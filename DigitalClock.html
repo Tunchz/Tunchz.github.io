@@ -115,7 +115,7 @@ svg {
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
-var //svgUnderlay = d3.select("svg"),
+var svgUnderlay = d3.select("svg"),
     svgOverlay = d3.select("body").append(function() { return svgUnderlay.node().cloneNode(true); }),
     svg = d3.selectAll("svg");
 
