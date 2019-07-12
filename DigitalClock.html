@@ -3,12 +3,12 @@
 <style>
 
 body {
-  background: #777777;
+  background: #666666;
   position: relative;
 }
 
 svg {
-  position: relative;//absolute;
+  position: absolute;
   top: 0;
   left: 4px;
   width: 88px;
@@ -35,7 +35,7 @@ svg {
 
 #overlay path,
 #overlay circle {
-  fill: #222;
+  fill: #888888;
   stroke: #5f0;
   stroke-opacity: 0;
 }
@@ -119,7 +119,7 @@ var svgUnderlay = d3.select("svg"),
     svgOverlay = d3.select("body").append(function() { return svgUnderlay.node().cloneNode(true); }),
     svg = d3.selectAll("svg");
 
-svgUnderlay.attr("id", "underlay");
+//svgUnderlay.attr("id", "underlay");
 svgOverlay.attr("id", "overlay");
 
 var digit = svg.selectAll(".digit"),
