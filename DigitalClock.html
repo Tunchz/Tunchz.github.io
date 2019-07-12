@@ -120,7 +120,7 @@ var svgUnderlay = d3.select("svg"),
     svgOverlay = d3.select("body").append(function() { return svgUnderlay.node().cloneNode(true); }),
     svg = d3.selectAll("svg");
 
-//svgUnderlay.attr("id", "underlay");
+svgUnderlay.attr("id", "underlay");
 svgOverlay.attr("id", "overlay");
 
 var digit = svg.selectAll(".digit"),
