@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="212.81" height="171.56" version="1.1" viewBox="0 0 212.8125 171.5625" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<metadata>
+<rdf:RDF>
+<cc:Work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+<dc:title/>
+</cc:Work>
+</rdf:RDF>
+</metadata>
+<circle cx="24.674" cy="133.91" r="11.437" color="#000000" color-rendering="auto" fill-rule="evenodd" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+<path d="m40.165 141.21v-129.22h21.809v45.617c32.66-9.1745 47.121 3.6419 56.703 22.354 15.68-38.506 78.308-37.454 75.101 26.898h-56.382c3.9083 30.126 36.528 24.188 47.071 15.993l6.3609 14.539c-38.455 25.18-66.412 1.9196-73.423-16.538-9.0194 11.639-27.1 38.376-77.239 20.355z" fill-rule="evenodd"/>
+<path d="m61.973 76.331c52.127-20.326 50.258 67.029 0 51.614z" fill="#f9e819" fill-rule="evenodd"/>
+<path d="m136.1 91.779c0-28.75 35.665-27.558 35.665 0z" fill="#e2141a" fill-rule="evenodd"/>
+</svg>

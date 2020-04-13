@@ -1,0 +1,830 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Covid-19 Stat - สถิติผู้ติดเชื้อโควิด-19</title>
+    <meta name="description" content="Interactive dashboard สำหรับการศึกษาข้อมูลผู้ติดเชื้อโควิด-19 (Covid-19) ในประเทศไทย">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css\epistat.min.css">
+    <link rel="stylesheet" href="css\Raleway400f.css">
+    <style>
+        body {
+            font-family: Raleway
+        }
+    </style>
+    
+    <link rel="stylesheet" href="css\epistat.tunchz.css">
+    
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row height100p" id="wholecontent" class="charts">
+            <div class="col-sm-3 height100p" id="zone1">
+                <div id="subject-chart" class=""></div>
+            </div>
+            <div class="col-sm-9 height100p">
+                <div class="row height10p">
+                    <div class="col-sm-5 height100p" id="zone21">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <h1 class="h3">MHOLAN <small>Covid-19 Stat   :</small> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#info-modal"><strong>รายละเอียด</strong></button></h1>
+                                <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h2 class="modal-title h3" id="myModalLabel"><a href="home\index.htm">MHOLAN</a> &gt; Covid-19 Statistics Dashboard</h2>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h3 style="margin-top:0">How to use</h3>
+                                                <p>To use this tool you have to click on each chart to filter through cases.</p>
+                                                <h4 class="">5 Graphs:</h4>
+                                                <ol>
+                                                    <li>the pathogen in row chart,</li>
+                                                    <li>the week in line chart,</li>
+                                                    <li>the place of residence in map (the square in bottom-left is 'Unknown'),</li>
+                                                    <li>the age in bar chart,</li>
+                                                    <li>the gender in row chart.</li>
+                                                </ol>
+                                                <p>All the numbers you can see on the graphs are raw number of cases. Except the map represents the incidence per 100k inhabitants &mdash; <i>i.e.</i> count x 1e5 / population_of_2012.</p>
+                                                <h3>Data</h3>
+                                                <p>Provided by the sentinel laboratory network (Epilabo), the National Reference Centers (NRC) or the HIV/AIDS register. <a data-toggle="modal" data-target="#datasource-modal" href="">See detailed data sources per pathogen</a></p>
+                                                <ul>
+                                                    <li>The date is agregated to the monday of the week.</li>
+                                                    <li>The location is agregated to the province.</li>
+                                                </ul>
+                                                <p>Sciensano is not responsible for the conclusions drawn on the basis of these data.</p>
+                                                <h3>Contact</h3>
+                                                <p>For questions, feedback, technical problems or errors; contact <a href="mailto:epistat@wiv-isp.be">epistat@wiv-isp.be</a>.</p>
+                                                <p></p>
+                                            </div>
+                                            <div class="modal-footer"><span class="pull-left">Made by Mathias Leroy</span><br><span class="pull-left">Copyright &#169; 2016–2018 Sciensano, All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="datasource-modal" tabindex="-1" role="dialog" aria-labelledby="datasource-modalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h3 class="modal-title" id="myModalLabel">Data Source</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table class="table table-condensed">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Pathogen</th>
+                                                            <th>Data Source</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Adenovirus</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Bordetella pertussis</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Borrelia burgdorferi (Lyme)</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Campylobacter</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Chikungunya virus</td>
+                                                            <td>NRC</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Chlamydia psittaci</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Chlamydia trachomatis</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Cryptosporidium</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Entamoeba histolytica</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Escherichia coli (VTEC)</td>
+                                                            <td>NRC</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Giardia</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Haemophilus influenzae</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Hantavirus</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Hepatitis A virus</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Hepatitis C virus</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>HIV</td>
+                                                            <td>HIV/AIDS register</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Listeria monocytogenes</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Neisseria gonorrhoeae</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Neisseria meningitidis</td>
+                                                            <td>NRC</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Parainfluenza</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Respiratory Syncytial Virus</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Rotavirus</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Salmonella</td>
+                                                            <td>NRC</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Shigella</td>
+                                                            <td>NRC</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Streptococcus pneumoniae</td>
+                                                            <td>NRC</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Streptococcus pyogenes</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Tick-borne encephalitis</td>
+                                                            <td>NRC</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>West Nile virus</td>
+                                                            <td>NRC</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Yellow fever virus</td>
+                                                            <td>NRC</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Yersinia enterocolitica</td>
+                                                            <td>Epilabo</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-7 height100p" id="zone22">
+                        <div id="dc-data-count">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <div class="h3"><strong class="filter-count">-</strong> <span class="text-sm">cases selected / <strong class="total-count">-</strong></span></div>
+                                    <div class="h6"><span id="viewFilters"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row height60p">
+                    <div class="col-sm-6 height100p" id="zone3">
+                        <div id="map-chart"></div>
+                    </div>
+                    <div class="col-sm-6 height100p" id="zone4-5">
+                        <div class="row height50p">
+                            <div class="col-md-12 height100p" id="zone5">
+                                <br>
+                                <div id="gender-chart" class=""></div>
+                            </div>
+                        </div>
+                        <div class="row height50p">
+                            <div class="col-md-12 height100p" id="zone4">
+                                <div id="age-chart" class=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row height30p">
+                    <div class="col-md-12 height100p" id="zone2">
+                        <div id="date-chart" class=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js\epistat.min.js"></script>
+    <script>
+        var goldenRatio = 1.618034,
+            transitionDuration = 200,
+            minHeight = 500,
+            svgPadding = 30;
+
+        function getURLParameter(e) {
+            return decodeURIComponent((new RegExp("[?|&]" + e + "=([^&;]+?)(&|#|;|$)").exec(location.search) || [, ""])[1].replace(/\+/g, "%20")) || null
+        }
+        var filterGerm, csvfile, subjectChart = dc.rowChart("#subject-chart"),
+            dateChart = dc.lineChart("#date-chart"),
+            mapChart = dc.geoChoroplethChart("#map-chart"),
+            ageChart = dc.barChart("#age-chart"),
+            genderChart = dc.rowChart("#gender-chart");
+        filterGerm = getURLParameter("germ") ? getURLParameter("germ") : "Respiratory Syncytial Virus", csvfile = getURLParameter("sample") && 0 != getURLParameter("sample") ? "https://Tunchz.github.io/public_cases_sample.csv" : getURLParameter("demo") && 0 != getURLParameter("demo") ? "https://Tunchz.github.io/public_cases_sample.csv" : "https://Tunchz.github.io/public_cases.csv", d3.csv(csvfile, function(e, y) {
+                d3.json("https://Tunchz.github.io/be-provinces-unk.geo.json", function(e) {
+                    var t = d3.time.format("%Y-%m-%d");
+                    d3.format(".2f");
+                    y.forEach(function(e, a) {
+                        switch (e.date = t.parse(e.DateMonday), "" === e.Age ? e.Age = -1 : e.Age = +e.Age, e.NUTS2 = +e.NUTS2, e.NUTS2) {
+                            case 10:
+                                e.province = "Brussels";
+                                break;
+                            case 21:
+                                e.province = "Antwerp";
+                                break;
+                            case 22:
+                                e.province = "Limburg";
+                                break;
+                            case 23:
+                                e.province = "East Flanders";
+                                break;
+                            case 24:
+                                e.province = "Flemish Brabant";
+                                break;
+                            case 25:
+                                e.province = "West Flanders";
+                                break;
+                            case 31:
+                                e.province = "Walloon Brabant";
+                                break;
+                            case 32:
+                                e.province = "Hainaut";
+                                break;
+                            case 33:
+                                e.province = "Liege";
+                                break;
+                            case 34:
+                                e.province = "Luxembourg";
+                                break;
+                            case 35:
+                                e.province = "Namur";
+                                break;
+                            default:
+                                e.province = "Unknown"
+                        }
+                        switch (e.NUTS2) {
+                            case 10:
+                                e.incidence = 1e5 / 1119088;
+                                break;
+                            case 21:
+                                e.incidence = 1e5 / 1764773;
+                                break;
+                            case 22:
+                                e.incidence = 1e5 / 844621;
+                                break;
+                            case 23:
+                                e.incidence = 1e5 / 1445831;
+                                break;
+                            case 24:
+                                e.incidence = 1e5 / 1086446;
+                                break;
+                            case 25:
+                                e.incidence = 1e5 / 1164967;
+                                break;
+                            case 31:
+                                e.incidence = 1e5 / 382866;
+                                break;
+                            case 32:
+                                e.incidence = 1e5 / 1317284;
+                                break;
+                            case 33:
+                                e.incidence = 1e5 / 1077203;
+                                break;
+                            case 34:
+                                e.incidence = 1e5 / 271352;
+                                break;
+                            case 35:
+                                e.incidence = 1e5 / 476835;
+                                break;
+                            default:
+                                e.incidence = .1
+                        }
+                        switch (e.incidence = Math.round(1e4 * e.incidence) / 1e4, e.Gender) {
+                            case "M":
+                                e.Gender = "Male";
+                                break;
+                            case "F":
+                                e.Gender = "Female";
+                                break;
+                            default:
+                                e.Gender = "Unknown"
+                        }
+                        switch (e.Subject) {
+                            case "BORPER":
+                                e.Subject = "Bordetella pertussis";
+                                break;
+                            case "BRRBUR":
+                                e.Subject = "Borrelia burgdorferi (Lyme)";
+                                break;
+                            case "CAM_SP":
+                                e.Subject = "Campylobacter";
+                                break;
+                            case "CHLPSI":
+                                e.Subject = "Chlamydia psittaci";
+                                break;
+                            case "CHLTRA":
+                                e.Subject = "Chlamydia trachomatis";
+                                break;
+                            case "CRS_SP":
+                                e.Subject = "Cryptosporidium";
+                                break;
+                            case "ENTHIS":
+                                e.Subject = "Entamoeba histolytica";
+                                break;
+                            case "GIA_SP":
+                                e.Subject = "Giardia";
+                                break;
+                            case "HAEINF":
+                                e.Subject = "Haemophilus influenzae";
+                                break;
+                            case "LIS_SP":
+                                e.Subject = "Listeria monocytogenes";
+                                break;
+                            case "NEIGON":
+                                e.Subject = "Neisseria gonorrhoeae";
+                                break;
+                            case "STRPYO":
+                                e.Subject = "Streptococcus pyogenes";
+                                break;
+                            case "V_ADV":
+                                e.Subject = "Adenovirus";
+                                break;
+                            case "V_HAV":
+                                e.Subject = "Hepatitis A virus";
+                                break;
+                            case "V_HCV":
+                                e.Subject = "Hepatitis C virus";
+                                break;
+                            case "V_HTV":
+                                e.Subject = "Hantavirus";
+                                break;
+                            case "V_PIV":
+                                e.Subject = "Parainfluenza";
+                                break;
+                            case "V_RSV":
+                                e.Subject = "Respiratory Syncytial Virus";
+                                break;
+                            case "V_RTV":
+                                e.Subject = "Rotavirus";
+                                break;
+                            case "YERENT":
+                                e.Subject = "Yersinia enterocolitica";
+                                break;
+                            case "CHIK":
+                                e.Subject = "Chikungunya virus";
+                                break;
+                            case "MENI":
+                                e.Subject = "Neisseria meningitidis";
+                                break;
+                            case "PNEU":
+                                e.Subject = "Streptococcus pneumoniae";
+                                break;
+                            case "SALM":
+                                e.Subject = "Salmonella";
+                                break;
+                            case "SHIG":
+                                e.Subject = "Shigella";
+                                break;
+                            case "TBEV":
+                                e.Subject = "Tick-borne encephalitis";
+                                break;
+                            case "VTEC":
+                                e.Subject = "Escherichia coli (VTEC)";
+                                break;
+                            case "WNF":
+                                e.Subject = "West Nile virus";
+                                break;
+                            case "YELF":
+                                e.Subject = "Yellow fever virus";
+                                break;
+                            case "HIV":
+                                e.Subject = "HIV";
+                                break;
+                            case "AGAL":
+                                e.Subject = "S. agalactiae";
+                                break;
+                            case "AMR":
+                                e.Subject = "Antibiotic resistant Pseudomonas and Acinetobacter";
+                                break;
+                            case "ANAP":
+                                e.Subject = "Anaplasma (Ehrlichia)";
+                                break;
+                            case "BAR_SP":
+                                e.Subject = "Bartonella";
+                                break;
+                            case "BORPAR":
+                                e.Subject = "Bordetella parapertussis";
+                                break;
+                            case "BORR":
+                                e.Subject = "Borrelia burgdorferi";
+                                break;
+                            case "BOTU":
+                                e.Subject = "C. botulinum and perfringens and pseudotuberculosis";
+                                break;
+                            case "BRU_SP":
+                            case "BRUC":
+                                e.Subject = "Brucella";
+                                break;
+                            case "BURK":
+                                e.Subject = "Burkholderia cepacia";
+                                break;
+                            case "CAMP":
+                                e.Subject = "Campylobacter";
+                                break;
+                            case "CAN_SP":
+                                e.Subject = "Candida";
+                                break;
+                            case "CHLPNE":
+                                e.Subject = "C. pneumoniae";
+                                break;
+                            case "CHOL":
+                                e.Subject = "V. cholerae and V. parahaemolyticus";
+                                break;
+                            case "CLSDIF":
+                                e.Subject = "C. difficile";
+                                break;
+                            case "COLBUR":
+                                e.Subject = "C. burnetii";
+                                break;
+                            case "CONG":
+                                e.Subject = "Congenital infections";
+                                break;
+                            case "CONSYPH":
+                                e.Subject = "T. pallidum congenital";
+                                break;
+                            case "CRY_SP":
+                                e.Subject = "Cryptococcus";
+                                break;
+                            case "CYC_SP":
+                                e.Subject = "Cyclospora";
+                                break;
+                            case "DENGUE":
+                                e.Subject = "Dengue virus";
+                                break;
+                            case "DIFF":
+                                e.Subject = "C. difficile";
+                                break;
+                            case "DIPH":
+                                e.Subject = "C. diphtheriae and ulcerans";
+                                break;
+                            case "ENC":
+                                e.Subject = "Enterococcus";
+                                break;
+                            case "ENTE":
+                                e.Subject = "Enterovirus";
+                                break;
+                            case "ESBL":
+                                e.Subject = "ESBL + carbapenemase producing Enterobacteriaceae";
+                                break;
+                            case "ESCCOL":
+                                e.Subject = "Escherichia coli (VTEC)";
+                                break;
+                            case "GONOAMR":
+                                e.Subject = "N. gonorrhoeae";
+                                break;
+                            case "HANTA":
+                                e.Subject = "Hantavirus";
+                                break;
+                            case "HELI":
+                            case "HELPYL":
+                                e.Subject = "H. pylori";
+                                break;
+                            case "HEPA":
+                                e.Subject = "Hepatitis A virus";
+                                break;
+                            case "HEPB":
+                                e.Subject = "Hepatitis B virus";
+                                break;
+                            case "HEPC":
+                                e.Subject = "Hepatitis C virus";
+                                break;
+                            case "HEPD":
+                                e.Subject = "Hepatitis D virus";
+                                break;
+                            case "HEPE":
+                                e.Subject = "Hepatitis E virus";
+                                break;
+                            case "INFL":
+                            case "INFLANTIVIR":
+                            case "INFLVIRAGGR":
+                                e.Subject = "Influenza virus";
+                                break;
+                            case "LEGI":
+                                e.Subject = "Legionella";
+                                break;
+                            case "LEGPNE":
+                                e.Subject = "L. pneumophila";
+                                break;
+                            case "LEI_SP":
+                                e.Subject = "Leishmania";
+                                break;
+                            case "LEP_SP":
+                                e.Subject = "Leptospira";
+                                break;
+                            case "LGV":
+                                e.Subject = "C. trachomatis";
+                                break;
+                            case "LIST":
+                                e.Subject = "Listeria monocytogenes";
+                                break;
+                            case "MEAS":
+                                e.Subject = "Measles virus";
+                                break;
+                            case "MUMP":
+                                e.Subject = "Mumps virus";
+                                break;
+                            case "MYC_SP":
+                                e.Subject = "Mycobacterium";
+                                break;
+                            case "MYCO":
+                                e.Subject = "Mycosis";
+                                break;
+                            case "MYCOISO":
+                                e.Subject = "M. tuberculosis genotyping (ECDC project)";
+                                break;
+                            case "MYCTUB":
+                                e.Subject = "M. tuberculosis";
+                                break;
+                            case "MYPPNE":
+                                e.Subject = "M. pneumoniae";
+                                break;
+                            case "NEIMEN":
+                                e.Subject = "N. meningitidis";
+                                break;
+                            case "NORO":
+                                e.Subject = "Norovirus";
+                                break;
+                            case "PAS_SP":
+                                e.Subject = "Pasteurella";
+                                break;
+                            case "PERT":
+                                e.Subject = "Bordetella pertussis and parapertussis";
+                                break;
+                            case "PLA_SP":
+                                e.Subject = "Plasmodium";
+                                break;
+                            case "POLI":
+                                e.Subject = "Poliovirus";
+                                break;
+                            case "QFEV":
+                                e.Subject = "C. burnetii";
+                                break;
+                            case "RABI":
+                                e.Subject = "Rabies virus";
+                                break;
+                            case "RESP":
+                                e.Subject = "Respiratory pathogens";
+                                break;
+                            case "RICK":
+                                e.Subject = "Rickettsia";
+                                break;
+                            case "ROTA":
+                                e.Subject = "Rotavirus";
+                                break;
+                            case "RUBE":
+                                e.Subject = "Rubella virus";
+                                break;
+                            case "SAL_SP":
+                                e.Subject = "Salmonella";
+                                break;
+                            case "SARS":
+                                e.Subject = "Severe Acute Respiratory Syndrome";
+                                break;
+                            case "SHI_SP":
+                                e.Subject = "Shigella";
+                                break;
+                            case "STAAUR":
+                            case "STAU":
+                                e.Subject = "S. aureus";
+                                break;
+                            case "STRBHB":
+                                e.Subject = "S. agalactiae";
+                                break;
+                            case "STRPNE":
+                                e.Subject = "S. pneumoniae";
+                                break;
+                            case "STRPYO":
+                            case "STRPYOG":
+                                e.Subject = "S. pyogenes";
+                                break;
+                            case "SYPH":
+                                e.Subject = "T. pallidum";
+                                break;
+                            case "TOP_SP":
+                                e.Subject = "Toxoplasma";
+                                break;
+                            case "TREPAL":
+                                e.Subject = "T. pallidum";
+                                break;
+                            case "TUBE":
+                                e.Subject = "Mycobacterium";
+                                break;
+                            case "TUBECULT":
+                                e.Subject = "Mycobacterium identification";
+                                break;
+                            case "TUBEGENO":
+                                e.Subject = "M. tuberculosis genotyping (Brussels)";
+                                break;
+                            case "V_ENV":
+                                e.Subject = "Enterovirus";
+                                break;
+                            case "V_HBV":
+                                e.Subject = "Hepatitis B virus";
+                                break;
+                            case "V_HEV":
+                                e.Subject = "Hepatitis E virus";
+                                break;
+                            case "V_HSV":
+                                e.Subject = "Herpes simplex virus";
+                                break;
+                            case "V_INF":
+                                e.Subject = "Influenza virus";
+                                break;
+                            case "V_MEV":
+                                e.Subject = "Measles virus";
+                                break;
+                            case "V_MTV":
+                                e.Subject = "Human metapneumovirus";
+                                break;
+                            case "V_MUV":
+                                e.Subject = "Mumps virus";
+                                break;
+                            case "V_NWA":
+                                e.Subject = "Norovirus";
+                                break;
+                            case "V_PAV":
+                                e.Subject = "Human Papillomavirus";
+                                break;
+                            case "V_PVV":
+                                e.Subject = "Parvovirus B19";
+                                break;
+                            case "V_RBV":
+                                e.Subject = "Rubella virus";
+                                break;
+                            case "V_RHI":
+                                e.Subject = "Rhinovirus";
+                                break;
+                            case "YERS":
+                                e.Subject = "Y. enterocolitica"
+                        }
+                        delete e.DateMonday
+                    });
+                    var r, a = crossfilter(y),
+                        i = a.groupAll(),
+                        c = a.dimension(function(e) {
+                            return e.Subject
+                        }),
+                        s = c.group(),
+                        n = a.dimension(function(e) {
+                            return d3.time.week(e.date)
+                        }),
+                        o = n.group(),
+                        u = a.dimension(function(e) {
+                            return e.province
+                        }),
+                        b = u.group().reduceSum(function(e) {
+                            return e.incidence
+                        }),
+                        d = a.dimension(function(e) {
+                            return e.Age
+                        }),
+                        l = d.group(),
+                        g = a.dimension(function(e) {
+                            return e.Gender
+                        }),
+                        S = g.group(),
+                        m = document.getElementById("zone1").offsetWidth - svgPadding,
+                        h = Math.max(document.getElementById("zone1").offsetHeight, minHeight) - svgPadding;
+                    subjectChart.width(m).height(h).margins({
+                        top: 20,
+                        left: 10,
+                        right: 10,
+                        bottom: 40
+                    }).transitionDuration(transitionDuration).dimension(c).group(s).colors("#FF6900").label(function(e) {
+                        return e.key
+                    }).filter(filterGerm).title(function(e) {
+                        return e.key + " : " + e.value
+                    }).elasticX(!0).xAxis().ticks(3), subjectChart.onClick = (r = subjectChart, function(e) {
+                        var a = r.keyAccessor()(e);
+                        dc.events.trigger(function() {
+                            r.filter(null), r.filter(a), r.redrawGroup()
+                        })
+                    });
+                    var p = d3.min(y, function(e) {
+                            return e.date
+                        }),
+                        k = d3.max(y, function(e) {
+                            return e.date
+                        }),
+                        j = document.getElementById("zone2").offsetWidth - svgPadding,
+                        f = document.getElementById("zone2").offsetHeight - svgPadding;
+                    dateChart.width(j).height(f).margins({
+                        top: 30,
+                        right: 40,
+                        bottom: 30,
+                        left: 40
+                    }).dimension(n).group(o, "Count / week").x(d3.time.scale().domain([p.setMonth(p.getMonth() - 1), k.setMonth(k.getMonth() + 1)])).round(d3.time.month.round).renderArea(!0).transitionDuration(transitionDuration).elasticY(!0).renderHorizontalGridLines(!0).legend(dc.legend().x(50).y(10).itemHeight(13).gap(5)).brushOn(!0).mouseZoomable(!1).colors("#FF6900").xAxisLabel("Date of Diagnosis", 10).yAxis().ticks(3);
+                    var v = document.getElementById("zone3").offsetWidth - svgPadding,
+                        C = document.getElementById("zone3").offsetHeight - svgPadding;
+                    mapChart.width(v).height(C).dimension(u).group(b).transitionDuration(200).projection(d3.geo.mercator().translate([v / 2, C / 2]).center([-1.481, .01]).scale(4e3 * Math.min(v, C))).overlayGeoJson(e.features, "province", function(e) {
+                        return e.properties.name
+                    }).colors(d3.scale.quantize().range(["#FFE1CC", "#FFD5B7", "#FFC9A3", "#FFBD8E", "#FFB17A", "#FFA566", "#FF9951", "#FF8D3D", "#FF8128", "#FF7514", "#FF6900"])).title(function(e) {
+                        return e.key + " : " + e.value.toFixed(2)
+                    }), mapChart.on("preRender", function(e) {
+                        e.colorDomain(d3.extent(e.data(), e.valueAccessor()))
+                    }), mapChart.on("preRedraw", function(e) {
+                        e.colorDomain(d3.extent(e.data(), e.valueAccessor()))
+                    });
+                    var E = document.getElementById("zone4").offsetWidth - svgPadding,
+                        P = document.getElementById("zone4").offsetHeight - svgPadding;
+                    ageChart.width(E).height(P).margins({
+                        top: 10,
+                        right: 40,
+                        bottom: 30,
+                        left: 50
+                    }).dimension(d).group(l).transitionDuration(transitionDuration).elasticY(!0).centerBar(!1).gap(1).colors("#FF6900").round(dc.round.floor).alwaysUseRounding(!0).x(d3.scale.linear().domain([0, 100])).renderHorizontalGridLines(!0).xAxisLabel(["Age"]).yAxis().ticks(3);
+                    var A = document.getElementById("zone5").offsetWidth - svgPadding,
+                        R = document.getElementById("zone5").offsetHeight - svgPadding;
+
+                    genderChart.width(A).height(R).margins({
+                        top: 10,
+                        left: 10,
+                        right: 10,
+                        bottom: 40
+                    }).dimension(g).group(S).transitionDuration(transitionDuration).colors("#FF6900").label(function(e) {
+                        return e.key
+                    }).title(function(e) {
+                        return e.key + ": " + e.value
+                    }).elasticX(!0).xAxis().ticks(3), window.onresize = function(e) {
+                        var a = document.getElementById("zone1").offsetWidth - svgPadding,
+                            t = Math.max(document.getElementById("zone1").offsetHeight, minHeight) - svgPadding;
+                        subjectChart.width(a).height(t).transitionDuration(0);
+                        var r = document.getElementById("zone2").offsetWidth - svgPadding,
+                            i = document.getElementById("zone2").offsetHeight - svgPadding;
+                        dateChart.width(r).height(i).transitionDuration(0);
+                        var c = document.getElementById("zone4").offsetWidth - svgPadding,
+                            s = document.getElementById("zone4").offsetHeight - svgPadding;
+                        ageChart.width(c).height(s).transitionDuration(0);
+                        var n = document.getElementById("zone5").offsetWidth - svgPadding,
+                            o = document.getElementById("zone5").offsetHeight - svgPadding;
+                        genderChart.width(n).height(o).transitionDuration(0), dc.renderAll(), subjectChart.transitionDuration(transitionDuration), dateChart.transitionDuration(transitionDuration), ageChart.transitionDuration(transitionDuration), genderChart.transitionDuration(transitionDuration)
+                    }, dc.dataCount("#dc-data-count").dimension(a).group(i), dc.renderlet(function(e) {
+                        dc.events.trigger(function() {
+                            $("#viewFilters").html(""), 0 != subjectChart.filters().length && $("#viewFilters").append('<i class="fa fa-filter"></i> <span class="text-bg">Pathogen</span>=<span class="text-md">' + subjectChart.filters() + "</span> "), 0 != dateChart.filters().length && $("#viewFilters").append('<i class="fa fa-filter"></i> <span class="text-bg">Date</span>=<span class="text-md">[' + t(dateChart.filters()[0][0]) + ", " + t(dateChart.filters()[0][1]) + "[</span> "), 0 != mapChart.filters().length && $("#viewFilters").append('<i class="fa fa-filter"></i> <span class="text-bg">Province</span>=<span class="text-md">' + mapChart.filters() + "</span> "), 0 != ageChart.filters().length && $("#viewFilters").append('<i class="fa fa-filter"></i> <span class="text-bg">Age</span>=<span class="text-md">' + ageChart.filters() + "</span> "), 0 != genderChart.filters().length && $("#viewFilters").append('<i class="fa fa-filter"></i> <span class="text-bg">Gender</span>=<span class="text-md">' + genderChart.filters() + "</span> "), 0 == subjectChart.filters().length && 0 == dateChart.filters().length && 0 == mapChart.filters().length && 0 == ageChart.filters().length && 0 == genderChart.filters().length || $("#viewFilters").append('<a href="javascript:dc.filterAll();dc.redrawAll();"><strong>RESET</strong></a>')
+                        })
+                    }), dc.renderAll()
+                })
+            });
+ /*           ,
+
+            function(e, a, t, r, i, c, s) {
+                e.GoogleAnalyticsObject = i, e.ga = e.ga || function() {
+                    (e.ga.q = e.ga.q || []).push(arguments)
+                }, e.ga.l = 1 * new Date, c = a.createElement("script"), s = a.getElementsByTagName("script")[0], c.async = 1, c.src = "//www.google-analytics.com/analytics.js", s.parentNode.insertBefore(c, s)
+            }(window, document, 0, 0, "ga"), ga("create", "UA-28290657-9", "auto"), ga("send", "pageview")
+*/
+    </script>
+</body>
+
+</html>

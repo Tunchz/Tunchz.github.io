@@ -1,0 +1,819 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Covid-19 Stat - สถิติผู้ติดเชื้อโควิด-19</title>
+    <meta name="description" content="Interactive dashboard สำหรับการศึกษาข้อมูลผู้ติดเชื้อโควิด-19 (Covid-19) ในประเทศไทย">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css\covid19.min.blue.css">
+    <!link rel="stylesheet" href="css\Raleway400f.css">
+    <link rel="icon" type="image/x-icon" href="img\icons\Mholan_Logo.png"/>
+    <style>
+        body {
+            width :100%;
+            height :100%;
+            margin: 0;
+            font-family: DB Heavent,mitr extralight, helvetica neue,sans-serif;
+            font-size: 18px;
+            overscroll-behavior: none;
+            scroll-behavior: smooth;
+            line-height: 1.2;/*1.42857143;*/
+
+        }
+        .card {
+            background-color: #ea5771;/*#e55e00;*/
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            color:#fff;
+            font-family: DB Heavent;
+            /*float: middle;  */
+            font-size: 16px;
+            text-align: center;
+            /*white-space: nowrap;*/
+            vertical-align: middle;
+            border-radius: 6px;
+            /*line-height: 1.2;*/
+        }
+        .dc-table-head {
+            font-size: 20px;
+            text-align: -internal-center;
+            border-bottom: 1px solid #ddd;
+
+        }
+        .dc-table-row {
+            /*height: 80%*/
+            font-size: 18px;
+            padding-top: 1px;
+            padding-bottom: 1px;
+
+        }
+        .table>tbody>tr>td {
+            padding-top: 0px;
+            padding-bottom: 0px;
+            border-top: 0px solid #ddd;
+        }
+        
+    </style>
+
+
+    <link rel="stylesheet" href="css\covid19.tunchz.blue.css">
+    
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="col-md-12 height100p" id="wholecontent" class="charts">
+            <div class="col-sm-3 height15p" id="zone-Tcol1">
+                <div class="col-xs-12 height100p">
+                    <div class="h2 row height40p" style="text-align: right; padding-top : 20px"><img id="logo" src="img\icons\Mholan_Logo.png" style="float:left" width=50 height=40></img><span style="font-family: DB Heavent;font-size: 36px;">Covid19 Stat </span><span><small>Dashboard </small></span>
+                    </div>
+                    <div style="text-align: right;"><button type="button" class="btn btn-primary" style="padding: 3px 9px;" data-toggle="modal" data-target="#info-modal"><strong>รายละเอียด</strong></button></div>
+                    <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h2 class="modal-title h3" id="myModalLabel"><a href="https://www.maholan.co.th/">MHOLAN</a> &gt; Covid-19 Statistics Dashboard </h2>
+                                </div>
+                                <div class="modal-body">
+                                    <h3 style="margin-top:0">การใช้งาน</h3>
+                                    <p>คลิ๊กเลือกในแต่ละกราฟเพื่อกรองข้อมูลที่แสดงบนแดชบอร์ด โดยจำนวนข้อมูลและตัวกรองจะถูกแสดงในมุมบนขวา และยกเลิกตัวกรองโดยการคลิ๊ก <a>reset</a> ในแต่ละกราฟ หรือ <a>Reset All</a> มุมซ้ายบนเพื่อยกเลิกตัวกรองทั้งหมด </p>
+                                    <h3 class="">การแสดงผล 7 ส่วน:</h3>
+                                    <ol>
+                                        <li>ตัวเลขแสดงสถานะสถิติผู้ติดเชื้อ > ผู้ติดเชื้อ/กำลังรักษา/หายแล้ว/เสียชีวิต,</li>
+                                        <li>การแท่งแนวนอนแสดงจำนวนผู้ติดเชื้อรายจังหวัดเรียงลำดับมากไปน้อย</li>
+                                        <li>แผนที่แสดงจำนวนผู้ติดเชื้อในแต่ละจังหวัด (พื้นที่สี่เหลี่ยม - ไม่พบข้อมูล)</li>
+                                        <li>กราฟวงกลมแสดงสัดส่วนเพศของผู้ติดเชื้อ</li>
+                                        <li>กราฟแท่งแนวนอนแสดงจำนวนผู้ติดเชื้อแยกตามสัญชาติเรียงลำดับมากไปน้อย</li>
+                                        <li>กราฟแท่งแนวตั้งแสดงจำนวนผู้ติดเชื้อตามอายุ</li>
+                                        <li>กราฟเส้นแสดงจำนวนผู้ติดเชื้อ/ผู้ติดเชื้อสะสมรายวัน</li>
+                                    </ol>
+                                    <h3>ข้อมูล</h3>
+                                    <p>ข้อมูลสถานการณ์โควิด 19 ของ กรมควบคุมโรค กระทรวงสาธารณสุข<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a></p>
+                                    <ul>
+                                        <li>The date is agregated to the monday of the week.</li>
+                                        <li>The location is agregated to the province.</li>
+                                    </ul>
+                                    <p>Mholan จัดทำแดชบอร์ด Covid-19 Stat เพื่อใช้ศึกษาและติดตามสถานการณ์ของโรคระบาดโควิด 19 เพื่อประโยชน์กับสาธารณะชน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง</p>
+                                    <h3>ติดต่อ</h3>
+                                    <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">tunchz@gmail.com</a>.</p>
+                                    <p></p>
+                                </div>
+                                <div class="modal-footer"><span class="pull-left">Made by Mholan Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="datasource-modal" tabindex="-1" role="dialog" aria-labelledby="datasource-modalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h3 class="modal-title" id="myModalLabel">รายละเอียดแหล่งข้อมูล</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>ชุดข้อมูล</th>
+                                                <th>แหล่งข้อมูล</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Covid-19-Daily</td>
+                                                <td>https://data.go.th/dataset/covid-19-daily</td>
+                                            </tr>
+                                            <tr>
+                                                <td>ข้อมูลแสดงค่าประจำวัน</td>
+                                                <td>https://covid19.th-stat.com/api/open/today</td>
+                                            </tr>
+                                            <tr>
+                                                <td>ข้อมูลแต่ละเคส</td>
+                                                <td>https://covid19.th-stat.com/api/open/cases</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-225 height15p">
+                <div class = "card 1" ><span style="font-size: 20px;">ผู้ติดเชื้อ</span><br>
+                    <span id = "total-case" style="font-family: mitr;font-size: 40px;"></span><br>
+                    เพิ่ม <span id = "total-newcase" style="font-size: 20px;"></span> ราย
+                </div>
+            </div>
+            <div class="col-sm-225 height15p">
+                <div  class = "card 2" style="background-color:#fcc400;"><span style="font-size: 20px;">กำลังรักษา</span><br>
+                    <span id = "total-care" style="font-family: mitr;font-size: 40px;"></span><br>
+                    <span id = "total-newcare" style="font-size: 20px;"></span> ราย
+                </div>
+            </div>
+            <div class="col-sm-225 height15p">
+                <div  class = "card 3" style="background-color:#039245;"><span style="font-size: 20px;"><span>หายแล้ว</span></span><br>
+                    <span id = "total-recover" style="font-family: mitr;font-size: 40px;"></span><br>
+                    เพิ่ม <span id = "total-newrecover" style="font-size: 20px;"></span> ราย
+                </div>    
+            </div>
+            <div class="col-sm-225 height15p">
+                <div  class = "card 4" style="background-color:#d22d36;"><span style="font-size: 20px;"><span>เสียชีวิต</span></span><br>
+                    <span id = "total-decease" style="font-family: mitr;font-size: 40px;"></span><br>
+                    เพิ่ม <span id = "total-newdecease" style="font-size: 20px;"></span> ราย
+                </div>
+                <h5 id="update-date" style = "font-size: 16px;text-align: right; margin-top: -10px"></h5>    
+            </div>
+            <div class="col-xs-12 height5p" id="dc-data-count" style="height: 5%;">
+                <div class="h4" style="padding-left: 50px; margin-top: -5px; margin-bottom: 0px; "><strong class="filter-count" style="font-size: 46px;">-</strong> <span class="text-sm" style="font-size: 18px;"> รายถูกเลือกจาก <strong class="total-count" style="font-size: 24px;">-</strong> ราย  </span><span id="viewFilters" style="font-size: 16px";></span>
+                </div>
+            </div>
+            <div class="height80p" id="zone-Bottom" style="height: 77%; min-height: 70%">
+                <div class="col-sm-3 height100p" id="zone1">
+                    <div id="prov-chart-title" class="">>> ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">จังหวัด</span> Top <span id="sliderValue">10</span><a class="reset" href="javascript:provChart.filterAll();dc.redrawAll();" style="display: none;"> reset</a>
+                    </div>
+                    <div  id="slidercontainer" ><input type="range" class="slider" id="slideRange1" value="10" min="5" max="30" step="1" oninput="updateSlider(this.value)">
+                    </div>
+                    <div id="prov-chart" style="height: 94%;">
+                    </div>
+                </div>
+                <div class="col-sm-9 height100p">
+                    <div class="col-sm-5 height70p" id="zone3">
+                        <div id="map-chart">>> <span style="font-size: 24px">แผนที่</span>แสดงความหนาแน่นผู้ติดเชื้อ <a class="reset" href="javascript:mapChart.filterAll();dc.redrawAll();" style="display: none;">reset</a></div>
+                    </div>
+                    <div class="col-sm-7 height70p" id="zone4-5">
+                        <div class="col-sm-6 height50p" id="zone5">
+                            <div id="sex-chart" class="">>> ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">เพศ </span><a class="reset" href="javascript:sexChart.filterAll();dc.redrawAll();" style="display: none;">reset</a></div>
+                        </div>
+                        <div class="col-sm-6 height50p" id="zone6">
+                            <div id="nation-chart-title" class="">>> ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">สัญชาติ</span> Top <span id="sliderValue2">7</span><a class=" reset" href="javascript:nationChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+                            </div>
+
+                            <div  id="slidercontainer2"><input type="range" class="slider" id="slideRange2" value="7" min="5" max="30" step="1" oninput="updateSlider2(this.value)">
+                            </div>
+
+                            <div id="nation-chart" style="height: 80%">
+                            </div>
+                        </div>
+                        <div class="col-md-12 height50p" id="zone4">
+                            <div id="age-chart" class="" style="padding-top: 20px">>> ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">อายุ </span><a class="reset" href="javascript:ageChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 height30p" id="zone2">
+                        <div id="date-chart" class="" style=" height: 95%">>> ผู้ติดเชื้อ<span style="font-size: 24px;">รายวัน </span><a class="reset" href="javascript:dateChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+<div class="col-xs-12 height50p">
+    <br><br>
+    <h4>>>ตารางข้อมูลผู้ติดเชื้อโควิด-19</h4>
+    <div id="paging" style={margin-top: 20px}>
+        Showing <span id="begin"></span>-<span id="end"></span> of <span id="size"></span> <span id="totalsize"></span>
+        <input id="last" class="btn btn-primary" style="padding: 0px 6px;" type="Button" value="Last" onclick="javascript:last()" />
+        <input id="next" class="btn btn-primary" style="padding: 0px 6px;" type="button" value="Next" onclick="javascript:next()"/>
+    </div>
+    <table class="table table-hover" id="dc-data-table">
+    </table>
+</div>
+
+
+
+
+        </div>
+    </div>
+
+
+    <script src="js\covid19.js"></script>
+    <!script src="js\d3.js"><!/script>
+    <!script src="js\crossfilter.js"><!/script>
+    <!script src="js\dc.js"><!/script>
+
+    <script>
+        var goldenRatio = 1.618034,
+            transitionDuration = 200,
+            minHeight = 500,
+            svgPadding = 30,
+            Theme_Color = "#008fff";//#0ab4f3",//"#FF6900";
+            //Theme_Color_Range = d3.scaleLinear().domain([1,150]).range(["white", "blue"]);
+            //Theme_Color_Range = d3.scaleSequential().domain([1,150]).interpolator(d3.interpolateViridis);
+            Theme_Color_Range = [/*"#f8fbff", "#deecf8",*/ "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#07519c", "#253494", "#071d58", /*"#e10609", "#e10609", "#800026"*/,"#800026", "#800026", "#800026"],
+            //["#FFE1CC", "#FFD5B7", "#FFC9A3", "#FFBD8E", "#FFB17A", "#FFA566", "#FF9951", "#FF8D3D", "#FF8128", "#FF7514", "#FF6900"];
+            slider1 = 10,
+            slider2 = 7;
+        var a;
+
+//        var sliderDiv = document.getElementById("sliderValue"),
+//            inputslide = document.getElementById("slidercontainer");
+        
+        var provChart = dc.rowChart("#prov-chart"),
+            dateChart = dc.lineChart("#date-chart"),
+            mapChart = dc.geoChoroplethChart("#map-chart"),
+            ageChart = dc.barChart("#age-chart"),
+            nationChart = dc.rowChart("#nation-chart"),
+            sexChart = dc.pieChart("#sex-chart"),
+            covidTable = dc.dataTable('#dc-data-table');
+
+
+
+            //d3.json("https://covid19.th-stat.com/api/open/today", function(todayjson) {
+            d3.json("https://Tunchz.github.io/covid19_today.json", function(todayjson) {
+
+                //console.log(datajson);
+                //d3.json("https://covid19.th-stat.com/api/open/cases", function(datajson) { 
+                d3.json("https://Tunchz.github.io/covid19_case.json", function(datajson) { 
+                    var y = datajson.Data;
+
+
+                d3.json("https://Tunchz.github.io/mapth_small_+unknown.json", function(mapjson) {
+                    var t = d3.time.format("%Y-%m-%d %H:%M:%S")
+                        t2 = d3.time.format("%d-%b-%y");
+                    //console.log(json);
+                    d3.format(".2f");
+                    //console.log(y);
+
+                    var today = Date.now(),
+                        temp = crossfilter(y),
+                        nt_temp = temp.dimension(function(e) {
+                            return e.Nation
+                        }),
+                        N_temp = nt_temp.group()
+                        Nation_top10 = [];
+
+
+                        //console.log(today);
+
+                    for (i=0;i<10;i++){
+                        Nation_top10[i] = N_temp.top(10)[i].key
+                    }
+
+
+                    //console.log(Nation_top10);
+                    //console.log(Nation_top10.includes("ไทย"));
+
+
+                    y.forEach(function(e, a) {
+                        e.date = t.parse(e["ConfirmDate"])
+                        delete e["ConfirmDate"]
+                        e.Province === "กทม" ? e.Province = "กรุงเทพมหานคร" : e.Province === "" ? e.Province = "ไม่พบข้อมูล" : e.Province = e.Province.trim()
+                        //e.Province === "ไม่พบข้อมูล" ? e.Province_filtered = "" : e.Province_filtered = e.Province
+                        e.Province_filtered = e.Province
+                        e.Gender === "" ? e.Gender = "ไม่พบข้อมูล" : e.Gender = e.Gender.trim()
+                        //Nation_top10.includes(e.Nation) ? e.NationTop10 = e.Nation : e.NationTop10 = "ประเทศอื่นๆ"
+
+                    });
+                    //console.log(datajson.UpdateDate);
+                    
+
+                    function accumulate_group(source_group) {
+                        return {
+                            all:function () {
+                                var cumulate = 0;
+                                return source_group.all().map(function(d) {
+                                    cumulate += d.value;
+                                    return {key:d.key, value:cumulate};
+                                });
+                            }
+                        };
+                    }
+                    
+
+
+
+
+                    //console.log(remove_unknown(a))
+                        a = crossfilter(y);
+                    var totalcase = y.length,
+                        k1 = crossfilter(todayjson),
+                        k = k1.groupAll(),
+                        r/*, a */= crossfilter(y),
+                        i = a.groupAll(),
+                        u = a.dimension(function(e) {return e.Province}),
+                        b = u.group().reduceSum(function(e) {return 1}),
+                        c = a.dimension(function(e) {return e.Province_filtered}),
+                        s = c.group(),//.reduceSum(function(e) {return e.Province_filtered === "" ? 0 : 1}),
+                        //c_temp = c,
+                        //c_unknown = c.filter(function(d){return d.Province = "ไม่พบข้อมูล"}),
+                        //c_unknown = c_temp.filter("กรุงเทพมหานคร"),
+                        //s_unknown = c_unknown.group(),
+
+                        n = a.dimension(function(e) {return e.date}),
+                        o = n.group(),
+
+                        accumdateGroup = accumulate_group(o);
+
+                        d = a.dimension(function(e) {return e.Age}),
+                        l = d.group().reduceSum(function(e) {return e.Age === 0  ? 0 : 1}),
+                        g = a.dimension(function(e) {return e.Gender}),
+                        S = g.group(),
+                        nt = a.dimension(function(e) {return e.Nation}),
+                        N = nt.group(),
+
+                        agerange = a.dimension(e => {   
+                            a_ = e.Age;
+                            if (a_ <= 10) {
+                                return '0 - 10 ปี';
+                            } else if (a_ <= 20) {
+                                return '11 - 20 ปี';
+                            } else if (a_ <= 30) {
+                                return '21 - 30 ปี';
+                            } else if (a_ <= 40) {
+                                return '31 - 40 ปี';
+                            } else if (a_ <= 50) {
+                                return '41 - 50 ปี';
+                            } else if (a_ <= 60) {
+                                return '51 - 60 ปี';
+                            } else if (a_ <= 70) {
+                                return '61 - 70 ปี';
+                            } else if (a_ <= 80) {
+                                return '71 - 80 ปี';
+                            } else if (a_ <= 90) {
+                                return '91 - 90 ปี';
+                            } else if (a_ > 90) {
+                                return 'มากกว่า 90 ปี';
+                            } else {
+                                return 'ไม่ระบุ';
+                            }
+                        }),
+                        ageGroup = agerange.group()/*.reduceSum(function(e) {
+                            return 1
+                        })*/
+                        ;
+
+                    //console.log(ageGroup.top(10))
+                    //console.log(c_unknown.group().top(2))
+                    var formatComma = d3.format(",");
+
+                    dc.numberDisplay("#total-case").formatNumber(d3.format(""))
+                          .valueAccessor(function(d) {return todayjson.Confirmed})
+                          .transitionDuration(0)
+                          .group(k);
+
+
+                    dc.numberDisplay("#total-newcase").formatNumber(d3.format(""))
+                          .valueAccessor(function(d) {return todayjson.NewConfirmed})
+                          .transitionDuration(0)
+                          .group(k);
+
+                    dc.numberDisplay("#total-care").formatNumber(d3.format(""))
+                          .valueAccessor(function(d) {return todayjson.Hospitalized})
+                          .transitionDuration(0)
+                          .group(k);
+
+                    dc.numberDisplay("#total-newcare").formatNumber(d3.format(""))
+                          .valueAccessor(function(d) {return todayjson.NewHospitalized})
+                          .transitionDuration(0)
+                          .group(k);
+
+                    dc.numberDisplay("#total-recover").formatNumber(d3.format(""))
+                          .valueAccessor(function(d) {return todayjson.Recovered})
+                          .transitionDuration(0)
+                          .group(k);
+
+                    dc.numberDisplay("#total-newrecover").formatNumber(d3.format(""))
+                          .valueAccessor(function(d) {return todayjson.NewRecovered})
+                          .transitionDuration(0)
+                          .group(k);
+
+                    dc.numberDisplay("#total-decease").formatNumber(d3.format(""))
+                          .valueAccessor(function(d) {return todayjson.Deaths})
+                          .transitionDuration(0)
+                          .group(k);
+
+                    dc.numberDisplay("#total-newdecease").formatNumber(d3.format(""))
+                          .valueAccessor(function(d) {return todayjson.NewDeaths})
+                          .transitionDuration(0)
+                          .group(k);
+
+                    document.getElementById("update-date").innerHTML = "อัปเดตล่าสุด : " + datajson.UpdateDate +" ";
+
+
+
+                    //("#update-date").html("").append();
+
+
+                    
+                    var m = document.getElementById("zone1").offsetWidth - svgPadding,
+                        h = document.getElementById("zone1").offsetHeight - svgPadding-30;
+                    provChart.width(m).height(h).margins({top: 0, left: 10, right: 10, bottom: 0})
+                        .transitionDuration(transitionDuration)
+                        .dimension(c)
+                        .group(s)
+                        .data(function (group) { return group.top(slider1);})
+                        .colors(Theme_Color).label(function(e) {return e.key+ "  " + e.value + " ราย"})
+                        .ordering(function(e) { return -e.value; }).title(function(e) {return e.key + " : " + e.value + " ราย"})
+                        .gap(1)
+                        .elasticX(!0)
+                        .xAxis()/*.orient("top")*/.ticks(3)
+                        , window.onresize = function(e) {
+                            var a = r.keyAccessor()(e);
+                            dc.events.trigger(function() {
+                                r.filter(null), r.filter(a), r.redrawGroup()
+                            })
+                            provChart.width(m).height(h).transitionDuration(0), dc.renderAll(), ageChart.transitionDuration(transitionDuration), dateChart.transitionDuration(transitionDuration), nationChart.transitionDuration(transitionDuration), sexChart.transitionDuration(transitionDuration), mapChart.transitionDuration(transitionDuration)
+
+                    };
+/*                    .onpretransition = function() {
+                        provChart.select('g.axis').attr('transform', 'translate(0,0)');
+                        provChart.selectAll('line.grid-line').attr('y2', provChart.effectiveHeight());
+                    };
+*/
+/*
+
+var rowtip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function (d) { return d.key + ": "  + d.value; });
+
+
+provChart.on('pretransition.add-tip', function(chart) {
+    chart.selectAll('g.row')
+        .call(rowtip)
+        .on('mouseover', rowtip.show)
+        .on('mouseout', rowtip.hide);
+});
+*/
+
+
+  //provChart.on('pretransition', function(chart) {
+    provChart.onpretransition=function(chart) {
+    chart.selectAll('rect.box')
+      .append('title')
+      .text(function(d) {
+        return d.key + ' (mean ' + d3.mean(d.value) + ')';
+      });
+    };
+
+
+
+                    var p = d3.min(y, function(e) {return e.date}),
+                        k = d3.max(y, function(e) {return e.date}),
+                        j = document.getElementById("zone2").offsetWidth - svgPadding,
+                        f = document.getElementById("zone2").offsetHeight - svgPadding;
+                    dateChart.width(j).height(f).margins({
+                        top: 10,
+                        right: 10,
+                        bottom: 10,
+                        left: 40
+                        }).dimension(n)
+                        .group(o, "จำนวนผู้ป่วยรายวัน")
+                        .stack(accumdateGroup, 'จำนวนผู้ป่วยสะสม')
+                        .x(d3.time.scale().domain([p/*.setMonth(p.getMonth() - 1)*/, today/*k/*.setMonth(k.getMonth() + 1)*/])).round(d3.time.day.round)
+                        .renderArea(!0).transitionDuration(transitionDuration)
+                        .elasticY(!0)
+                        .renderHorizontalGridLines(!0)
+                        .legend(dc.legend().x(50).y(20).itemHeight(10).gap(5))
+                        .brushOn(!0).mouseZoomable(!0)
+                        //.colors(Theme_Color)
+                        .ordinalColors(['#008fff','#e10609'/*'#800026','#e55e00'*/])
+                        //.colors(d3.scale.quantize().range(["#800026", "#800026"]))
+                        //.xAxisLabel("วัน/เดือน/ปี", 10)
+                        //.rederDataPoints(!0)
+                        //.dotRadius(3)
+                        //.interpolate(!0)
+                        //.xyTipsOn(!0)
+                        .yAxis().ticks(3);
+ 
+
+
+
+                    var v = document.getElementById("zone3").offsetWidth// - svgPadding,
+                        C = document.getElementById("zone3").offsetHeight;// - svgPadding;
+                    mapChart.width(v).height(C).dimension(u).group(b).transitionDuration(200)
+                            .projection(d3.geo.mercator().rotate([-100.6331, -13.2]).translate([v / 2, C / 2]).center([1.5, -0.8]).scale(2.478*Math.min(v*1.872, C-69)+541))
+                            .overlayGeoJson(mapjson.features, "PROVINCE_N", function(e) {return e.properties.PROVINCE_N})
+                            .colors(d3.scale.quantize().range(Theme_Color_Range))
+                            .colorDomain([-8, 100/*b.top(2)[0].key === "ไม่พบข้อมูล" ? b.top(2)[1].value : b.top(2)[0].value*/])
+                            .label(function(e) {return 15/*e.value*/})
+                            .title(function(e) {return "จังหวัด : " + e.key + "\nจำนวนผู้ติดเชื้อ : " + e.value + " คน"})
+                            
+
+
+//console.log(b.top(2)[0].value.toString())
+//console.log(N.top(5))
+                    
+
+                    var Nw = document.getElementById("zone6").offsetWidth - svgPadding,
+                        Nh = document.getElementById("zone6").offsetHeight - svgPadding;                    
+                    sexChart
+                        .width(Nw)
+                        .height(Nh)
+                        .radius(Math.min(Nw,Nh)*3.5/10)
+                        .innerRadius(Math.min(Nw,Nh)*2.5/10)
+                        .dimension(g)
+                        .group(S)
+                        .externalLabels(10)
+                        .legend(dc.legend().x((Nw/2)-Math.min(Nw,Nh)/7).y(Nh/2-Math.min(Nw,Nh)/9).itemHeight(10).gap(5))
+                        .ordering(function(e) { return e.value; })
+                        .title(function(e) {return e.key + " : "+ e.value+ " ราย (" + (e.value/totalcase*100).toFixed(2)+"%)"})
+                        .label(function(e) {return /*e.key + " " + */(e.value/totalcase*100).toFixed(2)+"%"
+                        })
+                        .ordinalColors(['#008fff','#ea5771','#dadada'])
+                        .ordering(function(d) { return d.key === "ชาย" ? 1: d.key === "หญิง" ? 2: 3 })
+                        //.colorAccessor(function(d,i) { return d.key === "ชาย" ? d.color ='#008fff': d.key === "หญิง" ? d.color = '#ea5771': d.color = '#dadada' })
+                        //.domain(["ไม่ระบุเพศ","หญิง","ชาย"])
+                        //.externalRadiusPadding(0).drawPaths(false)
+                        //.legend(dc.legend())
+                        //.legend(new dc.Legend().x(200).y(60).itemHeight(13).gap(5))
+/*                      .on('pretransition', function(nationChart) {
+                            sexChart.selectAll('text.pie-slice').text(function(d) {
+                            return dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2*Math.PI) * 100) + '%';
+                            })
+                        })
+*/                      ;
+
+
+
+                    var E = document.getElementById("zone4").offsetWidth - svgPadding,
+                        P = document.getElementById("zone4").offsetHeight - svgPadding;
+                    ageChart.width(E).height(P).margins({ top: 10, right: 0, bottom: 40, left: 20})
+                        .dimension(d/*agerange*/)
+                        .group(l/*ageGroup*/)
+                        .transitionDuration(transitionDuration)
+                        .elasticY(!0).centerBar(!1).gap(1)
+                        .colors(Theme_Color).round(dc.round.floor).alwaysUseRounding(!0)
+                        .x(d3.scale.linear().domain([0, 100]))
+                        .renderHorizontalGridLines(!0)/*.xAxisLabel(["อายุ"])*/
+                        .yAxis().ticks(3);
+
+
+
+
+                    var A = document.getElementById("zone5").offsetWidth - svgPadding,
+                        R = document.getElementById("zone5").offsetHeight - svgPadding;
+
+                    //console.log(document.getElementById("zone5"));
+                    nationChart.width(A).height(R)
+                        .margins({top:0, left:10, right:0, bottom:40})
+                        .dimension(nt).group(N).transitionDuration(transitionDuration)
+                        .data(function (group) { return group.top(slider2);})
+                        .gap(1)
+                        .colors(Theme_Color)
+                        .label(function(e) {return e.key})
+                        .title(function(e) {return e.key + " : " + e.value + " ราย"})
+                        .label(function(e) {return e.key + " " + e.value + " ราย ("+ (e.value/totalcase*100).toFixed(2)+"%)"})
+                        //.labelOffsetX(-10)
+                        .ordering(function(e) { return e.key === "ประเทศอื่นๆ" ? 0 : -e.value; })
+                        .elasticX(!0).xAxis().ticks(3);
+
+
+    covidTable /* dc.dataTable('.dc-data-table', 'chartGroup') */
+        .dimension(n/*dateDimension*/)
+        .group(function(e) {return ""/*e.Nation;*/})
+
+        .columns([
+            {label: ' ', format: function(e) {return e.index;}},
+            {label: 'วันที่',
+                format: function (e) {
+                    return (e.date).getDate()+"/"+e.date.getMonth()+1+"/"+(e.date.getYear()+1900);
+                }
+            },
+//            'date',
+            {label: 'สัญชาติ', format: function(e) {return e.Nation;}},
+            {label: 'อายุ', format: function(e) {return e.Age;}},
+            {label: 'เพศ', format: function(e) {return e.Gender;}},
+            {label: 'จังหวัด', format: function(e) {return e.Province;}},
+            
+        ])
+
+        .sortBy(function(e) {return e.date})
+        .order(d3.ascending)
+        //.size(Infinity)
+        //.beginSlice(15)
+        //.endSlice(35)
+
+
+
+        //.on('renderlet', table => {table.selectAll('.dc-table-group').classed('info', true)})
+        .onrenderlet = function(table) {table.selectAll('.dc-table-group').classed('info', true)}
+        //.on('preRender', update_offset)
+        .onprerender = function() { pdate_offset();}
+
+        //.on('preRedraw', update_offset)
+        .onpreredraw = function() { update_offset();}
+
+        //.on('pretransition', display)
+        .onpretransition = function() { display();}
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+                    ,window.onresize = function(e) {
+                        var a = document.getElementById("zone1").offsetWidth - svgPadding,
+                            t = document.getElementById("zone1").offsetHeight - svgPadding-30;
+                        provChart.width(a).height(t).transitionDuration(0);
+                        var r = document.getElementById("zone2").offsetWidth - svgPadding,
+                            i = document.getElementById("zone2").offsetHeight - svgPadding;
+                        dateChart.width(r).height(i).transitionDuration(0);
+                        var c = document.getElementById("zone4").offsetWidth - svgPadding,
+                            s = document.getElementById("zone4").offsetHeight - svgPadding;
+                        ageChart.width(c).height(s).transitionDuration(0);
+                        var v = document.getElementById("zone3").offsetWidth// - svgPadding,
+                            C = document.getElementById("zone3").offsetHeight;// - svgPadding;
+                        mapChart.width(v).height(C)/*.scale(2.478*Math.min(v*1.872, C-69)+541)*/.transitionDuration(0);
+                        var n = document.getElementById("zone5").offsetWidth - svgPadding,
+                            o = document.getElementById("zone5").offsetHeight - svgPadding;
+                        nationChart.width(n).height(o).transitionDuration(0);
+                        var Nw = document.getElementById("zone6").offsetWidth - svgPadding,
+                            Nh = document.getElementById("zone6").offsetHeight - svgPadding;                  
+                        sexChart.width(Nw).width(Nw).radius(Math.min(Nw,Nh)*4/10).innerRadius(Math.min(Nw,Nh)*3/10).transitionDuration(0), 
+                        dc.renderAll(),
+                        provChart.transitionDuration(transitionDuration), 
+                        dateChart.transitionDuration(transitionDuration), 
+                        ageChart.transitionDuration(transitionDuration), 
+                        nationChart.transitionDuration(transitionDuration), 
+                        mapChart.transitionDuration(transitionDuration),
+                        sexChart.transitionDuration(transitionDuration)
+                    }; 
+
+
+
+                    dc.dataCount("#dc-data-count").dimension(a).group(i), dc.renderlet(function(e) {
+                        dc.events.trigger(function() {
+                            $("#viewFilters").html(""), 
+                             0 != provChart.filters().length && $("#viewFilters").append('<i class="fa fa-filter"></i> <span class="text-bg">จังหวัด</span>=<span class="text-md">' + provChart.filters() + "</span> "), 
+                            0 != mapChart.filters().length && $("#viewFilters").append('<i class="fa fa-filter"></i> <span class="text-bg">จังหวัด</span>=<span class="text-md">' + mapChart.filters() + "</span> "), 
+                            0 != sexChart.filters().length && $("#viewFilters").append('<i class="fa fa-filter"></i> <span class="text-bg">เพศ</span>=<span class="text-md">' + sexChart.filters() + "</span> ") ,
+                            0 != nationChart.filters().length && $("#viewFilters").append('<i class="fa fa-filter"></i> <span class="text-bg">สัญชาติ</span>=<span class="text-md">' + nationChart.filters() + "</span> "), 
+                            0 != ageChart.filters().length && $("#viewFilters").append('<i class="fa fa-filter"></i> <span class="text-bg">อายุ</span>=<span class="text-md">' + ageChart.filters() + "</span> "), 
+                            0 != dateChart.filters().length && $("#viewFilters").append('<i class="fa fa-filter"></i> <span class="text-bg">ช่วงวัน</span>=<span class="text-md">[' + t(dateChart.filters()[0][0]) + ", " + t(dateChart.filters()[0][1]) + "]</span> "), 
+                            0 == provChart.filters().length && 0 == dateChart.filters().length && 0 == mapChart.filters().length && 0 == ageChart.filters().length && 0 == nationChart.filters().length && 0 == sexChart.filters().length || $("#viewFilters").append('<a href="javascript:dc.filterAll();dc.redrawAll();"><btn-primary><strong>Reset All</strong></btn></a>')
+                   })
+                    }), dc.renderAll()
+
+                    //sliderDiv != sliderOld ? provChart.data(function(group) { return group.top(sliderDiv);});
+                    //sliderOld = sliderDiv,
+
+                    
+                    slidercontainer.oninput = function() {
+                    
+                        var a = document.getElementById("zone1").offsetWidth - svgPadding,
+                            t = document.getElementById("zone1").offsetHeight - svgPadding-30;
+                        provChart.width(a).height(t).transitionDuration(0);
+                        provChart.render(),
+                        provChart.transitionDuration(transitionDuration)
+                    }
+
+                    slidercontainer2.oninput = function() {
+                        var n = document.getElementById("zone5").offsetWidth - svgPadding,
+                            o = document.getElementById("zone5").offsetHeight - svgPadding;
+                        nationChart.width(n).height(o).transitionDuration(0);
+                        nationChart.render(),
+                        nationChart.transitionDuration(transitionDuration)
+                    }
+
+
+
+                })      //d3.json--map
+
+                })      //d3.json--data
+                
+                
+            });         //d3.json--today
+
+
+
+    //## change slider score value to re-assign the data in pie chart
+    function updateSlider(slideValue) {
+        //var sliderDiv = document.getElementById("sliderValue");
+        document.getElementById("sliderValue").innerHTML = slideValue;
+        slider1 = document.getElementById("sliderValue").innerHTML;
+    }
+
+    function updateSlider2(slideValue2) {
+        //var sliderDiv = document.getElementById("sliderValue");
+        document.getElementById("sliderValue2").innerHTML = slideValue2;
+        slider2 = document.getElementById("sliderValue2").innerHTML;
+    }
+
+
+
+
+
+      // use odd page size to show the effect better
+      var ofs = 0, pag = 20;
+
+      function update_offset() {
+          var totFilteredRecs = a.groupAll().value();
+          var end = ofs + pag > totFilteredRecs ? totFilteredRecs : ofs + pag;
+          ofs = ofs >= totFilteredRecs ? Math.floor((totFilteredRecs - 1) / pag) * pag : ofs;
+          ofs = ofs < 0 ? 0 : ofs;
+
+          //covidTable.beginSlice(ofs);
+          //covidTable.endSlice(ofs+pag);
+
+          console.log("update");
+      }
+
+      function display() {
+          console.log("display");
+          var totFilteredRecs = a.groupAll().value();
+          var end = ofs + pag > totFilteredRecs ? totFilteredRecs : ofs + pag;
+          d3.select('#begin')
+              .text(end === 0? ofs : ofs + 1);
+          d3.select('#end')
+              .text(end);
+          d3.select('#last')
+              .attr('disabled', ofs-pag<0 ? 'true' : null);
+          d3.select('#next')
+              .attr('disabled', ofs+pag>=totFilteredRecs ? 'true' : null);
+          d3.select('#size').text(totFilteredRecs);
+          if(totFilteredRecs != a.size()){
+            d3.select('#totalsize').text("(filtered Total: " + a.size() + " )");
+          }else{
+            d3.select('#totalsize').text('');
+          }
+
+
+          console.log(ofs+1);
+          console.log(end);
+      }
+
+      function next() {
+          ofs += pag;
+          update_offset();
+          covidTable.redraw();
+
+          console.log("next");
+          console.log(ofs);
+          console.log(pag);
+          display();
+      }
+
+      function last() {
+          ofs -= pag;
+          update_offset();
+          covidTable.redraw();
+
+          console.log("last");
+          console.log(ofs);
+          console.log(pag);
+          display();
+      }
+
+
+
+
+
+    </script>
+</body>
+
+</html>

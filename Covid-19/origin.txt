@@ -1,0 +1,468 @@
+Uri: https://epistat.wiv-isp.be/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/css/epistat.min.css
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\css\epistat.min.css
+Content Type: text/css
+
+Uri: https://epistat.wiv-isp.be/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/js/epistat.min.js
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\js\epistat.min.js
+Content Type: application/javascript
+
+Uri: https://epistat.wiv-isp.be/fonts/fontawesome-webfont.eot?v=4.2.0
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\fontawesome-webfont.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/fontawesome-webfont.eot?
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\fontawesome-webfont-1.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/fontawesome-webfont.woff?v=4.2.0
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\fontawesome-webfont-2.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/fontawesome-webfont.ttf?v=4.2.0
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\fontawesome-webfont-3.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/fontawesome-webfont.svg?v=4.2.0
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\fontawesome-webfont-4.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/glyphicons-halflings-regular.eot
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\glyphicons-halflings-regular.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/glyphicons-halflings-regular.eot?
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\glyphicons-halflings-regular-1.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/glyphicons-halflings-regular.woff2
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\glyphicons-halflings-regular-2.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/glyphicons-halflings-regular.woff
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\glyphicons-halflings-regular-3.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/glyphicons-halflings-regular.ttf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\glyphicons-halflings-regular-4.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/glyphicons-halflings-regular.svg
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\glyphicons-halflings-regular-5.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/img/icons/favicon-32x32.png
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\img\icons\favicon-32x32.png
+Content Type: image/png
+
+Uri: https://epistat.wiv-isp.be/css/main.css
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\css\main.css
+Content Type: text/css
+
+Uri: https://epistat.wiv-isp.be/Covid/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\Covid\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/dashboard/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\dashboard\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/momo/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\momo\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/influenza/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\influenza\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/sti/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\sti\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/ticks/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\ticks\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/contact/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\contact\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/img/sciensano_logo_neg_white_mini.svg
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\img\sciensano_logo_neg_white_mini.svg
+Content Type: image/svg+xml
+
+Uri: https://epistat.wiv-isp.be/img/icons/flu.svg
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\img\icons\flu.svg
+Content Type: image/svg+xml
+
+Uri: https://epistat.wiv-isp.be/img/icons/sti.svg
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\img\icons\sti.svg
+Content Type: image/svg+xml
+
+Uri: https://epistat.wiv-isp.be/img/icons/tick.svg
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\img\icons\tick.svg
+Content Type: image/svg+xml
+
+Uri: https://epistat.wiv-isp.be/img/icons/local_hospital.svg
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\img\icons\local_hospital.svg
+Content Type: image/svg+xml
+
+Uri: https://epistat.wiv-isp.be/img/icons/Be-logo_mini.svg
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\img\icons\Be-logo_mini.svg
+Content Type: image/svg+xml
+
+Uri: https://epistat.wiv-isp.be/img/icons/sciensano_logo_POS_CMYK.svg
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\img\icons\sciensano_logo_POS_CMYK.svg
+Content Type: image/svg+xml
+
+Uri: https://epistat.wiv-isp.be/js/bootstrap.min.js
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\js\bootstrap.min.js
+Content Type: application/javascript
+
+Uri: https://epistat.wiv-isp.be/fonts/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/glyphicons-halflings-regular.eot
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\glyphicons-halflings-regular.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/glyphicons-halflings-regular.eot?
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\glyphicons-halflings-regular-1.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/glyphicons-halflings-regular.woff2
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\glyphicons-halflings-regular-2.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/glyphicons-halflings-regular.woff
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\glyphicons-halflings-regular-3.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/glyphicons-halflings-regular.ttf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\glyphicons-halflings-regular-4.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/glyphicons-halflings-regular.svg
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\glyphicons-halflings-regular-5.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/Covid/image/cov19.jfif
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\Covid\image\cov19.jpg
+Content Type: image/pjpeg
+
+Uri: https://epistat.wiv-isp.be/js/momo.js
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\js\momo.js
+Content Type: application/javascript
+
+Uri: https://epistat.wiv-isp.be/index.html
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\index.html
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/momo/?region=
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\momo\index-1.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/momo/?region=VLA
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\momo\index-2.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/momo/?region=WAL
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\momo\index-3.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/momo/?region=BRU
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\momo\index-4.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/docs/momo/Be-MOMO summer 2018 report_NL.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\momo\Be-MOMO summer 2018 report_NL.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/docs/momo/Be-MOMO summer 2018 report_FR.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\momo\Be-MOMO summer 2018 report_FR.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/docs/momo/Be-MOMO winter 2017-18 report_NL.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\momo\Be-MOMO winter 2017-18 report_NL.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/docs/momo/Be-MOMO winter 2017-18 report_FR.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\momo\Be-MOMO winter 2017-18 report_FR.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/docs/momo/2017-Surveillance-mortaliteit-alle-oorzaken-Vlaanderen-zomer.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\momo\2017-Surveillance-mortaliteit-alle-oorzaken-Vlaanderen-zomer.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/docs/momo/2017_Rapport_surveillance_de_la_mortalite_ete_Belgique.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\momo\2017_Rapport_surveillance_de_la_mortalite_ete_Belgique.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/docs/momo/2017_Rapport_surveillance_van_de_mortaliteit_zomer_Belgie.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\momo\2017_Rapport_surveillance_van_de_mortaliteit_zomer_Belgie.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/js/influenza.js
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\js\influenza.js
+Content Type: application/javascript
+
+Uri: https://epistat.wiv-isp.be/js/sti.js
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\js\sti.js
+Content Type: application/javascript
+
+Uri: https://epistat.wiv-isp.be/docs/ticks/TekenNet2017_NL.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\ticks\TekenNet2017_NL.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/docs/ticks/Ziekte-kiemen-teken-2017.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\ticks\Ziekte-kiemen-teken-2017.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/docs/ticks/TekenNet2016_NL.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\ticks\TekenNet2016_NL.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/docs/ticks/TekenNet2015_NL.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\ticks\TekenNet2015_NL.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/docs/ticks/TiquesNet2017_FR.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\ticks\TiquesNet2017_FR.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/docs/ticks/Pathogenes-Tiques-2017.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\ticks\Pathogenes-Tiques-2017.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/docs/ticks/TiquesNet2016_FR.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\ticks\TiquesNet2016_FR.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/docs/ticks/TiquesNet2015_FR.pdf
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\docs\ticks\TiquesNet2015_FR.pdf
+Content Type: application/pdf
+
+Uri: https://epistat.wiv-isp.be/js/ticks.js
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\js\ticks.js
+Content Type: application/javascript
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/bootstrap/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\bootstrap\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+
+Uri: https://epistat.wiv-isp.be/fonts/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/home/
+File Name: C:\Users\Acer\Google Drive\CRMA_Bigdata_SharedFolder\_BI_Examples\Web_Examples\DB\epistat.wiv-isp.be\fonts\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\home\index.htm
+Content Type: text/html
+

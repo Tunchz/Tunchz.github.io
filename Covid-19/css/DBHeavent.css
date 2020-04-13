@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'DBHeavent';
+    font-style: normal;
+    font-weight: 400;
+    src: url(.. /fonts/DBHeavent/DBHeavent.tff) format('truetype'),
+    url(../fonts/DBHeavent/DBHeaventLi.ttf) format('truetype') 
+
+}
