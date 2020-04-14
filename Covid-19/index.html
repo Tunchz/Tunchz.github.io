@@ -17,7 +17,7 @@
 
 <body>
     <div class="container-fluid">
-        <div class="col-md-12 height100p charts" id="wholecontent">
+        <div class="col-md-12 height100p charts" id="wholecontent"  style="min-height: 700px">
             <div class="col-sm-3 height15p card-wrapper" id="zone-Tcol1">
                 <div class="col-xs-12 height100p">
                     <div class="h2 row height30p" style="text-align: right; padding-top : 0px"><img id="logo" src="img\icons\Mholan_Logo.png" style="float:left" width=50 height=40></img><span style="font-family: DB Heavent;font-size: 36px;">Covid19 Stat </span><span><small>Dashboard </small></span>
@@ -45,10 +45,8 @@
                                     <h3>ข้อมูล</h3>
                                     <p>ข้อมูลสถานการณ์โควิด 19 ของ กรมควบคุมโรค กระทรวงสาธารณสุข<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a></p>
                                     <ul>
-                                        <li>The date is agregated to the monday of the week.</li>
-                                        <li>The location is agregated to the province.</li>
+                                        <li>Mholan จัดทำแดชบอร์ด Covid-19 Stat เพื่อใช้ศึกษาและติดตามสถานการณ์ของโรคระบาดโควิด 19 เพื่อประโยชน์กับสาธารณะชน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง</li>
                                     </ul>
-                                    <p>Mholan จัดทำแดชบอร์ด Covid-19 Stat เพื่อใช้ศึกษาและติดตามสถานการณ์ของโรคระบาดโควิด 19 เพื่อประโยชน์กับสาธารณะชน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง</p>
                                     <h3>ติดต่อ</h3>
                                     <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">tunchz@gmail.com</a>.</p>
                                     <p></p>
@@ -64,7 +62,7 @@
                                     <h3 class="modal-title" id="myModalLabel">รายละเอียดแหล่งข้อมูล</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <table class="table table-condensed">
+                                    <table class="table table-condensed" style="font-size: 18px">
                                         <thead>
                                             <tr>
                                                 <th>ชุดข้อมูล</th>
@@ -72,10 +70,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Covid-19-Daily</td>
-                                                <td>https://data.go.th/dataset/covid-19-daily</td>
-                                            </tr>
+
                                             <tr>
                                                 <td>ข้อมูลแสดงค่าประจำวัน</td>
                                                 <td>https://covid19.th-stat.com/api/open/today</td>
@@ -94,30 +89,34 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-225 height15p">
-                <div class = "card 1" style="background-color:#ea5771;"><span style="font-size: 20px;">ผู้ติดเชื้อ</span><br>
-                    <span id = "total-case" style="font-family: mitr;font-size: 40px;"></span><br>
-                    เพิ่ม <span id = "total-newcase" style="font-size: 20px;"></span> ราย
+            <div class="col-sm-225 height15p card-wrapper">
+                <div class = "card 1" style="background-color:#ea5771;">
+                    <div style="height:25%; font-size: 20px;">ผู้ติดเชื้อ</div>
+                    <div id = "total-case" style="height:50%; font-family: mitr;font-size: 40px;"></div>
+                    <div style="height:25%;">เพิ่ม <span id = "total-newcase" style="font-size: 20px;"></span> ราย</div>
                 </div>
             </div>
-            <div class="col-sm-225 height15p">
-                <div  class = "card 2" style="background-color:#fcc400;"><span style="font-size: 20px;">กำลังรักษา</span><br>
-                    <span id = "total-care" style="font-family: mitr;font-size: 40px;"></span><br>
-                    <span id = "total-newcare" style="font-size: 20px;"></span> ราย
+            <div class="col-sm-225 height15p card-wrapper">
+                <div  class = "card 2" style="background-color:#fcc400;">
+                    <div style="height:25%; font-size: 20px;">กำลังรักษา</div>
+                    <div id = "total-care" style="height:50%; font-family: mitr;font-size: 40px;"></div>
+                    <div style="height:25%;"><span id = "total-newcare" style="font-size: 20px;"></span> ราย</div>
                 </div>
             </div>
-            <div class="col-sm-225 height15p">
-                <div  class = "card 3" style="background-color:#039245;"><span style="font-size: 20px;"><span>หายแล้ว</span></span><br>
-                    <span id = "total-recover" style="font-family: mitr;font-size: 40px;"></span><br>
-                    เพิ่ม <span id = "total-newrecover" style="font-size: 20px;"></span> ราย
+            <div class="col-sm-225 height15p card-wrapper">
+                <div  class = "card 3" style="background-color:#039245;">
+                    <div style="height:25%; font-size: 20px;">หายแล้ว</div>
+                    <div id = "total-recover" style="height:50%; font-family: mitr;font-size: 40px;"></div>
+                    <div style="height:25%;">เพิ่ม <span id = "total-newrecover" style="font-size: 20px;"></span> ราย</div>
                 </div>    
             </div>
-            <div class="col-sm-225 height15p">
-                <div  class = "card 4" style="background-color:#d22d36;"><span style="font-size: 20px;"><span>เสียชีวิต</span></span><br>
-                    <span id = "total-decease" style="font-family: mitr;font-size: 40px;"></span><br>
-                    เพิ่ม <span id = "total-newdecease" style="font-size: 20px;"></span> ราย
+            <div class="col-sm-225 height15p card-wrapper">
+                <div  class = "card 4" style="background-color:#d22d36;">
+                    <div style="height:25%; font-size: 20px;">เสียชีวิต</div>
+                    <div id = "total-decease" style="height:50%; font-family: mitr;font-size: 40px;"></div>
+                    <div style="height:25%;">เพิ่ม <span id = "total-newdecease" style="font-size: 20px;"></span> ราย</div>
                 </div>
-                <h5 id="update-date" style = "font-size: 12px; color : #aaa;text-align: right; margin-top: -10px; padding-right: 10px;"></h5>    
+                <h5 id="update-date" style = "font-size: 12px; color : #aaa;text-align: right; margin-top: 0px; padding-right: 10px;"></h5>    
             </div>
             <div class="col-xs-12 height5p dc-chart-wrapper" id="dc-data-count" style="height: 5%;">
                 <div class="h4" style="padding-left: 10px; margin-top: -13px; margin-bottom: 0px; "><img id="logo" src="img\flags\th.png" style="float:left; padding-top:13px; padding-right:10px;" width=40 height=38></img><strong class="filter-count" style="font-size: 46px;">-</strong> <span class="text-sm" style="font-size: 18px;"> ราย ถูกเลือกจาก <strong class="total-count" style="font-size: 24px;">-</strong> ราย  </span><span id="viewFilters" style="font-size: 16px;"></span><span id="confirmed-cases-update" style = "font-size: 12px;color : #aaa; padding-left: 5px"></span>
@@ -126,7 +125,7 @@
             <div class="col-xs-12 height80p" id="zone-Bottom">
                 
                 <div class="col-sm-3 height100p" id="zone-left">
-                    <div class="col-sm-12 height95p dc-chart-wrapper" id="zone-prov">
+                    <div class="col-sm-12 height90p dc-chart-wrapper" id="zone-prov">
                         <div id="prov-chart-title" class="">>> ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">จังหวัด</span><span id="prov-reset"></span>
                         </div>
                         <div  id="slidercontainer" class="col-xs-9" ><input type="range" class="slider" id="slideRange1" value="10" min="5" max="30" step="1" oninput="updateSlider(this.value)">
@@ -140,8 +139,8 @@
                     </div>
 
                     <! link for data table>
-                    <div id="datatable-trigger" class="col-xs-12 height5p dc-chart-wrapper" style="padding-top: 3px; text-align: center;">
-                        <span> <a data-toggle="modal" data-target="#datatable-modal" href="" >แสดงตารางข้อมูล</a></span>
+                    <div id="datatable-trigger" class="col-xs-12 height10p dc-chart-wrapper" style="padding-top: 20px; text-align: center; vertical-align: middle;">
+                        <a data-toggle="modal" data-target="#datatable-modal" href="" >แสดงตารางข้อมูล</a>
                     </div>
 
                     <! data table>
@@ -153,7 +152,7 @@
                             <div class="chart-wrapper"><button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-right: 15px; color: #fff;"><span aria-hidden="true">&times;</span></button>
                                 <div class="chart-title">>> ตารางข้อมูลผู้ติดเชื้อโควิด-19 : ข้อมูล <strong id="size" style="font-size: 46px;">-</strong> <span id="totalsize"></span> ราย<span id="confirmed-cases-update2" style = "font-size: 12px;color : #aaa; padding-left: 5px"></span></div>
                                 <div class="chart-stage">
-                                    <table class="table table-hover" id="data-table"></table>
+                                    <table class="table table-hover" id="data-table" style="min-width: 400px"></table>
                                 </div>
                                 <div class="chart-notes"><button type="button" class="btn btn-default" data-dismiss="modal" style="font-family: DB Heavent; font-size: 16px; padding: 0px 9px;"><strong>Close</strong></button></div>
                             </div>
@@ -166,7 +165,7 @@
                     <div class="col-sm-5 height70p dc-chart-wrapper" id="zone-map">
                         <div id="map-chart">>> <span style="font-size: 24px">แผนที่</span>แสดงความหนาแน่นผู้ติดเชื้อ <a class="reset" href="javascript:mapChart.filterAll();dc.redrawAll();" style="display: none;">reset</a></div>
                     </div>
-                    <div class="col-sm-7 height70p" id="zone-age-5">
+                    <div class="col-sm-7 height70p" id="zone-sex-nation-age">
                         <div class="col-sm-6 height50p dc-chart-wrapper" id="zone-nation">
                             <div id="sex-chart" class="">>> ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">เพศ </span><a class="reset" href="javascript:sexChart.filterAll();dc.redrawAll();" style="display: none;">reset</a></div>
                         </div>
@@ -205,6 +204,7 @@
     <!script src="js\dc.js"><!/script>
 
     <script>
+        setheight();
         var goldenRatio = 1.618034,
             transitionDuration = 200,
             minHeight = 500,
@@ -243,12 +243,12 @@
 
 
 
-            d3.json("https://covid19.th-stat.com/api/open/today", function(todayjson) {
-            //d3.json("https://Tunchz.github.io/covid19_today.json", function(todayjson) {
+            //d3.json("https://covid19.th-stat.com/api/open/today", function(todayjson) {
+            d3.json("https://Tunchz.github.io/covid19_today.json", function(todayjson) {
 
                 //console.log(datajson);
-                d3.json("https://covid19.th-stat.com/api/open/cases", function(datajson) { 
-                //d3.json("https://Tunchz.github.io/covid19_case.json", function(datajson) { 
+                //d3.json("https://covid19.th-stat.com/api/open/cases", function(datajson) { 
+                d3.json("https://Tunchz.github.io/covid19_case.json", function(datajson) { 
                     var y = datajson.Data;
 
 
@@ -468,7 +468,7 @@
                     dateChart.width(j).height(f).margins({
                         top: 10,
                         right: 10,
-                        bottom: 35,
+                        bottom: 45,
                         left: 40
                         }).dimension(n)
                         .group(o, "จำนวนผู้ป่วยรายวัน")
@@ -496,19 +496,19 @@
                     var v = document.getElementById("zone-map").offsetWidth,// - svgPadding,
                         C = document.getElementById("zone-map").offsetHeight;// - svgPadding;
                     mapChart.width(v).height(C).dimension(u).group(b).transitionDuration(200)
-                            .projection(d3.geo.mercator().rotate([-100.6331, -13.2]).translate([v / 2, C / 2]).center([1.5, -1.1]).scale(2.478*Math.min(v*1.872, C-69)+541+50))
+                            .projection(d3.geo.mercator().rotate([-100.6331, -13.2]).translate([v / 2, C / 2]).center([1.5, -1.1]).scale(2.478*Math.min(v*1.872, C-69)+541))
                             .overlayGeoJson(mapjson.features, "PROVINCE_N", function(e) {e.properties.value = e.value; return e.properties.PROVINCE_N})
                             .colors(d3.scale.quantize().range(Theme_Color_Range))
                             .colorDomain([-8, 100/*b.top(2)[0].key === "ไม่พบข้อมูล" ? b.top(2)[1].value : b.top(2)[0].value*/])
                             .label(function(e) {return 15/*e.value*/})
-                            .title(function(e) {return e.value/*"จังหวัด : " + e.key + "\nจำนวนผู้ติดเชื้อ : " + e.value + " คน"*/})
-                            //.title(function(e) {return ""})
+                            //.title(function(e) {return e.value/*"จังหวัด : " + e.key + "\nจำนวนผู้ติดเชื้อ : " + e.value + " คน"*/})
+                            .title(function(e) {return ""})
     
 
 
 
 
-//console.log(b.top(2)[0].value.toString())
+//console.log(b.top(Infinity).filter(function(e) { return e.key == "นครนายก"})[0].value);
 //console.log(N.top(5))
                     
 
@@ -517,12 +517,13 @@
                     sexChart
                         .width(Nw)
                         .height(Nh)
+                        .cx(Nw/2+10).cy(Nh/2-10)
                         .radius(Math.min(Nw,Nh)*4/10)
                         .innerRadius(Math.min(Nw,Nh)*3/10)
                         .dimension(g)
                         .group(S)
                         .externalLabels(10)
-                        .legend(dc.legend().x((Nw/2)-Math.min(Nw,Nh)/7).y(Nh/2-Math.min(Nw,Nh)/9).itemHeight(10).gap(5))
+                        .legend(dc.legend().x((Nw/2)-Math.min(Nw,Nh)/7+10).y(Nh/2-Math.min(Nw,Nh)/9-10).itemHeight(10).gap(5))
                         .ordering(function(e) { return e.value; })
                         //.title(function(e) {return e.key + " : "+ e.value+ " ราย (" + (e.value/totalcase*100).toFixed(2)+"%)"})
                         .title(function(e) {return ""})
@@ -538,7 +539,7 @@
 
                     var E = document.getElementById("zone-age").offsetWidth - svgPadding,
                         P = document.getElementById("zone-age").offsetHeight - svgPadding;
-                    ageChart.width(E).height(P).margins({ top: 10, right: 0, bottom: 35, left: 20})
+                    ageChart.width(E).height(P).margins({ top: 10, right: 0, bottom: 35, left: 30})
                         .dimension(d/*agerange*/)
                         .group(l/*ageGroup*/)
                         .transitionDuration(transitionDuration)
@@ -594,6 +595,7 @@
                         .size(totalcase)
 
                     ,window.onresize = function(e) {
+                        setheight();
                         var a = document.getElementById("zone-prov").offsetWidth - svgPadding,
                             t = document.getElementById("zone-prov").offsetHeight - svgPadding-50;
                         provChart.width(a).height(t).transitionDuration(0);
@@ -611,7 +613,7 @@
                         nationChart.width(n).height(o).transitionDuration(0);
                         var Nw = document.getElementById("zone-sex").offsetWidth - svgPadding,
                             Nh = document.getElementById("zone-sex").offsetHeight - svgPadding;                  
-                        sexChart.width(Nw).height(Nh).radius(Math.min(Nw,Nh)*4/10).innerRadius(Math.min(Nw,Nh)*3/10).transitionDuration(0).legend(dc.legend().x((Nw/2)-Math.min(Nw,Nh)/7).y(Nh/2-Math.min(Nw,Nh)/9).itemHeight(10).gap(5)), 
+                        sexChart.width(Nw).height(Nh).cx(Nw/2+10).cy(Nh/2-10).radius(Math.min(Nw,Nh)*4/10).innerRadius(Math.min(Nw,Nh)*3/10).transitionDuration(0).legend(dc.legend().x((Nw/2)-Math.min(Nw,Nh)/7+10).y(Nh/2-Math.min(Nw,Nh)/9-10).itemHeight(10).gap(5)), 
                         dc.renderAll(),
                         provChart.transitionDuration(transitionDuration), 
                         dateChart.transitionDuration(transitionDuration), 
@@ -632,6 +634,7 @@
 
                         agechart_add_togglebrush(),
                         datechart_add_togglebrush()
+
                     }; 
  
 
@@ -691,6 +694,29 @@
 
                     agechart_togglebrush(),
                     datechart_togglebrush()
+
+
+
+                    function showMapDetail() {
+
+                        // show tooltip with information from the __data__ property of the element
+                        var d = this.__data__;
+                        var key = d.properties.PROVINCE_N;
+                        var prov_data = b.top(Infinity).filter(function(e) { return e.key == key});
+                        var value = prov_data.length === 1 ? prov_data[0].value : 0;
+                        //console.log(prov_data.length === 1 ? prov_data[0].value : 0);
+                        var content = "<b>"+ key + "<br><span style=\" font-size : 30px\">" + value + "</span><b><br>ราย";
+
+                        return tooltip.style({
+                                "visibility": "visible",
+                                "text-align": "center",
+                                "top": (event.pageY - 10) + "px",
+                                "left": (event.pageX + 10) + "px"
+                            })
+                            .html(content);
+                    }
+
+
 
 
 
@@ -774,7 +800,7 @@
         //var program = d.layer;
         var value = d.properties.Pop;
         var key = d.properties.PROVINCE_N;
-        //console.log(d);
+        console.log(b.top(Infinity).filter(function(e) { return e.key == key})[0].value);
         var content = "<b>"+ key + "<br><span style=\" font-size : 30px\">" + value + "</span><b><br>ราย";
 
         return tooltip.style({
@@ -785,7 +811,7 @@
             })
             .html(content);
     }
-
+    
 
     function showSexDetail() {
 
@@ -928,6 +954,21 @@
 
       }
 
+    function setheight() {
+
+        if($("#wholecontent").width() < 770) 
+        {
+            $(".card-wrapper").height(120);
+            $("#zone-sex-nation-age").height(600);
+            $("#zone-date").height(300);
+        }
+        else
+        {
+            $(".card-wrapper").height("0%");
+            $("#zone-sex-nation-age").height("70%");
+            $("#zone-date").height("10%");
+        }
+    }
 
 
     </script>
