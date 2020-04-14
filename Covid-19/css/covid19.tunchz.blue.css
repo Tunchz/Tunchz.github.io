@@ -1,3 +1,120 @@
+@font-face {
+    font-family: db heavent;
+    src: /*url(fonts/DBHeavent-Light.woff2) format('woff2'),*/ url(fonts/DBHeavent-Light.woff) format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: db heavent;
+    src: /*url(fonts/DBHeavent-BoldIt.woff2) format('woff2'),*/ url(fonts/DBHeavent-BoldIt.woff) format('woff');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: db heavent;
+    src: /*url(fonts/DBHeavent-MedIt.woff2) format('woff2'),*/ url(fonts/DBHeavent-MedIt.woff) format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: db heavent;
+    src: /*url(fonts/DBHeavent.woff2) format('woff2'),*/ url(fonts/DBHeavent.woff) format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: db heavent;
+    src: /*url(fonts/DBHeavent-Thin.woff2) format('woff2'),*/ url(fonts/DBHeavent-Thin.woff) format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: db heavent;
+    src: /*url(fonts/DBHeavent-LightIt.woff2) format('woff2'),*/ url(fonts/DBHeavent-LightIt.woff) format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: db heavent;
+    src: /*url(fonts/DBHeavent-Italic.woff2) format('woff2'),*/ url(fonts/DBHeavent-Italic.woff) format('woff');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: db heavent;
+    src: /*url(fonts/DBHeavent-UltraLi.woff2) format('woff2'),*/ url(fonts/DBHeavent-UltraLi.woff) format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: db heavent;
+    src: /*url(fonts/DBHeavent-UltraLiIt.woff2) format('woff2'),*/ url(fonts/DBHeavent-UltraLiIt.woff) format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: db heavent;
+    src: /*url(fonts/DBHeavent-Med.woff2) format('woff2'),*/ url(fonts/DBHeavent-Med.woff) format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: db heavent;
+    src: /*url(fonts/DBHeavent-BlackIt.woff2) format('woff2'),*/ url(fonts/DBHeavent-BlackIt.woff) format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: db heavent;
+    src: /*url(fonts/DBHeavent-Black.woff2) format('woff2'),*/ url(fonts/DBHeavent-Black.woff) format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: db heavent;
+    src: /*url(fonts/DBHeavent-Bold.woff2) format('woff2'),*/ url(fonts/DBHeavent-Bold.woff) format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: db heavent;
+    src: /*url(fonts/DBHeavent-ThinIt.woff2) format('woff2'),*/ url(fonts/DBHeavent-ThinIt.woff) format('woff');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap
+}
+
+
+
+
+
+
 
          body,
         html {
