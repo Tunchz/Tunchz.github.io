@@ -167,12 +167,12 @@
 
                 <div class="col-sm-9 height100p">
                     <div class="col-sm-5 height70p dc-chart-wrapper" id="zone-map" >
-                        <div id="map-chart">┃ <span style="font-size: 24px">แผนที่</span>แสดงความหนาแน่นผู้ติดเชื้อ <a class="reset" href="javascript:mapChart.filterAll();dc.redrawAll();" style="display: none;">reset</a><a data-toggle="modal" href="" style="float: right;text-decoration: none;" onclick="toggle_extend('zone-map')">⌝</a>
+                        <div id="map-chart" style=" height: 95%;">┃ <span style="font-size: 24px">แผนที่</span>แสดงความหนาแน่นผู้ติดเชื้อ <a class="reset" href="javascript:mapChart.filterAll();dc.redrawAll();" style="display: none;">reset</a><a data-toggle="modal" href="" style="float: right;text-decoration: none;" onclick="toggle_extend('zone-map')">⌝</a>
                         </div>
                     </div>
                     <div class="col-sm-7 height70p" id="zone-nation-nation-age">
                         <div class="col-sm-6 height50p dc-chart-wrapper" id="zone-sex">
-                            <div id="sex-chart" class="">┃ ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">เพศ </span><a class="reset" href="javascript:sexChart.filterAll();dc.redrawAll();" style="display: none;">reset</a><a data-toggle="modal" href="" style="float: right;text-decoration: none;" onclick="toggle_extend('zone-sex')">⌝</a>
+                            <div id="sex-chart" class="" style=" height: 95%;">┃ ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">เพศ </span><a class="reset" href="javascript:sexChart.filterAll();dc.redrawAll();" style="display: none;">reset</a><a data-toggle="modal" href="" style="float: right;text-decoration: none;" onclick="toggle_extend('zone-sex')">⌝</a>
                             </div>
                         </div>
                         <div class="col-sm-6 height50p dc-chart-wrapper" id="zone-nation">
@@ -189,7 +189,7 @@
                             </div>
                         </div>
                         <div class="col-xs-12 height50p dc-chart-wrapper" id="zone-age">
-                            <div id="age-chart" class="">┃ ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">อายุ </span><a class="reset" href="javascript:ageChart.filterAll();dc.redrawAll();" style="display: none;">reset</a><a data-toggle="modal" href="" style="float: right;text-decoration: none;" onclick="toggle_extend('zone-age')">⌝</a>
+                            <div id="age-chart" class=""  style=" height: 95%;">┃ ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">อายุ </span><a class="reset" href="javascript:ageChart.filterAll();dc.redrawAll();" style="display: none;">reset</a><a data-toggle="modal" href="" style="float: right;text-decoration: none;" onclick="toggle_extend('zone-age')">⌝</a>
                             </div>
                         </div>
                     </div>
@@ -1002,6 +1002,8 @@
 
                 $("#"+extenddiv).width($("#wholecontent").width()-16);
                 $("#"+extenddiv).height($("#wholecontent").height()*0.8-16);
+                document.getElementById(extenddiv).style.position = "absolute";
+
             }
 
         }
