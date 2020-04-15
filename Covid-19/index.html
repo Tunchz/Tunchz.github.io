@@ -995,11 +995,11 @@
             else {
                 before_style.height = document.getElementById(extenddiv).style.height;
                 before_style.width = document.getElementById(extenddiv).style.width;
-                document.getElementById(extenddiv).style.position = "absolute";
+                document.getElementById(extenddiv).style.position = "fixed";
                 document.getElementById(extenddiv).style.zIndex = 10;
                 var offset_left = document.getElementById(extenddiv).offsetLeft - 5;
                 document.getElementById(extenddiv).style.marginLeft = "-" + (document.getElementById(extenddiv).offsetLeft - 5) + "px";
-
+                document.getElementById(extenddiv).style.position = "absolute";
                 $("#"+extenddiv).width($("#wholecontent").width()-16);
                 $("#"+extenddiv).height($("#wholecontent").height()*0.8-16);
             }
