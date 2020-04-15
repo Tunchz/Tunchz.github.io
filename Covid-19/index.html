@@ -221,11 +221,12 @@
             //["#FFE1CC", "#FFD5B7", "#FFC9A3", "#FFBD8E", "#FFB17A", "#FFA566", "#FF9951", "#FF8D3D", "#FF8128", "#FF7514", "#FF6900"];
             slider1 = 10,
             slider2 = 7;
-        var a,
+        var a,b,
             brush = !1,
             extenddiv,
             extend = !1,
             before_style = {width:"0",height:"0"};
+
 
 //        var sliderDiv = document.getElementById("sliderValue"),
 //            inputslide = document.getElementById("slidercontainer");
@@ -314,7 +315,7 @@
                         r/*, a */= crossfilter(y),
                         i = a.groupAll(),
                         u = a.dimension(function(e) {return e.Province}),
-                        b = u.group()/*.reduceSum(function(e) {return 1})*/,
+//                        b = u.group(),
                         c = a.dimension(function(e) {return e.Province_filtered}),
                         s = c.group(),//.reduceSum(function(e) {return e.Province_filtered === "" ? 0 : 1}),
                         //c_temp = c,
@@ -366,6 +367,9 @@
                             return 1
                         })*/
                         ;
+                        b = u.group();
+
+
 
                         //console.log(o);
 
@@ -711,29 +715,6 @@
 
 
 
-                    function showMapDetail() {
-
-                        // show tooltip with information from the __data__ property of the element
-                        var d = this.__data__;
-                        var key = d.properties.PROVINCE_N;
-                        var prov_data = b.top(Infinity).filter(function(e) { return e.key == key});
-                        var value = prov_data.length === 1 ? prov_data[0].value : 0;
-                        //console.log(prov_data.length === 1 ? prov_data[0].value : 0);
-                        var content = "<b>"+ key + "<br><span style=\" font-size : 30px\">" + value + "</span><b><br>ราย";
-
-                        return tooltip.style({
-                                "visibility": "visible",
-                                "text-align": "center",
-                                "top": (event.pageY - 10) + "px",
-                                "left": (event.pageX + 10) + "px"
-                            })
-                            .html(content);
-                    }
-
-
-
-
-
                 })      //d3.json--map
 
                 })      //d3.json--data
@@ -811,10 +792,10 @@
 
         // show tooltip with information from the __data__ property of the element
         var d = this.__data__;
-        //var program = d.layer;
-        var value = d.properties.Pop;
         var key = d.properties.PROVINCE_N;
-        console.log(b.top(Infinity).filter(function(e) { return e.key == key})[0].value);
+        var prov_data = b.top(Infinity).filter(function(e) { return e.key == key});
+        var value = prov_data.length === 1 ? prov_data[0].value : 0;
+        //console.log(prov_data.length === 1 ? prov_data[0].value : 0);
         var content = "<b>"+ key + "<br><span style=\" font-size : 30px\">" + value + "</span><b><br>ราย";
 
         return tooltip.style({
@@ -825,7 +806,7 @@
             })
             .html(content);
     }
-    
+   
 
     function showSexDetail() {
 
@@ -1017,8 +998,6 @@
                 document.getElementById(extenddiv).style.position = "fixed";
                 document.getElementById(extenddiv).style.zIndex = 10;
                 var offset_left = document.getElementById(extenddiv).offsetLeft - 5;
-                console.log(offset_left);
-                console.log("-" + offset_left + "px");
                 document.getElementById(extenddiv).style.marginLeft = "-" + (document.getElementById(extenddiv).offsetLeft - 5) + "px";
 
                 $("#"+extenddiv).width($("#wholecontent").width()-16);
@@ -1036,6 +1015,8 @@
                 t = document.getElementById("zone-prov").offsetHeight - svgPadding-50;
             provChart.width(a).height(t);
             provChart.render();
+            d3.selectAll("#prov-chart g rect").on("mouseover", showProvDetail).on("mouseout", hideDetail);
+            d3.selectAll("#prov-chart g text").on("mouseover", showProvDetail).on("mouseout", hideDetail);
         } else if (extenddiv == "zone-date") {
             if (extend) {document.getElementById("date-chart").style.height = "94%";}
             else {document.getElementById("date-chart").style.height = "90%";};
@@ -1044,32 +1025,40 @@
             dateChart.width(r).height(i).transitionDuration(0);
             dateChart.render();
             datechart_add_togglebrush();
+            d3.selectAll("#date-chart g circle").on("mouseover", showDateDetail),d3.selectAll("#date-chart g g g").on("mouseout", hideDetail);
         } else if (extenddiv == "zone-age") {
             var c = document.getElementById("zone-age").offsetWidth - svgPadding,
                 s = document.getElementById("zone-age").offsetHeight - svgPadding;
             ageChart.width(c).height(s).transitionDuration(0);
             ageChart.render();
             agechart_add_togglebrush();
+            d3.selectAll("#age-chart rect.bar").on("mouseover", showAgeDetail).on("mouseout", hideDetail);
         } else if (extenddiv == "zone-map") {
             var v = document.getElementById("zone-map").offsetWidth// - svgPadding,
                 C = document.getElementById("zone-map").offsetHeight;// - svgPadding;
             mapChart.width(v).height(C).projection(d3.geo.mercator().rotate([-100.6331, -13.2]).translate([v / 2, C / 2]).center([1.5, -1.1]).scale(2.478*Math.min(v*1.872, C-69)+541+50)).transitionDuration(0);
             mapChart.render();
+            d3.selectAll("#map-chart g path").on("mouseover", showMapDetail).on("mouseout", hideDetail);
         } else if (extenddiv == "zone-nation") {
             var n = document.getElementById("zone-nation").offsetWidth - svgPadding,
                 o = document.getElementById("zone-nation").offsetHeight - svgPadding;
             nationChart.width(n).height(o).transitionDuration(0);
             nationChart.render();
+            d3.selectAll("#nation-chart g rect").on("mouseover", showNationDetail).on("mouseout", hideDetail);
+            d3.selectAll("#nation-chart g text").on("mouseover", showNationDetail).on("mouseout", hideDetail);
         } else if (extenddiv == "zone-sex") {
             var Nw = document.getElementById("zone-sex").offsetWidth - svgPadding,
                 Nh = document.getElementById("zone-sex").offsetHeight - svgPadding;                  
             sexChart.width(Nw).height(Nh).cx(Nw/2+10).cy(Nh/2-10).radius(Math.min(Nw,Nh)*4/10).innerRadius(Math.min(Nw,Nh)*3/10).transitionDuration(0).legend(dc.legend().x((Nw/2)-Math.min(Nw,Nh)/7+10).y(Nh/2-Math.min(Nw,Nh)/9-10).itemHeight(10).gap(5)), 
             sexChart.render();
+            d3.selectAll("#sex-chart g path").on("mouseover", showSexDetail).on("mouseout", hideDetail);
         } else {
 
         }
 
     }
+
+
 
 
     </script>
