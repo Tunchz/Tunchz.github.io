@@ -92,29 +92,29 @@
             <div class="col-sm-225 height15p card-wrapper">
                 <div class = "card 1" style="background-color:#ea5771;">
                     <div style="height:25%; font-size: 20px;">ผู้ติดเชื้อ</div>
-                    <div id = "total-case" style="height:50%; font-family: mitr;font-size: 40px;"></div>
-                    <div style="height:25%;">เพิ่ม <span id = "total-newcase" style="font-size: 20px;"></span> ราย</div>
+                    <div id = "total-case" style="height:50%; font-family: mitr;font-size: 42px;"></div>
+                    <div style="height:25%;"><span id = "total-newcase" style="font-size: 20px;"></span></div>
                 </div>
             </div>
             <div class="col-sm-225 height15p card-wrapper">
                 <div  class = "card 2" style="background-color:#fcc400;">
                     <div style="height:25%; font-size: 20px;">กำลังรักษา</div>
-                    <div id = "total-care" style="height:50%; font-family: mitr;font-size: 40px;"></div>
-                    <div style="height:25%;"><span id = "total-newcare" style="font-size: 20px;"></span> ราย</div>
+                    <div id = "total-care" style="height:50%; font-family: mitr;font-size: 42px;"></div>
+                    <div style="height:25%;"><span id = "total-newcare" style="font-size: 20px;"></span></div>
                 </div>
             </div>
             <div class="col-sm-225 height15p card-wrapper">
                 <div  class = "card 3" style="background-color:#039245;">
                     <div style="height:25%; font-size: 20px;">หายแล้ว</div>
-                    <div id = "total-recover" style="height:50%; font-family: mitr;font-size: 40px;"></div>
-                    <div style="height:25%;">เพิ่ม <span id = "total-newrecover" style="font-size: 20px;"></span> ราย</div>
+                    <div id = "total-recover" style="height:50%; font-family: mitr;font-size: 42px;"></div>
+                    <div style="height:25%;"><span id = "total-newrecover" style="font-size: 20px;"></span></div>
                 </div>    
             </div>
             <div class="col-sm-225 height15p card-wrapper">
                 <div  class = "card 4" style="background-color:#d22d36;">
                     <div style="height:25%; font-size: 20px;">เสียชีวิต</div>
-                    <div id = "total-decease" style="height:50%; font-family: mitr;font-size: 40px;"></div>
-                    <div style="height:25%;">เพิ่ม <span id = "total-newdecease" style="font-size: 20px;"></span> ราย</div>
+                    <div id = "total-decease" style="height:50%; font-family: mitr;font-size: 42px;"></div>
+                    <div style="height:25%;"><span id = "total-newdecease" style="font-size: 20px;"></span></div>
                 </div>
                 <h5 id="update-date" style = "font-size: 12px; color : #aaa;text-align: right; margin-top: 0px; padding-right: 10px;"></h5>    
             </div>
@@ -139,7 +139,7 @@
                     </div>
 
                     <! link for data table>
-                    <div id="datatable-trigger" class="col-xs-12 height10p dc-chart-wrapper" style="padding-top: 20px; text-align: center; vertical-align: middle;">
+                    <div id="datatable-trigger" class="col-xs-12 height10p dc-chart-wrapper" style="padding-top: 16px; font-size: 20px; text-align: center; vertical-align: middle;">
                         <a data-toggle="modal" data-target="#datatable-modal" href="" >แสดงตารางข้อมูล</a>
                     </div>
 
@@ -384,54 +384,18 @@
                     //console.log(c_unknown.group().top(2))
                     var formatComma = d3.format(",");
 
-                    dc.numberDisplay("#total-case").formatNumber(d3.format(""))
-                          .valueAccessor(function(d) {return todayjson.Confirmed})
-                          .transitionDuration(0)
-                          .group(k);
-
-
-                    dc.numberDisplay("#total-newcase").formatNumber(d3.format(""))
-                          .valueAccessor(function(d) {return todayjson.NewConfirmed})
-                          .transitionDuration(0)
-                          .group(k);
-
-                    dc.numberDisplay("#total-care").formatNumber(d3.format(""))
-                          .valueAccessor(function(d) {return todayjson.Hospitalized})
-                          .transitionDuration(0)
-                          .group(k);
-
-                    dc.numberDisplay("#total-newcare").formatNumber(d3.format(""))
-                          .valueAccessor(function(d) {return todayjson.NewHospitalized})
-                          .transitionDuration(0)
-                          .group(k);
-
-                    dc.numberDisplay("#total-recover").formatNumber(d3.format(""))
-                          .valueAccessor(function(d) {return todayjson.Recovered})
-                          .transitionDuration(0)
-                          .group(k);
-
-                    dc.numberDisplay("#total-newrecover").formatNumber(d3.format(""))
-                          .valueAccessor(function(d) {return todayjson.NewRecovered})
-                          .transitionDuration(0)
-                          .group(k);
-
-                    dc.numberDisplay("#total-decease").formatNumber(d3.format(""))
-                          .valueAccessor(function(d) {return todayjson.Deaths})
-                          .transitionDuration(0)
-                          .group(k);
-
-                    dc.numberDisplay("#total-newdecease").formatNumber(d3.format(""))
-                          .valueAccessor(function(d) {return todayjson.NewDeaths})
-                          .transitionDuration(0)
-                          .group(k);
+                    document.getElementById("total-case").innerHTML = todayjson.Confirmed;
+                    document.getElementById("total-newcase").innerHTML = displaytexttotal(todayjson.NewConfirmed);
+                    document.getElementById("total-care").innerHTML = todayjson.Hospitalized;
+                    document.getElementById("total-newcare").innerHTML = displaytexttotal(todayjson.NewHospitalized);
+                    document.getElementById("total-recover").innerHTML = todayjson.Recovered;
+                    document.getElementById("total-newrecover").innerHTML = displaytexttotal(todayjson.NewRecovered);
+                    document.getElementById("total-decease").innerHTML = todayjson.Deaths;
+                    document.getElementById("total-newdecease").innerHTML = displaytexttotal(todayjson.NewDeaths);
 
                     document.getElementById("update-date").innerHTML = "ข้อมูลสรุปผู้ติดเชื้อรายวันอัปเดตล่าสุด : " + todayjson.UpdateDate +" ";
                     document.getElementById("confirmed-cases-update").innerHTML = "  ข้อมูลยืนยันผู้ติดเชื้อสะสมอัปเดตล่าสุด : " + datajson.UpdateDate +" ";
                     document.getElementById("confirmed-cases-update2").innerHTML = "  ข้อมูลยืนยันผู้ติดเชื้อสะสมอัปเดตล่าสุด : " + datajson.UpdateDate +" ";
-
-
-
-
 
                     
                     var m = document.getElementById("zone-prov").offsetWidth - svgPadding,
@@ -953,18 +917,31 @@
         }
 
       }
+    function displaytexttotal(d) {
+        if (d > 0) {
+            return "เพิ่ม " + Math.abs(d) + " ราย";
+        } 
+        else if (d < 0) {
+            return "ลด " + Math.abs(d) + " ราย";
+        }
+        else {
+            return "ไม่เปลี่ยนแปลง";
+        }
+    }
 
     function setheight() {
 
         if($("#wholecontent").width() < 770) 
         {
             $(".card-wrapper").height(120);
+            $("#zone-map").height(700);
             $("#zone-sex-nation-age").height(600);
             $("#zone-date").height(300);
         }
         else
         {
             $(".card-wrapper").height("0%");
+            $("#zone-map").height("50%");
             $("#zone-sex-nation-age").height("70%");
             $("#zone-date").height("10%");
         }
