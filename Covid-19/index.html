@@ -125,8 +125,14 @@
             <div class="col-xs-12 height80p" id="zone-Bottom">
                 
                 <div class="col-sm-3 height100p" id="zone-left">
-                    <div class="col-sm-12 height90p dc-chart-wrapper" id="zone-prov">
-                        <div id="prov-chart-title" class="">>> ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">จังหวัด</span><span id="prov-reset"></span>
+                    <div class="col-sm-12 height90p dc-chart-wrapper" id="zone-prov" style="position: relative;">
+                        <div id="prov-chart-title" class="">┃ ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">จังหวัด</span><span id="prov-reset"></span>
+
+                    <span id="fullextend-trigger" class="" style="padding-top: 16px; font-size: 20px; text-align: center; vertical-align: middle;">
+                        <a data-toggle="modal" href="" style="float: right;text-decoration: none;" onclick="toggle_extend('zone-prov')">⌝</a>
+                    </span>
+
+
                         </div>
                         <div  id="slidercontainer" class="col-xs-9" ><input type="range" class="slider" id="slideRange1" value="10" min="5" max="30" step="1" oninput="updateSlider(this.value)">
                         </div>
@@ -147,30 +153,30 @@
                     <div class="modal fade" id="datatable-modal" tabindex="-1" role="dialog" aria-labelledby="datatable-modalLabel" aria-hidden="true" style="padding-top: 15%">
 
 
-                        <div class="col-xs-12 height50p">
-                            <br>
+                        <div class="col-xs-12 height50p chart-wrapper">
                             <div class="chart-wrapper"><button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-right: 15px; color: #fff;"><span aria-hidden="true">&times;</span></button>
-                                <div class="chart-title">>> ตารางข้อมูลผู้ติดเชื้อโควิด-19 : ข้อมูล <strong id="size" style="font-size: 46px;">-</strong> <span id="totalsize"></span> ราย<span id="confirmed-cases-update2" style = "font-size: 12px;color : #aaa; padding-left: 5px"></span></div>
+                                <div class="chart-title">┃ ตารางข้อมูลผู้ติดเชื้อโควิด-19 : ข้อมูล <strong id="size" style="font-size: 46px;">-</strong> <span id="totalsize"></span> ราย<span id="confirmed-cases-update2" style = "font-size: 12px;color : #aaa; padding-left: 5px"></span></div>
                                 <div class="chart-stage">
                                     <table class="table table-hover" id="data-table" style="min-width: 400px"></table>
                                 </div>
                                 <div class="chart-notes"><button type="button" class="btn btn-default" data-dismiss="modal" style="font-family: DB Heavent; font-size: 16px; padding: 0px 9px;"><strong>Close</strong></button></div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
                 <div class="col-sm-9 height100p">
-                    <div class="col-sm-5 height70p dc-chart-wrapper" id="zone-map">
-                        <div id="map-chart">>> <span style="font-size: 24px">แผนที่</span>แสดงความหนาแน่นผู้ติดเชื้อ <a class="reset" href="javascript:mapChart.filterAll();dc.redrawAll();" style="display: none;">reset</a></div>
-                    </div>
-                    <div class="col-sm-7 height70p" id="zone-sex-nation-age">
-                        <div class="col-sm-6 height50p dc-chart-wrapper" id="zone-nation">
-                            <div id="sex-chart" class="">>> ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">เพศ </span><a class="reset" href="javascript:sexChart.filterAll();dc.redrawAll();" style="display: none;">reset</a></div>
+                    <div class="col-sm-5 height70p dc-chart-wrapper" id="zone-map" >
+                        <div id="map-chart">┃ <span style="font-size: 24px">แผนที่</span>แสดงความหนาแน่นผู้ติดเชื้อ <a class="reset" href="javascript:mapChart.filterAll();dc.redrawAll();" style="display: none;">reset</a><a data-toggle="modal" href="" style="float: right;text-decoration: none;" onclick="toggle_extend('zone-map')">⌝</a>
                         </div>
+                    </div>
+                    <div class="col-sm-7 height70p" id="zone-nation-nation-age">
                         <div class="col-sm-6 height50p dc-chart-wrapper" id="zone-sex">
-                            <div id="nation-chart-title" class="">>> ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">สัญชาติ</span><span id="nation-reset"></span>
+                            <div id="sex-chart" class="">┃ ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">เพศ </span><a class="reset" href="javascript:sexChart.filterAll();dc.redrawAll();" style="display: none;">reset</a><a data-toggle="modal" href="" style="float: right;text-decoration: none;" onclick="toggle_extend('zone-sex')">⌝</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 height50p dc-chart-wrapper" id="zone-nation">
+                            <div id="nation-chart-title" class="">┃ ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">สัญชาติ</span><span id="nation-reset"></span><a data-toggle="modal" href="" style="float: right;text-decoration: none;" onclick="toggle_extend('zone-nation')">⌝</a>
                             </div>
 
                             <div  id="slidercontainer2" class="col-xs-9" ><input type="range" class="slider" id="slideRange1" value="10" min="5" max="30" step="1" oninput="updateSlider2(this.value)">
@@ -179,21 +185,20 @@
                                  Top <span id="sliderValue2">7</span>   
                             </div>
 
-                            <div id="nation-chart" style="height: 80%">
+                            <div id="nation-chart" style="height: 93%">
                             </div>
                         </div>
                         <div class="col-xs-12 height50p dc-chart-wrapper" id="zone-age">
-                            <div id="age-chart" class="">>> ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">อายุ </span><a class="reset" href="javascript:ageChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+                            <div id="age-chart" class="">┃ ผู้ติดเชื้อแยกตาม<span style="font-size: 24px">อายุ </span><a class="reset" href="javascript:ageChart.filterAll();dc.redrawAll();" style="display: none;">reset</a><a data-toggle="modal" href="" style="float: right;text-decoration: none;" onclick="toggle_extend('zone-age')">⌝</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-12 height30p dc-chart-wrapper" id="zone-date">
-                        <div id="date-chart" class="" style=" height: 88%">>> ผู้ติดเชื้อ<span style="font-size: 24px;">รายวัน </span><a class="reset" href="javascript:dateChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+                        <div id="date-chart" class="" style=" height: 90%;">┃ ผู้ติดเชื้อ<span style="font-size: 24px;">รายวัน </span><a class="reset" href="javascript:dateChart.filterAll();dc.redrawAll();" style="display: none;">reset</a><a data-toggle="modal" href="" style="float: right;text-decoration: none;" onclick="toggle_extend('zone-date')">⌝</a>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -217,7 +222,10 @@
             slider1 = 10,
             slider2 = 7;
         var a,
-            brush = !1;
+            brush = !1,
+            extenddiv,
+            extend = !1,
+            before_style = {width:"0",height:"0"};
 
 //        var sliderDiv = document.getElementById("sliderValue"),
 //            inputslide = document.getElementById("slidercontainer");
@@ -243,12 +251,12 @@
 
 
 
-            d3.json("https://covid19.th-stat.com/api/open/today", function(todayjson) {
-            //d3.json("https://Tunchz.github.io/covid19_today.json", function(todayjson) {
+            //d3.json("https://covid19.th-stat.com/api/open/today", function(todayjson) {
+            d3.json("https://Tunchz.github.io/covid19_today.json", function(todayjson) {
 
                 //console.log(datajson);
-                d3.json("https://covid19.th-stat.com/api/open/cases", function(datajson) { 
-                //d3.json("https://Tunchz.github.io/covid19_case.json", function(datajson) { 
+                //d3.json("https://covid19.th-stat.com/api/open/cases", function(datajson) { 
+                d3.json("https://Tunchz.github.io/covid19_case.json", function(datajson) { 
                     var y = datajson.Data;
 
 
@@ -328,8 +336,10 @@
 
                         agerange = a.dimension(e => {   
                             a_ = e.Age;
-                            if (a_ <= 10) {
-                                return '0 - 10 ปี';
+                            if (a_ == 0) {
+                                return 'ไม่ระบุ';
+                            } else if (a_ <= 10) {
+                                return '1 - 10 ปี';
                             } else if (a_ <= 20) {
                                 return '11 - 20 ปี';
                             } else if (a_ <= 30) {
@@ -359,7 +369,7 @@
 
                         //console.log(o);
 
-
+/*
                         for (var j = 0; j < mapjson.features.length; j++) {
                             var jsonState = mapjson.features[j].properties.PROVINCE_N,
                                 prov = b.all();
@@ -377,7 +387,7 @@
                         }       
 
                         //console.log(mapjson);
-
+*/
 
 
                     //console.log(ageGroup.top(10))
@@ -420,8 +430,32 @@
                             provChart.width(m).height(h).transitionDuration(0), dc.renderAll(), ageChart.transitionDuration(transitionDuration), dateChart.transitionDuration(transitionDuration), nationChart.transitionDuration(transitionDuration), sexChart.transitionDuration(transitionDuration), mapChart.transitionDuration(transitionDuration)
 
                     };
+/*
+                    var provChartEx = dc.rowChart("#prov-chart-extend");
+                    var mx = document.getElementById("wholecontent").offsetWidth - svgPadding,
+                        hx = document.getElementById("wholecontent").offsetHeight*0.8 - svgPadding-50;
+                    provChartEx.width(mx).height(hx).margins({top: 0, left: 10, right: 10, bottom: 0})
+                        .transitionDuration(transitionDuration)
+                        .dimension(c)
+                        .group(s)
+                        .data(function (group) { return group.top(slider1);})
+                        .colors(Theme_Color).label(function(e) {return e.key+ "  " + e.value + " ราย"})
+                        .ordering(function(e) { return -e.value; })
+                        //.title(function(e) {return e.key + " : " + e.value + " ราย"})
+                        .title(function(e) {return ""})
+                        .gap(1)
+                        .elasticX(!0)
+                        .xAxis().ticks(3)
+                        , window.onresize = function(e) {
+                            var a = r.keyAccessor()(e);
+                            dc.events.trigger(function() {
+                                r.filter(null), r.filter(a), r.redrawGroup()
+                            })
+                            provChart.width(m).height(h).transitionDuration(0), dc.renderAll(), ageChart.transitionDuration(transitionDuration), dateChart.transitionDuration(transitionDuration), nationChart.transitionDuration(transitionDuration), sexChart.transitionDuration(transitionDuration), mapChart.transitionDuration(transitionDuration)
 
+                    };
 
+*/
 
 
 
@@ -432,7 +466,7 @@
                     dateChart.width(j).height(f).margins({
                         top: 10,
                         right: 10,
-                        bottom: 45,
+                        bottom: 55,
                         left: 40
                         }).dimension(n)
                         .group(o, "จำนวนผู้ป่วยรายวัน")
@@ -504,25 +538,40 @@
                     var E = document.getElementById("zone-age").offsetWidth - svgPadding,
                         P = document.getElementById("zone-age").offsetHeight - svgPadding;
                     ageChart.width(E).height(P).margins({ top: 10, right: 0, bottom: 35, left: 30})
-                        .dimension(d/*agerange*/)
-                        .group(l/*ageGroup*/)
+                        .dimension(d)
+                        .group(l)
                         .transitionDuration(transitionDuration)
                         .elasticY(!0).centerBar(!1).gap(1)
                         .colors(Theme_Color).round(dc.round.floor).alwaysUseRounding(!0)
                         .x(d3.scale.linear().domain([0, 100]))
-                        .renderHorizontalGridLines(!0)/*.xAxisLabel(["อายุ"])*/
-                        .brushOn(brush/*!1**/)
+                        .renderHorizontalGridLines(!0)
+                        .brushOn(brush)
                         .title(function(e) {return ""})
                         //.legend(dc.legend().x(30).y(20).itemHeight(10).gap(5))
                         .yAxis().ticks(3);
 
+/*                    ageChart.width(E).height(P).margins({ top: 10, right: 0, bottom: 35, left: 30})
+                        .dimension(agerange)
+                        .group(ageGroup)
+                        .transitionDuration(transitionDuration)
+                        .elasticY(!0).centerBar(!1).gap(1)
+                        .colors(Theme_Color).round(dc.round.floor).alwaysUseRounding(!0)
+                        //.x(d3.scale.linear().domain([0, 100]))
+                        .x(d3.scale.ordinal().domain(['1 - 10 ปี','11 - 20 ปี','21 - 30 ปี','31 - 40 ปี','41 - 50 ปี','51 - 60 ปี','61 - 70 ปี','71 - 80 ปี','91 - 90 ปี','มากกว่า 90 ปี','ไม่ระบุ']))
+                        .xUnits(dc.units.ordinal)
+                        .renderHorizontalGridLines(!0)
+                        .brushOn(brush/)
+                        .title(function(e) {return ""})
+                        //.legend(dc.legend().x(30).y(20).itemHeight(10).gap(5))
+                        .yAxis().ticks(3);
+*/
 
 
 
                     var A = document.getElementById("zone-nation").offsetWidth - svgPadding,
                         R = document.getElementById("zone-nation").offsetHeight - svgPadding;
 
-                    //console.log(document.getElementById("zone-nation"));
+                    //console.log(document.getElementById("zone-sex"));
                     nationChart.width(A).height(R)
                         .margins({top:0, left:10, right:0, bottom:55})
                         .dimension(nt).group(N).transitionDuration(transitionDuration)
@@ -560,6 +609,7 @@
 
                     ,window.onresize = function(e) {
                         setheight();
+                        if (extend) {display_extend();};
                         var a = document.getElementById("zone-prov").offsetWidth - svgPadding,
                             t = document.getElementById("zone-prov").offsetHeight - svgPadding-50;
                         provChart.width(a).height(t).transitionDuration(0);
@@ -733,7 +783,7 @@
                 class: "toggle-area",
                 x : 0,
                 y : 0,
-                height : 20, 
+                height : 35, 
                 width : document.getElementById("zone-date").offsetWidth,
                 fill : "#fff",
                 opacity : 0
@@ -931,20 +981,94 @@
 
     function setheight() {
 
-        if($("#wholecontent").width() < 770) 
-        {
+        if($("#wholecontent").width() < 741){
             $(".card-wrapper").height(120);
             $("#zone-map").height(700);
-            $("#zone-sex-nation-age").height(600);
+            $("#zone-nation-nation-age").height(600);
             $("#zone-date").height(300);
-        }
-        else
-        {
+        } else {
             $(".card-wrapper").height("0%");
             $("#zone-map").height("50%");
-            $("#zone-sex-nation-age").height("70%");
+            $("#zone-nation-nation-age").height("70%");
             $("#zone-date").height("10%");
         }
+    }
+
+    function toggle_extend(a) {
+        if (extend ||$("#wholecontent").width()>740){
+            extenddiv = a;
+            display_extend();
+            update_extended_chart()
+        }
+    }    
+
+    function display_extend() {
+        if (extend ||$("#wholecontent").width()>740){
+            if (extend){
+                document.getElementById(extenddiv).style.marginLeft = "";
+                document.getElementById(extenddiv).style.position = "relative";
+                document.getElementById(extenddiv).style.zIndex = 0;
+                document.getElementById(extenddiv).style.height = before_style.height;
+                document.getElementById(extenddiv).style.width = before_style.width;
+            } 
+            else {
+                before_style.height = document.getElementById(extenddiv).style.height;
+                before_style.width = document.getElementById(extenddiv).style.width;
+                document.getElementById(extenddiv).style.position = "fixed";
+                document.getElementById(extenddiv).style.zIndex = 10;
+                var offset_left = document.getElementById(extenddiv).offsetLeft - 5;
+                console.log(offset_left);
+                console.log("-" + offset_left + "px");
+                document.getElementById(extenddiv).style.marginLeft = "-" + (document.getElementById(extenddiv).offsetLeft - 5) + "px";
+
+                $("#"+extenddiv).width($("#wholecontent").width()-16);
+                $("#"+extenddiv).height($("#wholecontent").height()*0.8-16);
+            }
+
+        }
+
+      extend = !extend;
+    }
+
+    function update_extended_chart(){
+        if(extenddiv == "zone-prov") {
+            var a = document.getElementById("zone-prov").offsetWidth - svgPadding,
+                t = document.getElementById("zone-prov").offsetHeight - svgPadding-50;
+            provChart.width(a).height(t);
+            provChart.render();
+        } else if (extenddiv == "zone-date") {
+            if (extend) {document.getElementById("date-chart").style.height = "94%";}
+            else {document.getElementById("date-chart").style.height = "90%";};
+            var r = document.getElementById("zone-date").offsetWidth - svgPadding,
+                i = document.getElementById("zone-date").offsetHeight - svgPadding;
+            dateChart.width(r).height(i).transitionDuration(0);
+            dateChart.render();
+            datechart_add_togglebrush();
+        } else if (extenddiv == "zone-age") {
+            var c = document.getElementById("zone-age").offsetWidth - svgPadding,
+                s = document.getElementById("zone-age").offsetHeight - svgPadding;
+            ageChart.width(c).height(s).transitionDuration(0);
+            ageChart.render();
+            agechart_add_togglebrush();
+        } else if (extenddiv == "zone-map") {
+            var v = document.getElementById("zone-map").offsetWidth// - svgPadding,
+                C = document.getElementById("zone-map").offsetHeight;// - svgPadding;
+            mapChart.width(v).height(C).projection(d3.geo.mercator().rotate([-100.6331, -13.2]).translate([v / 2, C / 2]).center([1.5, -1.1]).scale(2.478*Math.min(v*1.872, C-69)+541+50)).transitionDuration(0);
+            mapChart.render();
+        } else if (extenddiv == "zone-nation") {
+            var n = document.getElementById("zone-nation").offsetWidth - svgPadding,
+                o = document.getElementById("zone-nation").offsetHeight - svgPadding;
+            nationChart.width(n).height(o).transitionDuration(0);
+            nationChart.render();
+        } else if (extenddiv == "zone-sex") {
+            var Nw = document.getElementById("zone-sex").offsetWidth - svgPadding,
+                Nh = document.getElementById("zone-sex").offsetHeight - svgPadding;                  
+            sexChart.width(Nw).height(Nh).cx(Nw/2+10).cy(Nh/2-10).radius(Math.min(Nw,Nh)*4/10).innerRadius(Math.min(Nw,Nh)*3/10).transitionDuration(0).legend(dc.legend().x((Nw/2)-Math.min(Nw,Nh)/7+10).y(Nh/2-Math.min(Nw,Nh)/9-10).itemHeight(10).gap(5)), 
+            sexChart.render();
+        } else {
+
+        }
+
     }
 
 
