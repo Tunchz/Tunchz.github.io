@@ -153,7 +153,7 @@
                     <div class="modal fade" id="datatable-modal" tabindex="-1" role="dialog" aria-labelledby="datatable-modalLabel" aria-hidden="true" style="padding-top: 15%">
 
 
-                        <div class="col-xs-12 height50p chart-wrapper">
+                        <div class="col-xs-12 height70p" style="padding: 0px 10px">
                             <div class="chart-wrapper"><button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-right: 15px; color: #fff;"><span aria-hidden="true">&times;</span></button>
                                 <div class="chart-title">┃ ตารางข้อมูลผู้ติดเชื้อโควิด-19 : ข้อมูล <strong id="size" style="font-size: 46px;">-</strong> <span id="totalsize"></span> ราย<span id="confirmed-cases-update2" style = "font-size: 12px;color : #aaa; padding-left: 5px"></span></div>
                                 <div class="chart-stage">
@@ -168,6 +168,9 @@
                 <div class="col-sm-9 height100p">
                     <div class="col-sm-5 height70p dc-chart-wrapper" id="zone-map" >
                         <div id="map-chart" style=" height: 95%;">┃ <span style="font-size: 24px">แผนที่</span>แสดงความหนาแน่นผู้ติดเชื้อ <a class="reset" href="javascript:mapChart.filterAll();dc.redrawAll();" style="display: none;">reset</a><a data-toggle="modal" href="" style="float: right;text-decoration: none;" onclick="toggle_extend('zone-map')">⌝</a>
+                        </div>
+                        <div id="map-legend" style=" height: 5%;">
+                            
                         </div>
                     </div>
                     <div class="col-sm-7 height70p" id="zone-nation-nation-age">
@@ -207,6 +210,7 @@
     <!script src="js\d3.js"><!/script>
     <!script src="js\crossfilter.js"><!/script>
     <!script src="js\dc.js"><!/script>
+    <!script src="js\legend.js"><!/script>
 
     <script>
         setheight();
@@ -214,10 +218,9 @@
             transitionDuration = 200,
             minHeight = 500,
             svgPadding = 30,
-            Theme_Color = "#008fff";//#0ab4f3",//"#FF6900";
+            Theme_Color = "#008fff",//#0ab4f3",//"#FF6900";
             //Theme_Color_Range = d3.scaleLinear().domain([1,150]).range(["white", "blue"]);
             //Theme_Color_Range = d3.scaleSequential().domain([1,150]).interpolator(d3.interpolateViridis);
-            Theme_Color_Range = [/*"#f8fbff", "#deecf8",*/ "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#07519c", "#253494", "#071d58", /*"#e10609", "#e10609", "#800026"*/,"#800026", "#800026", "#800026"],
             //["#FFE1CC", "#FFD5B7", "#FFC9A3", "#FFBD8E", "#FFB17A", "#FFA566", "#FF9951", "#FF8D3D", "#FF8128", "#FF7514", "#FF6900"];
             slider1 = 10,
             slider2 = 7;
@@ -234,6 +237,7 @@
         var provChart = dc.rowChart("#prov-chart"),
             dateChart = dc.lineChart("#date-chart"),
             mapChart = dc.geoChoroplethChart("#map-chart"),
+            mapLegend = dc.heatMap("#map-legend"),
             ageChart = dc.barChart("#age-chart"),
             nationChart = dc.rowChart("#nation-chart"),
             sexChart = dc.pieChart("#sex-chart"),
@@ -310,8 +314,8 @@
                     //console.log(remove_unknown(a))
                         a = crossfilter(y);
                     var totalcase = y.length,
-                        k1 = crossfilter(todayjson),
-                        k = k1.groupAll(),
+//                        k1 = crossfilter(todayjson),
+//                        k = k1.groupAll(),
                         r/*, a */= crossfilter(y),
                         i = a.groupAll(),
                         u = a.dimension(function(e) {return e.Province}),
@@ -434,32 +438,6 @@
                             provChart.width(m).height(h).transitionDuration(0), dc.renderAll(), ageChart.transitionDuration(transitionDuration), dateChart.transitionDuration(transitionDuration), nationChart.transitionDuration(transitionDuration), sexChart.transitionDuration(transitionDuration), mapChart.transitionDuration(transitionDuration)
 
                     };
-/*
-                    var provChartEx = dc.rowChart("#prov-chart-extend");
-                    var mx = document.getElementById("wholecontent").offsetWidth - svgPadding,
-                        hx = document.getElementById("wholecontent").offsetHeight*0.8 - svgPadding-50;
-                    provChartEx.width(mx).height(hx).margins({top: 0, left: 10, right: 10, bottom: 0})
-                        .transitionDuration(transitionDuration)
-                        .dimension(c)
-                        .group(s)
-                        .data(function (group) { return group.top(slider1);})
-                        .colors(Theme_Color).label(function(e) {return e.key+ "  " + e.value + " ราย"})
-                        .ordering(function(e) { return -e.value; })
-                        //.title(function(e) {return e.key + " : " + e.value + " ราย"})
-                        .title(function(e) {return ""})
-                        .gap(1)
-                        .elasticX(!0)
-                        .xAxis().ticks(3)
-                        , window.onresize = function(e) {
-                            var a = r.keyAccessor()(e);
-                            dc.events.trigger(function() {
-                                r.filter(null), r.filter(a), r.redrawGroup()
-                            })
-                            provChart.width(m).height(h).transitionDuration(0), dc.renderAll(), ageChart.transitionDuration(transitionDuration), dateChart.transitionDuration(transitionDuration), nationChart.transitionDuration(transitionDuration), sexChart.transitionDuration(transitionDuration), mapChart.transitionDuration(transitionDuration)
-
-                    };
-
-*/
 
 
 
@@ -494,21 +472,42 @@
  
 
 
+                    var Theme_Color_Range = [/*"#f8fbff",*/ "#deecf8",/* "#c6dbef",*/ "#9ecae1", /*"#6baed6", */"#4292c6", /*"#2171b5",*/ "#07519c", /*"#253494", */"#071d58", /*"#e10609",*/ "#e10609", "#800026"];
 
                     var v = document.getElementById("zone-map").offsetWidth,// - svgPadding,
-                        C = document.getElementById("zone-map").offsetHeight;// - svgPadding;
+                        C = document.getElementById("zone-map").offsetHeight*0.95;// - svgPadding;
                     mapChart.width(v).height(C).dimension(u).group(b).transitionDuration(200)
                             .projection(d3.geo.mercator().rotate([-100.6331, -13.2]).translate([v / 2, C / 2]).center([1.5, -1.1]).scale(2.478*Math.min(v*1.872, C-69)+541))
                             .overlayGeoJson(mapjson.features, "PROVINCE_N", function(e) {e.properties.value = e.value; return e.properties.PROVINCE_N})
-                            .colors(d3.scale.quantize().range(Theme_Color_Range))
-                            .colorDomain([-8, 100/*b.top(2)[0].key === "ไม่พบข้อมูล" ? b.top(2)[1].value : b.top(2)[0].value*/])
+                            .colors(d3.scale.threshold().range(Theme_Color_Range))
+                            .colorDomain([1,6,11,51,101,501])
+                            //.colorDomain([-8, 100/*b.top(2)[0].key === "ไม่พบข้อมูล" ? b.top(2)[1].value : b.top(2)[0].value*/])
                             .label(function(e) {return 15/*e.value*/})
                             //.title(function(e) {return e.value/*"จังหวัด : " + e.key + "\nจำนวนผู้ติดเชื้อ : " + e.value + " คน"*/})
                             .title(function(e) {return ""})
-    
+                            .legend(dc.legend().x(0).y(0).horizontal(false).itemHeight(10).gap(5))
+                            ;
+
+                    var mapcolor = [{key:"0",value:0},{key:"1-5",value:3},{key:"6-10",value:8},{key:"11-50",value:30},{key:"51-100",value:80},{key:"101-500",value:300},{key:">500",value:800}];
+                    var mc = crossfilter(mapcolor),
+                        colorD = mc.dimension(function(e) {return e.key;}),
+                        colorG = colorD.group().reduceSum(function(e) {return e.value;});
+
+                    //console.log(colorG.all());
 
 
-
+                    mapLegend.width(v).height(45).dimension(colorD).group(colorG)
+                        .margins({top: 0, bottom: 37, left: (v-270)/2, right: (v-270)/2})
+                        .keyAccessor(function(e) {return e.value;})
+                        .valueAccessor(function(e) { return "";})
+                        .colorAccessor(function(e) { return e.value;})
+                        .title(function(e) {return ""})
+                        .colors(d3.scale.threshold().range(Theme_Color_Range))
+                        .colsLabel(function(e) {return colorG.top(7).filter(function(d) { return d.value == e})[0].key;})
+                        .colorDomain([1,6,11,51,101,501])
+                        .xBorderRadius(0)
+                        .yBorderRadius(0)
+                        .boxOnClick(!1);
 
 //console.log(b.top(Infinity).filter(function(e) { return e.key == "นครนายก"})[0].value);
 //console.log(N.top(5))
@@ -532,7 +531,7 @@
                         .label(function(e) {return /*e.key + " " + */(e.value/totalcase*100).toFixed(2)+"%"
                         })
                         .ordinalColors(['#008fff','#ea5771','#dadada'])
-                        .ordering(function(d) { return d.key === "ชาย" ? 1: d.key === "หญิง" ? 2: 3 });
+                        .ordering(function(e) { return e.key === "ชาย" ? 1: e.key === "หญิง" ? 2: 3 });
 
 
 
@@ -624,8 +623,9 @@
                             s = document.getElementById("zone-age").offsetHeight - svgPadding;
                         ageChart.width(c).height(s).transitionDuration(0);
                         var v = document.getElementById("zone-map").offsetWidth// - svgPadding,
-                            C = document.getElementById("zone-map").offsetHeight;// - svgPadding;
-                        mapChart.width(v).height(C).projection(d3.geo.mercator().rotate([-100.6331, -13.2]).translate([v / 2, C / 2]).center([1.5, -1.1]).scale(2.478*Math.min(v*1.872, C-69)+541+50)).transitionDuration(0);
+                            C = document.getElementById("zone-map").offsetHeight*0.95;// - svgPadding;
+                        mapChart.width(v).height(C).projection(d3.geo.mercator().rotate([-100.6331, -13.2]).translate([v / 2, C / 2]).center([1.5, -1.1]).scale(2.478*Math.min(v*1.872, C-69)+541)).transitionDuration(0);
+                        mapLegend.width(v).height(45).margins({top: 0, bottom: 37, left: (v-270)/2, right: (v-270)/2}).transitionDuration(0);
                         var n = document.getElementById("zone-nation").offsetWidth - svgPadding,
                             o = document.getElementById("zone-nation").offsetHeight - svgPadding;
                         nationChart.width(n).height(o).transitionDuration(0);
@@ -999,7 +999,7 @@
                 document.getElementById(extenddiv).style.zIndex = 10;
                 var offset_left = document.getElementById(extenddiv).offsetLeft - 5;
                 document.getElementById(extenddiv).style.marginLeft = "-" + (document.getElementById(extenddiv).offsetLeft - 5) + "px";
-                document.getElementById(extenddiv).style.position = "absolute";
+
                 $("#"+extenddiv).width($("#wholecontent").width()-16);
                 $("#"+extenddiv).height($("#wholecontent").height()*0.8-16);
                 document.getElementById(extenddiv).style.position = "absolute";
@@ -1037,9 +1037,11 @@
             d3.selectAll("#age-chart rect.bar").on("mouseover", showAgeDetail).on("mouseout", hideDetail);
         } else if (extenddiv == "zone-map") {
             var v = document.getElementById("zone-map").offsetWidth// - svgPadding,
-                C = document.getElementById("zone-map").offsetHeight;// - svgPadding;
-            mapChart.width(v).height(C).projection(d3.geo.mercator().rotate([-100.6331, -13.2]).translate([v / 2, C / 2]).center([1.5, -1.1]).scale(2.478*Math.min(v*1.872, C-69)+541+50)).transitionDuration(0);
+                C = document.getElementById("zone-map").offsetHeight*(extend ? 1.1 : 0.95);// - svgPadding;
+            mapChart.width(v).height(C).projection(d3.geo.mercator().rotate([-100.6331, -13.2]).translate([v / 2, C / 2]).center([1.5, (extend ? -2.1 : -1.1)]).scale(2.478*Math.min(v*1.872, C-69)+541)).transitionDuration(0);
             mapChart.render();
+            mapLegend.width(v).height(45).margins({top: 0, bottom: 37, left: (v-270)/2, right: (v-270)/2}).transitionDuration(0);
+            mapLegend.render();
             d3.selectAll("#map-chart g path").on("mouseover", showMapDetail).on("mouseout", hideDetail);
         } else if (extenddiv == "zone-nation") {
             var n = document.getElementById("zone-nation").offsetWidth - svgPadding,
