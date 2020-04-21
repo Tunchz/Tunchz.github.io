@@ -1165,3 +1165,15 @@
             width: calc(100%-10px)*/
         }
 
+
+        #map-legend>svg>g>g>text {
+            font-family: db heavent;
+            font-size: 12px; 
+            fill: #fff;
+        }
+
+        #map-legend>svg>g>g>rect {
+            stroke: #404040
+        }
+
+
