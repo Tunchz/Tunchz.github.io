@@ -1,0 +1,414 @@
+﻿<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Place this data between the <head> tags of your website -->
+<title>z.et.Z∙E∙R∙O : the question isn't can you; it's WILL YOU. -FWTT-</title>
+<meta name="description" content="the question isn't can you; it's WILL YOU. -FWTT-">
+
+<!link href='http://fonts.googleapis.com/css?family=Karla:400,700,700italic' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="css\reset.css"> <!-- CSS reset -->
+<link rel="stylesheet" href="css\style.css"> <!-- Resource style -->
+<script src="js\modernizr.js"></script> <!-- Modernizr -->
+<link rel="stylesheet" href="css/mapbox-gl.css">
+<link rel="stylesheet" href="css/FWTT.css">
+<link rel="stylesheet" href="css/fonts.css">
+
+
+
+	
+</head>
+<body onresize="buildChart(sensor);">
+	<nav id="cd-vertical-nav" style="font-family: Impact;">
+		<ul>
+			<li>
+				<a href="#section1" data-number="1">
+					<span class="cd-dot"></span>
+					<span class="cd-label">Intro</span>
+				</a>
+			</li>
+			<li>
+				<a href="#section2" data-number="2">
+					<span class="cd-dot"></span>
+					<span class="cd-label">Zone 1 ▸ Sensors</span>
+				</a>
+			</li>
+			<li>
+				<a href="#section3" data-number="3">
+					<span class="cd-dot"></span>
+					<span class="cd-label">Zone 2 ▸ Maps</span>
+				</a>
+			</li>
+
+			<li>
+				<a href="#section7" data-number="7">
+					<span class="cd-dot"></span>
+					<span class="cd-label">About</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<a class="cd-nav-trigger cd-img-replace">Open navigation<span></span></a>
+
+	<section id="section1" class="cd-section">
+		<h1 style="font-family: Impact;">LEAP OR FALL ▸ Z∙E∙R∙O</h1>
+
+        
+
+		<a href="#section2" class="cd-scroll-down cd-img-replace">scroll down</a>
+	</section><!-- cd-section -->
+
+	<section id="section2" class="cd-section" id="chart">
+		  
+      <div id="s2left"></div>
+      <div id="section2-title">
+        <h0> <y>Z</y>on<y>e</y> 1 : <y>R</y>eal-Time Sens<y>o</y>r</h0>
+      <!/div>
+      <!div id="section2-subtitle">
+        <h00> แสดงข้อมูลเซนเซอร์วัดคุณภาพอากาศ ▸ ปริมาณฝุ่นละออง PM2.5 ความชื้น อุณหภูมิ และปริมาณแสดงสว่าง</h00>
+      </div>
+      <!div id="divider"><!/div>
+		  <!div id="chart"><!/div>
+      <div id="TimeDisplay"></div>
+
+
+      <svg id="chart-container"></svg>
+
+      <div id="s21">
+        <h3><span id="s2-humd">Humd</span></h3>
+        <h4>Humidity</h4>
+        <h7><span id="s2-humd-minmax">Humd-minmax</span></h7>
+       </div>
+       <div id="s22">
+        <h3><span id="s2-light">Light</span></h3>
+        <h4>Light</h4>
+        <h7><span id="s2-light-minmax">Humd-minmax</span></h7>
+       </div>
+       <div id="s23">
+        <h3><span id="s2-temp">Temp</span></h3>
+        <h4>Temperature</h4>
+        <h7><span id="s2-temp-minmax">Humd-minmax</span></h7>
+       </div>
+       <div id="s24">
+        <h3><span id="s2-pm25">PM25</span></h3>
+        <h4>PM 2.5</h4>
+        <h7><span id="s2-pm25-minmax">Humd-minmax</span></h7>
+       </div>
+       <div id="s25">
+        <h7><span id="s2-time">Humd-minmax</span></h7>
+       </div>
+
+
+
+
+    
+	</section><!-- cd-section -->
+
+	<section id="section3" class="cd-section" id="chart2">
+
+    <div id="s3left"></div>
+    <div id="section3-title">
+      <h0> <y>Z</y>on<y>e</y> 2 : <y>R</y>eal-Time L<y>o</y>cation</h0>
+    <!/div>
+    <!div id="section3-subtitle">
+      <h00> แสดงข้อมูลตำแหน่งบนแผนที่ ▸ ละติจูด-ลองติจูด ของตำแหน่งเซนเซอร์แต่ละเซนเซอร์</h00>
+    </div>
+
+
+		 <div id="map"></div>
+
+
+	</section><!-- cd-section -->
+
+
+	<section id="section7" class="cd-section">
+		<article>     โปรเจคนี้สร้างขึ้นเพื่อแสดงตัวอย่างการนำข้อมูลที่รวบรวมจากอุปกรณ์ iot ต่างๆ เช่น เซนเซอร์ แล้วนำมาแสดงข้อมูลแบบ Real-Time. <br><br> ชุดข้อมูลที่ใช้ในตัวอย่างนี้เป็นข้อมูลจากอุปกรณ์เซนเซอร์ตรวจวัดคุณภาพอากาศ และข้อมูลเซนเซอร์จากโทรศัพท์ </article>
+    
+
+    <footer>
+      A data visualization project by <a href="mailto:tunchz@gmail.com">-FWTT-</a>
+    </footer>
+	</section><!-- cd-section -->
+
+
+</body>
+
+
+
+  <script src="js/d3.v355.min.js"></script>
+  <script src="js/chartsdisplay.js"></script>
+  <script src='js/mapbox-gl.js'></script>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/main.js"></script> <!-- Resource jQuery -->
+
+
+
+<script>
+
+
+
+    function project(m,d) {
+      return m.project(new mapboxgl.LngLat(+d.lon, +d.lat)/*getLL(d)*/);
+    }
+
+    function markerupdate(m,d) {
+      d
+      .attr({
+        cx: function(d) { 
+          var x = project(m,d).x;
+          return x
+        },
+        cy: function(d) { 
+          var y = project(m,d).y;
+          return y
+        },
+      })
+    }
+
+    function zoom(d) {
+      if (d==1) {
+        return 16;
+      } else if (d==2) {
+        return 12;
+      } else if (d==3) {
+        return 9;
+      } else {
+        return 5;
+      }
+    }
+
+    function drawmap(data){
+
+
+      //remove all old markers and popups
+      markers = d3.select("#map").selectAll(".marker");
+      markers.remove();
+      popups = d3.select("#map").selectAll(".mapboxgl-popup");
+      popups.remove();
+
+      var popups=[];
+
+      for (j = 0; j < data.length; j++) {
+
+        if (data[j].lat!=0 && data[j].lon!=0){
+
+          var el = document.createElement('div');
+          el.className = 'marker';
+          el.id = 'marker-'+j;
+
+          // make a marker for each feature and add to the map
+          new mapboxgl.Marker(el)
+          .setLngLat([data[j].lon,data[j].lat])
+          .addTo(map);
+
+          popups[j] = new mapboxgl.Popup({ offset: 20, closeButton: false, closeOnClick: false }).setHTML('<strong>┃ '+data[j].name+'</strong><br><small> ▸ Update: '+formatTime(data[j].date)+ '<br> ▸ Lat: '+ data[j].lat +'  Lat: '+ data[j].lon+'</small>');
+
+          d3.select("#map").selectAll("#marker-"+j).style("background-image","url('img/"+ data[j].name +".jpg')");
+
+          d3.select("#map").selectAll(".marker")
+            .on('mouseover', function(e) {k=d3.select(this).attr('id').split("-")[1]; popups[k].setLngLat([data[k].lon,data[k].lat]).addTo(map);})
+            .on('mouseout', function(e) {popup = popups[d3.select(this).attr('id').split("-")[1]]; popup.remove();})
+            .on('click', function(d) {z!=1 ? z = z - 1 : z = z; k=d3.select(this).attr('id').split("-")[1]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});})
+            .on('contextmenu', function(d) {z!=4 ? z = z + 1 : z = z; k=d3.select(this).attr('id').split("-")[1]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});});
+
+        } //if
+      } //for
+    }
+
+
+
+    function refresh(){
+
+
+        d3.json("http://122.155.11.222:8080/minMNRX-TPtGugcDTF3AnoG123K1dngc/project", function(error, data) {
+          if (error) {
+            document.getElementById("TimeDisplay").innerHTML = "...Error Loading Sensor Data...";
+            sensor.unshift({ 'pm25' : 0,                         //sensor.push({ 'pm25' : 0,
+                          'humd' : 0,                          
+                          'temp' : 0,                         
+                          'light' : 0,                        
+                          'pm10' : 0, 
+                          'lat' : 0,     
+                          'lon' : 0,     
+                          'name' : "เสือผู้ไม่กินเหยื่อซ้ำ",
+                          'date' : new Date
+            });
+          } else {
+            sensor.unshift({ 'pm25' : data.widgets[4].value,                         //pm2.5
+                          'humd' : data.widgets[0].value,                          //hum
+                          'temp' : data.widgets[5].value,                         //temp
+                          'light' : data.widgets[3].value,                          //light
+                          'pm10' : parseFloat((data.widgets[7].value).split("\u0000")[0]).toFixed(2),     //lat
+                          'lat' : (data.widgets[7].value).split("\u0000")[0],     //lat
+                          'lon' : (data.widgets[7].value).split("\u0000")[1],     //lon
+                          'name' : "เสือผู้ไม่กินเหยื่อซ้ำ",
+                          'date' : new Date()
+            });
+         
+          }
+
+          while (sensor.length>windowlength) {
+            //sensor.shift();
+            sensor.pop();
+          }
+          
+          d3.json("http://122.155.11.222:8080/eF8QFnjVmxkEj4xmSNXeCExKZTBBECcm/project", function(error, data2) {
+            
+            //console.log(data2.widgets[0].value);
+                    if (error) {
+                      sensor2.unshift({ 'lat' : 0,     
+                                    'lon' : 0,   
+                                    'name' : "Tunchz",  
+                                    'date' : new Date()
+                      });
+                    } else {
+                      sensor2.unshift({ 'lat' : (data2.widgets[0].value).split("\u0000")[0],     //lat
+                                    'lon' : (data2.widgets[0].value).split("\u0000")[1],     //lon
+                                    'name' : "Tunchz",
+                                    'date' : new Date()
+                      });
+                   
+                    }
+                    while (sensor2.length>1) {
+                    //sensor.shift();
+                    sensor2.pop();
+          }
+          });
+
+          //console.log([sensor[0],sensor2[0]]);
+
+
+          buildChart(sensor);
+          // draw the dot on map for last coordinate
+          //drawmap([sensor[windowlength-1]]);
+          drawmap([sensor[0],sensor2[0]]);
+        });
+
+
+
+    }
+
+
+
+    function tick(map) {
+      setTimeout(tick, 1000 - Date.now() % 1000);
+      var now = new Date;
+      document.getElementById("TimeDisplay").innerHTML = formatTime(now)+" ▸ refresh in "+i+ " secs";
+      if (i<=0) {
+        refresh(map);
+          i = refresh_rate;
+      } 
+
+      i -= 1;
+    }
+
+
+
+
+    var formatTime = d3.time.format("%d %B %Y %H:%M:%S");
+    var chartData,
+        refresh_rate = i = 4,
+        windowlength = 200
+        z = 2;
+        //transitiontime = 100;
+    var sensor = [],
+        sensor2 = [{"lat":0,"lon":0}];
+    var timenow = new Date;
+
+        timenow = new Date(timenow.getTime() - (refresh_rate*windowlength*1000));
+    var j;
+    for (j = 0; j < windowlength; j++) {
+        sensor.unshift({ 'pm25' : 0,                         //sensor.push({ 'pm25' : 0,                     
+                      'humd' : 0,                          
+                      'temp' : 0,                         
+                      'light' : 0,                        
+                      'pm10' : 0,
+                      'lat' : 0,     
+                      'lon' : 0,     
+                      'name' : "เสือผู้ไม่กินเหยื่อซ้ำ",
+                      'date' : new Date(timenow.getTime() + (refresh_rate*j*1000))
+        });
+    }
+
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg'
+    /*'pk.eyJ1IjoiZW5qYWxvdCIsImEiOiJjaWhtdmxhNTIwb25zdHBsejk0NGdhODJhIn0.2-F2hS_oTZenAWc0BMf_uw'*/
+    
+    //Setup mapbox-gl map
+    var map = new mapboxgl.Map({
+      //style: 'mapbox://styles/tunchz/ck9litjbw2soc1iqo4rysy4nt',
+      //style: 'mapbox://styles/mapbox/streets-v11',
+      //style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',  // the outdoors-v10 style but without Hillshade layers
+      //style: 'mapbox://styles/mapbox/outdoors-v10',
+      style: 'mapbox://styles/mapbox/dark-v10',
+      //style: 'mapbox://styles/mapbox/light-v10',
+      container: 'map', // container id
+      center: [101.1673626,14.2808669],
+      minZoom: 5,
+      maxZoom: 16,
+      zoom: 12,
+      pitch: 90,
+      //bearing: -17.6,
+      antialias: true
+
+    })
+
+/*
+    //use with : style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g' to add hillshading
+    map.on('load', function() {
+    map.addSource('dem', {
+    'type': 'raster-dem',
+    'url': 'mapbox://mapbox.terrain-rgb'
+    });
+    map.addLayer(
+    {
+    'id': 'hillshading',
+    'source': 'dem',
+    'type': 'hillshade'
+    // insert below waterway-river-canal-shadow;
+    // where hillshading sits in the Mapbox Outdoors style
+    },
+    'waterway-river-canal-shadow'
+    );
+    });
+*/
+
+
+
+    //map.flyTo({ center: [-0.1,51.5119112] });
+
+
+    // disable map rotation using right click + drag
+    //map.dragRotate.disable();
+     
+    // disable map rotation using touch rotation gesture
+    //map.touchZoomRotate.disableRotation();
+
+    //map.scrollZoom.disable()
+    //map.addControl(new mapboxgl.Navigation());
+    map.addControl(new mapboxgl.FullscreenControl()/*, 'top-left'*/);
+    // Add geolocate control to the map.
+    map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true})/*, 'top-left'*/);
+    map.addControl(new mapboxgl.NavigationControl()/*, 'top-left'*/);
+
+
+    // Setup our svg layer that we can manipulate with d3
+//    var container = map.getCanvasContainer()
+//    var svg = d3.select(container).append("svg")
+
+
+
+    refresh();
+    //drawmap(map,sensor);
+
+    tick();
+
+
+  </script>
+
+
+
+</html>
