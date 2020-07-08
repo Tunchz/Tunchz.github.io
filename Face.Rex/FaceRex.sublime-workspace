@@ -1,0 +1,502 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"wi",
+				"width\tproperty"
+			],
+			[
+				"sen",
+				"sensor2"
+			],
+			[
+				"table",
+				"table-container"
+			],
+			[
+				"pad",
+				"padding\tproperty"
+			],
+			[
+				"co",
+				"columns"
+			],
+			[
+				"border-co",
+				"border-color\tproperty"
+			],
+			[
+				"border-w",
+				"border-image-width\tproperty"
+			],
+			[
+				"sel",
+				"selectAll"
+			],
+			[
+				"time",
+				"timenow"
+			],
+			[
+				"ref",
+				"refresh_rate"
+			],
+			[
+				"window",
+				"windowlength"
+			],
+			[
+				"font-s",
+				"font-feature-settings\tproperty"
+			],
+			[
+				"font-si",
+				"font-size-adjust\tproperty"
+			],
+			[
+				"mar",
+				"margin-top\tproperty"
+			],
+			[
+				"chart",
+				"chart-wrapper"
+			],
+			[
+				"ex",
+				"extend"
+			],
+			[
+				"offset",
+				"offsetWidth"
+			],
+			[
+				"s",
+				"style"
+			],
+			[
+				"di",
+				"div\tTag"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"R",
+				"Recovered"
+			],
+			[
+				"zone-sex",
+				"zone-sex-nation-age"
+			],
+			[
+				"car",
+				"card-wrapper"
+			],
+			[
+				"max",
+				"max-height\tproperty"
+			],
+			[
+				"prov-chart",
+				"prov-chart-title"
+			],
+			[
+				"confirmed",
+				"confirmed-cases-update"
+			],
+			[
+				"tr",
+				"translate"
+			],
+			[
+				"tron",
+				"transform"
+			],
+			[
+				"toggle",
+				"toggle-area"
+			],
+			[
+				"padding",
+				"padding-left\tproperty"
+			],
+			[
+				"to",
+				"tooltip"
+			],
+			[
+				"ov",
+				"overflow-y\tproperty"
+			],
+			[
+				"margin",
+				"margin-right\tproperty"
+			],
+			[
+				"magin",
+				"margin-left\tproperty"
+			],
+			[
+				"dis",
+				"display"
+			],
+			[
+				"covid",
+				"covidTable"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"gr",
+				"groupAll"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 828,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "script.js",
+			"settings":
+			{
+				"buffer_size": 3772,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 157.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/JS/FaceRec/Face.Rex"
+	],
+	"file_history":
+	[
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/JS/FaceRec/Face.Rex/index_detect.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/JS/FaceRec/Face.Rex/script_detect.js",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/JS/FaceRec/Face-Detection-JavaScript/index.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/JS/FaceRec/Face-Detection-JavaScript/script.js",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/index_edited_022.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/EventDrop&DatePicker/js/script_test_datepicker.js",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/EventDrop&DatePicker/test_datepicker.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/css/FWTT.css",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/css/style.css",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/css/covid19.min.css",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/z.et.ZERO.MACS002.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/z.et.ZERO.MACS003_Responsive.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/ISOC/POC/POC1/Z.et.ZERO/z.et.ZERO_005.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/Example_Crossfilter/index2.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/EventDrop&DatePicker/css/patternfly.min.css",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/EventDrop&DatePicker/css/patternfly-additions.min.css",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/EventDrop&DatePicker/css/style.css",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/z.et.ZERO.MACS.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/Example_Crossfilter/EventDrop/index.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/Example_Crossfilter/EventDrop/demo.js",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/Example_Crossfilter/hello-eventdrops/index.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/Z.et.ZERO.MACS/Example_Crossfilter/index.html",
+		"/C/Users/Acer/Desktop/Z.et.ZERO.MACS/css/fonts.css",
+		"/C/Users/Acer/Desktop/Z.et.ZERO.MACS/z.et.ZERO.MACS.html",
+		"/C/Users/Acer/Desktop/Z.et.ZERO.MACS/css/FWTT.css",
+		"/C/Users/Acer/Desktop/Z.et.ZERO.MACS/js/main.js",
+		"/C/Users/Acer/Desktop/Z.et.ZERO.MACS/css/style.css",
+		"/C/Users/Acer/Desktop/Z.et.ZERO.MACS/Image-Grid.html",
+		"/C/Users/Acer/Desktop/Z.et.ZERO.MACS/TableImg02.html",
+		"/C/Users/Acer/Desktop/Z.et.ZERO.MACS/Table4.html",
+		"/C/Users/Acer/Desktop/Z.et.ZERO.MACS/Table2.html",
+		"/C/Users/Acer/Desktop/Z.et.ZERO.MACS/js/d3-jetpack.js",
+		"/C/Users/Acer/Desktop/Z.et.ZERO.MACS/demo_db_connection.js",
+		"/C/Users/Acer/Desktop/Z.et.ZERO.MACS/Test_connection.html",
+		"/C/Users/Acer/Desktop/Z.et.ZERO.MACS/z.et.ZERO_005.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/WebTemplate/Z.et.ZERO/css/FWTT.css",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/WebTemplate/Z.et.ZERO/z.et.ZERO_005.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/WebTemplate/Z.et.ZERO/css/style.css",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/WebTemplate/Z.et.ZERO/js/ChartsDisplay.js",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/WebTemplate/Z.et.ZERO/css/fonts.css",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/css/covid19.tunchz.blue.css",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/WebTemplate/Z.et.ZERO/z.et.ZERO_003.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/index009_Finetuned.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/WebTemplate/Z.et.ZERO - Copy/z.et.ZERO_002.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/WebTemplate/Z.et.ZERO/index009_Finetuned.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/WebTemplate/Z.et.ZERO/css/reset.css",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/WebTemplate/Z.et.ZERO/z.et.ZERO_002.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/testmapbox5_plottingLatLon.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/js/d3.v3.js",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/testmapbox6_plottingLatLon.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/testmapbox3_overlayShape.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/testmapbox5_overlayPoints.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/testmapbox4_overlayShape.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/css/mapbox.css",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/js/ChartsDisplay.js",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/testmapbox6_overlayPoints.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/testmapbox3_overlayShape_pencil.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/testmapbox2_overlayShape.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/testmapbox2_overlayShape_otherexample.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/testmapbox2.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/testmapbox.html",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/css/bootstrap.min.css",
+		"/C/Users/Acer/Desktop/POC1/RealTimeDB/index003.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/css/main.tunchz.css",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/css/covid19.min.blue.css",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/js/covid19.js",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/js/legend.js",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/index_edited_018.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/js/dc.min.js",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/index_edited_016.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/index_edited_014.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/Chart_Exercise002/index_Edited 002_2.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/js/d3.v3.min.js",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/js/d3.js",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/index_edited_010.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/index_edited_008.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/css/covid19.main.tunchz.css",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/css/DBHeavent.css",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/index_edited_006.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/Covid19_Full/covid19.workpointnews.com/_next/static/css/7ce8fc8c3460fc8ad993.css",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/Covid19_Full/covid19.workpointnews.com/_next/static/css/48a77e213599729dd8c8.css",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/index_edited_005.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/css/epistat.tunchz.css",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/hclseq.svg",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/DB/Covid-19/index.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/D3Visualizations-master/USA_Map/geoMapth.js",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/D3Visualizations-master/USA_Map/indexThailandMap.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/Chart_Exercise002/index_Edited 002_1.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/Covid19_Full/covid19.workpointnews.com/index.html",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/Covid19_Full/covid19.workpointnews.com/_next/static/chunks/25abc9403b1e710d317373e98b8adb41dc896fad.eef57aaeacd38be99884.js",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/Covid19_Full/covid19.workpointnews.com/_next/static/Kh-lBrZsO5_vRqa9TTBmw/pages/_app.js",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/Covid19_Full/covid19.workpointnews.com/_next/static/Kh-lBrZsO5_vRqa9TTBmw/pages/index.js",
+		"/C/Users/Acer/Google Drive/CRMA_Bigdata_SharedFolder/_BI_Examples/Web_Examples/Covid19_Full/covid19.workpointnews.com/_next/static/chunks/2edcde7b556a14f2313d799fbb262bd6bdd88958.6d4e92b4d4537ccfb27d.js"
+	],
+	"find":
+	{
+		"height": 22.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "C:\\Users\\Acer\\Google Drive\\CRMA_Bigdata_SharedFolder\\JS\\FaceRec\\Face.Rex"
+		}
+	],
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 828,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								671,
+								671
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "script.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3772,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3772,
+								3772
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 702.4,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 35.2
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"sex",
+				"C:\\Users\\Acer\\Google Drive\\CRMA_Bigdata_SharedFolder\\_BI_Examples\\Web_Examples\\Chart_Exercise002\\index_Edited 002_1.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 250.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
