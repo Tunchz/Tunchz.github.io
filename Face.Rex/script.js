@@ -1,6 +1,7 @@
 //const imageUpload = document.getElementById('imageUpload')
 const video = document.getElementById('video');
-const isScreenSmall = window.matchMedia("(max-width: 700px)");
+const isWidthSmall = window.matchMedia("(max-width:700px)");
+const isHeightSmall = window.matchMedia("(max-height:700px)");
 
 Promise.all([
   faceapi.nets.faceRecognitionNet.loadFromUri('https://tunchz.github.io/Face.Rex/models'),
@@ -17,30 +18,60 @@ function startVideo() {
 }
 
 
-/****Fixing the video with based on size size  ****/
-function screenResize(isScreenSmall) {
-  if (isScreenSmall.matches) {
-    video.style.width = "400px";
-    video.style.height = "400px";
-  } else {
-    video.style.width = "720px";
-    video.style.height = "560px";
-  }
-}
-
-
-/****Event Listeiner for the video****/
-screenResize(isScreenSmall);
-isScreenSmall.addListener(screenResize);
 
 video.addEventListener('play',async () => {
   const canvas = faceapi.createCanvasFromMedia(video)
   document.body.append(canvas)
   const labeledFaceDescriptors = await loadLabeledImages()
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
-  const displaySize = { width: video.width, height: video.height }
+  var displaySize = { width: video.width, height: video.height }
   faceapi.matchDimensions(canvas, displaySize)
+  //console.log("test")
+
+
+
+  /****Fixing the video with based on size size  ****/
+  function screenResizeW(isScreenSmall) {
+    if (isScreenSmall.matches) {
+      video.style.width = "320px";
+      video.style.height = "240px";
+      canvas.style.width = "320px";
+      canvas.style.height = "240px";
+    } else {
+      video.style.width = "640px";
+      video.style.height = "480px";
+      canvas.style.width = "640px";
+      canvas.style.height = "480px";
+    }
+  }
+
+  function screenResizeH(isScreenSmall) {
+    if (isScreenSmall.matches) {
+      video.style.width = "320px";
+      video.style.height = "240px";
+      canvas.style.width = "320px";
+      canvas.style.height = "240px";
+    } else {
+      video.style.width = "640px";
+      video.style.height = "480px";
+      canvas.style.width = "640px";
+      canvas.style.height = "480px";
+    }
+  }
+
+  /****Event Listeiner for the video****/
+  screenResizeW(isWidthSmall);
+  isWidthSmall.addListener(screenResizeW);
+
+  screenResizeH(isHeightSmall);
+  isHeightSmall.addListener(screenResizeH);
+
+
+  /****Detect face and recognize every 0.1s ****/
   setInterval(async () => {
+
+    //console.log(video.width,canvas.width)
+
     //const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
     //const resizedDetections = faceapi.resizeResults(detections, displaySize)
     const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors()
