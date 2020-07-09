@@ -1,5 +1,6 @@
 //const imageUpload = document.getElementById('imageUpload')
-const video = document.getElementById('video')
+const video = document.getElementById('video');
+const isScreenSmall = window.matchMedia("(max-width: 700px)");
 
 Promise.all([
   faceapi.nets.faceRecognitionNet.loadFromUri('https://tunchz.github.io/Face.Rex/models'),
@@ -15,6 +16,22 @@ function startVideo() {
   )
 }
 
+
+/****Fixing the video with based on size size  ****/
+function screenResize(isScreenSmall) {
+  if (isScreenSmall.matches) {
+    video.style.width = "400px";
+    video.style.height = "400px";
+  } else {
+    video.style.width = "720px";
+    video.style.height = "560px";
+  }
+}
+
+
+/****Event Listeiner for the video****/
+screenResize(isScreenSmall);
+isScreenSmall.addListener(screenResize);
 
 video.addEventListener('play',async () => {
   const canvas = faceapi.createCanvasFromMedia(video)
