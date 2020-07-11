@@ -6,7 +6,7 @@ const isHeightSmall = window.matchMedia("(max-height:700px)");
 Promise.all([
   faceapi.nets.faceRecognitionNet.loadFromUri('https://tunchz.github.io/Face.Rex/models'),
   faceapi.nets.faceLandmark68Net.loadFromUri('https://tunchz.github.io/Face.Rex/models'),
-  faceapi.nets.ssdMobilenetv1.loadFromUri('https://tunchz.github.io/Face.Rex/models')
+  faceapi.nets.ssdMobilenetv1.loadFromUri('https://tunchz.github.io/Face.Rex/models'),
 ]).then(startVideo) //then(start)
 
 function startVideo() {
@@ -75,6 +75,7 @@ video.addEventListener('play',async () => {
     //const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
     //const resizedDetections = faceapi.resizeResults(detections, displaySize)
     const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors()
+
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
 
 
@@ -147,4 +148,11 @@ function loadLabeledImages() {
       return new faceapi.LabeledFaceDescriptors(label, descriptions)
     })
   )
+}
+
+function interpolateAgePredictions(age) {
+  predictedAges = [age].concat(predictedAges).slice(0, 30);
+  const avgPredictedAge =
+    predictedAges.reduce((total, a) => total + a) / predictedAges.length;
+  return avgPredictedAge;
 }

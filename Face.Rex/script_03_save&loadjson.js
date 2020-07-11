@@ -31,6 +31,13 @@ video.addEventListener('play',async () => {
   /**** define overlay canvas for drawing the results over the vedio ****/
   const canvas = faceapi.createCanvasFromMedia(video)
   document.body.append(canvas)
+  /**** define display size and format canvas size to match ****/
+  var displaySize = { width: video.width, height: video.height }
+  faceapi.matchDimensions(canvas, displaySize)
+
+  /**** display notification ****/
+  const noti = new faceapi.draw.DrawBox({ x: 0, y: 10, width: 0, height: 0 }, { label: " Loading face model... " });
+  noti.draw(canvas);
 
   
   //console.log("build models from label images and save");
@@ -52,9 +59,7 @@ video.addEventListener('play',async () => {
 
 
 
-  /**** define display size and format canvas size to match ****/
-  var displaySize = { width: video.width, height: video.height }
-  faceapi.matchDimensions(canvas, displaySize)
+
 
   /****Event Listeiner for the content width is too small ****/
   screenResizeW(isWidthSmall);
