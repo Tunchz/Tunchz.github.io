@@ -69,7 +69,7 @@ video.addEventListener('play',async () => {
 
   //const labeledFaceDescriptors = await loadLabeledImages()
     /**** load model from save lebeled descriptor from json file ****/
-  const labeledFaceDescriptors = await loadLabeledDescriptor("https://tunchz.github.io/Face.Rex/descriptors/descriptor001.json");
+  const labeledFaceDescriptors = await loadLabeledDescriptor("https://tunchz.github.io/Face.Rex/descriptors/descriptor002.json");
   //console.log("model loaded");
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
   //console.log("face matcher built");

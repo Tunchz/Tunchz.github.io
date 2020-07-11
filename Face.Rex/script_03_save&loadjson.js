@@ -91,9 +91,9 @@ video.addEventListener('play',async () => {
   /**** WITHOUT Node.js : Start file json download for descriptor ****/
   //download("descriptor001.json",labeledFaceDescriptors);
 
-  console.log("load models");
+  //console.log("load models");
   /**** load model from save lebeled descriptor from json file ****/
-  const labeledFaceDescriptors = await loadLabeledDescriptor("https://tunchz.github.io/Face.Rex/descriptors/descriptor001.json");
+  const labeledFaceDescriptors = await loadLabeledDescriptor("https://tunchz.github.io/Face.Rex/descriptors/descriptor002.json");
 
 
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
