@@ -31,34 +31,6 @@ video.addEventListener('play',async () => {
   /**** define overlay canvas for drawing the results over the vedio ****/
   const canvas = faceapi.createCanvasFromMedia(video)
   document.body.append(canvas)
-  /**** define display size and format canvas size to match ****/
-  var displaySize = { width: video.width, height: video.height }
-  faceapi.matchDimensions(canvas, displaySize)
-
-  /**** display notification ****/
-  const noti = new faceapi.draw.DrawBox({ x: 0, y: 10, width: 0, height: 0 }, { label: " Loading face model... " });
-  noti.draw(canvas);
-
-  
-  //console.log("build models from label images and save");
-  /**** construct model for face regcognition from labeled image dataset ****/
-  //const labeledFaceDescriptors = await loadLabeledImages();
-
-  /**** WITH Node.js : save descriptor to json ****/
-  // save_tojson("descriptor001", labeledFaceDescriptors);
-
-  /**** WITHOUT Node.js : Start file json download for descriptor ****/
-  //download("descriptor001.json",labeledFaceDescriptors);
-
-  console.log("load models");
-  /**** load model from save lebeled descriptor from json file ****/
-  const labeledFaceDescriptors = await loadLabeledDescriptor("https://tunchz.github.io/Face.Rex/descriptors/descriptor001.json");
-
-
-  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
-
-
-
 
 
   /****Event Listeiner for the content width is too small ****/
@@ -98,6 +70,36 @@ video.addEventListener('play',async () => {
       canvas.style.height = "480px";
     }
   }
+
+
+  /**** define display size and format canvas size to match ****/
+  var displaySize = { width: video.width, height: video.height }
+  faceapi.matchDimensions(canvas, displaySize)
+
+  /**** display notification ****/
+  const noti = new faceapi.draw.DrawBox({ x: 0, y: 10, width: 0, height: 0 }, { label: " Loading face model... " });
+  noti.draw(canvas);
+
+  
+  //console.log("build models from label images and save");
+  /**** construct model for face regcognition from labeled image dataset ****/
+  //const labeledFaceDescriptors = await loadLabeledImages();
+
+  /**** WITH Node.js : save descriptor to json ****/
+  // save_tojson("descriptor001", labeledFaceDescriptors);
+
+  /**** WITHOUT Node.js : Start file json download for descriptor ****/
+  //download("descriptor001.json",labeledFaceDescriptors);
+
+  console.log("load models");
+  /**** load model from save lebeled descriptor from json file ****/
+  const labeledFaceDescriptors = await loadLabeledDescriptor("https://tunchz.github.io/Face.Rex/descriptors/descriptor001.json");
+
+
+  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
+
+
+
 
 
   /****Detect face and recognize every 0.1s ****/

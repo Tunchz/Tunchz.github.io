@@ -22,22 +22,13 @@ function startVideo() {
 video.addEventListener('play',async () => {
   const canvas = faceapi.createCanvasFromMedia(video)
   document.body.append(canvas)
-  var displaySize = { width: video.width, height: video.height }
-  faceapi.matchDimensions(canvas, displaySize)
-  const noti = new faceapi.draw.DrawBox({ x: 0, y: 10, width: 0, height: 0 }, { label: " Loading face model... " });
-  noti.draw(canvas);
-  //console.log("model load start");
+  
+  /****Event Listeiner for the video****/
+  screenResizeW(isWidthSmall);
+  isWidthSmall.addListener(screenResizeW);
 
-  //const labeledFaceDescriptors = await loadLabeledImages()
-    /**** load model from save lebeled descriptor from json file ****/
-  const labeledFaceDescriptors = await loadLabeledDescriptor("https://tunchz.github.io/Face.Rex/descriptors/descriptor001.json");
-  //console.log("model loaded");
-  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
-  //console.log("face matcher built");
-
-  //console.log("test")
-
-
+  screenResizeH(isHeightSmall);
+  isHeightSmall.addListener(screenResizeH);
 
   /****Fixing the video with based on size size  ****/
   function screenResizeW(isScreenSmall) {
@@ -68,12 +59,20 @@ video.addEventListener('play',async () => {
     }
   }
 
-  /****Event Listeiner for the video****/
-  screenResizeW(isWidthSmall);
-  isWidthSmall.addListener(screenResizeW);
 
-  screenResizeH(isHeightSmall);
-  isHeightSmall.addListener(screenResizeH);
+
+  var displaySize = { width: video.width, height: video.height }
+  faceapi.matchDimensions(canvas, displaySize)
+  const noti = new faceapi.draw.DrawBox({ x: 0, y: 10, width: 0, height: 0 }, { label: " Loading face model... " });
+  noti.draw(canvas);
+  //console.log("model load start");
+
+  //const labeledFaceDescriptors = await loadLabeledImages()
+    /**** load model from save lebeled descriptor from json file ****/
+  const labeledFaceDescriptors = await loadLabeledDescriptor("https://tunchz.github.io/Face.Rex/descriptors/descriptor001.json");
+  //console.log("model loaded");
+  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
+  //console.log("face matcher built");
 
 
   /****Detect face and recognize every 0.1s ****/
