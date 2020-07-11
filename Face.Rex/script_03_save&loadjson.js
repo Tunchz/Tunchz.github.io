@@ -131,7 +131,7 @@ video.addEventListener('play',async () => {
       const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() + " ▶ " + Math.round(interpolatedAge) +" "+ gender +" : "+ emotion })
       drawBox.draw(canvas)
     })
-  }, 100)
+  }, 500)
 })
 
 

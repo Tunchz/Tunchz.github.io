@@ -22,7 +22,7 @@ function startVideo() {
 video.addEventListener('play',async () => {
   const canvas = faceapi.createCanvasFromMedia(video)
   document.body.append(canvas)
-  
+
   /****Event Listeiner for the video****/
   screenResizeW(isWidthSmall);
   isWidthSmall.addListener(screenResizeW);
@@ -90,7 +90,7 @@ video.addEventListener('play',async () => {
       const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
       drawBox.draw(canvas)
     })
-  }, 100)
+  }, 500)
 })
 
 
