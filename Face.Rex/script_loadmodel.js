@@ -82,9 +82,10 @@ video.addEventListener('play',async () => {
 
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
 
+    const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor))
+
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
 
-    const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor))
     results.forEach((result, i) => {
       const box = resizedDetections[i].detection.box
       const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })

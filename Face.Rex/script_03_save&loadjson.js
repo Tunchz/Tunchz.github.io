@@ -108,11 +108,13 @@ video.addEventListener('play',async () => {
     const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
     /****Resize the result of detection matching the display size ****/
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
-    /**** Clear the previous overlay draw on the canvas ****/
-    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
 
     /**** Match the faces detected with the descriptor ****/
     const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor))
+
+    /**** Clear the previous overlay draw on the canvas ****/
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+
     results.forEach((result, i) => {
 
       /**** extract age gender emotion from result ****/
