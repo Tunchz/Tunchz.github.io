@@ -88,7 +88,15 @@ video.addEventListener('play',async () => {
 
     results.forEach((result, i) => {
       const box = resizedDetections[i].detection.box
-      const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
+
+      if (result.label == "unknown") {
+        bcolor = 'rgba(255, 0, 0, 1)';
+      } else {
+        bcolor = 'rgba(0, 0, 255, 1)';
+      }
+      const drawBox = new faceapi.draw.DrawBox(box, { label: result.label,
+                                                    lineWidth: 2, boxColor: bcolor, drawLabelOptions: {fontSize: 12}})
+      //const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
       drawBox.draw(canvas)
     })
   }, 500)

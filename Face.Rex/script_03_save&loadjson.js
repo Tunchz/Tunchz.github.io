@@ -130,7 +130,13 @@ video.addEventListener('play',async () => {
       /**** get bounding box on face ****/
       const box = resizedDetections[i].detection.box
       /**** draw box wiht label ****/
-      const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() + " ▶ " + Math.round(interpolatedAge) +" "+ gender +" : "+ emotion })
+      if (result.label == "unknown") {
+        bcolor = 'rgba(255, 0, 0, 1)';
+      } else {
+        bcolor = 'rgba(0, 0, 255, 1)';
+      }
+      const drawBox = new faceapi.draw.DrawBox(box, { label: /*result.toString()*/result.label + " ▶ " + Math.round(interpolatedAge) +" "+ gender +" : "+ emotion,
+                                                    lineWidth: 2, boxColor: bcolor, drawLabelOptions: {fontSize: 12}})
       drawBox.draw(canvas)
     })
   }, 500)
