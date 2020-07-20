@@ -237,7 +237,8 @@ video.addEventListener('play',async () => {
         bcolor = 'rgba(255, 0, 0, 1)';
       } else if (verifed) {
         bcolor = 'rgba(0, 0, 255, 1)';
-        canvas.getContext("2d").drawImage(labelimg[parseInt(result.label)], box.x-labelimg[parseInt(result.label)].width, box.y-20);
+        //canvas.getContext("2d").drawImage(labelimg[parseInt(result.label)], box.x-labelimg[parseInt(result.label)].width, box.y-20);
+        canvas.getContext("2d").drawImage(labelimg[parseInt(result.label)], box.x+2, box.y+box.height-labelimg[parseInt(result.label)].height-2);
       } else {
         bcolor = 'rgba(255, 100, 0, 1)';
       }
