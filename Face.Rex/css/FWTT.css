@@ -91,6 +91,13 @@ cursor: pointer;
 border: 2px solid #ffcc00;
 opacity: 1;
 }
+
+#thumbnail {
+  border-radius: 10%;
+  border: 2px solid #ffcc00;
+}
+
+
  
 .mapboxgl-popup {
 max-width: 240px;
@@ -194,7 +201,7 @@ color:#000;
       }
 
       .tag {
-        font-size: 14px;
+        font-size: 12px;
         padding: 3px 0px;
         font-weight: normal;
         justify-content: right;
@@ -230,15 +237,23 @@ color:#000;
         vertical-align: middle;
       }
 
-      .img_col,.tag_col {
+      .img_col {
         min-width: 70px;
         max-width: 120px;
         width: 25%;
       }
 
+      .tag_col {
+        min-width: 70px;
+        max-width: 120px;
+        width: 28%;
+      }
+
       .detail_col {
         padding-left: 10px;
       }
+
+
 
 html {
   scroll-behavior: smooth;
