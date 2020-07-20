@@ -183,19 +183,20 @@ color:#000;
 
       .detail {
         font-size: 14px;
+        font-weight: normal;
         padding: 3px 0px;
-        font-weight: bold;
       }
 
       .subdetail {
         font-size: 10px;
+        font-weight: normal;
         padding: 3px 0px;
       }
 
       .tag {
         font-size: 14px;
         padding: 3px 0px;
-        font-weight: bold;
+        font-weight: normal;
         justify-content: right;
         padding-right: 10px;
         text-align: right;
@@ -203,6 +204,7 @@ color:#000;
 
       .subtag {
         font-size: 10px;
+        font-weight: normal;
         padding: 3px 0px;
         padding-right: 10px;
         text-align: right;
