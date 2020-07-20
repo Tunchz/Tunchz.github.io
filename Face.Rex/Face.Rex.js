@@ -6,19 +6,20 @@ const timetokeepverifiedfaces = 60000;
 
 // Url for target google sheet script of insert the face record
 const sheetUrl = "https://script.google.com/macros/s/AKfycbxxYJAPo5auDaZiy66RizPTMGE9QxLeIbUDRw_shEDpEbQoZCg/exec";
+//const sheetUrl = "https://script.google.com/macros/s/AKfycbw6y-uoU3UA2-E9tLc6x0TcdQ64E19cny4bkocY/exec";
 // Url for face log google sheet
 const facelogsheetUrl = "https://spreadsheets.google.com/feeds/cells/1f2zLWOWivY_L72VW0odfmGGeF4wxve1D6o4VvQm2Spg/1/public/values?alt=json-in-script&callback=doData";
+//const facelogsheetUrl = "https://spreadsheets.google.com/feeds/cells/1BkNHlFBWNXDSDD-jMM_BWSYjLNenLVKGW9cY7Mtnkzg/1/public/values?alt=json-in-script&callback=doData";
 // Url for face models
 const modelsUrl = "https://tunchz.github.io/Face.Rex/models";
 // Url for trained face descriptor used to label known faces
 const facedescriptorUrl = "https://tunchz.github.io/Face.Rex/descriptors/descriptor_withID.json";
-// Load face labels list
-const facelabels = loadcsvtoarray('https://tunchz.github.io/Face.Rex/descriptors/LabeledFaceList.csv');
-
-var labelimg=[];
-loadlabelimage("https://tunchz.github.io/Face.Rex/labeled_images_2",0,facelabels.length);
+// Load face labels list & profile image
+const facelabels = loadcsvtoarray('https://tunchz.github.io/Face.Rex/descriptors/LabeledFaceImageProfiles2.csv');
+//console.log(facelabels);
 
 var summarysheetResults = [];
+
 
 const videocontainer = document.getElementById('video-container');
 const video = document.getElementById('video');
@@ -78,6 +79,14 @@ video.addEventListener('play',async () => {
   const canvas = faceapi.createCanvasFromMedia(video)
   videocontainer.append(canvas)
 
+  /**** define display size and format canvas size to match ****/
+  var displaySize = { width: video.width, height: video.height }
+  faceapi.matchDimensions(canvas, displaySize)
+
+  /**** display notification ****/
+  const noti = new faceapi.draw.DrawBox({ x: 0, y: 10, width: 0, height: 0 }, { label: " Loading face model... " });
+  noti.draw(canvas);
+
 
   /****Event Listeiner for the content width is too small ****/
   screenResizeW(isWidthSmall);
@@ -117,14 +126,6 @@ video.addEventListener('play',async () => {
     }
   }
 
-
-  /**** define display size and format canvas size to match ****/
-  var displaySize = { width: video.width, height: video.height }
-  faceapi.matchDimensions(canvas, displaySize)
-
-  /**** display notification ****/
-  const noti = new faceapi.draw.DrawBox({ x: 0, y: 10, width: 0, height: 0 }, { label: " Loading face model... " });
-  noti.draw(canvas);
 
   
   //console.log("load models");
@@ -237,13 +238,17 @@ video.addEventListener('play',async () => {
         bcolor = 'rgba(255, 0, 0, 1)';
       } else if (verifed) {
         bcolor = 'rgba(0, 0, 255, 1)';
+        //display profile image top-left
         //canvas.getContext("2d").drawImage(labelimg[parseInt(result.label)], box.x-labelimg[parseInt(result.label)].width, box.y-20);
-        canvas.getContext("2d").drawImage(labelimg[parseInt(result.label)], box.x+2, box.y+box.height-labelimg[parseInt(result.label)].height-2);
+        //display profile image bottom-left
+        var w = facelabels[parseInt(result.label)].img.width/2,h = facelabels[parseInt(result.label)].img.height/2;
+
+        canvas.getContext("2d").drawImage(facelabels[parseInt(result.label)].img, box.x+2, box.y+box.height-h/*facelabels[parseInt(result.label)].img.height*/-2,w,h);
       } else {
         bcolor = 'rgba(255, 100, 0, 1)';
       }
 
-      const drawBox = new faceapi.draw.DrawBox(box, { label: " "+ facelabels[parseInt(result.label)] + " "/* + " : " + Math.round(interpolatedAge) + gender +" ▷ "+ emotion*/,
+      const drawBox = new faceapi.draw.DrawBox(box, { label: " "+ (result.label == "unknown" ? "unknown": facelabels[parseInt(result.label)].name) + " "/* + " : " + Math.round(interpolatedAge) + gender +" ▷ "+ emotion*/,
                                                     lineWidth: 2, boxColor: bcolor, drawLabelOptions: {fontSize: 12}})
       drawBox.draw(canvas)
       const text = new faceapi.draw.DrawTextField([" "+ Math.round(interpolatedAge) + gender +" ▸ Mood : "+ emotion],{ x: box.x, y: box.y+box.height}, 
@@ -345,9 +350,15 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
     for (k=0; k<detectedfacesList.length; k++) {
       if (detectedfacesList[k].id == sendingList[0].id & detectedfacesList[k].date == sendingList[0].date) {
         faceinlist = true;
+        // Update no. of detection, last seen, mood, image
         detectedfacesList[k].detection++;
+        detectedfacesList[k].last = formatTime(facerec.last);
+        detectedfacesList[k].timestamp = facerec.last;
+        detectedfacesList[k].mood = mood;
+        detectedfacesList[k].img = imgdata;
         //update detection number in the Table
         //document.getElementById('subtag-'+(detectedfacesList.length-k-1)+'-1').innerHTML = detectedfacesList[k].detection;
+        //console.log("update",detectedfacesList);
         updateTable();
       }
     }
@@ -355,8 +366,12 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
     if (!faceinlist) {
       detectedfacesList.push(sendingList[0]);
       detectedfacesList[detectedfacesList.length-1].detection = 1;
-      //console.log("radraw table");
-      updateTable();      
+      detectedfacesList[detectedfacesList.length-1].last = formatTime(facerec.last);
+      detectedfacesList[detectedfacesList.length-1].timestamp = facerec.last;
+
+      //console.log("add",detectedfacesList);
+      updateTable();  
+
     }
 
   }
@@ -398,26 +413,31 @@ function handleResults(spreadsheetArray) {
   var facesList = [], inlist = false;
 
   //console.log(spreadsheetArray);
-  for (r=1; r<spreadsheetArray.length; r++) {
+  //for (r=1; r<spreadsheetArray.length; r++) {
+  for (r=spreadsheetArray.length-1; r>0; r--) {
     inlist = false;
     for (s=0; s<facesList.length; s++) {
       if (spreadsheetArray[r][1] == facesList[s].id & spreadsheetArray[r][2] == facesList[s].date) {
         inlist = true;
         facesList[s].detection++;
+        facesList[s].timein = spreadsheetArray[r][3];
       }
     }
     //console.log(r,inlist);
     if (!inlist) {
-      facesList.push({  
+      var d = spreadsheetArray[r][2].split('/');
+      facesList./*push*/unshift({  
                       'id'        : spreadsheetArray[r][1],
                       'date'      : spreadsheetArray[r][2],
                       'timein'    : spreadsheetArray[r][3],
+                      'last'      : spreadsheetArray[r][3],
                       'mood'      : spreadsheetArray[r][4],
                       'location'  : spreadsheetArray[r][5],
                       'lat'       : spreadsheetArray[r][6],
                       'lon'       : spreadsheetArray[r][7],
                       'img'       : spreadsheetArray[r][8].replace(/\s/g, "+"),
                       'status'    : "succeeded",
+                      'timestamp' : new Date(d[2]+'-'+d[1]+'-'+d[0]+' '+spreadsheetArray[r][3]+':00'),
                       'detection' : 1
       });      
     }
@@ -442,18 +462,20 @@ function displayTable() {
 
   sf = crossfilter(detectedfacesList);
   sf.date = sf.dimension(function(d) { return d.date; });
+  sf.timestamp = sf.dimension(function(d) { return d.timestamp; });
 
   //console.log(detectedfacesList);
   //console.log(sf.date.top(Infinity));
 
-  //List_filtered = sf.date.filterExact("2020-07-19").bottom(Infinity);
-  List_filtered = sf.date.top(Infinity)
+  sf.date.filterExact(formatDate(new Date())/*"19/07/2020"*/).top(Infinity);
+  List_filtered = sf.timestamp.top(Infinity);
 
   //console.log(sf.date.top(Infinity));
   //console.log(List_filtered);
 
-  tabulateimg(List_filtered, ["img","id","location","date","timein","mood","status","detection"]); 
+  tabulateimg(List_filtered, ["img","id","location","date","timein","last","mood","status","detection"]); 
 }
+
 
 async function loadLabeledDescriptor(filename) {
 // load json file
@@ -496,11 +518,15 @@ function loadcsvtoarray(filename) {
     url: filename,
     dataType: "text",
     success: function (data) {
-      arr = csv2array(data);
+      arr = csv2array(data); //console.log(arr);
     }
   });
-  for (i = 1; i < arr.length; i++) {
-    labels.push(arr[i][1]);
+  for (i = 1; i < 50/*arr.length*/; i++) {
+    var mini_img = new Image(); 
+    mini_img.src = 'data:image/jpeg;base64,'+arr[i][2];//.replace(/\s/g, "+");
+    mini_img.id = 'thumbnail';
+    labels.push({"name" : arr[i][1],"img" : mini_img});
+    //console.log(i);
   }
 
 
@@ -532,8 +558,7 @@ function csv2array(strData, strDelimiter) {
     return (arrData);
 }
 
-var labelimg = [];
-
+/*
 function loadlabelimage(filelink,iter,max) {
   var data = '';
   var canvas = document.createElement("canvas");
@@ -562,3 +587,4 @@ function loadlabelimage(filelink,iter,max) {
   img.src = filelink+"/"+iter+"/1.jpg";
 }
 
+*/

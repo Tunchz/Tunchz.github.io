@@ -173,7 +173,7 @@
             for (m=1; m < 4 /*columns.length*/; m++) {
               if (columns[m] == 'id') {
                 if ((row[columns[m]].substr(0,1)) != 'u') {
-                  dt[columns[m]] = facelabels[parseInt(row[columns[m]])];
+                  dt[columns[m]] = facelabels[parseInt(row[columns[m]])].name;
                 } else {
                   dt[columns[m]] = row[columns[m]];
                 }
@@ -242,7 +242,7 @@
         // Display detail as table header
         cthead2.append('tr')
           .selectAll('th')
-          .data(function (d) {/*console.log(d.value[columns[1]]);*/ return [d.value[columns[4]]]})
+          .data(function (d) {/*console.log(d.value[columns[1]]);*/ return [d.value[columns[4]]+" - "+d.value[columns[5]]]})
           .enter()
           .append('th')
             .attr('class', 'tag')
@@ -250,7 +250,7 @@
 
         // Display subdetail as table row 
         var crows2 = ctbody2.selectAll('tr')
-          .data(function (d) {return [{value : d.value[columns[5]], name : "mood", row : d.value[columns[8]]},{value : d.value[columns[6]], name : "status", row : d.value[columns[8]], detection : d.value[columns[7]]}]})
+          .data(function (d) {return [{value : d.value[columns[6]], name : "mood", row : d.value[columns[9]]},{value : d.value[columns[7]], name : "status", row : d.value[columns[9]], detection : d.value[columns[8]]}]})
           .enter()
           .append('tr')
           .append('th')
