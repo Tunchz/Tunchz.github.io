@@ -5,35 +5,148 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>z.et.ZERO.Face.Rex : the question isn't can you; it's WILL YOU. -FWTT-</title>
     <meta name="description" content="the question isn't can you; it's WILL YOU. -FWTT-">
+    <link rel="icon" type="image/x-icon" href="img/face.rex_blue.png"/>
     <link rel="stylesheet" href="css/covid19.min.css">
+    <link rel="stylesheet" href="css/covid19.min.blue.css">
     <link rel="stylesheet" href="css/FWTT.css">
     <link rel="stylesheet" href="css/fonts.css">
   </head>
   <body>
     <div class = "section-container">
-      <div class = "col-sm-8 height10p" style = "background-color: #fff">
+      <div id = "left-panel" class = "col-sm-8 height100p">
+        <div id = "top-left" class = "col-sm-12 height10p" style = "min-height : 70px; padding-right: 10px; background-color: #fff;">
+          <div class = "height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #2a58c3/*#383838;*/">
+            <div id = "logo-container" class = "col-xs-4" style = "display: flex;justify-content: center; align-items: center; max-width: 100px;">
+              <img id = "Face.Rex.logo" src = 'img/face.rex.png' style = "padding: 5px; width : 10vh; height : 100%; min-height : 70px; min-width : 70px; "></img>
+            </div>
+            <div id = "Title-container" class = "col-xs-6 height100p" style = "">
+              <div id = "Text1" class = "col-xs-12 height50p" style = "padding:0px;margin:0px;">
+                <span style="font-family: Impact;font-size: 30px;">Face.Rex </span>
+              </div>
+              <div id = "Text2" class = "col-xs-12 height50p" style = "display: flex;justify-content: left; align-items: center;">
+                <button type="button" class="btn btn-primary" style="padding: 0px 4px;" data-toggle="modal" data-target="#info-modal">รายละเอียด</button>                          
+              </div>
+            </div>
+            <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                            <h2 class="modal-title h3" id="myModalLabel"><a href="https://www.maholan.co.th/">Face.Fex</a> &gt; Face Recognition System Dashboard </h2>
+                        </div>
+                        <div class="modal-body">
+                            <h3 style="margin-top:0">การใช้งาน</h3>
+                            <p>คลิ๊กเลือกในแต่ละกราฟเพื่อกรองข้อมูลที่แสดงบนแดชบอร์ด โดยจำนวนข้อมูลและตัวกรองจะถูกแสดงในมุมบนขวา และยกเลิกตัวกรองโดยการคลิ๊ก <a>reset</a> ในแต่ละกราฟ หรือ <a>Reset All</a> มุมซ้ายบนเพื่อยกเลิกตัวกรองทั้งหมด </p>
+                            <h3 class="">การแสดงผล 7 ส่วน:</h3>
+                            <ol>
+                                <li>ตัวเลขแสดงสถานะสถิติผู้ติดเชื้อ > ผู้ติดเชื้อ/กำลังรักษา/หายแล้ว/เสียชีวิต,</li>
+                                <li>การแท่งแนวนอนแสดงจำนวนผู้ติดเชื้อรายจังหวัดเรียงลำดับมากไปน้อย</li>
+                                <li>แผนที่แสดงจำนวนผู้ติดเชื้อในแต่ละจังหวัด (พื้นที่สี่เหลี่ยม - ไม่พบข้อมูล)</li>
+                                <li>กราฟวงกลมแสดงสัดส่วนเพศของผู้ติดเชื้อ</li>
+                                <li>กราฟแท่งแนวนอนแสดงจำนวนผู้ติดเชื้อแยกตามสัญชาติเรียงลำดับมากไปน้อย</li>
+                                <li>กราฟแท่งแนวตั้งแสดงจำนวนผู้ติดเชื้อตามอายุ (คลิ๊กแกน x เพื่อเปลี่ยน Brush/Tooltips mode)</li>
+                                <li>กราฟเส้นแสดงจำนวนผู้ติดเชื้อ/ผู้ติดเชื้อสะสมรายวัน (คลิ๊กแกน x เพื่อเปลี่ยน Brush/Tooltips mode)</li>
+                            </ol>
+                            <h3>ข้อมูล</h3>
+                            <p>ข้อมูลสถานการณ์โควิด 19 ของ กรมควบคุมโรค กระทรวงสาธารณสุข<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a></p>
+                            <ul>
+                                <li>Mholan จัดทำแดชบอร์ด Covid-19 Stat เพื่อใช้ศึกษาและติดตามสถานการณ์ของโรคระบาดโควิด 19 เพื่อประโยชน์กับสาธารณะชน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง</li>
+                            </ul>
+                            <h3>ติดต่อ</h3>
+                            <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">tunchz@gmail.com</a>.</p>
+                            <p></p>
+                        </div>
+                        <div class="modal-footer"><span class="pull-left">Made by Mholan Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="datasource-modal" tabindex="-1" role="dialog" aria-labelledby="datasource-modalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h3 class="modal-title" id="myModalLabel">รายละเอียดแหล่งข้อมูล</h3>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-condensed" style="font-size: 18px">
+                                <thead>
+                                    <tr>
+                                        <th>ชุดข้อมูล</th>
+                                        <th>แหล่งข้อมูล</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-      </div>
-      <div class = "col-sm-4 height10p" style = "background-color: #383838">
+                                    <tr>
+                                        <td>ข้อมูลแสดงค่าประจำวัน</td>
+                                        <td>https://covid19.th-stat.com/api/open/today</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ข้อมูลแต่ละเคส</td>
+                                        <td>https://covid19.th-stat.com/api/open/cases</td>
+                                    </tr>
 
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class = "col-sm-12 height90p" style = "background-color: #fff;">
+           <div id="video-container">
+            <video id="video" width="640" height="480" autoplay muted></video>
+          </div>       
+          <!div id="map-container">
+            <!div id="map"><!/div>
+          <!/div>
+        </div>
       </div>
-      <div class = "col-sm-8 height90p" style = "background-color: #fff;">
-         <div id="video-container">
-          <video id="video" width="640" height="480" autoplay muted></video>
-        </div>       
-        <!div id="map-container">
-          <!div id="map"><!/div>
-        <!/div>
-      </div>
-      <div class = "col-sm-4 height90p" style = "background-color: #383838">
-        <div id="table-container" oncontextmenu="return false;">
+      <div id = "right-panel" class = "col-sm-4 height100p">
+        <div id = "top-right" class = "col-sm-12 height10p" style = "min-height : 50px; padding-left: 10px; background-color: #383838;">
+          <div class = "height100p" style = "border-bottom: 2px solid #fff; padding-right: 10px">
+
+            <div class="col-xs-4 height100p card-wrapper">
+                <div class = "card 1" style="/*background-color:#ea5771;*/">
+                    <div style="height:25%; font-size: 10px;padding-bottom = 2px;  border-bottom: 2px solid #039245/*#383838;*/">ตรวจพบ</div>
+                    <div id = "total-case" style="height:50%; font-family: mitr;font-size: 42px;">3</div>
+                    <div style="height:25%;text-align: left;"><span id = "total-newcase" style="font-size: 10px;">ยืนยัน</span></div>
+                </div>
+            </div>
+            <div class="col-xs-4 height100p card-wrapper">
+                <div  class = "card 2" style="/*background-color:#fcc400;*/">
+                    <div style="height:25%; font-size: 10px;padding-bottom = 2px;  border-bottom: 2px solid #d22d36/*#383838;*/">ยังตรวจไม่พบ</div>
+                    <div id = "total-care" style="height:50%; font-family: mitr;font-size: 42px;">15</div>
+                    <div style="height:25%;text-align: left;"><span id = "total-newcare" style="font-size: 10px;">รอยืนยัน</span></div>
+                </div>
+            </div>
+            <div class="col-xs-4 height100p card-wrapper">
+                <div  class = "card 3" style="/*background-color:#039245;*/">
+                    <div style="height:25%; font-size: 10px;padding-bottom = 2px;  border-bottom: 2px solid #fcc400/*#383838;*/">สถานะ</div>
+                    <div id = "total-recover" style="height:50%; font-family: mitr;font-size: 42px;">OK</div>
+                    <div style="height:25%;text-align: left;"><span id = "total-newrecover" style="font-size: 10px;">จัดเก็บ</span></div>
+                </div>    
+            </div>
+
+
+
+
+
+          </div>
+        </div>
+        <div class = "col-sm-12 height90p" style = "background-color: #383838">
+
+          <div id="table-container" oncontextmenu="return false;">
+          </div>
         </div>
       </div>
     </div>
   </body>
 
   <script defer src="js/face-api.min.js"></script>
-  <script src="js2/d3.v355.min.js"></script>
+  <!script src="js2/d3.v355.min.js"><!/script>
+  <script src="js/covid19.js"></script>
   <!script src='js2/mapbox-gl.js'><!/script>
   <script src="js2/crossfilter.min.js"></script>
   <script src="js2/jquery.min.js"></script>
