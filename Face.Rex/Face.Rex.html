@@ -104,35 +104,33 @@
         </div>
       </div>
       <div id = "right-panel" class = "col-sm-4 height100p">
-        <div id = "top-right" class = "col-sm-12 height10p" style = "min-height : 50px; padding-left: 10px; background-color: #383838;">
+        <div id = "top-right" class = "col-sm-12 height10p" style = "min-height : 70px; padding-left: 10px; background-color: #383838;">
           <div class = "height100p" style = "border-bottom: 2px solid #fff; padding-right: 10px">
 
             <div class="col-xs-4 height100p card-wrapper">
                 <div class = "card 1" style="/*background-color:#ea5771;*/">
-                    <div style="height:25%; font-size: 10px;padding-bottom = 2px;  border-bottom: 2px solid #039245/*#383838;*/">ตรวจพบ</div>
-                    <div id = "total-case" style="height:50%; font-family: mitr;font-size: 42px;">3</div>
-                    <div style="height:25%;text-align: left;"><span id = "total-newcase" style="font-size: 10px;">ยืนยัน</span></div>
+                    <div class = "col-xs-6" style="height:25%; font-size: 10px;text-align: left;padding-bottom = 2px;border-bottom: 2px solid #039245">ตรวจพบ</div>
+                    <div class = "col-xs-6" id = "total-detectedfaces"style="height:25%; font-size: 10px;padding-bottom = 2px;border-bottom: 2px solid #039245"></div>
+                    <div class = "col-xs-6" style="height:75%;display:flex; font-size: 10px;text-align: left;"><span style ="align-self: flex-end;">ยืนยัน</span></div>
+                    <div class = "col-xs-6" id = "total-verified" style="height:75%; font-family: mitr;font-size: 42px;"></div>
                 </div>
             </div>
             <div class="col-xs-4 height100p card-wrapper">
-                <div  class = "card 2" style="/*background-color:#fcc400;*/">
-                    <div style="height:25%; font-size: 10px;padding-bottom = 2px;  border-bottom: 2px solid #d22d36/*#383838;*/">ยังตรวจไม่พบ</div>
-                    <div id = "total-care" style="height:50%; font-family: mitr;font-size: 42px;">15</div>
-                    <div style="height:25%;text-align: left;"><span id = "total-newcare" style="font-size: 10px;">รอยืนยัน</span></div>
+                <div class = "card 2" style="/*background-color:#ea5771;*/">
+                    <div class = "col-xs-6" style="height:25%; font-size: 10px;text-align: left;padding-bottom = 2px;border-bottom: 2px solid #fcc400">ระบุไม่ได้</div>
+                    <div class = "col-xs-6" id = "total-unknown"style="height:25%; font-size: 10px;padding-bottom = 2px;border-bottom: 2px solid #fcc400"></div>
+                    <div class = "col-xs-6" style="height:75%;display:flex; font-size: 10px;text-align: left;"><span style ="align-self: flex-end;">รอยืนยัน</span></div>
+                    <div class = "col-xs-6" id = "total-tobeverified" style="height:75%; font-family: mitr;font-size: 42px;"></div>
                 </div>
             </div>
             <div class="col-xs-4 height100p card-wrapper">
-                <div  class = "card 3" style="/*background-color:#039245;*/">
-                    <div style="height:25%; font-size: 10px;padding-bottom = 2px;  border-bottom: 2px solid #fcc400/*#383838;*/">สถานะ</div>
-                    <div id = "total-recover" style="height:50%; font-family: mitr;font-size: 42px;">OK</div>
-                    <div style="height:25%;text-align: left;"><span id = "total-newrecover" style="font-size: 10px;">จัดเก็บ</span></div>
-                </div>    
+                <div class = "card 3" style="/*background-color:#ea5771;*/">
+                    <div class = "col-xs-6" style="height:25%; font-size: 10px;text-align: left;padding-bottom = 2px;border-bottom: 2px solid #d22d36">Detection</div>
+                    <div class = "col-xs-6" id = "total-detection"style="height:25%; font-size: 10px;padding-bottom = 2px;border-bottom: 2px solid #d22d36">ปกติ</div>
+                    <div class = "col-xs-3" style="height:75%;display:flex; font-size: 10px;text-align: left;"><span style ="align-self: flex-end;">เวลา</span></div>
+                    <div class = "col-xs-9" id = "total-status" style="height:75%; font-family: mitr;font-size: 42px;"></div>
+                </div>
             </div>
-
-
-
-
-
           </div>
         </div>
         <div class = "col-sm-12 height90p" style = "background-color: #383838">
@@ -150,7 +148,6 @@
   <!script src='js2/mapbox-gl.js'><!/script>
   <script src="js2/crossfilter.min.js"></script>
   <script src="js2/jquery.min.js"></script>
-  <!script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"><!/script>
   <script defer src="Face.Rex.js"></script>
 
   <script>
@@ -268,9 +265,9 @@
         .style("border",function (d) {
               if (d.status == "succeeded") {
                 return "3px solid #9bee00"
-              } else if (d.status == "sending") {
+              } else if (d.status == "unknown") {
                 return "3px solid #ffcc00"
-              } else if (d.status == "failed") {
+              } else if (d.status == "sending") {
                 return "3px solid #316be6"
               } else {
                 return "3px solid #ff0000"
@@ -355,7 +352,7 @@
         // Display detail as table header
         cthead2.append('tr')
           .selectAll('th')
-          .data(function (d) {/*console.log(d.value[columns[1]]);*/ return [d.value[columns[4]]+" - "+d.value[columns[5]]]})
+          .data(function (d) {/*console.log(d.value[columns[1]]);*/ return d.value[columns[4]]==d.value[columns[5]]?[d.value[columns[4]]]:[d.value[columns[4]]+" - "+d.value[columns[5]]]})
           .enter()
           .append('th')
             .attr('class', 'tag')
@@ -369,7 +366,7 @@
           .append('th')
             .attr('id',function(d) {/*console.log(d);*/return 'subtag-'+d.row+'-'+d.name})
             .attr('class', 'subtag')
-            .text(function (column) {return column.name == "mood"? column.value : column.detection + " " + (column.value == 'succeeded' ? '✔': column.value == 'failed' ? '✘': '❗' )})
+            .text(function (column) {return column.name == "mood"? column.value : column.detection + " " + (column.value == 'succeeded'|column.value == 'unknown' ? '✔': column.value == 'failed' ? '✘': '❗' )})
 
 /*
         if (data[t].status == 'succeeded') {

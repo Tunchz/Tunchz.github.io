@@ -291,6 +291,9 @@ video.addEventListener('play',async () => {
       detectedfaces.shift();
     }
 
+    // update time
+    document.getElementById("total-status").innerHTML = formatTime(new Date());
+
   }, detectionloopDelay)
   
 })
@@ -327,7 +330,7 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
 
   // callback handler that will be called on success
   request.done(function (response, textStatus, jqXHR){
-    sendingList[0].status = "succeeded";
+    sendingList[0].status = sendingList[0].id=="unknown"?"unknown":"succeeded";
     addtoList();
     sendingList.shift();
     //console.log("Sending succeeded.",detectedfacesList,"unsent : "+sendingList.length);
@@ -436,7 +439,7 @@ function handleResults(spreadsheetArray) {
                       'lat'       : spreadsheetArray[r][6],
                       'lon'       : spreadsheetArray[r][7],
                       'img'       : spreadsheetArray[r][8].replace(/\s/g, "+"),
-                      'status'    : "succeeded",
+                      'status'    : spreadsheetArray[r][1]=="unknown"?"unknown":"succeeded",
                       'timestamp' : new Date(d[2]+'-'+d[1]+'-'+d[0]+' '+spreadsheetArray[r][3]+':00'),
                       'detection' : 1
       });      
@@ -459,20 +462,44 @@ function updateTable() {
 
 
 function displayTable() {
-
+  const totaltoverified = 23;
   sf = crossfilter(detectedfacesList);
   sf.date = sf.dimension(function(d) { return d.date; });
   sf.timestamp = sf.dimension(function(d) { return d.timestamp; });
+  sf.id = sf.dimension(function(d) { return d.id; });
 
   //console.log(detectedfacesList);
   //console.log(sf.date.top(Infinity));
 
   sf.date.filterExact(formatDate(new Date())/*"19/07/2020"*/).top(Infinity);
+  var unknown = sf.id.filterExact("unknown").top(Infinity).length;
+  sf.id.filterAll();
   List_filtered = sf.timestamp.top(Infinity);
+
+  var detection = 0;
+  for (t=0;t<List_filtered.length;t++) {
+    detection = detection + List_filtered[t].detection;
+    //console.log(detection,parseInt(List_filtered[t].detection));
+  }
+
 
   //console.log(sf.date.top(Infinity));
   //console.log(List_filtered);
 
+
+
+  // Update Stats
+  document.getElementById("total-detectedfaces").innerHTML = List_filtered.length;
+  document.getElementById("total-verified").innerHTML = List_filtered.length - unknown;
+  document.getElementById("total-unknown").innerHTML = unknown;
+  document.getElementById("total-tobeverified").innerHTML = totaltoverified - List_filtered.length;
+  document.getElementById("total-detection").innerHTML = detection;//+' ครั้ง';
+  document.getElementById("total-status").innerHTML = formatTime(new Date());
+
+
+  //console.log(detectedfacesList.length,List_filtered.length)
+
+  // Create Table
   tabulateimg(List_filtered, ["img","id","location","date","timein","last","mood","status","detection"]); 
 }
 
