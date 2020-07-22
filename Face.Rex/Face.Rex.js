@@ -3,13 +3,20 @@ const detectionloopDelay = 1000;
 const verifyingPeriod = 5000;  
 const missedDuration = 3000;      //must be greater than detectionloopDelay
 const timetokeepverifiedfaces = 60000;
+const timetoupdateResults = 60000;  // 1 minute
+
+
+// Initialize basic parameter
+const num_keep = verifyingPeriod/detectionloopDelay;
+var loop_i = 0;
+var looptoUpdate = timetoupdateResults/detectionloopDelay;
 
 // Url for target google sheet script of insert the face record
-const sheetUrl = "https://script.google.com/macros/s/AKfycbxxYJAPo5auDaZiy66RizPTMGE9QxLeIbUDRw_shEDpEbQoZCg/exec";
-//const sheetUrl = "https://script.google.com/macros/s/AKfycbw6y-uoU3UA2-E9tLc6x0TcdQ64E19cny4bkocY/exec";
+//const sheetUrl = "https://script.google.com/macros/s/AKfycbxxYJAPo5auDaZiy66RizPTMGE9QxLeIbUDRw_shEDpEbQoZCg/exec";
+const sheetUrl = "https://script.google.com/macros/s/AKfycbw6y-uoU3UA2-E9tLc6x0TcdQ64E19cny4bkocY/exec";
 // Url for face log google sheet
-const facelogsheetUrl = "https://spreadsheets.google.com/feeds/cells/1f2zLWOWivY_L72VW0odfmGGeF4wxve1D6o4VvQm2Spg/1/public/values?alt=json-in-script&callback=doData";
-//const facelogsheetUrl = "https://spreadsheets.google.com/feeds/cells/1BkNHlFBWNXDSDD-jMM_BWSYjLNenLVKGW9cY7Mtnkzg/1/public/values?alt=json-in-script&callback=doData";
+//const facelogsheetUrl = "https://spreadsheets.google.com/feeds/cells/1f2zLWOWivY_L72VW0odfmGGeF4wxve1D6o4VvQm2Spg/1/public/values?alt=json-in-script&callback=doData";
+const facelogsheetUrl = "https://spreadsheets.google.com/feeds/cells/1BkNHlFBWNXDSDD-jMM_BWSYjLNenLVKGW9cY7Mtnkzg/1/public/values?alt=json-in-script&callback=doData";
 // Url for face models
 const modelsUrl = "https://tunchz.github.io/Face.Rex/models";
 // Url for trained face descriptor used to label known faces
@@ -31,14 +38,14 @@ let sendingList = [];
 let lat = 0,long = 0,loc;
 const croppadding = 0.2;  // padding factor
 
-// Load face log to create detectedfacesList
-summarysheetLoad(facelogsheetUrl);
-
 // crossfilter variable
 var sf,List_filtered;
 
 var formatDate = d3.time.format("%d/%m/%Y");  //("%d %B %Y %H:%M:%S");
 var formatTime = d3.time.format("%H:%M");     //("%H:%M:%S");
+
+// Load face log to create detectedfacesList
+summarysheetLoad(facelogsheetUrl);
 
 /**** Load all model needed for face ****/
 Promise.all([
@@ -135,10 +142,10 @@ video.addEventListener('play',async () => {
   // 1st run-in to get face descriptor engine ready
   const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors();
 
-  const num_keep = verifyingPeriod/detectionloopDelay;
 
   /****Detect face and recognize for every detectionDelay milliseconds ****/
   setInterval(async () => {
+    loop_i++;
     /**** Detect face ▶ find face landmark ▶ predict agaist face descriptor ▶ predict face expression ▶ predict age&gender****/
     const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
     /****Resize the result of detection matching the display size ****/
@@ -291,8 +298,17 @@ video.addEventListener('play',async () => {
       detectedfaces.shift();
     }
 
-    // update time
-    document.getElementById("total-status").innerHTML = formatTime(new Date());
+
+    if (loop_i>looptoUpdate-1) {
+      // update time
+      document.getElementById("total-status").innerHTML = formatTime(new Date());
+
+      // update results
+
+      summarysheetLoad(facelogsheetUrl);
+
+      loop_i = 0;
+    }
 
   }, detectionloopDelay)
   
@@ -381,12 +397,15 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
 }
 
 function summarysheetLoad(url) {
+
+  console.log("update summary sheet start at "+formatTime(new Date()));
   // Create JSONP Request to Google Docs API, then execute the callback function doData
   $.ajax({
       url: url,
       jsonp: 'doData',
       dataType: 'jsonp'
   });
+
 }
 
 
@@ -394,6 +413,7 @@ function summarysheetLoad(url) {
 function doData(data) {
   var entries = data.feed.entry;
   var previousRow = 0;
+  summarysheetResults = [];
   for (var i = 0; i < entries.length; i++) {
       var latestRow = summarysheetResults[summarysheetResults.length - 1];
       var cell = entries[i];
@@ -409,6 +429,7 @@ function doData(data) {
       }
   }
   handleResults(summarysheetResults);
+  console.log("update summary sheet finished at "+ formatTime(new Date()));
 }
 
 // Handle array recieved from face log sheet to store in detectedfacesList
@@ -449,14 +470,19 @@ function handleResults(spreadsheetArray) {
   detectedfacesList = facesList;
   //console.log(detectedfacesList);
 
- displayTable();
+ //displayTable();
+ updateTable();
   
 }
 
 function updateTable() {
   // remove table
-  var removetable = document.getElementById('table_image');
-  removetable.parentElement.removeChild(removetable);
+  // first time there is no table to remove
+  if (loop_i !=0) {
+    var removetable = document.getElementById('table_image');
+    removetable.parentElement.removeChild(removetable);    
+  }
+
   displayTable();
 }
 
@@ -471,7 +497,7 @@ function displayTable() {
   //console.log(detectedfacesList);
   //console.log(sf.date.top(Infinity));
 
-  sf.date.filterExact(formatDate(new Date())/*"19/07/2020"*/).top(Infinity);
+  sf.date.filterExact(formatDate(new Date())/*"21/07/2020"*/).top(Infinity);
   var unknown = sf.id.filterExact("unknown").top(Infinity).length;
   sf.id.filterAll();
   List_filtered = sf.timestamp.top(Infinity);
