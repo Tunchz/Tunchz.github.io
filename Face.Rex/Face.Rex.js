@@ -4,7 +4,7 @@ const verifyingPeriod = 5000;
 const missedDuration = 3000;      //must be greater than detectionloopDelay
 const timetokeepverifiedfaces = 60000;
 const timetoupdateResults = 60000;  // 1 minute
-const facematcherThreshold = 0.4;   // greatest distance for face
+const facematcherThreshold = 0.45;   // greatest distance for face
 
 // Initialize basic parameter
 const num_keep = verifyingPeriod/detectionloopDelay;
