@@ -4,7 +4,7 @@ const verifyingPeriod = 5000;
 const missedDuration = 3000;      //must be greater than detectionloopDelay
 const timetokeepverifiedfaces = 60000;
 const timetoupdateResults = 60000;  // 1 minute
-
+const facematcherThreshold = 0.4;   // greatest distance for face
 
 // Initialize basic parameter
 const num_keep = verifyingPeriod/detectionloopDelay;
@@ -138,7 +138,7 @@ video.addEventListener('play',async () => {
   //console.log("load models");
   /**** load model from save lebeled descriptor from json file ****/
   const labeledFaceDescriptors = await loadLabeledDescriptor(facedescriptorUrl); //console.log(labeledFaceDescriptors);
-  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
+  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, facematcherThreshold)
   // 1st run-in to get face descriptor engine ready
   const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors();
 
