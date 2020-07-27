@@ -31,21 +31,14 @@ var data = [],
   //start = new Date('2020-05-18T17:59:06.134Z'),
   today = new Date();//Date('2020-05-18T17:59:06.134Z');
 
-for (var x in json) { //json lives in external file for testing
-  data[x] = {};
-  data[x].name = json[x].name;
 
-/*
-  data[x].data = [];
-  for (var y in json[x].data) {
-    data[x].data.push({});
-    data[x].data[y].date = new Date(json[x].data[y].date);
-    data[x].data[y].details = json[x].data[y].details;
-  }
-*/
+var dept = [{"dept" : "All"},{"dept" : "MACS"},{"dept" : "MHL"},{"dept" : "Tunchz Family"}];
 
-  $('#timeline-selectpicker').append("<option>" + data[x].name + "</option>");
-  data[x].display = true;
+
+
+for (var x in dept) { 
+  $('#timeline-selectpicker').append("<option>" + dept[x].dept + "</option>");
+  dept[x].display = true;
 }
 $('#timeline-selectpicker').selectpicker('selectAll');
 
@@ -90,7 +83,7 @@ if(countNames(data) <= 0) {
 */
 
 
-var element = d3.select('#pf-timeline').append('div').datum(data.filter(function(eventGroup) {
+var element = d3.select('#pf-timeline').append('div').datum(dept.filter(function(eventGroup) {
   return eventGroup.display === true;
 }));
 
@@ -101,8 +94,8 @@ var element = d3.select('#pf-timeline').append('div').datum(data.filter(function
 
 
 $('#timeline-selectpicker').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {
-  data[clickedIndex].display = !data[clickedIndex].display;
-  element.datum(data.filter(function(eventGroup) {
+  dept[clickedIndex].display = !dept[clickedIndex].display;
+  element.datum(dept.filter(function(eventGroup) {
     return eventGroup.display === true;
   }));
 
@@ -116,7 +109,7 @@ $('#timeline-selectpicker').on('changed.bs.select', function(event, clickedIndex
   */
 
   //**************update after item option has been reselected
-  console.log(data);
+  console.log(dept);
 
 
 });

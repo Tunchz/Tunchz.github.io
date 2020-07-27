@@ -25,7 +25,7 @@ const modelsUrl = "https://tunchz.github.io/Face.Rex/models";
 const facedescriptorUrl = "https://tunchz.github.io/Face.Rex/descriptors/descriptor_withID.json";
 // Load face labels list & profile image
 let facestoverifyList = [];
-const facelabels = loadcsvtoarray('https://tunchz.github.io/Face.Rex/descriptors/LabeledFaceImageProfiles2.csv');
+const facelabels = loadcsvtoarray('https://tunchz.github.io/Face.Rex/descriptors/LabeledFaceImageProfiles3.csv');
 //console.log(facelabels);
 
 d3.select('#table-container').append('table').attr("id","table_image");
@@ -34,6 +34,9 @@ var summarysheetResults = [];
 
 const videocontainer = document.getElementById('video-container');
 const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+resizeAdjust();
+
 const isWidthSmall = window.matchMedia("(max-width:700px)");
 const isHeightSmall = window.matchMedia("(max-height:700px)");
 let detectedfaces = [];
@@ -100,12 +103,46 @@ navigator.geolocation.getCurrentPosition(function(position) {
 });
 
 
+function resizeAdjust() {
+  //console.log($("#video-container").width(),$("#video-container").height())
+
+
+if($("#wholecontent").width() < 768){
+  //console.log("<768")
+
+  $("#left-panel").height(($("#video-container").width())*3.1/4+100);
+/*            $(".card-wrapper").height(120);
+            $("#zone-map").height(700);
+            $("#zone-nation-nation-age").height(600);
+            $("#zone-date").height(300);
+*/
+        } else {
+  $("#left-panel").height($("#wholecontent").height());
+
+/*            $(".card-wrapper").height("0%");
+            $("#zone-map").height("50%");
+            $("#zone-nation-nation-age").height("70%");
+            $("#zone-date").height("10%");
+*/
+        }
+
+  $("#video").width(($("#video-container").width()-40));
+  $("#video").height(($("#video-container").width()-40)*3/4);
+  $("#canvas").width(($("#video-container").width()-40));
+  $("#canvas").height(($("#video-container").width()-40)*3/4);
+/*      video.style.width = "320px";
+      video.style.height = "240px";
+      canvas.style.width = "320px";
+      canvas.style.height = "240px";
+*/
+}
+
 /**** add event listener to precess when video plays ****/
 video.addEventListener('play',async () => {
 
   /**** define overlay canvas for drawing the results over the vedio ****/
-  const canvas = faceapi.createCanvasFromMedia(video)
-  videocontainer.append(canvas)
+  //const canvas = faceapi.createCanvasFromMedia(video)
+  //videocontainer.append(canvas)
 
   /**** define display size and format canvas size to match ****/
   var displaySize = { width: video.width, height: video.height }
@@ -114,48 +151,7 @@ video.addEventListener('play',async () => {
   /**** display notification ****/
   const noti = new faceapi.draw.DrawBox({ x: 0, y: 10, width: 0, height: 0 }, { label: " Loading face model... " });
   noti.draw(canvas);
-
-
-  /****Event Listeiner for the content width is too small ****/
-  screenResizeW(isWidthSmall);
-  isWidthSmall.addListener(screenResizeW);
-  /****Event Listeiner for the content height is too small ****/
-  screenResizeH(isHeightSmall);
-  isHeightSmall.addListener(screenResizeH);
-
-
-  /****Fixing the display size based width ****/
-  function screenResizeW(isScreenSmall) {
-    if (isScreenSmall.matches) {
-      video.style.width = "320px";
-      video.style.height = "240px";
-      canvas.style.width = "320px";
-      canvas.style.height = "240px";
-    } else {
-      video.style.width = "640px";
-      video.style.height = "480px";
-      canvas.style.width = "640px";
-      canvas.style.height = "480px";
-    }
-  }
-
-  /****Fixing the display size based height ****/
-  function screenResizeH(isScreenSmall) {
-    if (isScreenSmall.matches) {
-      video.style.width = "320px";
-      video.style.height = "240px";
-      canvas.style.width = "320px";
-      canvas.style.height = "240px";
-    } else {
-      video.style.width = "640px";
-      video.style.height = "480px";
-      canvas.style.width = "640px";
-      canvas.style.height = "480px";
-    }
-  }
-
-
-  
+ 
   //console.log("load models");
   /**** load model from save lebeled descriptor from json file ****/
   const labeledFaceDescriptors = await loadLabeledDescriptor(facedescriptorUrl); //console.log(labeledFaceDescriptors);
@@ -488,7 +484,7 @@ function handleResults(spreadsheetArray) {
   for (r=spreadsheetArray.length-1; r>0; r--) {
     inlist = false;
     for (s=0; s<facesList.length; s++) {
-      if (spreadsheetArray[r][1] == facesList[s].id & spreadsheetArray[r][2] == facesList[s].date) {
+      if (spreadsheetArray[r][1] == facesList[s].id & spreadsheetArray[r][2] == facesList[s].date & spreadsheetArray[r][1] != "unknown") {
         inlist = true;
         facesList[s].detection++;
         facesList[s].timein = spreadsheetArray[r][3];
@@ -583,10 +579,18 @@ function displayTable() {
     
     var fl = crossfilter(facestoverifyList);
     fl.verified = fl.dimension(function(d) { return d.verified; });
+    fl.dept = fl.dimension(function(d) { return d.last; });
     fl.id = fl.dimension(function(d) { return parseInt(d.id); });
-    fl.verified.filterExact("nonverified").top(Infinity); 
+    fl.verified.filterExact("nonverified") 
+    //var f = ["MHL", "MACS"];
+    //fl.dept.filter(function(d){return f.indexOf(d) > -1;});
+    //fl.dept.filterFunction(multivalue_filter(["MACS"]));
     List_filtered = fl.id.bottom(Infinity);
     //console.log(List_filtered.length,List_filtered);
+
+
+//fruitDimension.filterFunction(multivalue_filter(["apple","lemon","orange"]));
+
 
   } else {
     sf.verified.filterExact(filterVerification).top(Infinity);
@@ -612,6 +616,13 @@ function displayTable() {
 
   // Create Table
   tabulateimg(List_filtered, ["img","id","location","date","timein","last","mood","status","detection"]); 
+}
+
+
+function multivalue_filter(values) {
+    return function(v) {
+        return values.indexOf(v) !== -1;
+    };
 }
 
 
@@ -669,10 +680,10 @@ function loadcsvtoarray(filename) {
     facestoverifyList.push({  
                     'id'        : arr[i][0],
                     'date'      : " ",
-                    'timein'    : "MACS",
-                    'last'      : "MACS",
+                    'timein'    : arr[i][3],
+                    'last'      : arr[i][3],
                     'mood'      : " ",
-                    'location'  : "ตำแหน่ง",
+                    'location'  : arr[i][4],
                     'lat'       : " ",
                     'lon'       : " ",
                     'img'       : mini_img.src,
