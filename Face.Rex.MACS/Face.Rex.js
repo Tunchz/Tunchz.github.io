@@ -103,7 +103,7 @@ if($("#wholecontent").width() < 768){
 
   //$("#left-panel").height(($("#video-container").width())*3.1/4+100);
   if (isonMobile) {
-    $("#left-panel").height(($("#video-container").width())*4/3);
+    $("#left-panel").height(($("#video-container").width()-200)*4/3);
     $("#video").width(($("#video-container").width()-200));
     $("#video").height(($("#video-container").width()-200)*4/3);
     $("#canvas").width(($("#video-container").width()-200));
