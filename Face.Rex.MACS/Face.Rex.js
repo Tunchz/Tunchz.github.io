@@ -5,8 +5,6 @@ const missedDuration = 3000;      //must be greater than detectionloopDelay
 const timetokeepverifiedfaces = 60000;
 const timetoupdateResults = 60000;  // 1 minute
 const facematcherThreshold = 0.49;   // greatest distance for face
-const useTinyModel = false; //true;  // TinyFace model is not good for detecting small faces
-
 
 // Initialize basic parameter
 const num_keep = verifyingPeriod/detectionloopDelay;
@@ -35,7 +33,7 @@ var summarysheetResults = [];
 const videocontainer = document.getElementById('video-container');
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
-const isonMobile = true; //onMobile();
+const isonMobile = onMobile();
 if (isonMobile) {
   detectionloopDelay = 2*detectionloopDelay;
 }
@@ -64,26 +62,14 @@ var filterVerification = "verified";
 summarysheetLoad(facelogsheetUrl);
 
 /**** Load all model needed for face ****/
-if (useTinyModel) {
-  console.log('Tiny Model is being loaded...')
-  Promise.all([
-    //faceapi.nets.ssdMobilenetv1.loadFromUri(modelsUrl),
-    //faceapi.nets.faceLandmark68Net.loadFromUri(modelsUrl),
-    faceapi.nets.tinyFaceDetector.loadFromUri(modelsUrl),
-    faceapi.nets.faceRecognitionNet.loadFromUri(modelsUrl),
-    faceapi.nets.faceLandmark68TinyNet.loadFromUri(modelsUrl),
-    faceapi.nets.faceExpressionNet.loadFromUri(modelsUrl),
-    faceapi.nets.ageGenderNet.loadFromUri(modelsUrl)
-  ]).then(startVideo) //then(start)
-} else {
-  Promise.all([
-    faceapi.nets.ssdMobilenetv1.loadFromUri(modelsUrl),
-    faceapi.nets.faceLandmark68Net.loadFromUri(modelsUrl),
-    faceapi.nets.faceRecognitionNet.loadFromUri(modelsUrl),
-    faceapi.nets.faceExpressionNet.loadFromUri(modelsUrl),
-    faceapi.nets.ageGenderNet.loadFromUri(modelsUrl)
-  ]).then(startVideo) //then(start)
-}
+Promise.all([
+  faceapi.nets.ssdMobilenetv1.loadFromUri(modelsUrl),
+  faceapi.nets.faceLandmark68Net.loadFromUri(modelsUrl),
+  faceapi.nets.faceRecognitionNet.loadFromUri(modelsUrl),
+  faceapi.nets.faceExpressionNet.loadFromUri(modelsUrl),
+  faceapi.nets.ageGenderNet.loadFromUri(modelsUrl)
+]).then(startVideo) //then(start)
+
 
 function startVideo() {
   navigator.getUserMedia(
@@ -117,11 +103,11 @@ if($("#wholecontent").width() < 768){
 
   //$("#left-panel").height(($("#video-container").width())*3.1/4+100);
   if (isonMobile) {
-    $("#left-panel").height(($("#video-container").width())*4/3.2);
-    $("#video").width(($("#video-container").width()-100));
-    $("#video").height(($("#video-container").width()-100)*4/3.2);
-    $("#canvas").width(($("#video-container").width()-100));
-    $("#canvas").height(($("#video-container").width()-100)*4/3.2);
+    $("#left-panel").height(($("#video-container").width())*4/3);
+    $("#video").width(($("#video-container").width()-200));
+    $("#video").height(($("#video-container").width()-200)*4/3);
+    $("#canvas").width(($("#video-container").width()-200));
+    $("#canvas").height(($("#video-container").width()-200)*4/3);
 
 
   } else {
@@ -393,6 +379,7 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
                           'lon'       : long,
                           'img'       : imgdata,
                           'status'    : "sending",
+                          'dept'      : facestoverifyList[parseInt(facerec.label)].last,
                           'verified'  : facerec.label == 'unknown' ? "unknown" : "verified"
   });
 
@@ -523,12 +510,13 @@ function handleResults(spreadsheetArray) {
                       'date'      : spreadsheetArray[r][2],
                       'timein'    : spreadsheetArray[r][3],
                       'last'      : spreadsheetArray[r][3],
-                      'mood'      : spreadsheetArray[r][4],
+                      'mood'      : spreadsheetArray[r][1]=="unknown"?"":spreadsheetArray[r][4],
                       'location'  : spreadsheetArray[r][5],
                       'lat'       : spreadsheetArray[r][6],
                       'lon'       : spreadsheetArray[r][7],
                       'img'       : spreadsheetArray[r][8].replace(/\s/g, "+"),
                       'status'    : spreadsheetArray[r][1]=="unknown"?"unknown":"succeeded",
+                      'dept'      : spreadsheetArray[r][1]=="unknown"?"":facestoverifyList[parseInt(spreadsheetArray[r][1])].last,
                       'verified'  : spreadsheetArray[r][1]=="unknown"?"unknown":"verified",
                       'timestamp' : new Date(d[2]+'-'+d[1]+'-'+d[0]+' '+spreadsheetArray[r][3]+':00'),
                       'detection' : 1
@@ -638,7 +626,7 @@ function displayTable() {
   //console.log(detectedfacesList.length,List_filtered.length)
 
   // Create Table
-  tabulateimg(List_filtered, ["img","id","location","date","timein","last","mood","status","detection"]); 
+  tabulateimg(List_filtered, ["img","id","dept","date","timein","last","mood","status","detection"]); 
 }
 
 
@@ -706,11 +694,12 @@ function loadcsvtoarray(filename) {
                     'timein'    : arr[i][3],
                     'last'      : arr[i][3],
                     'mood'      : " ",
-                    'location'  : arr[i][4],
+                    'location'  : " ",
                     'lat'       : " ",
                     'lon'       : " ",
                     'img'       : mini_img.src,
                     'status'    : "toverify",
+                    'dept'      : arr[i][4],
                     'verified'  : "nonverified",
                     'timestamp' : " ",
                     'detection' : " "
