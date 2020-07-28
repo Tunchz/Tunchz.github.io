@@ -338,8 +338,10 @@ video.addEventListener('play',async () => {
     for (j=0 ; j < numfaces ; j++) {
       var timemissed = timenow.getTime() - detectedfaces[0].last.getTime();
       if (detectedfaces[0].datetime.length > num_keep-1) {
-        //compensate time for verified face for 15s total
-        timemissed = timemissed - timetokeepverifiedfaces + missedDuration;
+        //compensate time for verified face for timetokeepverifiedfaces  except "unknown" face
+        if (detectedfaces[0].label != "unknown") {
+          timemissed = timemissed - timetokeepverifiedfaces + missedDuration;
+        }
       } else if (timemissed > 0) {
         detectedfaces[0].datetime.shift();
       }
