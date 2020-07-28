@@ -381,7 +381,7 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
                           'lon'       : long,
                           'img'       : imgdata,
                           'status'    : "sending",
-                          'dept'      : facestoverifyList[parseInt(facerec.label)].last,
+                          'dept'      : facerec.label == 'unknown' ? "" : facestoverifyList[parseInt(facerec.label)].last,
                           'verified'  : facerec.label == 'unknown' ? "unknown" : "verified"
   });
 
