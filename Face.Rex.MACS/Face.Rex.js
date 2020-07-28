@@ -36,7 +36,9 @@ const videocontainer = document.getElementById('video-container');
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const isonMobile = onMobile();
-console.log(isonMobile);
+if (isonMobile) {
+  detectionloopDelay = 2*detectionloopDelay;
+}
 resizeAdjust();
 
 const isWidthSmall = window.matchMedia("(max-width:700px)");
@@ -130,10 +132,10 @@ if($("#wholecontent").width() < 768){
         }
 
   if (isonMobile) {
-    $("#video").width(($("#video-container").width()-40));
-    $("#video").height(($("#video-container").width()-40)*4/3);
-    $("#canvas").width(($("#video-container").width()-40));
-    $("#canvas").height(($("#video-container").width()-40)*4/3);
+    $("#video").width(($("#video-container").width()-100));
+    $("#video").height(($("#video-container").width()-100)*5/3);
+    $("#canvas").width(($("#video-container").width()-100));
+    $("#canvas").height(($("#video-container").width()-100)*5/3);
 
   } else {
     $("#video").width(($("#video-container").width()-40));
