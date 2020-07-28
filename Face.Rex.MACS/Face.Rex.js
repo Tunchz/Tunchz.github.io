@@ -51,7 +51,8 @@ var sf,List_filtered;
 var formatDate = d3.time.format("%d/%m/%Y");  //("%d %B %Y %H:%M:%S");
 var formatTime = d3.time.format("%H:%M");     //("%H:%M:%S");
 var formatTimeDisplay = d3.time.format("%H:%M:%S");
-var formatDateDisplay = d3.time.format("%d %B");
+var formatDayDisplay = d3.time.format("%d");
+var formatMonthDisplay = d3.time.format("%B");
 var filterDate = formatDate(new Date());
 var filterVerification = "verified";
 
@@ -597,9 +598,6 @@ function displayTable() {
     List_filtered = sf.timestamp.top(Infinity);
   }
 
-  
-
-
 
   // Update Stats
   document.getElementById("total-detectedfaces").innerHTML = totaldetected;
@@ -608,8 +606,9 @@ function displayTable() {
   document.getElementById("total-tobeverified").innerHTML = totaltoverified - (totaldetected - unknown);
   document.getElementById("total-detection").innerHTML = detection;//+' ครั้ง';
   document.getElementById("total-unknown").innerHTML = unknown;
-  document.getElementById("date-container").innerHTML = formatDateDisplay($('#datepicker').datepicker('getDate'));
-  console.log(filterDate,formatDateDisplay($('#datepicker').datepicker('getDate')));
+  document.getElementById("daydisplay").innerHTML = formatDayDisplay($('#datepicker').datepicker('getDate'));
+  document.getElementById("monthdisplay").innerHTML = formatMonthDisplay($('#datepicker').datepicker('getDate'));
+  //console.log(filterDate,formatDateDisplay($('#datepicker').datepicker('getDate')));
 
 
   //console.log(detectedfacesList.length,List_filtered.length)
