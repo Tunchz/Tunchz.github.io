@@ -294,7 +294,7 @@ html {
 }
 
 .input-group-addon {
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 0px 6px;
   background: #383838;
   color: #fff;
@@ -302,7 +302,7 @@ html {
 }
 
 .form-control {
-  border-radius: 4px;
+  border-radius: 2px;
   height: 24px;
   padding: 0px 3px;
   background-color: #383838;
@@ -368,14 +368,20 @@ html {
   background-color: #555; 
 }
 
-#date-container {
-  padding-left: 5px;
+#daydisplay {
+  margin-bottom: -16px;
   color: #fff;
   font-family: Impact;
-  font-size: 48px;
-  float: left;
+  font-size: 62px;
 }
 
+#monthdisplay {
+  padding-left: 5px;
+  padding-bottom: 2px;
+  color: #fff;
+  font-family: Impact;
+  font-size: 18px;
+}
 
 .modal .modal-backdrop {
   z-index: 100;
