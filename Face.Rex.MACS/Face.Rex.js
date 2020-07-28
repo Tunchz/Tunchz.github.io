@@ -115,7 +115,14 @@ function resizeAdjust() {
 if($("#wholecontent").width() < 768){
   //console.log("<768")
 
-  $("#left-panel").height(($("#video-container").width())*3.1/4+100);
+  //$("#left-panel").height(($("#video-container").width())*3.1/4+100);
+  if (isonMobile) {
+    $("#left-panel").height(($("#video-container").width())*4.1/3+100);
+
+  } else {
+    $("#left-panel").height(($("#video-container").width())*3.1/4+100);
+
+  }
 /*            $(".card-wrapper").height(120);
             $("#zone-map").height(700);
             $("#zone-nation-nation-age").height(600);
@@ -133,9 +140,9 @@ if($("#wholecontent").width() < 768){
 
   if (isonMobile) {
     $("#video").width(($("#video-container").width()-100));
-    $("#video").height(($("#video-container").width()-100)*5/3);
+    $("#video").height(($("#video-container").width()-100)*4/3);
     $("#canvas").width(($("#video-container").width()-100));
-    $("#canvas").height(($("#video-container").width()-100)*5/3);
+    $("#canvas").height(($("#video-container").width()-100)*4/3);
 
   } else {
     $("#video").width(($("#video-container").width()-40));
