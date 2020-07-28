@@ -7,7 +7,7 @@ const timetoupdateResults = 60000;  // 1 minute
 const facematcherThreshold = 0.49;   // greatest distance for face
 
 // Initialize basic parameter
-const num_keep = verifyingPeriod/detectionloopDelay;
+var num_keep = verifyingPeriod/detectionloopDelay;
 var loop_i = 0;
 var looptoUpdate = timetoupdateResults/detectionloopDelay;
 
@@ -30,17 +30,16 @@ d3.select('#table-container').append('table').attr("id","table_image");
 var summarysheetResults = [];
 
 
-const videocontainer = document.getElementById('video-container');
+//const videocontainer = document.getElementById('video-container');
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
-const isonMobile = onMobile();
+const isonMobile = true;//onMobile();
 if (isonMobile) {
   detectionloopDelay = 2*detectionloopDelay;
+  num_keep = verifyingPeriod/detectionloopDelay;
 }
 resizeAdjust();
 
-const isWidthSmall = window.matchMedia("(max-width:700px)");
-const isHeightSmall = window.matchMedia("(max-height:700px)");
 let detectedfaces = [];
 let detectedfacesList = [];
 let sendingList = [];
@@ -103,15 +102,17 @@ if($("#wholecontent").width() < 768){
 
   //$("#left-panel").height(($("#video-container").width())*3.1/4+100);
   if (isonMobile) {
-    $("#left-panel").height(($("#video-container").width()-200)*4/3);
-    $("#video").width(($("#video-container").width()-200));
-    $("#video").height(($("#video-container").width()-200)*4/3);
-    $("#canvas").width(($("#video-container").width()-200));
-    $("#canvas").height(($("#video-container").width()-200)*4/3);
+    $("#left-panel").height(($("#video-container").width()-150)*4/3+20+75);
+    $("#video-container").height(($("#video-container").width()-150)*4/3+20);
+    $("#video").width(($("#video-container").width()-150));
+    $("#video").height(($("#video-container").width()-150)*4/3);
+    $("#canvas").width(($("#video-container").width()-150));
+    $("#canvas").height(($("#video-container").width()-150)*4/3);
 
 
   } else {
-    $("#left-panel").height(($("#video-container").width())*3.1/4+100);
+    $("#left-panel").height(($("#video-container").width())*3/4+75);
+    $("#video-container").height(($("#video-container").width())*3/4);
     $("#video").width(($("#video-container").width()-40));
     $("#video").height(($("#video-container").width()-40)*3/4);
     $("#canvas").width(($("#video-container").width()-40));
@@ -124,6 +125,7 @@ if($("#wholecontent").width() < 768){
 */
         } else {
   $("#left-panel").height($("#wholecontent").height());
+  $("#video-container").height($("#wholecontent").height()*0.9);
     $("#video").width(($("#video-container").width()-40));
     $("#video").height(($("#video-container").width()-40)*3/4);
     $("#canvas").width(($("#video-container").width()-40));
