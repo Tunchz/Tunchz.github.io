@@ -33,7 +33,7 @@ var summarysheetResults = [];
 //const videocontainer = document.getElementById('video-container');
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
-const isonMobile = true;//onMobile();
+const isonMobile = onMobile();
 if (isonMobile) {
   detectionloopDelay = 2*detectionloopDelay;
   num_keep = verifyingPeriod/detectionloopDelay;
