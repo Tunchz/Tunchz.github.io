@@ -423,19 +423,21 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
   function addtoList() {
     // add new detected face into detectedfacesList if not exist
     var faceinlist = false;
-    for (k=0; k<detectedfacesList.length; k++) {
-      if (detectedfacesList[k].id == sendingList[0].id & detectedfacesList[k].date == sendingList[0].date) {
-        faceinlist = true;
-        // Update no. of detection, last seen, mood, image
-        detectedfacesList[k].detection++;
-        detectedfacesList[k].last = formatTime(facerec.last);
-        detectedfacesList[k].timestamp = facerec.last;
-        detectedfacesList[k].mood = mood;
-        detectedfacesList[k].img = imgdata;
-        //update detection number in the Table
-        //document.getElementById('subtag-'+(detectedfacesList.length-k-1)+'-1').innerHTML = detectedfacesList[k].detection;
-        //console.log("update",detectedfacesList);
-        updateTable();
+    if (sendingList[0].id != 'unknown') {
+      for (k=0; k<detectedfacesList.length; k++) {
+        if (detectedfacesList[k].id == sendingList[0].id & detectedfacesList[k].date == sendingList[0].date) {
+          faceinlist = true;
+          // Update no. of detection, last seen, mood, image
+          detectedfacesList[k].detection++;
+          detectedfacesList[k].last = formatTime(facerec.last);
+          detectedfacesList[k].timestamp = facerec.last;
+          detectedfacesList[k].mood = mood;
+          detectedfacesList[k].img = imgdata;
+          //update detection number in the Table
+          //document.getElementById('subtag-'+(detectedfacesList.length-k-1)+'-1').innerHTML = detectedfacesList[k].detection;
+          //console.log("update",detectedfacesList);
+          updateTable();
+        }
       }
     }
     
@@ -444,7 +446,9 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
       detectedfacesList[detectedfacesList.length-1].detection = 1;
       detectedfacesList[detectedfacesList.length-1].last = formatTime(facerec.last);
       detectedfacesList[detectedfacesList.length-1].timestamp = facerec.last;
-
+      if (sendingList[0].id == 'unknown') {
+        detectedfacesList[detectedfacesList.length-1].mood = "";
+      }
       //console.log("add",detectedfacesList);
       updateTable();  
 
