@@ -117,11 +117,11 @@ if($("#wholecontent").width() < 768){
 
   //$("#left-panel").height(($("#video-container").width())*3.1/4+100);
   if (isonMobile) {
-    $("#left-panel").height(($("#video-container").width())*4/3);
+    $("#left-panel").height(($("#video-container").width())*4/3.2);
     $("#video").width(($("#video-container").width()-100));
-    $("#video").height(($("#video-container").width()-100)*4/3);
+    $("#video").height(($("#video-container").width()-100)*4/3.2);
     $("#canvas").width(($("#video-container").width()-100));
-    $("#canvas").height(($("#video-container").width()-100)*4/3);
+    $("#canvas").height(($("#video-container").width()-100)*4/3.2);
 
 
   } else {
