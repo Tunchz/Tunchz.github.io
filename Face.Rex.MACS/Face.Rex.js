@@ -1,5 +1,5 @@
 // Basic parameter for detection in millisecond
-const detectionloopDelay = 1000;    
+var detectionloopDelay = 1000;    
 const verifyingPeriod = 5000;  
 const missedDuration = 3000;      //must be greater than detectionloopDelay
 const timetokeepverifiedfaces = 60000;
@@ -35,7 +35,7 @@ var summarysheetResults = [];
 const videocontainer = document.getElementById('video-container');
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
-const isonMobile = onMobile();
+const isonMobile = true; //onMobile();
 if (isonMobile) {
   detectionloopDelay = 2*detectionloopDelay;
 }
@@ -117,11 +117,19 @@ if($("#wholecontent").width() < 768){
 
   //$("#left-panel").height(($("#video-container").width())*3.1/4+100);
   if (isonMobile) {
-    $("#left-panel").height(($("#video-container").width())*4.1/3+100);
+    $("#left-panel").height(($("#video-container").width())*4/3);
+    $("#video").width(($("#video-container").width()-100));
+    $("#video").height(($("#video-container").width()-100)*4/3);
+    $("#canvas").width(($("#video-container").width()-100));
+    $("#canvas").height(($("#video-container").width()-100)*4/3);
+
 
   } else {
     $("#left-panel").height(($("#video-container").width())*3.1/4+100);
-
+    $("#video").width(($("#video-container").width()-40));
+    $("#video").height(($("#video-container").width()-40)*3/4);
+    $("#canvas").width(($("#video-container").width()-40));
+    $("#canvas").height(($("#video-container").width()-40)*3/4);
   }
 /*            $(".card-wrapper").height(120);
             $("#zone-map").height(700);
@@ -130,7 +138,10 @@ if($("#wholecontent").width() < 768){
 */
         } else {
   $("#left-panel").height($("#wholecontent").height());
-
+    $("#video").width(($("#video-container").width()-40));
+    $("#video").height(($("#video-container").width()-40)*3/4);
+    $("#canvas").width(($("#video-container").width()-40));
+    $("#canvas").height(($("#video-container").width()-40)*3/4);
 /*            $(".card-wrapper").height("0%");
             $("#zone-map").height("50%");
             $("#zone-nation-nation-age").height("70%");
@@ -138,19 +149,6 @@ if($("#wholecontent").width() < 768){
 */
         }
 
-  if (isonMobile) {
-    $("#video").width(($("#video-container").width()-100));
-    $("#video").height(($("#video-container").width()-100)*4/3);
-    $("#canvas").width(($("#video-container").width()-100));
-    $("#canvas").height(($("#video-container").width()-100)*4/3);
-
-  } else {
-    $("#video").width(($("#video-container").width()-40));
-    $("#video").height(($("#video-container").width()-40)*3/4);
-    $("#canvas").width(($("#video-container").width()-40));
-    $("#canvas").height(($("#video-container").width()-40)*3/4);
-
-  }
 /*      video.style.width = "320px";
       video.style.height = "240px";
       canvas.style.width = "320px";
@@ -628,7 +626,7 @@ function displayTable() {
   // Update Stats
   document.getElementById("total-detectedfaces").innerHTML = totaldetected;
   document.getElementById("total-verified").innerHTML = totaldetected - unknown;
-  document.getElementById("total-status").innerHTML = isonMobile ? "Mobile Mode" : "Desktop Mode";//formatTime(new Date());
+  document.getElementById("total-status").innerHTML = isonMobile ? "Mobile" : "Desktop";//formatTime(new Date());
   document.getElementById("total-tobeverified").innerHTML = totaltoverified - (totaldetected - unknown);
   document.getElementById("total-detection").innerHTML = detection;//+' ครั้ง';
   document.getElementById("total-unknown").innerHTML = unknown;
