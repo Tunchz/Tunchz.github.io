@@ -7,9 +7,9 @@ const timetoupdateResults = 60000;  // 1 minute
 const facematcherThreshold = 0.49;   // greatest distance for face
 
 // Initialize basic parameter
-var num_keep = verifyingPeriod/detectionloopDelay;
+var num_keep = Math.ceil(verifyingPeriod/detectionloopDelay);
 var loop_i = 0;
-var looptoUpdate = timetoupdateResults/detectionloopDelay;
+var looptoUpdate = Math.ceil(timetoupdateResults/detectionloopDelay);
 
 // Url for target google sheet script of insert the face record
 //const sheetUrl = "https://script.google.com/macros/s/AKfycbxxYJAPo5auDaZiy66RizPTMGE9QxLeIbUDRw_shEDpEbQoZCg/exec";
@@ -36,7 +36,7 @@ const canvas = document.getElementById('canvas');
 const isonMobile = onMobile();
 if (isonMobile) {
   detectionloopDelay = 2*detectionloopDelay;
-  num_keep = verifyingPeriod/detectionloopDelay;
+  num_keep = Math.ceil(verifyingPeriod/detectionloopDelay);
 }
 resizeAdjust();
 
