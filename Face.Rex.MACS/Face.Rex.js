@@ -31,7 +31,7 @@ var summarysheetResults = [];
 
 
 //const videocontainer = document.getElementById('video-container');
-var ipcamToggle = false;//true;
+var ipcamToggle = !true;
 const isonMobile = onMobile();
 if (isonMobile) {
   detectionloopDelay = 2*detectionloopDelay;
@@ -116,7 +116,7 @@ function startVideo() {
   navigator.getUserMedia(
     { video: {} },
     stream => video.srcObject = stream,
-    err => alert("error loading video >> "+err) //console.error(err)
+    err => alert("error loading video >> please allow access to the video source...") //console.error(err)
   )
   video.muted = true;
 }
@@ -138,55 +138,45 @@ navigator.geolocation.getCurrentPosition(function(position) {
 function resizeAdjust() {
   //console.log($("#video-container").width(),$("#video-container").height())
 
-if($("#wholecontent").width() < 768){
-  //console.log("<768")
+  if($("#wholecontent").width() < 768){
+    //console.log("<768")
 
-  //$("#left-panel").height(($("#video-container").width())*3.1/4+100);
-  if (isonMobile) {
-    video.width = "480";
-    video.height = "640";
-    $("#left-panel").height(($("#video-container").width()-150)*4/3+20+75);
-    $("#video-container").height(($("#video-container").width()-150)*4/3+20);
-    $("#video").width(($("#video-container").width()-150));
-    $("#video").height(($("#video-container").width()-150)*4/3);
-    $("#canvas").width(($("#video-container").width()-150));
-    $("#canvas").height(($("#video-container").width()-150)*4/3);
+    //$("#left-panel").height(($("#video-container").width())*3.1/4+100);
+    if (isonMobile) {
+      video.width = "480";
+      video.height = "640";
+      canvas.width = "480";
+      canvas.height = "640";
+      $("#left-panel").height(($("#video-container").width()-150)*4/3+20+75);
+      $("#video-container").height(($("#video-container").width()-150)*4/3+20);
+      $("#video").width(($("#video-container").width()-150));
+      $("#video").height(($("#video-container").width()-150)*4/3);
+      $("#canvas").width(($("#video-container").width()-150));
+      $("#canvas").height(($("#video-container").width()-150)*4/3);
 
+
+    } else {
+      $("#left-panel").height(($("#video-container").width())*3/4+75);
+      $("#video-container").height(($("#video-container").width())*3/4);
+      $("#video").width(($("#video-container").width()-40));
+      $("#video").height(($("#video-container").width()-40)*3/4);
+      $("#canvas").width(($("#video-container").width()-40));
+      $("#canvas").height(($("#video-container").width()-40)*3/4);
+    }
 
   } else {
-    $("#left-panel").height(($("#video-container").width())*3/4+75);
-    $("#video-container").height(($("#video-container").width())*3/4);
+    video.width = "640";
+    video.height = "480";
+    $("#left-panel").height($("#wholecontent").height());
+    $("#video-container").height($("#wholecontent").height()*0.9);
     $("#video").width(($("#video-container").width()-40));
     $("#video").height(($("#video-container").width()-40)*3/4);
     $("#canvas").width(($("#video-container").width()-40));
     $("#canvas").height(($("#video-container").width()-40)*3/4);
-  }
-/*            $(".card-wrapper").height(120);
-            $("#zone-map").height(700);
-            $("#zone-nation-nation-age").height(600);
-            $("#zone-date").height(300);
-*/
-        } else {
-  video.width = "640";
-  video.height = "480";
-  $("#left-panel").height($("#wholecontent").height());
-  $("#video-container").height($("#wholecontent").height()*0.9);
-  $("#video").width(($("#video-container").width()-40));
-  $("#video").height(($("#video-container").width()-40)*3/4);
-  $("#canvas").width(($("#video-container").width()-40));
-  $("#canvas").height(($("#video-container").width()-40)*3/4);
-/*            $(".card-wrapper").height("0%");
-            $("#zone-map").height("50%");
-            $("#zone-nation-nation-age").height("70%");
-            $("#zone-date").height("10%");
-*/
-        }
 
-/*      video.style.width = "320px";
-      video.style.height = "240px";
-      canvas.style.width = "320px";
-      canvas.style.height = "240px";
-*/
+  }
+
+
 }
 
 function onMobile() {
@@ -221,6 +211,14 @@ console.log("     " +video.videoWidth+" | "+video.videoHeight);
   //const TinyFaceDetectorOptions = new faceapi.TinyFaceDetectorOptions()
   if (!ipcamToggle) {
     const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors();
+  } else {
+    try {
+      image = await faceapi.fetchImage(image_src);
+    }
+    catch(err) {
+      alert("error playing video for ip camera >> please check the connection...");
+    }
+    var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors();
   }
   var canvas_ctx = canvas.getContext('2d');
 
@@ -232,7 +230,13 @@ console.log("     " +video.videoWidth+" | "+video.videoHeight);
     /**** Detect face ▶ find face landmark ▶ predict agaist face descriptor ▶ predict face expression ▶ predict age&gender****/
     
     if (ipcamToggle) {
-      image = await faceapi.fetchImage(image_src);
+      try {
+        image = await faceapi.fetchImage(image_src);
+      }
+      catch(err) {
+        alert("error playing video for ip camera >> please check the connection...");
+      }
+      //image = await faceapi.fetchImage(image_src);
       var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
     } else {
       var detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
@@ -283,8 +287,7 @@ console.log("     " +video.videoWidth+" | "+video.videoHeight);
       var progress = 0;
 
       /**** get bounding box on face ****/
-      const box = resizedDetections[i].detection.box
-
+      const box = resizedDetections[i].detection.box;
 
       if (numfaces > 0) {
         for (j=0 ; j< numfaces ; j++) {
@@ -306,8 +309,9 @@ console.log("     " +video.videoWidth+" | "+video.videoHeight);
 
 
               if (ipcamToggle) {
-                ctx.drawImage(image, box.x+box.width/2-box.height*(0.5+1.5*croppadding), box.y-box.height*2*croppadding, 
-                             box.height*(1+3*croppadding), box.height*(1+3*croppadding), 0, 0,  box.height*(1+3*croppadding), box.height*(1+3*croppadding));
+                const box_ = detections[i].detection.box;
+                ctx.drawImage(image, box_.x+box_.width/2-box_.height*(0.5+1.4*croppadding), box_.y-box_.height*2*croppadding, 
+                             box_.height*(1+3*croppadding), box_.height*(1+3*croppadding), 0, 0,  box_.height*(1+3*croppadding), box_.height*(1+3*croppadding));
               } else {
                 ctx.drawImage(video, box.x+box.width/2-box.height*(0.5+1.5*croppadding), box.y-box.height*2*croppadding, 
                              box.height*(1+3*croppadding), box.height*(1+3*croppadding), 0, 0,  box.height*(1+3*croppadding), box.height*(1+3*croppadding));
@@ -909,6 +913,10 @@ $('#right-button').click(function() {
   }
 });
 
+// Detect if orientation changes on mobile
+window.addEventListener("orientationchange", function() {
+  resizeAdjust();
+}, false);
 
 }
 
