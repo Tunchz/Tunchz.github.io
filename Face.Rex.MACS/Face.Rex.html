@@ -100,8 +100,9 @@
                 </div>
             </div>
           </div>
-          <div id = "f" class = "col-sm-6 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #2a58c3/*#383838;*/">
+          <div id = "select-container" class = "col-sm-6 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #2a58c3/*#383838;*/">
 
+ 
 
 
           </div>
@@ -129,16 +130,7 @@
           </div>
           <div id = "filter-container" class = "filter-container col-xs-8 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #fff;/*#383838;*/min-width: 242px;">
             <div id = "filter-toprow" class = "filter-row col-sm-12 height50p">
-              <div class="toolbar-pf">
-                <!div class="col-sm-12">
-                  <form class="toolbar-pf-actions">
-                    <div class="form-group">
-                      <select class="selectpicker width100" style = "width : 100%;" id="timeline-selectpicker" data-live-search="true" multiple></select>
-                    </div>
-                  </form>
-                <!/div>
-              </div>
-              
+              <select id = "dept-selector"></select>
             </div>
 
             <div id = "filter-bottomrow" class = "filter-row col-sm-12 height50p">
@@ -154,7 +146,7 @@
                       
                       <div class="input-group date" id="datepicker">
 
-                        <input type="text" class="form-control bootstrap-datepicker" style="width: 99px;"><span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                        <input type="text" class="form-control bootstrap-datepicker" style="width: 78px;"><span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -227,10 +219,10 @@
   <script defer src="Face.Rex.js"></script>
 
   <!script src="js/bootstrap.min.js"><!/script>
-  <script src="js/bootstrap-select.min.js"></script>
+  <!script src="js/bootstrap-select.min.js"><!/script>
   <script src="js/bootstrap-datepicker.min.js"></script>
   <script src="js/d3.min.js"></script>
-  <script src="js/data.js"></script>
+  <!script src="js/data.js"><!/script>
   <script src="js/script_test_datepicker.js"></script>
 
   <script>

@@ -35,14 +35,14 @@ var data = [],
 var dept = [{"dept" : "All"},{"dept" : "MACS"},{"dept" : "MHL"},{"dept" : "Tunchz Family"}];
 
 
-
+/*
 for (var x in dept) { 
   $('#timeline-selectpicker').append("<option>" + dept[x].dept + "</option>");
   dept[x].display = true;
 }
 $('#timeline-selectpicker').selectpicker('selectAll');
 
-
+*/
 
 /*
 
@@ -82,7 +82,27 @@ if(countNames(data) <= 0) {
 }
 */
 
+var allGroup = ["All", "MACS", "MHL", "Tunchz Family"];
 
+// add the options to the button
+d3.select("#dept-selector")
+  .selectAll('myOptions')
+  .data(allGroup)
+  .enter()
+  .append('option')
+  .text(function (d) { return d; }) // text showed in the menu
+  .attr("value", function (d) { return d; }) // corresponding value returned by the button
+
+d3.select("#dept-selector").on("change", function(d) {
+    // recover the option that has been chosen
+    filterDept = d3.select(this).property("value")
+    // run the updateChart function with this selected option
+    //console.log(filterDept);
+    zoomFilter();
+})
+
+
+/*
 var element = d3.select('#pf-timeline').append('div').datum(dept.filter(function(eventGroup) {
   return eventGroup.display === true;
 }));
@@ -99,20 +119,13 @@ $('#timeline-selectpicker').on('changed.bs.select', function(event, clickedIndex
     return eventGroup.display === true;
   }));
 
-  //--------------timeline(element);
 
-  /*----bootstrap.min.js
-  $('[data-toggle="popover"]').popover({
-    'container': '#pf-timeline',
-    'placement': 'top'
-  });
-  */
-
-  //**************update after item option has been reselected
   console.log(dept);
 
 
 });
+*/
+
 
 /*
 
@@ -134,6 +147,7 @@ $('#datepicker').datepicker('setDate', today);
 
 $('#datepicker').on('changeDate', zoomFilter);
 
+/*
 $( document.body ).on( 'click', '.dropdown-menu li', function( event ) {
   var $target = $( event.currentTarget );
   $target.closest( '.dropdown' )
@@ -145,6 +159,8 @@ $( document.body ).on( 'click', '.dropdown-menu li', function( event ) {
 
   return false;
 });
+*/
+
 
 /*
 function countNames(data) {

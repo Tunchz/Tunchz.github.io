@@ -47,7 +47,7 @@ let lat = 0,long = 0,loc;
 const croppadding = 0.2;  // padding factor
 
 // crossfilter variable
-var sf,List_filtered;
+var dl,fl,List_filtered;
 
 var formatDate = d3.time.format("%d/%m/%Y");  //("%d %B %Y %H:%M:%S");
 var formatTime = d3.time.format("%H:%M");     //("%H:%M:%S");
@@ -56,6 +56,7 @@ var formatDayDisplay = d3.time.format("%d");
 var formatMonthDisplay = d3.time.format("%B");
 var filterDate = formatDate(new Date());
 var filterVerification = "verified";
+var filterDept = "All";
 
 // Load face log to create detectedfacesList
 summarysheetLoad(facelogsheetUrl);
@@ -540,6 +541,8 @@ function handleResults(spreadsheetArray) {
   
 }
 
+
+
 function updateTable() {
   // remove table
   // first time there is no table to remove
@@ -553,77 +556,89 @@ function updateTable() {
 
 
 function displayTable() {
-  const totaltoverified = facestoverifyList.length;
-
-  sf = crossfilter(detectedfacesList);
-  sf.date = sf.dimension(function(d) { return d.date; });
-  sf.timestamp = sf.dimension(function(d) { return d.timestamp; });
-  sf.id = sf.dimension(function(d) { return d.id; });
-  sf.verified = sf.dimension(function(d) { return d.verified; });
-
-  //console.log(detectedfacesList);
-  //console.log(sf.date.top(Infinity));
+  // Initialize crossfilter variable for detectedfacesList
+  dl = crossfilter(detectedfacesList);
+  dl.date = dl.dimension(function(d) { return d.date; });
+  dl.timestamp = dl.dimension(function(d) { return d.timestamp; });
+  dl.id = dl.dimension(function(d) { return d.id; });
+  dl.verified = dl.dimension(function(d) { return d.verified; });
+  dl.dept = dl.dimension(function(d) { return d.dept; });
 
   // clear previous verification filter
-  sf.verified.filterAll();
+  dl.verified.filterAll();
 
   // filter by selected date
-  sf.date.filterExact(filterDate/*"21/07/2020"*/).top(Infinity);
+  dl.date.filterExact(filterDate/*"21/07/2020"*/)
 
-  // count verified and unknown faces
-  var totaldetected = sf.id.top(Infinity).length;
-  var unknown = sf.id.filterExact("unknown").top(Infinity).length;
+  // count all detected faces and unknown faces
+  var totaldetected = dl.id.top(Infinity).length;
+  var unknown = dl.id.filterExact("unknown").top(Infinity).length;
+  totaldetected = totaldetected - unknown;
 
   // clear id filter
-  sf.id.filterAll();
+  dl.id.filterAll();
 
-  // Sort by timestamp
-  List_filtered = sf.timestamp.top(Infinity);
+  // sync verified face from detectedfacesList to facestoverifyList
+   for (s=0; s<facestoverifyList.length; s++) {
+    facestoverifyList[s].verified = "nonverified";
+  }
+  List_filtered = dl.verified.filterExact("verified").top(Infinity); 
+  for (s=0; s<List_filtered.length; s++) {
+    facestoverifyList[parseInt(List_filtered[s].id)].verified = "verified";
+  }
 
-  // count number of detections
+  // Initialize crossfilter variable for facestoverifyList
+  fl = crossfilter(facestoverifyList);
+  fl.verified = fl.dimension(function(d) { return d.verified; });
+  fl.dept = fl.dimension(function(d) { return d.last; });
+  fl.id = fl.dimension(function(d) { return parseInt(d.id); });
+  fl.verified.filterExact("nonverified") 
+
+  // filter dept from selected filter menu and count number of id that has not been verified
+  if (filterDept == "All") {
+    fl.dept.filterAll();
+  } else {
+    fl.dept.filterExact(filterDept);
+  }
+  var totaltoverified = fl.id.top(Infinity).length;
+
+  // filter verified faces and dept from selected filter menu 
+  // to count number of id that has been verified and total detection
+  dl.verified.filterExact("verified");
+  if (filterDept == "All") {
+    dl.dept.filterAll();
+  } else {
+    dl.dept.filterExact(filterDept);
+  }   
+  List_filtered = dl.id.top(Infinity);
+  var totalverified = List_filtered.length;
   var detection = 0;
   for (t=0;t<List_filtered.length;t++) {
     detection = detection + List_filtered[t].detection;
     //console.log(detection,parseInt(List_filtered[t].detection));
   }
 
-  // filter verification status
+  // Check the filter value to assign the correct list for unknown
+  // unknown list have no dept, neet to clear dept filter
+  if (filterVerification == "unknown") { 
+    dl.dept.filterAll();
+    dl.verified.filterExact("unknown");    
+    List_filtered = dl.id.top(Infinity);
+  }
+
+  // Assign to correct list for filter verification status to update table
   if (filterVerification == "nonverified") {
-    List_filtered = sf.verified.filterExact("verified").top(Infinity);
-    for (s=0; s<facestoverifyList.length; s++) {
-      facestoverifyList[s].verified = "nonverified";
-    }
-    for (s=0; s<List_filtered.length; s++) {
-      facestoverifyList[parseInt(List_filtered[s].id)].verified = "verified";
-      //console.log(List_filtered[s].id);
-    }
-    
-    var fl = crossfilter(facestoverifyList);
-    fl.verified = fl.dimension(function(d) { return d.verified; });
-    fl.dept = fl.dimension(function(d) { return d.last; });
-    fl.id = fl.dimension(function(d) { return parseInt(d.id); });
-    fl.verified.filterExact("nonverified") 
-    //var f = ["MHL", "MACS"];
-    //fl.dept.filter(function(d){return f.indexOf(d) > -1;});
-    //fl.dept.filterFunction(multivalue_filter(["MACS"]));
     List_filtered = fl.id.bottom(Infinity);
-    //console.log(List_filtered.length,List_filtered);
-
-
-//fruitDimension.filterFunction(multivalue_filter(["apple","lemon","orange"]));
-
-
   } else {
-    sf.verified.filterExact(filterVerification).top(Infinity);
-    List_filtered = sf.timestamp.top(Infinity);
+    List_filtered = dl.timestamp.top(Infinity);
   }
 
 
   // Update Stats
   document.getElementById("total-detectedfaces").innerHTML = totaldetected;
-  document.getElementById("total-verified").innerHTML = totaldetected - unknown;
+  document.getElementById("total-verified").innerHTML = totalverified;
   document.getElementById("total-status").innerHTML = isonMobile ? "Mobile" : "Desktop";//formatTime(new Date());
-  document.getElementById("total-tobeverified").innerHTML = totaltoverified - (totaldetected - unknown);
+  document.getElementById("total-tobeverified").innerHTML = totaltoverified;
   document.getElementById("total-detection").innerHTML = detection;//+' ครั้ง';
   document.getElementById("total-unknown").innerHTML = unknown;
   document.getElementById("daydisplay").innerHTML = formatDayDisplay($('#datepicker').datepicker('getDate'));

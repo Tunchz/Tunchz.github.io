@@ -398,3 +398,18 @@ html {
     font-size: 12px;
 }
 
+#dept-selector {
+  width: 200px;
+  border-radius: 2px;
+  height: 24px;
+  padding: 0px 3px;
+  background-color: #383838;
+  color: #fff;
+  border-color: #aaa;
+}
+
+#dept-selector:hover {
+  background-color: #fff;
+  color: #383838;
+}
+
