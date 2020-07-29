@@ -31,13 +31,43 @@ var summarysheetResults = [];
 
 
 //const videocontainer = document.getElementById('video-container');
-const video = document.getElementById('video');
-const canvas = document.getElementById('canvas');
+var ipcamToggle = false;//true;
 const isonMobile = onMobile();
 if (isonMobile) {
   detectionloopDelay = 2*detectionloopDelay;
   num_keep = Math.ceil(verifyingPeriod/detectionloopDelay);
+  ipcamToggle = false;
 }
+
+const videocontainer = document.getElementById('video-container');
+if (ipcamToggle) {
+//const video = document.getElementById('video');
+//const image_src = video.src.replace("video","shot.jpg");
+  const video = document.createElement("img");
+  video.id = "video";
+  video.width = "640";
+  video.height = "480";
+  video.src= "http://192.168.1.11:8080/video";
+  video.alt= "Video feed";
+  videocontainer.append(video);
+  var image_src = video.src.replace("video","shot.jpg");
+} else {
+  const video = document.createElement("video");
+  video.id = "video";
+  video.width = "640";
+  video.height = "480";
+  video.autoplay = true;
+  //video.muted = true;
+  //video.setAttribute('muted', 'muted');
+  videocontainer.append(video);
+}
+
+
+//const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+
+
+
 resizeAdjust();
 
 let detectedfaces = [];
@@ -62,13 +92,24 @@ var filterDept = "All";
 summarysheetLoad(facelogsheetUrl);
 
 /**** Load all model needed for face ****/
-Promise.all([
-  faceapi.nets.ssdMobilenetv1.loadFromUri(modelsUrl),
-  faceapi.nets.faceLandmark68Net.loadFromUri(modelsUrl),
-  faceapi.nets.faceRecognitionNet.loadFromUri(modelsUrl),
-  faceapi.nets.faceExpressionNet.loadFromUri(modelsUrl),
-  faceapi.nets.ageGenderNet.loadFromUri(modelsUrl)
-]).then(startVideo) //then(start)
+if (ipcamToggle) {
+  Promise.all([
+    faceapi.nets.ssdMobilenetv1.loadFromUri(modelsUrl),
+    faceapi.nets.faceLandmark68Net.loadFromUri(modelsUrl),
+    faceapi.nets.faceRecognitionNet.loadFromUri(modelsUrl),
+    faceapi.nets.faceExpressionNet.loadFromUri(modelsUrl),
+    faceapi.nets.ageGenderNet.loadFromUri(modelsUrl)
+  ]).then(start) 
+} else {
+  Promise.all([
+    faceapi.nets.ssdMobilenetv1.loadFromUri(modelsUrl),
+    faceapi.nets.faceLandmark68Net.loadFromUri(modelsUrl),
+    faceapi.nets.faceRecognitionNet.loadFromUri(modelsUrl),
+    faceapi.nets.faceExpressionNet.loadFromUri(modelsUrl),
+    faceapi.nets.ageGenderNet.loadFromUri(modelsUrl)
+  ]).then(startVideo) //then(start) 
+}
+
 
 
 function startVideo() {
@@ -77,6 +118,7 @@ function startVideo() {
     stream => video.srcObject = stream,
     err => alert("error loading video >> "+err) //console.error(err)
   )
+  video.muted = true;
 }
 
 // get latitude and longitude
@@ -93,16 +135,16 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
 });
 
-
 function resizeAdjust() {
   //console.log($("#video-container").width(),$("#video-container").height())
-
 
 if($("#wholecontent").width() < 768){
   //console.log("<768")
 
   //$("#left-panel").height(($("#video-container").width())*3.1/4+100);
   if (isonMobile) {
+    video.width = "480";
+    video.height = "640";
     $("#left-panel").height(($("#video-container").width()-150)*4/3+20+75);
     $("#video-container").height(($("#video-container").width()-150)*4/3+20);
     $("#video").width(($("#video-container").width()-150));
@@ -125,12 +167,14 @@ if($("#wholecontent").width() < 768){
             $("#zone-date").height(300);
 */
         } else {
+  video.width = "640";
+  video.height = "480";
   $("#left-panel").height($("#wholecontent").height());
   $("#video-container").height($("#wholecontent").height()*0.9);
-    $("#video").width(($("#video-container").width()-40));
-    $("#video").height(($("#video-container").width()-40)*3/4);
-    $("#canvas").width(($("#video-container").width()-40));
-    $("#canvas").height(($("#video-container").width()-40)*3/4);
+  $("#video").width(($("#video-container").width()-40));
+  $("#video").height(($("#video-container").width()-40)*3/4);
+  $("#canvas").width(($("#video-container").width()-40));
+  $("#canvas").height(($("#video-container").width()-40)*3/4);
 /*            $(".card-wrapper").height("0%");
             $("#zone-map").height("50%");
             $("#zone-nation-nation-age").height("70%");
@@ -152,15 +196,18 @@ function onMobile() {
 };
 
 /**** add event listener to precess when video plays ****/
-video.addEventListener('play',async () => {
+video.addEventListener('play',() => {
+  start();
+})
 
-  /**** define overlay canvas for drawing the results over the vedio ****/
-  //const canvas = faceapi.createCanvasFromMedia(video)
-  //videocontainer.append(canvas)
+async function start() {
+
+console.log("---- " +video.offsetWidth+" | "+video.offsetHeight);
+console.log("     " +video.videoWidth+" | "+video.videoHeight);
 
   /**** define display size and format canvas size to match ****/
-  var displaySize = { width: video.width, height: video.height }
-  faceapi.matchDimensions(canvas, displaySize)
+  var displaySize = { width: video.width, height: video.height };
+  faceapi.matchDimensions(canvas, displaySize);
 
   /**** display notification ****/
   const noti = new faceapi.draw.DrawBox({ x: 0, y: 10, width: 0, height: 0 }, { label: " Loading face model... " });
@@ -169,11 +216,12 @@ video.addEventListener('play',async () => {
   //console.log("load models");
   /**** load model from save lebeled descriptor from json file ****/
   const labeledFaceDescriptors = await loadLabeledDescriptor(facedescriptorUrl); //console.log(labeledFaceDescriptors);
-  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, facematcherThreshold)
+  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, facematcherThreshold);
   // 1st run-in to get face descriptor engine ready
   //const TinyFaceDetectorOptions = new faceapi.TinyFaceDetectorOptions()
-  const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors();
-
+  if (!ipcamToggle) {
+    const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors();
+  }
   var canvas_ctx = canvas.getContext('2d');
 
 
@@ -182,15 +230,19 @@ video.addEventListener('play',async () => {
   setInterval(async () => {
     loop_i++;
     /**** Detect face ▶ find face landmark ▶ predict agaist face descriptor ▶ predict face expression ▶ predict age&gender****/
-    const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
-    // Use TinyFace Model
-    //const detections = await faceapi.detectAllFaces(video,TinyFaceDetectorOptions).withFaceLandmarks(useTinyModel).withFaceDescriptors().withFaceExpressions().withAgeAndGender();
+    
+    if (ipcamToggle) {
+      image = await faceapi.fetchImage(image_src);
+      var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
+    } else {
+      var detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
+    }
 
     /****Resize the result of detection matching the display size ****/
-    const resizedDetections = faceapi.resizeResults(detections, displaySize)
+    const resizedDetections = faceapi.resizeResults(detections, displaySize);
 
     /**** Match the faces detected with the descriptor ****/
-    const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor))
+    const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
 
     /**** Clear the previous overlay draw on the canvas ****/
     //canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
@@ -201,13 +253,7 @@ video.addEventListener('play',async () => {
     var timenow = new Date();
     var numfaces = detectedfaces.length;
 
-    //Display time
-    /*const timedisplay = new faceapi.draw.DrawTextField([" "+formatTimeDisplay(timenow)+" "],{ x: canvas.width, y: 0}, 
-                                                  {anchorPosition: 'TOP_RIGTH', backgroundColor : 'rgba(0, 0, 255, 1 )', fontColor : 'rgba(255, 255, 255, 1 )',
-                                                  fonts : "Impact", fontSize : 16, padding : 2});
-    timedisplay.draw(canvas);
-*/
-  
+ 
     canvas_ctx.lineWidth = "12";
     canvas_ctx.strokeStyle = "blue";
     canvas_ctx.rect(canvas.width - 80, 6, 80, 12);
@@ -239,10 +285,6 @@ video.addEventListener('play',async () => {
       /**** get bounding box on face ****/
       const box = resizedDetections[i].detection.box
 
-      // adjust box to fit face for Tiny model
-      //const box_ = resizedDetections[i].detection.box
-      //const box = {x:box_.x+0.1*box_.width, y:box_.y-0.1*box_.width, width:0.8*box_.width, height:box_.height};
-
 
       if (numfaces > 0) {
         for (j=0 ; j< numfaces ; j++) {
@@ -260,8 +302,17 @@ video.addEventListener('play',async () => {
 
               canvascropped.width = box.height*(1+3*croppadding);//box.width*(1+2*croppadding);
               canvascropped.height = box.height*(1+3*croppadding);
-              ctx.drawImage(video, box.x+box.width/2-box.height*(0.5+1.5*croppadding), box.y-box.height*2*croppadding, 
+              
+
+
+              if (ipcamToggle) {
+                ctx.drawImage(image, box.x+box.width/2-box.height*(0.5+1.5*croppadding), box.y-box.height*2*croppadding, 
                              box.height*(1+3*croppadding), box.height*(1+3*croppadding), 0, 0,  box.height*(1+3*croppadding), box.height*(1+3*croppadding));
+              } else {
+                ctx.drawImage(video, box.x+box.width/2-box.height*(0.5+1.5*croppadding), box.y-box.height*2*croppadding, 
+                             box.height*(1+3*croppadding), box.height*(1+3*croppadding), 0, 0,  box.height*(1+3*croppadding), box.height*(1+3*croppadding));
+              }
+
               base64data = canvascropped.toDataURL("image/jpeg");
               //console.log(base64data);
 
@@ -370,7 +421,7 @@ video.addEventListener('play',async () => {
 
   }, detectionloopDelay)
   
-})
+}
 
 function detectedfacelistAdd(facerec, mood, imgdata) {
 
@@ -804,7 +855,7 @@ for (s = 0; s < fl_dept.length;s++) {
     "num"  : fl_dept[s].value
   });
 }
-console.log(dept);
+//console.log(dept);
 
 //var dept = [{"dept" : "All", "num" : 49},{"dept" : "MACS", "num" : 32},{"dept" : "MHL", "num" : 11},{"dept" : "Tunchz Family", "num" : 6}];
 
