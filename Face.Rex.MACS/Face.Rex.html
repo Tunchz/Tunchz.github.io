@@ -19,10 +19,10 @@
   <body onresize="resizeAdjust();">
     <div id = "wholecontent" class = "section-container">
       <div id = "left-panel" class = "col-sm-7 height100p">
-        <div id = "top-left" class = "col-sm-12 height10p" style = "min-height : 74.64px; padding-right: 10px; background-color: #fff;">
+        <div id = "top-left" class = "col-sm-12 height10p" style = "height : 75px; padding-right: 10px; background-color: #fff;">
           <div id = "title" class = "col-sm-6 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #2a58c3/*#383838;*/">
             <div id = "logo-container" class = "col-xs-6" style = "display: flex;justify-content: center; align-items: center; max-width: 100px;">
-              <img id = "Face.Rex.logo" src = 'img/Face.Rex.png' style = "padding: 5px; width : 10vh; height : 100%; min-height : 70px; min-width : 70px; "></img>
+              <img id = "Face.Rex.logo" src = 'img/Face.Rex.png' style = "padding: 5px; width : 75px; height : 75px;"></img>
             </div>
             <div id = "Title-container" class = "col-xs-6 height100p" style = "">
               <div id = "Text1" class = "col-xs-12 height50p" style = "padding:0px;margin:0px;">
@@ -119,7 +119,7 @@
         </div>
       </div>
       <div id = "right-panel" class = "col-sm-5 height100p" style = "padding-right: 10px; background-color: #383838;">
-        <div id = "top-right1" class = "col-sm-12 height10p" style = "min-height : 74.64px; max-height : 100px; padding-left: 10px; background-color: #383838;">
+        <div id = "top-right1" class = "col-sm-12 height10p" style = "height : 75px; max-height : 100px; padding-left: 10px; background-color: #383838;">
           <div id = "date-container" class = "col-xs-4 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #fff;">
 
             <div class = "col-sm-12" style="padding-left:3px; height:100%;display:flex; font-size: 10px;text-align: left;">
@@ -128,7 +128,7 @@
             </div>
 
           </div>
-          <div id = "filter-container" class = "filter-container col-xs-8 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #fff;/*#383838;*/min-width: 242px;">
+          <div id = "filter-container" class = "filter-container col-xs-8 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #fff;/*#383838;*/">
             <div id = "filter-toprow" class = "filter-row col-sm-12 height50p">
               <select id = "dept-selector"></select>
             </div>
@@ -146,11 +146,11 @@
                       
                       <div class="input-group date" id="datepicker">
 
-                        <input type="text" class="form-control bootstrap-datepicker" style="width: 78px;"><span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                        <input id = "datepicked" type="text" class="form-control bootstrap-datepicker" style="width: 60px;"><span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                       </div>
                     </div>
                     <div class="form-group">
-                      <button class="btn btn-default" id="reset-button" type="button">TODAY</button>
+                      <button class="btn btn-default" id="today-button" type="button">TODAY</button>
                     </div>
                   </form>
                 <!/div>
@@ -173,7 +173,7 @@
                 <div class = "col-xs-6" id = "total-detectedfaces"style="height:20%; font-size: 10px;padding-bottom : 1px;border-bottom: 1px solid #fff; padding-right : 5px;"></div>
                 <div class = "card-menu col-xs-12" onmouseover="" onclick="updateMenu(1)" style="height:70%;border-bottom: 2px solid #9bee00">
                   <div class = "col-xs-6" style="padding-left:3px; height:100%;display:flex; font-size: 10px;text-align: left;"><span style ="align-self: flex-end;">ยืนยัน</span></div>
-                  <div class = "col-xs-6" id = "total-verified" style="margin-top: -12px; height:100%; font-family: Impact;font-size: 42px;color:#9bee00; padding-right : 3px;"></div>
+                  <div class = "col-xs-6" id = "total-verified" style="margin-top: -12px; height:100%; font-family: Impact;font-size: 45px;color:#9bee00; padding-right : 3px;"></div>
                 </div>
                 <div id = "menuIndicator1" class = "card-menu-indicator col-xs-12" style="margin-top: 1px; height:10%; background: #9bee00"></div>
               </div>
@@ -184,7 +184,7 @@
                 <div class = "col-xs-6" id = "total-detection"style="height:20%; font-size: 10px;padding-bottom = 1px;border-bottom: 1px solid #fff; padding-right : 5px;"></div>
                 <div class = "card-menu col-xs-12" onmouseover="" onclick="updateMenu(2)" style="height:70%;border-bottom: 2px solid #fcc400">
                   <div class = "col-xs-6" style="padding-left:3px; height:100%;display:flex; font-size: 10px;text-align: left;"><span style ="align-self: flex-end;">รอยืนยัน</span></div>
-                  <div class = "col-xs-6" id = "total-tobeverified" style="margin-top: -12px; height:100%; font-family: Impact;font-size: 42px; color:#fcc400; padding-right : 3px;"></div>
+                  <div class = "col-xs-6" id = "total-tobeverified" style="margin-top: -12px; height:100%; font-family: Impact;font-size: 45px; color:#fcc400; padding-right : 3px;"></div>
                 </div>
                 <div id = "menuIndicator2" class = "card-menu-indicator col-xs-12" style="margin-top: 2px; height:10%; background: #fff0"></div>
               </div>
@@ -195,7 +195,7 @@
                 <div class = "col-xs-6" id = "total-status"style="height:20%; font-size: 10px;padding-bottom = 1px;border-bottom: 1px solid #fff; padding-right : 5px;">ปกติ</div>
                 <div class = "card-menu col-xs-12" onmouseover="" onclick="updateMenu(3)" style="height:70%;border-bottom: 2px solid #ff0000">
                   <div class = "col-xs-3" style="padding-left:3px; height:100%;display:flex; font-size: 10px;text-align: left;"><span style ="align-self: flex-end;">unknown</span></div>
-                  <div class = "col-xs-9" id = "total-unknown" style="margin-top: -12px; height:100%; font-family: Impact;font-size: 42px;color:#ff0000; padding-right : 3px;"></div>
+                  <div class = "col-xs-9" id = "total-unknown" style="margin-top: -12px; height:100%; font-family: Impact;font-size: 45px;color:#ff0000; padding-right : 3px;"></div>
                 </div>
                 <div id = "menuIndicator3" class = "card-menu-indicator col-xs-12" style="margin-top: 2px; height:10%; background: #fff0"></div>
               </div>
@@ -223,7 +223,7 @@
   <script src="js/bootstrap-datepicker.min.js"></script>
   <script src="js/d3.min.js"></script>
   <!script src="js/data.js"><!/script>
-  <script src="js/script_test_datepicker.js"></script>
+  <!script src="js/script_test_datepicker.js"><!/script>
 
   <script>
 

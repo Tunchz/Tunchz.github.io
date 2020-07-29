@@ -293,14 +293,6 @@ html {
     background-image: linear-gradient(to bottom, #2a58c3 0, #2a58c3 100%);
 }
 
-.input-group-addon {
-  border-radius: 2px;
-  padding: 0px 6px;
-  background: #383838;
-  color: #fff;
-  border-color: #aaa;
-}
-
 .form-control {
   border-radius: 2px;
   height: 24px;
@@ -310,11 +302,31 @@ html {
   border-color: #aaa;
 }
 
+.input-group-addon {
+  border-radius: 2px;
+  padding: 0px 6px;
+  background: #383838;
+  color: #fff;
+  border-color: #aaa;
+}
+
+.form-control:hover, .input-group-addon:hover  {
+  background: #fff;
+  color: #383838;
+}
+
 .btn-default {
   background: #383838;
   color: #fff;
   border-color: #aaa;
   font-size: 12px;
+  font-weight: 400;
+}
+
+.btn:focus, .btn:active {
+  background: #383838;
+  color: #fff;
+  outline: none;
 }
 
 .toolbar-pf .form-group {
@@ -399,13 +411,14 @@ html {
 }
 
 #dept-selector {
-  width: 200px;
+  width: 182px;
   border-radius: 2px;
   height: 24px;
   padding: 0px 3px;
   background-color: #383838;
   color: #fff;
   border-color: #aaa;
+  cursor: pointer;
 }
 
 #dept-selector:hover {

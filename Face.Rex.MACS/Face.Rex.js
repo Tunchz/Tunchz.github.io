@@ -730,6 +730,8 @@ function loadcsvtoarray(filename) {
 
   }
 
+  // filterInitialize() needs facetoverifyList to be loaded completely
+  filterInitialize();
 
   return labels;
 
@@ -784,7 +786,80 @@ function updateMenu(menuNum) {
   }
 }
 
+function filterInitialize() {
 
+const ONE_HOUR = 60 * 60 * 1000,
+      ONE_DAY = 24 * ONE_HOUR;
+var today = new Date();//Date('2020-05-18T17:59:06.134Z');
+
+// Retrieve department list from facestoverifyList
+fl = crossfilter(facestoverifyList);
+fl.dept = fl.dimension(function(d) { return d.last; });
+fl_dept = fl.dept.group().reduceCount().top(Infinity);
+
+var dept = [{"dept" : "All", "num" : facestoverifyList.length}]
+for (s = 0; s < fl_dept.length;s++) {
+  dept.push({ 
+    "dept" : fl_dept[s].key,
+    "num"  : fl_dept[s].value
+  });
+}
+console.log(dept);
+
+//var dept = [{"dept" : "All", "num" : 49},{"dept" : "MACS", "num" : 32},{"dept" : "MHL", "num" : 11},{"dept" : "Tunchz Family", "num" : 6}];
+
+// add the options to the button
+d3.select("#dept-selector")
+  .selectAll('myOptions')
+  .data(dept)
+  .enter()
+  .append('option')
+  .text(function (d) { return d.dept+"   ("+d.num+")"; }) // text showed in the menu
+  .attr("value", function (d) { return d.dept; }) // corresponding value returned by the button
+
+d3.select("#dept-selector").on("change", function(d) {
+    filterDept = d3.select(this).property("value");
+    updateTable();
+})
+
+
+$('#datepicker').datepicker({
+  format: 'dd/mm/yy',
+  autoclose: true,
+  //todayBtn: "linked",
+  todayHighlight: true
+  
+});
+
+$('#datepicker').datepicker('setDate', today);
+
+$('#datepicker').on('changeDate', function () {
+  filterDate = formatDate($('#datepicker').datepicker('getDate'));
+  updateTable();
+});
+
+$('#today-button').click(function() {
+  $('#datepicker').datepicker('setDate', today);
+  filterDate = formatDate($('#datepicker').datepicker('getDate'));
+  updateTable();
+});
+
+$('#left-button').click(function() {
+  $('#datepicker').datepicker('setDate', new Date(($('#datepicker').datepicker('getDate')).getTime() - ONE_DAY));
+  filterDate = formatDate($('#datepicker').datepicker('getDate'));
+  updateTable();
+});
+
+$('#right-button').click(function() {
+  if (formatDate($('#datepicker').datepicker('getDate')) != formatDate(new Date())) {
+    $('#datepicker').datepicker('setDate', new Date(($('#datepicker').datepicker('getDate')).getTime() + ONE_DAY));
+    filterDate = formatDate($('#datepicker').datepicker('getDate'));
+    updateTable();
+  }
+});
+
+
+}
 
 /*
 function loadlabelimage(filelink,iter,max) {
