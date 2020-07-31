@@ -329,6 +329,15 @@ html {
   outline: none;
 }
 
+.select-container {
+  padding : 15px 0px;
+  vertical-align: middle;
+  justify-content: flex-end;
+  display: flex;
+  color: #383838;
+  background-color: #fff;
+}
+
 .toolbar-pf .form-group {
     border-right: 1px solid #d1d1d1;
     display: table-cell;
@@ -424,5 +433,37 @@ html {
 #dept-selector:hover {
   background-color: #fff;
   color: #383838;
+}
+
+.select-container {
+  padding : 15px 0px;
+  vertical-align: middle;
+  justify-content: flex-end;
+  display: flex;
+}
+
+.button-control {
+  background-color: #2a58c3;
+  color: #fff;
+  border-color: #2a58c3;
+  border-radius: 2px;
+  font-size: 24px;
+}
+
+.button-control:hover {
+  background-color: #fff;
+  color: ##2a58c3;
+  border-color: #2a58c3;
+}
+
+.noti {
+  padding : 10px;
+  position: absolute;
+  float : center;
+  color : #fff;
+  background-color: #ffffff38;
+  font-family: Impact;
+  font-size: 20px;
+  font-weight: 200;
 }
 

@@ -10,6 +10,7 @@ const facematcherThreshold = 0.49;   // greatest distance for face
 var num_keep = Math.ceil(verifyingPeriod/detectionloopDelay);
 var loop_i = 0;
 var looptoUpdate = Math.ceil(timetoupdateResults/detectionloopDelay);
+var videoStart = true;
 
 // Url for target google sheet script of insert the face record
 //const sheetUrl = "https://script.google.com/macros/s/AKfycbxxYJAPo5auDaZiy66RizPTMGE9QxLeIbUDRw_shEDpEbQoZCg/exec";
@@ -40,10 +41,13 @@ if (isonMobile) {
 }
 
 const videocontainer = document.getElementById('video-container');
+const canvas = document.getElementById('canvas');
+var video,notification;
+
 if (ipcamToggle) {
 //const video = document.getElementById('video');
 //const image_src = video.src.replace("video","shot.jpg");
-  const video = document.createElement("img");
+  video = document.createElement("img");
   video.id = "video";
   video.width = "640";
   video.height = "480";
@@ -52,7 +56,7 @@ if (ipcamToggle) {
   videocontainer.append(video);
   var image_src = video.src.replace("video","shot.jpg");
 } else {
-  const video = document.createElement("video");
+  video = document.createElement("video");
   video.id = "video";
   video.width = "640";
   video.height = "480";
@@ -63,13 +67,12 @@ if (ipcamToggle) {
 }
 
 
-//const video = document.getElementById('video');
-const canvas = document.getElementById('canvas');
 
 
 
-resizeAdjust();
 
+
+let faceMatcher;
 let detectedfaces = [];
 let detectedfacesList = [];
 let sendingList = [];
@@ -112,13 +115,46 @@ if (ipcamToggle) {
 
 
 
-function startVideo() {
+async function startVideo() {
+
+
+
+  if (!videoStart) {
+    video.remove();
+    console.log("start video....");
+    video = document.createElement("video");
+    video.id = "video";
+    video.width = "640";
+    video.height = "480";
+    video.autoplay = true;
+    //video.muted = true;
+    //video.setAttribute('muted', 'muted');
+    videocontainer.append(video);
+
+  } else {
+    console.log("1st Run...")
+    const labeledFaceDescriptors = await loadLabeledDescriptor(facedescriptorUrl); //console.log(labeledFaceDescriptors);
+    faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, facematcherThreshold);
+    try {
+      image = await faceapi.fetchImage("https://tunchz.github.io/Face.Rex/labeled_images/Tunchz/2.jpg");
+    }
+    catch(err) {
+      alert("error playing video for ip camera >> please check the connection...");
+    }
+    var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();;
+    const resizedDetections = faceapi.resizeResults(detections, { width: 320, height: 240 });
+    const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));    
+  }
+  
   navigator.getUserMedia(
     { video: {} },
     stream => video.srcObject = stream,
     err => alert("error loading video >> please allow access to the video source...") //console.error(err)
   )
   video.muted = true;
+  videoStart = true;
+  document.getElementById("stop-button").innerHTML = "■";
+  resizeAdjust();
 }
 
 // get latitude and longitude
@@ -167,6 +203,8 @@ function resizeAdjust() {
   } else {
     video.width = "640";
     video.height = "480";
+    canvas.width = "640";
+    canvas.height = "480";
     $("#left-panel").height($("#wholecontent").height());
     $("#video-container").height($("#wholecontent").height()*0.9);
     $("#video").width(($("#video-container").width()-40));
@@ -187,13 +225,14 @@ function onMobile() {
 
 /**** add event listener to precess when video plays ****/
 video.addEventListener('play',() => {
+  //console.log("videp play...")
   start();
 })
 
 async function start() {
 
-console.log("---- " +video.offsetWidth+" | "+video.offsetHeight);
-console.log("     " +video.videoWidth+" | "+video.videoHeight);
+//console.log("---- " +video.offsetWidth+" | "+video.offsetHeight);
+//console.log("     " +video.videoWidth+" | "+video.videoHeight);
 
   /**** define display size and format canvas size to match ****/
   var displaySize = { width: video.width, height: video.height };
@@ -205,21 +244,27 @@ console.log("     " +video.videoWidth+" | "+video.videoHeight);
  
   //console.log("load models");
   /**** load model from save lebeled descriptor from json file ****/
-  const labeledFaceDescriptors = await loadLabeledDescriptor(facedescriptorUrl); //console.log(labeledFaceDescriptors);
-  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, facematcherThreshold);
+//  const labeledFaceDescriptors = await loadLabeledDescriptor(facedescriptorUrl); //console.log(labeledFaceDescriptors);
+//  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, facematcherThreshold);
+
   // 1st run-in to get face descriptor engine ready
   //const TinyFaceDetectorOptions = new faceapi.TinyFaceDetectorOptions()
-  if (!ipcamToggle) {
+/*  if (ipcamToggle) {
     const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors();
+    const resizedDetections = faceapi.resizeResults(detections, displaySize);
+    const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
   } else {
     try {
-      image = await faceapi.fetchImage(image_src);
+      image = await faceapi.fetchImage("https://tunchz.github.io/Face.Rex/labeled_images/Tunchz/1.jpg");
     }
     catch(err) {
       alert("error playing video for ip camera >> please check the connection...");
     }
     var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors();
+    const resizedDetections = faceapi.resizeResults(detections, displaySize);
+    const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
   }
+*/
   var canvas_ctx = canvas.getContext('2d');
 
 
@@ -227,110 +272,145 @@ console.log("     " +video.videoWidth+" | "+video.videoHeight);
   //console.log("loop start!")
   setInterval(async () => {
     loop_i++;
-    /**** Detect face ▶ find face landmark ▶ predict agaist face descriptor ▶ predict face expression ▶ predict age&gender****/
-    
-    if (ipcamToggle) {
-      try {
-        image = await faceapi.fetchImage(image_src);
-      }
-      catch(err) {
-        alert("error playing video for ip camera >> please check the connection...");
-      }
-      //image = await faceapi.fetchImage(image_src);
-      var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
-    } else {
-      var detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
+
+    if (videoStart) {
+      detect();
+    } else { 
+      canvas_ctx.clearRect(0, 0, canvas.width, canvas.height);
+      var timenow = new Date();
+      var numfaces = detectedfaces.length 
+      canvas_ctx.lineWidth = "12";
+      canvas_ctx.strokeStyle = "blue";
+      canvas_ctx.rect(canvas.width - 80, 6, 80, 12);
+      canvas_ctx.stroke();
+      canvas_ctx.font = "20px Impact";
+      canvas_ctx.fillText(" "+formatTimeDisplay(timenow)+" ", canvas.width - 80, 20);
     }
 
-    /****Resize the result of detection matching the display size ****/
-    const resizedDetections = faceapi.resizeResults(detections, displaySize);
 
-    /**** Match the faces detected with the descriptor ****/
-    const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
+    // Check loops to update detectedfacesList from google sheet
+    if (loop_i>looptoUpdate-1) {
 
-    /**** Clear the previous overlay draw on the canvas ****/
-    //canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+      summarysheetLoad(facelogsheetUrl);
 
-    canvas_ctx.clearRect(0, 0, canvas.width, canvas.height);
+      loop_i = 0;
+    }
 
+    async function detect() {
 
-    var timenow = new Date();
-    var numfaces = detectedfaces.length;
-
- 
-    canvas_ctx.lineWidth = "12";
-    canvas_ctx.strokeStyle = "blue";
-    canvas_ctx.rect(canvas.width - 80, 6, 80, 12);
-    canvas_ctx.stroke();
-    canvas_ctx.font = "20px Impact";
-    //canvas_ctx.fillStyle = "blue";
-    canvas_ctx.fillText(" "+formatTimeDisplay(timenow)+" ", canvas.width - 80, 20);
-
-    results.forEach((result, i) => {
-
-      /**** extract age gender emotion from result ****/
-      const age = resizedDetections[i].age;
-      var gender = 'unknown';
-      if (resizedDetections[i].gender = 'male') {
-        gender = "♂ ชาย";
-      } else {
-        gender = "♁ หญิง";
-      }
-      const expressions = resizedDetections[i].expressions;
-      const maxValue = Math.max(...Object.values(expressions));
-      const emotion = Object.keys(expressions).filter(item => expressions[item] === maxValue);
-
-
-
-      /**** record detected faces to verify ****/
-      var facefound,verified = false;
-      var progress = 0;
-
-      /**** get bounding box on face ****/
-      const box = resizedDetections[i].detection.box;
-
-      if (numfaces > 0) {
-        for (j=0 ; j< numfaces ; j++) {
-          if (detectedfaces[j].label == result.label) {
-            facefound = true;
-            if (detectedfaces[j].datetime.length > num_keep-1) {
-              detectedfaces[j].datetime.shift();
-              verified = true;
-            } else if (detectedfaces[j].datetime.length == num_keep-1) {
-              // 1st time verified : capture face image & add face to detectedfacesList
-
-              var base64data = '';
-              var canvascropped = document.createElement("canvas");
-              var ctx = canvascropped.getContext("2d");
-
-              canvascropped.width = box.height*(1+3*croppadding);//box.width*(1+2*croppadding);
-              canvascropped.height = box.height*(1+3*croppadding);
-              
-
-
-              if (ipcamToggle) {
-                const box_ = detections[i].detection.box;
-                ctx.drawImage(image, box_.x+box_.width/2-box_.height*(0.5+1.4*croppadding), box_.y-box_.height*2*croppadding, 
-                             box_.height*(1+3*croppadding), box_.height*(1+3*croppadding), 0, 0,  box_.height*(1+3*croppadding), box_.height*(1+3*croppadding));
-              } else {
-                ctx.drawImage(video, box.x+box.width/2-box.height*(0.5+1.5*croppadding), box.y-box.height*2*croppadding, 
-                             box.height*(1+3*croppadding), box.height*(1+3*croppadding), 0, 0,  box.height*(1+3*croppadding), box.height*(1+3*croppadding));
-              }
-
-              base64data = canvascropped.toDataURL("image/jpeg");
-              //console.log(base64data);
-
-              detectedfacelistAdd(detectedfaces[j], emotion[0], base64data);
-
-            }
-            detectedfaces[j].datetime.push(1);   
-            progress = detectedfaces[j].datetime.length;
-            detectedfaces[j].last = timenow;
-          } 
+      //console.log("detect...");
+      /**** Detect face ▶ find face landmark ▶ predict agaist face descriptor ▶ predict face expression ▶ predict age&gender****/
+    
+      if (ipcamToggle) {
+        try {
+          image = await faceapi.fetchImage(image_src);
         }
+        catch(err) {
+          alert("error playing video for ip camera >> please check the connection...");
+        }
+        //image = await faceapi.fetchImage(image_src);
+        var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
+      } else {
+        var detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
+      }
+
+      /****Resize the result of detection matching the display size ****/
+      const resizedDetections = faceapi.resizeResults(detections, displaySize);
+
+      /**** Match the faces detected with the descriptor ****/
+      const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
+
+      /**** Clear the previous overlay draw on the canvas ****/
+      //canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+
+      canvas_ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 
-        if (!facefound) {
+      var timenow = new Date();
+      var numfaces = detectedfaces.length;
+
+   
+      canvas_ctx.lineWidth = "12";
+      canvas_ctx.strokeStyle = "blue";
+      canvas_ctx.rect(canvas.width - 80, 6, 80, 12);
+      canvas_ctx.stroke();
+      canvas_ctx.font = "20px Impact";
+      canvas_ctx.fillText(" "+formatTimeDisplay(timenow)+" ", canvas.width - 80, 20);
+
+      results.forEach((result, i) => {
+
+        /**** extract age gender emotion from result ****/
+        const age = resizedDetections[i].age;
+        var gender = 'unknown';
+        if (resizedDetections[i].gender = 'male') {
+          gender = "♂ ชาย";
+        } else {
+          gender = "♁ หญิง";
+        }
+        const expressions = resizedDetections[i].expressions;
+        const maxValue = Math.max(...Object.values(expressions));
+        const emotion = Object.keys(expressions).filter(item => expressions[item] === maxValue);
+
+
+
+        /**** record detected faces to verify ****/
+        var facefound,verified = false;
+        var progress = 0;
+
+        /**** get bounding box on face ****/
+        const box = resizedDetections[i].detection.box;
+
+        if (numfaces > 0) {
+          for (j=0 ; j< numfaces ; j++) {
+            if (detectedfaces[j].label == result.label) {
+              facefound = true;
+              if (detectedfaces[j].datetime.length > num_keep-1) {
+                detectedfaces[j].datetime.shift();
+                verified = true;
+              } else if (detectedfaces[j].datetime.length == num_keep-1) {
+                // 1st time verified : capture face image & add face to detectedfacesList
+
+                var base64data = '';
+                var canvascropped = document.createElement("canvas");
+                var ctx = canvascropped.getContext("2d");
+
+                canvascropped.width = box.height*(1+3*croppadding);//box.width*(1+2*croppadding);
+                canvascropped.height = box.height*(1+3*croppadding);
+                
+
+
+                if (ipcamToggle) {
+                  const box_ = detections[i].detection.box;
+                  ctx.drawImage(image, box_.x+box_.width/2-box_.height*(0.5+1.4*croppadding), box_.y-box_.height*2*croppadding, 
+                               box_.height*(1+3*croppadding), box_.height*(1+3*croppadding), 0, 0,  box_.height*(1+3*croppadding), box_.height*(1+3*croppadding));
+                } else {
+                  ctx.drawImage(video, box.x+box.width/2-box.height*(0.5+1.5*croppadding), box.y-box.height*2*croppadding, 
+                               box.height*(1+3*croppadding), box.height*(1+3*croppadding), 0, 0,  box.height*(1+3*croppadding), box.height*(1+3*croppadding));
+                }
+
+                base64data = canvascropped.toDataURL("image/jpeg");
+                //console.log(base64data);
+
+                detectedfacelistAdd(detectedfaces[j], emotion[0], base64data);
+
+              }
+              detectedfaces[j].datetime.push(1);   
+              progress = detectedfaces[j].datetime.length;
+              detectedfaces[j].last = timenow;
+            } 
+          }
+
+
+          if (!facefound) {
+            detectedfaces.push({  
+                                'label'     : result.label,
+                                'datetime'  : [1],
+                                'last'      : timenow,
+                                'time_missed': 0
+            });
+            progress = 1;
+          }
+        } else {
           detectedfaces.push({  
                               'label'     : result.label,
                               'datetime'  : [1],
@@ -339,93 +419,79 @@ console.log("     " +video.videoWidth+" | "+video.videoHeight);
           });
           progress = 1;
         }
-      } else {
-        detectedfaces.push({  
-                            'label'     : result.label,
-                            'datetime'  : [1],
-                            'last'      : timenow,
-                            'time_missed': 0
-        });
-        progress = 1;
-      }
 
 
-      
-      /**** draw box wiht label ****/
-      if (result.label == "unknown") {
-        bcolor = 'rgba(255, 0, 0, 1)';
-      } else if (verified) {
-        bcolor = '#9bee00';
-        //display profile image top-left
-        //canvas.getContext("2d").drawImage(labelimg[parseInt(result.label)], box.x-labelimg[parseInt(result.label)].width, box.y-20);
-        //display profile image bottom-left
-        var w = facelabels[parseInt(result.label)].img.width/2,h = facelabels[parseInt(result.label)].img.height/2;
+        
+        /**** draw box wiht label ****/
+        if (result.label == "unknown") {
+          bcolor = 'rgba(255, 0, 0, 1)';
+        } else if (verified) {
+          bcolor = '#9bee00';
+          //display profile image top-left
+          //canvas.getContext("2d").drawImage(labelimg[parseInt(result.label)], box.x-labelimg[parseInt(result.label)].width, box.y-20);
+          //display profile image bottom-left
+          var w = facelabels[parseInt(result.label)].img.width/2,h = facelabels[parseInt(result.label)].img.height/2;
 
-        canvas.getContext("2d").drawImage(facelabels[parseInt(result.label)].img, box.x+2, box.y+box.height-h/*facelabels[parseInt(result.label)].img.height*/-2,w,h);
-      } else {
-        bcolor = 'rgba(255, 100, 0, 1)';
-      }
+          canvas.getContext("2d").drawImage(facelabels[parseInt(result.label)].img, box.x+2, box.y+box.height-h/*facelabels[parseInt(result.label)].img.height*/-2,w,h);
+        } else {
+          bcolor = 'rgba(255, 100, 0, 1)';
+        }
 
-      const drawBox = new faceapi.draw.DrawBox(box, { label: " "+ (result.label == "unknown" ? "unknown": facelabels[parseInt(result.label)].name) + " "/* + " : " + Math.round(interpolatedAge) + gender +" ▷ "+ emotion*/,
-                                                    lineWidth: 2, boxColor: bcolor, drawLabelOptions: {fontSize: 13, fontColor :'rgba(0, 0, 0, 1)'}})
-      drawBox.draw(canvas)
-      const text = new faceapi.draw.DrawTextField([" "+ Math.round(age) + gender +" ▸ Mood : "+ emotion],{ x: box.x, y: box.y+box.height}, 
-                                                    {anchorPosition: 'TOP_LEFT', backgroundColor : 'rgba(0, 0, 0, 0 )', fontColor : 'rgba(255, 255, 255, 1 )',
-                                                    fontSize : 10, padding : 2});
-      text.draw(canvas);
-
-      // draw verifying progress bar
-      if (!verified & result.label != "unknown") {
-        const progressBar = new faceapi.draw.DrawBox({ x: box.x+4, y: box.y+box.height-6, width: (box.width-8)/5*progress, height: 2 },
-                                                      {lineWidth: 2, boxColor:'rgba(255, 100, 0, 1)'/*, drawLabelOptions: {fontSize: 8}*/});
-        progressBar.draw(canvas);
-        const text = new faceapi.draw.DrawTextField(["verifying progress..."],{ x: box.x+4, y: box.y+box.height-23}, 
+        const drawBox = new faceapi.draw.DrawBox(box, { label: " "+ (result.label == "unknown" ? "unknown": facelabels[parseInt(result.label)].name) + " "/* + " : " + Math.round(interpolatedAge) + gender +" ▷ "+ emotion*/,
+                                                      lineWidth: 2, boxColor: bcolor, drawLabelOptions: {fontSize: 13, fontColor :'rgba(0, 0, 0, 1)'}})
+        drawBox.draw(canvas)
+        const text = new faceapi.draw.DrawTextField([" "+ Math.round(age) + gender +" ▸ Mood : "+ emotion],{ x: box.x, y: box.y+box.height}, 
                                                       {anchorPosition: 'TOP_LEFT', backgroundColor : 'rgba(0, 0, 0, 0 )', fontColor : 'rgba(255, 255, 255, 1 )',
                                                       fontSize : 10, padding : 2});
         text.draw(canvas);
 
+        // draw verifying progress bar
+        if (!verified & result.label != "unknown") {
+          const progressBar = new faceapi.draw.DrawBox({ x: box.x+4, y: box.y+box.height-6, width: (box.width-8)/5*progress, height: 2 },
+                                                        {lineWidth: 2, boxColor:'rgba(255, 100, 0, 1)'/*, drawLabelOptions: {fontSize: 8}*/});
+          progressBar.draw(canvas);
+          const text = new faceapi.draw.DrawTextField(["verifying progress..."],{ x: box.x+4, y: box.y+box.height-23}, 
+                                                        {anchorPosition: 'TOP_LEFT', backgroundColor : 'rgba(0, 0, 0, 0 )', fontColor : 'rgba(255, 255, 255, 1 )',
+                                                        fontSize : 10, padding : 2});
+          text.draw(canvas);
 
-      }
 
-    })
-
-    /**** Remove expired faces from detected faces ****/
-    numfaces = detectedfaces.length;
-    for (j=0 ; j < numfaces ; j++) {
-      var timemissed = timenow.getTime() - detectedfaces[0].last.getTime();
-      if (detectedfaces[0].datetime.length > num_keep-1) {
-        //compensate time for verified face for timetokeepverifiedfaces  except "unknown" face
-        if (detectedfaces[0].label != "unknown") {
-          timemissed = timemissed - timetokeepverifiedfaces + missedDuration;
         }
-      } else if (timemissed > 0) {
-        detectedfaces[0].datetime.shift();
+
+      })
+
+      /**** Remove expired faces from detected faces ****/
+      numfaces = detectedfaces.length;
+      for (j=0 ; j < numfaces ; j++) {
+        var timemissed = timenow.getTime() - detectedfaces[0].last.getTime();
+        if (detectedfaces[0].datetime.length > num_keep-1) {
+          //compensate time for verified face for timetokeepverifiedfaces  except "unknown" face
+          if (detectedfaces[0].label != "unknown") {
+            timemissed = timemissed - timetokeepverifiedfaces + missedDuration;
+          }
+        } else if (timemissed > 0) {
+          detectedfaces[0].datetime.shift();
+        }
+            //console.log(timemissed);
+        if (timemissed < missedDuration) {
+          detectedfaces[0].time_missed = timemissed;
+          var facerec = detectedfaces[0];
+          detectedfaces.push(facerec);
+        
+        }
+        detectedfaces.shift();
       }
-          //console.log(timemissed);
-      if (timemissed < missedDuration) {
-        detectedfaces[0].time_missed = timemissed;
-        var facerec = detectedfaces[0];
-        detectedfaces.push(facerec);
-      
-      }
-      detectedfaces.shift();
-    }
 
 
-    if (loop_i>looptoUpdate-1) {
-      // update time
-      //document.getElementById("total-status").innerHTML = formatTime(new Date());
-
-      // update results
-
-      summarysheetLoad(facelogsheetUrl);
-
-      loop_i = 0;
-    }
+    }    
 
   }, detectionloopDelay)
+
+
   
-}
+}// function Start()
+
+
 
 function detectedfacelistAdd(facerec, mood, imgdata) {
 
@@ -785,8 +851,8 @@ function loadcsvtoarray(filename) {
 
   }
 
-  // filterInitialize() needs facetoverifyList to be loaded completely
-  filterInitialize();
+  // Initialize() needs facetoverifyList to be loaded completely
+  Initialize();
 
   return labels;
 
@@ -841,7 +907,7 @@ function updateMenu(menuNum) {
   }
 }
 
-function filterInitialize() {
+function Initialize() {
 
 const ONE_HOUR = 60 * 60 * 1000,
       ONE_DAY = 24 * ONE_HOUR;
@@ -913,6 +979,18 @@ $('#right-button').click(function() {
   }
 });
 
+$('#stop-button').click(function() {
+  $('#datepicker').datepicker('setDate', today);
+  filterDate = formatDate($('#datepicker').datepicker('getDate'));
+  if (videoStart) {
+    stopVideo();
+    displaynoti("Video stops...")    
+  } else {
+    displaynoti("")
+    startVideo();
+  }
+});
+
 // Detect if orientation changes on mobile
 window.addEventListener("orientationchange", function() {
   resizeAdjust();
@@ -950,3 +1028,49 @@ function loadlabelimage(filelink,iter,max) {
 }
 
 */
+
+// stop both mic and camera
+function stopVideo(stream) {
+  video.srcObject.getTracks().forEach(function(track) {
+    if (track.readyState == 'live') {
+      track.stop();
+    }
+  });
+  //video.pause();
+  //video.src = "";
+  videoStart = false;  
+  document.getElementById("stop-button").innerHTML = "▶";
+}
+
+// stop only camera
+function stopVideoOnly(stream) {
+  stream.getTracks().forEach(function(track) {
+    if (track.readyState == 'live' && track.kind === 'video') {
+      track.stop();
+    }
+  });
+}
+
+// stop only mic
+function stopAudioOnly(stream) {
+  stream.getTracks().forEach(function(track) {
+    if (track.readyState == 'live' && track.kind === 'audio') {
+      track.stop();
+    }
+  });
+}
+
+function displaynoti(text) {
+  if (text == "") {
+    notification.remove();
+  } else {
+    notification = document.createElement("button");
+    notification.id = "noti";
+    notification.className = "noti btn btn_default";
+    notification.width = "20%";
+    notification.height = "10%";
+    videocontainer.append(notification);
+    document.getElementById("noti").innerHTML = text;
+
+  }
+}
