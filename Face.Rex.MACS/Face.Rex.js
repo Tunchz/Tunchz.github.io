@@ -58,12 +58,14 @@ if (ipcamToggle) {
 } else {
   video = document.createElement("video");
   video.id = "video";
-  video.width = "640";
-  video.height = "480";
+  //video.width = "640";
+  //video.height = "480";
+  video.style.backgroundColor = "#000";
   video.autoplay = true;
   //video.muted = true;
   //video.setAttribute('muted', 'muted');
   videocontainer.append(video);
+  resizeAdjust();
 }
 
 
@@ -110,51 +112,55 @@ if (ipcamToggle) {
     faceapi.nets.faceRecognitionNet.loadFromUri(modelsUrl),
     faceapi.nets.faceExpressionNet.loadFromUri(modelsUrl),
     faceapi.nets.ageGenderNet.loadFromUri(modelsUrl)
-  ]).then(startVideo) //then(start) 
+  ]).then(pre_start) //then(start) 
 }
 
 
 
-async function startVideo() {
-
-
-
+function startVideo(webcam) {
   if (!videoStart) {
     video.remove();
     console.log("start video....");
     video = document.createElement("video");
     video.id = "video";
-    video.width = "640";
-    video.height = "480";
+    video.style.backgroundColor = "#000";
+    //video.width = "640";
+    //video.height = "480";
     video.autoplay = true;
     //video.muted = true;
     //video.setAttribute('muted', 'muted');
     videocontainer.append(video);
+    resizeAdjust();
 
-  } else {
-    console.log("1st Run...")
-    const labeledFaceDescriptors = await loadLabeledDescriptor(facedescriptorUrl); //console.log(labeledFaceDescriptors);
-    faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, facematcherThreshold);
-    try {
-      image = await faceapi.fetchImage("https://tunchz.github.io/Face.Rex/labeled_images/Tunchz/2.jpg");
-    }
-    catch(err) {
-      alert("error playing video for ip camera >> please check the connection...");
-    }
-    var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();;
-    const resizedDetections = faceapi.resizeResults(detections, { width: 320, height: 240 });
-    const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));    
   }
-  
-  navigator.getUserMedia(
-    { video: {} },
-    stream => video.srcObject = stream,
-    err => alert("error loading video >> please allow access to the video source...") //console.error(err)
-  )
-  video.muted = true;
-  videoStart = true;
-  document.getElementById("stop-button").innerHTML = "■";
-  resizeAdjust();
+
+  if (webcam) {
+    console.log("WebCam");
+    navigator.getUserMedia(
+      { video: {} },
+      stream => {
+        video.srcObject = stream;
+        videoStart = true;
+        //document.getElementById("stop-button").innerHTML = "■";
+        stopButton();
+        resizeAdjust();
+        video.muted = true;
+        displaynoti("");
+        console.log("video started...")
+      },
+      err => {
+        //alert("error loading video >> please allow access to the video source...")
+        inputMenu();
+      } //console.error(err)
+    )
+  } else {
+    console.log("CCTV");
+
+    displaynoti("");
+    inputMenu();
+
+  }
+
 }
 
 // get latitude and longitude
@@ -229,49 +235,46 @@ video.addEventListener('play',() => {
   start();
 })
 
+async function firstRun() {
+  console.log("1st Run...")
+  const labeledFaceDescriptors = await loadLabeledDescriptor(facedescriptorUrl); //console.log(labeledFaceDescriptors);
+  faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, facematcherThreshold);
+  try {
+    image = await faceapi.fetchImage("https://tunchz.github.io/Face.Rex/labeled_images/Tunchz/2.jpg");
+  }
+  catch(err) {
+    alert("error fetching image for 1st-run testing >> please check the connection...");
+  }
+  var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();;
+  const resizedDetections = faceapi.resizeResults(detections, { width: 320, height: 240 });
+  const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));    
+  videoStart = false;
+  inputMenu();
+}
+
+function pre_start() {
+  //startVideo();
+  firstRun();
+  videoStart = false;
+  displaynoti("Loading models...");
+  start();
+}
+
+
 async function start() {
-
-//console.log("---- " +video.offsetWidth+" | "+video.offsetHeight);
-//console.log("     " +video.videoWidth+" | "+video.videoHeight);
-
+  
   /**** define display size and format canvas size to match ****/
   var displaySize = { width: video.width, height: video.height };
   faceapi.matchDimensions(canvas, displaySize);
 
-  /**** display notification ****/
-  const noti = new faceapi.draw.DrawBox({ x: 0, y: 10, width: 0, height: 0 }, { label: " Loading face model... " });
-  noti.draw(canvas);
- 
-  //console.log("load models");
-  /**** load model from save lebeled descriptor from json file ****/
-//  const labeledFaceDescriptors = await loadLabeledDescriptor(facedescriptorUrl); //console.log(labeledFaceDescriptors);
-//  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, facematcherThreshold);
-
-  // 1st run-in to get face descriptor engine ready
-  //const TinyFaceDetectorOptions = new faceapi.TinyFaceDetectorOptions()
-/*  if (ipcamToggle) {
-    const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors();
-    const resizedDetections = faceapi.resizeResults(detections, displaySize);
-    const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
-  } else {
-    try {
-      image = await faceapi.fetchImage("https://tunchz.github.io/Face.Rex/labeled_images/Tunchz/1.jpg");
-    }
-    catch(err) {
-      alert("error playing video for ip camera >> please check the connection...");
-    }
-    var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors();
-    const resizedDetections = faceapi.resizeResults(detections, displaySize);
-    const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
-  }
-*/
   var canvas_ctx = canvas.getContext('2d');
-
 
   /****Detect face and recognize for every detectionDelay milliseconds ****/
   //console.log("loop start!")
   setInterval(async () => {
     loop_i++;
+
+    console.log(loop_i,videoStart);
 
     if (videoStart) {
       detect();
@@ -279,11 +282,11 @@ async function start() {
       canvas_ctx.clearRect(0, 0, canvas.width, canvas.height);
       var timenow = new Date();
       var numfaces = detectedfaces.length 
-      canvas_ctx.lineWidth = "12";
-      canvas_ctx.strokeStyle = "blue";
-      canvas_ctx.rect(canvas.width - 80, 6, 80, 12);
-      canvas_ctx.stroke();
+      //canvas_ctx.lineWidth = "12";
+      //canvas_ctx.strokeStyle = "#00f";
+      //canvas_ctx.rect(canvas.width - 80, 6, 80, 12);
       canvas_ctx.font = "20px Impact";
+      canvas_ctx.fillStyle = "#fff";
       canvas_ctx.fillText(" "+formatTimeDisplay(timenow)+" ", canvas.width - 80, 20);
     }
 
@@ -298,7 +301,6 @@ async function start() {
 
     async function detect() {
 
-      //console.log("detect...");
       /**** Detect face ▶ find face landmark ▶ predict agaist face descriptor ▶ predict face expression ▶ predict age&gender****/
     
       if (ipcamToggle) {
@@ -331,10 +333,13 @@ async function start() {
 
    
       canvas_ctx.lineWidth = "12";
-      canvas_ctx.strokeStyle = "blue";
+      canvas_ctx.strokeStyle = "#000";
+      canvas_ctx.globalAlpha = 0.2;
       canvas_ctx.rect(canvas.width - 80, 6, 80, 12);
       canvas_ctx.stroke();
+      canvas_ctx.globalAlpha = 1;
       canvas_ctx.font = "20px Impact";
+      canvas_ctx.fillStyle = "#fff";
       canvas_ctx.fillText(" "+formatTimeDisplay(timenow)+" ", canvas.width - 80, 20);
 
       results.forEach((result, i) => {
@@ -979,17 +984,6 @@ $('#right-button').click(function() {
   }
 });
 
-$('#stop-button').click(function() {
-  $('#datepicker').datepicker('setDate', today);
-  filterDate = formatDate($('#datepicker').datepicker('getDate'));
-  if (videoStart) {
-    stopVideo();
-    displaynoti("Video stops...")    
-  } else {
-    displaynoti("")
-    startVideo();
-  }
-});
 
 // Detect if orientation changes on mobile
 window.addEventListener("orientationchange", function() {
@@ -1031,15 +1025,29 @@ function loadlabelimage(filelink,iter,max) {
 
 // stop both mic and camera
 function stopVideo(stream) {
+    try {
+      video.srcObject.getTracks().forEach(function(track) {
+        if (track.readyState == 'live') {
+          track.stop();
+        }
+      });
+    }
+    catch(err) {
+      //alert("error stoping video >> "+err);
+    }
+/*
   video.srcObject.getTracks().forEach(function(track) {
     if (track.readyState == 'live') {
       track.stop();
     }
   });
+*/
   //video.pause();
   //video.src = "";
   videoStart = false;  
-  document.getElementById("stop-button").innerHTML = "▶";
+  inputMenu();
+  //displaynoti("Video Stoped");
+  //document.getElementById("stop-button").innerHTML = "▶";
 }
 
 // stop only camera
@@ -1061,9 +1069,11 @@ function stopAudioOnly(stream) {
 }
 
 function displaynoti(text) {
-  if (text == "") {
+  try {
     notification.remove();
-  } else {
+  }
+  catch(err) {}
+  if (text != "") {
     notification = document.createElement("button");
     notification.id = "noti";
     notification.className = "noti btn btn_default";
@@ -1074,3 +1084,57 @@ function displaynoti(text) {
 
   }
 }
+
+function inputMenu() {
+  console.log("Input Menu");
+  // remove remaining notification
+  try {
+    notification.remove();
+  }
+  catch(err) {}    
+  // remove existing stop-button
+  try {
+    document.getElementById("stop-button").remove();
+  }
+  catch(err) {}     
+
+  notification = document.createElement("div");
+  notification.id = "noti";
+  notification.className = "noti";
+  notification.style.backgroundColor = "#000";
+  notification.width = "20%";
+  notification.height = "10%";
+  videocontainer.append(notification);
+
+  // Webcam Button
+  const webcam = new Image();
+  webcam.id = "webcam";
+  webcam.className = "button-img";
+  webcam.src = "img/WebCam_icon.png";
+  webcam.setAttribute('type', 'button');
+  webcam.setAttribute('onclick', 'startVideo(true)');
+  notification.append(webcam);
+
+  // CCTV Button
+  const cctv = new Image();
+  cctv.id = "cctv";
+  cctv.className = "button-img";
+  cctv.src = "img/CCTV_icon.png";
+  cctv.setAttribute('onclick', 'startVideo(false)');
+  notification.append(cctv);
+  
+}
+
+function stopButton() {
+  //document.getElementById("stop-button").innerHTML = "■";
+  const stopbtn = document.createElement("button");
+  stopbtn.id = "stop-button";
+  stopbtn.className = "btn btn-default button-control";
+  stopbtn.style.padding = "0px 10px";
+  stopbtn.setAttribute('type', 'button');
+  stopbtn.setAttribute('onclick', 'stopVideo()');
+  document.getElementById("select-container").append(stopbtn);
+  document.getElementById("stop-button").innerHTML = "■";
+}
+
+//<button class="btn btn-default button-control" id="stop-button" style = "padding: 0px 10px;" type="button"></button>

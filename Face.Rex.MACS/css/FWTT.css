@@ -436,7 +436,7 @@ html {
 }
 
 .select-container {
-  padding : 15px 0px;
+  padding : 15px 10px;
   vertical-align: middle;
   justify-content: flex-end;
   display: flex;
@@ -457,6 +457,7 @@ html {
 }
 
 .noti {
+  border-radius: 2px;
   padding : 10px;
   position: absolute;
   float : center;
@@ -467,3 +468,18 @@ html {
   font-weight: 200;
 }
 
+.button-img {
+  width:100px;
+  height:100px;
+  padding: 0px;
+  margin: 0px 10px;
+  border-radius: 10px;
+  border: 6px solid #222222;
+  border-radius: 2px;
+  background-color: #222222;
+}
+
+.button-img:hover, .button-img:focus, .button-img:active {
+  border: 0px solid #aaa;
+  background-color: #494949;
+}
