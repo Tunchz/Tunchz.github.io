@@ -136,6 +136,7 @@ function startVideo(webcam) {
 
   if (webcam) {
     console.log("WebCam");
+    displaynoti("Retrieving video...");
     navigator.getUserMedia(
       { video: {} },
       stream => {
@@ -150,14 +151,16 @@ function startVideo(webcam) {
       },
       err => {
         //alert("error loading video >> please allow access to the video source...")
-        inputMenu();
+        displaynoti("Can't access video source!<br><red><small>click to return</small></red>");
+        //inputMenu();
       } //console.error(err)
     )
   } else {
     console.log("CCTV");
 
-    displaynoti("");
-    inputMenu();
+    //displaynoti("");
+    displaynoti("Can't access video source!<br><red><small>click to return</small></red>");
+    //inputMenu();
 
   }
 
@@ -1033,21 +1036,10 @@ function stopVideo(stream) {
       });
     }
     catch(err) {
-      //alert("error stoping video >> "+err);
     }
-/*
-  video.srcObject.getTracks().forEach(function(track) {
-    if (track.readyState == 'live') {
-      track.stop();
-    }
-  });
-*/
-  //video.pause();
-  //video.src = "";
+
   videoStart = false;  
   inputMenu();
-  //displaynoti("Video Stoped");
-  //document.getElementById("stop-button").innerHTML = "▶";
 }
 
 // stop only camera
@@ -1076,9 +1068,10 @@ function displaynoti(text) {
   if (text != "") {
     notification = document.createElement("button");
     notification.id = "noti";
-    notification.className = "noti btn btn_default";
+    notification.className = "noti btn";
     notification.width = "20%";
     notification.height = "10%";
+    notification.setAttribute('onclick', 'inputMenu()');
     videocontainer.append(notification);
     document.getElementById("noti").innerHTML = text;
 

@@ -456,7 +456,7 @@ html {
   border-color: #2a58c3;
 }
 
-.noti {
+.noti, .noti:hover {
   border-radius: 2px;
   padding : 10px;
   position: absolute;
@@ -464,7 +464,7 @@ html {
   color : #fff;
   background-color: #ffffff38;
   font-family: Impact;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 200;
 }
 
@@ -486,5 +486,13 @@ html {
 
 .button-img:focus, .button-img:active {
   border: 2px solid #fff;
+}
+
+red {
+  color : #f00;
+}
+
+red:hover {
+  text-decoration: underline
 }
 
