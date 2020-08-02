@@ -480,6 +480,11 @@ html {
 }
 
 .button-img:hover, .button-img:focus, .button-img:active {
-  border: 0px solid #aaa;
+  border: 2px solid #494949;
   background-color: #494949;
 }
+
+.button-img:focus, .button-img:active {
+  border: 2px solid #fff;
+}
+
