@@ -157,7 +157,7 @@ function startVideo(webcam) {
     console.log("WebCam");
     displaynoti("Retrieving video...");
     navigator.getUserMedia(
-      { video: {width:640, height:480} },//{ video: {} },
+      { video: {} },  //{ video: {width:640, height:480} },
       stream => {
         video.srcObject = stream;
         videoStart = true;
@@ -1168,7 +1168,7 @@ async function ipcamInit(inputip) {
     ipcamUse = true;
 
     console.log("CCTV");
-    displaynoti("Retrieving video from "+ inputip);
+    displaynoti("Retrieving video from   "+ inputip);
 
     try {
       image_src = "http://"+inputip+"/shot.jpg";
@@ -1199,11 +1199,15 @@ function inputIP() {
   const form =  document.createElement("form");
   form.id = "ip-input";
   notification.append(form);
-  document.getElementById("ip-input").innerHTML = '<label for="ip">IP : </label><input id="ip" class = "btn-default" name="ip" type="text" value="" /><input class = "btn btn-default" type="submit" value="Retrieve" />';
+  document.getElementById("ip-input").innerHTML = '<label for="ip">IP : </label><input id="ip" class = "btn-default" name="ip" type="text" value="" title="กรอก ip XXX.XXX.XXX.XXX:XXXX"/><input class = "btn btn-default" type="submit" value="Retrieve" />';
   console.log("submit");
-  var serializedData;
+
+
+  //var serializedData;
+
 
   $("#ip-input").submit(function(event){
+/*    //console.log("ip is "+document.getElementById("ip").value);
     // setup some local variables
     var $form = $(this);
     // let's select and cache all the fields
@@ -1212,7 +1216,10 @@ function inputIP() {
     $inputs.prop("disabled", true);
     ipcamInit(serializedData.replace(/%3A/g, ":").split("=")[1]);
 
+
     // prevent default posting of form
     event.preventDefault();
+*/
+    ipcamInit(document.getElementById("ip").value);
   });
 }
