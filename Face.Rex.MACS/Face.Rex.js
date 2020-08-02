@@ -73,7 +73,7 @@ if (ipcamUse) {
 */
 
 // Initialize vidio element
-video = document.createElement("video");
+video = document.createElement("img");
 video.id = "video";
 video.style.backgroundColor = "#000";
 video.autoplay = true;
@@ -208,12 +208,13 @@ function resizeAdjust() {
       video.height = "640";
       canvas.width = "480";
       canvas.height = "640";
-      $("#left-panel").height(($("#video-container").width()-150)*4/3+20+75);
-      $("#video-container").height(($("#video-container").width()-150)*4/3+20);
-      $("#video").width(($("#video-container").width()-150));
-      $("#video").height(($("#video-container").width()-150)*4/3);
-      $("#canvas").width(($("#video-container").width()-150));
-      $("#canvas").height(($("#video-container").width()-150)*4/3);
+      //$("#left-panel").height(($("#video-container").width()-150)*4/3+20+75);
+      $("#left-panel").height(($("#video-container").width()-50)*4/3+20+75);
+      $("#video-container").height(($("#video-container").width()-50)*4/3+20);
+      $("#video").width(($("#video-container").width()-50));
+      $("#video").height(($("#video-container").width()-50)*4/3);
+      $("#canvas").width(($("#video-container").width()-50));
+      $("#canvas").height(($("#video-container").width()-50)*4/3);
 
 
     } else {
@@ -1104,7 +1105,7 @@ function inputMenu() {
 
   try { 
   video.remove();
-  video = document.createElement("video");
+  video = document.createElement("img");
   video.id = "video";
   video.style.backgroundColor = "#000";
   video.autoplay = true;
@@ -1223,3 +1224,7 @@ function inputIP() {
     ipcamInit(document.getElementById("ip").value);
   });
 }
+
+window.addEventListener("orientationchange", function() {
+  alert(window.orientation);
+}, false);
