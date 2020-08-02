@@ -669,7 +669,7 @@ function handleResults(spreadsheetArray) {
                       'location'  : spreadsheetArray[r][5],
                       'lat'       : spreadsheetArray[r][6],
                       'lon'       : spreadsheetArray[r][7],
-                      'img'       : typeof spreadsheetArray[r][8]!='undefined'? spreadsheetArray[r][8].replace(/\s/g, "+"):spreadsheetArray[r][1]=="unknown"?"img/unknown_small.jpg":facelabels[parseInt(spreadsheetArray[r][1])].img.src, //if no image, use profile image
+                      'img'       : typeof spreadsheetArray[r][8]!='undefined'? spreadsheetArray[r][8].replace(/\s/g, "+"):spreadsheetArray[r][1]=="unknown"?"https://tunchz.github.io/Face.Rex.MACS/img/unknown_small.jpg":facelabels[parseInt(spreadsheetArray[r][1])].img.src, //if no image, use profile image
                       'status'    : spreadsheetArray[r][1]=="unknown"?"unknown":"succeeded",
                       'dept'      : spreadsheetArray[r][1]=="unknown"?"":facestoverifyList[parseInt(spreadsheetArray[r][1])].last,
                       'verified'  : spreadsheetArray[r][1]=="unknown"?"unknown":"verified",
