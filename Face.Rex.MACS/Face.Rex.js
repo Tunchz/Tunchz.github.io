@@ -27,24 +27,27 @@ let facestoverifyList = [];
 const facelabels = loadcsvtoarray('https://tunchz.github.io/Face.Rex/descriptors/LabeledFaceImageProfiles3.csv');
 //console.log(facelabels);
 
+var camIP = "10.90.0.98:8080";// "192.168.1.11:8080";
+var image_src;
+
 d3.select('#table-container').append('table').attr("id","table_image");
 var summarysheetResults = [];
 
 
 //const videocontainer = document.getElementById('video-container');
-var ipcamToggle = !true;
+var ipcamUse = !true;
 const isonMobile = onMobile();
 if (isonMobile) {
   detectionloopDelay = 2*detectionloopDelay;
   num_keep = Math.ceil(verifyingPeriod/detectionloopDelay);
-  ipcamToggle = false;
+  ipcamUse = false;
 }
 
 const videocontainer = document.getElementById('video-container');
 const canvas = document.getElementById('canvas');
 var video,notification;
-
-if (ipcamToggle) {
+/*
+if (ipcamUse) {
 //const video = document.getElementById('video');
 //const image_src = video.src.replace("video","shot.jpg");
   video = document.createElement("img");
@@ -67,10 +70,16 @@ if (ipcamToggle) {
   videocontainer.append(video);
   resizeAdjust();
 }
+*/
 
-
-
-
+// Initialize vidio element
+video = document.createElement("video");
+video.id = "video";
+video.style.backgroundColor = "#000";
+video.autoplay = true;
+videocontainer.append(video);
+resizeAdjust();
+displaynoti("Loading models...");
 
 
 
@@ -97,7 +106,7 @@ var filterDept = "All";
 summarysheetLoad(facelogsheetUrl);
 
 /**** Load all model needed for face ****/
-if (ipcamToggle) {
+if (ipcamUse) {
   Promise.all([
     faceapi.nets.ssdMobilenetv1.loadFromUri(modelsUrl),
     faceapi.nets.faceLandmark68Net.loadFromUri(modelsUrl),
@@ -118,6 +127,7 @@ if (ipcamToggle) {
 
 
 function startVideo(webcam) {
+/*
   if (!videoStart) {
     video.remove();
     console.log("start video....");
@@ -133,16 +143,24 @@ function startVideo(webcam) {
     resizeAdjust();
 
   }
-
+*/
   if (webcam) {
+    video.remove();
+    video = document.createElement("video");
+    video.id = "video";
+    video.style.backgroundColor = "#000";
+    video.autoplay = true;
+    videocontainer.append(video);
+    resizeAdjust();
+    ipcamUse = false;
+
     console.log("WebCam");
     displaynoti("Retrieving video...");
     navigator.getUserMedia(
-      { video: {} },
+      { video: {width:640, height:480} },//{ video: {} },
       stream => {
         video.srcObject = stream;
         videoStart = true;
-        //document.getElementById("stop-button").innerHTML = "■";
         stopButton();
         resizeAdjust();
         video.muted = true;
@@ -156,15 +174,13 @@ function startVideo(webcam) {
       } //console.error(err)
     )
   } else {
-    console.log("CCTV");
-
-    //displaynoti("");
-    displaynoti("Can't access video source!<br><red><small>click to return</small></red>");
-    //inputMenu();
-
+    //ipcamInit();
+    inputIP();
   }
 
 }
+
+
 
 // get latitude and longitude
 navigator.geolocation.getCurrentPosition(function(position) {
@@ -240,6 +256,7 @@ video.addEventListener('play',() => {
 
 async function firstRun() {
   console.log("1st Run...")
+  // Using all models for first time to 
   const labeledFaceDescriptors = await loadLabeledDescriptor(facedescriptorUrl); //console.log(labeledFaceDescriptors);
   faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, facematcherThreshold);
   try {
@@ -259,7 +276,7 @@ function pre_start() {
   //startVideo();
   firstRun();
   videoStart = false;
-  displaynoti("Loading models...");
+  //displaynoti("Loading models...");
   start();
 }
 
@@ -296,9 +313,7 @@ async function start() {
 
     // Check loops to update detectedfacesList from google sheet
     if (loop_i>looptoUpdate-1) {
-
       summarysheetLoad(facelogsheetUrl);
-
       loop_i = 0;
     }
 
@@ -306,12 +321,14 @@ async function start() {
 
       /**** Detect face ▶ find face landmark ▶ predict agaist face descriptor ▶ predict face expression ▶ predict age&gender****/
     
-      if (ipcamToggle) {
+      if (ipcamUse) {
         try {
           image = await faceapi.fetchImage(image_src);
         }
         catch(err) {
-          alert("error playing video for ip camera >> please check the connection...");
+          //alert("error playing video for ip camera >> please check the connection...");
+          videoStart = false;
+          displaynoti("Can't retrieve video source! check your connection.<br><red><small>click to return</small></red>");
         }
         //image = await faceapi.fetchImage(image_src);
         var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
@@ -387,7 +404,7 @@ async function start() {
                 
 
 
-                if (ipcamToggle) {
+                if (ipcamUse) {
                   const box_ = detections[i].detection.box;
                   ctx.drawImage(image, box_.x+box_.width/2-box_.height*(0.5+1.4*croppadding), box_.y-box_.height*2*croppadding, 
                                box_.height*(1+3*croppadding), box_.height*(1+3*croppadding), 0, 0,  box_.height*(1+3*croppadding), box_.height*(1+3*croppadding));
@@ -642,7 +659,7 @@ function handleResults(spreadsheetArray) {
     }
     //console.log(r,inlist);
     if (!inlist) {
-      var d = spreadsheetArray[r][2].split('/');
+      var d = spreadsheetArray[r][2].split('/'); //split date to reconstruct timestamp later on
       facesList./*push*/unshift({  
                       'id'        : spreadsheetArray[r][1],
                       'date'      : spreadsheetArray[r][2],
@@ -652,7 +669,7 @@ function handleResults(spreadsheetArray) {
                       'location'  : spreadsheetArray[r][5],
                       'lat'       : spreadsheetArray[r][6],
                       'lon'       : spreadsheetArray[r][7],
-                      'img'       : spreadsheetArray[r][8].replace(/\s/g, "+"),
+                      'img'       : typeof spreadsheetArray[r][8]!='undefined'? spreadsheetArray[r][8].replace(/\s/g, "+"):spreadsheetArray[r][1]=="unknown"?"img/unknown_small.jpg":facelabels[parseInt(spreadsheetArray[r][1])].img.src, //if no image, use profile image
                       'status'    : spreadsheetArray[r][1]=="unknown"?"unknown":"succeeded",
                       'dept'      : spreadsheetArray[r][1]=="unknown"?"":facestoverifyList[parseInt(spreadsheetArray[r][1])].last,
                       'verified'  : spreadsheetArray[r][1]=="unknown"?"unknown":"verified",
@@ -1083,13 +1100,22 @@ function inputMenu() {
   // remove remaining notification
   try {
     notification.remove();
-  }
-  catch(err) {}    
+  } catch(err) {}    
+
+  try { 
+  video.remove();
+  video = document.createElement("video");
+  video.id = "video";
+  video.style.backgroundColor = "#000";
+  video.autoplay = true;
+  videocontainer.append(video);
+  resizeAdjust();
+  } catch(err) {}
+
   // remove existing stop-button
   try {
     document.getElementById("stop-button").remove();
-  }
-  catch(err) {}     
+  } catch(err) {}     
 
   notification = document.createElement("div");
   notification.id = "noti";
@@ -1130,4 +1156,63 @@ function stopButton() {
   document.getElementById("stop-button").innerHTML = "■";
 }
 
-//<button class="btn btn-default button-control" id="stop-button" style = "padding: 0px 10px;" type="button"></button>
+
+async function ipcamInit(inputip) {
+    video.remove();
+    video = document.createElement("img");
+    video.id = "video";
+    video.style.backgroundColor = "#000";
+    video.alt= "Video feed";
+    videocontainer.append(video);
+    resizeAdjust();
+    ipcamUse = true;
+
+    console.log("CCTV");
+    displaynoti("Retrieving video from "+ inputip);
+
+    try {
+      image_src = "http://"+inputip+"/shot.jpg";
+      await faceapi.fetchImage(image_src);
+      video.src= "http://"+inputip+"/video";
+      stopButton();
+      resizeAdjust();
+      videoStart = true;
+      displaynoti("");
+      console.log("video started...");
+    } 
+    catch(err) {
+      displaynoti("Can't access video source!<br><red><small>click to return</small></red>");
+    }  
+
+
+}
+
+function inputIP() {
+  displaynoti("");
+  notification = document.createElement("div");
+  notification.id = "noti";
+  notification.className = "noti";
+  notification.style.fontFamily = 'Serithai';
+  notification.style.fontSize = '12px';
+  videocontainer.append(notification);
+
+  const form =  document.createElement("form");
+  form.id = "ip-input";
+  notification.append(form);
+  document.getElementById("ip-input").innerHTML = '<label for="ip">IP : </label><input id="ip" class = "btn-default" name="ip" type="text" value="" /><input class = "btn btn-default" type="submit" value="Retrieve" />';
+  console.log("submit");
+  var serializedData;
+
+  $("#ip-input").submit(function(event){
+    // setup some local variables
+    var $form = $(this);
+    // let's select and cache all the fields
+    var $inputs = $form.find("input, select, button");
+    serializedData = $form.serialize();
+    $inputs.prop("disabled", true);
+    ipcamInit(serializedData.replace(/%3A/g, ":").split("=")[1]);
+
+    // prevent default posting of form
+    event.preventDefault();
+  });
+}

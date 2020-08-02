@@ -496,3 +496,10 @@ red:hover {
   text-decoration: underline
 }
 
+#ip {
+  height: 24px;
+  padding: 0px 3px;
+  margin: 0px 3px;
+  border: 1px solid #aaa;
+}
+
