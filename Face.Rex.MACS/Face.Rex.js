@@ -11,6 +11,7 @@ var num_keep = Math.ceil(verifyingPeriod/detectionloopDelay);
 var loop_i = 0;
 var looptoUpdate = Math.ceil(timetoupdateResults/detectionloopDelay);
 var videoStart = true;
+var displaySize, canvas_ctx;
 
 // Url for target google sheet script of insert the face record
 //const sheetUrl = "https://script.google.com/macros/s/AKfycbxxYJAPo5auDaZiy66RizPTMGE9QxLeIbUDRw_shEDpEbQoZCg/exec";
@@ -27,7 +28,7 @@ let facestoverifyList = [];
 const facelabels = loadcsvtoarray('https://tunchz.github.io/Face.Rex/descriptors/LabeledFaceImageProfiles3.csv');
 //console.log(facelabels);
 
-var camIP = "10.90.0.98:8080";// "192.168.1.11:8080";
+//var camIP = "10.90.0.98:8080";// "192.168.1.11:8080";
 var image_src;
 
 d3.select('#table-container').append('table').attr("id","table_image");
@@ -203,7 +204,7 @@ function resizeAdjust() {
     //console.log("<768")
 
     //$("#left-panel").height(($("#video-container").width())*3.1/4+100);
-    if (isonMobile) {
+    if (isonMobile & !ipcamUse) {
       video.width = "480";
       video.height = "640";
       canvas.width = "480";
@@ -240,6 +241,7 @@ function resizeAdjust() {
 
   }
 
+  displaySize = { width: video.width, height: video.height };
 
 }
 
@@ -285,10 +287,10 @@ function pre_start() {
 async function start() {
   
   /**** define display size and format canvas size to match ****/
-  var displaySize = { width: video.width, height: video.height };
+  displaySize = { width: video.width, height: video.height };
   faceapi.matchDimensions(canvas, displaySize);
 
-  var canvas_ctx = canvas.getContext('2d');
+  canvas_ctx = canvas.getContext('2d');
 
   /****Detect face and recognize for every detectionDelay milliseconds ****/
   //console.log("loop start!")
@@ -1224,7 +1226,22 @@ function inputIP() {
     ipcamInit(document.getElementById("ip").value);
   });
 }
-
+/*
 window.addEventListener("orientationchange", function() {
-  alert(window.orientation);
+  //alert(window.orientation);
+  if (isonMobile & !ipcamUse) {    
+    try {
+      video.srcObject.getTracks().forEach(function(track) {
+        if (track.readyState == 'live') {
+          track.stop();
+        }
+      });
+    }
+    catch(err) {
+    }
+
+  videoStart = false;  
+  }
+
 }, false);
+*/
