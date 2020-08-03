@@ -327,6 +327,7 @@ async function start() {
 
     // Check loops to update detectedfacesList from google sheet
     if (loop_i>looptoUpdate-1) {
+      uploadsendingfailList();
       summarysheetLoad(facelogsheetUrl);
       loop_i = 0;
     }
@@ -381,7 +382,7 @@ async function start() {
 
         /**** extract age gender emotion from result ****/
         const age = resizedDetections[i].age;
-        var gender = 'unknown';
+        var gender;
         if (resizedDetections[i].gender = 'male') {
           gender = "♂ ชาย";
         } else {
@@ -479,7 +480,7 @@ async function start() {
 
         const drawBox = new faceapi.draw.DrawBox(box, { label: " "+ (result.label == "unknown" ? "unknown": facelabels[parseInt(result.label)].name) + " "/* + " : " + Math.round(interpolatedAge) + gender +" ▷ "+ emotion*/,
                                                       lineWidth: 2, boxColor: bcolor, drawLabelOptions: {fontSize: 13, fontColor :'rgba(0, 0, 0, 1)'}})
-        drawBox.draw(canvas)
+        drawBox.draw(canvas);
         const text = new faceapi.draw.DrawTextField([" "+ Math.round(age) + gender +" ▸ Mood : "+ emotion],{ x: box.x, y: box.y+box.height}, 
                                                       {anchorPosition: 'TOP_LEFT', backgroundColor : 'rgba(0, 0, 0, 0 )', fontColor : 'rgba(255, 255, 255, 1 )',
                                                       fontSize : 10, padding : 2});
@@ -494,8 +495,6 @@ async function start() {
                                                         {anchorPosition: 'TOP_LEFT', backgroundColor : 'rgba(0, 0, 0, 0 )', fontColor : 'rgba(255, 255, 255, 1 )',
                                                         fontSize : 10, padding : 2});
           text.draw(canvas);
-
-
         }
 
       })
@@ -535,7 +534,7 @@ async function start() {
 
 function detectedfacelistAdd(facerec, mood, imgdata) {
 
-  sendingList.unshift({  
+  var sendingRec = {  
                           'id'        : facerec.label,
                           'date'      : formatDate(facerec.last),
                           'timein'    : formatTime(facerec.last),
@@ -547,16 +546,16 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
                           'status'    : "sending",
                           'dept'      : facerec.label == 'unknown' ? "" : facestoverifyList[parseInt(facerec.label)].last,
                           'verified'  : facerec.label == 'unknown' ? "unknown" : "verified"
-  });
+  };
 
-  var serializedData = "id=" + sendingList[0].id
-                        +"&date="+ sendingList[0].date
-                        +"&timein="+ sendingList[0].timein
-                        +"&mood="+ sendingList[0].mood
-                        +"&location="+ sendingList[0].location
-                        +"&lat="+ sendingList[0].lat
-                        +"&lon="+ sendingList[0].lon
-                        +"&img="+ sendingList[0].img;
+  var serializedData = "id=" + sendingRec.id
+                        +"&date="+ sendingRec.date
+                        +"&timein="+ sendingRec.timein
+                        +"&mood="+ sendingRec.mood
+                        +"&location="+ sendingRec.location
+                        +"&lat="+ sendingRec.lat
+                        +"&lon="+ sendingRec.lon
+                        +"&img="+ sendingRec.img;
 
   // send request to insert face record to the target sheet
   request = $.ajax({
@@ -567,16 +566,17 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
 
   // callback handler that will be called on success
   request.done(function (response, textStatus, jqXHR){
-    sendingList[0].status = sendingList[0].id=="unknown"?"unknown":"succeeded";
+    sendingRec.status = sendingRec.id=="unknown"?"unknown":"succeeded";
     addtoList();
-    sendingList.shift();
+    //sendingList.shift();
     //console.log("Sending succeeded.",detectedfacesList,"unsent : "+sendingList.length);
 
   });
 
   // callback handler that will be called on failure
   request.fail(function (jqXHR, textStatus, errorThrown){
-    sendingList[0].status = "failed";
+    sendingRec.status = "failed";
+    sendingList.push(sendingRec);
     addtoList();
     console.error("The following error occured: "+ textStatus, errorThrown);
 
@@ -587,9 +587,9 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
   function addtoList() {
     // add new detected face into detectedfacesList if not exist
     var faceinlist = false;
-    if (sendingList[0].id != 'unknown') {
+    if (sendingRec.id != 'unknown') {
       for (k=0; k<detectedfacesList.length; k++) {
-        if (detectedfacesList[k].id == sendingList[0].id & detectedfacesList[k].date == sendingList[0].date) {
+        if (detectedfacesList[k].id == sendingRec.id & detectedfacesList[k].date == sendingRec.date) {
           faceinlist = true;
           // Update no. of detection, last seen, mood, image
           detectedfacesList[k].detection++;
@@ -606,11 +606,11 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
     }
     
     if (!faceinlist) {
-      detectedfacesList.push(sendingList[0]);
+      detectedfacesList.push(sendingRec);
       detectedfacesList[detectedfacesList.length-1].detection = 1;
       detectedfacesList[detectedfacesList.length-1].last = formatTime(facerec.last);
       detectedfacesList[detectedfacesList.length-1].timestamp = facerec.last;
-      if (sendingList[0].id == 'unknown') {
+      if (sendingRec.id == 'unknown') {
         detectedfacesList[detectedfacesList.length-1].mood = "";
       }
       //console.log("add",detectedfacesList);
@@ -619,6 +619,45 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
     }
 
   }
+}
+
+
+function uploadsendingfailList() {
+  for (f=0;f<sendingList.length;f++) {
+
+    var serializedData = "id=" + sendingList[0].id
+                          +"&date="+ sendingList[0].date
+                          +"&timein="+ sendingList[0].timein
+                          +"&mood="+ sendingList[0].mood
+                          +"&location="+ sendingList[0].location
+                          +"&lat="+ sendingList[0].lat
+                          +"&lon="+ sendingList[0].lon
+                          +"&img="+ sendingList[0].img;
+
+    // send request to insert face record to the target sheet
+    request = $.ajax({
+      url: sheetUrl, 
+      type: "post",
+      data: serializedData
+    });
+
+    // callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR){
+      sendingList.shift();
+      //console.log("Sending succeeded.",detectedfacesList,"unsent : "+sendingList.length);
+
+    });
+
+    // callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown){
+      console.error("The following error occured: "+ textStatus, errorThrown);
+      var rec = sendingList[0];
+      sendingList.push(rec);
+      sendingList.shift();
+    });
+
+  }
+  //updateTable();
 }
 
 function summarysheetLoad(url) {
@@ -798,7 +837,7 @@ function displayTable() {
   // Update Stats
   document.getElementById("total-detectedfaces").innerHTML = totaldetected;
   document.getElementById("total-verified").innerHTML = totalverified;
-  document.getElementById("total-status").innerHTML = isonMobile ? "Mobile" : "Desktop";//formatTime(new Date());
+  document.getElementById("total-status").innerHTML = sendingList.length != 0? sendingList.length+" failed" :(isonMobile ? "Mobile" : "Desktop");
   document.getElementById("total-tobeverified").innerHTML = totaltoverified;
   document.getElementById("total-detection").innerHTML = detection;//+' ครั้ง';
   document.getElementById("total-unknown").innerHTML = unknown;
