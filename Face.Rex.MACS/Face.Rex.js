@@ -225,6 +225,10 @@ function resizeAdjust() {
 
 
     } else {
+      video.width = "640";
+      video.height = "480";
+      canvas.width = "640";
+      canvas.height = "480";      
       $("#left-panel").height(($("#video-container").width())*3/4+75);
       $("#video-container").height(($("#video-container").width())*3/4);
       $("#video").width(($("#video-container").width()-40));
@@ -263,6 +267,8 @@ video.addEventListener('play',() => {
   start();
 })
 
+var detections,resizedDetections,results;
+
 async function firstRun() {
   console.log("1st Run...")
   // Using all models for first time to 
@@ -274,9 +280,9 @@ async function firstRun() {
   catch(err) {
     alert("error fetching image for 1st-run testing >> please check the connection...");
   }
-  var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();;
-  const resizedDetections = faceapi.resizeResults(detections, { width: 320, height: 240 });
-  const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));    
+  detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();;
+  resizedDetections = faceapi.resizeResults(detections, { width: 320, height: 240 });
+  results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));    
   videoStart = false;
   inputMenu();
 }
@@ -288,7 +294,6 @@ function pre_start() {
   //displaynoti("Loading models...");
   start();
 }
-
 
 async function start() {
   
@@ -340,16 +345,17 @@ async function start() {
           displaynoti("Can't retrieve video source! check your connection.<br><red><small>click to return</small></red>");
         }
         //image = await faceapi.fetchImage(image_src);
-        var detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
+        resizedDetections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
+
       } else {
-        var detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
+        detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors().withFaceExpressions().withAgeAndGender();
+
+        /****Resize the result of detection matching the display size ****/
+        resizedDetections = faceapi.resizeResults(detections, displaySize);
       }
 
-      /****Resize the result of detection matching the display size ****/
-      const resizedDetections = faceapi.resizeResults(detections, displaySize);
-
       /**** Match the faces detected with the descriptor ****/
-      const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
+      results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
 
       /**** Clear the previous overlay draw on the canvas ****/
       //canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
