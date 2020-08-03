@@ -38,7 +38,7 @@ var summarysheetResults = [];
 
 //const videocontainer = document.getElementById('video-container');
 var ipcamUse = !true;
-const isonMobile = true;//onMobile();
+const isonMobile = onMobile();
 if (isonMobile) {
   detectionloopDelay = 2*detectionloopDelay;
   num_keep = Math.ceil(verifyingPeriod/detectionloopDelay);
