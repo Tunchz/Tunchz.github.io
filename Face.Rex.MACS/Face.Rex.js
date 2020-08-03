@@ -1,7 +1,7 @@
 // Basic parameter for detection in millisecond
 var detectionloopDelay = 1000;    
-const verifyingPeriod = 5000;  
-const missedDuration = 3000;      //must be greater than detectionloopDelay
+const verifyingPeriod = 3000;  
+const missedDuration = 2000;      //must be greater than detectionloopDelay
 const timetokeepverifiedfaces = 60000;
 const timetoupdateResults = 60000;  // 1 minute
 const facematcherThreshold = 0.49;   // greatest distance for face
@@ -481,7 +481,7 @@ async function start() {
 
         // draw verifying progress bar
         if (!verified & result.label != "unknown") {
-          const progressBar = new faceapi.draw.DrawBox({ x: box.x+4, y: box.y+box.height-6, width: (box.width-8)/5*progress, height: 2 },
+          const progressBar = new faceapi.draw.DrawBox({ x: box.x+4, y: box.y+box.height-6, width: (box.width-8)/num_keep*progress, height: 2 },
                                                         {lineWidth: 2, boxColor:'rgba(255, 100, 0, 1)'/*, drawLabelOptions: {fontSize: 8}*/});
           progressBar.draw(canvas);
           const text = new faceapi.draw.DrawTextField(["verifying progress..."],{ x: box.x+4, y: box.y+box.height-23}, 
