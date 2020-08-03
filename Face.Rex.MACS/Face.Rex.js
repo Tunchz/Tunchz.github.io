@@ -1326,7 +1326,7 @@ function switchCam(sw) {
   } else {
     // not on mobile
     navigator.getUserMedia(
-      { video: {} },  //{ video: {width:640, height:480} },
+      { video: {}, audio: false },  //{ video: {width:640, height:480} },
       stream => {
         video.srcObject = stream;
         videoStart = true;
