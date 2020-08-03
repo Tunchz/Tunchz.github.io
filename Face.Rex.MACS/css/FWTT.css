@@ -442,7 +442,10 @@ html {
   display: flex;
 }
 
-.button-control {
+.button-control, .button-control:focus {
+  width : 45px;
+  height: 45px;
+  margin : 0px 2px;
   background-color: #2a58c3;
   color: #fff;
   border-color: #2a58c3;
@@ -452,7 +455,7 @@ html {
 
 .button-control:hover {
   background-color: #fff;
-  color: ##2a58c3;
+  color: #2a58c3;
   border-color: #2a58c3;
 }
 

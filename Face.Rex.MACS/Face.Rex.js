@@ -11,6 +11,7 @@ var num_keep = Math.ceil(verifyingPeriod/detectionloopDelay);
 var loop_i = 0;
 var looptoUpdate = Math.ceil(timetoupdateResults/detectionloopDelay);
 var videoStart = true;
+var frontCam = false; // default for mobile rear camera
 var displaySize, canvas_ctx;
 
 // Url for target google sheet script of insert the face record
@@ -37,7 +38,7 @@ var summarysheetResults = [];
 
 //const videocontainer = document.getElementById('video-container');
 var ipcamUse = !true;
-const isonMobile = onMobile();
+const isonMobile = true;//onMobile();
 if (isonMobile) {
   detectionloopDelay = 2*detectionloopDelay;
   num_keep = Math.ceil(verifyingPeriod/detectionloopDelay);
@@ -157,12 +158,14 @@ function startVideo(webcam) {
 
     console.log("WebCam");
     displaynoti("Retrieving video...");
+
+    /*
     navigator.getUserMedia(
       { video: {} },  //{ video: {width:640, height:480} },
       stream => {
         video.srcObject = stream;
         videoStart = true;
-        stopButton();
+        controlButton();
         resizeAdjust();
         video.muted = true;
         displaynoti("");
@@ -174,6 +177,9 @@ function startVideo(webcam) {
         //inputMenu();
       } //console.error(err)
     )
+    */
+    switchCam(false);
+
   } else {
     //ipcamInit();
     inputIP();
@@ -1117,8 +1123,11 @@ function inputMenu() {
 
   // remove existing stop-button
   try {
-    document.getElementById("stop-button").remove();
+    document.getElementById("switch-button").remove();
   } catch(err) {}     
+  try {
+    document.getElementById("stop-button").remove();
+  } catch(err) {}  
 
   notification = document.createElement("div");
   notification.id = "noti";
@@ -1147,7 +1156,27 @@ function inputMenu() {
   
 }
 
-function stopButton() {
+function controlButton() {
+  // remove existing stop-button
+  try {
+    document.getElementById("switch-button").remove();
+  } catch(err) {}     
+  try {
+    document.getElementById("stop-button").remove();
+  } catch(err) {}  
+
+  //Camera switch
+  if (isonMobile) {
+    const switchbtn = document.createElement("button");
+    switchbtn.id = "switch-button";
+    switchbtn.className = "btn btn-default button-control";
+    switchbtn.style.padding = "0px 10px";
+    switchbtn.setAttribute('type', 'button');
+    switchbtn.setAttribute('onclick', 'switchCam(true)');
+    document.getElementById("select-container").append(switchbtn);
+    document.getElementById("switch-button").innerHTML = "⟳";
+  }
+
   //document.getElementById("stop-button").innerHTML = "■";
   const stopbtn = document.createElement("button");
   stopbtn.id = "stop-button";
@@ -1177,7 +1206,7 @@ async function ipcamInit(inputip) {
       image_src = "http://"+inputip+"/shot.jpg";
       await faceapi.fetchImage(image_src);
       video.src= "http://"+inputip+"/video";
-      stopButton();
+      controlButton();
       resizeAdjust();
       videoStart = true;
       displaynoti("");
@@ -1245,3 +1274,73 @@ window.addEventListener("orientationchange", function() {
 
 }, false);
 */
+
+function switchCam(sw) {
+  if (sw) {frontCam = !frontCam;console.log("switch camera!");}
+  
+  if (isonMobile) {
+    const videoConstraints = {};
+    if (frontCam) {
+      console.log("front camera"); 
+      videoConstraints.facingMode = 'user';
+    } else {
+      console.log("rear camera"); 
+      videoConstraints.facingMode = 'environment';
+    }
+    const constraints = {
+      video: videoConstraints,
+      audio: false
+    };
+    
+/*    navigator.mediaDevices
+      .getUserMedia(constraints)
+      .then(stream => {
+        currentStream = stream;
+        video.srcObject = stream;
+        return navigator.mediaDevices.enumerateDevices();
+      })
+      .then(gotDevices)
+      .catch(error => {
+        console.error(error);
+    });
+*/
+    navigator.getUserMedia(
+      constraints,//{ video: {} },  //{ video: {width:640, height:480} },
+      stream => {
+        video.srcObject = stream;
+        videoStart = true;
+        controlButton();
+        resizeAdjust();
+        video.muted = true;
+        displaynoti("");
+        console.log("video started...")
+      },
+      err => {
+        //alert("error loading video >> please allow access to the video source...")
+        controlButton();
+        displaynoti("Can't access "+(frontCam?"front":"rear")+" camera!<br><red><small>click to return</small></red>");
+        //inputMenu();
+      } //console.error(err)
+    )
+
+  } else {
+    // not on mobile
+    navigator.getUserMedia(
+      { video: {} },  //{ video: {width:640, height:480} },
+      stream => {
+        video.srcObject = stream;
+        videoStart = true;
+        controlButton();
+        resizeAdjust();
+        video.muted = true;
+        displaynoti("");
+        console.log("video started...")
+      },
+      err => {
+        //alert("error loading video >> please allow access to the video source...")
+        displaynoti("Can't access video source!<br><red><small>click to return</small></red>");
+        //inputMenu();
+      } //console.error(err)
+    )    
+  }
+}
