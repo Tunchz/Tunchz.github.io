@@ -1282,7 +1282,7 @@ function switchCam(sw) {
     const videoConstraints = {};
     if (frontCam) {
       console.log("front camera"); 
-      videoConstraints.facingMode = 'user';
+      //videoConstraints.facingMode = 'user';
     } else {
       console.log("rear camera"); 
       videoConstraints.facingMode = 'environment';
