@@ -1052,17 +1052,21 @@ function loadlabelimage(filelink,iter,max) {
 
 */
 
+
 // stop both mic and camera
 function stopVideo(stream) {
     try {
+      /*
       video.srcObject.getTracks().forEach(function(track) {
         if (track.readyState == 'live') {
           track.stop();
         }
       });
-    }
-    catch(err) {
-    }
+      */
+      video.srcObject.getTracks().forEach(track => {
+        track.stop();
+      });
+    } catch(err) {}
 
   videoStart = false;  
   inputMenu();
@@ -1276,7 +1280,23 @@ window.addEventListener("orientationchange", function() {
 */
 
 function switchCam(sw) {
-  if (sw) {frontCam = !frontCam;console.log("switch camera!");}
+  if (sw) {
+    frontCam = !frontCam;
+    console.log("switch camera!");
+    try {
+      /*
+      video.srcObject.getTracks().forEach(function(track) {
+        if (track.readyState == 'live') {
+          track.stop();
+        }
+      });
+      */
+      video.srcObject.getTracks().forEach(track => {
+        track.stop();
+      });
+    } catch(err) {}
+    videoStart = false;  
+  }
   
   if (isonMobile) {
     const videoConstraints = {};
