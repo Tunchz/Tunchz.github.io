@@ -534,7 +534,7 @@ async function start() {
 
 function detectedfacelistAdd(facerec, mood, imgdata) {
 
-  var sendingRec = {  
+  const sendingRec = {  
                           'id'        : facerec.label,
                           'date'      : formatDate(facerec.last),
                           'timein'    : formatTime(facerec.last),
@@ -548,7 +548,7 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
                           'verified'  : facerec.label == 'unknown' ? "unknown" : "verified"
   };
 
-  var serializedData = "id=" + sendingRec.id
+  const serializedData = "id=" + sendingRec.id
                         +"&date="+ sendingRec.date
                         +"&timein="+ sendingRec.timein
                         +"&mood="+ sendingRec.mood
@@ -625,7 +625,7 @@ function detectedfacelistAdd(facerec, mood, imgdata) {
 function uploadsendingfailList() {
   for (f=0;f<sendingList.length;f++) {
 
-    var serializedData = "id=" + sendingList[0].id
+    const serializedData = "id=" + sendingList[0].id
                           +"&date="+ sendingList[0].date
                           +"&timein="+ sendingList[0].timein
                           +"&mood="+ sendingList[0].mood
