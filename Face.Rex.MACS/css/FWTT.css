@@ -390,7 +390,7 @@ html {
 }
 
 #daydisplay {
-  margin-bottom: -16px;
+  margin-bottom: -18px;
   color: #fff;
   font-family: Impact;
   font-size: 62px;
@@ -420,7 +420,7 @@ html {
 }
 
 #dept-selector {
-  width: 181px;
+  width: 191px;
   border-radius: 2px;
   height: 24px;
   padding: 0px 3px;
