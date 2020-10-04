@@ -243,7 +243,7 @@ function resizeAdjust() {
     canvas.width = "640";
     canvas.height = "480";
     $("#left-panel").height($("#wholecontent").height());
-    $("#video-container").height($("#wholecontent").height()*0.9);
+    $("#video-container").height($("#wholecontent").height()*0.875);
     $("#video").width(($("#video-container").width()-40));
     $("#video").height(($("#video-container").width()-40)*3/4);
     $("#canvas").width(($("#video-container").width()-40));
@@ -752,6 +752,7 @@ function updateTable() {
   //}
 
   displayTable();
+
 }
 
 
@@ -850,6 +851,7 @@ function displayTable() {
 
   // Create Table
   tabulateimg(List_filtered, ["img","id","dept","date","timein","last","mood","status","detection"]); 
+  drawmap(dl.timestamp.top(Infinity))
 }
 
 
@@ -1155,6 +1157,11 @@ function displaynoti(text) {
 
 function inputMenu() {
   console.log("Input Menu");
+
+  // hide map and show video container for menu
+  document.getElementById("map-container").style.display = "none";
+  document.getElementById("video-container").style.display = "flex";
+
   // remove remaining notification
   try {
     notification.remove();
@@ -1178,13 +1185,23 @@ function inputMenu() {
     document.getElementById("stop-button").remove();
   } catch(err) {}  
 
+  // Menu Blackground Container
   notification = document.createElement("div");
   notification.id = "noti";
   notification.className = "noti";
   notification.style.backgroundColor = "#000";
-  notification.width = "20%";
+  notification.width = "30%";
   notification.height = "10%";
   videocontainer.append(notification);
+
+  // Map Button
+  const mapbt = new Image();
+  mapbt.id = "mapbt";
+  mapbt.className = "button-img";
+  mapbt.src = "img/MAP_icon.png";
+  mapbt.setAttribute('type', 'button');
+  mapbt.setAttribute('onclick', 'startMap()');
+  notification.append(mapbt);
 
   // Webcam Button
   const webcam = new Image();
@@ -1409,3 +1426,52 @@ function switchCam(sw) {
     )    
   }
 }
+
+
+
+function startMap() {
+
+  //hide 
+  document.getElementById("video-container").style.display = "none";
+  document.getElementById("map-container").style.display = "block";
+
+  //$("#map-container").height($("#left-panel").height()*0.7);
+
+/*
+  if (webcam) {
+    video.remove();
+    video = document.createElement("video");
+    video.id = "video";
+    video.style.backgroundColor = "#000";
+    video.autoplay = true;
+    videocontainer.append(video);
+    resizeAdjust();
+    ipcamUse = false;
+
+    console.log("WebCam");
+    displaynoti("Retrieving video...");
+
+    switchCam(false);
+
+  } else {
+    //ipcamInit();
+    inputIP();
+  }
+*/
+
+  //document.getElementById("stop-button").innerHTML = "■";
+  const stopbtn = document.createElement("button");
+  stopbtn.id = "stop-button";
+  stopbtn.className = "btn btn-default button-control";
+  //stopbtn.style.margin = "-20px 0px 0px 0px";
+  stopbtn.style.padding = "0px 10px";
+  stopbtn.setAttribute('type', 'button');
+  stopbtn.setAttribute('onclick', 'inputMenu()');
+  document.getElementById("select-container").append(stopbtn);
+  //document.getElementById("stop-button").innerHTML = "■";
+  document.getElementById("stop-button").innerHTML = "⌂";
+
+
+
+}
+
