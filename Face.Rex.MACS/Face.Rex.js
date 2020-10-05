@@ -1434,6 +1434,14 @@ function startMap() {
   //hide 
   document.getElementById("video-container").style.display = "none";
   document.getElementById("map-container").style.display = "block";
+  map.resize();
+  //document.getElementById("left-bottom").style.height = "87%";
+  //document.getElementById("map-container").style.height = "98%";
+  //document.getElementById("left-bottom").style.height = "88%";
+  // $("#map-container").height($("#left-bottom").height()*0.98);
+  // $("#map-container").width($("#left-bottom").width()*0.98);
+  // $("#map").height($("#left-bottom").height()*0.98);
+  // $("#map").width($("#left-bottom").width()*0.98);
 
   //$("#map-container").height($("#left-panel").height()*0.7);
 

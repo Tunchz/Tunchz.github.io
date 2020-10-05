@@ -110,7 +110,7 @@
           </div>
         </div>
 
-        <div class = "col-sm-12 height90p" style = "height : 88%; background-color: #fff;">
+        <div id = "left-bottom" class = "col-sm-12 height90p" style = "height : 88%; background-color: #fff;">
           <div id="video-container" style = "display: flex">
 
             <!video id="video" width="640" height="480" autoplay muted><!/video>
@@ -121,8 +121,8 @@
 
 
 
-          <div id="map-container" style = "">
-            <div id="map"></div>
+          <div id="map-container">
+            <div id="map" class='blue'></div>
           </div>
 
 
@@ -233,15 +233,16 @@
   <script>
 
     var formatDateTime = d3.time.format("%d %B %Y %H:%M:%S");
-    var chartData,
-        refresh_rate = i = 4,
-        windowlength = 200
-        z = 2;
-        //transitiontime = 100;
+    var z=2;
+    // var chartData,
+    //     refresh_rate = i = 4,
+    //     windowlength = 200
+    //     z = 2;
+    //     //transitiontime = 100;
 
-    var timenow = new Date;
+    // var timenow = new Date;
 
-        timenow = new Date(timenow.getTime() - (refresh_rate*windowlength*1000));
+    //     timenow = new Date(timenow.getTime() - (refresh_rate*windowlength*1000));
 
 
     mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg'
