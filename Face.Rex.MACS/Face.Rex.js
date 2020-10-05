@@ -1190,8 +1190,13 @@ function inputMenu() {
   notification.id = "noti";
   notification.className = "noti";
   notification.style.backgroundColor = "#000";
-  notification.width = "30%";
-  notification.height = "10%";
+  if (isonMobile) {
+    notification.width = "27%";
+    notification.height = "9%";
+  } else {
+    notification.width = "30%";
+    notification.height = "10%";    
+  }
   videocontainer.append(notification);
 
   // Map Button
