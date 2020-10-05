@@ -391,7 +391,7 @@ html {
 }
 
 #daydisplay {
-  margin-bottom: -18px;
+  margin-bottom: -19px;
   color: #fff;
   font-family: Impact;
   font-size: 62px;
@@ -451,7 +451,7 @@ html {
   color: #fff;
   border-color: #2a58c3;
   border-radius: 2px;
-  font-size: 24px;
+  font-size: 28px;
 }
 
 .button-control:hover {
@@ -462,7 +462,7 @@ html {
 
 .noti, .noti:hover {
   border-radius: 2px;
-  padding : 10px;
+  padding : 5px;
   position: absolute;
   float : center;
   color : #fff;
@@ -476,7 +476,7 @@ html {
   width:100px;
   height:100px;
   padding: 0px;
-  margin: 0px 10px;
+  margin: 0px 7px;
   border-radius: 10px;
   border: 6px solid #222222;
   border-radius: 2px;
