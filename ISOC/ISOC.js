@@ -90,7 +90,7 @@ summarysheetLoad(facelogsheetUrl);
 startMap();
 start();
 
-rightpanel_isopen = 1;
+var rightpanel_isopen = 1;
 switchRightpanel();
 
 
@@ -156,10 +156,11 @@ function resizeAdjust() {
   if($("#wholecontent").width() < 768){
     //console.log("<768")
 
-    if (isonMobile & !ipcamUse) {
+    if (!isonMobile & (rightpanel_isopen==1)) {
       document.getElementById("left-panel").style.width = "100%";
       document.getElementById("right-panel").style.width = "100%";
-      $("#left-bottom").height(($("#wholecontent").height()-80)*0.8);
+      $("#left-panel").height(($("#wholecontent").height())*0.8);
+      $("#left-bottom").height(($("#left-panel").height()-80));
       $("#map-container").height($("#left-bottom").height()-10);
       $("#map-container").width($("#left-bottom").width()-10);
       document.getElementById("map-container").style.top = "5px";
@@ -167,7 +168,8 @@ function resizeAdjust() {
     } else {   
       document.getElementById("left-panel").style.width = "100%";
       document.getElementById("right-panel").style.width = "100%";
-      $("#left-bottom").height(($("#wholecontent").height()-80));
+      $("#left-panel").height($("#wholecontent").height());
+      $("#left-bottom").height(($("#left-panel").height()-80));
       $("#map-container").height($("#left-bottom").height()-10);
       $("#map-container").width($("#left-bottom").width()-10);
       document.getElementById("map-container").style.top = "5px";
@@ -183,8 +185,8 @@ function resizeAdjust() {
     document.getElementById("map-container").style.left = "5px";
   }
 
-  displaySize = { width: video.width, height: video.height };
-
+  //displaySize = { width: video.width, height: video.height };
+  map.resize();
 }
 
 function onMobile() {
@@ -1359,7 +1361,6 @@ function switchRightpanel() {
   document.getElementById("right-panel").style.display = "none";
   rightpanel_isopen = 0;
   }
-  resizeAdjust()
-  map.resize();
+  resizeAdjust()  
 }
 
