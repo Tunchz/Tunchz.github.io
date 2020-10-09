@@ -1002,7 +1002,7 @@ function Initialize() {
   // Detect if orientation changes on mobile
   window.addEventListener("orientationchange", function() {
     //resizeAdjust();
-    rightpanel_isopen = 0;
+    rightpanel_isopen = 1;
     switchRightpanel();
   }, false);
 
