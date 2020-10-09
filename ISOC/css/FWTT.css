@@ -324,7 +324,7 @@ html {
 }
 
 .btn:focus, .btn:active {
-  background: #383838;
+  background: #2a58c3;
   color: #fff;
   outline: none;
 }
@@ -429,7 +429,7 @@ html {
 
 
 .select-container {
-  padding : 10px 0px 10px 10px;
+  padding : 5px 0px 5px 5px;
   margin-right: -10px
   vertical-align: middle;
   justify-content: flex-end;
@@ -504,13 +504,13 @@ red:hover {
 }
 
 #menu-button {
-  margin: 3px 0px;
-  width: 30px;
-  height:50px;
+  margin: 0px 0px;
+  width: 20px;
+  height:30px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   background-color: #383838;
   border-color: #383838;
-  font-size: 24px;
+  font-size: 18px;
 }
 
