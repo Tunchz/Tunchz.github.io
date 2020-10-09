@@ -171,9 +171,7 @@ function resizeAdjust() {
       document.getElementById("map-container").style.left = "5px";
     } else {   
       document.getElementById("left-panel").style.width = "100%";
-      if (rightpanel_isopen==1) {
-        document.getElementById("right-panel").style.width = "100%";
-      }
+      document.getElementById("right-panel").style.width = "100%";
       document.getElementById("left-panel").style.height = "100%";
       $("#left-bottom").height(($("#left-panel").height()-80));
       $("#map-container").height($("#left-bottom").height()-8);
@@ -1004,7 +1002,9 @@ function Initialize() {
 
   // Detect if orientation changes on mobile
   window.addEventListener("orientationchange", function() {
-    resizeAdjust();
+    //resizeAdjust();
+    rightpanel_isopen = 0;
+    switchRightpanel();
   }, false);
 
 }
