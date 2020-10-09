@@ -164,7 +164,7 @@ function resizeAdjust() {
       } else {
       document.getElementById("left-panel").style.height = "100%";
       }
-      $("#left-bottom").height(($("#left-panel").height()-80));
+      $("#left-bottom").height(($("#left-panel").height()-43));
       $("#map-container").height($("#left-bottom").height()-8);
       $("#map-container").width($("#left-bottom").width()-10);
       document.getElementById("map-container").style.top = "4px";
@@ -173,7 +173,7 @@ function resizeAdjust() {
       document.getElementById("left-panel").style.width = "100%";
       document.getElementById("right-panel").style.width = "100%";
       document.getElementById("left-panel").style.height = "100%";
-      $("#left-bottom").height(($("#left-panel").height()-80));
+      $("#left-bottom").height(($("#left-panel").height()-43));
       $("#map-container").height($("#left-bottom").height()-8);
       $("#map-container").width($("#left-bottom").width()-10);
       document.getElementById("map-container").style.top = "4px";
@@ -182,8 +182,7 @@ function resizeAdjust() {
 
   } else {
     document.getElementById("left-panel").style.height = "100%";
-    $("#left-bottom").height($("#wholecontent").height()-78);
-    $("#left-bottom").height($("#wholecontent").height()-78);
+    $("#left-bottom").height($("#wholecontent").height()-43);
     $("#map-container").height($("#left-bottom").height()-8);
     $("#map-container").width($("#left-bottom").width()-10);
     document.getElementById("map-container").style.top = "4px";
