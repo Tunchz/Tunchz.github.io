@@ -156,27 +156,34 @@ function resizeAdjust() {
   if($("#wholecontent").width() < 768){
     //console.log("<768")
 
-    if (!isonMobile & (rightpanel_isopen==1)) {
+    if (isonMobile) {
       document.getElementById("left-panel").style.width = "100%";
       document.getElementById("right-panel").style.width = "100%";
-      $("#left-panel").height(($("#wholecontent").height())*0.8);
+      if (rightpanel_isopen==1) {
+      document.getElementById("left-panel").style.height = "80%";
+      } else {
+      document.getElementById("left-panel").style.height = "100%";
+      }
       $("#left-bottom").height(($("#left-panel").height()-80));
-      $("#map-container").height($("#left-bottom").height()-10);
+      $("#map-container").height($("#left-bottom").height()-8);
       $("#map-container").width($("#left-bottom").width()-10);
-      document.getElementById("map-container").style.top = "5px";
+      document.getElementById("map-container").style.top = "4px";
       document.getElementById("map-container").style.left = "5px";
     } else {   
       document.getElementById("left-panel").style.width = "100%";
-      document.getElementById("right-panel").style.width = "100%";
-      $("#left-panel").height($("#wholecontent").height());
+      if (rightpanel_isopen==1) {
+        document.getElementById("right-panel").style.width = "100%";
+      }
+      document.getElementById("left-panel").style.height = "100%";
       $("#left-bottom").height(($("#left-panel").height()-80));
-      $("#map-container").height($("#left-bottom").height()-10);
+      $("#map-container").height($("#left-bottom").height()-8);
       $("#map-container").width($("#left-bottom").width()-10);
-      document.getElementById("map-container").style.top = "5px";
+      document.getElementById("map-container").style.top = "4px";
       document.getElementById("map-container").style.left = "5px";
     }
 
   } else {
+    document.getElementById("left-panel").style.height = "100%";
     $("#left-bottom").height($("#wholecontent").height()-78);
     $("#left-bottom").height($("#wholecontent").height()-78);
     $("#map-container").height($("#left-bottom").height()-8);
