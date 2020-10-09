@@ -126,6 +126,7 @@ color:#000;
 
 
 #map { 
+  position: absolute;
   width: 100%; /*90%;*/
   height: 100%;
 }
