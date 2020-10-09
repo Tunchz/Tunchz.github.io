@@ -156,56 +156,31 @@ function resizeAdjust() {
   if($("#wholecontent").width() < 768){
     //console.log("<768")
 
-    //$("#left-panel").height(($("#video-container").width())*3.1/4+100);
     if (isonMobile & !ipcamUse) {
-      // video.width = "480";
-      // video.height = "640";
-      // canvas.width = "480";
-      // canvas.height = "640";
-      //$("#left-panel").height(($("#video-container").width()-150)*4/3+20+75);
-      $("#left-bottom").height($("#wholecontent").height()-80);
+      document.getElementById("left-panel").style.width = "100%";
+      document.getElementById("right-panel").style.width = "100%";
+      $("#left-bottom").height(($("#wholecontent").height()-80)*0.8);
       $("#map-container").height($("#left-bottom").height()-10);
       $("#map-container").width($("#left-bottom").width()-10);
       document.getElementById("map-container").style.top = "5px";
       document.getElementById("map-container").style.left = "5px";
-
-      // $("#video-container").height(($("#video-container").width()-50)*4/3+20);
-      // $("#video").width(($("#video-container").width()-50));
-      // $("#video").height(($("#video-container").width()-50)*4/3);
-      // $("#canvas").width(($("#video-container").width()-50));
-      // $("#canvas").height(($("#video-container").width()-50)*4/3);
-
-
-    } else {
-      // video.width = "640";
-      // video.height = "480";
-      // canvas.width = "640";
-      // canvas.height = "480";      
-      $("#left-bottom").height($("#wholecontent").height()-80);
-      // $("#video-container").height(($("#video-container").width())*3/4);
-      // $("#video").width(($("#video-container").width()-40));
-      // $("#video").height(($("#video-container").width()-40)*3/4);
-      // $("#canvas").width(($("#video-container").width()-40));
-      // $("#canvas").height(($("#video-container").width()-40)*3/4);
+    } else {   
+      document.getElementById("left-panel").style.width = "100%";
+      document.getElementById("right-panel").style.width = "100%";
+      $("#left-bottom").height(($("#wholecontent").height()-80));
+      $("#map-container").height($("#left-bottom").height()-10);
+      $("#map-container").width($("#left-bottom").width()-10);
+      document.getElementById("map-container").style.top = "5px";
+      document.getElementById("map-container").style.left = "5px";
     }
 
   } else {
-    // video.width = "640";
-    // video.height = "480";
-    // canvas.width = "640";
-    // canvas.height = "480";
     $("#left-bottom").height($("#wholecontent").height()-78);
     $("#left-bottom").height($("#wholecontent").height()-78);
     $("#map-container").height($("#left-bottom").height()-8);
     $("#map-container").width($("#left-bottom").width()-10);
     document.getElementById("map-container").style.top = "4px";
     document.getElementById("map-container").style.left = "5px";
-    // $("#video-container").height($("#wholecontent").height()*0.875);
-    // $("#video").width(($("#video-container").width()-40));
-    // $("#video").height(($("#video-container").width()-40)*3/4);
-    // $("#canvas").width(($("#video-container").width()-40));
-    // $("#canvas").height(($("#video-container").width()-40)*3/4);
-
   }
 
   displaySize = { width: video.width, height: video.height };
