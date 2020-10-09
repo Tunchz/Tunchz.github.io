@@ -1,0 +1,634 @@
+﻿<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+  	<meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>z.et.ZERO.Face.Rex : the question isn't can you; it's WILL YOU. -FWTT-</title>
+    <meta name="description" content="the question isn't can you; it's WILL YOU. -FWTT-">
+    <link rel="icon" type="image/x-icon" href="img/Face.Rex_Blue.png"/>
+    <link rel="stylesheet" href="css/covid19.min.blue.css">
+
+    <link rel="stylesheet" href="css/patternfly.min.css" />
+    <link rel="stylesheet" href="css/patternfly-additions.min.css" />
+
+    <link rel="stylesheet" href="css/FWTT.css">
+    <link rel="stylesheet" href="css/fonts.css">
+
+    <link rel="stylesheet" href="css/mapbox-gl.css">
+
+
+  </head>
+  <body onresize="resizeAdjust();">
+    <div id = "wholecontent" class = "section-container">
+      <div id = "left-panel" class = "col-sm-7 height100p">
+        <div id = "top-left" class = "col-sm-12 height10p" style = "min-height : 77px; max-height : 77px; padding-right: 0px; background-color: #fff;">
+          <div id = "title" class = "col-xs-8 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #2a58c3/*#383838;*/">
+            <div id = "logo-container" class = "col-xs-6" style = "display: flex;justify-content: center; align-items: center; max-width: 100px;">
+              <img id = "Face.Rex.logo" src = 'img/Face.Rex.png' style = "padding: 5px; width : 75px; height : 75px;"></img>
+            </div>
+            <div id = "Title-container" class = "col-xs-6 height100p" style = "">
+              <div id = "Text1" class = "col-xs-12 height50p" style = "padding:0px;margin:0px;">
+                <span style="font-family: Impact;font-size: 30px;">ISOC </span>
+              </div>
+              <div id = "Text2" class = "col-xs-12 height50p" style = "display: flex;justify-content: left; align-items: center;">
+                <button type="button" class="btn btn-primary" style="padding: 0px 4px;" data-toggle="modal" data-target="#info-modal">รายละเอียด</button>                          
+              </div>
+            </div>
+            <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                            <h2 class="modal-title h3" id="myModalLabel"><a href="https://www.maholan.co.th/">ISOC</a> &gt; Disaster Risk Situation Dashboard </h2>
+                        </div>
+                        <div class="modal-body">
+                            <h3 style="margin-top:0">การใช้งาน</h3>
+                            <p>ระบบจะตรวจจับใบหน้าและวาดกรอบสี่เหลี่ยมล้อมรอบใบหน้า ชื่อของใบหน้าจะถูกแสดงมุมบนซ้าย และแสดงสีตามกรณีดังนี้ </p>
+                            <ol>
+                                <li>สีส้ม     --> ใบหน้ากำลังถูกยืนยันตัวตนจากระบบ</li>
+                                <li>สีเขียว   --> ใบหน้าถูกยืนยันเรียบร้อยพร้อมแสดงรูปโปรไฟล์มุมล่างซ้าย</li>
+                                <li>สีแดง    --> ใบหน้าไม่ได้ลงทะเบียนในระบบหรือระบบไม่สามารถยืนยันใบหน้าได้</li>
+                            </ol>
+
+                            <h3 class="">การแสดงรายละเอียดบนแถบด้านขวา</h3>
+                            <p>ในโหมดหน้าจอแคบแถบจะถูกแสดงดัานล่างถัดจากกรอบการแสดงภาพกล้อง ซึ่งสามารถเลื่อนหน้าจอขึ้นเพื่อดูรายละเอียด</p>
+                            <ol>
+                                <li>ส่วนตัวกรอง เป็นแถบบนสุดแสดงตัวกรองใช้ในการเลือกช่วงเวลาในการแสดงผลการตรวจจับใบหน้า</li>
+                                <li>ส่วนตัวเลขสรุป เป็นแถบแสดงตัวเลขสรุปผลการตรวจจับใบหน้าแบ่งประเภทตามรหัสสี (คลิ๊กเลือกประเภทเพื่อเรียกดูรายชื่อตามประเภทที่ต้องการ)</li>
+                                <li>ส่วนตาราง แสดงรูปใบหน้าพร้อมรายละเอียดการตรวจับใบหน้า ได้แก่ ชื่อ ชื่อกลุ่ม วัน ห้วงเวลา อารมณ์ใบหน้า และสถานะการจัดเก็บข้อมูลใบหน้า</li>
+                            </ol>
+                            <h3>ข้อมูล</h3>
+                            <p>ข้อมูลใบหน้า เป็นข้อมูลใบหน้าของข้าราชการในกองคณิตศาสตร์และคอมพิวเตอร์ ส่วนการศึกษา โรงเรียนนายร้อยพระจุลจอมเกล้า<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a></p>
+                            <ul>
+                                <li>ระบบตรวจจับใบหน้า Face.Rex ถูกพัฒนาขึ้นเพื่อใช้ศึกษา Maching Learning และการนำเทคโนโลยีและ AI มาสนับสนุนในการปฏิบัติงานและการเรียนการสอน เพื่อประโยชน์กับสาธารณะชน ติดต่อผู้จัดทำระบบเพื่อขออนุญาตในการใช้งานข้อมูลใดๆ ที่เป็นผลลัพธ์จากระบบก่อนนำไปใช้งาน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง </li>
+                            </ul>
+                            <h3>ติดต่อ</h3>
+                            <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">tunchz@gmail.com</a>.</p>
+                            <p></p>
+                        </div>
+                        <div class="modal-footer"><span class="pull-left">Made by CRMA Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="datasource-modal" tabindex="-1" role="dialog" aria-labelledby="datasource-modalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h3 class="modal-title" id="myModalLabel">รายละเอียดแหล่งข้อมูล</h3>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-condensed" >
+                                <thead>
+                                    <tr>
+                                        <th>ชุดข้อมูล</th>
+                                        <th>แหล่งข้อมูล</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>ข้อมูลรายชื่อข้าราชการกองคณิตศาสตร์และคอมพิวเตอร์</td>
+                                        <td>https://macs.crma.ac.th</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ข้อมูลรายชื่อข้าราชการกองอื่นๆ</td>
+                                        <td>https://acadiv.crma.ac.th</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div id = "select-container" class = "select-container col-xs-4 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #2a58c3/*#383838;*/">
+
+            <!button class="btn btn-default button-control" id="stop-button" style = "padding: 0px 10px;" type="button"><!/button>
+
+
+          </div>
+        </div>
+
+        <div id = "left-bottom" class = "col-sm-12 height90p" style = "height : 88%; background-color: #fff;">
+          <div id="video-container" style = "display: flex">
+
+            <!video id="video" width="640" height="480" autoplay muted><!/video>
+            <!img id="video" width="640" height="480" src="http://192.168.1.106:8080/video" alt="Video feed"/>
+            <canvas id="canvas" width="640" height="480"></canvas>
+
+          </div>       
+
+
+
+          <div id="map-container">
+            <div id="map" class='blue'></div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+      <div id = "right-panel" class = "col-sm-5 height100p" style = "padding-right: 10px; background-color: #383838;">
+        <div id = "top-right1" class = "col-sm-12 height10p" style = "min-height : 77px; max-height : 77px; padding-left: 10px; background-color: #383838;">
+          <div id = "date-container" class = "col-xs-4 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #fff;">
+
+            <div class = "col-sm-12" style="padding-left:3px; height:100%;display:flex; font-size: 10px;text-align: left;">
+              <div id = "daydisplay" style ="align-self: flex-end;"></div>
+              <span id = "monthdisplay" style ="align-self: flex-end;"></span>
+            </div>
+
+          </div>
+          <div id = "filter-container" class = "filter-container col-xs-8 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #fff;/*#383838;*/">
+            <div id = "filter-toprow" class = "filter-row col-sm-12 height50p">
+              <select id = "dept-selector" style="height: 24px;"></select>
+            </div>
+
+            <div id = "filter-bottomrow" class = "filter-row col-sm-12 height50p">
+              <div class="row toolbar-pf">
+                <!div class="col-sm-12">
+                  <form class="toolbar-pf-actions">
+                    <div class="form-group">
+                    <button class="btn btn-default" id="left-button" type="button" style="height: 24px; margin : 0px; padding: 1px 6px;">◀</button>  
+                    <button class="btn btn-default" id="right-button" type="button" style="height: 24px; margin : 0px; padding: 1px 6px;">▶</button>
+
+                    </div>
+                    <div class="form-group">
+                      
+                      <div class="input-group date" id="datepicker">
+
+                        <input id = "datepicked" type="text" class="form-control bootstrap-datepicker" style="width: 70px;"><span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <button class="btn btn-default" id="today-button" type="button" style="height: 24px;">TODAY</button>
+                    </div>
+                  </form>
+                <!/div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+        <div id = "top-right2" class = "col-sm-12 height10p" style = "min-height : 82px; max-height : 82px; padding-left: 10px; background-color: #383838;">
+          <div id = "menu-container" class = "height100p" style = "padding-right: 10px; border-bottom: 2px solid #9bee00;">
+
+            <div class="col-xs-4 height100p card-wrapper" style="padding-top:1px;">
+              <div class = "card 1" style="/*background-color:#ea5771;*/">
+                <div class = "col-xs-6" style="padding-left:3px; height:22%; font-size: 10px;text-align: left;padding-bottom : 1px;border-bottom: 1px solid #fff">ตรวจพบ</div>
+                <div class = "col-xs-6" id = "total-detectedfaces"style="height:22%; font-size: 10px;padding-bottom : 1px;border-bottom: 1px solid #fff; padding-right : 5px;"></div>
+                <div class = "card-menu col-xs-12" onmouseover="" onclick="updateMenu(1)" style="height:70%;border-bottom: 2px solid #9bee00">
+                  <div class = "col-xs-6" style="padding-left:3px; height:100%;display:flex; font-size: 10px;text-align: left;"><span style ="align-self: flex-end;">ยืนยัน</span></div>
+                  <div class = "col-xs-6" id = "total-verified" style="margin-top: -8px; height:100%; font-family: Impact;font-size: 42px;color:#9bee00; padding-right : 3px;"></div>
+                </div>
+                <div id = "menuIndicator1" class = "card-menu-indicator col-xs-12" style="margin-top: 1px; height:10%; background: #9bee00"></div>
+              </div>
+            </div>
+            <div class="col-xs-4 height100p card-wrapper" style="padding-top:1px;">
+              <div class = "card 2" style="/*background-color:#ea5771;*/">
+                <div class = "col-xs-6" style="padding-left:3px; height:22%; font-size: 10px;text-align: left;padding-bottom = 1px;border-bottom: 1px solid #fff">Detection</div>
+                <div class = "col-xs-6" id = "total-detection"style="height:22%; font-size: 10px;padding-bottom = 1px;border-bottom: 1px solid #fff; padding-right : 5px;"></div>
+                <div class = "card-menu col-xs-12" onmouseover="" onclick="updateMenu(2)" style="height:70%;border-bottom: 2px solid #fcc400">
+                  <div class = "col-xs-6" style="padding-left:3px; height:100%;display:flex; font-size: 10px;text-align: left;"><span style ="align-self: flex-end;">รอยืนยัน</span></div>
+                  <div class = "col-xs-6" id = "total-tobeverified" style="margin-top: -8px; height:100%; font-family: Impact;font-size: 42px; color:#fcc400; padding-right : 3px;"></div>
+                </div>
+                <div id = "menuIndicator2" class = "card-menu-indicator col-xs-12" style="margin-top: 2px; height:10%; background: #fff0"></div>
+              </div>
+            </div>
+            <div class="col-xs-4 height100p card-wrapper" style="padding-top:1px;">
+              <div class = "card 3" style="/*background-color:#ea5771;*/">
+                <div class = "col-xs-6" style="padding-left:3px; height:22%; font-size: 10px;text-align: left;padding-bottom = 1px;border-bottom: 1px solid #fff">Status</div>
+                <div class = "col-xs-6" id = "total-status"style="height:22%; font-size: 10px;padding-bottom = 1px;border-bottom: 1px solid #fff; padding-right : 5px;">ปกติ</div>
+                <div class = "card-menu col-xs-12" onmouseover="" onclick="updateMenu(3)" style="height:70%;border-bottom: 2px solid #ff0000">
+                  <div class = "col-xs-3" style="padding-left:3px; height:100%;display:flex; font-size: 10px;text-align: left;"><span style ="align-self: flex-end;">unknown</span></div>
+                  <div class = "col-xs-9" id = "total-unknown" style="margin-top: -8px; height:100%; font-family: Impact;font-size: 42px;color:#ff0000; padding-right : 3px;"></div>
+                </div>
+                <div id = "menuIndicator3" class = "card-menu-indicator col-xs-12" style="margin-top: 2px; height:10%; background: #fff0"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class = "col-sm-12 height80p" style = "height : 76%; background-color: #383838">
+          <div id="table-container" oncontextmenu="return false;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script defer src="js/face-api.min.js"></script>
+  <!script src="js/d3.v355.min.js"><!/script>
+  <script src="js/covid19.js"></script>
+  <script src='js/mapbox-gl.js'></script>
+  <script src="js/crossfilter.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script defer src="ISOC.js"></script>
+
+  <script src="js/bootstrap-datepicker.min.js"></script>
+  <script src="js/d3.min.js"></script>
+
+  <script>
+
+    var formatDateTime = d3.time.format("%d %B %Y %H:%M:%S");
+    var z=2;
+    // var chartData,
+    //     refresh_rate = i = 4,
+    //     windowlength = 200
+    //     z = 2;
+    //     //transitiontime = 100;
+
+    // var timenow = new Date;
+
+    //     timenow = new Date(timenow.getTime() - (refresh_rate*windowlength*1000));
+
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg'
+    
+    //Setup mapbox-gl map
+    var map = new mapboxgl.Map({
+      //style: 'mapbox://styles/tunchz/ck9litjbw2soc1iqo4rysy4nt',
+      //style: 'mapbox://styles/mapbox/streets-v11',
+      //style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',  // the outdoors-v10 style but without Hillshade layers
+      //style: 'mapbox://styles/mapbox/outdoors-v10',
+      //style: 'mapbox://styles/mapbox/dark-v10',
+      style: 'mapbox://styles/mapbox/satellite-v9',
+      //style: 'mapbox://styles/mapbox/light-v10',
+      container: 'map', // container id
+      center: [101.1673626,14.2808669],
+      minZoom: 5,
+      maxZoom: 20,
+      zoom: 12,
+      pitch: 90,
+      //bearing: -17.6,
+      antialias: true
+
+    })
+
+
+    //map.flyTo({ center: [-0.1,51.5119112] });
+
+
+    // disable map rotation using right click + drag
+    //map.dragRotate.disable();
+     
+    // disable map rotation using touch rotation gesture
+    //map.touchZoomRotate.disableRotation();
+
+    //map.scrollZoom.disable()
+    map.doubleClickZoom.disable();
+    //map.addControl(new mapboxgl.Navigation());
+    map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
+    // Add geolocate control to the map.
+    map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true}), 'top-left');
+    map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+
+
+    document.getElementById("map-container").style.display = "none";
+
+    //refresh();
+    //drawmap(map,sensor);
+
+    //tick();
+
+
+
+    function tabulateimg(data, columns) {
+
+
+      var table = d3.select('#table-container').append('table').attr("id","table_image");
+
+      //var thead = table.append('thead')
+      var tbody = table.append('tbody');
+      var dummy = [];
+
+      for (t=0; t<data.length; t++) {
+        data[t].row_no = t;
+      }
+      columns.push('row_no');
+      //console.log(data);
+    //console.log("1",img_col==null)
+    /*
+      // append the header row
+      thead.append('tr')
+        .selectAll('th')
+        .data([img_col[0],'detail']).enter()
+        .append('th')
+          .text(function (column) { return column; });
+    */
+      // create a row for each object in the data
+      var rows = tbody.selectAll('tr')
+        .data(data)
+        .enter()
+        .append('tr')
+        .attr('class','table_row')
+        .attr('id',function(d) {return 'row-'+d.id});
+
+      // create a cell in each row for each column
+
+      //------ 1st column section ------------------------------------------------------------------  
+      var img_cells = rows.selectAll('td')
+        .data(function (row) { //console.log(row);
+          return ["img"/*columns[0]*/].map(function (column) {
+            return {column: column, value: row[column], status:row["status"]};
+          });
+        })
+        .enter()
+        .append('td').attr("class","img_col")
+        .append('div')
+        .attr('class', 'table_img_container')
+        .append('img')
+        .attr('class', 'table_img')
+        .attr('src', function(d) {return d.column == columns[0] ?  d.value : null;})
+        .style("border",function (d) {
+              if (d.status == "succeeded") {
+                return "3px solid #9bee00"
+              } else if (d.status == "unknown") {
+                return "3px solid #ff0000"
+              } else if (d.status == "sending") {
+                return "3px solid #ffcc00"
+              } else if (d.status == "toverify") {
+                return "3px solid #ffcc00"
+              } else {
+                return "3px solid #316be6"
+              }
+        });
+
+      //------ 2nd column section ------------------------------------------------------------------  
+      var cells = rows.selectAll('td')
+        .data(function (row) {
+          //console.log(row);
+          return ['img','detail'].map(function (column) {
+            var dt = {};
+            for (m=1; m < 4 /*columns.length*/; m++) {
+              if (columns[m] == 'id') {
+                if ((row[columns[m]].substr(0,7)) != 'unknown') {
+                  dt[columns[m]] = facelabels[parseInt(row[columns[m]])].name;
+                } else {
+                  dt[columns[m]] = row[columns[m]];
+                }
+                
+              } else {
+                dt[columns[m]] = row[columns[m]];
+              }
+     
+            }
+            //console.log(dt);
+            return {column: column, value: dt /*{"detail" : row[columns[1]], "subdetail_1" : row[columns[2]], "subdetail_2" : row[columns[3]]}*/};
+          });
+        })
+        .enter()
+        .append('td').attr("class","detail_col")
+        .append('table').attr("id","detail_table");
+
+        var cthead = cells.append('thead')
+        var ctbody = cells.append('tbody');
+
+        // Display detail as table header
+        cthead.append('tr')
+          .selectAll('th')
+          .data(function (d) {/*console.log(d.value[columns[1]]);*/ return [d.value[columns[1]]]})
+          .enter()
+          .append('th')
+            .attr('class', 'detail')
+            .text(function (column) {return column })
+
+        // Display subdetail as table row 
+        var crows = ctbody.selectAll('tr')
+          .data(function (d) {return [d.value[columns[2]],d.value[columns[3]]]})
+          .enter()
+          .append('tr')
+          .append('th')
+            .attr('class', 'subdetail')
+            .text(function (column) {return column })
+
+      //------ 3rd column section ------------------------------------------------------------------         
+      var cells2 = rows.selectAll('td')
+        .data(function (row) {
+          //console.log(row);
+          return ['img','detail','tag'].map(function (column) {
+            var dt = {};
+            for (m=4; m<columns.length; m++) {
+              /*if (m == 7) {
+                dt['row_no'] = row['row_no'];
+              } else if (columns[m] == 'lat') {
+                dt[columns[m]] = '●';
+              } else {
+                dt[columns[m]] = row[columns[m]];
+              } */    
+              dt[columns[m]] = row[columns[m]];
+            }
+            //console.log(dt);
+            return {column: column, value: dt /*{"detail" : row[columns[1]], "subdetail_1" : row[columns[2]], "subdetail_2" : row[columns[3]]}*/};
+          });
+        })
+        .enter()
+        .append('td').attr("class","tag_col")
+        .append('table').attr("id","tag_table");
+
+        var cthead2 = cells2.append('thead')
+        var ctbody2 = cells2.append('tbody');
+
+        // Display detail as table header
+        cthead2.append('tr')
+          .selectAll('th')
+          .data(function (d) {/*console.log(d.value[columns[1]]);*/ return d.value[columns[4]]==d.value[columns[5]]?[d.value[columns[4]]]:[d.value[columns[4]]+" - "+d.value[columns[5]]]})
+          .enter()
+          .append('th')
+            .attr('class', 'tag')
+            .text(function (column) {return column })
+
+        // Display subdetail as table row 
+        var crows2 = ctbody2.selectAll('tr')
+          .data(function (d) {return [{value : d.value[columns[6]], name : "mood", row : d.value[columns[9]]},{value : d.value[columns[7]], name : "status", row : d.value[columns[9]], detection : d.value[columns[8]]}]})
+          .enter()
+          .append('tr')
+          .append('th')
+            .attr('id',function(d) {/*console.log(d);*/return 'subtag-'+d.row+'-'+d.name})
+            .attr('class', 'subtag')
+            .text(function (column) {return column.name == "mood"? column.value : column.detection + " " + (column.value == 'succeeded'|column.value == 'unknown' ? '✔': column.value == 'failed' ? '✘': '❗' )})
+
+/*
+        if (data[t].status == 'succeeded') {
+          data[t].status = '✔';
+        } else if (data[t].status == 'failed') {
+          data[t].status = '✘';
+        } else {
+          data[t].status = '❗';
+        }
+
+*/
+
+      return table;
+    }
+
+    function project(m,d) {
+      return m.project(new mapboxgl.LngLat(+d.lon, +d.lat)/*getLL(d)*/);
+    }
+
+    function markerupdate(m,d) {
+      d
+      .attr({
+        cx: function(d) { 
+          var x = project(m,d).x;
+          return x
+        },
+        cy: function(d) { 
+          var y = project(m,d).y;
+          return y
+        },
+      })
+    }
+
+    function zoom(d) {
+      if (d==0) {
+        return 18.5;
+      } else if (d==1) {
+        return 16;
+      } else if (d==2) {
+        return 12;
+      } else if (d==3) {
+        return 9;
+      } else {
+        return 5;
+      }
+    }
+
+    function drawmap(data){
+      //remove all old markers and popups
+      markers = d3.select("#map").selectAll(".marker");
+      markers.remove();
+      popups = d3.select("#map").selectAll(".mapboxgl-popup");
+      popups.remove();
+
+      var popups={},j = 0,index = {};
+      
+      for (j = 0; j < data.length; j++) {
+        index[data[j].id] = j;
+        
+        if (data[j].lat!=0 && data[j].lon!=0){
+          
+          //console.log(data[j].name,data[j].lat,data[j].lon);
+          var el = document.createElement('div');
+          el.className = 'marker';
+          el.id = 'marker-'+ data[j].id;
+
+          // make a marker for each feature and add to the map
+          new mapboxgl.Marker(el)
+          .setLngLat([data[j].lon,data[j].lat])
+          .addTo(map);
+
+          popups[data[j].id] = new mapboxgl.Popup({ offset: 25, closeButton: false, closeOnClick: false }).setHTML('<strong>┃ '+facelabels[parseInt(data[j].id)].name+'</strong><small><br> ▸  '+ data[j].mood+ '  ' + data[j].status+ '<br> ▸ '+formatDateTime(data[j].timestamp)+ /*'<br> ▸ Lat: '+ data[j].lat +'  Lat: '+ data[j].lon +*/ '<br> ▸  '+ data[j].location+ '</small>');
+
+          //d3.select("#map").selectAll("#marker-"+j).style("background-image","url('img/"+ data[j].name +".jpg')");
+          d3.select("#map").selectAll("#marker-"+data[j].id)
+            //.style("background-image","url('img/เสือผู้ไม่กินเหยื่อซ้ำ.jpg')")
+            .style("background-image", "url('https://tunchz.github.io/Face.Rex/labeled_images_2/" + data[j].id + "/1.jpg')")
+            //.style("background-image","src('" + data[j].img + "')")
+            .style("border",function (d) {
+              if (data[j].status == "มาทำงาน") {
+                return "2px solid #9bee00"
+              } else if (data[j].status == "ทำงานที่บ้าน") {
+                return "2px solid #ffcc00"
+              } else if (data[j].status == "ราชการ") {
+                return "3px solid #316be6"
+              } else {
+                return "2px solid #9bee00"
+              }
+/*            .append('img')
+            .attr('class', 'table_img')
+            .attr('src', function(d) {return d.column == columns[0] ?  d.value : null;})
+*/            })
+            ;
+
+          d3.select("#map").selectAll(".marker")
+            .on('mouseover', function(e) {
+              d3.select("#map").selectAll(".marker").style('opacity',0.6);
+              id = d3.select(this).attr('id').split("-")[1];
+              k=index[id]; 
+              d3.select("#marker-"+data[k].id).style('opacity',1).style('height','45px').style('width','45px').style('z-index',2);
+              popups[id].setLngLat([data[k].lon,data[k].lat]).addTo(map);})
+            .on('mouseout', function(e) {
+              d3.select("#map").selectAll(".marker").style('opacity',1).style('height','30px').style('width','30px').style('z-index',0);
+              popup = popups[d3.select(this).attr('id').split("-")[1]]; popup.remove();})
+            .on('click', function(d) {k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});})
+            .on('dblclick', function(d) {z!=0 ? z = z - 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});})
+            .on('contextmenu', function(d) {z!=4 ? z = z + 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});});
+
+        } //if
+      } //for
+
+      //tabulateimg(data, ["img","name","status","timestamp"]);
+
+
+          d3.select("#table-container").selectAll(".table_row")
+            .on('mouseover', function(e) {
+              d3.select("#map").selectAll(".marker").style('opacity',0.6);
+              id=d3.select(this).attr('id').split("-")[1]; 
+              k = index[id]
+              d3.select("#marker-"+id).style('opacity',1).style('height','45px').style('width','45px').style('z-index',2);
+              popups[id].setLngLat([data[k].lon,data[k].lat]).addTo(map);
+            })
+            .on('mouseout', function(e) {
+              d3.select("#map").selectAll(".marker").style('opacity',1).style('height','30px').style('width','30px').style('z-index',0);
+              popup = popups[d3.select(this).attr('id').split("-")[1]]; popup.remove();})
+            .on('click', function(d) {k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});})
+            .on('dblclick', function(d) {z!=0 ? z = z - 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});})
+            .on('contextmenu', function(d) {z!=4 ? z = z + 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});});
+    }
+
+
+    // function refresh(){
+    //   d3.json("http://122.155.11.222:1880/checkin?", function(error, data2) {
+
+    //     var formatDate = d3.time.format("%Y-%m-%d"),
+    //         formatTime = d3.time.format("%H:%M:%S");
+
+
+    //     if (!error) {
+    //       //console.log(data2.length);
+    //       for (j = 0; j < data2.length; j++) {
+    //         sensor2.push({ 'name' : data2[j].name,
+    //                     'id' : j,     
+    //                     'img' : 'img/เสือผู้ไม่กินเหยื่อซ้ำ.jpg',             
+    //                     'lat' :+parseFloat(data2[j].latitude).toFixed(6),
+    //                     'lon' : +parseFloat(data2[j].longitude).toFixed(6),
+    //                     'status': data2[j].status,
+    //                     'detail': data2[j].detail,
+    //                     'location': data2[j].location,
+    //                     'timestamp' : new Date(data2[j].timestamp),
+    //                     'date' : formatDate(new Date(data2[j].timestamp)),
+    //                     'time' : formatTime(new Date(data2[j].timestamp)),
+    //         });            
+    //       }
+    //     }
+    //     var sf = crossfilter(sensor2);
+    //     sf.date = sf.dimension(function(d) { return d.date; });
+
+    //     var sensor2_filtered = sf.date.filterExact("2020-05-18").bottom(Infinity)
+
+    //     //drawmap(sensor2_filtered);
+
+    //     tabulateimg(sensor2_filtered, ["img","name","status","timestamp","time","lat","lon"]);
+    //   });
+    // }
+
+    // function tick() {
+    //   setTimeout(tick, 1000 - Date.now() % 1000);
+    //   var now = new Date;
+    //   document.getElementById("TimeDisplay").innerHTML = formatTime(now)+" ▸ refresh in "+i+ " secs";
+    //   if (i<=0) {
+    //     refresh();
+    //       i = refresh_rate;
+    //   } 
+    //   i -= 1;
+    // }
+
+
+  </script>
+
+
+
+</html>
