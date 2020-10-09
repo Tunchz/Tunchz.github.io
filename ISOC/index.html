@@ -562,9 +562,9 @@
             .on('mouseout', function(e) {
               d3.select("#map").selectAll(".marker").style('opacity',1).style('height','30px').style('width','30px').style('z-index',0);
               popup = popups[d3.select(this).attr('id').split("-")[1]]; popup.remove();})
-            .on('click', function(d) {k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});})
-            .on('dblclick', function(d) {z!=0 ? z = z - 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});})
-            .on('contextmenu', function(d) {z!=4 ? z = z + 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});});
+            .on('click', function(d) {k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : 1, curve : 1, essential: true});})
+            .on('dblclick', function(d) {z!=0 ? z = z - 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : 1, curve : 1, essential: true});})
+            .on('contextmenu', function(d) {z!=4 ? z = z + 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : 1, curve : 1, essential: true});});
 
         } //if
       } //for
@@ -583,9 +583,9 @@
             .on('mouseout', function(e) {
               d3.select("#map").selectAll(".marker").style('opacity',1).style('height','30px').style('width','30px').style('z-index',0);
               popup = popups[d3.select(this).attr('id').split("-")[1]]; popup.remove();})
-            .on('click', function(d) {k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});})
-            .on('dblclick', function(d) {z!=0 ? z = z - 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});})
-            .on('contextmenu', function(d) {z!=4 ? z = z + 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});});
+            .on('click', function(d) {k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : 1, curve : 1, essential: true});})
+            .on('dblclick', function(d) {z!=0 ? z = z - 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : 1, curve : 1, essential: true});})
+            .on('contextmenu', function(d) {z!=4 ? z = z + 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : 1, curve : 1, essential: true});});
     }
 
 
