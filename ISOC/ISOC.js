@@ -45,19 +45,19 @@ if (isonMobile) {
   ipcamUse = false;
 }
 
-const videocontainer = document.getElementById('video-container');
-const canvas = document.getElementById('canvas');
-var video,notification;
+// const videocontainer = document.getElementById('video-container');
+// const canvas = document.getElementById('canvas');
+// var video,notification;
 
 
-// Initialize vidio element
-video = document.createElement("img");
-video.id = "video";
-video.style.backgroundColor = "#000";
-video.autoplay = true;
-videocontainer.append(video);
-resizeAdjust();
-displaynoti("Loading models...");
+// // Initialize vidio element
+// video = document.createElement("img");
+// video.id = "video";
+// video.style.backgroundColor = "#000";
+// video.autoplay = true;
+// videocontainer.append(video);
+// resizeAdjust();
+// displaynoti("Loading models...");
 
 
 
@@ -234,11 +234,11 @@ function onMobile() {
 
 async function start() {
   
-  /**** define display size and format canvas size to match ****/
-  displaySize = { width: video.width, height: video.height };
-  faceapi.matchDimensions(canvas, displaySize);
+  // /**** define display size and format canvas size to match ****/
+  // displaySize = { width: video.width, height: video.height };
+  // faceapi.matchDimensions(canvas, displaySize);
 
-  canvas_ctx = canvas.getContext('2d');
+  // canvas_ctx = canvas.getContext('2d');
 
   /****Detect face and recognize for every detectionDelay milliseconds ****/
   //console.log("loop start!")
@@ -247,19 +247,19 @@ async function start() {
 
     console.log(loop_i,videoStart);
 
-    if (videoStart) {
-      detect();
-    } else { 
-      canvas_ctx.clearRect(0, 0, canvas.width, canvas.height);
-      var timenow = new Date();
-      var numfaces = detectedfaces.length 
-      //canvas_ctx.lineWidth = "12";
-      //canvas_ctx.strokeStyle = "#00f";
-      //canvas_ctx.rect(canvas.width - 80, 6, 80, 12);
-      canvas_ctx.font = "20px Impact";
-      canvas_ctx.fillStyle = "#fff";
-      canvas_ctx.fillText(" "+formatTimeDisplay(timenow)+" ", canvas.width - 80, 20);
-    }
+    // if (videoStart) {
+    //   detect();
+    // } else { 
+    //   canvas_ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //   var timenow = new Date();
+    //   var numfaces = detectedfaces.length 
+    //   //canvas_ctx.lineWidth = "12";
+    //   //canvas_ctx.strokeStyle = "#00f";
+    //   //canvas_ctx.rect(canvas.width - 80, 6, 80, 12);
+    //   canvas_ctx.font = "20px Impact";
+    //   canvas_ctx.fillStyle = "#fff";
+    //   canvas_ctx.fillText(" "+formatTimeDisplay(timenow)+" ", canvas.width - 80, 20);
+    // }
 
 
     // Check loops to update detectedfacesList from google sheet
@@ -1333,8 +1333,8 @@ function controlButton() {
 function startMap() {
 
   //hide 
-  document.getElementById("video-container").style.display = "none";
-  document.getElementById("map-container").style.display = "block";
+  // document.getElementById("video-container").style.display = "none";
+  // document.getElementById("map-container").style.display = "block";
   map.resize();
 
   //document.getElementById("stop-button").innerHTML = "■";
