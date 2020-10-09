@@ -108,13 +108,6 @@
         </div>
 
         <div id = "left-bottom" class = "col-sm-12 height90p" style = "height : 88%; background-color: #fff;">
-          <div id="video-container" style = "display: flex">
-
-            <!video id="video" width="640" height="480" autoplay muted><!/video>
-            <!img id="video" width="640" height="480" src="http://192.168.1.106:8080/video" alt="Video feed"/>
-            <canvas id="canvas" width="640" height="480"></canvas>
-
-          </div>       
 
 
 
@@ -263,7 +256,7 @@
       container: 'map', // container id
       center: [101.6673626,13.2808669],
       //center: [13.79,53.545],
-      minZoom: 4.7,
+      minZoom: 4,
       maxZoom: 20,
       zoom: 4.7,
       pitch: 0,
@@ -295,6 +288,8 @@
     map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true}), 'top-left');
     map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
+    //document.getElementsByClassName("mapboxgl-ctrl-top-left").style.top = "30px";
+
     //document.getElementById("map-container").style.display = "none";
 
     //refresh();
@@ -303,7 +298,10 @@
     //tick();
     
     map_addlayer();
-    map_addpulsemarker()
+    map_addpulsemarker();
+    map_addpulsemarker2();
+    map_addpulsemarker3();
+    map_addpulsemarker4();
 
 
     function tabulateimg(data, columns) {
@@ -743,13 +741,28 @@
           'type': 'geojson',
           'data': {
             'type': 'FeatureCollection',
-            'features': [{
-              'type': 'Feature',
-              'geometry': {
-                'type': 'Point',
-                'coordinates': [100.1673626,17.2808669]
+            'features': [
+              {
+                'type': 'Feature',
+                'geometry': {
+                  'type': 'Point',
+                  'coordinates': [100.1673626,17.2808669]
+                }
+              },
+              {
+                'type': 'Feature',
+                'geometry': {
+                  'type': 'Point',
+                  'coordinates': [101.1673626,13.2808669]
+                }
               }
-            }]
+            ]
+
+
+
+
+            // "type": "Point",
+            // "coordinates": [100.1673626,17.2808669]
           }
         });
 
@@ -762,14 +775,288 @@
           }
         });
       });
-      console.log('pulsing marker done')
     }
 
 
 
+    function map_addpulsemarker2() {
+
+      var framesPerSecond = 50; 
+      var initialOpacity = 1
+      var opacity = initialOpacity;
+      var initialRadius = 6;
+      var radius = initialRadius;
+      var maxRadius = 25;
+
+
+      map.on('load', function () {
+
+          // Add a source and layer displaying a point which will be animated in a circle.
+          map.addSource('point', {
+              "type": "geojson",
+              "data": {
+                  "type": "Point",
+                  "coordinates": [103.1673626,18.2808669]
+              }
+          });
+
+          map.addLayer({
+              "id": "outtercircle",
+              "source": "point",
+              "type": "circle",
+              "paint": {
+                  "circle-radius": initialRadius,
+                  "circle-radius-transition": {duration: 0},
+                  "circle-opacity-transition": {duration: 0},
+                  "circle-color": "#aaf"
+              }
+          });
+
+          map.addLayer({
+              "id": "innercircle",
+              "source": "point",
+              "type": "circle",
+              "paint": {
+                  "circle-radius": initialRadius,
+                  "circle-color": "#0000ff"
+              }
+          });
+
+
+          function animateMarker(timestamp) {
+              setTimeout(function(){
+                  requestAnimationFrame(animateMarker);
+
+                  radius += (maxRadius - radius) / framesPerSecond;
+                  opacity -= ( .9 / framesPerSecond );
+                  if (opacity < 0) { opacity = 0}
+
+                  map.setPaintProperty('outtercircle', 'circle-radius', radius);
+                  map.setPaintProperty('outtercircle', 'circle-opacity', opacity);
+
+                  if (opacity <= 0) {
+                      radius = initialRadius;
+                      opacity = initialOpacity;
+                  } 
+
+              }, 1000 / framesPerSecond);
+              
+          }
+
+          // Start the animation.
+          animateMarker(0);
+      });
+
+    }
 
 
 
+    function map_addpulsemarker3() {
+
+      //var elevated_points = 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_geography_regions_elevation_points.geojson'
+
+      var framesPerSecond = 30;
+      var multiplier = 1;
+      var opacity = .1;
+      var textSize = 24;
+
+      map.on('load', function(){
+        map.addSource('mountains', {
+          'type': 'geojson',
+  
+          "data": {
+            // "type": "Point",
+            // "coordinates": [102.6673626,15.2808669]
+
+            'type': 'FeatureCollection',
+            'features': [
+              {
+                'type': 'Feature',
+                'geometry': {
+                  'type': 'Point',
+                  'coordinates': [102.6673626,15.2]
+                }
+              },
+              {
+                'type': 'Feature',
+                'geometry': {
+                  'type': 'Point',
+                  'coordinates': [103.1673626,15.8808669]
+                }
+              }
+            ]
+          }
+
+
+
+        });
+
+        var baseLayout = {
+          'text-field': '▼',
+          'text-font': ['Open Sans Extrabold', 'Arial Unicode MS Bold'],
+          'text-size': 24,
+          // 'text-padding': 60,
+          // 'text-allow-overlap': true,
+          'text-ignore-placement': true
+        }
+
+        var basePaint = {
+          'text-color': 'rgba(0,255,0,1)',
+          'text-opacity': 1,
+        }
+
+
+        map.addLayer({
+          'id': 'mountains-pulse',
+          'type': 'symbol',
+          'source': 'mountains',
+          'layout': baseLayout,
+          'paint': basePaint
+        })
+
+        map.addLayer({
+          'id': 'mountains',
+          'type': 'symbol',
+          'source': 'mountains',
+          'layout': baseLayout,
+          'paint': basePaint
+        });
+
+        map.setPaintProperty('mountains-pulse', 'text-color', 'rgba(200,255,200,1)')
+
+        map.setLayoutProperty('mountains-pulse', 'text-size', 24)
+
+
+        function pulseMarker(timestamp){
+          setTimeout(function() {
+            requestAnimationFrame(pulseMarker)
+
+
+            multiplier += .1;
+            opacity -= ( .9 / framesPerSecond );
+            textSize += ( 50 / framesPerSecond );
+
+            map.setPaintProperty('mountains-pulse', 'text-opacity', opacity)
+            map.setLayoutProperty('mountains-pulse', 'text-size', textSize)
+
+            if (opacity <= 0.1) {
+              opacity = 1;
+              textSize = 24;
+            }
+
+          }, 1000 / framesPerSecond );
+        }
+
+        pulseMarker(0);
+
+      })
+
+
+    }
+
+    function map_addpulsemarker4() {
+
+
+        var framesPerSecond = 30;
+        var multiplier = 1;
+        var opacity = .1;
+        var textSize = 24;
+
+
+      map.on('load', function(){
+        map.addSource('mountains2', {
+          'type': 'geojson',
+          //'data': elevated_points
+
+
+          "data": {
+            // "type": "Point",
+            // "coordinates": [102.6673626,15.2808669]
+
+            'type': 'FeatureCollection',
+            'features': [
+              {
+                'type': 'Feature',
+                'geometry': {
+                  'type': 'Point',
+                  'coordinates': [99.067,18.8]
+                }
+              },
+              {
+                'type': 'Feature',
+                'geometry': {
+                  'type': 'Point',
+                  'coordinates': [100.073626,14.2]
+                }
+              }
+            ]
+
+          }
+        });
+
+
+        var baseLayout = {
+          'text-field': '☢',
+          'text-font': ['Open Sans Extrabold', 'Arial Unicode MS Bold'],
+          'text-size': 24,
+          // 'text-padding': 60,
+          // 'text-allow-overlap': true,
+          'text-ignore-placement': true
+        }
+
+        var basePaint = {
+          'text-color': 'rgba(255,100,0,1)',
+          'text-opacity': 1,
+        }
+
+
+        map.addLayer({
+          'id': 'mountains2-pulse',
+          'type': 'symbol',
+          'source': 'mountains2',
+          'layout': baseLayout,
+          'paint': basePaint
+        })
+
+        map.addLayer({
+          'id': 'mountains2',
+          'type': 'symbol',
+          'source': 'mountains2',
+          'layout': baseLayout,
+          'paint': basePaint
+        });
+
+        map.setPaintProperty('mountains2-pulse', 'text-color', 'rgba(255,255,200,1)')
+
+        map.setLayoutProperty('mountains2-pulse', 'text-size', 24)
+
+
+        function pulseMarker(timestamp){
+          setTimeout(function() {
+            requestAnimationFrame(pulseMarker)
+
+
+            multiplier += .1;
+            opacity -= ( .9 / framesPerSecond );
+            textSize += ( 50 / framesPerSecond );
+
+            map.setPaintProperty('mountains2-pulse', 'text-opacity', opacity)
+            map.setLayoutProperty('mountains2-pulse', 'text-size', textSize)
+
+            if (opacity <= 0.1) {
+              opacity = 1;
+              textSize = 24;
+            }
+
+          }, 1000 / framesPerSecond );
+        }
+
+        pulseMarker(0);
+
+      })
+
+
+    }
 
 
   </script>
