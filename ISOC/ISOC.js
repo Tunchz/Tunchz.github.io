@@ -164,29 +164,29 @@ function resizeAdjust() {
       } else {
       document.getElementById("left-panel").style.height = "100%";
       }
-      $("#left-bottom").height(($("#left-panel").height()-43));
-      $("#map-container").height($("#left-bottom").height()-8);
-      $("#map-container").width($("#left-bottom").width()-10);
-      document.getElementById("map-container").style.top = "4px";
-      document.getElementById("map-container").style.left = "5px";
+      $("#left-bottom").height(($("#left-panel").height()-1));
+      $("#map-container").height($("#left-bottom").height());
+      $("#map-container").width($("#left-bottom").width());
+      //document.getElementById("map-container").style.top = "4px";
+      //document.getElementById("map-container").style.left = "5px";
     } else {   
       document.getElementById("left-panel").style.width = "100%";
       document.getElementById("right-panel").style.width = "100%";
       document.getElementById("left-panel").style.height = "100%";
-      $("#left-bottom").height(($("#left-panel").height()-43));
-      $("#map-container").height($("#left-bottom").height()-8);
-      $("#map-container").width($("#left-bottom").width()-10);
-      document.getElementById("map-container").style.top = "4px";
-      document.getElementById("map-container").style.left = "5px";
+      $("#left-bottom").height(($("#left-panel").height()-1));
+      $("#map-container").height($("#left-bottom").height());
+      $("#map-container").width($("#left-bottom").width());
+      //document.getElementById("map-container").style.top = "4px";
+      //document.getElementById("map-container").style.left = "5px";
     }
 
   } else {
     document.getElementById("left-panel").style.height = "100%";
-    $("#left-bottom").height($("#wholecontent").height()-43);
-    $("#map-container").height($("#left-bottom").height()-8);
-    $("#map-container").width($("#left-bottom").width()-10);
-    document.getElementById("map-container").style.top = "4px";
-    document.getElementById("map-container").style.left = "5px";
+    $("#left-bottom").height($("#wholecontent").height()-1);
+    $("#map-container").height($("#left-bottom").height());
+    $("#map-container").width($("#left-bottom").width()-1);
+    //document.getElementById("map-container").style.top = "4px";
+    //document.getElementById("map-container").style.left = "5px";
   }
 
   //displaySize = { width: video.width, height: video.height };
@@ -1346,7 +1346,7 @@ function startMap() {
   menubtn.setAttribute('type', 'button');
   //stopbtn.setAttribute('onclick', 'inputMenu()');
   menubtn.setAttribute('onclick', 'switchRightpanel()');
-  document.getElementById("select-container").append(menubtn);
+  document.getElementById("menu-container-top-right").append(menubtn);
   //document.getElementById("stop-button").innerHTML = "■⌂";
   document.getElementById("menu-button").innerHTML = "☰";
 

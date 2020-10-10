@@ -37,13 +37,13 @@ small {
 
 svg {
   position:absolute;
-  top: 20%;
+  /*top: 20%;
   right: 0%;
-  /*margin-top:20px;
-  margin-bottom:20px;*/
+  margin-top:20px;
+  margin-bottom:20px;
   width:70%;
   height:72%;
-  /*background-color:#fff;*/
+  background-color:#fff;*/
   opacity: 1;
 
 }
@@ -117,11 +117,11 @@ color:#000;
 
 #map-container { 
   position:absolute; 
-  top: 1%;
-  left: 1%;
+  top: 0%;
+  left: 0%;
   
-  width: 98%; /*90%;*/
-  height: 98%;
+  width: 100%; /*90%;*/
+  height: 100%;
 }
 
 
@@ -365,7 +365,7 @@ html {
 }
 
 .filter-container {
-  padding : 5px 15px 5px 0px;
+  padding : 5px 5px 5px 0px;
 }
 
 .card {
@@ -505,13 +505,38 @@ red:hover {
 }
 
 #menu-button {
-  margin: 0px 0px;
-  width: 30px;
+  margin: 0px 0px 0px 0px;
+  padding-right: 5px;
+  width: 25px;
   height:30px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   background-color: #383838;
-  border-color: #383838;
+  border-color: #fff;
   font-size: 18px;
+  border-width: 0px;
 }
 
+
+.map_addon_top_left { 
+  padding: 0px; 
+  margin: 0px; 
+  position: absolute; 
+  left: 0px; 
+  top: 0px; 
+  cursor: pointer; 
+}
+
+.map_addon_top_right { 
+  padding: 0px; 
+  margin: 0px; 
+  position: absolute; 
+  right: 0px; 
+  top: 0px; 
+  cursor: pointer; 
+}
+
+#resizeMap { 
+  top: 5em; 
+  /*font-size: 40px;*/
+}
