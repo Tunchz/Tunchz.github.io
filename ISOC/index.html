@@ -63,15 +63,29 @@
                 <div id = "Text2_" class = "col-xs-4 height100p" style = "display: flex;justify-content: left; align-items: center; padding : 11px 0px 0px 5px;">
                   <!button type="button" class="btn btn-primary" style="padding: 0px 4px;" data-toggle="modal" data-target="#info-modal"><!/button>
                   <div type="button" class="btn btn-primary" style="width:18px; height:18px; border-radius: 50%; padding: 0px 5px; font-family: mitr;" data-toggle="modal" data-target="#info-modal">
-                    <div style="margin: -2px 0px 0px 1px;">!</div>
+                    <div style="margin: -2px 0px 0px 0px;">?</div>
                   </div>                          
                 </div>
               </div>
             </div>
+ 
+            <div id='notification-container-right-bg' class='map_addon_right' style = "width: 20%; min-width: 250px; height: auto; padding: 0px; background-color: #fff; opacity:0.2; display:none;"></div>
 
-            <div id='menu-container-top-right' class='map_addon_top_right' style = "/*width: 500; height: 40;*/ padding: 10px 0px 0px 0px;">
+            <div id='notification-container-right' class='map_addon_right' style = "width: 20%; min-width: 250px; /*height: 80%;*/ padding: 0px 0px 0px 0px;">
+              
+              <div class = "col-sm-12 height100p">
+                <!div id="notification-bg" style="height:100%; background-color: #fff; opacity: 0.2"><!/div>
+                <div id="table-container" class="table-container" oncontextmenu="return false;" style = "/*background-color: #fff; opacity: 1;*/">
+                </div>
+              </div>
 
             </div>
+
+
+
+
+
+            <div id='menu-container-top-right' class='map_addon_top_right' style = "/*width: 500; height: 40;*/ padding: 10px 0px 0px 0px;"></div>
 
 
 
@@ -231,7 +245,7 @@
           </div>
         </div>
         <div class = "col-sm-12 height80p" style = "height : 76%; background-color: #383838">
-          <div id="table-container" oncontextmenu="return false;">
+          <div id="table-container2" class="table-container" oncontextmenu="return false;">
           </div>
         </div>
       </div>
@@ -239,10 +253,8 @@
   </body>
 
   <script defer src="js/face-api.min.js"></script>
-  <!script src="js/d3.v355.min.js"><!/script>
   <script src="js/covid19.js"></script>
-  <!script src='js/mapbox-gl.js'><!/script>
-  <!link rel="stylesheet" href="css/mapbox-gl.css">
+
   <script src='js/mapbox-gl_v1120.js'></script>
   <link rel="stylesheet" href="css/mapbox-gl_v1120.css">
   <!script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"><!/script>
@@ -261,16 +273,6 @@
     var formatDateTime = d3.time.format("%d %B %Y %H:%M:%S");
     var z=4;  //default zoom level 0-4
     var flyspeed = 1.6;
-    // var chartData,
-    //     refresh_rate = i = 4,
-    //     windowlength = 200
-    //     z = 2;
-    //     //transitiontime = 100;
-
-    // var timenow = new Date;
-
-    //     timenow = new Date(timenow.getTime() - (refresh_rate*windowlength*1000));
-
 
     mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg'
     
@@ -294,18 +296,11 @@
       maxZoom: 20,
       zoom: 4.7,
       pitch: 0,
-      // center: [101.1673626,14.2808669],
-      // minZoom: 5,
-      // maxZoom: 20,
-      // zoom: 12,
       // pitch: 90,
       //bearing: -17.6,
       antialias: true
 
     })
-
-
-    //map.flyTo({ center: [-0.1,51.5119112] });
 
 
     // disable map rotation using right click + drag
@@ -322,14 +317,6 @@
     map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true}), 'top-left');
     map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
-    //document.getElementsByClassName("mapboxgl-ctrl-top-left").style.top = "30px";
-
-    //document.getElementById("map-container").style.display = "none";
-
-    //refresh();
-    //drawmap(map,sensor);
-
-    //tick();
     
 
     function tabulateimg(data, columns) {
