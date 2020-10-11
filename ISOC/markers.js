@@ -58,6 +58,212 @@
 
     }
 
+
+    function map_addpiecluster() {
+
+      // filters for classifying earthquakes into five categories based on magnitude
+      var mag1 = ['<', ['get', 'mag'], 150];
+      var mag2 = ['all', ['>=', ['get', 'mag'], 150], ['<', ['get', 'mag'], 200]];
+      var mag3 = ['all', ['>=', ['get', 'mag'], 200], ['<', ['get', 'mag'], 300]];
+      var mag4 = ['all', ['>=', ['get', 'mag'], 300], ['<', ['get', 'mag'], 315]];
+      var mag5 = ['>=', ['get', 'mag'], 315];
+
+      // colors to use for the categories
+      //var colors = ['#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c'];
+      var colors = ['#fed976', '#feb24c', '#ff0', '#fa0', '#f00'];
+
+      map.on('load', function () {
+          // add a clustered GeoJSON source for a sample set of earthquakes
+          map.addSource('hotspotth', {
+              'type': 'geojson',
+              'data': 
+                  'https://tunchz.github.io/ISOC/hotspotth.geojson',
+                  //'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson',
+              'cluster': true,
+              'clusterRadius': 70,
+              'clusterProperties': {
+                  // keep separate counts for each magnitude category in a cluster
+                  'mag1': ['+', ['case', mag1, 1, 0]],
+                  'mag2': ['+', ['case', mag2, 1, 0]],
+                  'mag3': ['+', ['case', mag3, 1, 0]],
+                  'mag4': ['+', ['case', mag4, 1, 0]],
+                  'mag5': ['+', ['case', mag5, 1, 0]]
+              }
+          });
+
+          // circle and symbol layers for rendering individual earthquakes (unclustered points)
+          map.addLayer({
+              'id': 'earthquake_circle',
+              'type': 'circle',
+              'source': 'hotspotth',
+              'filter': ['!=', 'cluster', true],
+              'paint': {
+                  'circle-color': [
+                      'case',
+                      mag1, colors[0],
+                      mag2, colors[1],
+                      mag3, colors[2],
+                      mag4, colors[3],
+                      colors[4]
+                  ],
+                  'circle-opacity': 1,
+                  'circle-radius': 6
+              }
+          });
+          map.addLayer({
+              'id': 'earthquake_label',
+              'type': 'symbol',
+              'source': 'hotspotth',
+              'filter': ['!=', 'cluster', true],
+              'layout': {
+                  'text-field': [
+                      'number-format',
+                      ['get', 'mag'],
+                      { 'min-fraction-digits': 1, 'max-fraction-digits': 1 }
+                  ],
+                  'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+                  'text-size': 6
+              },
+              'paint': {
+                  'text-color': [
+                      'case',
+                      ['<', ['get', 'mag'], 3],
+                      'black',
+                      'white'
+                  ]
+              }
+          });
+
+          var popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false
+          });
+
+          map.on('mouseenter', 'earthquake_circle', function (e) {
+              map.getCanvas().style.cursor = 'pointer';
+              var coordinates = e.features[0].geometry.coordinates.slice();
+              var a1 = e.features[0].properties.CHANGWAT;
+              var a2 = e.features[0].properties.mag;
+              popup
+                .setLngLat([coordinates[0],coordinates[1]])
+                .setHTML(
+                    'จังหวัด : ' + a1 + '<br>ความสว่าง : ' + a2
+                )
+                .addTo(map);
+          });
+
+          map.on('mouseleave', 'earthquake_circle', function () {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+          });
+
+
+          // after the GeoJSON data is loaded, update markers on the screen and do so on every map move/moveend
+          map.on('data', function (e) {
+              //console.log('map on data : ',e.sourceId,e.isSourceLoaded);
+
+              if (e.sourceId !== 'hotspotth' || !e.isSourceLoaded) return;
+
+              //console.log('map on data pass!');
+              //map.on('move', updateMarkers);
+              //map.on('moveend', updateMarkers);
+              updateMarkers();
+          });
+          map.on('move', updateMarkers);
+          map.on('moveend', updateMarkers);
+          updateMarkers();
+
+          // objects for caching and keeping track of HTML marker objects (for performance)
+          var markers = {};
+          var markersOnScreen = {};
+
+          function updateMarkers() {
+              //console.log('updateMarker call');
+              var newMarkers = {};
+              var features = map.querySourceFeatures('hotspotth');
+
+              // for every cluster on the screen, create an HTML marker for it (if we didn't yet),
+              // and add it to the map if it's not there already
+              for (var i = 0; i < features.length; i++) {
+                  var coords = features[i].geometry.coordinates;
+                  var props = features[i].properties;
+                  if (!props.cluster) continue;
+                  var id = props.cluster_id;
+
+                  var marker = markers[id];
+                  if (!marker) {
+                      var el = createDonutChart(props);
+                      marker = markers[id] = new mapboxgl.Marker({
+                          element: el
+                      }).setLngLat(coords);
+                  }
+                  newMarkers[id] = marker;
+
+                  if (!markersOnScreen[id]) marker.addTo(map);
+              }
+              // for every marker we've added previously, remove those that are no longer visible
+              for (id in markersOnScreen) {
+                  if (!newMarkers[id]) markersOnScreen[id].remove();
+              }
+              markersOnScreen = newMarkers;
+          }
+
+
+      });
+
+      // code for creating an SVG donut chart from feature properties
+      function createDonutChart(props) {
+          //console.log('createdDonutChart call')
+          var offsets = [];
+          var counts = [ props.mag1, props.mag2, props.mag3, props.mag4, props.mag5 ];
+          var total = 0;
+          for (var i = 0; i < counts.length; i++) {
+              offsets.push(total);
+              total += counts[i];
+          }
+          var fontSize = total >= 1000 ? 22 : total >= 100 ? 20 : total >= 10 ? 18 : 16;
+          fontSize -= 4;
+          var r = total >= 1000 ? 30 : total >= 100 ? 26 : total >= 10 ? 22 : 18;
+          r = Math.round(r * 0.7);
+          var r0 = Math.round(r * 0.75);
+          var w = r * 2;
+
+          var html = '<div><svg width="' + w + '" height="' + w + '" viewbox="0 0 ' + w + ' ' + w + 
+            '" text-anchor="middle" style="font: ' + fontSize + 'px sans-serif; display: block">';
+
+
+          for (i = 0; i < counts.length; i++) {
+              html += donutSegment( offsets[i] / total, (offsets[i] + counts[i]) / total, (r-1), (r0-1), colors[i]
+              );
+          }
+          html += '<circle cx="' + r + '" cy="' + r + '" r="' + (r0-1) + 
+              '"stroke="black" stroke-width="1" fill="white" stroke-opacity="0" /><text dominant-baseline="central" transform="translate(' + r + ', ' + r + ')">' + total.toLocaleString() + '</text></svg></div>';
+
+          var el = document.createElement('div');
+          el.innerHTML = html;
+          return el.firstChild;
+      }
+
+      function donutSegment(start, end, r, r0, color) {
+
+          if (end - start === 1) end -= 0.00001;
+          var a0 = 2 * Math.PI * (start - 0.25);
+          var a1 = 2 * Math.PI * (end - 0.25);
+          var x0 = Math.cos(a0),
+              y0 = Math.sin(a0);
+          var x1 = Math.cos(a1),
+              y1 = Math.sin(a1);
+          var largeArc = end - start > 0.5 ? 1 : 0;
+
+          return [ '<path stroke="white" d="M', r + r0 * x0 +1, r + r0 * y0 +1, 'L', r + r * x0 +1, r + r * y0 +1, 'A', (r), (r), 0,
+              largeArc, 1, r + r * x1 +1, r + r * y1 +1, 'L', r + r0 * x1 +1, r + r0 * y1 +1, 'A', (r0), (r0), 0, 
+              largeArc, 0, r + r0 * x0 +1, r + r0 * y0 +1, '" fill="' + color + '" stroke-opacity="0.9" />' ].join(' ');
+      }
+
+
+    }
+
+
     function map_addpulsemarker() {
 
       var size = 80;
@@ -278,7 +484,7 @@
         map.addSource('mountains', {
           'type': 'geojson',
   
-          "data": {
+          'data': {
             // "type": "Point",
             // "coordinates": [102.6673626,15.2808669]
 
@@ -409,9 +615,7 @@
           //'data': elevated_points
 
 
-          "data": {
-            // "type": "Point",
-            // "coordinates": [102.6673626,15.2808669]
+          'data': {
 
             'type': 'FeatureCollection',
             'features': [
@@ -742,44 +946,44 @@
 
 
 
-    function map_addcustommarker() {
+    // function map_addcustommarker() {
 
-      map.on('load', function () {
-          map.loadImage(
-              'https://tunchz.github.io/ISOC/img/marker_forest_green_s2.png',
-              function (error, image) {
-                  if (error) throw error;
-                  map.addImage('marker_forest', image);
-                  map.addSource('pointforest', {
-                      'type': 'geojson',
-                      'data': {
-                          'type': 'FeatureCollection',
-                          'features': [
-                              {
-                                  'type': 'Feature',
-                                  'geometry': {
-                                      'type': 'Point',
-                                      'coordinates': [104.073626,15.52]
-                                  }
-                              }
-                          ]
-                      }
-                  });
-                  map.addLayer({
-                      'id': 'markerforest_01',
-                      'type': 'symbol',
-                      'source': 'pointforest',
-                      'layout': {
-                          'icon-image': 'marker_forest',
-                          'icon-size': 0.5
-                      }
-                  });
-              }
-          );
-      });
+    //   map.on('load', function () {
+    //       map.loadImage(
+    //           'https://tunchz.github.io/ISOC/img/marker_forest_green_s2.png',
+    //           function (error, image) {
+    //               if (error) throw error;
+    //               map.addImage('marker_forest', image);
+    //               map.addSource('pointforest', {
+    //                   'type': 'geojson',
+    //                   'data': {
+    //                       'type': 'FeatureCollection',
+    //                       'features': [
+    //                           {
+    //                               'type': 'Feature',
+    //                               'geometry': {
+    //                                   'type': 'Point',
+    //                                   'coordinates': [104.073626,15.52]
+    //                               }
+    //                           }
+    //                       ]
+    //                   }
+    //               });
+    //               map.addLayer({
+    //                   'id': 'markerforest_01',
+    //                   'type': 'symbol',
+    //                   'source': 'pointforest',
+    //                   'layout': {
+    //                       'icon-image': 'marker_forest',
+    //                       'icon-size': 0.5
+    //                   }
+    //               });
+    //           }
+    //       );
+    //   });
 
 
-    }
+    // }
 
 
     function map_addcustommarker2() {
@@ -897,198 +1101,6 @@
     }
 
 
-    function map_addpiecluster() {
 
-      // filters for classifying earthquakes into five categories based on magnitude
-      var mag1 = ['<', ['get', 'mag'], 150];
-      var mag2 = ['all', ['>=', ['get', 'mag'], 150], ['<', ['get', 'mag'], 200]];
-      var mag3 = ['all', ['>=', ['get', 'mag'], 200], ['<', ['get', 'mag'], 300]];
-      var mag4 = ['all', ['>=', ['get', 'mag'], 300], ['<', ['get', 'mag'], 315]];
-      var mag5 = ['>=', ['get', 'mag'], 315];
-
-      // colors to use for the categories
-      //var colors = ['#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c'];
-      var colors = ['#fed976', '#feb24c', '#ff0', '#fa0', '#f00'];
-
-      map.on('load', function () {
-          // add a clustered GeoJSON source for a sample set of earthquakes
-          map.addSource('earthquakes', {
-              'type': 'geojson',
-              'data': 
-                  'https://tunchz.github.io/ISOC/hotspotth.geojson',
-                  //'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson',
-              'cluster': true,
-              'clusterRadius': 80,
-              'clusterProperties': {
-                  // keep separate counts for each magnitude category in a cluster
-                  'mag1': ['+', ['case', mag1, 1, 0]],
-                  'mag2': ['+', ['case', mag2, 1, 0]],
-                  'mag3': ['+', ['case', mag3, 1, 0]],
-                  'mag4': ['+', ['case', mag4, 1, 0]],
-                  'mag5': ['+', ['case', mag5, 1, 0]]
-              }
-          });
-
-          // circle and symbol layers for rendering individual earthquakes (unclustered points)
-          map.addLayer({
-              'id': 'earthquake_circle',
-              'type': 'circle',
-              'source': 'earthquakes',
-              'filter': ['!=', 'cluster', true],
-              'paint': {
-                  'circle-color': [
-                      'case',
-                      mag1, colors[0],
-                      mag2, colors[1],
-                      mag3, colors[2],
-                      mag4, colors[3],
-                      colors[4]
-                  ],
-                  'circle-opacity': 1,
-                  'circle-radius': 6
-              }
-          });
-          map.addLayer({
-              'id': 'earthquake_label',
-              'type': 'symbol',
-              'source': 'earthquakes',
-              'filter': ['!=', 'cluster', true],
-              'layout': {
-                  'text-field': [
-                      'number-format',
-                      ['get', 'mag'],
-                      { 'min-fraction-digits': 1, 'max-fraction-digits': 1 }
-                  ],
-                  'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-                  'text-size': 6
-              },
-              'paint': {
-                  'text-color': [
-                      'case',
-                      ['<', ['get', 'mag'], 3],
-                      'black',
-                      'white'
-                  ]
-              }
-          });
-
-          var popup = new mapboxgl.Popup({
-            closeButton: false,
-            closeOnClick: false
-          });
-
-          map.on('mouseenter', 'earthquake_circle', function (e) {
-              map.getCanvas().style.cursor = 'pointer';
-              var coordinates = e.features[0].geometry.coordinates.slice();
-              var a1 = e.features[0].properties.CHANGWAT;
-              var a2 = e.features[0].properties.mag;
-              popup
-                .setLngLat([coordinates[0],coordinates[1]])
-                .setHTML(
-                    'จังหวัด : ' + a1 + '<br>ความสว่าง : ' + a2
-                )
-                .addTo(map);
-          });
-
-          map.on('mouseleave', 'earthquake_circle', function () {
-            map.getCanvas().style.cursor = '';
-            popup.remove();
-          });
-
-
-          // objects for caching and keeping track of HTML marker objects (for performance)
-          var markers = {};
-          var markersOnScreen = {};
-
-          function updateMarkers() {
-              var newMarkers = {};
-              var features = map.querySourceFeatures('earthquakes');
-
-              // for every cluster on the screen, create an HTML marker for it (if we didn't yet),
-              // and add it to the map if it's not there already
-              for (var i = 0; i < features.length; i++) {
-                  var coords = features[i].geometry.coordinates;
-                  var props = features[i].properties;
-                  if (!props.cluster) continue;
-                  var id = props.cluster_id;
-
-                  var marker = markers[id];
-                  if (!marker) {
-                      var el = createDonutChart(props);
-                      marker = markers[id] = new mapboxgl.Marker({
-                          element: el
-                      }).setLngLat(coords);
-                  }
-                  newMarkers[id] = marker;
-
-                  if (!markersOnScreen[id]) marker.addTo(map);
-              }
-              // for every marker we've added previously, remove those that are no longer visible
-              for (id in markersOnScreen) {
-                  if (!newMarkers[id]) markersOnScreen[id].remove();
-              }
-              markersOnScreen = newMarkers;
-          }
-
-          // after the GeoJSON data is loaded, update markers on the screen and do so on every map move/moveend
-          map.on('data', function (e) {
-              if (e.sourceId !== 'earthquakes' || !e.isSourceLoaded) return;
-
-              map.on('move', updateMarkers);
-              map.on('moveend', updateMarkers);
-              updateMarkers();
-          });
-      });
-
-      // code for creating an SVG donut chart from feature properties
-      function createDonutChart(props) {
-          var offsets = [];
-          var counts = [ props.mag1, props.mag2, props.mag3, props.mag4, props.mag5 ];
-          var total = 0;
-          for (var i = 0; i < counts.length; i++) {
-              offsets.push(total);
-              total += counts[i];
-          }
-          var fontSize = total >= 1000 ? 22 : total >= 100 ? 20 : total >= 10 ? 18 : 16;
-          fontSize -= 4;
-          var r = total >= 1000 ? 36 : total >= 100 ? 28 : total >= 10 ? 22 : 18;
-          r = Math.round(r * 0.7);
-          var r0 = Math.round(r * 0.8);
-          var w = r * 2;
-
-          var html = '<div><svg width="' + w + '" height="' + w + '" viewbox="0 0 ' + w + ' ' + w + 
-            '" text-anchor="middle" style="font: ' + fontSize + 'px sans-serif; display: block">';
-
-
-          for (i = 0; i < counts.length; i++) {
-              html += donutSegment( offsets[i] / total, (offsets[i] + counts[i]) / total, (r-1), (r0-1), colors[i]
-              );
-          }
-          html += '<circle cx="' + r + '" cy="' + r + '" r="' + (r0-1) + 
-              '"stroke="black" stroke-width="1" fill="white" stroke-opacity="0" /><text dominant-baseline="central" transform="translate(' + r + ', ' + r + ')">' + total.toLocaleString() + '</text></svg></div>';
-
-          var el = document.createElement('div');
-          el.innerHTML = html;
-          return el.firstChild;
-      }
-
-      function donutSegment(start, end, r, r0, color) {
-
-          if (end - start === 1) end -= 0.00001;
-          var a0 = 2 * Math.PI * (start - 0.25);
-          var a1 = 2 * Math.PI * (end - 0.25);
-          var x0 = Math.cos(a0),
-              y0 = Math.sin(a0);
-          var x1 = Math.cos(a1),
-              y1 = Math.sin(a1);
-          var largeArc = end - start > 0.5 ? 1 : 0;
-
-          return [ '<path stroke="white" d="M', r + r0 * x0 +1, r + r0 * y0 +1, 'L', r + r * x0 +1, r + r * y0 +1, 'A', (r), (r), 0,
-              largeArc, 1, r + r * x1 +1, r + r * y1 +1, 'L', r + r0 * x1 +1, r + r0 * y1 +1, 'A', (r0), (r0), 0, 
-              largeArc, 0, r + r0 * x0 +1, r + r0 * y0 +1, '" fill="' + color + '" stroke-opacity="0.9" />' ].join(' ');
-      }
-
-
-    }
 
 
