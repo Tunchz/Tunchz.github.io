@@ -2,6 +2,10 @@
 
 
     map_addlayer();
+
+    map_addpiecluster();
+
+
     map_addpulsemarker();
     map_addpulsemarker2();
     map_addpulsemarker3();
@@ -11,8 +15,6 @@
     map_addcustommarker2();
 
     // map_addcluster();
-
-    map_addpiecluster();
 
 
 
@@ -28,8 +30,18 @@
           'type': 'fill',
           'source': 'mapth',
           'paint': {
-            'fill-color': '#2a58c3',
-            'fill-opacity': 0.0
+            'fill-color': [
+                      'case',
+                      ['==', ['get', 'PROVINCE_C'], '63'],'#ff0',
+                      ['==', ['get', 'PROVINCE_C'], '50'],'#f00',
+                      ['==', ['get', 'PROVINCE_C'], '30'],'#00f',
+                      '#2a58c3'],
+            'fill-opacity': [
+                      'case',
+                      ['==', ['get', 'PROVINCE_C'], '63'],0.4,
+                      ['==', ['get', 'PROVINCE_C'], '50'],0.4,
+                      ['==', ['get', 'PROVINCE_C'], '30'],0.4,
+                      0]
           }
         });
         map.addLayer({
@@ -186,7 +198,7 @@
               "type": "geojson",
               "data": {
                   "type": "Point",
-                  "coordinates": [103.1673626,18.2808669]
+                  "coordinates": [102.073626,14.2]
               }
           });
 
@@ -276,7 +288,7 @@
                 'type': 'Feature',
                 'geometry': {
                   'type': 'Point',
-                  'coordinates': [102.6673626,15.2]
+                  'coordinates': [102.973626,18.0] //[102.6673626,15.2]
                 }
               },
               {
@@ -303,7 +315,7 @@
         }
 
         var basePaint = {
-          'text-color': 'rgba(0,255,0,1)',
+          'text-color': 'rgba(150,0,255,1)',
           'text-opacity': 1,
         }
 
@@ -315,6 +327,22 @@
           'layout': baseLayout,
           'paint': basePaint
         })
+
+        map.addLayer({
+          'id': 'mountains-outline',
+          'type': 'symbol',
+          'source': 'mountains',
+          'layout': {
+            'text-field': '▼',
+            'text-font': ['Open Sans Extrabold', 'Arial Unicode MS Bold'],
+            'text-size': 34,
+            'text-ignore-placement': true
+          },
+          'paint': {
+            'text-color': 'rgba(255,255,255,1)',
+            'text-opacity': 1,
+          }
+        });
 
         map.addLayer({
           'id': 'mountains',
@@ -438,6 +466,22 @@
           'layout': baseLayout,
           'paint': basePaint
         })
+
+        map.addLayer({
+          'id': 'mountains2-outline',
+          'type': 'symbol',
+          'source': 'mountains2',
+          'layout': {
+            'text-field': '☢',
+            'text-font': ['Open Sans Extrabold', 'Arial Unicode MS Bold'],
+            'text-size': 28,
+            'text-ignore-placement': true
+          },
+          'paint': {
+            'text-color': 'rgba(255,255,255,1)',
+            'text-opacity': 1,
+          }
+        });
 
         map.addLayer({
           'id': 'mountains2',
@@ -770,7 +814,7 @@
             ,
             'geometry': {
                 'type': 'Point',
-                    'coordinates': [102.073626,14.2]
+                    'coordinates': [104.773626,15.2]
             }
         }
 
@@ -804,9 +848,9 @@
               //el.style.backgroundImage='url(https://placekitten.com/g/'+ marker.properties.iconSize.join('/') + '/)';
               //el.style.width=marker.properties.iconSize[0] + 'px';
               //el.style.height=marker.properties.iconSize[1] + 'px';
-              el.style.backgroundImage='url(img/marker_forest_green_s4.png)';
-              el.style.width = '30px';
-              el.style.height = '30px';
+              el.style.backgroundImage='url(img/marker_forest_green_s5.png)';
+              el.style.width = '20px';
+              el.style.height = '20px';
 
               el.addEventListener('click', function () {
                       window.alert(marker.properties.message);
@@ -844,7 +888,7 @@
 
 
               // add marker to map
-              new mapboxgl.Marker(el, {offset: [0,-15]}) .setLngLat(marker.geometry.coordinates) .addTo(map);
+              new mapboxgl.Marker(el, {offset: [0,-10]}) .setLngLat(marker.geometry.coordinates) .addTo(map);
           }
 
       );
@@ -856,21 +900,23 @@
     function map_addpiecluster() {
 
       // filters for classifying earthquakes into five categories based on magnitude
-      var mag1 = ['<', ['get', 'mag'], 2];
-      var mag2 = ['all', ['>=', ['get', 'mag'], 2], ['<', ['get', 'mag'], 3]];
-      var mag3 = ['all', ['>=', ['get', 'mag'], 3], ['<', ['get', 'mag'], 4]];
-      var mag4 = ['all', ['>=', ['get', 'mag'], 4], ['<', ['get', 'mag'], 5]];
-      var mag5 = ['>=', ['get', 'mag'], 5];
+      var mag1 = ['<', ['get', 'mag'], 150];
+      var mag2 = ['all', ['>=', ['get', 'mag'], 150], ['<', ['get', 'mag'], 200]];
+      var mag3 = ['all', ['>=', ['get', 'mag'], 200], ['<', ['get', 'mag'], 300]];
+      var mag4 = ['all', ['>=', ['get', 'mag'], 300], ['<', ['get', 'mag'], 315]];
+      var mag5 = ['>=', ['get', 'mag'], 315];
 
       // colors to use for the categories
-      var colors = ['#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c'];
+      //var colors = ['#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c'];
+      var colors = ['#fed976', '#feb24c', '#ff0', '#fa0', '#f00'];
 
       map.on('load', function () {
           // add a clustered GeoJSON source for a sample set of earthquakes
           map.addSource('earthquakes', {
               'type': 'geojson',
-              'data':
-                  'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson',
+              'data': 
+                  'https://tunchz.github.io/ISOC/hotspotth.geojson',
+                  //'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson',
               'cluster': true,
               'clusterRadius': 80,
               'clusterProperties': {
@@ -899,7 +945,7 @@
                       colors[4]
                   ],
                   'circle-opacity': 1,
-                  'circle-radius': 9
+                  'circle-radius': 6
               }
           });
           map.addLayer({
@@ -914,7 +960,7 @@
                       { 'min-fraction-digits': 1, 'max-fraction-digits': 1 }
                   ],
                   'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-                  'text-size': 8
+                  'text-size': 6
               },
               'paint': {
                   'text-color': [
@@ -934,12 +980,12 @@
           map.on('mouseenter', 'earthquake_circle', function (e) {
               map.getCanvas().style.cursor = 'pointer';
               var coordinates = e.features[0].geometry.coordinates.slice();
-              var a1 = e.features[0].properties.id;
+              var a1 = e.features[0].properties.CHANGWAT;
               var a2 = e.features[0].properties.mag;
               popup
                 .setLngLat([coordinates[0],coordinates[1]])
                 .setHTML(
-                    'Name : ' + a1 + '<br>Code : ' + a2
+                    'จังหวัด : ' + a1 + '<br>ความสว่าง : ' + a2
                 )
                 .addTo(map);
           });
@@ -1005,9 +1051,9 @@
           }
           var fontSize = total >= 1000 ? 22 : total >= 100 ? 20 : total >= 10 ? 18 : 16;
           fontSize -= 4;
-          var r = total >= 1000 ? 50 : total >= 100 ? 32 : total >= 10 ? 24 : 18;
+          var r = total >= 1000 ? 36 : total >= 100 ? 28 : total >= 10 ? 22 : 18;
           r = Math.round(r * 0.7);
-          var r0 = Math.round(r * 0.7);
+          var r0 = Math.round(r * 0.8);
           var w = r * 2;
 
           var html = '<div><svg width="' + w + '" height="' + w + '" viewbox="0 0 ' + w + ' ' + w + 
@@ -1044,3 +1090,5 @@
 
 
     }
+
+

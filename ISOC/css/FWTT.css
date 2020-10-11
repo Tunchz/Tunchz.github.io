@@ -183,8 +183,8 @@ table {
 }
 
 .table_row:hover {
-  background-color: #555;
-  /*opacity: 0.3;
+  /*background-color: #555;
+  opacity: 0.3;
   border-left: 7px solid #fff;*/
   /*border-left: 5px solid #2a58c3;
   border-right: 5px solid #2a58c3;*/
@@ -546,6 +546,7 @@ red:hover {
   cursor: pointer; 
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
+  display: block;
 }
 
 .map_custom_marker {
