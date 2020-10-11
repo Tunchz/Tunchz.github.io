@@ -160,9 +160,9 @@ function resizeAdjust() {
       document.getElementById("left-panel").style.width = "100%";
       document.getElementById("right-panel").style.width = "100%";
       if (rightpanel_isopen==1) {
-      document.getElementById("left-panel").style.height = "80%";
+        document.getElementById("left-panel").style.height = "80%";
       } else {
-      document.getElementById("left-panel").style.height = "100%";
+        document.getElementById("left-panel").style.height = "100%";
       }
       $("#left-bottom").height(($("#left-panel").height()-1));
       $("#map-container").height($("#left-bottom").height());
@@ -180,7 +180,7 @@ function resizeAdjust() {
       //document.getElementById("map-container").style.left = "5px";
     }
     document.getElementById("notification-container-right").style.display = "none";
-    $("#table_image").appendTo("#table-container2");
+    $("#table-container").appendTo("#table-container-RP");
 
   } else {
     document.getElementById("left-panel").style.height = "100%";
@@ -189,8 +189,14 @@ function resizeAdjust() {
     $("#map-container").width($("#left-bottom").width()-1);
     //document.getElementById("map-container").style.top = "4px";
     //document.getElementById("map-container").style.left = "5px";
-    document.getElementById("notification-container-right").style.display = "block";
-    $("#table_image").appendTo("#table-container");
+    if (rightpanel_isopen==1) {
+      document.getElementById("notification-container-right").style.display = "none";
+      $("#table-container").appendTo("#table-container-RP");
+    } else {
+      document.getElementById("notification-container-right").style.display = "block";
+      $("#table-container").appendTo("#table-container-MAP");
+    }
+
 
   }
 
