@@ -223,7 +223,7 @@
           }
           var fontSize = total >= 1000 ? 22 : total >= 100 ? 20 : total >= 10 ? 18 : 16;
           fontSize -= 4;
-          var r = total >= 1000 ? 30 : total >= 100 ? 26 : total >= 10 ? 22 : 18;
+          var r = total >= 1000 ? 28 : total >= 100 ? 24 : total >= 10 ? 20 : 16;
           r = Math.round(r * 0.7);
           var r0 = Math.round(r * 0.75);
           var w = r * 2;
@@ -237,7 +237,7 @@
               );
           }
           html += '<circle cx="' + r + '" cy="' + r + '" r="' + (r0-1) + 
-              '"stroke="black" stroke-width="1" fill="white" stroke-opacity="0" /><text dominant-baseline="central" transform="translate(' + r + ', ' + r + ')">' + total.toLocaleString() + '</text></svg></div>';
+              '"stroke="black" stroke-width="1" fill="white" stroke-opacity="0" opacity="0.7" /><text dominant-baseline="central" transform="translate(' + r + ', ' + r + ')">' + total.toLocaleString() + '</text></svg></div>';
 
           var el = document.createElement('div');
           el.innerHTML = html;
@@ -257,7 +257,7 @@
 
           return [ '<path stroke="white" d="M', r + r0 * x0 +1, r + r0 * y0 +1, 'L', r + r * x0 +1, r + r * y0 +1, 'A', (r), (r), 0,
               largeArc, 1, r + r * x1 +1, r + r * y1 +1, 'L', r + r0 * x1 +1, r + r0 * y1 +1, 'A', (r0), (r0), 0, 
-              largeArc, 0, r + r0 * x0 +1, r + r0 * y0 +1, '" fill="' + color + '" stroke-opacity="0.9" />' ].join(' ');
+              largeArc, 0, r + r0 * x0 +1, r + r0 * y0 +1, '" fill="' + color + '" stroke-opacity="0.9" opacity="0.7" />' ].join(' ');
       }
 
 
