@@ -179,6 +179,8 @@ function resizeAdjust() {
       //document.getElementById("map-container").style.top = "4px";
       //document.getElementById("map-container").style.left = "5px";
     }
+    document.getElementById("notification-container-right").style.display = "none";
+    $("#table_image").appendTo("#table-container2");
 
   } else {
     document.getElementById("left-panel").style.height = "100%";
@@ -187,6 +189,9 @@ function resizeAdjust() {
     $("#map-container").width($("#left-bottom").width()-1);
     //document.getElementById("map-container").style.top = "4px";
     //document.getElementById("map-container").style.left = "5px";
+    document.getElementById("notification-container-right").style.display = "block";
+    $("#table_image").appendTo("#table-container");
+
   }
 
   //displaySize = { width: video.width, height: video.height };
