@@ -6,7 +6,9 @@
     map_addpulsemarker2();
     map_addpulsemarker3();
     map_addpulsemarker4();
-    map_addcustommarker();
+
+
+    map_addcustommarker2();
 
     // map_addcluster();
 
@@ -700,11 +702,11 @@
 
       map.on('load', function () {
           map.loadImage(
-              'https://tunchz.github.io/ISOC/img/marker_forest.png',
+              'https://tunchz.github.io/ISOC/img/marker_forest_green_s2.png',
               function (error, image) {
                   if (error) throw error;
-                  map.addImage('cat', image);
-                  map.addSource('pointcat', {
+                  map.addImage('marker_forest', image);
+                  map.addSource('pointforest', {
                       'type': 'geojson',
                       'data': {
                           'type': 'FeatureCollection',
@@ -720,12 +722,12 @@
                       }
                   });
                   map.addLayer({
-                      'id': 'pointscat',
+                      'id': 'markerforest_01',
                       'type': 'symbol',
-                      'source': 'pointcat',
+                      'source': 'pointforest',
                       'layout': {
-                          'icon-image': 'cat',
-                          'icon-size': 0.05
+                          'icon-image': 'marker_forest',
+                          'icon-size': 0.5
                       }
                   });
               }
@@ -735,6 +737,120 @@
 
     }
 
+
+    function map_addcustommarker2() {
+
+      var geojson= {
+
+        'type': 'FeatureCollection',
+        'features': [ {
+
+            'type': 'Feature',
+            'properties': {
+                'message': 'Foo',
+                    'iconSize': [60, 60]
+            }
+
+            ,
+            'geometry': {
+                'type': 'Point',
+                    'coordinates': [104.073626,15.52]
+            }
+        }
+
+        ,
+            {
+
+            'type': 'Feature',
+            'properties': {
+                'message': 'Bar',
+                    'iconSize': [50, 50]
+            }
+
+            ,
+            'geometry': {
+                'type': 'Point',
+                    'coordinates': [102.073626,14.2]
+            }
+        }
+
+        ,
+            {
+
+            'type': 'Feature',
+            'properties': {
+                'message': 'Baz',
+                    'iconSize': [40, 40]
+            }
+
+            ,
+            'geometry': {
+                'type': 'Point',
+                    'coordinates': [105.073626,14.92]
+            }
+        }
+
+        ]
+      }
+
+      ;
+
+
+      // add markers to map
+      geojson.features.forEach(function (marker) {
+              // create a DOM element for the marker
+              var el=document.createElement('div');
+              el.className='map_custom_marker';
+              //el.style.backgroundImage='url(https://placekitten.com/g/'+ marker.properties.iconSize.join('/') + '/)';
+              //el.style.width=marker.properties.iconSize[0] + 'px';
+              //el.style.height=marker.properties.iconSize[1] + 'px';
+              el.style.backgroundImage='url(img/marker_forest_green_s4.png)';
+              el.style.width = '30px';
+              el.style.height = '30px';
+
+              el.addEventListener('click', function () {
+                      window.alert(marker.properties.message);
+                  }
+
+              );
+
+              var popup = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnClick: false
+              });
+
+              //map.on('mouseenter', 'earthquake_circle', function (e) {
+              el.addEventListener('mouseenter', function () {
+                  map.getCanvas().style.cursor = 'pointer';
+                  var coordinates = marker.geometry.coordinates.slice();
+                  var a1 = marker.properties.message;
+                  var a2 = marker.properties.iconSize;
+                  popup
+                    .setLngLat([coordinates[0],coordinates[1]])
+                    .setHTML(
+                        'Name : ' + a1 + '<br>Code : ' + a2
+                    )
+                    .addTo(map);
+              });
+
+              //map.on('mouseleave', 'earthquake_circle', function () {
+              el.addEventListener('mouseleave', function () {
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+              });
+
+
+
+
+
+              // add marker to map
+              new mapboxgl.Marker(el, {offset: [0,-15]}) .setLngLat(marker.geometry.coordinates) .addTo(map);
+          }
+
+      );
+
+
+    }
 
 
     function map_addpiecluster() {
