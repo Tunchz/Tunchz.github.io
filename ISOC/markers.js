@@ -1,15 +1,49 @@
 
+  load_layers();
 
 
-    map_addlayer();
+
+  async function load_layers() {
+
+    //map_addlayer();
 
     $.getJSON('https://tunchz.github.io/ISOC/DRM.json', function(drm_geojson) {
+
+      //var map_geojson = await get_map_geojson;
+
+      // filter : risk plan   
+      var drm_geojson_riskplan = {"type": "FeatureCollection"};
+      drm_geojson_riskplan.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id > 90});
+      prov_color = {};
+      for (i = 0; i < drm_geojson_riskplan.features.length; i++) {
+        var prov_code = (drm_geojson_riskplan.features[i].properties.val).toString();
+        var riskplan_code = drm_geojson_riskplan.features[i].properties.disaster_type_id - 90;
+        var pcolor;
+
+        switch (riskplan_code) {
+          case 1:
+            pcolor = "#f00";
+            break;
+          case 4:
+            pcolor = "#00f";
+            break;
+          case 5:
+            pcolor = "#ff0";
+            break;
+          default:
+            pcolor = "#fff";
+        }
+        prov_color[prov_code]=pcolor;
+      }
+
+      map_addlayer(prov_color)
 
       // filter : AIR AQI ☣    
       var drm_geojson_air = {"type": "FeatureCollection"};
       drm_geojson_air.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 2});
       map_add_pulsemarker(drm_geojson_air,"air_aqi",'☢','rgba(50,50,50,1)','rgba(255,255,255,1)','rgba(255,255,200,1)',1);
-
+      //map_addlayer(prov_color).then(map_add_pulsemarker(drm_geojson_air,"air_aqi",'☢','rgba(255,255,255,1)','rgba(255,255,255,1)','rgba(255,255,200,1)',1));
+      
       // filter : LANDSLIDE  ▼
       var drm_geojson_landslide = {"type": "FeatureCollection"};
       drm_geojson_landslide.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 3});
@@ -68,51 +102,84 @@
 
     // map_addcluster();
 
+  }
+
+
+
+
+    // function get_map_geojson() {
+    //   $.getJSON('https://tunchz.github.io/mapth_small.json', function(map_geojson) {
+    //     return map_geojson;
+    //   });
+    // }
+
+
 
 //==Map Polygon================================================================================================
 
-    function map_addlayer() {
-      var url = "https://tunchz.github.io/mapth_small.json"
-      map.on('load', function () {
-        map.addSource('mapth', { type: 'geojson', data: url });
-        map.addLayer({
-          'id': 'th_prov',
-          'type': 'fill',
-          'source': 'mapth',
-          'paint': {
-            'fill-color': [
-                      'case',
-                      ['==', ['get', 'PROVINCE_C'], '63'],'#ff0',
-                      ['==', ['get', 'PROVINCE_C'], '50'],'#f00',
-                      ['==', ['get', 'PROVINCE_C'], '30'],'#00f',
-                      '#2a58c3'],
-            'fill-opacity': [
-                      'case',
-                      ['==', ['get', 'PROVINCE_C'], '63'],0.3,
-                      ['==', ['get', 'PROVINCE_C'], '50'],0.3,
-                      ['==', ['get', 'PROVINCE_C'], '30'],0.3,
-                      0]
+
+
+    async function map_addlayer(province_color) {
+
+      $.getJSON('https://tunchz.github.io/mapth_small.json', function(map_geojson) {
+        //console.log(map_geojson);
+
+        for (i = 0; i < map_geojson.features.length; i++) {
+          var prov_c = map_geojson.features[i].properties.PROVINCE_C;
+          if (typeof province_color[prov_c] !== 'undefined') {
+            map_geojson.features[i].properties['color'] = province_color[prov_c];
+            map_geojson.features[i].properties['opacity'] = 0.3;
+          }else{
+            map_geojson.features[i].properties['color'] = "#fff";
+            map_geojson.features[i].properties['opacity'] = 0;
           }
+        }
+
+        map.on('load', function () {
+          map.addSource('mapth', { type: 'geojson', data: map_geojson });
+          map.addLayer({
+            'id': 'th_prov',
+            'type': 'fill',
+            'source': 'mapth',
+            'paint': {
+              'fill-color': ['get', 'color'],
+              'fill-opacity': ['get', 'opacity']
+              // 'fill-color': [
+              //           'case',
+              //           ['==', prov_risk_check(['get', 'PROVINCE_C']), '63'],'#ff0',
+              //           ['==', ['get', 'PROVINCE_C'], '50'],'#f00',
+              //           ['==', ['get', 'PROVINCE_C'], '30'],'#00f',
+              //           '#2a58c3'],
+              // 'fill-opacity': [
+              //           'case',
+              //           ['==', ['get', 'PROVINCE_C'], '63'],0.3,
+              //           ['==', ['get', 'PROVINCE_C'], '50'],0.3,
+              //           ['==', ['get', 'PROVINCE_C'], '30'],0.3,
+              //           0]
+            }
+          });
+          map.addLayer({
+            'id': 'th_prov_bound',
+            'type': 'line',
+            'source': 'mapth',
+            'paint': {
+              'line-width': 1,
+              'line-color': '#ddd',
+              'line-opacity': 0.5
+            }
+          });
+        // //Filter map layer
+        // map.setFilter('th_prov_bound',["in", "PROVINCE_C", '63','50'])
         });
-        map.addLayer({
-          'id': 'th_prov_bound',
-          'type': 'line',
-          'source': 'mapth',
-          'paint': {
-            'line-width': 1,
-            'line-color': '#ddd',
-            'line-opacity': 0.5
-          }
-        });
-      // //Filter map layer
-      // map.setFilter('th_prov_bound',["in", "PROVINCE_C", '63','50'])
       });
+      console.log("map done")
     }
 
 
 //==Pulsing Marker================================================================================================
 
     function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color_outline,color_pulse,size) {
+      console.log("start",marker_text);
         var framesPerSecond = 30;
         var multiplier = 1;
         var opacity = .1;
@@ -228,6 +295,8 @@
 
 
       })
+
+      console.log("layer",marker_text);
     }
 
 //==CUSTOM MARKER================================================================================================
@@ -237,7 +306,7 @@
 
 
     function map_add_custommarker(datageojson,layername,imageurl,size,offset) {
-      console.log(datageojson);
+      //console.log(datageojson);
       map.on('load', function () {
           map.loadImage(imageurl,
               function (error, image) {
@@ -262,7 +331,7 @@
           );
 
         var popup = new mapboxgl.Popup({
-          offset: 10,
+          offset: offset,
           closeButton: false,
           closeOnClick: false
         });
@@ -295,275 +364,275 @@
 
       });
 
-
+      console.log("layer", layername)
     }
-
-
-
-    function map_add_custommarker2(datageojson,class_name,image,size) {
-      //console.log(data_geojson.features.length);
-      var data_geojson = datageojson;
-      // add markers to map
-      data_geojson.features.forEach(function (marker) {
-      //for (i = 0; i < data_geojson.features.length; i++) {
-        marker = data_geojson.features[i];
-        // create a DOM element for the marker
-        var el=document.createElement('div');
-        el.className=class_name;
-        //el.style.backgroundImage='url(https://placekitten.com/g/'+ marker.properties.iconSize.join('/') + '/)';
-        //el.style.width=marker.properties.iconSize[0] + 'px';
-        //el.style.height=marker.properties.iconSize[1] + 'px';
-        el.style.backgroundImage='url('+image+')';
-        el.style.width = size+'px';
-        el.style.height = size+'px';
-
-        el.addEventListener('click', function () {
-                window.alert(marker.properties.message);
-            }
-
-        );
-
-        var popup = new mapboxgl.Popup({
-          offset : size+2,
-          closeButton: false,
-          closeOnClick: false
-        });
-
-        //map.on('mouseenter', 'earthquake_circle', function (e) {
-        el.addEventListener('mouseenter', function () {
-            map.getCanvas().style.cursor = 'pointer';
-            var coordinates = marker.geometry.coordinates.slice();
-            var a1 = marker.properties.disaster_type;
-            var a2 = marker.properties.level_detail;
-            popup
-              .setLngLat([coordinates[0],coordinates[1]])
-              .setHTML(
-                  'ภัย : ' + a1 + '<br>ระดับ : ' + a2
-              )
-              .addTo(map);
-        });
-
-        //map.on('mouseleave', 'earthquake_circle', function () {
-        el.addEventListener('mouseleave', function () {
-          map.getCanvas().style.cursor = '';
-          popup.remove();
-        });
-
-        // add marker to map
-        new mapboxgl.Marker(el, {offset: [0,(-size/2)]}) .setLngLat(marker.geometry.coordinates) .addTo(map);
-      });
-
-    }
-
-
-
 
 //=====================================================================================================
 
-    function map_addpulsemarker() {
+//     function map_add_custommarker2(datageojson,class_name,image,size) {
+//       //console.log(data_geojson.features.length);
+//       var data_geojson = datageojson;
+//       // add markers to map
+//       data_geojson.features.forEach(function (marker) {
+//       //for (i = 0; i < data_geojson.features.length; i++) {
+//         marker = data_geojson.features[i];
+//         // create a DOM element for the marker
+//         var el=document.createElement('div');
+//         el.className=class_name;
+//         //el.style.backgroundImage='url(https://placekitten.com/g/'+ marker.properties.iconSize.join('/') + '/)';
+//         //el.style.width=marker.properties.iconSize[0] + 'px';
+//         //el.style.height=marker.properties.iconSize[1] + 'px';
+//         el.style.backgroundImage='url('+image+')';
+//         el.style.width = size+'px';
+//         el.style.height = size+'px';
 
-      var size = 80;
+//         el.addEventListener('click', function () {
+//                 window.alert(marker.properties.message);
+//             }
+
+//         );
+
+//         var popup = new mapboxgl.Popup({
+//           offset : size+2,
+//           closeButton: false,
+//           closeOnClick: false
+//         });
+
+//         //map.on('mouseenter', 'earthquake_circle', function (e) {
+//         el.addEventListener('mouseenter', function () {
+//             map.getCanvas().style.cursor = 'pointer';
+//             var coordinates = marker.geometry.coordinates.slice();
+//             var a1 = marker.properties.disaster_type;
+//             var a2 = marker.properties.level_detail;
+//             popup
+//               .setLngLat([coordinates[0],coordinates[1]])
+//               .setHTML(
+//                   'ภัย : ' + a1 + '<br>ระดับ : ' + a2
+//               )
+//               .addTo(map);
+//         });
+
+//         //map.on('mouseleave', 'earthquake_circle', function () {
+//         el.addEventListener('mouseleave', function () {
+//           map.getCanvas().style.cursor = '';
+//           popup.remove();
+//         });
+
+//         // add marker to map
+//         new mapboxgl.Marker(el, {offset: [0,(-size/2)]}) .setLngLat(marker.geometry.coordinates) .addTo(map);
+//       });
+
+//     }
+
+
+
+
+// //=====================================================================================================
+
+//     function map_addpulsemarker() {
+
+//       var size = 80;
        
-      // implementation of CustomLayerInterface to draw a pulsing dot icon on the map
-      // see https://docs.mapbox.com/mapbox-gl-js/api/#customlayerinterface for more info
-      var pulsingDot = {
-        width: size,
-        height: size,
-        data: new Uint8Array(size * size * 4),
+//       // implementation of CustomLayerInterface to draw a pulsing dot icon on the map
+//       // see https://docs.mapbox.com/mapbox-gl-js/api/#customlayerinterface for more info
+//       var pulsingDot = {
+//         width: size,
+//         height: size,
+//         data: new Uint8Array(size * size * 4),
          
-        // get rendering context for the map canvas when layer is added to the map
-        onAdd: function () {
-          var canvas = document.createElement('canvas');
-          canvas.width = this.width;
-          canvas.height = this.height;
-          this.context = canvas.getContext('2d');
-        },
+//         // get rendering context for the map canvas when layer is added to the map
+//         onAdd: function () {
+//           var canvas = document.createElement('canvas');
+//           canvas.width = this.width;
+//           canvas.height = this.height;
+//           this.context = canvas.getContext('2d');
+//         },
            
-        // called once before every frame where the icon will be used
-        render: function () {
-          var duration = 1000;
-          var t = (performance.now() % duration) / duration;
+//         // called once before every frame where the icon will be used
+//         render: function () {
+//           var duration = 1000;
+//           var t = (performance.now() % duration) / duration;
            
-          var radius = (size / 2) * 0.3;
-          var outerRadius = (size / 2) * 0.7 * t + radius;
-          var context = this.context;
+//           var radius = (size / 2) * 0.3;
+//           var outerRadius = (size / 2) * 0.7 * t + radius;
+//           var context = this.context;
            
-          // draw outer circle
-          context.clearRect(0, 0, this.width, this.height);
-          context.beginPath();
-          context.arc(
-            this.width / 2,
-            this.height / 2,
-            outerRadius,
-            0,
-            Math.PI * 2
-          );
-          context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
-          context.fill();
+//           // draw outer circle
+//           context.clearRect(0, 0, this.width, this.height);
+//           context.beginPath();
+//           context.arc(
+//             this.width / 2,
+//             this.height / 2,
+//             outerRadius,
+//             0,
+//             Math.PI * 2
+//           );
+//           context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
+//           context.fill();
            
-          // draw inner circle
-          context.beginPath();
-          context.arc(
-            this.width / 2,
-            this.height / 2,
-            radius,
-            0,
-            Math.PI * 2
-          );
-          context.fillStyle = 'rgba(255, 10, 10, 1)';
-          context.strokeStyle = 'white';
-          context.lineWidth = 2 + 4 * (1 - t);
-          context.fill();
-          context.stroke();
+//           // draw inner circle
+//           context.beginPath();
+//           context.arc(
+//             this.width / 2,
+//             this.height / 2,
+//             radius,
+//             0,
+//             Math.PI * 2
+//           );
+//           context.fillStyle = 'rgba(255, 10, 10, 1)';
+//           context.strokeStyle = 'white';
+//           context.lineWidth = 2 + 4 * (1 - t);
+//           context.fill();
+//           context.stroke();
            
-          // update this image's data with data from the canvas
-          this.data = context.getImageData(0,0,this.width,this.height).data;
+//           // update this image's data with data from the canvas
+//           this.data = context.getImageData(0,0,this.width,this.height).data;
            
-          // continuously repaint the map, resulting in the smooth animation of the dot
-          map.triggerRepaint();
+//           // continuously repaint the map, resulting in the smooth animation of the dot
+//           map.triggerRepaint();
            
-          // return `true` to let the map know that the image was updated
-          return true;
-        }
-      };
+//           // return `true` to let the map know that the image was updated
+//           return true;
+//         }
+//       };
        
-      map.on('load', function () {
-        map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+//       map.on('load', function () {
+//         map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
          
-        map.addSource('points', {
-          'type': 'geojson',
-          'data': {
-            'type': 'FeatureCollection',
-            'features': [
-              {
-                'type': 'Feature',
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': [100.1673626,17.2808669]
-                }
-              },
-              {
-                'type': 'Feature',
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': [101.1673626,13.2808669]
-                }
-              }
-            ]
+//         map.addSource('points', {
+//           'type': 'geojson',
+//           'data': {
+//             'type': 'FeatureCollection',
+//             'features': [
+//               {
+//                 'type': 'Feature',
+//                 'geometry': {
+//                   'type': 'Point',
+//                   'coordinates': [100.1673626,17.2808669]
+//                 }
+//               },
+//               {
+//                 'type': 'Feature',
+//                 'geometry': {
+//                   'type': 'Point',
+//                   'coordinates': [101.1673626,13.2808669]
+//                 }
+//               }
+//             ]
 
 
 
 
-            // "type": "Point",
-            // "coordinates": [100.1673626,17.2808669]
-          }
-        });
+//             // "type": "Point",
+//             // "coordinates": [100.1673626,17.2808669]
+//           }
+//         });
 
-        map.addLayer({
-          'id': 'points',
-          'type': 'symbol',
-          'source': 'points',
-          'layout': {
-            'icon-image': 'pulsing-dot'
-          }
-        });
-
-
-        map.on('mouseenter', 'points', function () {
-            map.getCanvas().style.cursor = 'pointer';
-        });
-        map.on('mouseleave', 'points', function () {
-            map.getCanvas().style.cursor = '';
-        });
+//         map.addLayer({
+//           'id': 'points',
+//           'type': 'symbol',
+//           'source': 'points',
+//           'layout': {
+//             'icon-image': 'pulsing-dot'
+//           }
+//         });
 
 
-
-      });
-    }
+//         map.on('mouseenter', 'points', function () {
+//             map.getCanvas().style.cursor = 'pointer';
+//         });
+//         map.on('mouseleave', 'points', function () {
+//             map.getCanvas().style.cursor = '';
+//         });
 
 
 
-    function map_addpulsemarker2() {
-
-      var framesPerSecond = 50; 
-      var initialOpacity = 1
-      var opacity = initialOpacity;
-      var initialRadius = 6;
-      var radius = initialRadius;
-      var maxRadius = 25;
+//       });
+//     }
 
 
-      map.on('load', function () {
 
-          // Add a source and layer displaying a point which will be animated in a circle.
-          map.addSource('point', {
-              "type": "geojson",
-              "data": {
-                  "type": "Point",
-                  "coordinates": [102.073626,14.2]
-              }
-          });
+//     function map_addpulsemarker2() {
 
-          map.addLayer({
-              "id": "outtercircle",
-              "source": "point",
-              "type": "circle",
-              "paint": {
-                  "circle-radius": initialRadius,
-                  "circle-radius-transition": {duration: 0},
-                  "circle-opacity-transition": {duration: 0},
-                  "circle-color": "#aaf"
-              }
-          });
-
-          map.addLayer({
-              "id": "innercircle",
-              "source": "point",
-              "type": "circle",
-              "paint": {
-                  "circle-radius": initialRadius,
-                  "circle-color": "#0000ff"
-              }
-          });
+//       var framesPerSecond = 50; 
+//       var initialOpacity = 1
+//       var opacity = initialOpacity;
+//       var initialRadius = 6;
+//       var radius = initialRadius;
+//       var maxRadius = 25;
 
 
-          function animateMarker(timestamp) {
-              setTimeout(function(){
-                  requestAnimationFrame(animateMarker);
+//       map.on('load', function () {
 
-                  radius += (maxRadius - radius) / framesPerSecond;
-                  opacity -= ( .9 / framesPerSecond );
-                  if (opacity < 0) { opacity = 0}
+//           // Add a source and layer displaying a point which will be animated in a circle.
+//           map.addSource('point', {
+//               "type": "geojson",
+//               "data": {
+//                   "type": "Point",
+//                   "coordinates": [102.073626,14.2]
+//               }
+//           });
 
-                  map.setPaintProperty('outtercircle', 'circle-radius', radius);
-                  map.setPaintProperty('outtercircle', 'circle-opacity', opacity);
+//           map.addLayer({
+//               "id": "outtercircle",
+//               "source": "point",
+//               "type": "circle",
+//               "paint": {
+//                   "circle-radius": initialRadius,
+//                   "circle-radius-transition": {duration: 0},
+//                   "circle-opacity-transition": {duration: 0},
+//                   "circle-color": "#aaf"
+//               }
+//           });
 
-                  if (opacity <= 0) {
-                      radius = initialRadius;
-                      opacity = initialOpacity;
-                  } 
+//           map.addLayer({
+//               "id": "innercircle",
+//               "source": "point",
+//               "type": "circle",
+//               "paint": {
+//                   "circle-radius": initialRadius,
+//                   "circle-color": "#0000ff"
+//               }
+//           });
 
-              }, 1000 / framesPerSecond);
+
+//           function animateMarker(timestamp) {
+//               setTimeout(function(){
+//                   requestAnimationFrame(animateMarker);
+
+//                   radius += (maxRadius - radius) / framesPerSecond;
+//                   opacity -= ( .9 / framesPerSecond );
+//                   if (opacity < 0) { opacity = 0}
+
+//                   map.setPaintProperty('outtercircle', 'circle-radius', radius);
+//                   map.setPaintProperty('outtercircle', 'circle-opacity', opacity);
+
+//                   if (opacity <= 0) {
+//                       radius = initialRadius;
+//                       opacity = initialOpacity;
+//                   } 
+
+//               }, 1000 / framesPerSecond);
               
-          }
+//           }
 
-          // Start the animation.
-          animateMarker(0);
-
-
-        map.on('mouseenter', 'innercircle', function () {
-            map.getCanvas().style.cursor = 'pointer';
-        });
-        map.on('mouseleave', 'innercircle', function () {
-            map.getCanvas().style.cursor = '';
-        });
+//           // Start the animation.
+//           animateMarker(0);
 
 
+//         map.on('mouseenter', 'innercircle', function () {
+//             map.getCanvas().style.cursor = 'pointer';
+//         });
+//         map.on('mouseleave', 'innercircle', function () {
+//             map.getCanvas().style.cursor = '';
+//         });
 
 
-      });
 
-    }
+
+//       });
+
+//     }
 
 
 
