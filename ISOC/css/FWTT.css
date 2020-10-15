@@ -50,7 +50,8 @@ svg {
 
 svg text {
   /*font-family:sans-serif;*/
-  font-size:11px;
+  font-size:10px;
+  font-weight: "bold";
 }
 
 .x-axis path,
@@ -172,6 +173,8 @@ table {
   font-family: Serithai;
 }
 
+/*-------------Table Image-----------------*/
+
 .table_row {
   height: 60px;
   /*border-top: 3px solid #383838;
@@ -180,6 +183,7 @@ table {
   /*background-color: #ffcc00;*/
   /*border-left: 5px solid #383838;
   border-right: 5px solid #383838;*/
+  padding: 10px;
 }
 
 .table_row:hover {
@@ -259,6 +263,128 @@ table {
 #table_image {
   color:#fff;
 }
+
+/*-------------Table Marker-----------------*/
+
+.table_row_marker {
+  height: 30px;
+  /*border-top: 3px solid #383838;
+  border-bottom: 3px solid #383838;*/
+  cursor: pointer;
+  /*background-color: #ffcc00;*/
+  /*border-left: 5px solid #383838;
+  border-right: 5px solid #383838;*/
+}
+
+.table_row_marker:hover {
+  background-color: #ccc2;
+  /*opacity: 0.1;
+  border-left: 7px solid #fff;*/
+  /*border-left: 5px solid #2a58c3;
+  border-right: 5px solid #2a58c3;*/
+}
+
+.detail_marker_bg {
+  width:  12px;
+  height: 12px;
+  padding: 0px 0px 10px 0px;
+  border-radius: 50%;
+  /*background-color:#fff;*/
+}
+
+.detail_marker {
+  width:  12px;
+  height: 12px;
+  font-size: 7px;
+  color: #000;
+  font-weight: bold;
+  padding: 0px 0px 0px 0px;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: -5px;
+}
+
+.subdetail_marker {
+  font-size: 10px;
+  font-weight: normal;
+  padding: 3px 0px;
+}
+
+.tag_marker {
+  font-size: 10px;
+  padding: 6px 0px;
+  font-weight: normal;
+  justify-content: right;
+  padding-right: 10px;
+  text-align: left;
+}
+
+.subtag_marker {
+  font-size: 12px;
+  font-weight: normal;
+  padding: 0px 0px;
+  padding-left: 5px;
+  text-align: left;
+  color:#fff8;
+}
+.table_img_marker_container{
+  width: 26px;
+  height: 26px;
+  margin: 3px 0px 1px 4px;
+  justify-content: center;
+  align-items: center;  
+  display: flex;
+  /*background-color: #fff1;*/
+  border-radius: 50%;
+}
+
+.table_img_marker {
+  background-size: cover;
+  padding: 0px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  cursor: pointer;
+  /*border: 2px solid #ffcc00;*/
+  vertical-align: middle;
+}
+
+.marker_icon {
+  width:  26px;
+  height: 26px;
+  font-size: 20px;
+  color: #fff;
+  font-weight: normal;
+  padding: 0px 0px 0px 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+.img_col_marker {
+  min-width: 30px;
+  max-width: 30px;
+  width: 20%;
+}
+
+.tag_col_marker {
+  /*min-width: 70px;
+  max-width: 120px;
+  width: 28%;*/
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
+
+.detail_col_marker {
+  width:12px;
+  padding-left: 0px;
+}
+
+#table_image_marker {
+  color:#fff;
+}
+
+/*----------------------------------------------------------*/
 
 
 html {
