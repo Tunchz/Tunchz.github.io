@@ -1,6 +1,30 @@
 
   load_layers();
 
+  var disaster_type_color = {
+    '91':"#f00",
+    '92':"#f00",
+    '93':"#f00",
+    '94':"#00f",
+    '95':"#ff0",
+    '96':"#f00",
+    '97':"#f00",
+    '98':"#f00",
+    '99':"#f00"
+  };
+
+  // icon for each disaster type id
+  var symbol = [{'icon':"0"},
+  ///*1forest*/    {'icon': "https://tunchz.github.io/ISOC/img/marker_forest_green_s5.png",'color':"rgba(0,255,0,1)", 'textcolor':"rgba(0,255,0,1)",  'size':20},
+  /*1forest*/    {'icon': "❧",   'color':"rgba(0,255,0,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1},
+  /*2air*/       {'icon':"☢",    'color':"rgba(50,50,50,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1},
+  /*3landslide*/ {'icon':"☳",     'color':"rgba(150,0,255,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':0.7},
+  /*4flood*/     {'icon':"♦",      'color':"rgba(0,0,255,1)",    'outlinecolor':"rgba(255,255,255,1)",   'pulsecolor':"rgba(200,200,255,1)",  'size':0.8},
+  /*5drought*/   {'icon':"☭",     'color':"rgba(255,190,100,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.8},
+  /*6fire*/      {'icon':"♨",    'color':"rgba(255,100,0,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':0.8},
+  /*7hotspot*/   {'icon':"☀",    'color':"rgba(255,0,0,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':0.9},
+  /*8storm*/     {'icon':"♒",    'color':"rgba(150,150,255,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.7},
+  /*9heavyrain*/ {'icon':"☂",    'color':"rgba(0,150,255,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1}]
 
 
   async function load_layers() {
@@ -21,21 +45,9 @@
         var prov_code = (drm_geojson_riskplan.features[i].properties.val).toString();
         var riskplan_code = drm_geojson_riskplan.features[i].properties.disaster_type_id - 90;
         var pcolor;
+        // Color of each plan risk
 
-        switch (riskplan_code) {
-          case 1:
-            pcolor = "#f00";
-            break;
-          case 4:
-            pcolor = "#00f";
-            break;
-          case 5:
-            pcolor = "#ff0";
-            break;
-          default:
-            pcolor = "#fff";
-        }
-        prov_color[prov_code]=pcolor;
+        prov_color[prov_code]=disaster_type_color[drm_geojson_riskplan.features[i].properties.disaster_type_id.toString()];
       }
 
       $.getJSON('https://tunchz.github.io/mapth_small.json', function(map_geojson) {
@@ -54,17 +66,6 @@
         //map_addlayer2();
         map_addlayer(map_geojson);
         
-        // icon for each disaster type id
-        var symbol = [{'icon':"0"},
-        /*1forest*/    {'icon': "https://tunchz.github.io/ISOC/img/marker_forest_green_s5.png",'textcolor':"rgba(255,255,255,1)",  'size':20},
-        /*2air*/       {'icon':"☢",    'color':"rgba(50,50,50,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1},
-        /*3landslide*/ {'icon':"☳",     'color':"rgba(150,0,255,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':0.7},
-        /*4flood*/     {'icon':"♦",      'color':"rgba(0,0,255,1)",    'outlinecolor':"rgba(255,255,255,1)",   'pulsecolor':"rgba(200,200,255,1)",  'size':0.7},
-        /*5drought*/   {'icon':"☭",     'color':"rgba(255,190,100,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.8},
-        /*6fire*/      {'icon':"♨",    'color':"rgba(255,100,0,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':0.8},
-        /*7hotspot*/   {'icon':"☀",    'color':"rgba(255,0,0,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':0.9},
-        /*8storm*/     {'icon':"♒",    'color':"rgba(150,150,255,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.7},
-        /*9heavyrain*/ {'icon':"☂",    'color':"rgba(0,150,255,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1}]
 
         // filter : AIR AQI ☣    
         var drm_geojson_air = {"type": "FeatureCollection"};
@@ -111,11 +112,33 @@
         var drm_geojson_forest = {"type": "FeatureCollection"};
         drm_geojson_forest.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 1});
         //map_add_custommarker2(drm_geojson_forest,"custom_marker","img/marker_forest_green_s5.png",20);
-        map_add_custommarker(drm_geojson_forest,"forest",symbol[1].icon,symbol[1].textcolor,1,symbol[1].size,true);
+        //map_add_custommarker(drm_geojson_forest,"forest",symbol[1].icon,symbol[1].textcolor,1,symbol[1].size,true);
+        map_add_pulsemarker(drm_geojson_forest,"forest",symbol[1].icon,symbol[1].color,symbol[1].outlinecolor,symbol[1].pulsecolor,symbol[1].size,false);
 
-      });
 
-    });
+
+
+        // Build array for table image marker
+        var drm = [];
+        var disaster_type_id;
+        for (i = 0; i < drm_geojson.features.length; i++) {
+          drm.push(drm_geojson.features[i].properties);
+          disaster_type_id = drm_geojson.features[i].properties.disaster_type_id;
+          if (disaster_type_id < 90) {
+            drm[i]['icon'] = symbol[disaster_type_id].icon
+            drm[i]['color'] = symbol[disaster_type_id].color
+          } else {
+            drm[i]['icon'] = "■";
+            drm[i]['color'] = disaster_type_color[disaster_type_id.toString()];
+          }
+          
+        }
+        display_table_markers(drm);
+
+
+      }); //get map_geo_json
+
+    }); //get drm_geo_json
 
     //map_addpiecluster();
 
@@ -156,7 +179,7 @@
         // map.setFilter('th_prov_bound',["in", "PROVINCE_C", '63','50'])
         });
 
-      console.log("map done")
+      //console.log("map done")
     }
 
 
@@ -201,7 +224,7 @@
 //==Pulsing Marker================================================================================================
 
     function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color_outline,color_pulse,size,ispulse) {
-      console.log("start",marker_text);
+      //console.log("start",marker_text);
         var framesPerSecond = 30;
         var multiplier = 1;
         var opacity = 1;
@@ -286,7 +309,7 @@
             requestAnimationFrame(pulseMarker)
 
             multiplier += .1;
-            opacity -= ( .8 / framesPerSecond );
+            opacity -= ( .6 / framesPerSecond );
             textSize += ( Math.round(36*size) / framesPerSecond );
 
             map.setPaintProperty(layername+'-pulse', 'text-opacity', opacity)
@@ -338,7 +361,7 @@
 
       })
 
-      console.log("layer",marker_text);
+      //console.log("layer",marker_text);
     }
 
 //==CUSTOM MARKER================================================================================================
@@ -430,277 +453,8 @@
 
       });
 
-      console.log("layer", layername)
+      //console.log("layer", layername)
     }
-
-//=====================================================================================================
-
-//     function map_add_custommarker2(datageojson,class_name,image,size) {
-//       //console.log(data_geojson.features.length);
-//       var data_geojson = datageojson;
-//       // add markers to map
-//       data_geojson.features.forEach(function (marker) {
-//       //for (i = 0; i < data_geojson.features.length; i++) {
-//         marker = data_geojson.features[i];
-//         // create a DOM element for the marker
-//         var el=document.createElement('div');
-//         el.className=class_name;
-//         //el.style.backgroundImage='url(https://placekitten.com/g/'+ marker.properties.iconSize.join('/') + '/)';
-//         //el.style.width=marker.properties.iconSize[0] + 'px';
-//         //el.style.height=marker.properties.iconSize[1] + 'px';
-//         el.style.backgroundImage='url('+image+')';
-//         el.style.width = size+'px';
-//         el.style.height = size+'px';
-
-//         el.addEventListener('click', function () {
-//                 window.alert(marker.properties.message);
-//             }
-
-//         );
-
-//         var popup = new mapboxgl.Popup({
-//           offset : size+2,
-//           closeButton: false,
-//           closeOnClick: false
-//         });
-
-//         //map.on('mouseenter', 'earthquake_circle', function (e) {
-//         el.addEventListener('mouseenter', function () {
-//             map.getCanvas().style.cursor = 'pointer';
-//             var coordinates = marker.geometry.coordinates.slice();
-//             var a1 = marker.properties.disaster_type;
-//             var a2 = marker.properties.level_detail;
-//             popup
-//               .setLngLat([coordinates[0],coordinates[1]])
-//               .setHTML(
-//                   'ภัย : ' + a1 + '<br>ระดับ : ' + a2
-//               )
-//               .addTo(map);
-//         });
-
-//         //map.on('mouseleave', 'earthquake_circle', function () {
-//         el.addEventListener('mouseleave', function () {
-//           map.getCanvas().style.cursor = '';
-//           popup.remove();
-//         });
-
-//         // add marker to map
-//         new mapboxgl.Marker(el, {offset: [0,(-size/2)]}) .setLngLat(marker.geometry.coordinates) .addTo(map);
-//       });
-
-//     }
-
-
-
-
-// //=====================================================================================================
-
-//     function map_addpulsemarker() {
-
-//       var size = 80;
-       
-//       // implementation of CustomLayerInterface to draw a pulsing dot icon on the map
-//       // see https://docs.mapbox.com/mapbox-gl-js/api/#customlayerinterface for more info
-//       var pulsingDot = {
-//         width: size,
-//         height: size,
-//         data: new Uint8Array(size * size * 4),
-         
-//         // get rendering context for the map canvas when layer is added to the map
-//         onAdd: function () {
-//           var canvas = document.createElement('canvas');
-//           canvas.width = this.width;
-//           canvas.height = this.height;
-//           this.context = canvas.getContext('2d');
-//         },
-           
-//         // called once before every frame where the icon will be used
-//         render: function () {
-//           var duration = 1000;
-//           var t = (performance.now() % duration) / duration;
-           
-//           var radius = (size / 2) * 0.3;
-//           var outerRadius = (size / 2) * 0.7 * t + radius;
-//           var context = this.context;
-           
-//           // draw outer circle
-//           context.clearRect(0, 0, this.width, this.height);
-//           context.beginPath();
-//           context.arc(
-//             this.width / 2,
-//             this.height / 2,
-//             outerRadius,
-//             0,
-//             Math.PI * 2
-//           );
-//           context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
-//           context.fill();
-           
-//           // draw inner circle
-//           context.beginPath();
-//           context.arc(
-//             this.width / 2,
-//             this.height / 2,
-//             radius,
-//             0,
-//             Math.PI * 2
-//           );
-//           context.fillStyle = 'rgba(255, 10, 10, 1)';
-//           context.strokeStyle = 'white';
-//           context.lineWidth = 2 + 4 * (1 - t);
-//           context.fill();
-//           context.stroke();
-           
-//           // update this image's data with data from the canvas
-//           this.data = context.getImageData(0,0,this.width,this.height).data;
-           
-//           // continuously repaint the map, resulting in the smooth animation of the dot
-//           map.triggerRepaint();
-           
-//           // return `true` to let the map know that the image was updated
-//           return true;
-//         }
-//       };
-       
-//       map.on('load', function () {
-//         map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
-         
-//         map.addSource('points', {
-//           'type': 'geojson',
-//           'data': {
-//             'type': 'FeatureCollection',
-//             'features': [
-//               {
-//                 'type': 'Feature',
-//                 'geometry': {
-//                   'type': 'Point',
-//                   'coordinates': [100.1673626,17.2808669]
-//                 }
-//               },
-//               {
-//                 'type': 'Feature',
-//                 'geometry': {
-//                   'type': 'Point',
-//                   'coordinates': [101.1673626,13.2808669]
-//                 }
-//               }
-//             ]
-
-
-
-
-//             // "type": "Point",
-//             // "coordinates": [100.1673626,17.2808669]
-//           }
-//         });
-
-//         map.addLayer({
-//           'id': 'points',
-//           'type': 'symbol',
-//           'source': 'points',
-//           'layout': {
-//             'icon-image': 'pulsing-dot'
-//           }
-//         });
-
-
-//         map.on('mouseenter', 'points', function () {
-//             map.getCanvas().style.cursor = 'pointer';
-//         });
-//         map.on('mouseleave', 'points', function () {
-//             map.getCanvas().style.cursor = '';
-//         });
-
-
-
-//       });
-//     }
-
-
-
-//     function map_addpulsemarker2() {
-
-//       var framesPerSecond = 50; 
-//       var initialOpacity = 1
-//       var opacity = initialOpacity;
-//       var initialRadius = 6;
-//       var radius = initialRadius;
-//       var maxRadius = 25;
-
-
-//       map.on('load', function () {
-
-//           // Add a source and layer displaying a point which will be animated in a circle.
-//           map.addSource('point', {
-//               "type": "geojson",
-//               "data": {
-//                   "type": "Point",
-//                   "coordinates": [102.073626,14.2]
-//               }
-//           });
-
-//           map.addLayer({
-//               "id": "outtercircle",
-//               "source": "point",
-//               "type": "circle",
-//               "paint": {
-//                   "circle-radius": initialRadius,
-//                   "circle-radius-transition": {duration: 0},
-//                   "circle-opacity-transition": {duration: 0},
-//                   "circle-color": "#aaf"
-//               }
-//           });
-
-//           map.addLayer({
-//               "id": "innercircle",
-//               "source": "point",
-//               "type": "circle",
-//               "paint": {
-//                   "circle-radius": initialRadius,
-//                   "circle-color": "#0000ff"
-//               }
-//           });
-
-
-//           function animateMarker(timestamp) {
-//               setTimeout(function(){
-//                   requestAnimationFrame(animateMarker);
-
-//                   radius += (maxRadius - radius) / framesPerSecond;
-//                   opacity -= ( .9 / framesPerSecond );
-//                   if (opacity < 0) { opacity = 0}
-
-//                   map.setPaintProperty('outtercircle', 'circle-radius', radius);
-//                   map.setPaintProperty('outtercircle', 'circle-opacity', opacity);
-
-//                   if (opacity <= 0) {
-//                       radius = initialRadius;
-//                       opacity = initialOpacity;
-//                   } 
-
-//               }, 1000 / framesPerSecond);
-              
-//           }
-
-//           // Start the animation.
-//           animateMarker(0);
-
-
-//         map.on('mouseenter', 'innercircle', function () {
-//             map.getCanvas().style.cursor = 'pointer';
-//         });
-//         map.on('mouseleave', 'innercircle', function () {
-//             map.getCanvas().style.cursor = '';
-//         });
-
-
-
-
-//       });
-
-//     }
-
-
 
 
 
@@ -882,47 +636,7 @@
     // }
 
 
-// map_addcustommarker()
 
-
-//     function map_addcustommarker() {
-
-//       map.on('load', function () {
-//           map.loadImage(
-//               'https://tunchz.github.io/ISOC/img/marker_forest_green_s5.png',
-//               function (error, image) {
-//                   if (error) throw error;
-//                   map.addImage('marker_forest', image);
-//                   map.addSource('pointforest', {
-//                       'type': 'geojson',
-//                       'data': {
-//                           'type': 'FeatureCollection',
-//                           'features': [
-//                               {
-//                                   'type': 'Feature',
-//                                   'geometry': {
-//                                       'type': 'Point',
-//                                       'coordinates': [104.073626,15.52]
-//                                   }
-//                               }
-//                           ]
-//                       }
-//                   });
-//                   map.addLayer({
-//                       'id': 'markerforest_01',
-//                       'type': 'symbol',
-//                       'source': 'pointforest',
-//                       'layout': {
-//                           'icon-image': 'marker_forest',
-//                           'icon-size': 1
-//                       }
-//                   });
-//               }
-//           );
-//       });
-
-
-//     }
 
 
 //==PIE CLUSTER================================================================================================
@@ -971,7 +685,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
 
           // circle and symbol layers for rendering individual earthquakes (unclustered points)
           map.addLayer({
-              'id': 'earthquake_circle',
+              'id': 'hotspot_circle',
               'type': 'circle',
               'source': 'hotspotth',
               'filter': ['!=', 'cluster', true],
@@ -990,7 +704,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
               }
           });
           map.addLayer({
-              'id': 'earthquake_label',
+              'id': 'hotspot_label',
               'type': 'symbol',
               'source': 'hotspotth',
               'filter': ['!=', 'cluster', true],
@@ -1002,7 +716,8 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
                       { 'min-fraction-digits': 1, 'max-fraction-digits': 1 }
                   ],
                   'text-font': ['Roboto Black', 'Arial Unicode MS Bold'],
-                  'text-size': 6
+                  'text-offset': [0, -1.5],
+                  'text-size': 8
               },
               'paint': {
                   'text-color': [
@@ -1024,7 +739,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
             closeOnClick: false
           });
 
-          map.on('mouseenter', 'earthquake_circle', function (e) {
+          map.on('mouseenter', 'hotspot_circle', function (e) {
               map.getCanvas().style.cursor = 'pointer';
               var coordinates = e.features[0].geometry.coordinates.slice();
               var a1 = e.features[0].properties.CHANGWAT;
@@ -1037,7 +752,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
                 .addTo(map);
           });
 
-          map.on('mouseleave', 'earthquake_circle', function () {
+          map.on('mouseleave', 'hotspot_circle', function () {
             map.getCanvas().style.cursor = '';
             popup.remove();
           });
@@ -1046,12 +761,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
           // after the GeoJSON data is loaded, update markers on the screen and do so on every map move/moveend
           map.on('data', function (e) {
               //console.log('map on data : ',e.sourceId,e.isSourceLoaded);
-
               if (e.sourceId !== 'hotspotth' || !e.isSourceLoaded) return;
-
-              //console.log('map on data pass!');
-              //map.on('move', updateMarkers);
-              //map.on('moveend', updateMarkers);
               updateMarkers();
           });
           map.on('move', updateMarkers);
@@ -1131,114 +841,6 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
           }
 
 
-          // map.addLayer( {
-
-          //         id: 'clusters',
-          //         type: 'circle',
-          //         source: 'hotspotth',
-          //         filter: ['has', 'point_count'],
-          //         paint: {
-          //             // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-          //             // with three steps to implement three types of circles:
-          //             //   * Blue, 20px circles when point count is less than 100
-          //             //   * Yellow, 30px circles when point count is between 100 and 750
-          //             //   * Pink, 40px circles when point count is greater than or equal to 750
-          //             'circle-color': [ 'step',['get', 'point_count'],
-          //               '#fff',100,
-          //               '#fff',750,
-          //               '#fff'],
-          //             'circle-radius': [ 'step',['get', 'point_count'],
-          //               7,10,
-          //               9,100,
-          //               10,1000,
-          //               15],
-          //             'circle-opacity': 0.7,
-          //         }
-          //     }
-
-          // );
-
-          // map.addLayer( {
-
-          //         id: 'cluster-count',
-          //         type: 'symbol',
-          //         source: 'hotspotth',
-          //         filter: ['has', 'point_count'],
-          //         layout: {
-          //             'text-field': '{point_count}',
-          //             'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-          //             'text-size': 11
-          //         }
-          //     }
-
-          // );
-
-
-
-          // // inspect a cluster on click
-          // map.on('click', 'clusters', function (e) {
-          //         var features=map.queryRenderedFeatures(e.point, {
-          //                 layers: ['clusters']
-          //             }
-
-          //         );
-          //         var clusterId=features[0].properties.cluster_id;
-
-          //         map.getSource('hotspotth').getClusterExpansionZoom(clusterId,
-          //             function (err, zoom) {
-          //                 if (err) return;
-
-          //                 map.easeTo( {
-          //                         center: features[0].geometry.coordinates,
-          //                         zoom: zoom
-          //                     }
-
-          //                 );
-          //             }
-
-          //         );
-          //     }
-
-          // );
-
-
-          // map.on('click', 'unclustered-point', function (e) {
-          //         var coordinates=e.features[0].geometry.coordinates.slice();
-          //         var mag=e.features[0].properties.mag;
-          //         var tsunami;
-
-          //         if (e.features[0].properties.tsunami===1) {
-          //             tsunami='yes';
-          //         }
-
-          //         else {
-          //             tsunami='no';
-          //         }
-
-          //         // Ensure that if the map is zoomed out such that
-          //         // multiple copies of the feature are visible, the
-          //         // popup appears over the copy being pointed to.
-          //         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-          //             coordinates[0] +=e.lngLat.lng > coordinates[0] ? 360 : -360;
-          //         }
-
-          //         new mapboxgl.Popup() .setLngLat(coordinates) .setHTML('magnitude: '+ mag + '<br>Was there a tsunami?: '+ tsunami) .addTo(map);
-          //     }
-
-          // );
-
-          // map.on('mouseenter', 'clusters', function () {
-          //         map.getCanvas().style.cursor='pointer';
-          //     }
-
-          // );
-
-          // map.on('mouseleave', 'clusters', function () {
-          //         map.getCanvas().style.cursor='';
-          //     }
-
-          // );
-
       });
 
       // code for creating an SVG donut chart from feature properties
@@ -1259,7 +861,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
           var w = r * 2;
 
           var html = '<svg width="' + w + '" height="' + w + '" viewbox="0 0 ' + w + ' ' + w + 
-            '" text-anchor="middle" style="font: ' + fontSize + 'Roboto Black; display: block; ">';
+            '" text-anchor="middle" style="font: ' + fontSize + 'Serithai; display: block; ">';
 
 
           for (i = 0; i < counts.length; i++) {
@@ -1304,5 +906,197 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
     }
 
 
+//=== Table Image Marker ===============================================================================================================
 
 
+    // tabulateimg(List_filtered, ["img","id","dept","date","timein","last","mood","status","detection"]);
+    function tabulateimg_marker(data, columns) {
+console.log(data);
+console.log(columns);
+
+      var table = d3.select('#table-markers-container').append('table').attr("id","table_image_marker");
+
+      //var thead = table.append('thead')
+      var tbody = table.append('tbody');
+      var dummy = [];
+
+      for (t=0; t<data.length; t++) {
+        data[t].row_no = t;
+      }
+      columns.push('row_no');
+
+      var rows = tbody.selectAll('tr')
+        .data(data)
+        .enter()
+        .append('tr')
+        .attr('class','table_row_marker')
+        .attr('id',function(d) {return 'row-'+d.row_no});
+
+      // create a cell in each row for each column
+
+      //------ 1st column section ------------------------------------------------------------------  
+      var img_cells = rows.selectAll('td')
+        .data(function (row) { //console.log("row",row);
+          return [columns[0]].map(function (column) {//console.log("col",column);
+            return {column: column, value: row[column], color:row[columns[9]]};
+          });
+        })
+        .enter()
+        .append('td')
+        .attr("class","img_col_marker")
+        .append('div')
+        .attr('class', 'table_img_marker_container')
+        // .append('img')
+        // .attr('class', 'table_img_marker')
+        // .attr('src', function(d) {return d.column == columns[0] ?  "img/marker_forest_green_s5.png"/*d.value*/ : null;})
+        // .style("border",function (d) {
+        //       if (d.status == "succeeded") {
+        //         return "1px solid #9bee00"
+        //       } else if (d.status == "unknown") {
+        //         return "1px solid #ff0000"
+        //       } else if (d.status == "sending") {
+        //         return "1px solid #ffcc00"
+        //       } else if (d.status == "toverify") {
+        //         return "1px solid #ffcc00"
+        //       } else {
+        //         return "1px solid #316be6"
+        //       }
+        // })
+        .append('th')
+            .attr('class', 'marker_icon')
+            .text(function(d) {return d.column == columns[0] ?  d.value : null;})
+            .style("color",function (d) {return d.color})
+
+
+        ;
+
+      //------ 2nd column section ------------------------------------------------------------------  
+      var cells = rows.selectAll('td')
+        .data(function (row) {
+          //console.log(row);
+          return ['img','detail'].map(function (column) {
+            var dt = {};
+            for (m=1; m < 4 /*columns.length*/; m++) {
+              if (columns[m] == 'id') {
+                if ((row[columns[m]].substr(0,7)) != 'unknown') {
+                  dt[columns[m]] = facelabels[parseInt(row[columns[m]])].name;
+                } else {
+                  dt[columns[m]] = row[columns[m]];
+                }
+                
+              } else {
+                dt[columns[m]] = row[columns[m]];
+              }
+              dt[columns[9]] = row[columns[9]];
+            }
+            //console.log(dt);
+            return {column: column, value: dt /*{"detail" : row[columns[1]], "subdetail_1" : row[columns[2]], "subdetail_2" : row[columns[3]]}*/};
+          });
+        })
+        .enter()
+        .append('td').attr("class","detail_col_marker")
+        .append('table').attr("id","detail_table_marker");
+
+        var cthead = cells.append('thead')
+        var ctbody = cells.append('tbody');
+
+        // Display detail as table header
+        cthead.append('tr')
+          .selectAll('th')
+          .data(function (d) {console.log(d.value[columns[9]]); return [{tag:d.value[columns[1]], color:d.value[columns[9]]}]})
+          .enter()
+          .append('div')
+            .attr('class', 'detail_marker_bg')
+            .style("border",function (d) {return "1px solid " + d.color; /*console.log("color",d.color)*/})
+          .append('th')
+            .attr('class', 'detail_marker')
+            .text(function (d) {return d.tag })
+            .style("color",function (d) {return d.color})
+
+        // Display subdetail as table row 
+        var crows = ctbody.selectAll('tr')
+          .data(function (d) {return [d.value[columns[2]],d.value[columns[3]]]})
+          .enter()
+          .append('tr')
+          .append('th')
+            .attr('class', 'subdetail_marker')
+            .text(function (column) {return column })
+
+      //------ 3rd column section ------------------------------------------------------------------         
+      var cells2 = rows.selectAll('td')
+        .data(function (row) {
+          //console.log(row);
+          return ['img','detail','tag'].map(function (column) {
+            var dt = {};
+            for (m=4; m<columns.length; m++) {
+              /*if (m == 7) {
+                dt['row_no'] = row['row_no'];
+              } else if (columns[m] == 'lat') {
+                dt[columns[m]] = '●';
+              } else {
+                dt[columns[m]] = row[columns[m]];
+              } */    
+              dt[columns[m]] = row[columns[m]];
+            }
+            //console.log(dt);
+            return {column: column, value: dt /*{"detail" : row[columns[1]], "subdetail_1" : row[columns[2]], "subdetail_2" : row[columns[3]]}*/};
+          });
+        })
+        .enter()
+        .append('td').attr("class","tag_col_marker")
+        .append('table').attr("id","tag_table_marker");
+
+        var cthead2 = cells2.append('thead')
+        var ctbody2 = cells2.append('tbody');
+
+        // Display detail as table header
+        cthead2.append('tr')
+          .selectAll('th')
+          .data(function (d) {/*console.log(d.value[columns[1]]);*/ return d.value[columns[4]]==d.value[columns[5]]?[d.value[columns[4]]]:[d.value[columns[4]]+" - "+d.value[columns[5]]]})
+          .enter()
+          .append('th')
+            .attr('class', 'tag_marker')
+            .text(function (column) {return column })
+
+        // Display subdetail as table row 
+        var crows2 = ctbody2.selectAll('tr')
+          .data(function (d) {return [{value : d.value[columns[6]], name : "mood", row : d.value[columns[9]]},{value : d.value[columns[7]], name : "status", row : d.value[columns[9]], detection : d.value[columns[8]]}]})
+          .enter()
+          .append('tr')
+          .append('th')
+            .attr('id',function(d) {/*console.log(d);*/return 'subtag-'+d.row+'-'+d.name})
+            .attr('class', 'subtag_marker')
+            .text(function (column) {return column.name == "mood"? column.value : column.detection + "" + column.value/*(column.value == 'succeeded'|column.value == 'unknown' ? '✔': column.value == 'failed' ? '✘': '❗' )*/})
+
+/*
+        if (data[t].status == 'succeeded') {
+          data[t].status = '✔';
+        } else if (data[t].status == 'failed') {
+          data[t].status = '✘';
+        } else {
+          data[t].status = '❗';
+        }
+
+*/
+
+      return table;
+    }
+
+
+
+    function display_table_markers(disaster_risk_list) {
+
+        //console.log(disaster_risk_list);
+
+        // Initialize crossfilter variable for Disaster Risk List
+        var drl = crossfilter(disaster_risk_list);
+        drl.dtype_id = drl.dimension(function(d) { return d.disaster_type_id; });
+        dtype_id_group = drl.dtype_id.group();
+        //console.log(drl.dtype_id.bottom(Infinity));
+        //console.log(dtype_id_group.all());
+        tabulateimg_marker(disaster_risk_list, ["icon","val","date_start","date_start","date_start","date_start","date_start","disaster_type","date_start","color"]);
+
+    }
+
+
+    

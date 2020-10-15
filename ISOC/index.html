@@ -69,13 +69,13 @@
               </div>
             </div>
  
-            <div id='notification-container-right-bg' class='map_addon_right' style = "width: 20%; min-width: 250px; height: auto; padding: 0px; background-color: #fff; opacity:0.2; display:none;"></div>
+            <div id='notification-container-right-bg' class='map_addon_right' style = "width: 15%; min-width: 150px; height: auto; padding: 0px; background-color: #fff; opacity:0.2; display:none;"></div>
 
-            <div id='notification-container-right' class='map_addon_right' style = "width: 20%; min-width: 250px; padding: 0px 0px 0px 0px;display:none;">
+            <div id='notification-container-right' class='map_addon_right' style = "width: 130px; min-width: 130px; padding: 0px 0px 0px 0px;display:block;">
               
               <div id='table-container-MAP' class = "col-sm-12 height100p">
                 <!div id="notification-bg" style="height:100%; background-color: #fff; opacity: 0.2"><!/div>
-                <div id="table-container" class="table-container" oncontextmenu="return false;" style = "/*background-color: #fff; opacity: 1;*/">
+                <div id="table-markers-container" class="table-container" oncontextmenu="return false;" style = "background-color: #fff1;">
                 </div>
               </div>
 
@@ -93,7 +93,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
-                            <h2 class="modal-title h3" id="myModalLabel"><a href="https://www.maholan.co.th/">ISOC</a> &gt; Disaster Risk Situation Dashboard </h2>
+                            <h2 class="modal-title h3" id="myModalLabel"><a href="https://www.maholan.co.th/">DRM</a> &gt; Disaster Risk Management Dashboard </h2>
                         </div>
                         <div class="modal-body">
                             <h3 style="margin-top:0">การใช้งาน</h3>
@@ -245,8 +245,8 @@
           </div>
         </div>
         <div id='table-container-RP' class = "col-sm-12 height80p" style = "height : 76%; background-color: #383838">
-          <!div id="table-container2" class="table-container" oncontextmenu="return false;">
-          <!/div>
+          <div id="table-container" class="table-container" oncontextmenu="return false;">
+          </div>
         </div>
       </div>
     </div>
@@ -271,6 +271,8 @@
   <script>
 
     var formatDateTime = d3.time.format("%d %B %Y %H:%M:%S");
+
+    //---- Mapbox GL Initialization--------
     var z=4;  //default zoom level 0-4
     var flyspeed = 1.6;
 
@@ -320,7 +322,7 @@
     
 
     function tabulateimg(data, columns) {
-
+      //console.log(data);
 
       var table = d3.select('#table-container').append('table').attr("id","table_image");
 
