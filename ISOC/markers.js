@@ -6,6 +6,8 @@
   async function load_layers() {
 
     //map_addlayer();
+    map_addpiecluster();
+
 
     $.getJSON('https://tunchz.github.io/ISOC/DRM.json', function(drm_geojson) {
 
@@ -52,59 +54,70 @@
         //map_addlayer2();
         map_addlayer(map_geojson);
         
+        // icon for each disaster type id
+        var symbol = [{'icon':"0"},
+        /*1forest*/    {'icon': "https://tunchz.github.io/ISOC/img/marker_forest_green_s5.png",'textcolor':"rgba(255,255,255,1)",  'size':20},
+        /*2air*/       {'icon':"☢",    'color':"rgba(50,50,50,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1},
+        /*3landslide*/ {'icon':"☳",     'color':"rgba(150,0,255,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':0.7},
+        /*4flood*/     {'icon':"♦",      'color':"rgba(0,0,255,1)",    'outlinecolor':"rgba(255,255,255,1)",   'pulsecolor':"rgba(200,200,255,1)",  'size':0.7},
+        /*5drought*/   {'icon':"☭",     'color':"rgba(255,190,100,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.8},
+        /*6fire*/      {'icon':"♨",    'color':"rgba(255,100,0,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':0.8},
+        /*7hotspot*/   {'icon':"☀",    'color':"rgba(255,0,0,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':0.9},
+        /*8storm*/     {'icon':"♒",    'color':"rgba(150,150,255,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.7},
+        /*9heavyrain*/ {'icon':"☂",    'color':"rgba(0,150,255,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1}]
 
         // filter : AIR AQI ☣    
         var drm_geojson_air = {"type": "FeatureCollection"};
         drm_geojson_air.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 2});
-        map_add_pulsemarker(drm_geojson_air,"air_aqi",'☢','rgba(50,50,50,1)','rgba(255,255,255,1)','rgba(255,255,200,1)',1);
+        map_add_pulsemarker(drm_geojson_air,"air_aqi",symbol[2].icon,symbol[2].color,symbol[2].outlinecolor,symbol[2].pulsecolor,symbol[2].size,false);
         //map_addlayer(prov_color).then(map_add_pulsemarker(drm_geojson_air,"air_aqi",'☢','rgba(255,255,255,1)','rgba(255,255,255,1)','rgba(255,255,200,1)',1));
         
         // filter : LANDSLIDE  ▼
         var drm_geojson_landslide = {"type": "FeatureCollection"};
         drm_geojson_landslide.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 3});
-        map_add_pulsemarker(drm_geojson_landslide,"landslide",'☳','rgba(150,0,255,1)','rgba(255,255,255,1)','rgba(200,255,200,1)',0.7);
+        map_add_pulsemarker(drm_geojson_landslide,"landslide",symbol[3].icon,symbol[3].color,symbol[3].outlinecolor,symbol[3].pulsecolor,symbol[3].size,false);
 
         // filter : Flood  ●   
         var drm_geojson_flood = {"type": "FeatureCollection"};
         drm_geojson_flood.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 4});
-        map_add_pulsemarker(drm_geojson_flood,"flood",'♦','rgba(0,0,255,1)','rgba(255,255,255,1)','rgba(200,200,255,1)',0.7);
+        map_add_pulsemarker(drm_geojson_flood,"flood",symbol[4].icon,symbol[4].color,symbol[4].outlinecolor,symbol[4].pulsecolor,symbol[4].size,true);
 
         // filter : drought  ◆   
         var drm_geojson_drought = {"type": "FeatureCollection"};
         drm_geojson_drought.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 5});
-        map_add_pulsemarker(drm_geojson_drought,"drought",'☭','rgba(255,190,100,1)','rgba(255,255,255,1)','rgba(200,200,255,1)',0.8);
+        map_add_pulsemarker(drm_geojson_drought,"drought",symbol[5].icon,symbol[5].color,symbol[5].outlinecolor,symbol[5].pulsecolor,symbol[5].size,false);
 
         // filter : Forest Fire     
         var drm_geojson_fire = {"type": "FeatureCollection"};
         drm_geojson_fire.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 6});
-        map_add_pulsemarker(drm_geojson_fire,"fire",'♨','rgba(255,100,0,1)','rgba(255,255,255,1)','rgba(255,235,200,1)',0.8);
+        map_add_pulsemarker(drm_geojson_fire,"fire",symbol[6].icon,symbol[6].color,symbol[6].outlinecolor,symbol[6].pulsecolor,symbol[6].size,false);
 
         // filter : Hotspot  ✶   
         var drm_geojson_hotspot = {"type": "FeatureCollection"};
         drm_geojson_hotspot.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 7});
-        map_add_pulsemarker(drm_geojson_hotspot,"hotspot",'☀','rgba(255,0,0,1)','rgba(255,255,255,1)','rgba(255,200,200,1)',0.8);
+        map_add_pulsemarker(drm_geojson_hotspot,"hotspot",symbol[7].icon,symbol[7].color,symbol[7].outlinecolor,symbol[7].pulsecolor,symbol[7].size,false);
 
         // filter : Storm
         var drm_geojson_storm = {"type": "FeatureCollection"};
         drm_geojson_storm.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 8});
-        map_add_pulsemarker(drm_geojson_storm,"Storm",'♒','rgba(150,150,255,1)','rgba(255,255,255,1)','rgba(200,200,255,1)',0.7);
+        map_add_pulsemarker(drm_geojson_storm,"Storm",symbol[8].icon,symbol[8].color,symbol[8].outlinecolor,symbol[8].pulsecolor,symbol[8].size,false);
 
         // filter : Heavy Rain ☂
         var drm_geojson_rain = {"type": "FeatureCollection"};
         drm_geojson_rain.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 9});
-        map_add_pulsemarker(drm_geojson_rain,"rain",'☂','rgba(0,150,255,1)','rgba(255,255,255,1)','rgba(200,200,255,1)',1);
+        map_add_pulsemarker(drm_geojson_rain,"rain",symbol[9].icon,symbol[9].color,symbol[9].outlinecolor,symbol[9].pulsecolor,symbol[9].size,false);
 
         // filter : Forest
         var drm_geojson_forest = {"type": "FeatureCollection"};
         drm_geojson_forest.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 1});
         //map_add_custommarker2(drm_geojson_forest,"custom_marker","img/marker_forest_green_s5.png",20);
-        map_add_custommarker(drm_geojson_forest,"forest","https://tunchz.github.io/ISOC/img/marker_forest_green_s5.png",1,20);
+        map_add_custommarker(drm_geojson_forest,"forest",symbol[1].icon,symbol[1].textcolor,1,symbol[1].size,true);
 
       });
 
     });
 
-    map_addpiecluster();
+    //map_addpiecluster();
 
 
 
@@ -127,18 +140,6 @@
             'paint': {
               'fill-color': ['get', 'color'],
               'fill-opacity': ['get', 'opacity']
-              // 'fill-color': [
-              //           'case',
-              //           ['==', prov_risk_check(['get', 'PROVINCE_C']), '63'],'#ff0',
-              //           ['==', ['get', 'PROVINCE_C'], '50'],'#f00',
-              //           ['==', ['get', 'PROVINCE_C'], '30'],'#00f',
-              //           '#2a58c3'],
-              // 'fill-opacity': [
-              //           'case',
-              //           ['==', ['get', 'PROVINCE_C'], '63'],0.3,
-              //           ['==', ['get', 'PROVINCE_C'], '50'],0.3,
-              //           ['==', ['get', 'PROVINCE_C'], '30'],0.3,
-              //           0]
             }
           });
           map.addLayer({
@@ -159,51 +160,51 @@
     }
 
 
-    function map_addlayer2() {
-      var url = "https://tunchz.github.io/mapth_small.json"
-      map.on('load', function () {
-        map.addSource('mapth', { type: 'geojson', data: url });
-        map.addLayer({
-          'id': 'th_prov',
-          'type': 'fill',
-          'source': 'mapth',
-          'paint': {
-            'fill-color': [
-                      'case',
-                      ['==', ['get', 'PROVINCE_C'], '63'],'#ff0',
-                      ['==', ['get', 'PROVINCE_C'], '50'],'#f00',
-                      ['==', ['get', 'PROVINCE_C'], '30'],'#00f',
-                      '#2a58c3'],
-            'fill-opacity': [
-                      'case',
-                      ['==', ['get', 'PROVINCE_C'], '63'],0.3,
-                      ['==', ['get', 'PROVINCE_C'], '50'],0.3,
-                      ['==', ['get', 'PROVINCE_C'], '30'],0.3,
-                      0]
-          }
-        });
-        map.addLayer({
-          'id': 'th_prov_bound',
-          'type': 'line',
-          'source': 'mapth',
-          'paint': {
-            'line-width': 1,
-            'line-color': '#ddd',
-            'line-opacity': 0.5
-          }
-        });
-      // //Filter map layer
-      // map.setFilter('th_prov_bound',["in", "PROVINCE_C", '63','50'])
-      });
-    }
+    // function map_addlayer2() {
+    //   var url = "https://tunchz.github.io/mapth_small.json"
+    //   map.on('load', function () {
+    //     map.addSource('mapth', { type: 'geojson', data: url });
+    //     map.addLayer({
+    //       'id': 'th_prov',
+    //       'type': 'fill',
+    //       'source': 'mapth',
+    //       'paint': {
+    //         'fill-color': [
+    //                   'case',
+    //                   ['==', ['get', 'PROVINCE_C'], '63'],'#ff0',
+    //                   ['==', ['get', 'PROVINCE_C'], '50'],'#f00',
+    //                   ['==', ['get', 'PROVINCE_C'], '30'],'#00f',
+    //                   '#2a58c3'],
+    //         'fill-opacity': [
+    //                   'case',
+    //                   ['==', ['get', 'PROVINCE_C'], '63'],0.3,
+    //                   ['==', ['get', 'PROVINCE_C'], '50'],0.3,
+    //                   ['==', ['get', 'PROVINCE_C'], '30'],0.3,
+    //                   0]
+    //       }
+    //     });
+    //     map.addLayer({
+    //       'id': 'th_prov_bound',
+    //       'type': 'line',
+    //       'source': 'mapth',
+    //       'paint': {
+    //         'line-width': 1,
+    //         'line-color': '#ddd',
+    //         'line-opacity': 0.5
+    //       }
+    //     });
+    //   // //Filter map layer
+    //   // map.setFilter('th_prov_bound',["in", "PROVINCE_C", '63','50'])
+    //   });
+    // }
 
 //==Pulsing Marker================================================================================================
 
-    function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color_outline,color_pulse,size) {
+    function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color_outline,color_pulse,size,ispulse) {
       console.log("start",marker_text);
         var framesPerSecond = 30;
         var multiplier = 1;
-        var opacity = .1;
+        var opacity = 1;
         var textSize = 24;
 
       map.on('load', function(){
@@ -225,7 +226,6 @@
           'text-color': color_base,
           'text-opacity': 1,
         }
-
 
         map.addLayer({
           'id': layername+'-pulse',
@@ -259,6 +259,25 @@
           'paint': basePaint
         });
 
+        // if (true) {
+          map.addLayer({
+              'id': layername+'-label',
+              'type': 'symbol',
+              'source': layername,
+              'layout': {
+                  'text-field': ['get', 'val'],
+                  'text-font': ['Roboto Black', 'Arial Unicode MS Bold'],
+                  'text-ignore-placement': true,
+                  'text-offset': [0, -1.7*size],
+                  'text-size': 8
+              },
+              'paint': {
+                  'text-color': color_base,
+                  'text-opacity': 1,
+              }
+          });
+        // }
+
         map.setPaintProperty(layername+'-pulse', 'text-color', color_pulse)
         map.setLayoutProperty(layername+'-pulse', 'text-size', 24)
 
@@ -281,7 +300,7 @@
           }, 1000 / framesPerSecond );
         }
 
-        pulseMarker(0);
+        if (ispulse) {pulseMarker(0);}
 
         var popup = new mapboxgl.Popup({
           offset: 10,
@@ -301,10 +320,12 @@
             var coordinates = e.features[0].geometry.coordinates.slice();
             var a1 = e.features[0].properties.disaster_type
             var a2 = e.features[0].properties.level_detail;
-            popup
+            var a3 = e.features[0].properties.attr
+            var a4 = e.features[0].properties.val;
+             popup
               .setLngLat(coordinates)
               .setHTML(
-                  'ภัย : ' + a1 + '<br>ระดับ : ' + a2
+                  'ภัย : ' + a1 + '<br>ระดับ : ' + a2 + '<br>'+ a3 +' : ' + a4
               )
               .addTo(map);
         });
@@ -326,7 +347,7 @@
 //map_addcustommarker()
 
 
-    function map_add_custommarker(datageojson,layername,imageurl,size,offset) {
+    function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offset) {
       //console.log(datageojson);
       map.on('load', function () {
           map.loadImage(imageurl,
@@ -346,10 +367,32 @@
                           'icon-size': size,
                           'icon-anchor': 'bottom',
                           'icon-allow-overlap': true
+                      },
+                      'paint': {
+                        'icon-opacity': 1
                       }
                   });
+                  // if (true) {
+                    map.addLayer({
+                        'id': layername+'-label',
+                        'type': 'symbol',
+                        'source': layername,
+                        'layout': {
+                            'text-field': ['get', 'val'],
+                            'text-font': ['Roboto Black', 'Arial Unicode MS Bold'],
+                            'text-ignore-placement': true,
+                            'text-offset': [0, -size*3],
+                            'text-size': 8
+                        },
+                        'paint': {
+                            'text-color': textcolor,
+                            'text-opacity': 1,
+                        }
+                    });
+                  // }
               }
           );
+
 
         var popup = new mapboxgl.Popup({
           offset: offset,
@@ -369,10 +412,12 @@
             var coordinates = e.features[0].geometry.coordinates.slice();
             var a1 = e.features[0].properties.disaster_type
             var a2 = e.features[0].properties.level_detail;
-            popup
+            var a3 = e.features[0].properties.attr
+            var a4 = e.features[0].properties.val;
+             popup
               .setLngLat(coordinates)
               .setHTML(
-                  'ภัย : ' + a1 + '<br>ระดับ : ' + a2
+                  'ภัย : ' + a1 + '<br>ระดับ : ' + a2 + '<br>'+ a3 +' : ' + a4
               )
               .addTo(map);
         });
@@ -888,7 +933,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
 
       // filter json
       var data_hotspot_filtered = {};
-      data_hotspot_filtered.features = $(data_hotspot.features).filter(function (i,n){return n.properties.mag > 310});
+      data_hotspot_filtered.features = $(data_hotspot.features).filter(function (i,n){return n.properties.mag > 320});
       //console.log(data_filtered);
 
       // filters for classifying earthquakes into five categories based on magnitude
@@ -956,7 +1001,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
                       ['get', 'mag'],
                       { 'min-fraction-digits': 1, 'max-fraction-digits': 1 }
                   ],
-                  'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+                  'text-font': ['Roboto Black', 'Arial Unicode MS Bold'],
                   'text-size': 6
               },
               'paint': {
@@ -1214,7 +1259,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
           var w = r * 2;
 
           var html = '<svg width="' + w + '" height="' + w + '" viewbox="0 0 ' + w + ' ' + w + 
-            '" text-anchor="middle" style="font: ' + fontSize + 'px sans-serif; display: block; ">';
+            '" text-anchor="middle" style="font: ' + fontSize + 'Roboto Black; display: block; ">';
 
 
           for (i = 0; i < counts.length; i++) {
