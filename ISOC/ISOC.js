@@ -164,7 +164,7 @@ function resizeAdjust() {
       } else {
         document.getElementById("left-panel").style.height = "100%";
       }
-      $("#left-bottom").height(($("#left-panel").height()-1));
+      $("#left-bottom").height(($("#left-panel").height()));
       $("#map-container").height($("#left-bottom").height());
       $("#map-container").width($("#left-bottom").width());
       //document.getElementById("map-container").style.top = "4px";
