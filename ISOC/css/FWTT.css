@@ -670,13 +670,14 @@ red:hover {
   padding: 0px; 
   margin: 0px; 
   position: absolute; 
-  right: 3px; 
+  right: 0px; 
   top: 40px; 
   bottom: 10px; 
   cursor: pointer; 
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
   display: block;
+
 }
 
 .map_custom_marker {
@@ -722,4 +723,28 @@ red:hover {
   font-family: 'impact', sans-serif;
   border-radius:3px;
   margin: 10px;
+}
+
+
+
+
+/* custom scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff00; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #8880; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #5550; 
 }
