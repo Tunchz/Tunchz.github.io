@@ -680,10 +680,46 @@ red:hover {
 }
 
 .map_custom_marker {
-display: block;
-border: none;
-border-radius: 50%;
-cursor: pointer;
-padding: 0;
+  display: block;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
 }
 
+#map_style_menu_button {
+  height: 40px;
+  width:40px;
+  left: 10px;
+  bottom: 20px;
+  position: absolute;
+  background: #2a58c3;
+  padding: 0px;
+  font-family: 'impact', sans-serif;
+  border-radius:4px;
+}
+
+#map_style_menu_button_image {
+  height: 30px;
+  width: 30px;
+  margin:5px;
+  border-radius: 4px;
+  background-image: url("images/MapStyle.png");
+}
+
+#map_style_menu_outline {
+  height: 50px;
+  left: 5px;
+  bottom: 15px;
+  position: absolute;
+  padding: 0px;
+  border-radius:4px;
+}
+#map_style_menu {
+  height: 30px;
+  background: #fff;
+  padding-top: 0px;
+  font-family: 'impact', sans-serif;
+  border-radius:3px;
+  margin: 10px;
+}
