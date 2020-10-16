@@ -2,10 +2,10 @@
   load_layers();
 
   var disaster_type_color = {
-    '91':"#f00",
-    '92':"#f00",
-    '93':"#f00",
-    '94':"#00f",
+    '91':"#ff0000",
+    '92':"#ff0000",
+    '93':"#ff0000",
+    '94':"#0000ff",
     '95':"#f6b513",
     '96':"#f00",
     '97':"#f00",
@@ -129,7 +129,7 @@
             drm[i]['color'] = symbol[disaster_type_id].color
           } else {
             drm[i]['icon'] = "█";
-            drm[i]['color'] = disaster_type_color[disaster_type_id.toString()];
+            drm[i]['color'] = disaster_type_color[disaster_type_id.toString()]+"66";
           }
           
         }
@@ -154,7 +154,7 @@
 
     function map_addlayer(map_geojson) {
 
-        map.on('load', function () {
+        map.on('style.load', function () {
           map.addSource('mapth', { type: 'geojson', data: map_geojson });
           map.addLayer({
             'id': '_th_prov',
@@ -171,7 +171,7 @@
             'source': 'mapth',
             'paint': {
               'line-width': 1,
-              'line-color': '#ddd',
+              'line-color': '#aaa',
               'line-opacity': 0.5
             }
           });
@@ -230,7 +230,7 @@
         var opacity = 1;
         var textSize = 24;
 
-      map.on('load', function(){
+      map.on('style.load', function(){
         map.addSource(layername, {
           'type': 'geojson',
           'data': data_geojson
@@ -372,7 +372,7 @@
 
     function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offset) {
       //console.log(datageojson);
-      map.on('load', function () {
+      map.on('style.load', function () {
           map.loadImage(imageurl,
               function (error, image) {
                   if (error) throw error;
@@ -661,7 +661,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
       //var colors = ['#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c'];
       var colors = ['#fed976', '#feb24c', '#ff0', '#fa0', '#f00'];
 
-      map.on('load', function () {
+      map.on('style.load', function () {
           // add a clustered GeoJSON source for a sample set of earthquakes
           map.addSource('hotspotth', {
               'type': 'geojson',
@@ -759,7 +759,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
 
 
           // after the GeoJSON data is loaded, update markers on the screen and do so on every map move/moveend
-          map.on('data', function (e) {
+          map.on('style.load', function (e) {
               //console.log('map on data : ',e.sourceId,e.isSourceLoaded);
               if (e.sourceId !== 'hotspotth' || !e.isSourceLoaded) return;
               updateMarkers();
@@ -911,8 +911,6 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
 
     // tabulateimg(List_filtered, ["img","id","dept","date","timein","last","mood","status","detection"]);
     function tabulateimg_marker(data, columns) {
-console.log(data);
-console.log(columns);
 
       var table = d3.select('#table-markers-container').append('table').attr("id","table_image_marker");
 
@@ -1004,7 +1002,7 @@ console.log(columns);
         // Display detail as table header
         cthead.append('tr')
           .selectAll('th')
-          .data(function (d) {console.log(d.value[columns[9]]); return [{tag:d.value[columns[1]], color:d.value[columns[9]]}]})
+          .data(function (d) {return [{tag:d.value[columns[1]], color:d.value[columns[9]]}]})
           .enter()
           .append('div')
             .attr('class', 'tag_marker_bg')
