@@ -179,7 +179,8 @@ function resizeAdjust() {
       //document.getElementById("map-container").style.top = "4px";
       //document.getElementById("map-container").style.left = "5px";
     }
-    //document.getElementById("notification-container-right").style.display = "none";
+    document.getElementById("notification-container-right").style.display = "none";
+    document.getElementById("notification-container-bottom").style.display = "block";
     //$("#table-container").appendTo("#table-container-RP");
 
   } else {
@@ -189,6 +190,7 @@ function resizeAdjust() {
     $("#map-container").width($("#left-bottom").width()-1);
     //document.getElementById("map-container").style.top = "4px";
     //document.getElementById("map-container").style.left = "5px";
+    document.getElementById("notification-container-bottom").style.display = "none";
     if (rightpanel_isopen==1) {
       document.getElementById("notification-container-right").style.display = "none";
       //$("#table-container").appendTo("#table-container-RP");

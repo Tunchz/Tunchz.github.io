@@ -287,6 +287,28 @@ table {
   border-bottom-left-radius: 25px;
 }
 
+.table_col_marker {
+  height: 50px;
+  width: 100px;
+  /*border-top: 3px solid #383838;
+  border-bottom: 3px solid #383838;*/
+  cursor: pointer;
+  /*background-color: #ffcc00;*/
+  /*border-left: 5px solid #383838;
+  border-right: 5px solid #383838;*/
+  padding: 2px 0px 0px 5px;
+}
+
+.table_col_marker:hover {
+  background-color: #ccc5;
+  /*opacity: 0.1;
+  border-left: 7px solid #fff;*/
+  /*border-left: 5px solid #2a58c3;
+  border-right: 5px solid #2a58c3;*/
+  border-radius: 5px;
+}
+
+
 .tag_marker_bg {
   width:  15px;
   height: 15px;
@@ -381,7 +403,7 @@ table {
 }
 
 .tag_col_marker {
-  /*width:15px;*/
+  width:53px;
   padding-top: 3px;
 }
 
@@ -677,6 +699,20 @@ red:hover {
   cursor: pointer; 
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
+  display: block;
+
+}
+
+.map_addon_bottom { 
+  padding: 0px; 
+  margin: 0px; 
+  position: absolute; 
+  right: 50px; 
+  left: 50px; 
+  bottom: 0px; 
+  cursor: pointer; 
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
   display: block;
 
 }
