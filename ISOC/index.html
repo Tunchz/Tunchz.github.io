@@ -83,7 +83,7 @@
 
             <div id="map_style_menu_outline" style="display: none" onmouseleave="switchStyleMenu(false)"  >
               <div id="map_style_menu" >
-                <div style="margin: 7px 17px 0px 45px; padding-top:4px;">
+                <div style="margin: 5px 17px 0px 40px; padding-top:3px;">
                   <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" checked="checked" />
                   <label for="satellite-v9">satellite </label>
                   <input id="streets-v11" type="radio" name="rtoggle" value="streets" />
@@ -338,10 +338,15 @@
 
     var layerList = document.getElementById('map_style_menu');
     var inputs = layerList.getElementsByTagName('input');
+    var currentLayer = "satellite-v9";
      
     function switchLayer(layer) {
       var layerId = layer.target.id;
-      map.setStyle('mapbox://styles/mapbox/' + layerId);
+      if (layerId != currentLayer) {
+        map.setStyle('mapbox://styles/mapbox/' + layerId);
+        currentLayer = layerId;
+      }
+      
       //load_layers();
     }
      

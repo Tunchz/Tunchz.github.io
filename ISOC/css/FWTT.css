@@ -294,7 +294,7 @@ table {
   border-radius: 50%;
   vertical-align: middle;
   justify-content: center;
-  padding-top: 1px;
+  padding-top: 0px;
 }
 
 .tag_marker {
@@ -688,10 +688,10 @@ red:hover {
 }
 
 #map_style_menu_button {
-  height: 40px;
-  width:40px;
-  left: 10px;
-  bottom: 20px;
+  height: 36px;
+  width:36px;
+  left: 12px;
+  bottom: 22px;
   position: absolute;
   background: #2a58c3;
   padding: 0px;
@@ -702,21 +702,21 @@ red:hover {
 #map_style_menu_button_image {
   height: 30px;
   width: 30px;
-  margin:5px;
+  margin:3px;
   border-radius: 4px;
   background-image: url("images/MapStyle.png");
 }
 
 #map_style_menu_outline {
-  height: 50px;
+  height: 46px;
   left: 5px;
-  bottom: 15px;
+  bottom: 17px;
   position: absolute;
   padding: 0px;
   border-radius:4px;
 }
 #map_style_menu {
-  height: 30px;
+  height: 26px;
   background: #fff;
   padding-top: 0px;
   font-family: 'impact', sans-serif;

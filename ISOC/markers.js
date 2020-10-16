@@ -125,8 +125,8 @@
           drm.push(drm_geojson.features[i].properties);
           disaster_type_id = drm_geojson.features[i].properties.disaster_type_id;
           if (disaster_type_id < 90) {
-            drm[i]['icon'] = symbol[disaster_type_id].icon
-            drm[i]['color'] = symbol[disaster_type_id].color
+            drm[i]['icon'] = symbol[disaster_type_id].icon;
+            drm[i]['color'] = symbol[disaster_type_id].color;
           } else {
             drm[i]['icon'] = "█";
             drm[i]['color'] = disaster_type_color[disaster_type_id.toString()]+"66";
@@ -945,6 +945,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
         .attr("class","img_col_marker")
         .append('div')
         .attr('class', 'table_img_marker_container')
+        .style("border",function (d) {return "2px solid " + d.color})
         // .append('img')
         // .attr('class', 'table_img_marker')
         // .attr('src', function(d) {return d.column == columns[0] ?  "img/marker_forest_green_s5.png"/*d.value*/ : null;})
@@ -1006,7 +1007,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
           .enter()
           .append('div')
             .attr('class', 'tag_marker_bg')
-            .style("background-color",function (d) {return d.color})
+            .style("background-color",function (d) {console.log(d.color.substr(0,7));return (d.color.length != 9) ? d.color : d.color.substr(0,7);})
             //.style("border",function (d) {return "1px solid " + d.color; /*console.log("color",d.color)*/})
           .append('th')
             .attr('class', 'tag_marker')
@@ -1067,7 +1068,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
             .attr('id',function(d) {/*console.log(d);*/return 'subtag-'+d.row+'-'+d.name})
             .attr('class', 'subdetail_marker')
             .text(function (column) {return column.name == "mood"? column.value : column.detection + "" + column.value/*(column.value == 'succeeded'|column.value == 'unknown' ? '✔': column.value == 'failed' ? '✘': '❗' )*/})
-
+            .style("color", function (d) {return (d.row.length != 9) ? d.row : d.row.substr(0,7);})
 /*
         if (data[t].status == 'succeeded') {
           data[t].status = '✔';
