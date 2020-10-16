@@ -6,7 +6,7 @@
     '92':"#f00",
     '93':"#f00",
     '94':"#00f",
-    '95':"#ff0",
+    '95':"#f6b513",
     '96':"#f00",
     '97':"#f00",
     '98':"#f00",
@@ -16,15 +16,15 @@
   // icon for each disaster type id
   var symbol = [{'icon':"0"},
   ///*1forest*/    {'icon': "https://tunchz.github.io/ISOC/img/marker_forest_green_s5.png",'color':"rgba(0,255,0,1)", 'textcolor':"rgba(0,255,0,1)",  'size':20},
-  /*1forest*/    {'icon': "❧",   'color':"rgba(0,255,0,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1},
-  /*2air*/       {'icon':"☢",    'color':"rgba(50,50,50,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1},
-  /*3landslide*/ {'icon':"☳",     'color':"rgba(150,0,255,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':0.7},
-  /*4flood*/     {'icon':"♦",      'color':"rgba(0,0,255,1)",    'outlinecolor':"rgba(255,255,255,1)",   'pulsecolor':"rgba(200,200,255,1)",  'size':0.8},
+  /*1forest*/    {'icon': "❧",   'color':"rgba(52,168,83,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1},
+  /*2air*/       {'icon':"☢",    'color':"rgba(108,132,146,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1},
+  /*3landslide*/ {'icon':"☳",     'color':"rgba(132,52,135,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':0.7},
+  /*4flood*/     {'icon':"♦",      'color':"rgba(49,76,205,1)",    'outlinecolor':"rgba(255,255,255,1)",   'pulsecolor':"rgba(200,200,255,1)",  'size':0.8},
   /*5drought*/   {'icon':"☭",     'color':"rgba(255,190,100,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.8},
-  /*6fire*/      {'icon':"♨",    'color':"rgba(255,100,0,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':0.8},
-  /*7hotspot*/   {'icon':"☀",    'color':"rgba(255,0,0,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':0.9},
-  /*8storm*/     {'icon':"♒",    'color':"rgba(150,150,255,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.7},
-  /*9heavyrain*/ {'icon':"☂",    'color':"rgba(0,150,255,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1}]
+  /*6fire*/      {'icon':"♨",    'color':"rgba(227,116,0,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':0.8},
+  /*7hotspot*/   {'icon':"☀",    'color':"rgba(197,34,31,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':0.9},
+  /*8storm*/     {'icon':"♒",    'color':"rgba(18,158,175,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.7},
+  /*9heavyrain*/ {'icon':"☂",    'color':"rgba(156,192,249,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1}]
 
 
   async function load_layers() {
@@ -128,7 +128,7 @@
             drm[i]['icon'] = symbol[disaster_type_id].icon
             drm[i]['color'] = symbol[disaster_type_id].color
           } else {
-            drm[i]['icon'] = "■";
+            drm[i]['icon'] = "█";
             drm[i]['color'] = disaster_type_color[disaster_type_id.toString()];
           }
           
@@ -929,6 +929,7 @@ console.log(columns);
         .data(data)
         .enter()
         .append('tr')
+        .append('div')
         .attr('class','table_row_marker')
         .attr('id',function(d) {return 'row-'+d.row_no});
 
@@ -994,8 +995,8 @@ console.log(columns);
           });
         })
         .enter()
-        .append('td').attr("class","detail_col_marker")
-        .append('table').attr("id","detail_table_marker");
+        .append('td').attr("class","tag_col_marker")
+        .append('table').attr("id","tag_table_marker");
 
         var cthead = cells.append('thead')
         var ctbody = cells.append('tbody');
@@ -1006,12 +1007,13 @@ console.log(columns);
           .data(function (d) {console.log(d.value[columns[9]]); return [{tag:d.value[columns[1]], color:d.value[columns[9]]}]})
           .enter()
           .append('div')
-            .attr('class', 'detail_marker_bg')
-            .style("border",function (d) {return "1px solid " + d.color; /*console.log("color",d.color)*/})
+            .attr('class', 'tag_marker_bg')
+            .style("background-color",function (d) {return d.color})
+            //.style("border",function (d) {return "1px solid " + d.color; /*console.log("color",d.color)*/})
           .append('th')
-            .attr('class', 'detail_marker')
+            .attr('class', 'tag_marker')
             .text(function (d) {return d.tag })
-            .style("color",function (d) {return d.color})
+            .style("color", "#fff" /*function (d) {return d.color}*/)
 
         // Display subdetail as table row 
         var crows = ctbody.selectAll('tr')
@@ -1019,7 +1021,7 @@ console.log(columns);
           .enter()
           .append('tr')
           .append('th')
-            .attr('class', 'subdetail_marker')
+            .attr('class', 'subtag_marker')
             .text(function (column) {return column })
 
       //------ 3rd column section ------------------------------------------------------------------         
@@ -1043,8 +1045,8 @@ console.log(columns);
           });
         })
         .enter()
-        .append('td').attr("class","tag_col_marker")
-        .append('table').attr("id","tag_table_marker");
+        .append('td').attr("class","detail_col_marker")
+        .append('table').attr("id","detail_table_marker");
 
         var cthead2 = cells2.append('thead')
         var ctbody2 = cells2.append('tbody');
@@ -1055,7 +1057,7 @@ console.log(columns);
           .data(function (d) {/*console.log(d.value[columns[1]]);*/ return d.value[columns[4]]==d.value[columns[5]]?[d.value[columns[4]]]:[d.value[columns[4]]+" - "+d.value[columns[5]]]})
           .enter()
           .append('th')
-            .attr('class', 'tag_marker')
+            .attr('class', 'detail_marker')
             .text(function (column) {return column })
 
         // Display subdetail as table row 
@@ -1065,7 +1067,7 @@ console.log(columns);
           .append('tr')
           .append('th')
             .attr('id',function(d) {/*console.log(d);*/return 'subtag-'+d.row+'-'+d.name})
-            .attr('class', 'subtag_marker')
+            .attr('class', 'subdetail_marker')
             .text(function (column) {return column.name == "mood"? column.value : column.detection + "" + column.value/*(column.value == 'succeeded'|column.value == 'unknown' ? '✔': column.value == 'failed' ? '✘': '❗' )*/})
 
 /*
