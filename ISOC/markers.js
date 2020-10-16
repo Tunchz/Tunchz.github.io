@@ -1,5 +1,5 @@
 
-  load_layers();
+  
 
   var disaster_type_color = {
     '91':"#ff0000",
@@ -26,6 +26,11 @@
   /*8storm*/     {'icon':"♒",    'color':"rgba(18,158,175,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.7},
   /*9heavyrain*/ {'icon':"☂",    'color':"rgba(156,192,249,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1}]
 
+  load_layers();
+
+  setTimeout(function (){
+    map.setStyle('mapbox://styles/mapbox/satellite-v9');
+  }, 1000);
 
   async function load_layers() {
 
@@ -116,7 +121,7 @@
         map_add_pulsemarker(drm_geojson_forest,"forest",symbol[1].icon,symbol[1].color,symbol[1].outlinecolor,symbol[1].pulsecolor,symbol[1].size,false);
 
 
-
+        
 
         // Build array for table image marker
         var drm = [];
@@ -945,7 +950,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
         .attr("class","img_col_marker")
         .append('div')
         .attr('class', 'table_img_marker_container')
-        .style("border",function (d) {return "2px solid " + d.color})
+        .style("border",function (d) {return (d.color.length != 9) ? "2px solid " + d.color : "2px solid " + d.color.substr(0,7);})
         // .append('img')
         // .attr('class', 'table_img_marker')
         // .attr('src', function(d) {return d.column == columns[0] ?  "img/marker_forest_green_s5.png"/*d.value*/ : null;})
@@ -1007,7 +1012,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
           .enter()
           .append('div')
             .attr('class', 'tag_marker_bg')
-            .style("background-color",function (d) {console.log(d.color.substr(0,7));return (d.color.length != 9) ? d.color : d.color.substr(0,7);})
+            .style("background-color",function (d) {return (d.color.length != 9) ? d.color : d.color.substr(0,7);})
             //.style("border",function (d) {return "1px solid " + d.color; /*console.log("color",d.color)*/})
           .append('th')
             .attr('class', 'tag_marker')
@@ -1087,7 +1092,29 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
 
     function display_table_markers(disaster_risk_list) {
 
-        //console.log(disaster_risk_list);
+        console.log(disaster_risk_list);
+
+
+// var data=[ 
+//  { "category" : "Search Engines", "hits" : 5, "bytes" : 50189 },
+//  { "category" : "Content Server", "hits" : 1, "bytes" : 17308 },
+//  { "category" : "Content Server", "hits" : 1, "bytes" : 47412 },
+//  { "category" : "Search Engines", "hits" : 1, "bytes" : 7601 },
+//  { "category" : "Business", "hits" : 1, "bytes" : 2847 },
+//  { "category" : "Content Server", "hits" : 1, "bytes" : 24210 },
+//  { "category" : "Internet Services", "hits" : 1, "bytes" : 3690 },
+//  { "category" : "Search Engines", "hits" : 6, "bytes" : 613036 },
+//  { "category" : "Search Engines", "hits" : 1, "bytes" : 2858 } 
+// ];
+
+// var res = alasql('SELECT category, sum(hits) AS hits, sum(bytes) as bytes \
+// FROM ? \
+// GROUP BY category \
+// ORDER BY bytes DESC',[data]);
+
+        var res = alasql('SELECT disaster_type_id, disaster_type, icon, color, "" as blank, count(*) as num_rec \ FROM ?\ GROUP BY disaster_type_id, disaster_type, icon, color',[disaster_risk_list]);
+        //var res = alasql("SELECT disaster_type, count(*) as num_rec \ FROM ?\ GROUP BY disaster_type",[disaster_risk_list]);
+        console.log(res);
 
         // Initialize crossfilter variable for Disaster Risk List
         var drl = crossfilter(disaster_risk_list);
@@ -1095,7 +1122,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
         dtype_id_group = drl.dtype_id.group();
         //console.log(drl.dtype_id.bottom(Infinity));
         //console.log(dtype_id_group.all());
-        tabulateimg_marker(disaster_risk_list, ["icon","val","date_start","date_start","date_start","date_start","date_start","disaster_type","date_start","color"]);
+        tabulateimg_marker(res, ["icon","num_rec","blank","blank","blank","blank","blank","disaster_type","blank","color"]);
 
     }
 

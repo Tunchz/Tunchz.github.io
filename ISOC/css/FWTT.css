@@ -267,14 +267,14 @@ table {
 /*-------------Table Marker-----------------*/
 
 .table_row_marker {
-  height: 56px;
+  height: 50px;
   /*border-top: 3px solid #383838;
   border-bottom: 3px solid #383838;*/
   cursor: pointer;
   /*background-color: #ffcc00;*/
   /*border-left: 5px solid #383838;
   border-right: 5px solid #383838;*/
-  padding: 5px 0px 5px 5px;
+  padding: 2px 0px 5px 5px;
 }
 
 .table_row_marker:hover {
@@ -283,14 +283,14 @@ table {
   border-left: 7px solid #fff;*/
   /*border-left: 5px solid #2a58c3;
   border-right: 5px solid #2a58c3;*/
-  border-top-left-radius: 28px;
-  border-bottom-left-radius: 28px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 
 .tag_marker_bg {
   width:  15px;
   height: 15px;
-  margin: 0px 0px 10px -3px;
+  margin: 0px 0px 0px -3px;
   border-radius: 50%;
   vertical-align: middle;
   justify-content: center;
@@ -311,7 +311,7 @@ table {
 .subtag_marker {
   font-size: 10px;
   font-weight: normal;
-  padding: 6px 0px;
+  padding: 4px 0px;
 }
 
 .detail_marker {
@@ -324,8 +324,8 @@ table {
 }
 
 .subdetail_marker {
-  font-size: 12px;
-  font-weight: normal;
+  font-size: 10px;
+  font-weight: bold;
   padding: 0px 0px;
   padding-left: 5px;
   text-align: left;
