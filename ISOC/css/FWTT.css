@@ -274,7 +274,7 @@ table {
   /*background-color: #ffcc00;*/
   /*border-left: 5px solid #383838;
   border-right: 5px solid #383838;*/
-  padding: 2px 0px 5px 5px;
+  padding: 2px 0px 0px 5px;
 }
 
 .table_row_marker:hover {
@@ -310,8 +310,8 @@ table {
 
 .subtag_marker {
   font-size: 10px;
-  font-weight: normal;
-  padding: 4px 0px;
+  font-weight: bold;
+  padding: 10px 0px 0px 0px;
 }
 
 .detail_marker {
@@ -334,7 +334,7 @@ table {
 .table_img_marker_container{
   width: 35px;
   height: 35px;
-  margin: 6px 0px 0px 4px;
+  margin: 4px 0px 2px 4px;
   justify-content: center;
   align-items: center;  
   display: flex;
@@ -381,7 +381,8 @@ table {
 }
 
 .tag_col_marker {
-  width:15px;
+  /*width:15px;*/
+  padding-top: 3px;
 }
 
 #table_image_marker {

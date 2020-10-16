@@ -1021,59 +1021,60 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
 
         // Display subdetail as table row 
         var crows = ctbody.selectAll('tr')
-          .data(function (d) {return [d.value[columns[2]],d.value[columns[3]]]})
+          .data(function (d) {return [{value:d.value[columns[2]],color:d.value[columns[9]],value:d.value[columns[3]],color:d.value[columns[9]]}]})
           .enter()
           .append('tr')
           .append('th')
             .attr('class', 'subtag_marker')
-            .text(function (column) {return column })
+            .text(function (column) {return column.value })
+            .style("color", function (d) {return (d.color.length != 9) ? d.color : d.color.substr(0,7);})
 
-      //------ 3rd column section ------------------------------------------------------------------         
-      var cells2 = rows.selectAll('td')
-        .data(function (row) {
-          //console.log(row);
-          return ['img','detail','tag'].map(function (column) {
-            var dt = {};
-            for (m=4; m<columns.length; m++) {
-              /*if (m == 7) {
-                dt['row_no'] = row['row_no'];
-              } else if (columns[m] == 'lat') {
-                dt[columns[m]] = '●';
-              } else {
-                dt[columns[m]] = row[columns[m]];
-              } */    
-              dt[columns[m]] = row[columns[m]];
-            }
-            //console.log(dt);
-            return {column: column, value: dt /*{"detail" : row[columns[1]], "subdetail_1" : row[columns[2]], "subdetail_2" : row[columns[3]]}*/};
-          });
-        })
-        .enter()
-        .append('td').attr("class","detail_col_marker")
-        .append('table').attr("id","detail_table_marker");
+      // //------ 3rd column section ------------------------------------------------------------------         
+      // var cells2 = rows.selectAll('td')
+      //   .data(function (row) {
+      //     //console.log(row);
+      //     return ['img','detail','tag'].map(function (column) {
+      //       var dt = {};
+      //       for (m=4; m<columns.length; m++) {
+      //         /*if (m == 7) {
+      //           dt['row_no'] = row['row_no'];
+      //         } else if (columns[m] == 'lat') {
+      //           dt[columns[m]] = '●';
+      //         } else {
+      //           dt[columns[m]] = row[columns[m]];
+      //         } */    
+      //         dt[columns[m]] = row[columns[m]];
+      //       }
+      //       //console.log(dt);
+      //       return {column: column, value: dt /*{"detail" : row[columns[1]], "subdetail_1" : row[columns[2]], "subdetail_2" : row[columns[3]]}*/};
+      //     });
+      //   })
+      //   .enter()
+      //   .append('td').attr("class","detail_col_marker")
+      //   .append('table').attr("id","detail_table_marker");
 
-        var cthead2 = cells2.append('thead')
-        var ctbody2 = cells2.append('tbody');
+      //   var cthead2 = cells2.append('thead')
+      //   var ctbody2 = cells2.append('tbody');
 
-        // Display detail as table header
-        cthead2.append('tr')
-          .selectAll('th')
-          .data(function (d) {/*console.log(d.value[columns[1]]);*/ return d.value[columns[4]]==d.value[columns[5]]?[d.value[columns[4]]]:[d.value[columns[4]]+" - "+d.value[columns[5]]]})
-          .enter()
-          .append('th')
-            .attr('class', 'detail_marker')
-            .text(function (column) {return column })
+      //   // Display detail as table header
+      //   cthead2.append('tr')
+      //     .selectAll('th')
+      //     .data(function (d) {/*console.log(d.value[columns[1]]);*/ return d.value[columns[4]]==d.value[columns[5]]?[d.value[columns[4]]]:[d.value[columns[4]]+" - "+d.value[columns[5]]]})
+      //     .enter()
+      //     .append('th')
+      //       .attr('class', 'detail_marker')
+      //       .text(function (column) {return column })
 
-        // Display subdetail as table row 
-        var crows2 = ctbody2.selectAll('tr')
-          .data(function (d) {return [{value : d.value[columns[6]], name : "mood", row : d.value[columns[9]]},{value : d.value[columns[7]], name : "status", row : d.value[columns[9]], detection : d.value[columns[8]]}]})
-          .enter()
-          .append('tr')
-          .append('th')
-            .attr('id',function(d) {/*console.log(d);*/return 'subtag-'+d.row+'-'+d.name})
-            .attr('class', 'subdetail_marker')
-            .text(function (column) {return column.name == "mood"? column.value : column.detection + "" + column.value/*(column.value == 'succeeded'|column.value == 'unknown' ? '✔': column.value == 'failed' ? '✘': '❗' )*/})
-            .style("color", function (d) {return (d.row.length != 9) ? d.row : d.row.substr(0,7);})
+      //   // Display subdetail as table row 
+      //   var crows2 = ctbody2.selectAll('tr')
+      //     .data(function (d) {return [{value : d.value[columns[6]], name : "mood", row : d.value[columns[9]]},{value : d.value[columns[7]], name : "status", row : d.value[columns[9]], detection : d.value[columns[8]]}]})
+      //     .enter()
+      //     .append('tr')
+      //     .append('th')
+      //       .attr('id',function(d) {/*console.log(d);*/return 'subtag-'+d.row+'-'+d.name})
+      //       .attr('class', 'subdetail_marker')
+      //       .text(function (column) {return column.name == "mood"? column.value : column.detection + "" + column.value/*(column.value == 'succeeded'|column.value == 'unknown' ? '✔': column.value == 'failed' ? '✘': '❗' )*/})
+      //       .style("color", function (d) {return (d.row.length != 9) ? d.row : d.row.substr(0,7);})
 /*
         if (data[t].status == 'succeeded') {
           data[t].status = '✔';
@@ -1122,7 +1123,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
         dtype_id_group = drl.dtype_id.group();
         //console.log(drl.dtype_id.bottom(Infinity));
         //console.log(dtype_id_group.all());
-        tabulateimg_marker(res, ["icon","num_rec","blank","blank","blank","blank","blank","disaster_type","blank","color"]);
+        tabulateimg_marker(res, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
 
     }
 
