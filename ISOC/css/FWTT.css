@@ -296,7 +296,7 @@ table {
   /*background-color: #ffcc00;*/
   /*border-left: 5px solid #383838;
   border-right: 5px solid #383838;*/
-  padding: 2px 0px 0px 5px;
+  padding: 2px 0px 0px 0px;
 }
 
 .table_col_marker:hover {
@@ -657,19 +657,28 @@ red:hover {
   border: 1px solid #aaa;
 }
 
-#menu-button {
-  margin: 0px 0px 0px 0px;
+.map-menu-button, .map-menu-button:focus {
+  margin: 0px 2px 0px 2px;
   padding-right: 5px;
-  width: 25px;
+  width: 30px;
   height:30px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
+  border-radius: 2px;
   background-color: #383838;
-  border-color: #fff;
+  color: #fff;
   font-size: 18px;
   border-width: 0px;
+  outline: none;
 }
 
+.map-menu-button:hover {
+  background-color: #383838;
+  color: #2a58c3;
+}
+
+.map-menu-button:active {
+  background-color: #383838;
+  color: #2a58c388;
+}
 
 .map_addon_top_left { 
   padding: 0px; 
@@ -684,7 +693,7 @@ red:hover {
   padding: 0px; 
   margin: 0px; 
   position: absolute; 
-  right: 0px; 
+  right: 20px; 
   top: 0px; 
   cursor: pointer; 
 }
