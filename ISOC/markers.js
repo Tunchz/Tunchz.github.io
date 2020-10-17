@@ -26,13 +26,9 @@
   /*8storm*/     {'icon':"♒",    'color':"rgba(18,158,175,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.7},
   /*9heavyrain*/ {'icon':"☂",    'color':"rgba(156,192,249,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1}]
 
-  load_layers();
+  var disaster_risk_list_summary;
 
-  setTimeout(function (){
-    map.setStyle('mapbox://styles/mapbox/satellite-v9');
-  }, 1000);
-
-  async function load_layers() {
+  async function load_map_layers() {
 
     //map_addlayer();
     map_addpiecluster();
@@ -1139,7 +1135,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
           .append('tr')
           .append('th')
             .attr('class', 'subtag_marker')
-            .text(function (column) {return column.value })
+            .text(function (d) {return (typeof d.value !== 'undefined') ? d.value : columns[3] /*"\u00a0"*/})
             .style("color", function (d) {return (d.color.length != 9) ? d.color : d.color.substr(0,7);})
 
       // //------ 3rd column section ------------------------------------------------------------------         
@@ -1209,7 +1205,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
     // tabulateimg(List_filtered, ["img","id","dept","date","timein","last","mood","status","detection"]);
     function vertabulateimg_marker(data, columns) {
 
-      var table = d3.select('#vertical-table-markers-container').append('table').attr("id","table_image_marker");
+      var table = d3.select('#vertical-table-markers-container').append('table').attr("id","vertical_table_image_marker");
 
       //var thead = table.append('thead')
       var tbody = table.append('tbody');
@@ -1226,7 +1222,9 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
         .append('td')
         .append('div')
         .attr('class','table_col_marker')
-        .attr('id',function(d) {return 'col-'+d.row_no});
+        .attr('id','table_col_marker'/*function(d) {return 'col-'+d.row_no}*/)
+        //.style("width","100px")
+        ;
 
       // create a cell in each row for each column
 
@@ -1318,7 +1316,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
           .append('tr')
           .append('th')
             .attr('class', 'subtag_marker')
-            .text(function (column) {return column.value })
+            .text(function (d) {return (typeof d.value !== 'undefined') ? d.value : columns[3] /*"\u00a0"*/})
             .style("color", function (d) {return (d.color.length != 9) ? d.color : d.color.substr(0,7);})
 
       // //------ 3rd column section ------------------------------------------------------------------         
@@ -1385,7 +1383,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
 
     function display_table_markers(disaster_risk_list) {
 
-        console.log(disaster_risk_list);
+        //console.log(disaster_risk_list);
 
 
 // var data=[ 
@@ -1405,9 +1403,9 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
 // GROUP BY category \
 // ORDER BY bytes DESC',[data]);
 
-        var res = alasql('SELECT disaster_type_id, disaster_type, icon, color, "" as blank, count(*) as num_rec \ FROM ?\ GROUP BY disaster_type_id, disaster_type, icon, color',[disaster_risk_list]);
+        disaster_risk_list_summary = alasql('SELECT disaster_type_id, disaster_type, icon, color, "" as blank, count(*) as num_rec \ FROM ?\ GROUP BY disaster_type_id, disaster_type, icon, color',[disaster_risk_list]);
         //var res = alasql("SELECT disaster_type, count(*) as num_rec \ FROM ?\ GROUP BY disaster_type",[disaster_risk_list]);
-        console.log(res);
+        //console.log(res);
 
         // Initialize crossfilter variable for Disaster Risk List
         var drl = crossfilter(disaster_risk_list);
@@ -1415,10 +1413,104 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
         dtype_id_group = drl.dtype_id.group();
         //console.log(drl.dtype_id.bottom(Infinity));
         //console.log(dtype_id_group.all());
-        tabulateimg_marker(res, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
-        vertabulateimg_marker(res, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+        //tabulateimg_marker(res, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+        //tabulateimg_marker(res, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
+
+
+
+        //vertabulateimg_marker(res, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+
+        switchShortNoti();
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    function startMap() {
+
+      //hide 
+      // document.getElementById("video-container").style.display = "none";
+      // document.getElementById("map-container").style.display = "block";
+      map.resize();
+
+      //document.getElementById("stop-button").innerHTML = "■";
+      var menubtn = document.createElement("button");
+      menubtn.id = "lp-button";
+      menubtn.className = "map-menu-button";
+      //stopbtn.style.margin = "-20px 0px 0px 0px";
+      menubtn.style.padding = "0px 0px";
+      menubtn.setAttribute('type', 'button');
+      //stopbtn.setAttribute('onclick', 'inputMenu()');
+      menubtn.setAttribute('onclick', 'switchShortNoti()');
+      document.getElementById("menu-container-top-right").append(menubtn);
+      //document.getElementById("stop-button").innerHTML = "☷■⌂";
+      document.getElementById("lp-button").innerHTML = "↹";
+
+
+      //document.getElementById("stop-button").innerHTML = "■";
+      var menubtn = document.createElement("button");
+      menubtn.id = "bb-button";
+      menubtn.className = "map-menu-button";
+      //stopbtn.style.margin = "-20px 0px 0px 0px";
+      menubtn.style.padding = "0px 0px";
+      menubtn.setAttribute('type', 'button');
+      //stopbtn.setAttribute('onclick', 'inputMenu()');
+      menubtn.setAttribute('onclick', 'switchRightpanel()');
+      document.getElementById("menu-container-top-right").append(menubtn);
+      //document.getElementById("stop-button").innerHTML = "☰⌷↹■⌂";
+      document.getElementById("bb-button").innerHTML = "☷";
+
+
+    }
+
+
+    function switchShortNoti() {
+      var w;
+      var removetable = document.getElementById('table_image_marker');
+      removetable.parentElement.removeChild(removetable);    
+      removetable = document.getElementById('vertical_table_image_marker');
+      removetable.parentElement.removeChild(removetable);    
+      if (shortnoti==0) {
+        document.getElementById('notification-container-right').style.width = "65px";
+        tabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
+        vertabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
+        w = "55px";
+        shortnoti = 1;
+      } else {
+        document.getElementById('notification-container-right').style.width = "100px";
+        tabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+        vertabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+        w = "90px";
+        shortnoti = 0;
+      }
+        var doc = document.getElementsByClassName('table_col_marker');
+        for (i=0;i<doc.length;i++) {doc[i].style.width = w;} 
+    }
+
+    function switchRightpanel() {
+      if (rightpanel_isopen == 0) {
+      document.getElementById("left-panel").style.width = "66.67%";
+      document.getElementById("right-panel").style.width = "33.33%";
+      document.getElementById("right-panel").style.display = "block";  
+      rightpanel_isopen = 1;
+      } else {
+      document.getElementById("left-panel").style.width = "100%";
+      //document.getElementById("right-panel").style.width= "5%";
+      document.getElementById("right-panel").style.display = "none";
+      rightpanel_isopen = 0;
+      }
+      resizeAdjust()  
+    }
+
 
 
     

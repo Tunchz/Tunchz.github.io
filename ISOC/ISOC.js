@@ -14,25 +14,27 @@ var videoStart = false; //true;
 var frontCam = false; // default for mobile rear camera
 var displaySize, canvas_ctx;
 
-// Url for target google sheet script of insert the face record
-//const sheetUrl = "https://script.google.com/macros/s/AKfycbxxYJAPo5auDaZiy66RizPTMGE9QxLeIbUDRw_shEDpEbQoZCg/exec";
-const sheetUrl = "https://script.google.com/macros/s/AKfycbw6y-uoU3UA2-E9tLc6x0TcdQ64E19cny4bkocY/exec";
-// Url for face log google sheet
-//const facelogsheetUrl = "https://spreadsheets.google.com/feeds/cells/1f2zLWOWivY_L72VW0odfmGGeF4wxve1D6o4VvQm2Spg/1/public/values?alt=json-in-script&callback=doData";
-const facelogsheetUrl = "https://spreadsheets.google.com/feeds/cells/1BkNHlFBWNXDSDD-jMM_BWSYjLNenLVKGW9cY7Mtnkzg/1/public/values?alt=json-in-script&callback=doData";
-// Url for face models
-const modelsUrl = "https://tunchz.github.io/Face.Rex/models";
-// Url for trained face descriptor used to label known faces
-const facedescriptorUrl = "https://tunchz.github.io/Face.Rex/descriptors/descriptor_withID.json";
-// Load face labels list & profile image
-let facestoverifyList = [];
-const facelabels = loadcsvtoarray('https://tunchz.github.io/Face.Rex/descriptors/LabeledFaceImageProfiles3.csv');
-//console.log(facelabels);
+// // Url for target google sheet script of insert the face record
+// //const sheetUrl = "https://script.google.com/macros/s/AKfycbxxYJAPo5auDaZiy66RizPTMGE9QxLeIbUDRw_shEDpEbQoZCg/exec";
+// const sheetUrl = "https://script.google.com/macros/s/AKfycbw6y-uoU3UA2-E9tLc6x0TcdQ64E19cny4bkocY/exec";
+// // Url for face log google sheet
+// //const facelogsheetUrl = "https://spreadsheets.google.com/feeds/cells/1f2zLWOWivY_L72VW0odfmGGeF4wxve1D6o4VvQm2Spg/1/public/values?alt=json-in-script&callback=doData";
+// const facelogsheetUrl = "https://spreadsheets.google.com/feeds/cells/1BkNHlFBWNXDSDD-jMM_BWSYjLNenLVKGW9cY7Mtnkzg/1/public/values?alt=json-in-script&callback=doData";
+// // Url for face models
+// const modelsUrl = "https://tunchz.github.io/Face.Rex/models";
+// // Url for trained face descriptor used to label known faces
+// const facedescriptorUrl = "https://tunchz.github.io/Face.Rex/descriptors/descriptor_withID.json";
+// // Load face labels list & profile image
+// let facestoverifyList = [];
+// const facelabels = loadcsvtoarray('https://tunchz.github.io/Face.Rex/descriptors/LabeledFaceImageProfiles3.csv');
+// //console.log(facelabels);
 
 //var camIP = "10.90.0.98:8080";// "192.168.1.11:8080";
 var image_src;
 
 d3.select('#table-container').append('table').attr("id","table_image");
+d3.select('#table-markers-container').append('table').attr("id","table_image_marker");
+d3.select('#vertical-table-markers-container').append('table').attr("id","vertical_table_image_marker");
 var summarysheetResults = [];
 
 
@@ -83,15 +85,9 @@ var filterDept = "All";
 var detections,resizedDetections,results;
 
 
-// Load face log to create detectedfacesList
-summarysheetLoad(facelogsheetUrl);
+// // Load face log to create detectedfacesList
+// summarysheetLoad(facelogsheetUrl);
 
-
-startMap();
-start();
-
-var rightpanel_isopen = 1;
-switchRightpanel();
 
 
 
@@ -113,6 +109,22 @@ switchRightpanel();
 //     faceapi.nets.ageGenderNet.loadFromUri(modelsUrl)
 //   ]).then(pre_start) //then(start) 
 // }
+
+
+
+startMap();
+// start();
+
+var shortnoti = 0;
+var rightpanel_isopen = 1;
+switchRightpanel();
+
+load_map_layers();
+
+setTimeout(function (){
+  map.setStyle('mapbox://styles/mapbox/satellite-v9');
+}, 1000);
+
 
 
 
@@ -1341,45 +1353,4 @@ function controlButton() {
 //   }
 // }
 
-
-
-function startMap() {
-
-  //hide 
-  // document.getElementById("video-container").style.display = "none";
-  // document.getElementById("map-container").style.display = "block";
-  map.resize();
-
-  //document.getElementById("stop-button").innerHTML = "■";
-  const menubtn = document.createElement("button");
-  menubtn.id = "menu-button";
-  menubtn.className = "btn btn-default button-control";
-  //stopbtn.style.margin = "-20px 0px 0px 0px";
-  menubtn.style.padding = "0px 0px";
-  menubtn.setAttribute('type', 'button');
-  //stopbtn.setAttribute('onclick', 'inputMenu()');
-  menubtn.setAttribute('onclick', 'switchRightpanel()');
-  document.getElementById("menu-container-top-right").append(menubtn);
-  //document.getElementById("stop-button").innerHTML = "■⌂";
-  document.getElementById("menu-button").innerHTML = "☰";
-
-
-
-}
-
-
-function switchRightpanel() {
-  if (rightpanel_isopen == 0) {
-  document.getElementById("left-panel").style.width = "66.67%";
-  document.getElementById("right-panel").style.width = "33.33%";
-  document.getElementById("right-panel").style.display = "block";  
-  rightpanel_isopen = 1;
-  } else {
-  document.getElementById("left-panel").style.width = "100%";
-  //document.getElementById("right-panel").style.width= "5%";
-  document.getElementById("right-panel").style.display = "none";
-  rightpanel_isopen = 0;
-  }
-  resizeAdjust()  
-}
 
