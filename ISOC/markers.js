@@ -42,7 +42,7 @@
 
       //var map_geojson = await get_map_geojson;
 
-      // filter : risk plan   
+      // filter : risk plan color for provinces 
       var drm_geojson_riskplan = {"type": "FeatureCollection"};
       drm_geojson_riskplan.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id > 90});
       prov_color = {};
@@ -51,26 +51,46 @@
         var riskplan_code = drm_geojson_riskplan.features[i].properties.disaster_type_id - 90;
         var pcolor;
         // Color of each plan risk
-
-        prov_color[prov_code]=disaster_type_color[drm_geojson_riskplan.features[i].properties.disaster_type_id.toString()];
+        prov_color[prov_code]={'disaster_type':drm_geojson_riskplan.features[i].properties.disaster_type,'color':disaster_type_color[drm_geojson_riskplan.features[i].properties.disaster_type_id.toString()]};
       }
 
       $.getJSON('https://tunchz.github.io/mapth_small.json', function(map_geojson) {
-        for (i = 0; i < map_geojson.features.length; i++) {
-          var prov_c = map_geojson.features[i].properties.PROVINCE_C;
-          if (typeof prov_color[prov_c] !== 'undefined') {
-            map_geojson.features[i].properties['color'] = prov_color[prov_c];
-            map_geojson.features[i].properties['opacity'] = 0.3;
-          }else{
-            map_geojson.features[i].properties['color'] = "#fff";
-            map_geojson.features[i].properties['opacity'] = 0;
-          }
-        }      
 
-
-        //map_addlayer2();
+        // Add map province outline
         map_addlayer(map_geojson);
+
+        // filter : risk plan provinces
+        var map_geojson_riskplan = {"type": "FeatureCollection"};
+        map_geojson_riskplan.features = $(map_geojson.features).filter(function (i,n){return (typeof prov_color[n.properties.PROVINCE_C] !== 'undefined')});
+        //console.log("riskplan ",map_geojson_riskplan);
+
+
+        // Add color & opacity for risk plan in each province
+        for (i = 0; i < map_geojson_riskplan.features.length; i++) {
+          var prov_c = map_geojson_riskplan.features[i].properties.PROVINCE_C;
+          map_geojson_riskplan.features[i].properties['disaster_type'] = prov_color[prov_c].disaster_type;
+          map_geojson_riskplan.features[i].properties['color'] = prov_color[prov_c].color;
+          map_geojson_riskplan.features[i].properties['opacity'] = 0.3;
+        }      
+        // Add map with color province corresponding to risk plan
+        map_add_polygon(map_geojson_riskplan,"prov_riskplan");
         
+
+        // // Add color & opacity for risk plan in each province
+        // for (i = 0; i < map_geojson.features.length; i++) {
+        //   var prov_c = map_geojson.features[i].properties.PROVINCE_C;
+        //   if (typeof prov_color[prov_c] !== 'undefined') {
+        //     map_geojson.features[i].properties['disaster_type'] = prov_color[prov_c].disaster_type;
+        //     map_geojson.features[i].properties['color'] = prov_color[prov_c].color;
+        //     map_geojson.features[i].properties['opacity'] = 0.3;
+        //   }else{
+        //     map_geojson.features[i].properties['color'] = "#fff";
+        //     map_geojson.features[i].properties['opacity'] = 0;
+        //   }
+        // }      
+        // // Add map with color province corresponding to risk plan
+        // map_addlayer(map_geojson);
+
 
         // filter : AIR AQI ☣    
         var drm_geojson_air = {"type": "FeatureCollection"};
@@ -158,22 +178,22 @@
 
 
     function map_addlayer(map_geojson) {
-
+        var layername = 'map_th_prov'
         map.on('style.load', function () {
-          map.addSource('mapth', { type: 'geojson', data: map_geojson });
+          map.addSource(layername, { type: 'geojson', data: map_geojson });
           map.addLayer({
-            'id': '_th_prov',
+            'id': layername,
             'type': 'fill',
-            'source': 'mapth',
+            'source': layername,
             'paint': {
-              'fill-color': ['get', 'color'],
-              'fill-opacity': ['get', 'opacity']
+              'fill-color': "#fff",
+              'fill-opacity': 0
             }
           });
           map.addLayer({
-            'id': '_th_prov_bound',
+            'id': layername+'_bound',
             'type': 'line',
-            'source': 'mapth',
+            'source': layername,
             'paint': {
               'line-width': 1,
               'line-color': '#aaa',
@@ -182,6 +202,99 @@
           });
         // //Filter map layer
         // map.setFilter('th_prov_bound',["in", "PROVINCE_C", '63','50'])
+
+        var popup = new mapboxgl.Popup(/*{
+          offset: 10,
+          closeButton: false,
+          closeOnClick: false
+        }*/);
+
+        map.on('click', layername, function (e) {
+            map.getCanvas().style.cursor = 'pointer';
+            //var coordinates = e.features[0].geometry.coordinates.slice();
+            var prov = e.features[0].properties.PROVINCE_N;
+             popup
+              .setLngLat(e.lngLat)
+              .setHTML(
+                  'จังหวัด : ' + prov
+              )
+              .addTo(map);
+        });
+
+        // map.on('mouseenter', layername, function () {
+        //   map.getCanvas().style.cursor = 'pointer';
+        // });
+
+        map.on('mouseleave', layername, function () {
+          map.getCanvas().style.cursor = '';
+          popup.remove();
+        });
+
+
+
+
+        });
+
+      //console.log("map done")
+    }
+
+    function map_add_polygon(map_geojson,layername) {
+        //var layername = 'map_th_prov'
+        map.on('style.load', function () {
+          map.addSource(layername, { type: 'geojson', data: map_geojson });
+          map.addLayer({
+            'id': layername,
+            'type': 'fill',
+            'source': layername,
+            'paint': {
+              'fill-color': ['get', 'color'],
+              'fill-opacity': ['get', 'opacity']
+            }
+          });
+          // map.addLayer({
+          //   'id': layername+'_bound',
+          //   'type': 'line',
+          //   'source': layername,
+          //   'paint': {
+          //     'line-width': 1,
+          //     'line-color': '#aaa',
+          //     'line-opacity': 0.5
+          //   }
+          // });
+        // //Filter map layer
+        // map.setFilter('th_prov_bound',["in", "PROVINCE_C", '63','50'])
+
+        var popup = new mapboxgl.Popup(/*{
+          offset: 10,
+          closeButton: false,
+          closeOnClick: false
+        }*/);
+
+        map.on('click', layername, function (e) {
+            map.getCanvas().style.cursor = 'pointer';
+            //var coordinates = e.features[0].geometry.coordinates.slice();
+            var a1 = e.features[0].properties.disaster_type
+            var a2 = e.features[0].properties.PROVINCE_N;
+             popup
+              .setLngLat(e.lngLat)
+              .setHTML(
+                  'ภัย : ' + a1 + '<br>จังหวัด : ' + a2
+              )
+              .addTo(map);
+        });
+
+        map.on('mouseenter', layername, function () {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+
+        map.on('mouseleave', layername, function () {
+          map.getCanvas().style.cursor = '';
+          popup.remove();
+        });
+
+
+
+
         });
 
       //console.log("map done")
@@ -796,39 +909,39 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
 
                       var el = createDonutChart(props,i);
 
-                      el.addEventListener('click', function () {
-                              console.log("click")
-                              window.alert("click");
-                          }
-                      );
+                      // el.addEventListener('click', function () {
+                      //         console.log("click")
+                      //         window.alert("click");
+                      //     }
+                      // );
 
-                      var popup = new mapboxgl.Popup({
-                        offset : 22,
-                        closeButton: false,
-                        closeOnClick: false
-                      });
+                      // var popup = new mapboxgl.Popup({
+                      //   offset : 22,
+                      //   closeButton: false,
+                      //   closeOnClick: false
+                      // });
 
-                      // //map.on('mouseenter', 'earthquake_circle', function (e) {
-                      el.addEventListener('mouseenter', function () {
-                          console.log("mouseenter")
-                          map.getCanvas().style.cursor = 'pointer';
-                          //var coordinates = marker.geometry.coordinates.slice();
-                          // var a1 = "test";
-                          // var a2 = "cluster marker" + i;
-                          // popup
-                          //   .setLngLat(coords)
-                          //   .setHTML(
-                          //       'Name : ' + a1 + '<br>Code : ' + a2
-                          //   )
-                          //   .addTo(map);
-                      });
+                      // // //map.on('mouseenter', 'earthquake_circle', function (e) {
+                      // el.addEventListener('mouseenter', function () {
+                      //     console.log("mouseenter")
+                      //     map.getCanvas().style.cursor = 'pointer';
+                      //     //var coordinates = marker.geometry.coordinates.slice();
+                      //     // var a1 = "test";
+                      //     // var a2 = "cluster marker" + i;
+                      //     // popup
+                      //     //   .setLngLat(coords)
+                      //     //   .setHTML(
+                      //     //       'Name : ' + a1 + '<br>Code : ' + a2
+                      //     //   )
+                      //     //   .addTo(map);
+                      // });
 
-                      //map.on('mouseleave', 'earthquake_circle', function () {
-                      el.addEventListener('mouseleave', function () {
-                          console.log("mouseleave")
-                          map.getCanvas().style.cursor = '';
-                          //popup.remove();
-                      });
+                      // //map.on('mouseleave', 'earthquake_circle', function () {
+                      // el.addEventListener('mouseleave', function () {
+                      //     console.log("mouseleave")
+                      //     map.getCanvas().style.cursor = '';
+                      //     //popup.remove();
+                      // });
 
 
 
