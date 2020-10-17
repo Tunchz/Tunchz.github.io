@@ -308,7 +308,7 @@
     var flyspeed = 1.6;
 
     mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg'
-    
+    //mapboxgl.accessToken = 'pk.eyJ1IjoibXVyYWxpcHJhamFwYXRpIiwiYSI6ImNrMHA1d3VjYzBna3gzbG50ZjR5b2Zkb20ifQ.guBaIUcqkTdYHX1R6CM6FQ'
     //Setup mapbox-gl map
     var map = new mapboxgl.Map({
       //style: 'mapbox://styles/tunchz/ck9litjbw2soc1iqo4rysy4nt',
@@ -354,14 +354,17 @@
     var inputs = layerList.getElementsByTagName('input');
     var currentLayer = "satellite-v9";
      
+
+
+
+
     function switchLayer(layer) {
       var layerId = layer.target.id;
       if (layerId != currentLayer) {
         map.setStyle('mapbox://styles/mapbox/' + layerId);
         currentLayer = layerId;
       }
-      
-      //load_layers();
+      //map.setLayoutProperty('country-label', 'text-field', ['get','name_ru']);
     }
      
     for (var i = 0; i < inputs.length; i++) {

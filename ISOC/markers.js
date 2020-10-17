@@ -14,19 +14,23 @@
   };
 
   // icon for each disaster type id
-  var symbol = [{'icon':"0"},
-  ///*1forest*/    {'icon': "https://tunchz.github.io/ISOC/img/marker_forest_green_s5.png",'color':"rgba(0,255,0,1)", 'textcolor':"rgba(0,255,0,1)",  'size':20},
-  /*1forest*/    {'icon': "❧",   'color':"rgba(52,168,83,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1},
-  /*2air*/       {'icon':"☢",    'color':"rgba(108,132,146,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1},
-  /*3landslide*/ {'icon':"☳",     'color':"rgba(132,52,135,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':0.7},
-  /*4flood*/     {'icon':"♦",      'color':"rgba(49,76,205,1)",    'outlinecolor':"rgba(255,255,255,1)",   'pulsecolor':"rgba(200,200,255,1)",  'size':0.8},
-  /*5drought*/   {'icon':"☭",     'color':"rgba(255,190,100,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.8},
-  /*6fire*/      {'icon':"♨",    'color':"rgba(227,116,0,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':0.8},
-  /*7hotspot*/   {'icon':"☀",    'color':"rgba(197,34,31,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':0.9},
-  /*8storm*/     {'icon':"♒",    'color':"rgba(18,158,175,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.7},
-  /*9heavyrain*/ {'icon':"☂",    'color':"rgba(156,192,249,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1}]
+  var symbol = {'0':{'icon':"0"},
+  /*1forest*/    '1':{'layername':"forest",    'icon': "❧",    'color':"rgba(52,168,83,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.2 ,'visibility':'visible'},
+  /*2air*/       '2':{'layername':"air",       'icon':"☢",    'color':"rgba(108,132,146,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1 ,'visibility':'visible'},
+  /*3landslide*/ '3':{'layername':"landslide", 'icon':"☳",     'color':"rgba(132,52,135,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':0.7 ,'visibility':'visible'},
+  /*4flood*/     '4':{'layername':"flood",     'icon':"♦",      'color':"rgba(49,76,205,1)",    'outlinecolor':"rgba(255,255,255,1)",   'pulsecolor':"rgba(200,200,255,1)",  'size':0.8 ,'visibility':'visible'},
+  /*5drought*/   '5':{'layername':"drought",   'icon':"☭",     'color':"rgba(255,190,100,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.8 ,'visibility':'visible'},
+  /*6fire*/      '6':{'layername':"fire",      'icon':"♨",    'color':"rgba(227,116,0,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':0.8 ,'visibility':'visible'},
+  /*7hotspot*/   '7':{'layername':"hotspot",   'icon':"☀",    'color':"rgba(197,34,31,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':0.9 ,'visibility':'visible'},
+  /*8storm*/     '8':{'layername':"storm",     'icon':"♒",    'color':"rgba(18,158,175,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.7 ,'visibility':'visible'},
+  /*9heavyrain*/ '9':{'layername':"heavyrain", 'icon':"☂",    'color':"rgba(156,192,249,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1 ,'visibility':'visible'},
+  /*riskplan*/  '91':{'layername':"risk_forest",    'color':"#ff0000",'opacity':0.3 ,'visibility':'visible'},
+  /*riskplan*/  '94':{'layername':"risk_flood",     'color':"#0000ff",'opacity':0.3 ,'visibility':'visible'},
+  /*riskplan*/  '95':{'layername':"risk_drought",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible'}
+                  }
 
   var disaster_risk_list_summary;
+  var unselectedcolor = "#555"
 
   async function load_map_layers() {
 
@@ -38,103 +42,98 @@
 
       //var map_geojson = await get_map_geojson;
 
-      // filter : risk plan color for provinces 
-      var drm_geojson_riskplan = {"type": "FeatureCollection"};
-      drm_geojson_riskplan.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id > 90});
-      prov_color = {};
-      for (i = 0; i < drm_geojson_riskplan.features.length; i++) {
-        var prov_code = (drm_geojson_riskplan.features[i].properties.val).toString();
-        var riskplan_code = drm_geojson_riskplan.features[i].properties.disaster_type_id - 90;
-        var pcolor;
-        // Color of each plan risk
-        prov_color[prov_code]={'disaster_type':drm_geojson_riskplan.features[i].properties.disaster_type,'color':disaster_type_color[drm_geojson_riskplan.features[i].properties.disaster_type_id.toString()]};
-      }
-
       $.getJSON('https://tunchz.github.io/mapth_small.json', function(map_geojson) {
 
         // Add map province outline
         map_addlayer(map_geojson);
 
-        // filter : risk plan provinces
-        var map_geojson_riskplan = {"type": "FeatureCollection"};
-        map_geojson_riskplan.features = $(map_geojson.features).filter(function (i,n){return (typeof prov_color[n.properties.PROVINCE_C] !== 'undefined')});
-        //console.log("riskplan ",map_geojson_riskplan);
 
 
-        // Add color & opacity for risk plan in each province
-        for (i = 0; i < map_geojson_riskplan.features.length; i++) {
-          var prov_c = map_geojson_riskplan.features[i].properties.PROVINCE_C;
-          map_geojson_riskplan.features[i].properties['disaster_type'] = prov_color[prov_c].disaster_type;
-          map_geojson_riskplan.features[i].properties['color'] = prov_color[prov_c].color;
-          map_geojson_riskplan.features[i].properties['opacity'] = 0.3;
-        }      
-        // Add map with color province corresponding to risk plan
-        map_add_polygon(map_geojson_riskplan,"prov_riskplan");
+
+        var riskplan = [91,94,95];
+        riskplan.forEach(function (item, index) {
+          //console.log(index,item); 
+
+
+
+          // filter : risk plan color for provinces 
+          var drm_geojson_riskplan = {"type": "FeatureCollection"};
+          drm_geojson_riskplan.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == item});
+          prov_color = {};
+          for (i = 0; i < drm_geojson_riskplan.features.length; i++) {
+            var prov_code = (drm_geojson_riskplan.features[i].properties.val).toString();
+            //var riskplan_code = drm_geojson_riskplan.features[i].properties.disaster_type_id - 90;
+            var pcolor;
+            // Color of each plan risk
+            prov_color[prov_code]={'disaster_type':drm_geojson_riskplan.features[i].properties.disaster_type};
+          }
+
+          // filter : risk plan provinces
+          var map_geojson_riskplan = {"type": "FeatureCollection"};
+          map_geojson_riskplan.features = $(map_geojson.features).filter(function (i,n){return (typeof prov_color[n.properties.PROVINCE_C] !== 'undefined')});
+          //console.log("riskplan ",map_geojson_riskplan);
+
+
+          // Add color & opacity for risk plan in each province
+          for (i = 0; i < map_geojson_riskplan.features.length; i++) {
+            var prov_c = map_geojson_riskplan.features[i].properties.PROVINCE_C;
+            map_geojson_riskplan.features[i].properties['disaster_type'] = prov_color[prov_c].disaster_type;
+            map_geojson_riskplan.features[i].properties['color'] = symbol[item].color;//prov_color[prov_c].color;
+            map_geojson_riskplan.features[i].properties['opacity'] = symbol[item].opacity;
+          }      
+          // Add map with color province corresponding to risk plan
+          map_add_polygon(map_geojson_riskplan,symbol[item].layername);
         
+        });
 
-        // // Add color & opacity for risk plan in each province
-        // for (i = 0; i < map_geojson.features.length; i++) {
-        //   var prov_c = map_geojson.features[i].properties.PROVINCE_C;
-        //   if (typeof prov_color[prov_c] !== 'undefined') {
-        //     map_geojson.features[i].properties['disaster_type'] = prov_color[prov_c].disaster_type;
-        //     map_geojson.features[i].properties['color'] = prov_color[prov_c].color;
-        //     map_geojson.features[i].properties['opacity'] = 0.3;
-        //   }else{
-        //     map_geojson.features[i].properties['color'] = "#fff";
-        //     map_geojson.features[i].properties['opacity'] = 0;
-        //   }
-        // }      
-        // // Add map with color province corresponding to risk plan
-        // map_addlayer(map_geojson);
-
-
+ 
         // filter : AIR AQI ☣    
         var drm_geojson_air = {"type": "FeatureCollection"};
         drm_geojson_air.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 2});
-        map_add_pulsemarker(drm_geojson_air,"air_aqi",symbol[2].icon,symbol[2].color,symbol[2].outlinecolor,symbol[2].pulsecolor,symbol[2].size,false);
+        map_add_pulsemarker(drm_geojson_air,symbol[2].layername,symbol[2].icon,symbol[2].color,symbol[2].outlinecolor,symbol[2].pulsecolor,symbol[2].size,false);
         //map_addlayer(prov_color).then(map_add_pulsemarker(drm_geojson_air,"air_aqi",'☢','rgba(255,255,255,1)','rgba(255,255,255,1)','rgba(255,255,200,1)',1));
         
         // filter : LANDSLIDE  ▼
         var drm_geojson_landslide = {"type": "FeatureCollection"};
         drm_geojson_landslide.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 3});
-        map_add_pulsemarker(drm_geojson_landslide,"landslide",symbol[3].icon,symbol[3].color,symbol[3].outlinecolor,symbol[3].pulsecolor,symbol[3].size,false);
+        map_add_pulsemarker(drm_geojson_landslide,symbol[3].layername,symbol[3].icon,symbol[3].color,symbol[3].outlinecolor,symbol[3].pulsecolor,symbol[3].size,false);
 
         // filter : Flood  ●   
         var drm_geojson_flood = {"type": "FeatureCollection"};
         drm_geojson_flood.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 4});
-        map_add_pulsemarker(drm_geojson_flood,"flood",symbol[4].icon,symbol[4].color,symbol[4].outlinecolor,symbol[4].pulsecolor,symbol[4].size,true);
+        map_add_pulsemarker(drm_geojson_flood,symbol[4].layername,symbol[4].icon,symbol[4].color,symbol[4].outlinecolor,symbol[4].pulsecolor,symbol[4].size,true);
 
         // filter : drought  ◆   
         var drm_geojson_drought = {"type": "FeatureCollection"};
         drm_geojson_drought.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 5});
-        map_add_pulsemarker(drm_geojson_drought,"drought",symbol[5].icon,symbol[5].color,symbol[5].outlinecolor,symbol[5].pulsecolor,symbol[5].size,false);
+        map_add_pulsemarker(drm_geojson_drought,symbol[5].layername,symbol[5].icon,symbol[5].color,symbol[5].outlinecolor,symbol[5].pulsecolor,symbol[5].size,false);
 
         // filter : Forest Fire     
         var drm_geojson_fire = {"type": "FeatureCollection"};
         drm_geojson_fire.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 6});
-        map_add_pulsemarker(drm_geojson_fire,"fire",symbol[6].icon,symbol[6].color,symbol[6].outlinecolor,symbol[6].pulsecolor,symbol[6].size,false);
+        map_add_pulsemarker(drm_geojson_fire,symbol[6].layername,symbol[6].icon,symbol[6].color,symbol[6].outlinecolor,symbol[6].pulsecolor,symbol[6].size,false);
 
         // filter : Hotspot  ✶   
         var drm_geojson_hotspot = {"type": "FeatureCollection"};
         drm_geojson_hotspot.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 7});
-        map_add_pulsemarker(drm_geojson_hotspot,"hotspot",symbol[7].icon,symbol[7].color,symbol[7].outlinecolor,symbol[7].pulsecolor,symbol[7].size,false);
+        map_add_pulsemarker(drm_geojson_hotspot,symbol[7].layername,symbol[7].icon,symbol[7].color,symbol[7].outlinecolor,symbol[7].pulsecolor,symbol[7].size,false);
 
         // filter : Storm
         var drm_geojson_storm = {"type": "FeatureCollection"};
         drm_geojson_storm.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 8});
-        map_add_pulsemarker(drm_geojson_storm,"Storm",symbol[8].icon,symbol[8].color,symbol[8].outlinecolor,symbol[8].pulsecolor,symbol[8].size,false);
+        map_add_pulsemarker(drm_geojson_storm,symbol[8].layername,symbol[8].icon,symbol[8].color,symbol[8].outlinecolor,symbol[8].pulsecolor,symbol[8].size,false);
 
         // filter : Heavy Rain ☂
         var drm_geojson_rain = {"type": "FeatureCollection"};
         drm_geojson_rain.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 9});
-        map_add_pulsemarker(drm_geojson_rain,"rain",symbol[9].icon,symbol[9].color,symbol[9].outlinecolor,symbol[9].pulsecolor,symbol[9].size,false);
+        map_add_pulsemarker(drm_geojson_rain,symbol[9].layername,symbol[9].icon,symbol[9].color,symbol[9].outlinecolor,symbol[9].pulsecolor,symbol[9].size,false);
 
         // filter : Forest
         var drm_geojson_forest = {"type": "FeatureCollection"};
         drm_geojson_forest.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 1});
         //map_add_custommarker2(drm_geojson_forest,"custom_marker","img/marker_forest_green_s5.png",20);
         //map_add_custommarker(drm_geojson_forest,"forest",symbol[1].icon,symbol[1].textcolor,1,symbol[1].size,true);
-        map_add_pulsemarker(drm_geojson_forest,"forest",symbol[1].icon,symbol[1].color,symbol[1].outlinecolor,symbol[1].pulsecolor,symbol[1].size,false);
+        map_add_pulsemarker(drm_geojson_forest,symbol[1].layername,symbol[1].icon,symbol[1].color,symbol[1].outlinecolor,symbol[1].pulsecolor,symbol[1].size,false);
 
 
         
@@ -247,16 +246,16 @@
               'fill-opacity': ['get', 'opacity']
             }
           });
-          // map.addLayer({
-          //   'id': layername+'_bound',
-          //   'type': 'line',
-          //   'source': layername,
-          //   'paint': {
-          //     'line-width': 1,
-          //     'line-color': '#aaa',
-          //     'line-opacity': 0.5
-          //   }
-          // });
+          map.addLayer({
+            'id': layername+'_bound',
+            'type': 'line',
+            'source': layername,
+            'paint': {
+              'line-width': 2,
+              'line-color': '#fff',
+              'line-opacity': 0
+            }
+          });
         // //Filter map layer
         // map.setFilter('th_prov_bound',["in", "PROVINCE_C", '63','50'])
 
@@ -1043,7 +1042,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
         .append('tr')
         .append('div')
         .attr('class','table_row_marker')
-        .attr('id',function(d) {return 'row-'+d.row_no});
+        .attr('id',function(d) {return 'id-'+d.disaster_type});
 
       // create a cell in each row for each column
 
@@ -1051,14 +1050,14 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
       var img_cells = rows.selectAll('td')
         .data(function (row) { //console.log("row",row);
           return [columns[0]].map(function (column) {//console.log("col",column);
-            return {column: column, value: row[column], color:row[columns[9]]};
+            return {column: column, value: row[column], color:row[columns[9]], disaster_type: row["disaster_type_id"]};
           });
         })
         .enter()
         .append('td')
         .attr("class","img_col_marker")
         .append('div')
-        .attr('class', 'table_img_marker_container')
+        .attr('class', function (d) {return'table_img_marker_container image_marker_'+ d.disaster_type})
         .style("border",function (d) {return (d.color.length != 9) ? "2px solid " + d.color : "2px solid " + d.color.substr(0,7);})
         // .append('img')
         // .attr('class', 'table_img_marker')
@@ -1194,6 +1193,87 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
         }
 
 */
+
+
+
+        // if (true) {
+
+
+          // map.addLayer({
+          //   'id': layername,
+          //   'type': 'fill',
+          //   'source': layername,
+          //   'paint': {
+          //     'fill-color': ['get', 'color'],
+          //     'fill-opacity': ['get', 'opacity']
+          //   }
+          // });
+          // map.addLayer({
+          //   'id': layername+'_bound',
+          //   'type': 'line',
+          //   'source': layername,
+          //   'paint': {
+          //     'line-width': 2,
+          //     'line-color': '#fff',
+          //     'line-opacity': 0
+
+
+      d3.select("#table-markers-container").selectAll(".table_row_marker")
+        .on('mouseover', function(e) {
+          //d3.select("#map").selectAll(".marker").style('opacity',0.6);
+          var zoom = 2;
+
+          if (e.disaster_type_id < 90 ) {
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-outline', 'text-size', zoom*Math.round(28*symbol[e.disaster_type_id].size));
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'text-size', zoom*Math.round(24*symbol[e.disaster_type_id].size));
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'text-size', 12);
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'text-offset', [0, -1.8*symbol[e.disaster_type_id].size]);
+          } else {
+            map.setPaintProperty(symbol[e.disaster_type_id].layername, 'fill-opacity',1);
+            map.setPaintProperty(symbol[e.disaster_type_id].layername+'_bound','line-opacity',1);
+          }
+        })
+        .on('mouseout', function(e) { 
+          if (e.disaster_type_id < 90 ) {
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-outline', 'text-size', Math.round(28*symbol[e.disaster_type_id].size));
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'text-size', Math.round(24*symbol[e.disaster_type_id].size));
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'text-size', 8);
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'text-offset', [0, -1.7*symbol[e.disaster_type_id].size]);
+          } else {
+            map.setPaintProperty(symbol[e.disaster_type_id].layername, 'fill-opacity',symbol[e.disaster_type_id].opacity);
+            map.setPaintProperty(symbol[e.disaster_type_id].layername+'_bound','line-opacity',0);
+          }
+        })
+        .on('click', function(e) { })
+        .on('dblclick', function(e) {  })
+        .on('contextmenu', function(e) { 
+          var marker = document.getElementsByClassName('image_marker_'+e.disaster_type_id);
+          if (symbol[e.disaster_type_id].visibility == 'none') {            
+            marker[0].style.border = "2px solid " + symbol[e.disaster_type_id].color;
+            marker[0].style.backgroundColor = "#fff";
+            marker[1].style.border = "2px solid " + symbol[e.disaster_type_id].color;
+            marker[1].style.backgroundColor = "#fff";
+            symbol[e.disaster_type_id].visibility = 'visible';
+          } else {
+            marker[0].style.border = "2px solid " + unselectedcolor;
+            marker[0].style.backgroundColor = unselectedcolor;
+            marker[1].style.border = "2px solid " + unselectedcolor;
+            marker[1].style.backgroundColor = unselectedcolor;
+            symbol[e.disaster_type_id].visibility = 'none';
+          }
+          if (e.disaster_type_id < 90 ) {
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-pulse', 'visibility', symbol[e.disaster_type_id].visibility);
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-outline', 'visibility', symbol[e.disaster_type_id].visibility);
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'visibility', symbol[e.disaster_type_id].visibility);
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'visibility', symbol[e.disaster_type_id].visibility);
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'visibility', symbol[e.disaster_type_id].visibility);
+          } else {
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'visibility', symbol[e.disaster_type_id].visibility);
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'_bound', 'visibility', symbol[e.disaster_type_id].visibility);
+          }
+
+        });
+
 
       return table;
     }
@@ -1232,14 +1312,14 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
       var img_cells = rows.selectAll('td')
         .data(function (row) { //console.log("row",row);
           return [columns[0]].map(function (column) {//console.log("col",column);
-            return {column: column, value: row[column], color:row[columns[9]]};
+            return {column: column, value: row[column], color:row[columns[9]], disaster_type:row['disaster_type_id']};
           });
         })
         .enter()
         .append('td')
         .attr("class","img_col_marker")
         .append('div')
-        .attr('class', 'table_img_marker_container')
+        .attr('class', function (d) {return'table_img_marker_container image_marker_'+ d.disaster_type})
         .style("border",function (d) {return (d.color.length != 9) ? "2px solid " + d.color : "2px solid " + d.color.substr(0,7);})
         // .append('img')
         // .attr('class', 'table_img_marker')
@@ -1375,6 +1455,65 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
         }
 
 */
+
+
+      d3.select("#vertical-table-markers-container").selectAll(".table_col_marker")
+        .on('mouseover', function(e) {
+          //d3.select("#map").selectAll(".marker").style('opacity',0.6);
+          var zoom = 2;
+
+          if (e.disaster_type_id < 90 ) {
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-outline', 'text-size', zoom*Math.round(28*symbol[e.disaster_type_id].size));
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'text-size', zoom*Math.round(24*symbol[e.disaster_type_id].size));
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'text-size', 12);
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'text-offset', [0, -1.8*symbol[e.disaster_type_id].size]);
+          } else {
+            map.setPaintProperty(symbol[e.disaster_type_id].layername, 'fill-opacity',1);
+            map.setPaintProperty(symbol[e.disaster_type_id].layername+'_bound','line-opacity',1);
+          }
+        })
+        .on('mouseout', function(e) { 
+          if (e.disaster_type_id < 90 ) {
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-outline', 'text-size', Math.round(28*symbol[e.disaster_type_id].size));
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'text-size', Math.round(24*symbol[e.disaster_type_id].size));
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'text-size', 8);
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'text-offset', [0, -1.7*symbol[e.disaster_type_id].size]);
+          } else {
+            map.setPaintProperty(symbol[e.disaster_type_id].layername, 'fill-opacity',symbol[e.disaster_type_id].opacity);
+            map.setPaintProperty(symbol[e.disaster_type_id].layername+'_bound','line-opacity',0);
+          }
+        })
+        .on('click', function(e) { })
+        .on('dblclick', function(e) {  })
+        .on('contextmenu', function(e) { 
+          var marker = document.getElementsByClassName('image_marker_'+e.disaster_type_id);
+          if (symbol[e.disaster_type_id].visibility == 'none') {            
+            marker[0].style.border = "2px solid " + symbol[e.disaster_type_id].color;
+            marker[0].style.backgroundColor = "#fff";
+            marker[1].style.border = "2px solid " + symbol[e.disaster_type_id].color;
+            marker[1].style.backgroundColor = "#fff";
+            symbol[e.disaster_type_id].visibility = 'visible';
+          } else {
+            marker[0].style.border = "2px solid " + unselectedcolor;
+            marker[0].style.backgroundColor = unselectedcolor;
+            marker[1].style.border = "2px solid " + unselectedcolor;
+            marker[1].style.backgroundColor = unselectedcolor;
+            symbol[e.disaster_type_id].visibility = 'none';
+          }
+          if (e.disaster_type_id < 90 ) {
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-pulse', 'visibility', symbol[e.disaster_type_id].visibility);
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-outline', 'visibility', symbol[e.disaster_type_id].visibility);
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'visibility', symbol[e.disaster_type_id].visibility);
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'visibility', symbol[e.disaster_type_id].visibility);
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'visibility', symbol[e.disaster_type_id].visibility);
+          } else {
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'visibility', symbol[e.disaster_type_id].visibility);
+            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'_bound', 'visibility', symbol[e.disaster_type_id].visibility);
+          }
+
+        });
+
+
 
       return table;
     }
@@ -1480,7 +1619,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
       removetable = document.getElementById('vertical_table_image_marker');
       removetable.parentElement.removeChild(removetable);    
       if (shortnoti==0) {
-        document.getElementById('notification-container-right').style.width = "65px";
+        document.getElementById('notification-container-right').style.width = "70px";
         tabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
         vertabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
         w = "55px";
