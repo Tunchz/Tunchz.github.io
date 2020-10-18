@@ -24,11 +24,12 @@
   /*7hotspot*/   '7':{'layername':"hotspot",   'icon':"☀",    'color':"rgba(197,34,31,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':0.9 ,'visibility':'visible', 'dbclick':false},
   /*8storm*/     '8':{'layername':"storm",     'icon':"♒",    'color':"rgba(18,158,175,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.7 ,'visibility':'visible', 'dbclick':false},
   /*9heavyrain*/ '9':{'layername':"heavyrain", 'icon':"☂",    'color':"rgba(156,192,249,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1 ,'visibility':'visible', 'dbclick':false},
-  /*riskplan*/  '91':{'layername':"risk_forest",    'color':"#ff0000",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
-  /*riskplan*/  '94':{'layername':"risk_flood",     'color':"#0000ff",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
-  /*riskplan*/  '95':{'layername':"risk_drought",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false}
+  /*riskplan*/  '91':{'layername':"risk_forest", 'icon':"█",   'color':"#ff0000",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
+  /*riskplan*/  '94':{'layername':"risk_flood",  'icon':"█",   'color':"#0000ff",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
+  /*riskplan*/  '95':{'layername':"risk_drought",'icon':"█",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false}
                   }
   var drm_list = [1,2,3,4,5,6,7,8,9,91,94,95];
+  var risknoti_list = [1,2,3,4,5,6,7,8,9];
   var riskplan_list = [91,94,95];
   var disaster_risk_list_summary;
   var unselectedcolor = "#555"
@@ -48,15 +49,9 @@
         // Add map province outline
         map_addlayer(map_geojson);
 
-
-
-
-        
+        // Add Risk Plan Layer ----------------------------------------------
         riskplan_list.forEach(function (item, index) {
           //console.log(index,item); 
-
-
-
           // filter : risk plan color for provinces 
           var drm_geojson_riskplan = {"type": "FeatureCollection"};
           drm_geojson_riskplan.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == item});
@@ -87,54 +82,19 @@
         
         });
 
- 
-        // filter : AIR AQI ☣    
-        var drm_geojson_air = {"type": "FeatureCollection"};
-        drm_geojson_air.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 2});
-        map_add_pulsemarker(drm_geojson_air,symbol[2].layername,symbol[2].icon,symbol[2].color,symbol[2].outlinecolor,symbol[2].pulsecolor,symbol[2].size,false);
-        //map_addlayer(prov_color).then(map_add_pulsemarker(drm_geojson_air,"air_aqi",'☢','rgba(255,255,255,1)','rgba(255,255,255,1)','rgba(255,255,200,1)',1));
-        
-        // filter : LANDSLIDE  ▼
-        var drm_geojson_landslide = {"type": "FeatureCollection"};
-        drm_geojson_landslide.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 3});
-        map_add_pulsemarker(drm_geojson_landslide,symbol[3].layername,symbol[3].icon,symbol[3].color,symbol[3].outlinecolor,symbol[3].pulsecolor,symbol[3].size,false);
+        // Add Risk Notification Layer ----------------------------------------------
+        var drm_geojson_filtered = {};
+        risknoti_list.forEach(function (item, index) {
 
-        // filter : Flood  ●   
-        var drm_geojson_flood = {"type": "FeatureCollection"};
-        drm_geojson_flood.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 4});
-        map_add_pulsemarker(drm_geojson_flood,symbol[4].layername,symbol[4].icon,symbol[4].color,symbol[4].outlinecolor,symbol[4].pulsecolor,symbol[4].size,true);
+          drm_geojson_filtered[item] = {"type": "FeatureCollection"};
+          drm_geojson_filtered[item].features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == item});
+          map_add_pulsemarker(drm_geojson_filtered[item],symbol[item].layername,symbol[item].icon,symbol[item].color,symbol[item].outlinecolor,symbol[item].pulsecolor,symbol[item].size,false);
 
-        // filter : drought  ◆   
-        var drm_geojson_drought = {"type": "FeatureCollection"};
-        drm_geojson_drought.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 5});
-        map_add_pulsemarker(drm_geojson_drought,symbol[5].layername,symbol[5].icon,symbol[5].color,symbol[5].outlinecolor,symbol[5].pulsecolor,symbol[5].size,false);
+        });
 
-        // filter : Forest Fire     
-        var drm_geojson_fire = {"type": "FeatureCollection"};
-        drm_geojson_fire.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 6});
-        map_add_pulsemarker(drm_geojson_fire,symbol[6].layername,symbol[6].icon,symbol[6].color,symbol[6].outlinecolor,symbol[6].pulsecolor,symbol[6].size,false);
 
-        // filter : Hotspot  ✶   
-        var drm_geojson_hotspot = {"type": "FeatureCollection"};
-        drm_geojson_hotspot.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 7});
-        map_add_pulsemarker(drm_geojson_hotspot,symbol[7].layername,symbol[7].icon,symbol[7].color,symbol[7].outlinecolor,symbol[7].pulsecolor,symbol[7].size,false);
-
-        // filter : Storm
-        var drm_geojson_storm = {"type": "FeatureCollection"};
-        drm_geojson_storm.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 8});
-        map_add_pulsemarker(drm_geojson_storm,symbol[8].layername,symbol[8].icon,symbol[8].color,symbol[8].outlinecolor,symbol[8].pulsecolor,symbol[8].size,false);
-
-        // filter : Heavy Rain ☂
-        var drm_geojson_rain = {"type": "FeatureCollection"};
-        drm_geojson_rain.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 9});
-        map_add_pulsemarker(drm_geojson_rain,symbol[9].layername,symbol[9].icon,symbol[9].color,symbol[9].outlinecolor,symbol[9].pulsecolor,symbol[9].size,false);
-
-        // filter : Forest
-        var drm_geojson_forest = {"type": "FeatureCollection"};
-        drm_geojson_forest.features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == 1});
-        //map_add_custommarker2(drm_geojson_forest,"custom_marker","img/marker_forest_green_s5.png",20);
-        //map_add_custommarker(drm_geojson_forest,"forest",symbol[1].icon,symbol[1].textcolor,1,symbol[1].size,true);
-        map_add_pulsemarker(drm_geojson_forest,symbol[1].layername,symbol[1].icon,symbol[1].color,symbol[1].outlinecolor,symbol[1].pulsecolor,symbol[1].size,false);
+        // Add Risk Notification Layer ----------------------------------------------
+        map_addpiecluster();
 
 
         
@@ -145,12 +105,11 @@
         for (i = 0; i < drm_geojson.features.length; i++) {
           drm.push(drm_geojson.features[i].properties);
           disaster_type_id = drm_geojson.features[i].properties.disaster_type_id;
+          drm[i]['icon'] = symbol[disaster_type_id].icon;
           if (disaster_type_id < 90) {
-            drm[i]['icon'] = symbol[disaster_type_id].icon;
             drm[i]['color'] = symbol[disaster_type_id].color;
           } else {
-            drm[i]['icon'] = "█";
-            drm[i]['color'] = symbol[disaster_type_id.toString()].color+"66";
+            drm[i]['color'] = symbol[disaster_type_id].color+"66";
           }
           
         }
@@ -880,8 +839,11 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
           });
           map.on('move', updateMarkers);
           map.on('moveend', updateMarkers);
-          //map.on('zoomend', updateMarkers);
-          updateMarkers();
+
+          setTimeout(function (){
+            updateMarkers();
+          }, 1000);          
+          
 
           // objects for caching and keeping track of HTML marker objects (for performance)
           var markers = {};
