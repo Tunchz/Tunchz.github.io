@@ -122,7 +122,7 @@ color:#000;
   left: 0%;
   
   width: 100%; /*90%;*/
-  height: 100%;
+  height: 100%;  
 }
 
 
@@ -288,7 +288,7 @@ table {
 }
 
 .table_col_marker {
-  height: 50px;
+  height: 48px;
   width: 100px;
   /*border-top: 3px solid #383838;
   border-bottom: 3px solid #383838;*/
@@ -693,7 +693,7 @@ red:hover {
   padding: 0px; 
   margin: 0px; 
   position: absolute; 
-  right: 20px; 
+  right: 3px; 
   top: 0px; 
   cursor: pointer; 
 }
@@ -717,7 +717,7 @@ red:hover {
   margin: 0px; 
   position: absolute; 
   right: 5px; 
-  left: 50px; 
+  left: 5px; 
   bottom: 0px; 
   cursor: pointer; 
   border-top-left-radius: 3px;
@@ -735,40 +735,45 @@ red:hover {
 }
 
 #map_style_menu_button {
-  height: 36px;
-  width:36px;
-  left: 12px;
-  bottom: 22px;
+  height: 30px;
+  width:30px;
+  left: 10px;
+  top: 245px;
   position: absolute;
   background: #2a58c3;
   padding: 0px;
   font-family: 'impact', sans-serif;
   border-radius:5px;
+  opacity:0.6;
+}
+
+#map_style_menu_button:hover {
+  opacity: 1;
 }
 
 #map_style_menu_button_image {
-  height: 30px;
-  width: 30px;
+  height: 24px;
+  width: 24px;
   margin:3px;
   border-radius: 4px;
   background-image: url("images/MapStyle.png");
 }
 
 #map_style_menu_outline {
-  height: 46px;
-  left: 5px;
-  bottom: 17px;
+  height: 50px;
+  left: 0px;
+  top: 235px;
   position: absolute;
   padding: 0px;
-  border-radius:4px;
+  border-radius:5px;
 }
 #map_style_menu {
-  height: 26px;
+  height: 34px;
   background: #fff;
-  padding-top: 0px;
+  padding-top: 1px;
   font-family: 'impact', sans-serif;
-  border-radius:3px;
-  margin: 10px;
+  border-radius:5px;
+  margin: 8px;
 }
 
 
