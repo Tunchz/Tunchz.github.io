@@ -1,34 +1,35 @@
 
   
 
-  var disaster_type_color = {
-    '91':"#ff0000",
-    '92':"#ff0000",
-    '93':"#ff0000",
-    '94':"#0000ff",
-    '95':"#f6b513",
-    '96':"#f00",
-    '97':"#f00",
-    '98':"#f00",
-    '99':"#f00"
-  };
+  // var disaster_type_color = {
+  //   '91':"#ff0000",
+  //   '92':"#ff0000",
+  //   '93':"#ff0000",
+  //   '94':"#0000ff",
+  //   '95':"#f6b513",
+  //   '96':"#f00",
+  //   '97':"#f00",
+  //   '98':"#f00",
+  //   '99':"#f00"
+  // };
 
   // icon for each disaster type id
   var symbol = {'0':{'icon':"0"},
-  /*1forest*/    '1':{'layername':"forest",    'icon': "❧",    'color':"rgba(52,168,83,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.2 ,'visibility':'visible'},
-  /*2air*/       '2':{'layername':"air",       'icon':"☢",    'color':"rgba(108,132,146,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1 ,'visibility':'visible'},
-  /*3landslide*/ '3':{'layername':"landslide", 'icon':"☳",     'color':"rgba(132,52,135,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':0.7 ,'visibility':'visible'},
-  /*4flood*/     '4':{'layername':"flood",     'icon':"♦",      'color':"rgba(49,76,205,1)",    'outlinecolor':"rgba(255,255,255,1)",   'pulsecolor':"rgba(200,200,255,1)",  'size':0.8 ,'visibility':'visible'},
-  /*5drought*/   '5':{'layername':"drought",   'icon':"☭",     'color':"rgba(255,190,100,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.8 ,'visibility':'visible'},
-  /*6fire*/      '6':{'layername':"fire",      'icon':"♨",    'color':"rgba(227,116,0,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':0.8 ,'visibility':'visible'},
-  /*7hotspot*/   '7':{'layername':"hotspot",   'icon':"☀",    'color':"rgba(197,34,31,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':0.9 ,'visibility':'visible'},
-  /*8storm*/     '8':{'layername':"storm",     'icon':"♒",    'color':"rgba(18,158,175,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.7 ,'visibility':'visible'},
-  /*9heavyrain*/ '9':{'layername':"heavyrain", 'icon':"☂",    'color':"rgba(156,192,249,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1 ,'visibility':'visible'},
-  /*riskplan*/  '91':{'layername':"risk_forest",    'color':"#ff0000",'opacity':0.3 ,'visibility':'visible'},
-  /*riskplan*/  '94':{'layername':"risk_flood",     'color':"#0000ff",'opacity':0.3 ,'visibility':'visible'},
-  /*riskplan*/  '95':{'layername':"risk_drought",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible'}
+  /*1forest*/    '1':{'layername':"forest",    'icon': "❧",    'color':"rgba(52,168,83,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.2 ,'visibility':'visible', 'dbclick':false},
+  /*2air*/       '2':{'layername':"air",       'icon':"☢",    'color':"rgba(108,132,146,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1 ,'visibility':'visible', 'dbclick':false},
+  /*3landslide*/ '3':{'layername':"landslide", 'icon':"☳",     'color':"rgba(132,52,135,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':0.7 ,'visibility':'visible', 'dbclick':false},
+  /*4flood*/     '4':{'layername':"flood",     'icon':"♦",      'color':"rgba(49,76,205,1)",    'outlinecolor':"rgba(255,255,255,1)",   'pulsecolor':"rgba(200,200,255,1)",  'size':0.8 ,'visibility':'visible', 'dbclick':false},
+  /*5drought*/   '5':{'layername':"drought",   'icon':"☭",     'color':"rgba(255,190,100,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.8 ,'visibility':'visible', 'dbclick':false},
+  /*6fire*/      '6':{'layername':"fire",      'icon':"♨",    'color':"rgba(227,116,0,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':0.8 ,'visibility':'visible', 'dbclick':false},
+  /*7hotspot*/   '7':{'layername':"hotspot",   'icon':"☀",    'color':"rgba(197,34,31,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':0.9 ,'visibility':'visible', 'dbclick':false},
+  /*8storm*/     '8':{'layername':"storm",     'icon':"♒",    'color':"rgba(18,158,175,1)", 'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':0.7 ,'visibility':'visible', 'dbclick':false},
+  /*9heavyrain*/ '9':{'layername':"heavyrain", 'icon':"☂",    'color':"rgba(156,192,249,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1 ,'visibility':'visible', 'dbclick':false},
+  /*riskplan*/  '91':{'layername':"risk_forest",    'color':"#ff0000",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
+  /*riskplan*/  '94':{'layername':"risk_flood",     'color':"#0000ff",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
+  /*riskplan*/  '95':{'layername':"risk_drought",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false}
                   }
-
+  var drm_list = [1,2,3,4,5,6,7,8,9,91,94,95];
+  var riskplan_list = [91,94,95];
   var disaster_risk_list_summary;
   var unselectedcolor = "#555"
 
@@ -50,8 +51,8 @@
 
 
 
-        var riskplan = [91,94,95];
-        riskplan.forEach(function (item, index) {
+        
+        riskplan_list.forEach(function (item, index) {
           //console.log(index,item); 
 
 
@@ -149,7 +150,7 @@
             drm[i]['color'] = symbol[disaster_type_id].color;
           } else {
             drm[i]['icon'] = "█";
-            drm[i]['color'] = disaster_type_color[disaster_type_id.toString()]+"66";
+            drm[i]['color'] = symbol[disaster_type_id.toString()].color+"66";
           }
           
         }
@@ -1059,22 +1060,6 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
         .append('div')
         .attr('class', function (d) {return'table_img_marker_container image_marker_'+ d.disaster_type})
         .style("border",function (d) {return (d.color.length != 9) ? "2px solid " + d.color : "2px solid " + d.color.substr(0,7);})
-        // .append('img')
-        // .attr('class', 'table_img_marker')
-        // .attr('src', function(d) {return d.column == columns[0] ?  "img/marker_forest_green_s5.png"/*d.value*/ : null;})
-        // .style("border",function (d) {
-        //       if (d.status == "succeeded") {
-        //         return "1px solid #9bee00"
-        //       } else if (d.status == "unknown") {
-        //         return "1px solid #ff0000"
-        //       } else if (d.status == "sending") {
-        //         return "1px solid #ffcc00"
-        //       } else if (d.status == "toverify") {
-        //         return "1px solid #ffcc00"
-        //       } else {
-        //         return "1px solid #316be6"
-        //       }
-        // })
         .append('th')
             .attr('class', 'marker_icon')
             .text(function(d) {return d.column == columns[0] ?  d.value : null;})
@@ -1245,39 +1230,63 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
           }
         })
         .on('click', function(e) { })
-        .on('dblclick', function(e) {  })
+        .on('dblclick', function(e) {  
+          swithUnselectVisibility(e.disaster_type_id);
+        })
         .on('contextmenu', function(e) { 
-          var marker = document.getElementsByClassName('image_marker_'+e.disaster_type_id);
-          if (symbol[e.disaster_type_id].visibility == 'none') {            
-            marker[0].style.border = "2px solid " + symbol[e.disaster_type_id].color;
-            marker[0].style.backgroundColor = "#fff";
-            marker[1].style.border = "2px solid " + symbol[e.disaster_type_id].color;
-            marker[1].style.backgroundColor = "#fff";
-            symbol[e.disaster_type_id].visibility = 'visible';
-          } else {
-            marker[0].style.border = "2px solid " + unselectedcolor;
-            marker[0].style.backgroundColor = unselectedcolor;
-            marker[1].style.border = "2px solid " + unselectedcolor;
-            marker[1].style.backgroundColor = unselectedcolor;
-            symbol[e.disaster_type_id].visibility = 'none';
-          }
-          if (e.disaster_type_id < 90 ) {
-            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-pulse', 'visibility', symbol[e.disaster_type_id].visibility);
-            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-outline', 'visibility', symbol[e.disaster_type_id].visibility);
-            map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'visibility', symbol[e.disaster_type_id].visibility);
-            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'visibility', symbol[e.disaster_type_id].visibility);
-            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'visibility', symbol[e.disaster_type_id].visibility);
-          } else {
-            map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'visibility', symbol[e.disaster_type_id].visibility);
-            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'_bound', 'visibility', symbol[e.disaster_type_id].visibility);
-          }
-
+          swithLayerVisibility(e.disaster_type_id);
         });
 
 
       return table;
     }
 
+    function swithUnselectVisibility(disaster_type_id) {
+          drm_list.forEach(function (item, index) {
+            if (!symbol[disaster_type_id].dbclick) {              
+                symbol[item].visibility = 'visible';                              
+            } else {
+                symbol[item].visibility = 'none';                
+            }
+            if (disaster_type_id == item) {
+              symbol[disaster_type_id].visibility = 'none';
+            } else {
+              symbol[item].dbclick = false;
+            }
+            swithLayerVisibility(item);
+          })
+          symbol[disaster_type_id].dbclick = !symbol[disaster_type_id].dbclick;
+    }
+
+    function swithLayerVisibility(disaster_type_id) {
+
+      var marker = document.getElementsByClassName('image_marker_'+disaster_type_id);
+      if (symbol[disaster_type_id].visibility == 'none') {            
+        marker[0].style.border = "2px solid " + symbol[disaster_type_id].color;
+        marker[0].style.backgroundColor = "#fff";
+        marker[1].style.border = "2px solid " + symbol[disaster_type_id].color;
+        marker[1].style.backgroundColor = "#fff";
+        symbol[disaster_type_id].visibility = 'visible';
+      } else {
+        marker[0].style.border = "2px solid " + unselectedcolor;
+        marker[0].style.backgroundColor = unselectedcolor;
+        marker[1].style.border = "2px solid " + unselectedcolor;
+        marker[1].style.backgroundColor = unselectedcolor;
+        symbol[disaster_type_id].visibility = 'none';
+      }
+
+
+      if (disaster_type_id < 90 ) {
+        map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', symbol[disaster_type_id].visibility);
+        map.setLayoutProperty(symbol[disaster_type_id].layername+'-outline', 'visibility', symbol[disaster_type_id].visibility);
+        map.setLayoutProperty(symbol[disaster_type_id].layername, 'visibility', symbol[disaster_type_id].visibility);
+        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'visibility', symbol[disaster_type_id].visibility);
+        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'visibility', symbol[disaster_type_id].visibility);
+      } else {
+        map.setLayoutProperty(symbol[disaster_type_id].layername, 'visibility', symbol[disaster_type_id].visibility);
+        map.setLayoutProperty(symbol[disaster_type_id].layername+'_bound', 'visibility', symbol[disaster_type_id].visibility);
+      }
+    }
 
 //=== Vertical Table Image Marker ===============================================================================================================
 
@@ -1321,22 +1330,6 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
         .append('div')
         .attr('class', function (d) {return'table_img_marker_container image_marker_'+ d.disaster_type})
         .style("border",function (d) {return (d.color.length != 9) ? "2px solid " + d.color : "2px solid " + d.color.substr(0,7);})
-        // .append('img')
-        // .attr('class', 'table_img_marker')
-        // .attr('src', function(d) {return d.column == columns[0] ?  "img/marker_forest_green_s5.png"/*d.value*/ : null;})
-        // .style("border",function (d) {
-        //       if (d.status == "succeeded") {
-        //         return "1px solid #9bee00"
-        //       } else if (d.status == "unknown") {
-        //         return "1px solid #ff0000"
-        //       } else if (d.status == "sending") {
-        //         return "1px solid #ffcc00"
-        //       } else if (d.status == "toverify") {
-        //         return "1px solid #ffcc00"
-        //       } else {
-        //         return "1px solid #316be6"
-        //       }
-        // })
         .append('th')
             .attr('class', 'marker_icon')
             .text(function(d) {return d.column == columns[0] ?  d.value : null;})
@@ -1484,32 +1477,35 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
           }
         })
         .on('click', function(e) { })
-        .on('dblclick', function(e) {  })
+        .on('dblclick', function(e) {  
+          swithUnselectVisibility(e.disaster_type_id);
+        })
         .on('contextmenu', function(e) { 
-          var marker = document.getElementsByClassName('image_marker_'+e.disaster_type_id);
-          if (symbol[e.disaster_type_id].visibility == 'none') {            
-            marker[0].style.border = "2px solid " + symbol[e.disaster_type_id].color;
-            marker[0].style.backgroundColor = "#fff";
-            marker[1].style.border = "2px solid " + symbol[e.disaster_type_id].color;
-            marker[1].style.backgroundColor = "#fff";
-            symbol[e.disaster_type_id].visibility = 'visible';
-          } else {
-            marker[0].style.border = "2px solid " + unselectedcolor;
-            marker[0].style.backgroundColor = unselectedcolor;
-            marker[1].style.border = "2px solid " + unselectedcolor;
-            marker[1].style.backgroundColor = unselectedcolor;
-            symbol[e.disaster_type_id].visibility = 'none';
-          }
-          if (e.disaster_type_id < 90 ) {
-            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-pulse', 'visibility', symbol[e.disaster_type_id].visibility);
-            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-outline', 'visibility', symbol[e.disaster_type_id].visibility);
-            map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'visibility', symbol[e.disaster_type_id].visibility);
-            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'visibility', symbol[e.disaster_type_id].visibility);
-            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'visibility', symbol[e.disaster_type_id].visibility);
-          } else {
-            map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'visibility', symbol[e.disaster_type_id].visibility);
-            map.setLayoutProperty(symbol[e.disaster_type_id].layername+'_bound', 'visibility', symbol[e.disaster_type_id].visibility);
-          }
+          swithLayerVisibility(e.disaster_type_id);
+          // var marker = document.getElementsByClassName('image_marker_'+e.disaster_type_id);
+          // if (symbol[e.disaster_type_id].visibility == 'none') {            
+          //   marker[0].style.border = "2px solid " + symbol[e.disaster_type_id].color;
+          //   marker[0].style.backgroundColor = "#fff";
+          //   marker[1].style.border = "2px solid " + symbol[e.disaster_type_id].color;
+          //   marker[1].style.backgroundColor = "#fff";
+          //   symbol[e.disaster_type_id].visibility = 'visible';
+          // } else {
+          //   marker[0].style.border = "2px solid " + unselectedcolor;
+          //   marker[0].style.backgroundColor = unselectedcolor;
+          //   marker[1].style.border = "2px solid " + unselectedcolor;
+          //   marker[1].style.backgroundColor = unselectedcolor;
+          //   symbol[e.disaster_type_id].visibility = 'none';
+          // }
+          // if (e.disaster_type_id < 90 ) {
+          //   map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-pulse', 'visibility', symbol[e.disaster_type_id].visibility);
+          //   map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-outline', 'visibility', symbol[e.disaster_type_id].visibility);
+          //   map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'visibility', symbol[e.disaster_type_id].visibility);
+          //   map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'visibility', symbol[e.disaster_type_id].visibility);
+          //   map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'visibility', symbol[e.disaster_type_id].visibility);
+          // } else {
+          //   map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'visibility', symbol[e.disaster_type_id].visibility);
+          //   map.setLayoutProperty(symbol[e.disaster_type_id].layername+'_bound', 'visibility', symbol[e.disaster_type_id].visibility);
+          // }
 
         });
 
