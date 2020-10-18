@@ -5,16 +5,19 @@ function detectswipe(el,func) {
   swipe_det.sY = 0;
   swipe_det.eX = 0;
   swipe_det.eY = 0;
-  var min_x = 40;  //min x swipe for horizontal swipe
-  var max_x = 40;  //max x difference for vertical swipe
-  var min_y = 40;  //min y swipe for vertical swipe
-  var max_y = 40;  //max y difference for horizontal swipe
-  var direc = "";
+  var min = 40, //required min distance traveled to be considered swipe
+  max = 20, // maximum distance allowed at the same time in perpendicular direction
+  allowedTime = 300, // maximum time allowed to travel that distance
+  direc, elapsedTime, startTime;
   ele = document.getElementById(el);
   ele.addEventListener('touchstart',function(e){
     var t = e.touches[0];
     swipe_det.sX = t.screenX; 
     swipe_det.sY = t.screenY;
+    swipe_det.eX = 0; 
+    swipe_det.eY = 0;    
+    direc = "";
+    startTime = new Date().getTime(); // record time when finger first makes contact with surface
   },false);
   ele.addEventListener('touchmove',function(e){
     //e.preventDefault();
@@ -23,21 +26,23 @@ function detectswipe(el,func) {
     swipe_det.eY = t.screenY;    
   },false);
   ele.addEventListener('touchend',function(e){
+    elapsedTime = new Date().getTime() - startTime; // get time elapsed
+    //console.log(swipe_det.sX,swipe_det.sY,"|",swipe_det.eX,swipe_det.eY);
+    //console.log(elapsedTime,swipe_det.eX - swipe_det.sX,swipe_det.eY - swipe_det.sY);
     //horizontal detection
-    if ((((swipe_det.eX - min_x > swipe_det.sX) || (swipe_det.eX + min_x < swipe_det.sX)) && ((swipe_det.eY < swipe_det.sY + max_y) && (swipe_det.sY > swipe_det.eY - max_y)))) {
-      if(swipe_det.eX > swipe_det.sX) direc = "r";
-      else direc = "l";
-    }
-    //vertical detection
-    if ((((swipe_det.eY - min_y > swipe_det.sY) || (swipe_det.eY + min_y < swipe_det.sY)) && ((swipe_det.eX < swipe_det.sX + max_x) && (swipe_det.sX > swipe_det.eX - max_x)))) {
-      if(swipe_det.eY > swipe_det.sY) direc = "d";
-      else direc = "u";
-    }
+    if (elapsedTime <= allowedTime){
+        if ((Math.abs(swipe_det.eX - swipe_det.sX) > min) && (Math.abs(swipe_det.eY - swipe_det.sY) < max)) {
+          if(swipe_det.eX > swipe_det.sX) direc = "r"; else direc = "l";
+        }
+        //vertical detection
+        if ((Math.abs(swipe_det.eY - swipe_det.sY) > min) && (Math.abs(swipe_det.eX - swipe_det.sX) < max)) {
+          if(swipe_det.eY > swipe_det.sY) direc = "d"; else direc = "u";
+        }
 
-    if (direc != "") {
-      if(typeof func == 'function') func(el,direc);
+        if (direc != "") {
+          if(typeof func == 'function') func(el,direc);
+        }
     }
-    direc = "";
   },false);  
 }
 
@@ -47,12 +52,12 @@ detectswipe('notification-container-bottom',UDactions);
 
 function LRactions(el,swipedir) {
     if ((swipedir == 'l' && rightpanel_isopen == 0)||(swipedir == 'r' && rightpanel_isopen == 1)) {switchRightpanel()}
-    //console.log(el+" : "+swipedir);
+    console.log(el+" : "+swipedir);
 }
 
 function UDactions(el,swipedir) {
     if ((swipedir == 'u' && rightpanel_isopen == 0)||(swipedir == 'd' && rightpanel_isopen == 1)) {switchRightpanel()}
-    //console.log(el+" : "+swipedir);
+    console.log(el+" : "+swipedir);
 }
 
 
@@ -70,7 +75,7 @@ function UDactions(el,swipedir) {
 //     distX,
 //     distY,
 //     threshold = 40, //required min distance traveled to be considered swipe
-//     restraint = 40, // maximum distance allowed at the same time in perpendicular direction
+//     restraint = 20, // maximum distance allowed at the same time in perpendicular direction
 //     allowedTime = 300, // maximum time allowed to travel that distance
 //     elapsedTime,
 //     startTime,
