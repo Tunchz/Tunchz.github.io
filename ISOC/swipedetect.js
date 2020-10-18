@@ -52,12 +52,12 @@ detectswipe('notification-container-bottom',UDactions);
 
 function LRactions(el,swipedir) {
     if ((swipedir == 'l' && rightpanel_isopen == 0)||(swipedir == 'r' && rightpanel_isopen == 1)) {switchRightpanel()}
-    console.log(el+" : "+swipedir);
+    //console.log(el+" : "+swipedir);
 }
 
 function UDactions(el,swipedir) {
     if ((swipedir == 'u' && rightpanel_isopen == 0)||(swipedir == 'd' && rightpanel_isopen == 1)) {switchRightpanel()}
-    console.log(el+" : "+swipedir);
+    //console.log(el+" : "+swipedir);
 }
 
 
