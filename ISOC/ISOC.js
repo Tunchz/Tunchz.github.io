@@ -171,8 +171,9 @@ function resizeAdjust() {
     if (isonMobile) {
       document.getElementById("left-panel").style.width = "100%";
       document.getElementById("right-panel").style.width = "100%";
+      document.getElementById("right-panel").style.height = "25%";
       if (rightpanel_isopen==1) {
-        document.getElementById("left-panel").style.height = "80%";
+        document.getElementById("left-panel").style.height = "75%";
       } else {
         document.getElementById("left-panel").style.height = "100%";
       }
@@ -184,6 +185,12 @@ function resizeAdjust() {
     } else {   
       document.getElementById("left-panel").style.width = "100%";
       document.getElementById("right-panel").style.width = "100%";
+       document.getElementById("right-panel").style.height = "20%";
+      if (rightpanel_isopen==1) {
+        document.getElementById("left-panel").style.height = "80%";
+      } else {
+        document.getElementById("left-panel").style.height = "100%";
+      }     
       //document.getElementById("left-panel").style.height = "100%";
       //$("#left-bottom").height(($("#left-panel").height()));
       //$("#map-container").height($("#left-bottom").height());
@@ -198,6 +205,7 @@ function resizeAdjust() {
 
   } else {
     document.getElementById("left-panel").style.height = "100%";
+    document.getElementById("right-panel").style.height = "100%";
     //$("#left-bottom").height($("#wholecontent").height());
     //$("#map-container").height($("#left-bottom").height());
     //$("#map-container").width($("#left-bottom").width());

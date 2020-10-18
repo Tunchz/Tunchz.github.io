@@ -18,7 +18,7 @@
   </head>
   <body onresize="resizeAdjust();">
     <div id = "wholecontent" class = "section-container">
-      <div id = "left-panel" class = "col-sm-7 height100p">
+      <div id = "left-panel" class = "col-sm-7 height100p" onresize="map.resize()">
         <div id = "top-left" class = "col-sm-12 height10p" style = "min-height : 42px; max-height : 42px; padding-right: 0px; background-color: #fff; display: none">
           <div id = "title" class = "col-xs-8 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #2a58c3/*#383838;*/">
             <div id = "logo-container" class = "col-xs-4" style = "display: flex;justify-content: center; align-items: center; max-width: 50px;">
@@ -191,7 +191,7 @@
 
         </div>
       </div>
-      <div id = "right-panel" class = "col-sm-5 height100p" style = "padding-right: 10px; background-color: #383838;">
+      <div id = "right-panel" class = "col-sm-5 height100p" style = "background-color: #383838;">
         <div id = "top-right1" class = "col-sm-12 height10p" style = "min-height : 77px; max-height : 77px; padding-left: 10px; background-color: #383838; display: none;">
           <div id = "date-container" class = "col-xs-4 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #fff;">
 
@@ -272,7 +272,7 @@
             </div>
           </div>
         </div>
-        <div id='table-container-RP' class = "col-sm-12 height100p" style = "height : 76%; background-color: #383838">
+        <div id='table-container-RP' class = "col-sm-12 height100p" style = "background-color: #383838">
           <div id="table-container" class="table-container" oncontextmenu="return false;">
           </div>
         </div>
@@ -374,7 +374,7 @@
     }
         
     function switchStyleMenu(sw) {
-      console.log("switchStyleMenu : ",sw);
+      //console.log("switchStyleMenu : ",sw);
       if (sw) {
         document.getElementById("map_style_menu_outline").style.display = "block";
       } else {
@@ -388,7 +388,7 @@
 
 
     function tabulateimg(data, columns) {
-      //console.log(data);
+      console.log(data);
 
       var table = d3.select('#table-container').append('table').attr("id","table_image");
 
@@ -400,53 +400,37 @@
         data[t].row_no = t;
       }
       columns.push('row_no');
-      //console.log(data);
-    //console.log("1",img_col==null)
-    /*
-      // append the header row
-      thead.append('tr')
-        .selectAll('th')
-        .data([img_col[0],'detail']).enter()
-        .append('th')
-          .text(function (column) { return column; });
-    */
-      // create a row for each object in the data
+
       var rows = tbody.selectAll('tr')
         .data(data)
         .enter()
         .append('tr')
+        .append('div')
         .attr('class','table_row')
-        .attr('id',function(d) {return 'row-'+d.id});
+        .attr('id',function(d) {return 'row-'+d.row_no});
 
       // create a cell in each row for each column
 
       //------ 1st column section ------------------------------------------------------------------  
       var img_cells = rows.selectAll('td')
-        .data(function (row) { //console.log(row);
-          return ["img"/*columns[0]*/].map(function (column) {
-            return {column: column, value: row[column], status:row["status"]};
+        .data(function (row) { //console.log("row",row);
+          return [columns[0]].map(function (column) {//console.log("col",column);
+            return {column: column, value: row[column], color:row[columns[9]], disaster_type: row["disaster_type_id"]};
           });
         })
         .enter()
-        .append('td').attr("class","img_col")
+        .append('td')
+        .attr("class","img_col")
         .append('div')
-        .attr('class', 'table_img_container')
-        .append('img')
-        .attr('class', 'table_img')
-        .attr('src', function(d) {return d.column == columns[0] ?  d.value : null;})
-        .style("border",function (d) {
-              if (d.status == "succeeded") {
-                return "3px solid #9bee00"
-              } else if (d.status == "unknown") {
-                return "3px solid #ff0000"
-              } else if (d.status == "sending") {
-                return "3px solid #ffcc00"
-              } else if (d.status == "toverify") {
-                return "3px solid #ffcc00"
-              } else {
-                return "3px solid #316be6"
-              }
-        });
+        .attr('class', function (d) {return'table_img_container image_marker_'+ d.disaster_type})
+        .style("border",function (d) {return (d.color.length != 9) ? "2px solid " + d.color : "2px solid " + d.color.substr(0,7);})
+        .append('th')
+            .attr('class', 'marker_icon')
+            .text(function(d) {return d.column == columns[0] ?  d.value : null;})
+            .style("color",function (d) {return d.color})
+
+
+        ;
 
       //------ 2nd column section ------------------------------------------------------------------  
       var cells = rows.selectAll('td')
@@ -465,7 +449,7 @@
               } else {
                 dt[columns[m]] = row[columns[m]];
               }
-     
+              dt[columns[9]] = row[columns[9]];
             }
             //console.log(dt);
             return {column: column, value: dt /*{"detail" : row[columns[1]], "subdetail_1" : row[columns[2]], "subdetail_2" : row[columns[3]]}*/};
@@ -481,11 +465,12 @@
         // Display detail as table header
         cthead.append('tr')
           .selectAll('th')
-          .data(function (d) {/*console.log(d.value[columns[1]]);*/ return [d.value[columns[1]]]})
+          .data(function (d) {return [{detail:d.value[columns[1]], color:d.value[columns[9]]}]})
           .enter()
           .append('th')
             .attr('class', 'detail')
-            .text(function (column) {return column })
+            .text(function (d) {return d.detail })
+            .style("color",function (d) {return (d.color.length != 9) ? d.color : d.color.substr(0,7);})
 
         // Display subdetail as table row 
         var crows = ctbody.selectAll('tr')
@@ -512,6 +497,7 @@
               } */    
               dt[columns[m]] = row[columns[m]];
             }
+            dt[columns[9]] = row[columns[9]];
             //console.log(dt);
             return {column: column, value: dt /*{"detail" : row[columns[1]], "subdetail_1" : row[columns[2]], "subdetail_2" : row[columns[3]]}*/};
           });
@@ -526,21 +512,22 @@
         // Display detail as table header
         cthead2.append('tr')
           .selectAll('th')
-          .data(function (d) {/*console.log(d.value[columns[1]]);*/ return d.value[columns[4]]==d.value[columns[5]]?[d.value[columns[4]]]:[d.value[columns[4]]+" - "+d.value[columns[5]]]})
+          .data(function (d) {console.log(d.value[columns[5]]); return [{value : d.value[columns[4]]+" | "+d.value[columns[5]],color: d.value[columns[9]]}]})
           .enter()
           .append('th')
             .attr('class', 'tag')
-            .text(function (column) {return column })
+            .text(function (d) {return d.value })
+            .style("color",function (d) {return (d.color.length != 9) ? d.color : d.color.substr(0,7);})
 
         // Display subdetail as table row 
         var crows2 = ctbody2.selectAll('tr')
-          .data(function (d) {return [{value : d.value[columns[6]], name : "mood", row : d.value[columns[9]]},{value : d.value[columns[7]], name : "status", row : d.value[columns[9]], detection : d.value[columns[8]]}]})
+          .data(function (d) {return [{value : d.value[columns[6]], name : "response", row : d.value[columns[9]]},{value : d.value[columns[7]], name : "contract", row : d.value[columns[9]], detection : d.value[columns[8]]}]})
           .enter()
           .append('tr')
           .append('th')
             .attr('id',function(d) {/*console.log(d);*/return 'subtag-'+d.row+'-'+d.name})
             .attr('class', 'subtag')
-            .text(function (column) {return column.name == "mood"? column.value : column.detection + " " + (column.value == 'succeeded'|column.value == 'unknown' ? '✔': column.value == 'failed' ? '✘': '❗' )})
+            .text(function (column) {return column.value})
 
 /*
         if (data[t].status == 'succeeded') {

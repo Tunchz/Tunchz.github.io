@@ -26,7 +26,9 @@
   /*9heavyrain*/ '9':{'layername':"heavyrain", 'icon':"☂",    'color':"rgba(156,192,249,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1 ,'visibility':'visible', 'dbclick':false},
   /*riskplan*/  '91':{'layername':"risk_forest", 'icon':"█",   'color':"#ff0000",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
   /*riskplan*/  '94':{'layername':"risk_flood",  'icon':"█",   'color':"#0000ff",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
-  /*riskplan*/  '95':{'layername':"risk_drought",'icon':"█",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false}
+  /*riskplan*/  '95':{'layername':"risk_drought",'icon':"█",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
+  /*map_subd*/  '61':{'layername':"map_subd",    'icon':"T",   'color':"#a56400",'opacity':1   ,'visibility':'visible', 'dbclick':false},
+  /*hotspot*/   '62':{'layername':"hotspot",     'icon':"H",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false}
                   }
   var drm_list = [1,2,3,4,5,6,7,8,9,91,94,95];
   var risknoti_list = [1,2,3,4,5,6,7,8,9];
@@ -36,15 +38,12 @@
 
   async function load_map_layers() {
 
-    //map_addlayer();
-    map_addpiecluster();
 
-
-    $.getJSON('https://tunchz.github.io/ISOC/DRM.json', function(drm_geojson) {
+    $.getJSON('https://tunchz.github.io/ISOC/json/DRM.json', function(drm_geojson) {
 
       //var map_geojson = await get_map_geojson;
 
-      $.getJSON('https://tunchz.github.io/mapth_small.json', function(map_geojson) {
+      $.getJSON('https://tunchz.github.io/ISOC/json/mapth_small.json', function(map_geojson) {
 
         // Add map province outline
         map_addlayer(map_geojson);
@@ -155,35 +154,58 @@
               'line-opacity': 0.5
             }
           });
+
+          map.addLayer({
+              id: layername+'_label',
+              type: "symbol",
+              source: layername,
+              layout: {
+                  "text-field": ['get','PROVINCE_N'],
+                  "text-font": ['Open Sans Extrabold', 'Arial Unicode MS Bold'],
+                  "text-size": 10,
+                  'symbol-placement': "point"
+              },
+              paint: {
+                  "text-color": '#fff',
+                  "text-halo-color": '#000',
+                  "text-halo-width": 0.5,
+                  "text-halo-blur": 0,
+                  'text-opacity':0
+              }
+          });
+
+
         // //Filter map layer
         // map.setFilter('th_prov_bound',["in", "PROVINCE_C", '63','50'])
 
-        var popup = new mapboxgl.Popup(/*{
-          offset: 10,
-          closeButton: false,
-          closeOnClick: false
-        }*/);
+        // var popup = new mapboxgl.Popup({
+        //   offset: 10,
+        //   closeButton: false,
+        //   closeOnClick: false
+        // });
 
-        map.on('click', layername, function (e) {
-            map.getCanvas().style.cursor = 'pointer';
-            //var coordinates = e.features[0].geometry.coordinates.slice();
-            var prov = e.features[0].properties.PROVINCE_N;
-             popup
-              .setLngLat(e.lngLat)
-              .setHTML(
-                  'จังหวัด : ' + prov
-              )
-              .addTo(map);
-        });
+        // map.on('click', layername, function (e) {
+        //     map.getCanvas().style.cursor = 'pointer';
+        //     //var coordinates = e.features[0].geometry.coordinates.slice();
+        //     var prov = e.features[0].properties.PROVINCE_N;
+        //      popup
+        //       .setLngLat(e.lngLat)
+        //       .setHTML(
+        //           'จังหวัด : ' + prov
+        //       )
+        //       .addTo(map);
+        // });
 
         // map.on('mouseenter', layername, function () {
         //   map.getCanvas().style.cursor = 'pointer';
+        //   map.setPaintProperty(layername+'_label','text-opacity',1);
         // });
 
-        map.on('mouseleave', layername, function () {
-          map.getCanvas().style.cursor = '';
-          popup.remove();
-        });
+        // map.on('mouseleave', layername, function () {
+        //   map.getCanvas().style.cursor = '';
+        //   map.setPaintProperty(layername+'_label','text-opacity',0);
+        //   //popup.remove();
+        // });
 
 
 
@@ -216,6 +238,25 @@
               'line-opacity': 0
             }
           });
+
+          map.addLayer({
+              id: layername+'_label',
+              type: "symbol",
+              source: layername,
+              layout: {
+                  "text-field": ['get','PROVINCE_N'],//"{PROVINCE_N}\n",
+                  "text-font": ['Open Sans Extrabold', 'Arial Unicode MS Bold'],//["Droid Sans Regular"],
+                  "text-size": 10,
+                  'symbol-placement': "point"
+              },
+              paint: {
+                  "text-color": '#fff', //["case",["boolean", ["feature-state", "hover"], false],'rgba(255,0,0,0.75)','rgba(0,0,0,0.75)'],
+                  "text-halo-color": '#000', //["case",["boolean", ["feature-state", "hover"], false],'rgba(255,255,0,0.75)','rgba(255,255,255,0.75)'],
+                  "text-halo-width": 0.5,
+                  "text-halo-blur": 0,
+              }
+          });
+
         // //Filter map layer
         // map.setFilter('th_prov_bound',["in", "PROVINCE_C", '63','50'])
 
@@ -370,6 +411,9 @@
               'paint': {
                   'text-color': color_base,
                   'text-opacity': 1,
+                  'text-halo-color': "rgba(255,255,255,1)",                  
+                  'text-halo-width': 1,
+                  'text-halo-blur': 0
               }
           });
         // }
@@ -716,7 +760,7 @@
 
     function map_addpiecluster() {
 
-$.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotspot) {
+$.getJSON('https://tunchz.github.io/ISOC/json/hotspotth.geojson', function(data_hotspot) {
 
       // filter json
       var data_hotspot_filtered = {};
@@ -1247,6 +1291,7 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
       } else {
         map.setLayoutProperty(symbol[disaster_type_id].layername, 'visibility', symbol[disaster_type_id].visibility);
         map.setLayoutProperty(symbol[disaster_type_id].layername+'_bound', 'visibility', symbol[disaster_type_id].visibility);
+        map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'visibility', symbol[disaster_type_id].visibility);
       }
     }
 
@@ -1482,24 +1527,6 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
 
         //console.log(disaster_risk_list);
 
-
-// var data=[ 
-//  { "category" : "Search Engines", "hits" : 5, "bytes" : 50189 },
-//  { "category" : "Content Server", "hits" : 1, "bytes" : 17308 },
-//  { "category" : "Content Server", "hits" : 1, "bytes" : 47412 },
-//  { "category" : "Search Engines", "hits" : 1, "bytes" : 7601 },
-//  { "category" : "Business", "hits" : 1, "bytes" : 2847 },
-//  { "category" : "Content Server", "hits" : 1, "bytes" : 24210 },
-//  { "category" : "Internet Services", "hits" : 1, "bytes" : 3690 },
-//  { "category" : "Search Engines", "hits" : 6, "bytes" : 613036 },
-//  { "category" : "Search Engines", "hits" : 1, "bytes" : 2858 } 
-// ];
-
-// var res = alasql('SELECT category, sum(hits) AS hits, sum(bytes) as bytes \
-// FROM ? \
-// GROUP BY category \
-// ORDER BY bytes DESC',[data]);
-
         disaster_risk_list_summary = alasql('SELECT disaster_type_id, disaster_type, icon, color, "" as blank, count(*) as num_rec \ FROM ?\ GROUP BY disaster_type_id, disaster_type, icon, color',[disaster_risk_list]);
         //var res = alasql("SELECT disaster_type, count(*) as num_rec \ FROM ?\ GROUP BY disaster_type",[disaster_risk_list]);
         //console.log(res);
@@ -1516,6 +1543,9 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
 
 
         //vertabulateimg_marker(res, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+
+        // tabulateimg(List_filtered, ["img","id","dept","date","timein","last","mood","status","detection"]);
+        tabulateimg(disaster_risk_list, ["icon","disaster_type","source","updated_date","level_detail","DRM_state","response","contract","blank","color"]);
 
         switchShortNoti();
 
@@ -1595,9 +1625,9 @@ $.getJSON('https://tunchz.github.io/ISOC/hotspotth.geojson', function(data_hotsp
 
     function switchRightpanel() {
       if (rightpanel_isopen == 0) {
+      document.getElementById("right-panel").style.display = "block";  
       document.getElementById("left-panel").style.width = "66.67%";
       document.getElementById("right-panel").style.width = "33.33%";
-      document.getElementById("right-panel").style.display = "block";  
       rightpanel_isopen = 1;
       } else {
       document.getElementById("left-panel").style.width = "100%";
