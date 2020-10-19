@@ -1500,6 +1500,242 @@
     }
 
 
+//----Data Table ------------------------------------------
+
+    function tabulateimg(data, columns) {
+      //console.log(data);
+
+      var table = d3.select('#table-container').append('table').attr("id","table_image");
+
+      //var thead = table.append('thead')
+      var tbody = table.append('tbody');
+      var dummy = [];
+
+      for (t=0; t<data.length; t++) {
+        data[t].row_no = t;
+      }
+      columns.push('row_no');
+
+      var rows = tbody.selectAll('tr')
+        .data(data)
+        .enter()
+        .append('tr')
+        .append('div')
+        .attr('class','table_row')
+        .attr('id',function(d) {return 'datarow-'+d.disaster_id})
+        .attr('class',function(d) {return 'table_row datarow-'+d.disaster_type_id});
+
+      // create a cell in each row for each column
+
+      //------ 1st column section ------------------------------------------------------------------  
+      var img_cells = rows.selectAll('td')
+        .data(function (row) { //console.log("row",row);
+          return [columns[0]].map(function (column) {//console.log("col",column);
+            return {column: column, value: row[column], color:row[columns[9]], disaster_type: row["disaster_type_id"]};
+          });
+        })
+        .enter()
+        .append('td')
+        .attr("class","img_col")
+        .append('div')
+        .attr('class', function (d) {return'table_img_container image_marker_'+ d.disaster_type})
+        .style("border",function (d) {return (d.color.length != 9) ? "2px solid " + d.color : "2px solid " + d.color.substr(0,7);})
+        .append('th')
+            .attr('class', 'marker_icon')
+            .text(function(d) {return d.column == columns[0] ?  d.value : null;})
+            .style("color",function (d) {return d.color})
+
+
+        ;
+
+      //------ 2nd column section ------------------------------------------------------------------  
+      var cells = rows.selectAll('td')
+        .data(function (row) {
+          //console.log(row);
+          return ['img','detail'].map(function (column) {
+            var dt = {};
+            for (m=1; m < 4 /*columns.length*/; m++) {
+              if (columns[m] == 'id') {
+                if ((row[columns[m]].substr(0,7)) != 'unknown') {
+                  dt[columns[m]] = facelabels[parseInt(row[columns[m]])].name;
+                } else {
+                  dt[columns[m]] = row[columns[m]];
+                }
+                
+              } else {
+                dt[columns[m]] = row[columns[m]];
+              }
+              dt[columns[9]] = row[columns[9]];
+            }
+            //console.log(dt);
+            return {column: column, value: dt /*{"detail" : row[columns[1]], "subdetail_1" : row[columns[2]], "subdetail_2" : row[columns[3]]}*/};
+          });
+        })
+        .enter()
+        .append('td').attr("class","detail_col")
+        .append('table').attr("id","detail_table");
+
+        var cthead = cells.append('thead')
+        var ctbody = cells.append('tbody');
+
+        // Display detail as table header
+        cthead.append('tr')
+          .selectAll('th')
+          .data(function (d) {return [{detail:d.value[columns[1]], color:d.value[columns[9]]}]})
+          .enter()
+          .append('th')
+            .attr('class', 'detail')
+            .text(function (d) {return d.detail })
+            .style("color",function (d) {return (d.color.length != 9) ? d.color : d.color.substr(0,7);})
+
+        // Display subdetail as table row 
+        var crows = ctbody.selectAll('tr')
+          .data(function (d) {return [d.value[columns[2]],d.value[columns[3]]]})
+          .enter()
+          .append('tr')
+          .append('th')
+            .attr('class', 'subdetail')
+            .text(function (column) {return column })
+
+      //------ 3rd column section ------------------------------------------------------------------         
+      var cells2 = rows.selectAll('td')
+        .data(function (row) {
+          //console.log(row);
+          return ['img','detail','tag'].map(function (column) {
+            var dt = {};
+            for (m=4; m<columns.length; m++) {
+              /*if (m == 7) {
+                dt['row_no'] = row['row_no'];
+              } else if (columns[m] == 'lat') {
+                dt[columns[m]] = '●';
+              } else {
+                dt[columns[m]] = row[columns[m]];
+              } */    
+              dt[columns[m]] = row[columns[m]];
+            }
+            dt[columns[9]] = row[columns[9]];
+            //console.log(dt);
+            return {column: column, value: dt /*{"detail" : row[columns[1]], "subdetail_1" : row[columns[2]], "subdetail_2" : row[columns[3]]}*/};
+          });
+        })
+        .enter()
+        .append('td').attr("class","tag_col")
+        .append('table').attr("id","tag_table");
+
+        var cthead2 = cells2.append('thead')
+        var ctbody2 = cells2.append('tbody');
+
+        // Display detail as table header
+        cthead2.append('tr')
+          .selectAll('th')
+          .data(function (d) {return [{value : d.value[columns[4]]+" | "+d.value[columns[5]],color: d.value[columns[9]]}]})
+          .enter()
+          .append('th')
+            .attr('class', 'tag')
+            .text(function (d) {return d.value })
+            .style("color",function (d) {return (d.color.length != 9) ? d.color : d.color.substr(0,7);})
+
+        // Display subdetail as table row 
+        var crows2 = ctbody2.selectAll('tr')
+          .data(function (d) {return [{value : d.value[columns[6]], name : "response", row : d.value[columns[9]]},{value : d.value[columns[7]], name : "contract", row : d.value[columns[9]], detection : d.value[columns[8]]}]})
+          .enter()
+          .append('tr')
+          .append('th')
+            .attr('id',function(d) {/*console.log(d);*/return 'subtag-'+d.row+'-'+d.name})
+            .attr('class', 'subtag')
+            .text(function (column) {return column.value})
+
+
+
+
+        d3.select("#table-container").selectAll(".table_row")
+          .on('mouseover', function(e) {
+            //console.log(e.disaster_type_id,e.disaster_id);
+            switchZoomMarker(e.disaster_type_id,e.disaster_id,true);
+            //switchZoom(e.disaster_type_id,true);
+          })
+          .on('mouseout', function(e) { 
+            //switchZoom(e.disaster_type_id,false);
+            switchZoomMarker(e.disaster_type_id,e.disaster_id,false);
+          })
+          .on('click', function(e) { 
+            if (e.disaster_type_id < 90) {
+              map.flyTo({
+                center: ($(drm_geojson.features).filter(function (i,n){return n.properties.disaster_id == e.disaster_id}))[0].geometry.coordinates,
+                offset: [map_Xoffset, map_Yoffset],
+                //zoom : zoom(z), 
+                speed : flyspeed, 
+                curve : 1, 
+                essential: true
+              });
+            } else {
+              //console.log(($(drm_geojson.features).filter(function (i,n){return n.properties.disaster_id == e.disaster_id}))[0].geometry.coordinates);
+              zoomtoPolygon(map_geojson_riskplan[e.disaster_type_id].features[0].geometry.coordinates,false);
+            }
+          })
+          .on('dblclick', function(e) {  
+            //switchUnselectVisibility(e.disaster_type_id);
+          })
+          .on('contextmenu', function(e) { 
+            //switchLayerVisibility(e.disaster_type_id);
+          });
+
+
+
+      return table;
+    }
+
+
+    //========================================================================
+
+    function zoomtoPolygon(coordinates,zoom) {
+      // coordinates >> geojson.features.geometry.coordinates
+      var currentzoom = map.getZoom();           
+      var bounds = coordinates[0].reduce(function (bounds, coord) {
+          return bounds.extend(coord);
+      }, new mapboxgl.LngLatBounds(coordinates[0][0], coordinates[0][0]));
+
+      map.fitBounds(bounds, {
+        speed : flyspeed,
+        padding: 20
+      });
+      if (!zoom) map.setZoom(currentzoom)
+    }
+
+
+    function switchZoomMarker(disaster_type_id,disaster_id,iszoomed) {
+
+      var size = symbol[disaster_type_id].size,
+          unzoomedSize = Math.round(28*size),
+          zoomedSize = zoom*unzoomedSize;
+      if (iszoomed) {
+
+          if (disaster_type_id < 90 ) {
+            map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', 'none');
+            map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', ['match',['get', 'disaster_id'], disaster_id, zoomedSize ,unzoomedSize]);
+            map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', ['match',['get', 'disaster_id'], disaster_id, 12 ,8]);
+            //map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0,['match',['get', 'disaster_id'], disaster_id,-1.8,-1.7]]);
+          } else {
+            map.setPaintProperty(symbol[disaster_type_id].layername, 'fill-opacity',['match',['get', 'disaster_id'], disaster_id, 1 ,symbol[disaster_type_id].opacity]);
+            map.setPaintProperty(symbol[disaster_type_id].layername+'_bound','line-opacity',['match',['get', 'disaster_id'], disaster_id, 1 ,0]);
+            //console.log(disaster_type_id,disaster_id)
+          }
+
+      } else {
+          if (disaster_type_id < 90 ) {
+            map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', 'visible');
+            map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', Math.round(24*symbol[disaster_type_id].size));
+            map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 8);
+            map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0, -1.7*symbol[disaster_type_id].size]);
+          } else {
+            map.setPaintProperty(symbol[disaster_type_id].layername, 'fill-opacity',symbol[disaster_type_id].opacity);
+            map.setPaintProperty(symbol[disaster_type_id].layername+'_bound','line-opacity',0);
+          }
+      }
+    }
+
+
+
 
     function switchUnselectVisibility(disaster_type_id) {
           drm_list.forEach(function (item, index) {
