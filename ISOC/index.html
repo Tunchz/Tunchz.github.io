@@ -308,7 +308,7 @@
 
     //---- Mapbox GL Initialization--------
     var z=4;  //default zoom level 0-4
-    var flyspeed = 1.6;
+    var flyspeed = 0.8;
 
     mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg'
     //mapboxgl.accessToken = 'pk.eyJ1IjoibXVyYWxpcHJhamFwYXRpIiwiYSI6ImNrMHA1d3VjYzBna3gzbG50ZjR5b2Zkb20ifQ.guBaIUcqkTdYHX1R6CM6FQ'
@@ -544,7 +544,21 @@
             //switchZoom(e.disaster_type_id,false);
             switchZoomMarker(e.disaster_type_id,e.disaster_id,false);
           })
-          .on('click', function(e) { })
+          .on('click', function(e) { 
+            if (e.disaster_type_id < 90) {
+              map.flyTo({
+                center: ($(drm_geojson.features).filter(function (i,n){return n.properties.disaster_id == e.disaster_id}))[0].geometry.coordinates,
+                offset: [map_Xoffset, map_Yoffset],
+                //zoom : zoom(z), 
+                speed : flyspeed, 
+                curve : 1, 
+                essential: true
+              });
+            } else {
+              //console.log(($(drm_geojson.features).filter(function (i,n){return n.properties.disaster_id == e.disaster_id}))[0].geometry.coordinates);
+              zoomtoPolygon(map_geojson_riskplan[e.disaster_type_id].features[0].geometry.coordinates,false);
+            }
+          })
           .on('dblclick', function(e) {  
             //switchUnselectVisibility(e.disaster_type_id);
           })
@@ -555,6 +569,20 @@
 
 
       return table;
+    }
+
+    function zoomtoPolygon(coordinates,zoom) {
+      // coordinates >> geojson.features.geometry.coordinates
+      var currentzoom = map.getZoom();           
+      var bounds = coordinates[0].reduce(function (bounds, coord) {
+          return bounds.extend(coord);
+      }, new mapboxgl.LngLatBounds(coordinates[0][0], coordinates[0][0]));
+
+      map.fitBounds(bounds, {
+        speed : flyspeed,
+        padding: 20
+      });
+      if (!zoom) map.setZoom(currentzoom)
     }
 
 
@@ -573,7 +601,7 @@
           } else {
             map.setPaintProperty(symbol[disaster_type_id].layername, 'fill-opacity',['match',['get', 'disaster_id'], disaster_id, 1 ,symbol[disaster_type_id].opacity]);
             map.setPaintProperty(symbol[disaster_type_id].layername+'_bound','line-opacity',['match',['get', 'disaster_id'], disaster_id, 1 ,0]);
-            console.log(disaster_type_id,disaster_id)
+            //console.log(disaster_type_id,disaster_id)
           }
 
       } else {

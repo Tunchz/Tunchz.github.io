@@ -33,16 +33,19 @@
   var drm_list = [1,2,3,4,5,6,7,8,9,91,94,95];
   var risknoti_list = [1,2,3,4,5,6,7,8,9];
   var riskplan_list = [91,94,95];
-  var disaster_risk_list,disaster_risk_list_summary;
-  var unselectedcolor = "#555";
-  var zoom = 2;
+  var drm_geojson,disaster_risk_list,disaster_risk_list_summary,
+      map_geojson_riskplan = {},
+      unselectedcolor = "#555",
+      zoom = 2,
+      map_Xoffset = 0,
+      map_Yoffset = 0;
 
   async function load_map_layers() {
 
 
-    $.getJSON('https://tunchz.github.io/ISOC/json/DRM.json', function(drm_geojson) {
+    $.getJSON('https://tunchz.github.io/ISOC/json/DRM.json', function(drmgeojson) {
 
-      //var map_geojson = await get_map_geojson;
+      drm_geojson = drmgeojson;
 
       $.getJSON('https://tunchz.github.io/ISOC/json/mapth_small.json', function(map_geojson) {
 
@@ -68,21 +71,23 @@
           }
 
           // filter : risk plan provinces
-          var map_geojson_riskplan = {"type": "FeatureCollection"};
-          map_geojson_riskplan.features = $(map_geojson.features).filter(function (i,n){return (typeof prov_color[n.properties.PROVINCE_C] !== 'undefined')});
+          map_geojson_riskplan[item] = {"type": "FeatureCollection"}
+          map_geojson_riskplan[item].features = $(map_geojson.features).filter(function (i,n){return (typeof prov_color[n.properties.PROVINCE_C] !== 'undefined')});
           //console.log("riskplan ",map_geojson_riskplan);
 
 
           // Add color & opacity for risk plan in each province
-          for (i = 0; i < map_geojson_riskplan.features.length; i++) {
-            var prov_c = map_geojson_riskplan.features[i].properties.PROVINCE_C;
-            map_geojson_riskplan.features[i].properties['disaster_type'] = prov_color[prov_c].disaster_type;
-            map_geojson_riskplan.features[i].properties['disaster_id'] = prov_color[prov_c].disaster_id;
-            map_geojson_riskplan.features[i].properties['color'] = symbol[item].color;//prov_color[prov_c].color;
-            map_geojson_riskplan.features[i].properties['opacity'] = symbol[item].opacity;
+          for (i = 0; i < map_geojson_riskplan[item].features.length; i++) {
+            var prov_c = map_geojson_riskplan[item].features[i].properties.PROVINCE_C;
+            map_geojson_riskplan[item].features[i].properties['disaster_type'] = prov_color[prov_c].disaster_type;
+            map_geojson_riskplan[item].features[i].properties['disaster_id'] = prov_color[prov_c].disaster_id;
+            map_geojson_riskplan[item].features[i].properties['color'] = symbol[item].color;//prov_color[prov_c].color;
+            map_geojson_riskplan[item].features[i].properties['opacity'] = symbol[item].opacity;
+
+
           }      
           // Add map with color province corresponding to risk plan
-          map_add_polygon(map_geojson_riskplan,symbol[item].layername);
+          map_add_polygon(map_geojson_riskplan[item],symbol[item].layername);
         
         });
 
@@ -117,7 +122,23 @@
           }
           
         }
-        display_table_markers(drm);
+
+
+        setTimeout(function (){
+          map.setStyle('mapbox://styles/mapbox/satellite-v9');
+          display_table_markers(drm);
+
+            //console.log(polycenter(map_geojson_riskplan.features[i].geometry.coordinates,1));
+            //polycenter(map_geojson_riskplan.features[i].geometry.coordinates);
+
+            //map.fitBounds(map_geojson_riskplan['91'].features[0].geometry.coordinates, {padding: 20});
+
+
+            
+
+
+        }, 1500);
+        
 
 
       }); //get map_geo_json
@@ -360,7 +381,7 @@
           'text-font': ['Open Sans Extrabold', 'Arial Unicode MS Bold'],
           'text-size': Math.round(24*size),
           // 'text-padding': 60,
-          // 'text-allow-overlap': true,
+          'text-allow-overlap': true,
           'text-ignore-placement': true
         }
 
@@ -443,11 +464,13 @@
           closeOnClick: false
         });
 
+
         map.on('click', layername, function (e) {
             var coordinates = e.features[0].geometry.coordinates.slice();
             var a1 = e.features[0].properties.disaster_type
             var a2 = e.features[0].properties.level_detail;
             console.log(a1,a2)
+            //map.flyTo({center: e.features[0].geometry.coordinates});
         });
 
         map.on('mouseenter', layername, function (e) {

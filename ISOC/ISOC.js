@@ -121,9 +121,6 @@ switchRightpanel();
 
 load_map_layers();
 
-setTimeout(function (){
-  map.setStyle('mapbox://styles/mapbox/satellite-v9');
-}, 1500);
 
 
 
