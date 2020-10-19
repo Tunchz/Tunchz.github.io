@@ -113,7 +113,8 @@
             </div>
 
 
-            <div id='menu-container-top-right' class='map_addon_top_right' style = "/*width: 500; height: 40;*/ padding: 10px 0px 0px 0px;"></div>
+            <div id='menu-container-top-right' class='map_addon_top_right' style = "/*width: 500; height: 40;*/ padding: 0px 0px 0px 0px;"></div>
+            <div id='menu-container-bottom-right' class='map_addon_bottom_right' style = "/*width: 500; height: 40;*/ padding: 0px 0px 0px 0px;"></div>
 
 
 
@@ -388,7 +389,7 @@
 
 
     function tabulateimg(data, columns) {
-      console.log(data);
+      //console.log(data);
 
       var table = d3.select('#table-container').append('table').attr("id","table_image");
 
@@ -512,7 +513,7 @@
         // Display detail as table header
         cthead2.append('tr')
           .selectAll('th')
-          .data(function (d) {console.log(d.value[columns[5]]); return [{value : d.value[columns[4]]+" | "+d.value[columns[5]],color: d.value[columns[9]]}]})
+          .data(function (d) {return [{value : d.value[columns[4]]+" | "+d.value[columns[5]],color: d.value[columns[9]]}]})
           .enter()
           .append('th')
             .attr('class', 'tag')
@@ -706,7 +707,17 @@
     // }
 
 
-
+function openFullscreen(elem) {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+}
 
 
 

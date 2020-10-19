@@ -1065,7 +1065,7 @@ $.getJSON('https://tunchz.github.io/ISOC/json/hotspotth.geojson', function(data_
         .attr("class","img_col_marker")
         .append('div')
         .attr('class', function (d) {return'table_img_marker_container image_marker_'+ d.disaster_type})
-        .style("border",function (d) {return (d.color.length != 9) ? "2px solid " + d.color : "2px solid " + d.color.substr(0,7);})
+        .style("border",function (d) {return (d.color.length != 9) ? "3px solid " + d.color : "3px solid " + d.color.substr(0,7);})
         .append('th')
             .attr('class', 'marker_icon')
             .text(function(d) {return d.column == columns[0] ?  d.value : null;})
@@ -1336,7 +1336,7 @@ $.getJSON('https://tunchz.github.io/ISOC/json/hotspotth.geojson', function(data_
         .attr("class","img_col_marker")
         .append('div')
         .attr('class', function (d) {return'table_img_marker_container image_marker_'+ d.disaster_type})
-        .style("border",function (d) {return (d.color.length != 9) ? "2px solid " + d.color : "2px solid " + d.color.substr(0,7);})
+        .style("border",function (d) {return (d.color.length != 9) ? "3px solid " + d.color : "3px solid " + d.color.substr(0,7);})
         .append('th')
             .attr('class', 'marker_icon')
             .text(function(d) {return d.column == columns[0] ?  d.value : null;})
@@ -1549,20 +1549,16 @@ $.getJSON('https://tunchz.github.io/ISOC/json/hotspotth.geojson', function(data_
 
         switchShortNoti();
 
+        //requestFullScreen(document.getElementById('left-panel'));
+
+
     }
 
 
 
 
 
-
-
-
-
-
-
-
-    function startMap() {
+    function initialize() {
 
       //hide 
       // document.getElementById("video-container").style.display = "none";
@@ -1574,7 +1570,7 @@ $.getJSON('https://tunchz.github.io/ISOC/json/hotspotth.geojson', function(data_
       menubtn.id = "lp-button";
       menubtn.className = "map-menu-button";
       //stopbtn.style.margin = "-20px 0px 0px 0px";
-      menubtn.style.padding = "0px 0px";
+      //menubtn.style.padding = "0px 0px";
       menubtn.setAttribute('type', 'button');
       //stopbtn.setAttribute('onclick', 'inputMenu()');
       menubtn.setAttribute('onclick', 'switchShortNoti()');
@@ -1588,13 +1584,12 @@ $.getJSON('https://tunchz.github.io/ISOC/json/hotspotth.geojson', function(data_
       menubtn.id = "bb-button";
       menubtn.className = "map-menu-button";
       //stopbtn.style.margin = "-20px 0px 0px 0px";
-      menubtn.style.padding = "0px 0px";
+      //menubtn.style.padding = "0px 0px";
       menubtn.setAttribute('type', 'button');
       //stopbtn.setAttribute('onclick', 'inputMenu()');
       menubtn.setAttribute('onclick', 'switchRightpanel()');
       document.getElementById("menu-container-top-right").append(menubtn);
       //document.getElementById("stop-button").innerHTML = "☰⌷↹■⌂";
-      document.getElementById("bb-button").innerHTML = "☷";
 
 
     }
@@ -1635,9 +1630,64 @@ $.getJSON('https://tunchz.github.io/ISOC/json/hotspotth.geojson', function(data_
       document.getElementById("right-panel").style.display = "none";
       rightpanel_isopen = 0;
       }
+
+
       resizeAdjust()  
     }
 
 
+    function updateMapMenu() {
 
-    
+      var icon = "☰";
+      if($("#wholecontent").width() < 768){
+        // Move menu buttons position
+        $("#lp-button").appendTo("#menu-container-bottom-right");
+        $("#bb-button").appendTo("#menu-container-bottom-right");
+        if (rightpanel_isopen == 0) icon = '⊼'; else icon = '⊻';
+      } else {
+        $("#lp-button").appendTo("#menu-container-top-right");
+        $("#bb-button").appendTo("#menu-container-top-right");
+        if (rightpanel_isopen == 0) icon = '<'; else icon = '>';
+      }
+      document.getElementById("bb-button").innerHTML = icon;//"☷";
+    }
+
+    //     function cancelFullScreen(el) {
+    //         var requestMethod = el.cancelFullScreen||el.webkitCancelFullScreen||el.mozCancelFullScreen||el.exitFullscreen;
+    //         if (requestMethod) { // cancel full screen.
+    //             requestMethod.call(el);
+    //         } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+    //             var wscript = new ActiveXObject("WScript.Shell");
+    //             if (wscript !== null) {
+    //                 wscript.SendKeys("{F11}");
+    //             }
+    //         }
+    //     }
+
+    //     function requestFullScreen(el) {
+    //         // Supports most browsers and their versions.
+    //         var requestMethod = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+
+    //         if (requestMethod) { // Native full screen.
+    //             requestMethod.call(el);
+    //         } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+    //             var wscript = new ActiveXObject("WScript.Shell");
+    //             if (wscript !== null) {
+    //                 wscript.SendKeys("{F11}");
+    //             }
+    //         }
+    //         return false
+    //     }
+
+    //     function toggleFull() {
+    //         var elem = document.body; // Make the body go full screen.
+    //         var isInFullScreen = (document.fullScreenElement && document.fullScreenElement !== null) ||  (document.mozFullScreen || document.webkitIsFullScreen);
+
+    //         if (isInFullScreen) {
+    //             cancelFullScreen(document);
+    //         } else {
+    //             requestFullScreen(elem);
+    //         }
+    //         return false;
+    //     }
+    // 

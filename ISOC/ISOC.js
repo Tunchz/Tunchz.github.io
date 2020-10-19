@@ -112,10 +112,10 @@ var detections,resizedDetections,results;
 
 
 
-startMap();
+initialize();
 // start();
 
-var shortnoti = 0;
+var shortnoti = 1;
 var rightpanel_isopen = 1;
 switchRightpanel();
 
@@ -224,7 +224,7 @@ function resizeAdjust() {
 
 
   }
-
+  updateMapMenu();
   //displaySize = { width: video.width, height: video.height };
   map.resize();
 }

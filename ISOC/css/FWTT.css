@@ -661,7 +661,7 @@ red:hover {
 }
 
 .map-menu-button, .map-menu-button:focus {
-  margin: 0px 2px 0px 2px;
+  margin: 2px;
   padding-right: 5px;
   width: 30px;
   height:30px;
@@ -697,7 +697,17 @@ red:hover {
   margin: 0px; 
   position: absolute; 
   right: 3px; 
-  top: 0px; 
+  top: 10px; 
+  cursor: pointer; 
+}
+
+.map_addon_bottom_right { 
+  width : 34px;
+  padding: 0px; 
+  margin: 0px; 
+  position: absolute; 
+  right: 10px; 
+  bottom: 75px; 
   cursor: pointer; 
 }
 
