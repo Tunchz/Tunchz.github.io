@@ -387,7 +387,7 @@ table {
   padding: 0px 0px 0px 0px;
   text-align: center;
   vertical-align: middle;
-  margin-top: -5px;
+  margin-top: 4px;
 }
 
 
@@ -693,6 +693,7 @@ red:hover {
 }
 
 .map_addon_top_right { 
+  width:70px;
   padding: 0px; 
   margin: 0px; 
   position: absolute; 
