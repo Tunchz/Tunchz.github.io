@@ -696,7 +696,7 @@ red:hover {
   padding: 0px; 
   margin: 0px; 
   position: absolute; 
-  right: 3px; 
+  right: 1px; 
   top: 10px; 
   cursor: pointer; 
 }
@@ -716,11 +716,11 @@ red:hover {
   margin: 0px; 
   position: absolute; 
   right: 0px; 
-  top: 40px; 
-  bottom: 10px; 
+  top: 0px; 
+  bottom: 0px; 
   cursor: pointer; 
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  /*border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;*/
   display: block;
 
 }
@@ -729,8 +729,8 @@ red:hover {
   padding: 0px; 
   margin: 0px; 
   position: absolute; 
-  right: 5px; 
-  left: 5px; 
+  right: 0px; 
+  left: 0px; 
   bottom: 0px; 
   cursor: pointer; 
   border-top-left-radius: 3px;
@@ -820,4 +820,12 @@ red:hover {
 
 #left-panel {
   transition: margin-right 0.5s;
+}
+
+#table-container-MAP {
+  padding:40px 0px 10px 0px;
+}
+
+#vertical-table-container-MAP {
+  padding:0px 5px 0px 5px;
 }

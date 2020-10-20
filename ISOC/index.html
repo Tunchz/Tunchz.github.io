@@ -70,18 +70,23 @@
             </div>
  
 
-            <div id='notification-container-right' class='map_addon_right' style = "width: 100px; padding: 0px 0px 0px 0px;display:block;">
+            <div id='notification-container-right' class='map_addon_right' style = "width: auto; display:block;">
               
-              <div id='table-container-MAP' class = "col-sm-12 height100p">
+              <div id='table-container-MAP' class = "col-sm-12 height100p" style="display: block;">
                 <!div id="notification-bg" style="height:100%; background-color: #fff; opacity: 0.2"><!/div>
-                <div id="table-markers-container" class="table-container" oncontextmenu="return false;" style = "background-color: #fff0;">
-                </div>
+                <div id="table-markers-container" class="table-container" oncontextmenu="return false;" style = "background-color: #fff0;"></div>
+                <div id='menu-container-top-right' class='map_addon_top_right' style = "padding: 0px 0px 0px 0px;"></div>
+              </div>
+              <div id = "right-panel" class = "col-xs-12 height100p" style = "/*background-color: #383838;*/">
+                <div id='table-container-RP' class = "col-xs-12 height100p" style = "background-color: #ffffff11">
+                  <div id="table-container" class="table-container" oncontextmenu="return false;"></div>
+                </div>                
               </div>
 
             </div>
 
 
-            <div id='notification-container-bottom' class='map_addon_bottom' style = "height: 65px; padding: 0px 0px 0px 0px;display:block;">
+            <div id='notification-container-bottom' class='map_addon_bottom' style = "height: 65px; display:block;">
               
               <div id='vertical-table-container-MAP' class = "col-sm-12 height100p">
                 <!div id="notification-bg" style="height:100%; background-color: #fff; opacity: 0.2"><!/div>
@@ -113,8 +118,8 @@
             </div>
 
 
-            <div id='menu-container-top-right' class='map_addon_top_right' style = "/*width: 500; height: 40;*/ padding: 0px 0px 0px 0px;"></div>
-            <div id='menu-container-bottom-right' class='map_addon_bottom_right' style = "/*width: 500; height: 40;*/ padding: 0px 0px 0px 0px;"></div>
+            
+            <div id='menu-container-bottom-right' class='map_addon_bottom_right' style = "padding: 0px 0px 0px 0px;"></div>
 
 
 
@@ -192,7 +197,7 @@
 
         </div>
       </div>
-      <div id = "right-panel" class = "col-sm-5 height100p" style = "background-color: #383838;">
+      <div id = "right-panel__" class = "col-sm-5 height100p" style = "background-color: #383838;display: none;">
         <div id = "top-right1" class = "col-sm-12 height10p" style = "min-height : 77px; max-height : 77px; padding-left: 10px; background-color: #383838; display: none;">
           <div id = "date-container" class = "col-xs-4 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #fff;">
 
@@ -273,8 +278,8 @@
             </div>
           </div>
         </div>
-        <div id='table-container-RP' class = "col-sm-12 height100p" style = "background-color: #383838">
-          <div id="table-container" class="table-container" oncontextmenu="return false;">
+        <div id='table-container-RP__' class = "col-sm-12 height100p" style = "background-color: #383838">
+          <div id="table-container__" class="table-container" oncontextmenu="return false;">
           </div>
         </div>
       </div>

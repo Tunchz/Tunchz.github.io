@@ -1419,31 +1419,6 @@
         })
         .on('contextmenu', function(e) { 
           switchLayerVisibility(e.disaster_type_id);
-          // var marker = document.getElementsByClassName('image_marker_'+e.disaster_type_id);
-          // if (symbol[e.disaster_type_id].visibility == 'none') {            
-          //   marker[0].style.border = "2px solid " + symbol[e.disaster_type_id].color;
-          //   marker[0].style.backgroundColor = "#fff";
-          //   marker[1].style.border = "2px solid " + symbol[e.disaster_type_id].color;
-          //   marker[1].style.backgroundColor = "#fff";
-          //   symbol[e.disaster_type_id].visibility = 'visible';
-          // } else {
-          //   marker[0].style.border = "2px solid " + unselectedcolor;
-          //   marker[0].style.backgroundColor = unselectedcolor;
-          //   marker[1].style.border = "2px solid " + unselectedcolor;
-          //   marker[1].style.backgroundColor = unselectedcolor;
-          //   symbol[e.disaster_type_id].visibility = 'none';
-          // }
-          // if (e.disaster_type_id < 90 ) {
-          //   map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-pulse', 'visibility', symbol[e.disaster_type_id].visibility);
-          //   map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-outline', 'visibility', symbol[e.disaster_type_id].visibility);
-          //   map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'visibility', symbol[e.disaster_type_id].visibility);
-          //   map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'visibility', symbol[e.disaster_type_id].visibility);
-          //   map.setLayoutProperty(symbol[e.disaster_type_id].layername+'-label', 'visibility', symbol[e.disaster_type_id].visibility);
-          // } else {
-          //   map.setLayoutProperty(symbol[e.disaster_type_id].layername, 'visibility', symbol[e.disaster_type_id].visibility);
-          //   map.setLayoutProperty(symbol[e.disaster_type_id].layername+'_bound', 'visibility', symbol[e.disaster_type_id].visibility);
-          // }
-
         });
 
 
@@ -1675,6 +1650,7 @@
           })
           .on('dblclick', function(e) {  
             //switchUnselectVisibility(e.disaster_type_id);
+            switchUnselectVisibility(e.disaster_type_id);
           })
           .on('contextmenu', function(e) { 
             //switchLayerVisibility(e.disaster_type_id);
@@ -1879,13 +1855,13 @@
       removetable = document.getElementById('vertical_table_image_marker');
       removetable.parentElement.removeChild(removetable);    
       if (shortnoti==0) {
-        document.getElementById('notification-container-right').style.width = "70px";
+        document.getElementById('table-container-MAP').style.width = "70px";
         tabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
         vertabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
         w = "55px";
         shortnoti = 1;
       } else {
-        document.getElementById('notification-container-right').style.width = "100px";
+        document.getElementById('table-container-MAP').style.width = "100px";
         tabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
         vertabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
         w = "90px";
@@ -1898,18 +1874,28 @@
     function switchRightpanel() {
       if (rightpanel_isopen == 0) {
       document.getElementById("right-panel").style.display = "block";  
-      document.getElementById("left-panel").style.width = "66.67%";
-      document.getElementById("right-panel").style.width = "33.33%";
+      document.getElementById("left-panel").style.width = "100%";//"66.67%";
+      document.getElementById("right-panel").style.width = ($("#wholecontent").width()*0.333-100).toString()+"px";
+      //console.log($("#wholecontent").width()*0.333-100,$("#right-panel").width());
+      map_Xoffset = -$("#right-panel").width()/2 - 20;
       rightpanel_isopen = 1;
       } else {
       document.getElementById("left-panel").style.width = "100%";
       //document.getElementById("right-panel").style.width= "5%";
       document.getElementById("right-panel").style.display = "none";
+      map_Xoffset = 0
       rightpanel_isopen = 0;
       }
-
-
       resizeAdjust()  
+      //map.flyTo({center: [101.6673626,13.2808669],offset: [map_Xoffset, map_Yoffset]});
+      map.flyTo({
+        center: [101.6673626,13.2808669],
+        offset: [map_Xoffset, map_Yoffset],
+        //zoom : zoom(z), 
+        speed : flyspeed, 
+        curve : 1, 
+        essential: true
+      });
     }
 
 
