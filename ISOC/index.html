@@ -8,8 +8,8 @@
     <link rel="icon" type="image/x-icon" href="img/isoc.png"/>
     <link rel="stylesheet" href="css/covid19.min.blue.css">
 
-    <link rel="stylesheet" href="css/patternfly.min.css" />
-    <link rel="stylesheet" href="css/patternfly-additions.min.css" />
+    <!link rel="stylesheet" href="css/patternfly.min.css" />
+    <!link rel="stylesheet" href="css/patternfly-additions.min.css" />
 
     <link rel="stylesheet" href="css/FWTT.css">
     <link rel="stylesheet" href="css/fonts.css">
@@ -57,7 +57,7 @@
                 <img id = "logo" src = 'img/isoc.png' style = "padding: 5px; width : 40px; height : 40px;"></img>
               </div>
               <div id = "title-container2" class = "col-xs-9 height100p" style = "">
-                <div id = "Text1_" class = "col-xs-8 height100p" style = "padding: 0px 0px 0px 5px;margin:0px;margin-top: -5px; max-width: 65px; ">
+                <div id = "Text1_" class = "col-xs-8 height100p" style = "padding: 0px 0px 0px 5px;margin:0px;margin-top: 2px; max-width: 65px; ">
                   <span style="font-family: Impact;font-size: 30px; color: #fff;">DRM </span>
                 </div>
                 <div id = "Text2_" class = "col-xs-4 height100p" style = "display: flex;justify-content: left; align-items: center; padding : 11px 0px 0px 5px;">
@@ -286,7 +286,7 @@
     </div>
   </body>
 
-  <script defer src="js/face-api.min.js"></script>
+  <!script defer src="js/face-api.min.js"><!/script>
   <script src="js/covid19.js"></script>
 
   <script src='js/mapbox-gl_v1120.js'></script>
@@ -294,14 +294,14 @@
   <!script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"><!/script>
   <!link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
 
-  <script src="js/bootstrap-datepicker.min.js"></script>
-  <script src="js/d3.min.js"></script>
+  <!script src="js/bootstrap-datepicker.min.js"><!/script>
+  <!script src="js/d3.min.js"><!/script>
   <script src="js/alasql.js"></script>
   <script src="js/crossfilter.min.js"></script>
   <script src="js/jquery.min.js"></script>
 
   <script defer src="markers.js"></script>
-  <script defer src="ISOC.js"></script>
+  <!script defer src="ISOC.js"><!/script>
   <script defer src="swipedetect.js"></script>
 
 
@@ -424,88 +424,88 @@
       }
     }
 
-    function drawmap(data){
-      //remove all old markers and popups
-      markers = d3.select("#map").selectAll(".marker");
-      markers.remove();
-      popups = d3.select("#map").selectAll(".mapboxgl-popup");
-      popups.remove();
+//     function drawmap(data){
+//       //remove all old markers and popups
+//       markers = d3.select("#map").selectAll(".marker");
+//       markers.remove();
+//       popups = d3.select("#map").selectAll(".mapboxgl-popup");
+//       popups.remove();
 
-      var popups={},j = 0,index = {};
+//       var popups={},j = 0,index = {};
       
-      for (j = 0; j < data.length; j++) {
-        index[data[j].id] = j;
+//       for (j = 0; j < data.length; j++) {
+//         index[data[j].id] = j;
         
-        if (data[j].lat!=0 && data[j].lon!=0){
+//         if (data[j].lat!=0 && data[j].lon!=0){
           
-          //console.log(data[j].name,data[j].lat,data[j].lon);
-          var el = document.createElement('div');
-          el.className = 'marker';
-          el.id = 'marker-'+ data[j].id;
+//           //console.log(data[j].name,data[j].lat,data[j].lon);
+//           var el = document.createElement('div');
+//           el.className = 'marker';
+//           el.id = 'marker-'+ data[j].id;
 
-          // make a marker for each feature and add to the map
-          new mapboxgl.Marker(el)
-          .setLngLat([data[j].lon,data[j].lat])
-          .addTo(map);
+//           // make a marker for each feature and add to the map
+//           new mapboxgl.Marker(el)
+//           .setLngLat([data[j].lon,data[j].lat])
+//           .addTo(map);
 
-          popups[data[j].id] = new mapboxgl.Popup({ offset: 25, closeButton: false, closeOnClick: false }).setHTML('<strong>┃ '+facelabels[parseInt(data[j].id)].name+'</strong><small><br> ▸  '+ data[j].mood+ '  ' + data[j].status+ '<br> ▸ '+formatDateTime(data[j].timestamp)+ /*'<br> ▸ Lat: '+ data[j].lat +'  Lat: '+ data[j].lon +*/ '<br> ▸  '+ data[j].location+ '</small>');
+//           popups[data[j].id] = new mapboxgl.Popup({ offset: 25, closeButton: false, closeOnClick: false }).setHTML('<strong>┃ '+facelabels[parseInt(data[j].id)].name+'</strong><small><br> ▸  '+ data[j].mood+ '  ' + data[j].status+ '<br> ▸ '+formatDateTime(data[j].timestamp)+ /*'<br> ▸ Lat: '+ data[j].lat +'  Lat: '+ data[j].lon +*/ '<br> ▸  '+ data[j].location+ '</small>');
 
-          //d3.select("#map").selectAll("#marker-"+j).style("background-image","url('img/"+ data[j].name +".jpg')");
-          d3.select("#map").selectAll("#marker-"+data[j].id)
-            //.style("background-image","url('img/เสือผู้ไม่กินเหยื่อซ้ำ.jpg')")
-            .style("background-image", "url('https://tunchz.github.io/Face.Rex/labeled_images_2/" + data[j].id + "/1.jpg')")
-            //.style("background-image","src('" + data[j].img + "')")
-            .style("border",function (d) {
-              if (data[j].status == "มาทำงาน") {
-                return "2px solid #9bee00"
-              } else if (data[j].status == "ทำงานที่บ้าน") {
-                return "2px solid #ffcc00"
-              } else if (data[j].status == "ราชการ") {
-                return "3px solid #316be6"
-              } else {
-                return "2px solid #9bee00"
-              }
-/*            .append('img')
-            .attr('class', 'table_img')
-            .attr('src', function(d) {return d.column == columns[0] ?  d.value : null;})
-*/            })
-            ;
+//           //d3.select("#map").selectAll("#marker-"+j).style("background-image","url('img/"+ data[j].name +".jpg')");
+//           d3.select("#map").selectAll("#marker-"+data[j].id)
+//             //.style("background-image","url('img/เสือผู้ไม่กินเหยื่อซ้ำ.jpg')")
+//             .style("background-image", "url('https://tunchz.github.io/Face.Rex/labeled_images_2/" + data[j].id + "/1.jpg')")
+//             //.style("background-image","src('" + data[j].img + "')")
+//             .style("border",function (d) {
+//               if (data[j].status == "มาทำงาน") {
+//                 return "2px solid #9bee00"
+//               } else if (data[j].status == "ทำงานที่บ้าน") {
+//                 return "2px solid #ffcc00"
+//               } else if (data[j].status == "ราชการ") {
+//                 return "3px solid #316be6"
+//               } else {
+//                 return "2px solid #9bee00"
+//               }
+// /*            .append('img')
+//             .attr('class', 'table_img')
+//             .attr('src', function(d) {return d.column == columns[0] ?  d.value : null;})
+// */            })
+//             ;
 
-          d3.select("#map").selectAll(".marker")
-            .on('mouseover', function(e) {
-              d3.select("#map").selectAll(".marker").style('opacity',0.6);
-              id = d3.select(this).attr('id').split("-")[1];
-              k=index[id]; 
-              d3.select("#marker-"+data[k].id).style('opacity',1).style('height','45px').style('width','45px').style('z-index',2);
-              popups[id].setLngLat([data[k].lon,data[k].lat]).addTo(map);})
-            .on('mouseout', function(e) {
-              d3.select("#map").selectAll(".marker").style('opacity',1).style('height','30px').style('width','30px').style('z-index',0);
-              popup = popups[d3.select(this).attr('id').split("-")[1]]; popup.remove();})
-            .on('click', function(d) {k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});})
-            .on('dblclick', function(d) {z!=0 ? z = z - 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});})
-            .on('contextmenu', function(d) {z!=4 ? z = z + 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});});
+//           d3.select("#map").selectAll(".marker")
+//             .on('mouseover', function(e) {
+//               d3.select("#map").selectAll(".marker").style('opacity',0.6);
+//               id = d3.select(this).attr('id').split("-")[1];
+//               k=index[id]; 
+//               d3.select("#marker-"+data[k].id).style('opacity',1).style('height','45px').style('width','45px').style('z-index',2);
+//               popups[id].setLngLat([data[k].lon,data[k].lat]).addTo(map);})
+//             .on('mouseout', function(e) {
+//               d3.select("#map").selectAll(".marker").style('opacity',1).style('height','30px').style('width','30px').style('z-index',0);
+//               popup = popups[d3.select(this).attr('id').split("-")[1]]; popup.remove();})
+//             .on('click', function(d) {k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});})
+//             .on('dblclick', function(d) {z!=0 ? z = z - 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});})
+//             .on('contextmenu', function(d) {z!=4 ? z = z + 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});});
 
-        } //if
-      } //for
+//         } //if
+//       } //for
 
-      //tabulateimg(data, ["img","name","status","timestamp"]);
+//       //tabulateimg(data, ["img","name","status","timestamp"]);
 
 
-          d3.select("#table-container").selectAll(".table_row")
-            .on('mouseover', function(e) {
-              d3.select("#map").selectAll(".marker").style('opacity',0.6);
-              id=d3.select(this).attr('id').split("-")[1]; 
-              k = index[id]
-              d3.select("#marker-"+id).style('opacity',1).style('height','45px').style('width','45px').style('z-index',2);
-              popups[id].setLngLat([data[k].lon,data[k].lat]).addTo(map);
-            })
-            .on('mouseout', function(e) {
-              d3.select("#map").selectAll(".marker").style('opacity',1).style('height','30px').style('width','30px').style('z-index',0);
-              popup = popups[d3.select(this).attr('id').split("-")[1]]; popup.remove();})
-            .on('click', function(d) {k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});})
-            .on('dblclick', function(d) {z!=0 ? z = z - 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});})
-            .on('contextmenu', function(d) {z!=4 ? z = z + 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});});
-    }
+//           d3.select("#table-container").selectAll(".table_row")
+//             .on('mouseover', function(e) {
+//               d3.select("#map").selectAll(".marker").style('opacity',0.6);
+//               id=d3.select(this).attr('id').split("-")[1]; 
+//               k = index[id]
+//               d3.select("#marker-"+id).style('opacity',1).style('height','45px').style('width','45px').style('z-index',2);
+//               popups[id].setLngLat([data[k].lon,data[k].lat]).addTo(map);
+//             })
+//             .on('mouseout', function(e) {
+//               d3.select("#map").selectAll(".marker").style('opacity',1).style('height','30px').style('width','30px').style('z-index',0);
+//               popup = popups[d3.select(this).attr('id').split("-")[1]]; popup.remove();})
+//             .on('click', function(d) {k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});})
+//             .on('dblclick', function(d) {z!=0 ? z = z - 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});})
+//             .on('contextmenu', function(d) {z!=4 ? z = z + 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});});
+//     }
 
 
     // function refresh(){
@@ -555,17 +555,17 @@
     // }
 
 
-function openFullscreen(elem) {
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen();
-  } else if (elem.mozRequestFullScreen) { /* Firefox */
-    elem.mozRequestFullScreen();
-  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) { /* IE/Edge */
-    elem.msRequestFullscreen();
-  }
-}
+// function openFullscreen(elem) {
+//   if (elem.requestFullscreen) {
+//     elem.requestFullscreen();
+//   } else if (elem.mozRequestFullScreen) { /* Firefox */
+//     elem.mozRequestFullScreen();
+//   } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+//     elem.webkitRequestFullscreen();
+//   } else if (elem.msRequestFullscreen) { /* IE/Edge */
+//     elem.msRequestFullscreen();
+//   }
+// }
 
 
 
