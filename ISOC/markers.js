@@ -70,15 +70,15 @@ function resizeAdjust() {
       document.getElementById("vertical-table-container-MAP").style.height = "50px";
       document.getElementById("menu-container-bottom-right").style.bottom = ($("#wholecontent").height()*0.30+55).toString()+"px";
       document.getElementById("data-panel").style.height = ($("#wholecontent").height()*0.30).toString()+"px";
-      map_Yoffset = -$("#data-panel").height()/2 - 20;
+      map_Yoffset = -$("#data-panel").height()/2 - 50;
     } else {
 
       document.getElementById("data-panel").style.display = "none";
       document.getElementById("vertical-table-container-MAP").style.height = "70px";
       document.getElementById("menu-container-bottom-right").style.bottom = "75px";
-      map_Yoffset = 0
+      map_Yoffset = -30
     }
-    map_Xoffset = 0
+    map_Xoffset = -20
 
     document.getElementById("notification-container-right").style.display = "none";
     document.getElementById("notification-container-bottom").style.display = "block";
@@ -88,7 +88,7 @@ function resizeAdjust() {
 
     $("#lp-button").appendTo("#menu-container-bottom-right");
     $("#bb-button").appendTo("#menu-container-bottom-right");
-    if (!rightpanel_isopen) icon = '⊼'; else icon = '⊻';
+    if (!rightpanel_isopen) icon = '⩓'; else icon = '⩔';
 
 
   } else {
@@ -101,37 +101,24 @@ function resizeAdjust() {
       document.getElementById("data-panel").style.display = "block";  
       //document.getElementById("map-panel").style.width = "100%";
       document.getElementById("data-panel").style.width = ($("#wholecontent").width()*0.333).toString()+"px";
-      map_Xoffset = -$("#data-panel").width()/2 - 20;
+      map_Xoffset = -$("#data-panel").width()/2 - 40;
     } else {
       //document.getElementById("map-panel").style.width = "100%";
       document.getElementById("data-panel").style.display = "none";
-      map_Xoffset = 0;
+      map_Xoffset = -20;
     }
-    map_Yoffset = 0;
+    map_Yoffset = -30;
 
     $("#data-panel").appendTo("#notification-container-right");
 
     $("#lp-button").appendTo("#menu-container-top-right");
     $("#bb-button").appendTo("#menu-container-top-right");
-    if (!rightpanel_isopen) icon = '<'; else icon = '>';
+    if (!rightpanel_isopen) icon = '⪡'; else icon = '⪢'; 
 
   }
 
   // Update map menu icon
   document.getElementById("bb-button").innerHTML = icon;
-
-
-    // if (rightpanel_isopen==1) {
-    //   document.getElementById("notification-container-right").style.display = "none";
-    //   $("#table-container").appendTo("#table-container-RP");
-    // } else {
-    //   document.getElementById("notification-container-right").style.display = "block";
-    //   $("#table-container").appendTo("#table-container-MAP");
-    // }
-
-
-
-
 
   map.resize();
 }
@@ -143,9 +130,7 @@ function onMobile() {
 };
 
 
-
-async function load_map_layers() {
-
+function load_map_layers() {
 
   $.getJSON('https://tunchz.github.io/ISOC/json/DRM.json', function(drmgeojson) {
 
@@ -210,8 +195,6 @@ async function load_map_layers() {
       map_addpiecluster();
 
 
-      
-
       // Build array for table image marker
       var drm = [];
       var disaster_type_id;
@@ -231,16 +214,6 @@ async function load_map_layers() {
       setTimeout(function (){
         map.setStyle('mapbox://styles/mapbox/satellite-v9');
         display_table_markers(drm);
-
-          //console.log(polycenter(map_geojson_riskplan.features[i].geometry.coordinates,1));
-          //polycenter(map_geojson_riskplan.features[i].geometry.coordinates);
-
-          //map.fitBounds(map_geojson_riskplan['91'].features[0].geometry.coordinates, {padding: 20});
-
-
-          
-
-
       }, 1500);
       
 
@@ -248,9 +221,6 @@ async function load_map_layers() {
     }); //get map_geo_json
 
   }); //get drm_geo_json
-
-  //map_addpiecluster();
-
 
 
 }
@@ -280,7 +250,7 @@ function map_addlayer(map_geojson) {
         'source': layername,
         'paint': {
           'line-width': 1,
-          'line-color': '#aaa',
+          'line-color': '#fff',//'#2a58c3',
           'line-opacity': 0.5
         }
       });
@@ -1932,7 +1902,7 @@ function initialize() {
   //stopbtn.setAttribute('onclick', 'inputMenu()');
   menubtn.setAttribute('onclick', 'switchShortNoti()');
   document.getElementById("menu-container-top-right").append(menubtn);
-  //document.getElementById("stop-button").innerHTML = "☷■⌂";
+  //document.getElementById("stop-button").innerHTML = "⍜☷■⌂";
   document.getElementById("lp-button").innerHTML = "↹";
 
 
@@ -1963,13 +1933,13 @@ function switchShortNoti() {
     document.getElementById('table-container-MAP').style.width = "70px";
     tabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
     vertabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
-    w = "55px";
+    w = "59px";
     
   } else {
-    document.getElementById('table-container-MAP').style.width = "100px";
+    document.getElementById('table-container-MAP').style.width = "105px";
     tabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
     vertabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
-    w = "90px";
+    w = "96px";
     shortnoti = 0;
   }
   var doc = document.getElementsByClassName('table_col_marker');

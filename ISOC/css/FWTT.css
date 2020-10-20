@@ -218,7 +218,7 @@ table {
 .table_img_container{
   width: 35px;
   height: 35px;
-  margin: 4px 10px 2px 10px;
+  margin: 2px 10px 2px 10px;
   justify-content: center;
   align-items: center;  
   display: flex;
@@ -265,7 +265,7 @@ table {
   /*background-color: #ffcc00;*/
   /*border-left: 5px solid #383838;
   border-right: 5px solid #383838;*/
-  padding: 2px 0px 0px 5px;
+  padding: 2px 0px 0px 3px;
 }
 
 .table_row_marker:hover {
@@ -287,7 +287,7 @@ table {
   /*background-color: #ffcc00;*/
   /*border-left: 5px solid #383838;
   border-right: 5px solid #383838;*/
-  padding: 2px 0px 0px 0px;
+  padding: 1px 2px 0px 2px;
 }
 
 .table_col_marker:hover {
@@ -303,7 +303,7 @@ table {
 .tag_marker_bg {
   width:  15px;
   height: 15px;
-  margin: 0px 0px 0px -3px;
+  margin: -1px 0px 0px 1px;
   border-radius: 50%;
   vertical-align: middle;
   justify-content: center;
@@ -324,7 +324,7 @@ table {
 .subtag_marker {
   font-size: 10px;
   font-weight: bold;
-  padding: 10px 0px 0px 0px;
+  padding: 15px 0px 0px 3px;
 }
 
 .detail_marker {
@@ -345,9 +345,9 @@ table {
   color:#fff;
 }
 .table_img_marker_container{
-  width: 35px;
-  height: 35px;
-  margin: 4px 0px 2px 4px;
+  width: 42px;
+  height: 42px;
+  margin: 2px 0px 2px 2px;
   justify-content: center;
   align-items: center;  
   display: flex;
@@ -358,8 +358,8 @@ table {
 .table_img_marker {
   background-size: cover;
   padding: 0px;
-  width: 35px;
-  height: 35px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   cursor: pointer;
   /*border: 2px solid #ffcc00;*/
@@ -395,7 +395,7 @@ table {
 
 .tag_col_marker {
   width:53px;
-  padding-top: 3px;
+  padding-top: 0px;
 }
 
 #table_image_marker {
@@ -654,7 +654,7 @@ red:hover {
   width: 30px;
   height:30px;
   border-radius: 2px;
-  background-color: #383838;
+  background-color: #494949;
   color: #fff;
   font-size: 18px;
   border-width: 0px;
@@ -662,12 +662,12 @@ red:hover {
 }
 
 .map-menu-button:hover {
-  background-color: #383838;
+  background-color: #494949;
   color: #2a58c3;
 }
 
 .map-menu-button:active {
-  background-color: #383838;
+  background-color: #494949;
   color: #2a58c388;
 }
 
