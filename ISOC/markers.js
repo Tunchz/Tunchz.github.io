@@ -68,7 +68,7 @@ function resizeAdjust() {
     if (rightpanel_isopen) {
       document.getElementById("data-panel").style.display = "block";  
       document.getElementById("vertical-table-container-MAP").style.height = "50px";
-      document.getElementById("menu-container-bottom-right").style.bottom = "258px";
+      document.getElementById("menu-container-bottom-right").style.bottom = ($("#wholecontent").height()*0.30+55).toString()+"px";
       document.getElementById("data-panel").style.height = ($("#wholecontent").height()*0.30).toString()+"px";
       map_Yoffset = -$("#data-panel").height()/2 - 20;
     } else {
