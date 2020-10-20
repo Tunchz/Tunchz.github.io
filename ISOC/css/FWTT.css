@@ -11,18 +11,6 @@ body {
   font-family: "Serithai","Mitr";
 }
 
-
-#video-container {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column
-}
-
 canvas {
   position: absolute;
 }
@@ -84,15 +72,15 @@ svg text {
 
 
 .marker {
-/*background-image: url('img/aom.jpg');*/
-background-size: cover;
-width: 30px;
-height: 30px;
-padding: 2px;
-border-radius: 50%;
-cursor: pointer;
-border: 2px solid #ffcc00;
-opacity: 1;
+  /*background-image: url('img/aom.jpg');*/
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  padding: 2px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #ffcc00;
+  opacity: 1;
 }
 
 #thumbnail {
@@ -103,8 +91,8 @@ opacity: 1;
 
  
 .mapboxgl-popup {
-max-width: 240px;
-color:#000;
+  max-width: 240px;
+  color:#000;
 }
 
 .mapboxgl-ctrl-bottom-left, .mapboxgl-ctrl-bottom-right {
@@ -119,8 +107,7 @@ color:#000;
 #map-container { 
   position:absolute; 
   top: 0%;
-  left: 0%;
-  
+  left: 0%; 
   width: 100%; /*90%;*/
   height: 100%;  
 }
@@ -135,6 +122,7 @@ color:#000;
 
 
 .table-container {
+  padding: 5px;
   position: relative;
   left: 50%;
   top: 50%;
@@ -146,8 +134,8 @@ color:#000;
   -ms-transform: translateX(-50%) translateY(-50%);
   -o-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
-  width: 96%;
-  height: 98%;
+  width: 100%;
+  height: 100%;
   /*background-color: #ffcc00;*/
   overflow: auto;
 }
@@ -703,7 +691,7 @@ red:hover {
 }
 
 .map_addon_bottom_right { 
-  width : 34px;
+  height : 34px;
   padding: 0px; 
   margin: 0px; 
   position: absolute; 
@@ -782,10 +770,12 @@ red:hover {
   border-radius:5px;
 }
 #map_style_menu {
+  color:#383838;
   height: 34px;
   background: #fff;
   padding-top: 1px;
   font-family: 'impact', sans-serif;
+  font-size: 12px;
   border-radius:5px;
   margin: 8px;
 }
@@ -797,6 +787,7 @@ red:hover {
 /* width */
 ::-webkit-scrollbar {
   width: 0px;
+  height: 0px;
 }
 
 /* Track */

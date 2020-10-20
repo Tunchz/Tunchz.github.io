@@ -48,7 +48,7 @@ function detectswipe(el,func) {
 
 // add event listener for swipe
 detectswipe('notification-container-right',LRactions);
-detectswipe('notification-container-bottom',UDactions);
+detectswipe('vertical-table-container-MAP',UDactions);
 
 function LRactions(el,swipedir) {
     if ((swipedir == 'l' && rightpanel_isopen == 0)||(swipedir == 'r' && rightpanel_isopen == 1)) {switchRightpanel()}

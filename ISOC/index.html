@@ -18,270 +18,145 @@
   </head>
   <body onresize="resizeAdjust();">
     <div id = "wholecontent" class = "section-container">
-      <div id = "left-panel" class = "col-sm-7 height100p" onresize="map.resize()">
-        <div id = "top-left" class = "col-sm-12 height10p" style = "min-height : 42px; max-height : 42px; padding-right: 0px; background-color: #fff; display: none">
-          <div id = "title" class = "col-xs-8 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #2a58c3/*#383838;*/">
-            <div id = "logo-container" class = "col-xs-4" style = "display: flex;justify-content: center; align-items: center; max-width: 50px;">
-              <img id = "ISOC.logo" src = 'img/isoc.png' style = "padding: 5px; width : 40px; height : 40px;"></img>
-            </div>
-            <div id = "Title-container" class = "col-xs-8 height100p" style = "">
-              <div id = "Text1" class = "col-xs-6 height100p" style = "padding:0px;margin:0px;margin-top: -5px; max-width: 65px; ">
-                <span style="font-family: Impact;font-size: 30px;">ISOC </span>
-              </div>
-              <div id = "Text2" class = "col-xs-6 height100p" style = "display: flex;justify-content: left; align-items: center;">
-                <button type="button" class="btn btn-primary" style="padding: 0px 4px;" data-toggle="modal" data-target="#info-modal">รายละเอียด</button>                          
-              </div>
-            </div>
+      <div id = "map-panel" class = "col-sm-7 height100p" onresize="map.resize()">
 
+        <div id="map-container">
+          <div id="map" class='blue'></div>
+
+          <div id='header-container' class='map_addon_top_left' style = "width: 500; height: 40; margin: 5px 0px 0px 10px;">
+            <div id = "logo-container" class = "col-xs-3" style = "display: flex;justify-content: center; align-items: center;">
+              <img id = "logo" src = 'img/isoc.png' style = "padding: 5px; width : 40px; height : 40px;"></img>
+            </div>
+            <div id = "title-container" class = "col-xs-9 height100p" style = "">
+              <div id = "Text1_" class = "col-xs-8 height100p" style = "padding: 0px 0px 0px 5px;margin:0px;margin-top: 2px; max-width: 65px; ">
+                <span style="font-family: Impact;font-size: 30px; color: #fff;">DRM </span>
+              </div>
+              <div id = "Text2_" class = "col-xs-4 height100p" style = "display: flex;justify-content: left; align-items: center; padding : 11px 0px 0px 5px;">
+                <div type="button" class="btn btn-primary" style="width:18px; height:18px; border-radius: 50%; padding: 0px 5px; font-family: mitr;" data-toggle="modal" data-target="#info-modal">
+                  <div style="margin: -2px 0px 0px 0px;">?</div>
+                </div>                          
+              </div>
+            </div>
           </div>
-          <div id = "select-container" class = "select-container col-xs-4 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #2a58c3/*#383838;*/">
 
-            <!button class="btn btn-default button-control" id="stop-button" style = "padding: 0px 10px;" type="button"><!/button>
-
-
-          </div>
-        </div>
-
-        <div id = "left-bottom" class = "col-sm-12 height90p" style = "height : 88%; background-color: #383838;">
-
-
-
-          <div id="map-container">
-            <div id="map" class='blue'></div>
-
-
-
-
-            <div id='header-container' class='map_addon_top_left' style = "width: 500; height: 40; margin: 5px 0px 0px 10px;">
-              <div id = "logo-container" class = "col-xs-3" style = "display: flex;justify-content: center; align-items: center;">
-                <img id = "logo" src = 'img/isoc.png' style = "padding: 5px; width : 40px; height : 40px;"></img>
-              </div>
-              <div id = "title-container2" class = "col-xs-9 height100p" style = "">
-                <div id = "Text1_" class = "col-xs-8 height100p" style = "padding: 0px 0px 0px 5px;margin:0px;margin-top: 2px; max-width: 65px; ">
-                  <span style="font-family: Impact;font-size: 30px; color: #fff;">DRM </span>
-                </div>
-                <div id = "Text2_" class = "col-xs-4 height100p" style = "display: flex;justify-content: left; align-items: center; padding : 11px 0px 0px 5px;">
-                  <!button type="button" class="btn btn-primary" style="padding: 0px 4px;" data-toggle="modal" data-target="#info-modal"><!/button>
-                  <div type="button" class="btn btn-primary" style="width:18px; height:18px; border-radius: 50%; padding: 0px 5px; font-family: mitr;" data-toggle="modal" data-target="#info-modal">
-                    <div style="margin: -2px 0px 0px 0px;">?</div>
-                  </div>                          
-                </div>
-              </div>
-            </div>
- 
-
-            <div id='notification-container-right' class='map_addon_right' style = "width: auto; display:block;">
-              
-              <div id='table-container-MAP' class = "col-sm-12 height100p" style="display: block;">
-                <!div id="notification-bg" style="height:100%; background-color: #fff; opacity: 0.2"><!/div>
-                <div id="table-markers-container" class="table-container" oncontextmenu="return false;" style = "background-color: #fff0;"></div>
-                <div id='menu-container-top-right' class='map_addon_top_right' style = "padding: 0px 0px 0px 0px;"></div>
-              </div>
-              <div id = "right-panel" class = "col-xs-12 height100p" style = "/*background-color: #383838;*/">
-                <div id='table-container-RP' class = "col-xs-12 height100p" style = "background-color: #ffffff11">
-                  <div id="table-container" class="table-container" oncontextmenu="return false;"></div>
-                </div>                
-              </div>
-
-            </div>
-
-
-            <div id='notification-container-bottom' class='map_addon_bottom' style = "height: 65px; display:block;">
-              
-              <div id='vertical-table-container-MAP' class = "col-sm-12 height100p">
-                <!div id="notification-bg" style="height:100%; background-color: #fff; opacity: 0.2"><!/div>
-                <div id="vertical-table-markers-container" class="table-container" oncontextmenu="return false;" style = "background-color: #fff0;">
-                </div>
-              </div>
-
-            </div>
-
-
-            <div id="map_style_menu_outline" style="display: none" onmouseleave="switchStyleMenu(false)"  >
-              <div id="map_style_menu" >
-                <div style="margin: 5px 17px 0px 40px; padding-top:3px;" onclick="switchStyleMenu(false)" >
-                  <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" checked="checked" />
-                  <label for="satellite-v9">satellite </label>
-                  <input id="streets-v11" type="radio" name="rtoggle" value="streets" />
-                  <label for="streets-v11">streets </label>
-                  <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors" />
-                  <label for="outdoors-v11">outdoors </label>
-                  <input id="light-v10" type="radio" name="rtoggle" value="light" />
-                  <label for="light-v10">light </label>
-                  <input id="dark-v10" type="radio" name="rtoggle" value="dark" />
-                  <label for="dark-v10">dark </label>
-                </div>
-              </div>
-            </div>
-            <div id="map_style_menu_button" onmouseover="switchStyleMenu(true)" onblur="switchStyleMenu(false)">
-              <div id="map_style_menu_button_image"></div>
-            </div>
-
-
+          <div id='notification-container-right' class='map_addon_right' style = "width: auto; display:block;">
             
-            <div id='menu-container-bottom-right' class='map_addon_bottom_right' style = "padding: 0px 0px 0px 0px;"></div>
-
-
-
-            <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
-                            <h2 class="modal-title h3" id="myModalLabel"><a href="https://www.maholan.co.th/">DRM</a> &gt; Disaster Risk Management Dashboard </h2>
-                        </div>
-                        <div class="modal-body">
-                            <h3 style="margin-top:0">การใช้งาน</h3>
-                            <p>ระบบจะตรวจจับใบหน้าและวาดกรอบสี่เหลี่ยมล้อมรอบใบหน้า ชื่อของใบหน้าจะถูกแสดงมุมบนซ้าย และแสดงสีตามกรณีดังนี้ </p>
-                            <ol>
-                                <li>สีส้ม     --> ใบหน้ากำลังถูกยืนยันตัวตนจากระบบ</li>
-                                <li>สีเขียว   --> ใบหน้าถูกยืนยันเรียบร้อยพร้อมแสดงรูปโปรไฟล์มุมล่างซ้าย</li>
-                                <li>สีแดง    --> ใบหน้าไม่ได้ลงทะเบียนในระบบหรือระบบไม่สามารถยืนยันใบหน้าได้</li>
-                            </ol>
-
-                            <h3 class="">การแสดงรายละเอียดบนแถบด้านขวา</h3>
-                            <p>ในโหมดหน้าจอแคบแถบจะถูกแสดงดัานล่างถัดจากกรอบการแสดงภาพกล้อง ซึ่งสามารถเลื่อนหน้าจอขึ้นเพื่อดูรายละเอียด</p>
-                            <ol>
-                                <li>ส่วนตัวกรอง เป็นแถบบนสุดแสดงตัวกรองใช้ในการเลือกช่วงเวลาในการแสดงผลการตรวจจับใบหน้า</li>
-                                <li>ส่วนตัวเลขสรุป เป็นแถบแสดงตัวเลขสรุปผลการตรวจจับใบหน้าแบ่งประเภทตามรหัสสี (คลิ๊กเลือกประเภทเพื่อเรียกดูรายชื่อตามประเภทที่ต้องการ)</li>
-                                <li>ส่วนตาราง แสดงรูปใบหน้าพร้อมรายละเอียดการตรวจับใบหน้า ได้แก่ ชื่อ ชื่อกลุ่ม วัน ห้วงเวลา อารมณ์ใบหน้า และสถานะการจัดเก็บข้อมูลใบหน้า</li>
-                            </ol>
-                            <h3>ข้อมูล</h3>
-                            <p>ข้อมูลใบหน้า เป็นข้อมูลใบหน้าของข้าราชการในกองคณิตศาสตร์และคอมพิวเตอร์ ส่วนการศึกษา โรงเรียนนายร้อยพระจุลจอมเกล้า<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a></p>
-                            <ul>
-                                <li>ระบบตรวจจับใบหน้า Face.Rex ถูกพัฒนาขึ้นเพื่อใช้ศึกษา Maching Learning และการนำเทคโนโลยีและ AI มาสนับสนุนในการปฏิบัติงานและการเรียนการสอน เพื่อประโยชน์กับสาธารณะชน ติดต่อผู้จัดทำระบบเพื่อขออนุญาตในการใช้งานข้อมูลใดๆ ที่เป็นผลลัพธ์จากระบบก่อนนำไปใช้งาน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง </li>
-                            </ul>
-                            <h3>ติดต่อ</h3>
-                            <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">tunchz@gmail.com</a>.</p>
-                        </div>
-                        <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left">Made by CRMA Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
-                    </div>
-                </div>
+            <div id='table-container-MAP' class = "col-sm-12 height100p" style="display: block;">
+              <div id="table-markers-container" class="table-container" oncontextmenu="return false;" style = "background-color: #fff0;"></div>
+              <div id='menu-container-top-right' class='map_addon_top_right' style = "padding: 0px 0px 0px 0px;"></div>
             </div>
-            <div class="modal fade" id="datasource-modal" tabindex="-1" role="dialog" aria-labelledby="datasource-modalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h3 class="modal-title" id="myModalLabel">รายละเอียดแหล่งข้อมูล</h3>
-                        </div>
-                        <div class="modal-body">
-                            <table class="table table-condensed" >
-                                <thead>
-                                    <tr>
-                                        <th>ชุดข้อมูล</th>
-                                        <th>แหล่งข้อมูล</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td>ข้อมูลรายชื่อข้าราชการกองคณิตศาสตร์และคอมพิวเตอร์</td>
-                                        <td>https://macs.crma.ac.th</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ข้อมูลรายชื่อข้าราชการกองอื่นๆ</td>
-                                        <td>https://acadiv.crma.ac.th</td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
-                    </div>
-                </div>
+            <div id = "data-panel" class = "col-xs-12 height100p" style = "/*background-color: #383838;*/">
+              <div id='table-container-BG' class = "col-xs-12 height100p" style = "background-color: #ffffff11">
+                <div id="table-container" class="table-container" oncontextmenu="return false;"></div>
+              </div>                
             </div>
 
           </div>
 
 
-
-
-        </div>
-      </div>
-      <div id = "right-panel__" class = "col-sm-5 height100p" style = "background-color: #383838;display: none;">
-        <div id = "top-right1" class = "col-sm-12 height10p" style = "min-height : 77px; max-height : 77px; padding-left: 10px; background-color: #383838; display: none;">
-          <div id = "date-container" class = "col-xs-4 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #fff;">
-
-            <div class = "col-sm-12" style="padding-left:3px; height:100%;display:flex; font-size: 10px;text-align: left;">
-              <div id = "daydisplay" style ="align-self: flex-end;"></div>
-              <span id = "monthdisplay" style ="align-self: flex-end;"></span>
+          <div id='notification-container-bottom' class='map_addon_bottom' style = "height: auto; display:block;">
+            <div id='vertical-table-container-MAP' class = "col-sm-12 height100p">
+              <div id="vertical-table-markers-container" class="table-container" oncontextmenu="return false;" style = "padding: 0px 5px;/*-webkit-transform: translateX(-50%) translateY(0%);*/ background-color: #fff0;">
+              </div>
             </div>
-
           </div>
-          <div id = "filter-container" class = "filter-container col-xs-8 height100p" style = "padding-bottom = 2px;  border-bottom: 2px solid #fff;/*#383838;*/">
-            <div id = "filter-toprow" class = "filter-row col-sm-12 height50p">
-              <select id = "dept-selector" style="height: 24px;"></select>
+
+
+          <div id="map_style_menu_outline" style="display: none" onmouseleave="switchStyleMenu(false)"  >
+            <div id="map_style_menu" >
+              <div style="margin: 5px 17px 0px 40px; padding-top:3px;" onclick="switchStyleMenu(false)" >
+                <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" checked="checked" />
+                <label for="satellite-v9">satellite </label>
+                <input id="streets-v11" type="radio" name="rtoggle" value="streets" />
+                <label for="streets-v11">streets </label>
+                <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors" />
+                <label for="outdoors-v11">outdoors </label>
+                <input id="light-v10" type="radio" name="rtoggle" value="light" />
+                <label for="light-v10">light </label>
+                <input id="dark-v10" type="radio" name="rtoggle" value="dark" />
+                <label for="dark-v10">dark </label>
+              </div>
             </div>
+          </div>
+          <div id="map_style_menu_button" onmouseover="switchStyleMenu(true)" onblur="switchStyleMenu(false)">
+            <div id="map_style_menu_button_image"></div>
+          </div>
 
-            <div id = "filter-bottomrow" class = "filter-row col-sm-12 height50p">
-              <div class="row toolbar-pf">
-                <!div class="col-sm-12">
-                  <form class="toolbar-pf-actions">
-                    <div class="form-group">
-                    <button class="btn btn-default" id="left-button" type="button" style="height: 24px; margin : 0px; padding: 1px 6px;">◀</button>  
-                    <button class="btn btn-default" id="right-button" type="button" style="height: 24px; margin : 0px; padding: 1px 6px;">▶</button>
 
-                    </div>
-                    <div class="form-group">
-                      
-                      <div class="input-group date" id="datepicker">
+          
+          <div id='menu-container-bottom-right' class='map_addon_bottom_right' style = "padding: 0px 0px 0px 0px;"></div>
 
-                        <input id = "datepicked" type="text" class="form-control bootstrap-datepicker" style="width: 70px;"><span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+
+
+          <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                          <h2 class="modal-title h3" id="myModalLabel"><a href="https://www.maholan.co.th/">DRM</a> &gt; Disaster Risk Management Dashboard </h2>
                       </div>
-                    </div>
-                    <div class="form-group">
-                      <button class="btn btn-default" id="today-button" type="button" style="height: 24px;">TODAY</button>
-                    </div>
-                  </form>
-                <!/div>
+                      <div class="modal-body">
+                          <h3 style="margin-top:0">การใช้งาน</h3>
+                          <p>ระบบจะตรวจจับใบหน้าและวาดกรอบสี่เหลี่ยมล้อมรอบใบหน้า ชื่อของใบหน้าจะถูกแสดงมุมบนซ้าย และแสดงสีตามกรณีดังนี้ </p>
+                          <ol>
+                              <li>สีส้ม     --> ใบหน้ากำลังถูกยืนยันตัวตนจากระบบ</li>
+                              <li>สีเขียว   --> ใบหน้าถูกยืนยันเรียบร้อยพร้อมแสดงรูปโปรไฟล์มุมล่างซ้าย</li>
+                              <li>สีแดง    --> ใบหน้าไม่ได้ลงทะเบียนในระบบหรือระบบไม่สามารถยืนยันใบหน้าได้</li>
+                          </ol>
+
+                          <h3 class="">การแสดงรายละเอียดบนแถบด้านขวา</h3>
+                          <p>ในโหมดหน้าจอแคบแถบจะถูกแสดงดัานล่างถัดจากกรอบการแสดงภาพกล้อง ซึ่งสามารถเลื่อนหน้าจอขึ้นเพื่อดูรายละเอียด</p>
+                          <ol>
+                              <li>ส่วนตัวกรอง เป็นแถบบนสุดแสดงตัวกรองใช้ในการเลือกช่วงเวลาในการแสดงผลการตรวจจับใบหน้า</li>
+                              <li>ส่วนตัวเลขสรุป เป็นแถบแสดงตัวเลขสรุปผลการตรวจจับใบหน้าแบ่งประเภทตามรหัสสี (คลิ๊กเลือกประเภทเพื่อเรียกดูรายชื่อตามประเภทที่ต้องการ)</li>
+                              <li>ส่วนตาราง แสดงรูปใบหน้าพร้อมรายละเอียดการตรวจับใบหน้า ได้แก่ ชื่อ ชื่อกลุ่ม วัน ห้วงเวลา อารมณ์ใบหน้า และสถานะการจัดเก็บข้อมูลใบหน้า</li>
+                          </ol>
+                          <h3>ข้อมูล</h3>
+                          <p>ข้อมูลใบหน้า เป็นข้อมูลใบหน้าของข้าราชการในกองคณิตศาสตร์และคอมพิวเตอร์ ส่วนการศึกษา โรงเรียนนายร้อยพระจุลจอมเกล้า<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a></p>
+                          <ul>
+                              <li>ระบบตรวจจับใบหน้า Face.Rex ถูกพัฒนาขึ้นเพื่อใช้ศึกษา Maching Learning และการนำเทคโนโลยีและ AI มาสนับสนุนในการปฏิบัติงานและการเรียนการสอน เพื่อประโยชน์กับสาธารณะชน ติดต่อผู้จัดทำระบบเพื่อขออนุญาตในการใช้งานข้อมูลใดๆ ที่เป็นผลลัพธ์จากระบบก่อนนำไปใช้งาน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง </li>
+                          </ul>
+                          <h3>ติดต่อ</h3>
+                          <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">tunchz@gmail.com</a>.</p>
+                      </div>
+                      <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left">Made by CRMA Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                  </div>
               </div>
+          </div>
+          <div class="modal fade" id="datasource-modal" tabindex="-1" role="dialog" aria-labelledby="datasource-modalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h3 class="modal-title" id="myModalLabel">รายละเอียดแหล่งข้อมูล</h3>
+                      </div>
+                      <div class="modal-body">
+                          <table class="table table-condensed" >
+                              <thead>
+                                  <tr>
+                                      <th>ชุดข้อมูล</th>
+                                      <th>แหล่งข้อมูล</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
 
-            </div>
+                                  <tr>
+                                      <td>ข้อมูลรายชื่อข้าราชการกองคณิตศาสตร์และคอมพิวเตอร์</td>
+                                      <td>https://macs.crma.ac.th</td>
+                                  </tr>
+                                  <tr>
+                                      <td>ข้อมูลรายชื่อข้าราชการกองอื่นๆ</td>
+                                      <td>https://acadiv.crma.ac.th</td>
+                                  </tr>
 
+                              </tbody>
+                          </table>
+                      </div>
+                      <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                  </div>
+              </div>
           </div>
 
         </div>
-        <div id = "top-right2" class = "col-sm-12 height10p" style = "min-height : 82px; max-height : 82px; padding-left: 10px; background-color: #383838; display: none;">
-          <div id = "menu-container" class = "height100p" style = "padding-right: 0px; border-bottom: 2px solid #9bee00;">
 
-            <div class="col-xs-4 height100p card-wrapper" style="padding-top:1px;">
-              <div class = "card 1" style="/*background-color:#ea5771;*/">
-                <div class = "col-xs-6" style="padding-left:3px; height:22%; font-size: 10px;text-align: left;padding-bottom : 1px;border-bottom: 1px solid #fff">ตรวจพบ</div>
-                <div class = "col-xs-6" id = "total-detectedfaces"style="height:22%; font-size: 10px;padding-bottom : 1px;border-bottom: 1px solid #fff; padding-right : 5px;"></div>
-                <div class = "card-menu col-xs-12" onmouseover="" onclick="updateMenu(1)" style="height:70%;border-bottom: 2px solid #9bee00">
-                  <div class = "col-xs-6" style="padding-left:3px; height:100%;display:flex; font-size: 10px;text-align: left;"><span style ="align-self: flex-end;">ยืนยัน</span></div>
-                  <div class = "col-xs-6" id = "total-verified" style="margin-top: -8px; height:100%; font-family: Impact;font-size: 42px;color:#9bee00; padding-right : 3px;"></div>
-                </div>
-                <div id = "menuIndicator1" class = "card-menu-indicator col-xs-12" style="margin-top: 1px; height:10%; background: #9bee00"></div>
-              </div>
-            </div>
-            <div class="col-xs-4 height100p card-wrapper" style="padding-top:1px;">
-              <div class = "card 2" style="/*background-color:#ea5771;*/">
-                <div class = "col-xs-6" style="padding-left:3px; height:22%; font-size: 10px;text-align: left;padding-bottom = 1px;border-bottom: 1px solid #fff">Detection</div>
-                <div class = "col-xs-6" id = "total-detection"style="height:22%; font-size: 10px;padding-bottom = 1px;border-bottom: 1px solid #fff; padding-right : 5px;"></div>
-                <div class = "card-menu col-xs-12" onmouseover="" onclick="updateMenu(2)" style="height:70%;border-bottom: 2px solid #fcc400">
-                  <div class = "col-xs-6" style="padding-left:3px; height:100%;display:flex; font-size: 10px;text-align: left;"><span style ="align-self: flex-end;">รอยืนยัน</span></div>
-                  <div class = "col-xs-6" id = "total-tobeverified" style="margin-top: -8px; height:100%; font-family: Impact;font-size: 42px; color:#fcc400; padding-right : 3px;"></div>
-                </div>
-                <div id = "menuIndicator2" class = "card-menu-indicator col-xs-12" style="margin-top: 2px; height:10%; background: #fff0"></div>
-              </div>
-            </div>
-            <div class="col-xs-4 height100p card-wrapper" style="padding-top:1px;">
-              <div class = "card 3" style="/*background-color:#ea5771;*/">
-                <div class = "col-xs-6" style="padding-left:3px; height:22%; font-size: 10px;text-align: left;padding-bottom = 1px;border-bottom: 1px solid #fff">Status</div>
-                <div class = "col-xs-6" id = "total-status"style="height:22%; font-size: 10px;padding-bottom = 1px;border-bottom: 1px solid #fff; padding-right : 5px;">ปกติ</div>
-                <div class = "card-menu col-xs-12" onmouseover="" onclick="updateMenu(3)" style="height:70%;border-bottom: 2px solid #ff0000">
-                  <div class = "col-xs-3" style="padding-left:3px; height:100%;display:flex; font-size: 10px;text-align: left;"><span style ="align-self: flex-end;">unknown</span></div>
-                  <div class = "col-xs-9" id = "total-unknown" style="margin-top: -8px; height:100%; font-family: Impact;font-size: 42px;color:#ff0000; padding-right : 3px;"></div>
-                </div>
-                <div id = "menuIndicator3" class = "card-menu-indicator col-xs-12" style="margin-top: 2px; height:10%; background: #fff0"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id='table-container-RP__' class = "col-sm-12 height100p" style = "background-color: #383838">
-          <div id="table-container__" class="table-container" oncontextmenu="return false;">
-          </div>
-        </div>
       </div>
     </div>
   </body>
@@ -423,149 +298,6 @@
         return 4.7;
       }
     }
-
-//     function drawmap(data){
-//       //remove all old markers and popups
-//       markers = d3.select("#map").selectAll(".marker");
-//       markers.remove();
-//       popups = d3.select("#map").selectAll(".mapboxgl-popup");
-//       popups.remove();
-
-//       var popups={},j = 0,index = {};
-      
-//       for (j = 0; j < data.length; j++) {
-//         index[data[j].id] = j;
-        
-//         if (data[j].lat!=0 && data[j].lon!=0){
-          
-//           //console.log(data[j].name,data[j].lat,data[j].lon);
-//           var el = document.createElement('div');
-//           el.className = 'marker';
-//           el.id = 'marker-'+ data[j].id;
-
-//           // make a marker for each feature and add to the map
-//           new mapboxgl.Marker(el)
-//           .setLngLat([data[j].lon,data[j].lat])
-//           .addTo(map);
-
-//           popups[data[j].id] = new mapboxgl.Popup({ offset: 25, closeButton: false, closeOnClick: false }).setHTML('<strong>┃ '+facelabels[parseInt(data[j].id)].name+'</strong><small><br> ▸  '+ data[j].mood+ '  ' + data[j].status+ '<br> ▸ '+formatDateTime(data[j].timestamp)+ /*'<br> ▸ Lat: '+ data[j].lat +'  Lat: '+ data[j].lon +*/ '<br> ▸  '+ data[j].location+ '</small>');
-
-//           //d3.select("#map").selectAll("#marker-"+j).style("background-image","url('img/"+ data[j].name +".jpg')");
-//           d3.select("#map").selectAll("#marker-"+data[j].id)
-//             //.style("background-image","url('img/เสือผู้ไม่กินเหยื่อซ้ำ.jpg')")
-//             .style("background-image", "url('https://tunchz.github.io/Face.Rex/labeled_images_2/" + data[j].id + "/1.jpg')")
-//             //.style("background-image","src('" + data[j].img + "')")
-//             .style("border",function (d) {
-//               if (data[j].status == "มาทำงาน") {
-//                 return "2px solid #9bee00"
-//               } else if (data[j].status == "ทำงานที่บ้าน") {
-//                 return "2px solid #ffcc00"
-//               } else if (data[j].status == "ราชการ") {
-//                 return "3px solid #316be6"
-//               } else {
-//                 return "2px solid #9bee00"
-//               }
-// /*            .append('img')
-//             .attr('class', 'table_img')
-//             .attr('src', function(d) {return d.column == columns[0] ?  d.value : null;})
-// */            })
-//             ;
-
-//           d3.select("#map").selectAll(".marker")
-//             .on('mouseover', function(e) {
-//               d3.select("#map").selectAll(".marker").style('opacity',0.6);
-//               id = d3.select(this).attr('id').split("-")[1];
-//               k=index[id]; 
-//               d3.select("#marker-"+data[k].id).style('opacity',1).style('height','45px').style('width','45px').style('z-index',2);
-//               popups[id].setLngLat([data[k].lon,data[k].lat]).addTo(map);})
-//             .on('mouseout', function(e) {
-//               d3.select("#map").selectAll(".marker").style('opacity',1).style('height','30px').style('width','30px').style('z-index',0);
-//               popup = popups[d3.select(this).attr('id').split("-")[1]]; popup.remove();})
-//             .on('click', function(d) {k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});})
-//             .on('dblclick', function(d) {z!=0 ? z = z - 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});})
-//             .on('contextmenu', function(d) {z!=4 ? z = z + 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});});
-
-//         } //if
-//       } //for
-
-//       //tabulateimg(data, ["img","name","status","timestamp"]);
-
-
-//           d3.select("#table-container").selectAll(".table_row")
-//             .on('mouseover', function(e) {
-//               d3.select("#map").selectAll(".marker").style('opacity',0.6);
-//               id=d3.select(this).attr('id').split("-")[1]; 
-//               k = index[id]
-//               d3.select("#marker-"+id).style('opacity',1).style('height','45px').style('width','45px').style('z-index',2);
-//               popups[id].setLngLat([data[k].lon,data[k].lat]).addTo(map);
-//             })
-//             .on('mouseout', function(e) {
-//               d3.select("#map").selectAll(".marker").style('opacity',1).style('height','30px').style('width','30px').style('z-index',0);
-//               popup = popups[d3.select(this).attr('id').split("-")[1]]; popup.remove();})
-//             .on('click', function(d) {k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});})
-//             .on('dblclick', function(d) {z!=0 ? z = z - 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});})
-//             .on('contextmenu', function(d) {z!=4 ? z = z + 1 : z = z; k=index[d3.select(this).attr('id').split("-")[1]]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z), speed : flyspeed, curve : 1, essential: true});});
-//     }
-
-
-    // function refresh(){
-    //   d3.json("http://122.155.11.222:1880/checkin?", function(error, data2) {
-
-    //     var formatDate = d3.time.format("%Y-%m-%d"),
-    //         formatTime = d3.time.format("%H:%M:%S");
-
-
-    //     if (!error) {
-    //       //console.log(data2.length);
-    //       for (j = 0; j < data2.length; j++) {
-    //         sensor2.push({ 'name' : data2[j].name,
-    //                     'id' : j,     
-    //                     'img' : 'img/เสือผู้ไม่กินเหยื่อซ้ำ.jpg',             
-    //                     'lat' :+parseFloat(data2[j].latitude).toFixed(6),
-    //                     'lon' : +parseFloat(data2[j].longitude).toFixed(6),
-    //                     'status': data2[j].status,
-    //                     'detail': data2[j].detail,
-    //                     'location': data2[j].location,
-    //                     'timestamp' : new Date(data2[j].timestamp),
-    //                     'date' : formatDate(new Date(data2[j].timestamp)),
-    //                     'time' : formatTime(new Date(data2[j].timestamp)),
-    //         });            
-    //       }
-    //     }
-    //     var sf = crossfilter(sensor2);
-    //     sf.date = sf.dimension(function(d) { return d.date; });
-
-    //     var sensor2_filtered = sf.date.filterExact("2020-05-18").bottom(Infinity)
-
-    //     //drawmap(sensor2_filtered);
-
-    //     tabulateimg(sensor2_filtered, ["img","name","status","timestamp","time","lat","lon"]);
-    //   });
-    // }
-
-    // function tick() {
-    //   setTimeout(tick, 1000 - Date.now() % 1000);
-    //   var now = new Date;
-    //   document.getElementById("TimeDisplay").innerHTML = formatTime(now)+" ▸ refresh in "+i+ " secs";
-    //   if (i<=0) {
-    //     refresh();
-    //       i = refresh_rate;
-    //   } 
-    //   i -= 1;
-    // }
-
-
-// function openFullscreen(elem) {
-//   if (elem.requestFullscreen) {
-//     elem.requestFullscreen();
-//   } else if (elem.mozRequestFullScreen) { /* Firefox */
-//     elem.mozRequestFullScreen();
-//   } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-//     elem.webkitRequestFullscreen();
-//   } else if (elem.msRequestFullscreen) { /* IE/Edge */
-//     elem.msRequestFullscreen();
-//   }
-// }
 
 
 
