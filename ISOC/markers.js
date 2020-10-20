@@ -130,6 +130,8 @@ function onMobile() {
 };
 
 
+
+
 function load_map_layers() {
 
   $.getJSON('https://tunchz.github.io/ISOC/json/DRM.json', function(drmgeojson) {
@@ -164,7 +166,7 @@ function load_map_layers() {
         map_geojson_riskplan[item].features = $(map_geojson.features).filter(function (i,n){return (typeof prov_color[n.properties.PROVINCE_C] !== 'undefined')});
         //console.log("riskplan ",map_geojson_riskplan);
 
-
+        //console.log(map_geojson_riskplan[item].features.length);
         // Add color & opacity for risk plan in each province
         for (i = 0; i < map_geojson_riskplan[item].features.length; i++) {
           var prov_c = map_geojson_riskplan[item].features[i].properties.PROVINCE_C;
@@ -172,13 +174,15 @@ function load_map_layers() {
           map_geojson_riskplan[item].features[i].properties['disaster_id'] = prov_color[prov_c].disaster_id;
           map_geojson_riskplan[item].features[i].properties['color'] = symbol[item].color;//prov_color[prov_c].color;
           map_geojson_riskplan[item].features[i].properties['opacity'] = symbol[item].opacity;
-
-
+          //map_geojson_riskplan[item].features[i].properties['center'] = getCenter(map_geojson_riskplan[item]);
+          
         }      
         // Add map with color province corresponding to risk plan
         map_add_polygon(map_geojson_riskplan[item],symbol[item].layername);
+
       
       });
+   
 
       // Add Risk Notification Layer ----------------------------------------------
       var drm_geojson_filtered = {};
@@ -204,8 +208,10 @@ function load_map_layers() {
         drm[i]['icon'] = symbol[disaster_type_id].icon;
         if (disaster_type_id < 90) {
           drm[i]['color'] = symbol[disaster_type_id].color;
+          drm_geojson.features[i].properties['center'] = [0,0];
         } else {
           drm[i]['color'] = symbol[disaster_type_id].color+"66";
+          drm_geojson.features[i].properties['center'] = getCenter(map_geojson_riskplan[disaster_type_id]);
         }
         
       }
@@ -214,6 +220,7 @@ function load_map_layers() {
       setTimeout(function (){
         map.setStyle('mapbox://styles/mapbox/satellite-v9');
         display_table_markers(drm);
+
       }, 1500);
       
 
@@ -226,6 +233,26 @@ function load_map_layers() {
 }
 
 
+
+function getCenter(data) {
+  var bounds = {}, coords, point, latitude, longitude;
+  for (var i = 0; i < data.features.length; i++) {
+    coords = data.features[i].geometry.coordinates;
+
+    for (var j = 0; j < coords.length; j++) {
+      for (var k = 0; k < coords[j].length; k++) {
+        longitude = coords[j][k][0];
+        latitude = coords[j][k][1];
+        bounds.xMin = bounds.xMin < longitude ? bounds.xMin : longitude;
+        bounds.xMax = bounds.xMax > longitude ? bounds.xMax : longitude;
+        bounds.yMin = bounds.yMin < latitude ? bounds.yMin : latitude;
+        bounds.yMax = bounds.yMax > latitude ? bounds.yMax : latitude;
+      }
+    }
+  }
+
+  return [(bounds.xMin+bounds.xMax)/2,(bounds.yMin+bounds.yMax)/2];
+}
 
 //==Map Polygon================================================================================================
 
@@ -1718,8 +1745,16 @@ function tabulateimg(data, columns) {
             essential: true
           });
         } else {
-          //console.log(($(drm_geojson.features).filter(function (i,n){return n.properties.disaster_id == e.disaster_id}))[0].geometry.coordinates);
-          zoomtoPolygon(map_geojson_riskplan[e.disaster_type_id].features[0].geometry.coordinates,false);
+          //zoomtoPolygon(map_geojson_riskplan[e.disaster_type_id].features[0].geometry.coordinates,false);
+          map.flyTo({
+            center: e.center,//map_geojson_riskplan[e.disaster_type_id].features[0].properties.center,
+            offset: [map_Xoffset, map_Yoffset],
+            //zoom : zoom(z), 
+            speed : flyspeed, 
+            curve : 1, 
+            essential: true
+          });
+          console.log(e.center);
         }
       })
       .on('dblclick', function(e) {  
@@ -1738,19 +1773,19 @@ function tabulateimg(data, columns) {
 
 //========================================================================
 
-function zoomtoPolygon(coordinates,zoom) {
-  // coordinates >> geojson.features.geometry.coordinates
-  var currentzoom = map.getZoom();           
-  var bounds = coordinates[0].reduce(function (bounds, coord) {
-      return bounds.extend(coord);
-  }, new mapboxgl.LngLatBounds(coordinates[0][0], coordinates[0][0]));
+// function zoomtoPolygon(coordinates,zoom) {
+//   // coordinates >> geojson.features.geometry.coordinates
+//   var currentzoom = map.getZoom();           
+//   var bounds = coordinates[0].reduce(function (bounds, coord) {
+//       return bounds.extend(coord);
+//   }, new mapboxgl.LngLatBounds(coordinates[0][0], coordinates[0][0]));
 
-  map.fitBounds(bounds, {
-    speed : flyspeed,
-    padding: 20
-  });
-  if (!zoom) map.setZoom(currentzoom)
-}
+//   map.fitBounds(bounds, {
+//     speed : flyspeed,
+//     padding: 20
+//   });
+//   if (!zoom) map.setZoom(currentzoom)
+// }
 
 
 function switchZoomMarker(disaster_type_id,disaster_id,iszoomed) {
