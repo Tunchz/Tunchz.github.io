@@ -1191,7 +1191,7 @@ function tabulateimg_marker(data, columns) {
     .append('tr')
     .append('div')
     .attr('class','table_row_marker')
-    .attr('id',function(d) {return 'id-'+d.disaster_type});
+    .attr('id',function(d) {return 'table_row_marker_'+d.disaster_type_id});
 
   // create a cell in each row for each column
 
@@ -1391,9 +1391,9 @@ function vertabulateimg_marker(data, columns) {
     .append('td')
     .append('div')
     .attr('class','table_col_marker')
-    .attr('id','table_col_marker'/*function(d) {return 'col-'+d.row_no}*/)
+    .attr('id',function(d) {return 'table_col_marker_'+d.disaster_type_id});
     //.style("width","100px")
-    ;
+  
 
   // create a cell in each row for each column
 
@@ -1860,10 +1860,19 @@ function switchUnselectVisibility(disaster_type_id) {
           symbol[item].dbclick = false;
         }
         switchLayerVisibility(item);
+        document.getElementById("table_row_marker_"+item.toString()).style.borderRight = '0px solid #000';
+        document.getElementById("table_col_marker_"+item.toString()).style.borderBottom = '0px solid #000';        
       })
       symbol[disaster_type_id].dbclick = !symbol[disaster_type_id].dbclick;
-
-      
+      if (symbol[disaster_type_id].dbclick) {
+        document.getElementById("table_row_marker_"+disaster_type_id.toString()).style.borderRight = '3px solid '+ symbol[disaster_type_id].color;
+        document.getElementById("table_col_marker_"+disaster_type_id.toString()).style.borderBottom = '3px solid '+ symbol[disaster_type_id].color;
+      } 
+      // else {
+      //   document.getElementById("table_row_marker_"+disaster_type_id.toString()).style.borderRight = '0px solid #000';
+      //   document.getElementById("table_col_marker_"+disaster_type_id.toString()).style.borderBottom = '0px solid #000';
+      // }
+      //border-right: 3px solid #383838;
 }
 
 function switchLayerVisibility(disaster_type_id) {
