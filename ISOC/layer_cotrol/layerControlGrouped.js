@@ -6,8 +6,8 @@
  * [ ] ADD ZOOM LEVEL VISIBILITY ON TOGGLES MAKE INACTIVE ON ZOOMEND ADD FUNCTION TO CHECK FOR VISIBILITY
  */
 
-import * as mglHelper from "./lib/mglHelpers.js";
-import * as domHelper from "./lib/domHelpers.js";
+//import * as mglHelper from "./lib/mglHelpers.js";
+//import * as domHelper from "./lib/domHelpers.js";
 
 
 class layerControlGrouped {
