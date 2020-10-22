@@ -118,7 +118,7 @@
 .mapboxgl-ctrl-group {
     border-radius: 4px;
     background: #fff;
-    opacity: 0.4;
+    opacity: 1; //0.4;
 }
 
 .mapboxgl-ctrl-group:not(:empty) {
@@ -182,7 +182,7 @@
 }
 
 .mapboxgl-ctrl button:disabled .mapboxgl-ctrl-icon {
-    opacity: .25
+    opacity: 1;//.25
 }
 
 .mapboxgl-ctrl button:not(:disabled):hover {

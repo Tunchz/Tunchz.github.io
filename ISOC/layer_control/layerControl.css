@@ -3,8 +3,8 @@
   ****/
 
   .mapboxgl-ctrl-group>button {
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
   }
   .mapboxgl-ctrl-group:not(:empty) {
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
@@ -42,8 +42,8 @@
   ****/
 
   .mgl-layerControl.collapsed {
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     overflow: hidden;
     background-image: url("https://icongr.am/material/layers.svg");
     background-size: cover;
