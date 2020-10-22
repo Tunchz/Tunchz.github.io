@@ -433,7 +433,7 @@ function lcCreateButton(collapsed) {
   div["aria-label"] = "Layer Control";
   div.dataset.layerControl = "true"
   div.className = 'mapboxgl-ctrl mapboxgl-ctrl-group mgl-layerControl';
-  //if (collapsed) div.classList.add("collapsed");
+  if (collapsed) div.classList.add("collapsed");
 
   return div
 }
