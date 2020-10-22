@@ -60,7 +60,7 @@ class layerControlGrouped {
 
     this._layerControlConfig = config
 
-    console.log(config)
+    //console.log(config)
 
     // TARGET CONFIG LAYOUT
     // this._layerControlConfig = {
@@ -197,7 +197,7 @@ class layerControlGrouped {
       }
 
       if (e.target.dataset.layergroup) {
-        console.log("layergroup")
+        //console.log("layergroup")
         let inputs = e.target.parentElement.querySelectorAll("[data-master-layer]");
         // CHECK IF ANY OF THE BOXES ARE NOT CHECKED AND IF NOT THEM CHECK THEM ALL
         if (!domHelper.GetAllChecked(inputs)) {
@@ -433,7 +433,7 @@ function lcCreateButton(collapsed) {
   div["aria-label"] = "Layer Control";
   div.dataset.layerControl = "true"
   div.className = 'mapboxgl-ctrl mapboxgl-ctrl-group mgl-layerControl';
-  if (collapsed) div.classList.add("collapsed");
+  //if (collapsed) div.classList.add("collapsed");
 
   return div
 }
