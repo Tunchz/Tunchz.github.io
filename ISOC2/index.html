@@ -1,0 +1,564 @@
+﻿<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+  	<meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DRM : Disaster Risk Management</title>
+    <meta name="description" content="the question isn't can you; it's WILL YOU. -FWTT-">
+    <link rel="icon" type="image/x-icon" href="img/isoc.png"/>
+    <link rel="stylesheet" href="css/covid19.min.blue.css">
+
+    <!link rel="stylesheet" href="css/patternfly.min.css" />
+    <!link rel="stylesheet" href="css/patternfly-additions.min.css" />
+
+    <link rel="stylesheet" href="css/FWTT.css">
+    <link rel="stylesheet" href="css/fonts.css">
+
+
+  </head>
+  <body onresize="resizeAdjust();">
+    <div id = "wholecontent" class = "section-container">
+      <div id = "map-panel" class = "col-sm-7 height100p" onresize="map.resize()">
+
+        <div id="map-container">
+          <div id="map" class='blue'></div>
+
+          <div id='header-container' class='map_addon_top_left' style = "width: 500; height: 40; margin: 5px 0px 0px 10px;">
+            <div id = "logo-container" class = "col-xs-3" style = "display: flex;justify-content: center; align-items: center;">
+              <img id = "logo" src = 'img/isoc.png' style = "padding: 5px; width : 40px; height : 40px;"></img>
+            </div>
+            <div id = "title-container" class = "col-xs-9 height100p" style = "">
+              <div id = "Text1_" class = "col-xs-8 height100p" style = "padding: 0px 0px 0px 5px;margin:0px;margin-top: 10px; max-width: 65px; ">
+                <span style="font-family: Impact;font-size: 30px; color: #fff;">DRM </span>
+              </div>
+              <div id = "Text2_" class = "col-xs-4 height100p" style = "display: flex;justify-content: left; align-items: center; padding : 11px 0px 0px 5px;">
+                <div type="button" class="btn btn-primary" style="width:18px; height:18px; border-radius: 50%; padding: 0px 5px; font-family: mitr;" data-toggle="modal" data-target="#info-modal">
+                  <div style="margin: -2px 0px 0px 0px;">?</div>
+                </div>                          
+              </div>
+            </div>
+          </div>
+
+          <div id='notification-container-right' class='map_addon_right' style = "width: auto; display:block; margin:0px;">
+            
+            <div id='table-container-MAP' class = "col-sm-12 height100p" style="display: block;">
+              <div id="table-markers-container" class="table-container" oncontextmenu="return false;" style = "padding-right:0px; background-color: #fff0;/*-webkit-transform: translateX(-50%) translateY(0%);*/"></div>
+              <div id='menu-container-top-right' class='map_addon_top_right' style = "padding: 0px 0px 0px 0px;"></div>
+            </div>
+            <div id = "data-panel" class = "col-xs-12 height100p" style = "/*background-color: #383838;*/">
+              <div id='table-container-BG' class = "col-xs-12 height100p" style = "background-color: #ffffff22">
+                <div id="table-container" class="table-container" oncontextmenu="return false;"></div>
+              </div>                
+            </div>
+
+          </div>
+
+
+          <div id='notification-container-bottom' class='map_addon_bottom' style = "height: auto; display:block; margin:0px;">
+            <div id='vertical-table-container-MAP' class = "col-sm-12 height100p">
+              <div id="vertical-table-markers-container" class="table-container" oncontextmenu="return false;" style = "padding: 0px 5px; background-color: #fff0;/*-webkit-transform: translateX(-50%) translateY(-50%);*/">
+              </div>
+            </div>
+          </div>
+
+
+          <div id="map_style_menu_outline" style="display: none" onmouseleave="switchStyleMenu(false)"  >
+            <div id="map_style_menu" >
+              <div style="margin: 5px 17px 0px 40px; padding-top:3px;" onclick="switchStyleMenu(false)" >
+                <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" checked="checked" />
+                <label for="satellite-v9">satellite </label>
+                <input id="streets-v11" type="radio" name="rtoggle" value="streets" />
+                <label for="streets-v11">streets </label>
+                <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors" />
+                <label for="outdoors-v11">outdoors </label>
+                <input id="light-v10" type="radio" name="rtoggle" value="light" />
+                <label for="light-v10">light </label>
+                <input id="dark-v10" type="radio" name="rtoggle" value="dark" />
+                <label for="dark-v10">dark </label>
+              </div>
+            </div>
+          </div>
+          <div id="map_style_menu_button" class="mapboxgl-ctrl mapboxgl-ctrl-group" onmouseover="switchStyleMenu(true)" onblur="switchStyleMenu(false)">
+            <div id="map_style_menu_button_image" class="mapboxgl-ctrl mapboxgl-ctrl-group"></div>
+          </div>
+
+
+          
+          <div id='menu-container-bottom-right' class='map_addon_bottom_right' ></div>
+
+
+
+          <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                          <h2 class="modal-title h3" id="myModalLabel"><a href="https://www.maholan.co.th/">DRM</a> &gt; Disaster Risk Management Dashboard </h2>
+                      </div>
+                      <div class="modal-body">
+                          <h3 style="margin-top:0">การใช้งาน</h3>
+                          <p>ระบบจะตรวจจับใบหน้าและวาดกรอบสี่เหลี่ยมล้อมรอบใบหน้า ชื่อของใบหน้าจะถูกแสดงมุมบนซ้าย และแสดงสีตามกรณีดังนี้ </p>
+                          <ol>
+                              <li>สีส้ม     --> ใบหน้ากำลังถูกยืนยันตัวตนจากระบบ</li>
+                              <li>สีเขียว   --> ใบหน้าถูกยืนยันเรียบร้อยพร้อมแสดงรูปโปรไฟล์มุมล่างซ้าย</li>
+                              <li>สีแดง    --> ใบหน้าไม่ได้ลงทะเบียนในระบบหรือระบบไม่สามารถยืนยันใบหน้าได้</li>
+                          </ol>
+
+                          <h3 class="">การแสดงรายละเอียดบนแถบด้านขวา</h3>
+                          <p>ในโหมดหน้าจอแคบแถบจะถูกแสดงดัานล่างถัดจากกรอบการแสดงภาพกล้อง ซึ่งสามารถเลื่อนหน้าจอขึ้นเพื่อดูรายละเอียด</p>
+                          <ol>
+                              <li>ส่วนตัวกรอง เป็นแถบบนสุดแสดงตัวกรองใช้ในการเลือกช่วงเวลาในการแสดงผลการตรวจจับใบหน้า</li>
+                              <li>ส่วนตัวเลขสรุป เป็นแถบแสดงตัวเลขสรุปผลการตรวจจับใบหน้าแบ่งประเภทตามรหัสสี (คลิ๊กเลือกประเภทเพื่อเรียกดูรายชื่อตามประเภทที่ต้องการ)</li>
+                              <li>ส่วนตาราง แสดงรูปใบหน้าพร้อมรายละเอียดการตรวจับใบหน้า ได้แก่ ชื่อ ชื่อกลุ่ม วัน ห้วงเวลา อารมณ์ใบหน้า และสถานะการจัดเก็บข้อมูลใบหน้า</li>
+                          </ol>
+                          <h3>ข้อมูล</h3>
+                          <p>ข้อมูลใบหน้า เป็นข้อมูลใบหน้าของข้าราชการในกองคณิตศาสตร์และคอมพิวเตอร์ ส่วนการศึกษา โรงเรียนนายร้อยพระจุลจอมเกล้า<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a></p>
+                          <ul>
+                              <li>ระบบตรวจจับใบหน้า Face.Rex ถูกพัฒนาขึ้นเพื่อใช้ศึกษา Maching Learning และการนำเทคโนโลยีและ AI มาสนับสนุนในการปฏิบัติงานและการเรียนการสอน เพื่อประโยชน์กับสาธารณะชน ติดต่อผู้จัดทำระบบเพื่อขออนุญาตในการใช้งานข้อมูลใดๆ ที่เป็นผลลัพธ์จากระบบก่อนนำไปใช้งาน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง </li>
+                          </ul>
+                          <h3>ติดต่อ</h3>
+                          <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">tunchz@gmail.com</a>.</p>
+                      </div>
+                      <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left">Made by CRMA Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal fade" id="datasource-modal" tabindex="-1" role="dialog" aria-labelledby="datasource-modalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h3 class="modal-title" id="myModalLabel">รายละเอียดแหล่งข้อมูล</h3>
+                      </div>
+                      <div class="modal-body">
+                          <table class="table table-condensed" >
+                              <thead>
+                                  <tr>
+                                      <th>ชุดข้อมูล</th>
+                                      <th>แหล่งข้อมูล</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+
+                                  <tr>
+                                      <td>ข้อมูลรายชื่อข้าราชการกองคณิตศาสตร์และคอมพิวเตอร์</td>
+                                      <td>https://macs.crma.ac.th</td>
+                                  </tr>
+                                  <tr>
+                                      <td>ข้อมูลรายชื่อข้าราชการกองอื่นๆ</td>
+                                      <td>https://acadiv.crma.ac.th</td>
+                                  </tr>
+
+                              </tbody>
+                          </table>
+                      </div>
+                      <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                  </div>
+              </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </body>
+
+  <!script defer src="js/face-api.min.js"><!/script>
+  <script src="js/covid19.js"></script>
+
+  <!link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+    integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="layer_control/layerControl.css">
+
+
+  <script src='js/mapbox-gl_v1120.js'></script>
+  <link rel="stylesheet" href="css/mapbox-gl_v1120.css">
+  <!script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"><!/script>
+  <!link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+
+  <!script src="js/bootstrap-datepicker.min.js"><!/script>
+  <!script src="js/d3.min.js"><!/script>
+  <script src="js/alasql.js"></script>
+  <script src="js/crossfilter.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+
+  <script defer src="markers.js"></script>
+  <!script defer src="ISOC.js"><!/script>
+  <script defer src="swipedetect.js"></script>
+  
+
+  <!script type="module" defer src="maplayergroupedcontrol.js"><!/script>
+
+
+
+  <script>
+
+    var formatDateTime = d3.time.format("%d %B %Y %H:%M:%S");
+
+    //---- Mapbox GL Initialization--------
+    var z=4;  //default zoom level 0-4
+    var flyspeed = 0.8;
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg'
+    //mapboxgl.accessToken = 'pk.eyJ1IjoibXVyYWxpcHJhamFwYXRpIiwiYSI6ImNrMHA1d3VjYzBna3gzbG50ZjR5b2Zkb20ifQ.guBaIUcqkTdYHX1R6CM6FQ'
+    //Setup mapbox-gl map
+    var map = new mapboxgl.Map({
+      //style: 'mapbox://styles/tunchz/ck9litjbw2soc1iqo4rysy4nt',
+      //style: 'mapbox://styles/mapbox/streets-v11',
+      //style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',  // the outdoors-v10 style but without Hillshade layers
+      //style: 'mapbox://styles/mapbox/outdoors-v10',
+      style: 'mapbox://styles/mapbox/dark-v10',
+      //style: 'mapbox://styles/mapbox/satellite-v9',
+      //style: 'mapbox://styles/mapbox/light-v10',
+
+      // Custom map style
+      //style: 'https://maputnik.github.io/osm-liberty/style.json',
+
+      // hash: true,
+      // /*style: 'some mapbox style url*/
+      // /*below is a blank style*/
+      // style: {
+      //   "version": 8,
+      //   "name": "blank",
+      //   "sources": {
+      //     "blank": {
+      //       "type": "vector",
+      //       "url": ""
+      //     }
+      //   },
+      //   "layers": [{
+      //     "id": "background",
+      //     "type": "background",
+      //     "paint": {
+      //       "background-color": "#383838"
+      //     }
+      //   }]
+      // },
+
+
+
+
+      container: 'map', // container id
+      center: [101.6673626,13.2808669],
+      //center: [13.79,53.545],
+      minZoom: 0.3,
+      maxZoom: 20,
+      zoom: 4.7,
+      pitch: 0,
+      // pitch: 90,
+      //bearing: -17.6,
+      antialias: true
+
+    })
+
+    $("#header-container").appendTo(".mapboxgl-ctrl-top-left");
+    // disable map rotation using right click + drag
+    //map.dragRotate.disable();
+     
+    // disable map rotation using touch rotation gesture
+    //map.touchZoomRotate.disableRotation();
+
+    //map.scrollZoom.disable()
+    map.doubleClickZoom.disable();
+    //map.addControl(new mapboxgl.Navigation());
+    map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
+
+
+
+    // Add geolocate control to the map.
+    //map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true}), 'top-left');
+    map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+
+    var layerList = document.getElementById('map_style_menu');
+    var inputs = layerList.getElementsByTagName('input');
+    var currentLayer = "satellite-v9";
+     
+
+    $("#map_style_menu_button").appendTo(".mapboxgl-ctrl-top-left");
+    //$("#map_style_menu_outline").appendTo(".mapboxgl-ctrl-top-left");
+
+    
+    $("#notification-container-right").appendTo(".mapboxgl-ctrl-top-right");
+    $("#notification-container-bottom").appendTo(".mapboxgl-ctrl-bottom-left");
+
+    $("#menu-container-bottom-right").appendTo(".mapboxgl-ctrl-bottom-right");
+
+
+    function switchLayer(layer) {      
+
+      var layerId = layer.target.id;
+      if (layerId != currentLayer) {
+
+        var removebutton = document.getElementsByClassName('mgl-layerControl');
+        console.log("length",removebutton.length);
+        for (i=0;i<removebutton.length;i++) {console.log(i);removebutton[i].parentElement.removeChild(removebutton[i]);}
+        map.setStyle('mapbox://styles/mapbox/' + layerId);
+        currentLayer = layerId;
+      }
+      //map.setLayoutProperty('country-label', 'text-field', ['get','name_ru']);
+    }
+     
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].onclick = switchLayer;
+    }
+        
+    function switchStyleMenu(sw) {
+      //console.log("switchStyleMenu : ",sw);
+      if (sw) {
+        document.getElementById("map_style_menu_outline").style.display = "block";
+      } else {
+        document.getElementById("map_style_menu_outline").style.display = "none";
+      }
+    }
+
+
+
+
+
+    function project(m,d) {
+      return m.project(new mapboxgl.LngLat(+d.lon, +d.lat)/*getLL(d)*/);
+    }
+
+    function markerupdate(m,d) {
+      d
+      .attr({
+        cx: function(d) { 
+          var x = project(m,d).x;
+          return x
+        },
+        cy: function(d) { 
+          var y = project(m,d).y;
+          return y
+        },
+      })
+    }
+
+    function zoom(d) {
+      if (d==0) {
+        return 18.5;
+      } else if (d==1) {
+        return 16;
+      } else if (d==2) {
+        return 11;
+      } else if (d==3) {
+        return 7;
+      } else {
+        return 4.7;
+      }
+    }
+
+
+
+  </script>
+
+  <script type="module">
+//=======Map Layer Control ========================================================================================
+    //import { layerControlSimple } from "https://tunchz.github.io/ISOC/layer_control/layerControlSimple.js"
+    import { layerControlGrouped } from "https://tunchz.github.io/ISOC/layer_control/layerControlGrouped.js"
+
+    map.on('style.load', function () {
+
+
+      map.addSource('mapth_prov', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/mapth_small.json'
+      });
+
+
+      map.addSource('counties', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/layer_control/counties.min.geojson'
+      });
+
+      map.addSource('states', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/layer_control/states.geojson'
+      });
+
+      map.addSource('lakes', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/layer_control/lakes.geojson'
+      });     
+
+      map.addSource('rivers', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/layer_control/rivers.geojson'
+      });
+
+      map.addSource('rail', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/layer_control/rail.geojson'
+      });
+
+      map.addLayer({
+        'id': 'CountiesbASE',
+        'type': 'fill',
+        'source': 'counties',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': 'transparent',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0.5
+        }
+      });
+
+      map.addLayer({
+        'id': 'Province',
+        'type': 'line',
+        'source': 'mapth_prov',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': '#ff0000',
+        }
+      });
+
+      map.addLayer({
+        'id': 'Counties',
+        'type': 'fill',
+        'source': 'counties',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': 'lightgray',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0.9
+        }
+      });
+
+      map.addLayer({
+        'id': 'States',
+        'type': 'line',
+        'source': 'states',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': '#121212',
+        }
+      });
+
+      map.addLayer({
+        'id': 'Lakes',
+        'type': 'fill',
+        'source': 'lakes',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': 'blue',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0.9
+        }
+      });
+
+      map.addLayer({
+        'id': 'riversCase',
+        'type': 'line',
+        'source': "rivers",
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': 'white',
+          'line-width': 6
+        }
+      });
+
+      map.addLayer({
+        'id': 'rivers',
+        'type': 'line',
+        'source': "rivers",
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': 'blue',
+          'line-width': 3
+        }
+      });
+
+      map.addLayer({
+        'id': 'Rail',
+        'type': 'line',
+        'source': "rail",
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': {
+            stops: [
+              [0, "black"],
+              [14, "black"],
+              [18, "black"]
+            ]
+          },
+          'line-width': 3
+        }
+      });
+
+      var config = {
+        options: {
+          collapsed: true
+        },
+        layers: [
+          {
+            id: "Province",
+            hidden: false,
+            group: "Political",
+            directory: "Admin"
+          },
+          {
+            id: "Counties",
+            hidden: false,
+            group: "Cadastral",
+            directory: "Admin"
+          },
+          {
+            id: "States",
+            hidden: false,
+            group: "Political",
+            directory: "Admin"
+          },
+          {
+            id: "Lakes",
+            hidden: false,
+            group: "Hydro",
+            directory: "Environment"
+          },
+          {
+            id: "riversCase",
+            hidden: true,
+            group: "Hydro",
+            parent: "rivers",
+            directory: "Environment"
+          },
+          {
+            name: "Rivers",
+            id: "rivers",
+            hidden: false,
+            group: "Hydro",
+            children: true,
+            directory: "Environment"
+          },
+          {
+            id: "Rail",
+            hidden: false,
+            directory: "Cultural",
+            legend: "<icon class='fa fa-minus' style='color:red;'></icon> Legend defined in config<br><icon class='fa fa-minus' style='color:black;'></icon> Toggles when layer is off"
+          }
+        ]
+      }
+
+      map.addControl(new layerControlGrouped(config), "top-left");
+
+    });
+
+    /*End Blank Map*/
+  </script>
+
+
+
+</html>
