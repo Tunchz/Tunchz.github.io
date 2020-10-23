@@ -51,12 +51,12 @@ d3.select('#vertical-table-markers-container').append('table').attr("id","vertic
 
 initialize();
 
-
 var shortnoti = true;
 var rightpanel_isopen = true;
 switchRightpanel();
 
-load_map_layers();
+
+//load_map_layers();
 
 function resizeAdjust() {
   //console.log($("#video-container").width(),$("#video-container").height())
@@ -168,7 +168,7 @@ function load_map_layers() {
     $.getJSON('https://tunchz.github.io/ISOC/json/mapth_small.json', function(map_geojson) {
 
       // Add map province outline
-      map_addlayer(map_geojson);
+      //map_addlayer(map_geojson);
 
       // Add Risk Plan Layer ----------------------------------------------
       riskplan_list.forEach(function (item, index) {

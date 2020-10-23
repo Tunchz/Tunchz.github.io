@@ -31,12 +31,82 @@
               <div id = "Text1_" class = "col-xs-8 height100p" style = "padding: 0px 0px 0px 5px;margin:0px;margin-top: 10px; max-width: 65px; ">
                 <span style="font-family: Impact;font-size: 30px; color: #fff;">DRM </span>
               </div>
-              <div id = "Text2_" class = "col-xs-4 height100p" style = "display: flex;justify-content: left; align-items: center; padding : 11px 0px 0px 5px;">
+              <div id = "Text2_" class = "col-xs-4 height100p" style = "pointer-events: auto;display: flex;justify-content: left; align-items: center; padding : 11px 0px 0px 5px;">
                 <div type="button" class="btn btn-primary" style="width:18px; height:18px; border-radius: 50%; padding: 0px 5px; font-family: mitr;" data-toggle="modal" data-target="#info-modal">
                   <div style="margin: -2px 0px 0px 0px;">?</div>
                 </div>                          
               </div>
             </div>
+
+            <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true" style="pointer-events: auto; font-family: Serithai;font: 12px/16px Serithai;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                            <h2 class="modal-title h3" id="myModalLabel"><a href="https://www.maholan.co.th/">DRM</a> &gt; Disaster Risk Management Dashboard </h2>
+                        </div>
+                        <div class="modal-body">
+                            <h3 style="margin-top:0">การใช้งาน</h3>
+                            <p>ระบบจะตรวจจับใบหน้าและวาดกรอบสี่เหลี่ยมล้อมรอบใบหน้า ชื่อของใบหน้าจะถูกแสดงมุมบนซ้าย และแสดงสีตามกรณีดังนี้ </p>
+                            <ol>
+                                <li>สีส้ม     --> ใบหน้ากำลังถูกยืนยันตัวตนจากระบบ</li>
+                                <li>สีเขียว   --> ใบหน้าถูกยืนยันเรียบร้อยพร้อมแสดงรูปโปรไฟล์มุมล่างซ้าย</li>
+                                <li>สีแดง    --> ใบหน้าไม่ได้ลงทะเบียนในระบบหรือระบบไม่สามารถยืนยันใบหน้าได้</li>
+                            </ol>
+
+                            <h3 class="">การแสดงรายละเอียดบนแถบด้านขวา</h3>
+                            <p>ในโหมดหน้าจอแคบแถบจะถูกแสดงดัานล่างถัดจากกรอบการแสดงภาพกล้อง ซึ่งสามารถเลื่อนหน้าจอขึ้นเพื่อดูรายละเอียด</p>
+                            <ol>
+                                <li>ส่วนตัวกรอง เป็นแถบบนสุดแสดงตัวกรองใช้ในการเลือกช่วงเวลาในการแสดงผลการตรวจจับใบหน้า</li>
+                                <li>ส่วนตัวเลขสรุป เป็นแถบแสดงตัวเลขสรุปผลการตรวจจับใบหน้าแบ่งประเภทตามรหัสสี (คลิ๊กเลือกประเภทเพื่อเรียกดูรายชื่อตามประเภทที่ต้องการ)</li>
+                                <li>ส่วนตาราง แสดงรูปใบหน้าพร้อมรายละเอียดการตรวจับใบหน้า ได้แก่ ชื่อ ชื่อกลุ่ม วัน ห้วงเวลา อารมณ์ใบหน้า และสถานะการจัดเก็บข้อมูลใบหน้า</li>
+                            </ol>
+                            <h3>ข้อมูล</h3>
+                            <p>ข้อมูลใบหน้า เป็นข้อมูลใบหน้าของข้าราชการในกองคณิตศาสตร์และคอมพิวเตอร์ ส่วนการศึกษา โรงเรียนนายร้อยพระจุลจอมเกล้า<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a></p>
+                            <ul>
+                                <li>ระบบตรวจจับใบหน้า Face.Rex ถูกพัฒนาขึ้นเพื่อใช้ศึกษา Maching Learning และการนำเทคโนโลยีและ AI มาสนับสนุนในการปฏิบัติงานและการเรียนการสอน เพื่อประโยชน์กับสาธารณะชน ติดต่อผู้จัดทำระบบเพื่อขออนุญาตในการใช้งานข้อมูลใดๆ ที่เป็นผลลัพธ์จากระบบก่อนนำไปใช้งาน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง </li>
+                            </ul>
+                            <h3>ติดต่อ</h3>
+                            <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">tunchz@gmail.com</a>.</p>
+                        </div>
+                        <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left">Made by CRMA Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="datasource-modal" tabindex="-1" role="dialog" aria-labelledby="datasource-modalLabel" aria-hidden="true" style="pointer-events: auto; font-family: Serithai;font: 12px/16px Serithai;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h3 class="modal-title" id="myModalLabel">รายละเอียดแหล่งข้อมูล</h3>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-condensed" >
+                                <thead>
+                                    <tr>
+                                        <th>ชุดข้อมูล</th>
+                                        <th>แหล่งข้อมูล</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>ข้อมูลรายชื่อข้าราชการกองคณิตศาสตร์และคอมพิวเตอร์</td>
+                                        <td>https://macs.crma.ac.th</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ข้อมูลรายชื่อข้าราชการกองอื่นๆ</td>
+                                        <td>https://acadiv.crma.ac.th</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                    </div>
+                </div>
+            </div>
+
+
+
           </div>
 
           <div id='notification-container-right' class='map_addon_right' style = "width: auto; display:block; margin:0px;">
@@ -47,7 +117,7 @@
             </div>
             <div id = "data-panel" class = "col-xs-12 height100p" style = "/*background-color: #383838;*/">
               <div id='table-container-BG' class = "col-xs-12 height100p" style = "background-color: #ffffff22">
-                <div id="table-container" class="table-container" oncontextmenu="return false;"></div>
+                <div id="table-container" class="table-container" oncontextmenu="return false;"></div> 
               </div>                
             </div>
 
@@ -88,72 +158,7 @@
 
 
 
-          <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
-                          <h2 class="modal-title h3" id="myModalLabel"><a href="https://www.maholan.co.th/">DRM</a> &gt; Disaster Risk Management Dashboard </h2>
-                      </div>
-                      <div class="modal-body">
-                          <h3 style="margin-top:0">การใช้งาน</h3>
-                          <p>ระบบจะตรวจจับใบหน้าและวาดกรอบสี่เหลี่ยมล้อมรอบใบหน้า ชื่อของใบหน้าจะถูกแสดงมุมบนซ้าย และแสดงสีตามกรณีดังนี้ </p>
-                          <ol>
-                              <li>สีส้ม     --> ใบหน้ากำลังถูกยืนยันตัวตนจากระบบ</li>
-                              <li>สีเขียว   --> ใบหน้าถูกยืนยันเรียบร้อยพร้อมแสดงรูปโปรไฟล์มุมล่างซ้าย</li>
-                              <li>สีแดง    --> ใบหน้าไม่ได้ลงทะเบียนในระบบหรือระบบไม่สามารถยืนยันใบหน้าได้</li>
-                          </ol>
 
-                          <h3 class="">การแสดงรายละเอียดบนแถบด้านขวา</h3>
-                          <p>ในโหมดหน้าจอแคบแถบจะถูกแสดงดัานล่างถัดจากกรอบการแสดงภาพกล้อง ซึ่งสามารถเลื่อนหน้าจอขึ้นเพื่อดูรายละเอียด</p>
-                          <ol>
-                              <li>ส่วนตัวกรอง เป็นแถบบนสุดแสดงตัวกรองใช้ในการเลือกช่วงเวลาในการแสดงผลการตรวจจับใบหน้า</li>
-                              <li>ส่วนตัวเลขสรุป เป็นแถบแสดงตัวเลขสรุปผลการตรวจจับใบหน้าแบ่งประเภทตามรหัสสี (คลิ๊กเลือกประเภทเพื่อเรียกดูรายชื่อตามประเภทที่ต้องการ)</li>
-                              <li>ส่วนตาราง แสดงรูปใบหน้าพร้อมรายละเอียดการตรวจับใบหน้า ได้แก่ ชื่อ ชื่อกลุ่ม วัน ห้วงเวลา อารมณ์ใบหน้า และสถานะการจัดเก็บข้อมูลใบหน้า</li>
-                          </ol>
-                          <h3>ข้อมูล</h3>
-                          <p>ข้อมูลใบหน้า เป็นข้อมูลใบหน้าของข้าราชการในกองคณิตศาสตร์และคอมพิวเตอร์ ส่วนการศึกษา โรงเรียนนายร้อยพระจุลจอมเกล้า<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a></p>
-                          <ul>
-                              <li>ระบบตรวจจับใบหน้า Face.Rex ถูกพัฒนาขึ้นเพื่อใช้ศึกษา Maching Learning และการนำเทคโนโลยีและ AI มาสนับสนุนในการปฏิบัติงานและการเรียนการสอน เพื่อประโยชน์กับสาธารณะชน ติดต่อผู้จัดทำระบบเพื่อขออนุญาตในการใช้งานข้อมูลใดๆ ที่เป็นผลลัพธ์จากระบบก่อนนำไปใช้งาน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง </li>
-                          </ul>
-                          <h3>ติดต่อ</h3>
-                          <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">tunchz@gmail.com</a>.</p>
-                      </div>
-                      <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left">Made by CRMA Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
-                  </div>
-              </div>
-          </div>
-          <div class="modal fade" id="datasource-modal" tabindex="-1" role="dialog" aria-labelledby="datasource-modalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h3 class="modal-title" id="myModalLabel">รายละเอียดแหล่งข้อมูล</h3>
-                      </div>
-                      <div class="modal-body">
-                          <table class="table table-condensed" >
-                              <thead>
-                                  <tr>
-                                      <th>ชุดข้อมูล</th>
-                                      <th>แหล่งข้อมูล</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-
-                                  <tr>
-                                      <td>ข้อมูลรายชื่อข้าราชการกองคณิตศาสตร์และคอมพิวเตอร์</td>
-                                      <td>https://macs.crma.ac.th</td>
-                                  </tr>
-                                  <tr>
-                                      <td>ข้อมูลรายชื่อข้าราชการกองอื่นๆ</td>
-                                      <td>https://acadiv.crma.ac.th</td>
-                                  </tr>
-
-                              </tbody>
-                          </table>
-                      </div>
-                      <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
-                  </div>
-              </div>
-          </div>
 
         </div>
 
@@ -180,6 +185,7 @@
   <script src="js/crossfilter.min.js"></script>
   <script src="js/jquery.min.js"></script>
 
+  <!script type="module" src="https://tunchz.github.io/ISOC/base_layer_control.js"><!/script>
   <script defer src="markers.js"></script>
   <!script defer src="ISOC.js"><!/script>
   <script defer src="swipedetect.js"></script>
@@ -197,8 +203,8 @@
     var z=4;  //default zoom level 0-4
     var flyspeed = 0.8;
 
-    mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg'
-    //mapboxgl.accessToken = 'pk.eyJ1IjoibXVyYWxpcHJhamFwYXRpIiwiYSI6ImNrMHA1d3VjYzBna3gzbG50ZjR5b2Zkb20ifQ.guBaIUcqkTdYHX1R6CM6FQ'
+    //mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg'
+    mapboxgl.accessToken ="pk.eyJ1IjoiYTEwayIsImEiOiJjaWdyMmVrazcwMXpsdTZtMThscWtiOTJtIn0.-A76dzJ0vsKULJdDxGvVXg";
     //Setup mapbox-gl map
     var map = new mapboxgl.Map({
       //style: 'mapbox://styles/tunchz/ck9litjbw2soc1iqo4rysy4nt',
@@ -353,6 +359,8 @@
     //import { layerControlSimple } from "https://tunchz.github.io/ISOC/layer_control/layerControlSimple.js"
     import { layerControlGrouped } from "https://tunchz.github.io/ISOC/layer_control/layerControlGrouped.js"
 
+    
+
     map.on('style.load', function () {
 
 
@@ -361,6 +369,10 @@
         'data': 'https://tunchz.github.io/ISOC/json/mapth_small.json'
       });
 
+      map.addSource('mapth_subd', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/map_th_subd.geojson'
+      });
 
       map.addSource('counties', {
         'type': 'geojson',
@@ -402,17 +414,30 @@
       });
 
       map.addLayer({
-        'id': 'Province',
+        'id': 'จังหวัด',
         'type': 'line',
         'source': 'mapth_prov',
+        'layout': {
+          'visibility': 'visible'
+        },
+        'paint': {
+          'line-color': '#dddddd',
+          'line-opacity': 0.5
+        }
+      });
+
+      map.addLayer({
+        'id': 'ตำบล',
+        'type': 'line',
+        'source': 'mapth_subd',
         'layout': {
           'visibility': 'none'
         },
         'paint': {
-          'line-color': '#ff0000',
+          'line-color': '#bbbbbb',
+          'line-opacity': 0.5
         }
       });
-
       map.addLayer({
         'id': 'Counties',
         'type': 'fill',
@@ -504,7 +529,13 @@
         },
         layers: [
           {
-            id: "Province",
+            id: "จังหวัด",
+            hidden: false,
+            group: "Political",
+            directory: "Admin"
+          },
+          {
+            id: "ตำบล",
             hidden: false,
             group: "Political",
             directory: "Admin"
@@ -554,6 +585,8 @@
       map.addControl(new layerControlGrouped(config), "top-left");
 
     });
+
+    load_map_layers();
 
     /*End Blank Map*/
   </script>
