@@ -124,12 +124,11 @@ svg text {
 .table-container {
   padding: 5px;
   position: relative;
-  /*left: 50%;
-  top: 50%;*/
-  /*padding: 10px 0px;*/
+  left: 50%;
+  top: 50%;
+  /*padding: 10px 0px;
   bottom: auto;
-  right: auto;
-/*  -webkit-transform: translateX(-50%) translateY(0%);
+  right: auto;*/
   -webkit-transform: translateX(-50%) translateY(-50%);
   -moz-transform: translateX(-50%) translateY(-50%);
   -ms-transform: translateX(-50%) translateY(-50%);
@@ -138,7 +137,7 @@ svg text {
   width: 100%;
   height: 100%;
   /*background-color: #ffcc00;*/
-  overflow: hidden;
+  overflow: auto;
 }
 
 
@@ -677,11 +676,12 @@ red:hover {
 }
 
 #header-container { 
+  height: 30px;
   padding: 0px; 
-  margin-bottom: 20px; 
+  margin: 5px 0px 30px 10px; 
   position: relative; 
-  /*left: 0px; */
-  top: 0px; 
+  /*left: 0px; 
+  top: 0px; */
   cursor: pointer; 
 }
 
@@ -763,9 +763,11 @@ red:hover {
   font-family: 'impact', sans-serif;
   border-radius:2px;
   /*opacity:0.6;*/
+  cursor: pointer;
 }
 
 #map_style_menu_button:hover {
+  background: #ddd;
   opacity: 1;
 }
 
@@ -774,27 +776,31 @@ red:hover {
   width: 24px;
   margin:3px;
   border-radius: 2px;
-  border: 3px #2a58c3;
+  /*border: 3px #2a58c3;*/
   background-image: url("images/MapStyle.png");
 }
 
 #map_style_menu_outline {
-  height: 50px;
+  height: auto;
   left: 0px;
-  top: 181px;
+  top: 193px;
   position: absolute;
-  padding: 0px;
-  border-radius:3px;
+  padding: 10px;
+  border-radius:2px;
+  cursor: pointer;
+  pointer-events: auto;
 }
 #map_style_menu {
+  width: 100px;
   color:#383838;
-  height: 34px;
+  height: auto;
   background: #fff;
-  padding-top: 1px;
+  padding: 5px 15px 0px 15px;
   font-family: 'impact', sans-serif;
   font-size: 12px;
-  border-radius:3px;
+  border-radius:2px;
   margin: 8px;
+  margin-left: 38px;
 }
 
 
@@ -802,6 +808,7 @@ red:hover {
 
 /* custom scrollbar */
 /* width */
+
 ::-webkit-scrollbar {
   width: 0px;
   height: 0px;

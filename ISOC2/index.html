@@ -23,7 +23,7 @@
         <div id="map-container">
           <div id="map" class='blue'></div>
 
-          <div id='header-container' class='map_addon_top_left' style = "width: 500; height: 40; margin: 5px 0px 0px 10px;">
+          <div id='header-container' class='map_addon_top_left' style = "">
             <div id = "logo-container" class = "col-xs-3" style = "display: flex;justify-content: center; align-items: center;">
               <img id = "logo" src = 'img/isoc.png' style = "padding: 5px; width : 40px; height : 40px;"></img>
             </div>
@@ -62,24 +62,24 @@
           </div>
 
 
-          <div id="map_style_menu_outline" style="display: none" onmouseleave="switchStyleMenu(false)"  >
+          <div id="map_style_menu_outline" style="display: none" onmouseenter="switchStyleMenu(true)" onmouseleave="switchStyleMenu(false)"  >
             <div id="map_style_menu" >
-              <div style="margin: 5px 17px 0px 40px; padding-top:3px;" onclick="switchStyleMenu(false)" >
+              <div style="/*margin: 5px 17px 0px 5px; padding-top:3px;*/" onclick="switchStyleMenu(false)" >
                 <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" checked="checked" />
-                <label for="satellite-v9">satellite </label>
+                <label for="satellite-v9">satellite </label><br>
                 <input id="streets-v11" type="radio" name="rtoggle" value="streets" />
-                <label for="streets-v11">streets </label>
+                <label for="streets-v11">streets </label><br>
                 <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors" />
-                <label for="outdoors-v11">outdoors </label>
+                <label for="outdoors-v11">outdoors </label><br>
                 <input id="light-v10" type="radio" name="rtoggle" value="light" />
-                <label for="light-v10">light </label>
+                <label for="light-v10">light </label><br>
                 <input id="dark-v10" type="radio" name="rtoggle" value="dark" />
                 <label for="dark-v10">dark </label>
               </div>
             </div>
           </div>
-          <div id="map_style_menu_button" class="mapboxgl-ctrl mapboxgl-ctrl-group" onmouseover="switchStyleMenu(true)" onblur="switchStyleMenu(false)">
-            <div id="map_style_menu_button_image" class="mapboxgl-ctrl mapboxgl-ctrl-group"></div>
+          <div id="map_style_menu_button" class="mapboxgl-ctrl" onclick="switchStyleMenu(true)" onmouseleave="switchStyleMenu(false)">
+            <div id="map_style_menu_button_image" class="mapboxgl-ctrl"></div>
           </div>
 
 
@@ -271,9 +271,8 @@
     var inputs = layerList.getElementsByTagName('input');
     var currentLayer = "satellite-v9";
      
-
     $("#map_style_menu_button").appendTo(".mapboxgl-ctrl-top-left");
-    //$("#map_style_menu_outline").appendTo(".mapboxgl-ctrl-top-left");
+    $("#map_style_menu_outline").appendTo(".mapboxgl-ctrl-top-left");
 
     
     $("#notification-container-right").appendTo(".mapboxgl-ctrl-top-right");
