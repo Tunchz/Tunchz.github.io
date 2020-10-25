@@ -205,6 +205,7 @@
 
     //mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg'
     mapboxgl.accessToken ="pk.eyJ1IjoiYTEwayIsImEiOiJjaWdyMmVrazcwMXpsdTZtMThscWtiOTJtIn0.-A76dzJ0vsKULJdDxGvVXg";
+    //mapboxgl.accessToken ='';
     //Setup mapbox-gl map
     var map = new mapboxgl.Map({
       //style: 'mapbox://styles/tunchz/ck9litjbw2soc1iqo4rysy4nt',
@@ -359,9 +360,11 @@
     //import { layerControlSimple } from "https://tunchz.github.io/ISOC/layer_control/layerControlSimple.js"
     import { layerControlGrouped } from "https://tunchz.github.io/ISOC/layer_control/layerControlGrouped.js"
 
-    
+      //map_addpiecluster();  
 
     map.on('style.load', function () {
+
+      map_addcluster();  
 
 
       map.addSource('mapth_prov', {
@@ -369,19 +372,28 @@
         'data': 'https://tunchz.github.io/ISOC/json/mapth_small.json'
       });
 
+      map.addSource('mapth_dist', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/mapth_dist.json'
+      });
+
       map.addSource('mapth_subd', {
         'type': 'geojson',
-        'data': 'https://tunchz.github.io/ISOC/json/map_th_subd.geojson'
+        'data': 'https://tunchz.github.io/ISOC/json/mapth_subd.json'
       });
+
+      // map.addSource('hotspot', {
+      //   'type': 'geojson',
+      //   'data': 'https://tunchz.github.io/ISOC/json/hotspotth.geojson'
+      // });
+
+
+
+
 
       map.addSource('counties', {
         'type': 'geojson',
         'data': 'https://tunchz.github.io/ISOC/layer_control/counties.min.geojson'
-      });
-
-      map.addSource('states', {
-        'type': 'geojson',
-        'data': 'https://tunchz.github.io/ISOC/layer_control/states.geojson'
       });
 
       map.addSource('lakes', {
@@ -399,19 +411,19 @@
         'data': 'https://tunchz.github.io/ISOC/layer_control/rail.geojson'
       });
 
-      map.addLayer({
-        'id': 'CountiesbASE',
-        'type': 'fill',
-        'source': 'counties',
-        'layout': {
-          'visibility': 'none'
-        },
-        'paint': {
-          'fill-color': 'transparent',
-          'fill-outline-color': 'white',
-          'fill-opacity': 0.5
-        }
-      });
+      // map.addLayer({
+      //   'id': 'CountiesbASE',
+      //   'type': 'fill',
+      //   'source': 'counties',
+      //   'layout': {
+      //     'visibility': 'none'
+      //   },
+      //   'paint': {
+      //     'fill-color': 'transparent',
+      //     'fill-outline-color': 'white',
+      //     'fill-opacity': 0.5
+      //   }
+      // });
 
       map.addLayer({
         'id': 'จังหวัด',
@@ -419,6 +431,19 @@
         'source': 'mapth_prov',
         'layout': {
           'visibility': 'visible'
+        },
+        'paint': {
+          'line-color': '#dddddd',
+          'line-opacity': 0.5
+        }
+      });
+
+      map.addLayer({
+        'id': 'อำเภอ',
+        'type': 'line',
+        'source': 'mapth_dist',
+        'layout': {
+          'visibility': 'none'
         },
         'paint': {
           'line-color': '#dddddd',
@@ -438,6 +463,7 @@
           'line-opacity': 0.5
         }
       });
+
       map.addLayer({
         'id': 'Counties',
         'type': 'fill',
@@ -449,18 +475,6 @@
           'fill-color': 'lightgray',
           'fill-outline-color': 'white',
           'fill-opacity': 0.9
-        }
-      });
-
-      map.addLayer({
-        'id': 'States',
-        'type': 'line',
-        'source': 'states',
-        'layout': {
-          'visibility': 'none'
-        },
-        'paint': {
-          'line-color': '#121212',
         }
       });
 
@@ -535,21 +549,52 @@
             directory: "Admin"
           },
           {
+            id: "อำเภอ",
+            hidden: false,
+            group: "Political",
+            directory: "Admin"
+          },
+          {
             id: "ตำบล",
             hidden: false,
             group: "Political",
             directory: "Admin"
           },
+
+
+
+
+          {
+            id: "Hotspot-cluster-count",
+            hidden: true,
+            group: "Heats",
+            parent: "Hotspot-Cluster",
+            directory: "Environment"
+          },
+          {
+            id: "Hotspot-unclustered-point",
+            hidden: true,
+            group: "Heats",
+            parent: "Hotspot-Cluster",
+            directory: "Environment"
+          },
+          {
+            name: "Hotspot",
+            id: "Hotspot-Cluster",
+            hidden: false,
+            group: "Heats",
+            children: true,
+            directory: "Environment"
+          },
+
+
+
+
+
           {
             id: "Counties",
             hidden: false,
             group: "Cadastral",
-            directory: "Admin"
-          },
-          {
-            id: "States",
-            hidden: false,
-            group: "Political",
             directory: "Admin"
           },
           {
