@@ -33,7 +33,7 @@ class layerControlGrouped {
     this._directories = [...new Set(directories)];
 
     groups = this._layers.reduce(function (i, layer) {
-      if (!layer.group) layer.group = "Operational Layers"
+      if (!layer.group) layer.group = "ชั้นข้อมูลปฏิบัติการ"//"Operational Layers"
       return [...i, layer.group]
     }, []);
 
@@ -50,7 +50,7 @@ class layerControlGrouped {
     })
 
     this._layers.map(function (l) {
-      if (!l.group) l.group = "Operational Layers";
+      if (!l.group) l.group = "ชั้นข้อมูลปฏิบัติการ";//"Operational Layers";
       config[l.directory][l.group] = []
     })
 
