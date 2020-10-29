@@ -23,137 +23,142 @@
         <div id="map-container">
           <div id="map" class='blue'></div>
 
-          <div id='header-container' class='map_addon_top_left' style = "width: 500; height: 40; margin: 5px 0px 0px 10px;">
+          <div id='header-container' class='map_addon_top_left' style = "">
             <div id = "logo-container" class = "col-xs-3" style = "display: flex;justify-content: center; align-items: center;">
               <img id = "logo" src = 'img/isoc.png' style = "padding: 5px; width : 40px; height : 40px;"></img>
             </div>
             <div id = "title-container" class = "col-xs-9 height100p" style = "">
-              <div id = "Text1_" class = "col-xs-8 height100p" style = "padding: 0px 0px 0px 5px;margin:0px;margin-top: 2px; max-width: 65px; ">
+              <div id = "Text1_" class = "col-xs-8 height100p" style = "padding: 0px 0px 0px 5px;margin:0px;margin-top: 10px; max-width: 65px; ">
                 <span style="font-family: Impact;font-size: 30px; color: #fff;">DRM </span>
               </div>
-              <div id = "Text2_" class = "col-xs-4 height100p" style = "display: flex;justify-content: left; align-items: center; padding : 11px 0px 0px 5px;">
+              <div id = "Text2_" class = "col-xs-4 height100p" style = "pointer-events: auto;display: flex;justify-content: left; align-items: center; padding : 11px 0px 0px 5px;">
                 <div type="button" class="btn btn-primary" style="width:18px; height:18px; border-radius: 50%; padding: 0px 5px; font-family: mitr;" data-toggle="modal" data-target="#info-modal">
                   <div style="margin: -2px 0px 0px 0px;">?</div>
                 </div>                          
               </div>
             </div>
+
+            <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true" style="pointer-events: auto; font-family: Serithai;font: 12px/16px Serithai;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                            <h2 class="modal-title h3" id="myModalLabel"><a href="https://www.maholan.co.th/">DRM</a> &gt; Disaster Risk Management Dashboard </h2>
+                        </div>
+                        <div class="modal-body">
+                            <h3 style="margin-top:0">การใช้งาน</h3>
+                            <p>ระบบจะตรวจจับใบหน้าและวาดกรอบสี่เหลี่ยมล้อมรอบใบหน้า ชื่อของใบหน้าจะถูกแสดงมุมบนซ้าย และแสดงสีตามกรณีดังนี้ </p>
+                            <ol>
+                                <li>สีส้ม     --> ใบหน้ากำลังถูกยืนยันตัวตนจากระบบ</li>
+                                <li>สีเขียว   --> ใบหน้าถูกยืนยันเรียบร้อยพร้อมแสดงรูปโปรไฟล์มุมล่างซ้าย</li>
+                                <li>สีแดง    --> ใบหน้าไม่ได้ลงทะเบียนในระบบหรือระบบไม่สามารถยืนยันใบหน้าได้</li>
+                            </ol>
+
+                            <h3 class="">การแสดงรายละเอียดบนแถบด้านขวา</h3>
+                            <p>ในโหมดหน้าจอแคบแถบจะถูกแสดงดัานล่างถัดจากกรอบการแสดงภาพกล้อง ซึ่งสามารถเลื่อนหน้าจอขึ้นเพื่อดูรายละเอียด</p>
+                            <ol>
+                                <li>ส่วนตัวกรอง เป็นแถบบนสุดแสดงตัวกรองใช้ในการเลือกช่วงเวลาในการแสดงผลการตรวจจับใบหน้า</li>
+                                <li>ส่วนตัวเลขสรุป เป็นแถบแสดงตัวเลขสรุปผลการตรวจจับใบหน้าแบ่งประเภทตามรหัสสี (คลิ๊กเลือกประเภทเพื่อเรียกดูรายชื่อตามประเภทที่ต้องการ)</li>
+                                <li>ส่วนตาราง แสดงรูปใบหน้าพร้อมรายละเอียดการตรวจับใบหน้า ได้แก่ ชื่อ ชื่อกลุ่ม วัน ห้วงเวลา อารมณ์ใบหน้า และสถานะการจัดเก็บข้อมูลใบหน้า</li>
+                            </ol>
+                            <h3>ข้อมูล</h3>
+                            <p>ข้อมูลใบหน้า เป็นข้อมูลใบหน้าของข้าราชการในกองคณิตศาสตร์และคอมพิวเตอร์ ส่วนการศึกษา โรงเรียนนายร้อยพระจุลจอมเกล้า<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a></p>
+                            <ul>
+                                <li>ระบบตรวจจับใบหน้า Face.Rex ถูกพัฒนาขึ้นเพื่อใช้ศึกษา Maching Learning และการนำเทคโนโลยีและ AI มาสนับสนุนในการปฏิบัติงานและการเรียนการสอน เพื่อประโยชน์กับสาธารณะชน ติดต่อผู้จัดทำระบบเพื่อขออนุญาตในการใช้งานข้อมูลใดๆ ที่เป็นผลลัพธ์จากระบบก่อนนำไปใช้งาน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง </li>
+                            </ul>
+                            <h3>ติดต่อ</h3>
+                            <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">tunchz@gmail.com</a>.</p>
+                        </div>
+                        <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left">Made by CRMA Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="datasource-modal" tabindex="-1" role="dialog" aria-labelledby="datasource-modalLabel" aria-hidden="true" style="pointer-events: auto; font-family: Serithai;font: 12px/16px Serithai;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h3 class="modal-title" id="myModalLabel">รายละเอียดแหล่งข้อมูล</h3>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-condensed" >
+                                <thead>
+                                    <tr>
+                                        <th>ชุดข้อมูล</th>
+                                        <th>แหล่งข้อมูล</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>ข้อมูลรายชื่อข้าราชการกองคณิตศาสตร์และคอมพิวเตอร์</td>
+                                        <td>https://macs.crma.ac.th</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ข้อมูลรายชื่อข้าราชการกองอื่นๆ</td>
+                                        <td>https://acadiv.crma.ac.th</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                    </div>
+                </div>
+            </div>
+
+
+
           </div>
 
-          <div id='notification-container-right' class='map_addon_right' style = "width: auto; display:block;">
+          <div id='notification-container-right' class='map_addon_right' style = "width: auto; display:block; margin:0px;">
             
             <div id='table-container-MAP' class = "col-sm-12 height100p" style="display: block;">
-              <div id="table-markers-container" class="table-container" oncontextmenu="return false;" style = "padding-right:0px; background-color: #fff0;"></div>
+              <div id="table-markers-container" class="table-container" oncontextmenu="return false;" style = "padding-right:0px; background-color: #fff0;/*-webkit-transform: translateX(-50%) translateY(0%);*/"></div>
               <div id='menu-container-top-right' class='map_addon_top_right' style = "padding: 0px 0px 0px 0px;"></div>
             </div>
             <div id = "data-panel" class = "col-xs-12 height100p" style = "/*background-color: #383838;*/">
               <div id='table-container-BG' class = "col-xs-12 height100p" style = "background-color: #ffffff22">
-                <div id="table-container" class="table-container" oncontextmenu="return false;"></div>
+                <div id="table-container" class="table-container" oncontextmenu="return false;"></div> 
               </div>                
             </div>
 
           </div>
 
 
-          <div id='notification-container-bottom' class='map_addon_bottom' style = "height: auto; display:block;">
+          <div id='notification-container-bottom' class='map_addon_bottom' style = "height: auto; display:block; margin:0px;">
             <div id='vertical-table-container-MAP' class = "col-sm-12 height100p">
-              <div id="vertical-table-markers-container" class="table-container" oncontextmenu="return false;" style = "padding: 0px 5px;/*-webkit-transform: translateX(-50%) translateY(0%);*/ background-color: #fff0;">
+              <div id="vertical-table-markers-container" class="table-container" oncontextmenu="return false;" style = "padding: 0px 5px; background-color: #fff0;/*-webkit-transform: translateX(-50%) translateY(-50%);*/">
               </div>
             </div>
           </div>
 
 
-          <div id="map_style_menu_outline" style="display: none" onmouseleave="switchStyleMenu(false)"  >
+          <div id="map_style_menu_outline" style="display: none" onmouseenter="switchStyleMenu(true)" onmouseleave="switchStyleMenu(false)"  >
             <div id="map_style_menu" >
-              <div style="margin: 5px 17px 0px 40px; padding-top:3px;" onclick="switchStyleMenu(false)" >
+              <div style="/*margin: 5px 17px 0px 5px; padding-top:3px;*/" onclick="switchStyleMenu(false)" >
                 <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" checked="checked" />
-                <label for="satellite-v9">satellite </label>
+                <label for="satellite-v9">satellite </label><br>
                 <input id="streets-v11" type="radio" name="rtoggle" value="streets" />
-                <label for="streets-v11">streets </label>
+                <label for="streets-v11">streets </label><br>
                 <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors" />
-                <label for="outdoors-v11">outdoors </label>
+                <label for="outdoors-v11">outdoors </label><br>
                 <input id="light-v10" type="radio" name="rtoggle" value="light" />
-                <label for="light-v10">light </label>
+                <label for="light-v10">light </label><br>
                 <input id="dark-v10" type="radio" name="rtoggle" value="dark" />
                 <label for="dark-v10">dark </label>
               </div>
             </div>
           </div>
-          <div id="map_style_menu_button" onmouseover="switchStyleMenu(true)" onblur="switchStyleMenu(false)">
-            <div id="map_style_menu_button_image"></div>
+          <div id="map_style_menu_button" class="mapboxgl-ctrl" onclick="switchStyleMenu(true)" onmouseleave="switchStyleMenu(false)">
+            <div id="map_style_menu_button_image" class="mapboxgl-ctrl"></div>
           </div>
 
 
           
-          <div id='menu-container-bottom-right' class='map_addon_bottom_right' style = "padding: 0px 0px 0px 0px;"></div>
+          <div id='menu-container-bottom-right' class='map_addon_bottom_right' ></div>
 
 
 
-          <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
-                          <h2 class="modal-title h3" id="myModalLabel"><a href="https://www.maholan.co.th/">DRM</a> &gt; Disaster Risk Management Dashboard </h2>
-                      </div>
-                      <div class="modal-body">
-                          <h3 style="margin-top:0">การใช้งาน</h3>
-                          <p>ระบบจะตรวจจับใบหน้าและวาดกรอบสี่เหลี่ยมล้อมรอบใบหน้า ชื่อของใบหน้าจะถูกแสดงมุมบนซ้าย และแสดงสีตามกรณีดังนี้ </p>
-                          <ol>
-                              <li>สีส้ม     --> ใบหน้ากำลังถูกยืนยันตัวตนจากระบบ</li>
-                              <li>สีเขียว   --> ใบหน้าถูกยืนยันเรียบร้อยพร้อมแสดงรูปโปรไฟล์มุมล่างซ้าย</li>
-                              <li>สีแดง    --> ใบหน้าไม่ได้ลงทะเบียนในระบบหรือระบบไม่สามารถยืนยันใบหน้าได้</li>
-                          </ol>
 
-                          <h3 class="">การแสดงรายละเอียดบนแถบด้านขวา</h3>
-                          <p>ในโหมดหน้าจอแคบแถบจะถูกแสดงดัานล่างถัดจากกรอบการแสดงภาพกล้อง ซึ่งสามารถเลื่อนหน้าจอขึ้นเพื่อดูรายละเอียด</p>
-                          <ol>
-                              <li>ส่วนตัวกรอง เป็นแถบบนสุดแสดงตัวกรองใช้ในการเลือกช่วงเวลาในการแสดงผลการตรวจจับใบหน้า</li>
-                              <li>ส่วนตัวเลขสรุป เป็นแถบแสดงตัวเลขสรุปผลการตรวจจับใบหน้าแบ่งประเภทตามรหัสสี (คลิ๊กเลือกประเภทเพื่อเรียกดูรายชื่อตามประเภทที่ต้องการ)</li>
-                              <li>ส่วนตาราง แสดงรูปใบหน้าพร้อมรายละเอียดการตรวจับใบหน้า ได้แก่ ชื่อ ชื่อกลุ่ม วัน ห้วงเวลา อารมณ์ใบหน้า และสถานะการจัดเก็บข้อมูลใบหน้า</li>
-                          </ol>
-                          <h3>ข้อมูล</h3>
-                          <p>ข้อมูลใบหน้า เป็นข้อมูลใบหน้าของข้าราชการในกองคณิตศาสตร์และคอมพิวเตอร์ ส่วนการศึกษา โรงเรียนนายร้อยพระจุลจอมเกล้า<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a></p>
-                          <ul>
-                              <li>ระบบตรวจจับใบหน้า Face.Rex ถูกพัฒนาขึ้นเพื่อใช้ศึกษา Maching Learning และการนำเทคโนโลยีและ AI มาสนับสนุนในการปฏิบัติงานและการเรียนการสอน เพื่อประโยชน์กับสาธารณะชน ติดต่อผู้จัดทำระบบเพื่อขออนุญาตในการใช้งานข้อมูลใดๆ ที่เป็นผลลัพธ์จากระบบก่อนนำไปใช้งาน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง </li>
-                          </ul>
-                          <h3>ติดต่อ</h3>
-                          <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">tunchz@gmail.com</a>.</p>
-                      </div>
-                      <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left">Made by CRMA Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
-                  </div>
-              </div>
-          </div>
-          <div class="modal fade" id="datasource-modal" tabindex="-1" role="dialog" aria-labelledby="datasource-modalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h3 class="modal-title" id="myModalLabel">รายละเอียดแหล่งข้อมูล</h3>
-                      </div>
-                      <div class="modal-body">
-                          <table class="table table-condensed" >
-                              <thead>
-                                  <tr>
-                                      <th>ชุดข้อมูล</th>
-                                      <th>แหล่งข้อมูล</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-
-                                  <tr>
-                                      <td>ข้อมูลรายชื่อข้าราชการกองคณิตศาสตร์และคอมพิวเตอร์</td>
-                                      <td>https://macs.crma.ac.th</td>
-                                  </tr>
-                                  <tr>
-                                      <td>ข้อมูลรายชื่อข้าราชการกองอื่นๆ</td>
-                                      <td>https://acadiv.crma.ac.th</td>
-                                  </tr>
-
-                              </tbody>
-                          </table>
-                      </div>
-                      <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
-                  </div>
-              </div>
-          </div>
 
         </div>
 
@@ -163,6 +168,11 @@
 
   <!script defer src="js/face-api.min.js"><!/script>
   <script src="js/covid19.js"></script>
+
+  <!link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+    integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="layer_control/layerControl.css">
+
 
   <script src='js/mapbox-gl_v1120.js'></script>
   <link rel="stylesheet" href="css/mapbox-gl_v1120.css">
@@ -175,12 +185,15 @@
   <script src="js/crossfilter.min.js"></script>
   <script src="js/jquery.min.js"></script>
 
+  <!script type="module" src="https://tunchz.github.io/ISOC/base_layer_control.js"><!/script>
   <script defer src="markers.js"></script>
   <!script defer src="ISOC.js"><!/script>
   <script defer src="swipedetect.js"></script>
-
-
   
+
+  <!script type="module" defer src="maplayergroupedcontrol.js"><!/script>
+
+
 
   <script>
 
@@ -190,8 +203,9 @@
     var z=4;  //default zoom level 0-4
     var flyspeed = 0.8;
 
-    mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg'
-    //mapboxgl.accessToken = 'pk.eyJ1IjoibXVyYWxpcHJhamFwYXRpIiwiYSI6ImNrMHA1d3VjYzBna3gzbG50ZjR5b2Zkb20ifQ.guBaIUcqkTdYHX1R6CM6FQ'
+    //mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg'
+    mapboxgl.accessToken ="pk.eyJ1IjoiYTEwayIsImEiOiJjaWdyMmVrazcwMXpsdTZtMThscWtiOTJtIn0.-A76dzJ0vsKULJdDxGvVXg";
+    //mapboxgl.accessToken ='';
     //Setup mapbox-gl map
     var map = new mapboxgl.Map({
       //style: 'mapbox://styles/tunchz/ck9litjbw2soc1iqo4rysy4nt',
@@ -204,6 +218,30 @@
 
       // Custom map style
       //style: 'https://maputnik.github.io/osm-liberty/style.json',
+
+      // hash: true,
+      // /*style: 'some mapbox style url*/
+      // /*below is a blank style*/
+      // style: {
+      //   "version": 8,
+      //   "name": "blank",
+      //   "sources": {
+      //     "blank": {
+      //       "type": "vector",
+      //       "url": ""
+      //     }
+      //   },
+      //   "layers": [{
+      //     "id": "background",
+      //     "type": "background",
+      //     "paint": {
+      //       "background-color": "#383838"
+      //     }
+      //   }]
+      // },
+
+
+
 
       container: 'map', // container id
       center: [101.6673626,13.2808669],
@@ -218,7 +256,7 @@
 
     })
 
-
+    $("#header-container").appendTo(".mapboxgl-ctrl-top-left");
     // disable map rotation using right click + drag
     //map.dragRotate.disable();
      
@@ -229,21 +267,35 @@
     map.doubleClickZoom.disable();
     //map.addControl(new mapboxgl.Navigation());
     map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
+
+
+
     // Add geolocate control to the map.
-    map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true}), 'top-left');
+    //map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true}), 'top-left');
     map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
     var layerList = document.getElementById('map_style_menu');
     var inputs = layerList.getElementsByTagName('input');
     var currentLayer = "satellite-v9";
      
+    $("#map_style_menu_button").appendTo(".mapboxgl-ctrl-top-left");
+    $("#map_style_menu_outline").appendTo(".mapboxgl-ctrl-top-left");
+
+    
+    $("#notification-container-right").appendTo(".mapboxgl-ctrl-top-right");
+    $("#notification-container-bottom").appendTo(".mapboxgl-ctrl-bottom-left");
+
+    $("#menu-container-bottom-right").appendTo(".mapboxgl-ctrl-bottom-right");
 
 
+    function switchLayer(layer) {      
 
-
-    function switchLayer(layer) {
       var layerId = layer.target.id;
       if (layerId != currentLayer) {
+
+        var removebutton = document.getElementsByClassName('mgl-layerControl');
+        //console.log("length",removebutton.length);
+        for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
         map.setStyle('mapbox://styles/mapbox/' + layerId);
         currentLayer = layerId;
       }
@@ -301,6 +353,301 @@
 
 
 
+  </script>
+
+  <script type="module">
+//=======Map Layer Control ========================================================================================
+    //import { layerControlSimple } from "https://tunchz.github.io/ISOC/layer_control/layerControlSimple.js"
+    import { layerControlGrouped } from "https://tunchz.github.io/ISOC/layer_control/layerControlGrouped.js"
+
+      //map_addpiecluster();  
+
+    map.on('style.load', function () {
+
+
+      map.addSource('mapth_prov', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/mapth_small.json'
+      });
+
+      map.addSource('mapth_dist', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/mapth_dist.json'
+      });
+
+      map.addSource('mapth_subd', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/mapth_subd.json'
+      });
+
+
+
+
+      map.addSource('counties', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/layer_control/counties.min.geojson'
+      });
+
+      map.addSource('lakes', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/layer_control/lakes.geojson'
+      });     
+
+      map.addSource('rivers', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/layer_control/rivers.geojson'
+      });
+
+      map.addSource('rail', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/layer_control/rail.geojson'
+      });
+
+
+      map.addLayer({
+        'id': 'จังหวัด',
+        'type': 'line',
+        'source': 'mapth_prov',
+        'layout': {
+          'visibility': 'visible'
+        },
+        'paint': {
+          'line-color': '#dddddd',
+          'line-opacity': 0.5
+        }
+      });
+
+      map.addLayer({
+        'id': 'อำเภอ',
+        'type': 'line',
+        'source': 'mapth_dist',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': '#dddddd',
+          'line-opacity': 0.5
+        }
+      });
+
+      map.addLayer({
+        'id': 'ตำบล',
+        'type': 'line',
+        'source': 'mapth_subd',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': '#bbbbbb',
+          'line-opacity': 0.5
+        }
+      });
+
+
+
+      map_addcluster('hotspotth','https://tunchz.github.io/ISOC/json/hotspotth.geojson','none');  
+
+      map_addcluster('well','https://tunchz.github.io/ISOC/json/well_small.geojson','none');  
+
+
+
+
+      map.addLayer({
+        'id': 'Counties',
+        'type': 'fill',
+        'source': 'counties',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': 'lightgray',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0.9
+        }
+      });
+
+      map.addLayer({
+        'id': 'Lakes',
+        'type': 'fill',
+        'source': 'lakes',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': 'blue',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0.9
+        }
+      });
+
+      map.addLayer({
+        'id': 'riversCase',
+        'type': 'line',
+        'source': "rivers",
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': 'white',
+          'line-width': 6
+        }
+      });
+
+      map.addLayer({
+        'id': 'rivers',
+        'type': 'line',
+        'source': "rivers",
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': 'blue',
+          'line-width': 3
+        }
+      });
+
+      map.addLayer({
+        'id': 'Rail',
+        'type': 'line',
+        'source': "rail",
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': {
+            stops: [
+              [0, "black"],
+              [14, "black"],
+              [18, "black"]
+            ]
+          },
+          'line-width': 3
+        }
+      });
+
+      var config = {
+        options: {
+          collapsed: true
+        },
+        layers: [
+          {
+            id: "จังหวัด",
+            hidden: false,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร"
+          },
+          {
+            id: "อำเภอ",
+            hidden: false,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร"
+          },
+          {
+            id: "ตำบล",
+            hidden: false,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร"
+          },
+
+
+
+
+          {
+            id: "hotspotth-cluster-count",
+            hidden: true,
+            // group: "Heats",
+            parent: "hotspotth-cluster",
+            directory: "สิ่งแวดล้อม"
+          },
+          {
+            id: "hotspotth-unclustered-point",
+            hidden: true,
+            // group: "Heats",
+            parent: "hotspotth-cluster",
+            directory: "สิ่งแวดล้อม"
+          },
+          {
+            name: "จุดความร้อน",
+            id: "hotspotth-cluster",
+            hidden: false,
+            // group: "Heats",
+            children: true,
+            directory: "สิ่งแวดล้อม",
+            legend: "<icon class='fa fa-circle' style='color:#51bbd6;'></icon> 1-100 จุด<br><icon class='fa fa-circle' style='color:#f1f075;'></icon> 101-750 จุด<br><icon class='fa fa-circle' style='color:#f28cb1;'></icon> มากกว่า 750 จุด"            
+          },
+
+
+
+          {
+            id: "well-cluster-count",
+            hidden: true,
+            // group: "Heats",
+            parent: "well-cluster",
+            directory: "สิ่งแวดล้อม"
+          },
+          {
+            id: "well-unclustered-point",
+            hidden: true,
+            // group: "Heats",
+            parent: "well-cluster",
+            directory: "สิ่งแวดล้อม"
+          },
+          {
+            name: "บ่อบาดาล",
+            id: "well-cluster",
+            hidden: false,
+            // group: "Heats",
+            children: true,
+            directory: "สิ่งแวดล้อม",
+            legend: "<icon class='fa fa-circle' style='color:#51bbd6;'></icon> 1-100 บ่อ<br><icon class='fa fa-circle' style='color:#f1f075;'></icon> 101-750 บ่อ<br><icon class='fa fa-circle' style='color:#f28cb1;'></icon> มากกว่า 750 บ่อ"            
+          },
+
+
+
+
+          {
+            id: "Counties",
+            hidden: false,
+            group: "Cadastral",
+            directory: "การบริหาร"
+          },
+          {
+            id: "Lakes",
+            hidden: false,
+            group: "น้ำ",
+            directory: "สิ่งแวดล้อม"
+          },
+          {
+            id: "riversCase",
+            hidden: true,
+            group: "น้ำ",
+            parent: "rivers",
+            directory: "สิ่งแวดล้อม"
+          },
+          {
+            name: "Rivers",
+            id: "rivers",
+            hidden: false,
+            group: "น้ำ",
+            children: true,
+            directory: "สิ่งแวดล้อม"
+          },
+          {
+            id: "Rail",
+            hidden: false,
+            directory: "Cultural",
+            legend: "<icon class='fa fa-minus' style='color:red;'></icon> Legend defined in config<br><icon class='fa fa-minus' style='color:black;'></icon> Toggles when layer is off"
+          }
+        ]
+      }
+
+      map.addControl(new layerControlGrouped(config), "top-left");
+
+    });
+
+    load_map_layers();
+
+    /*End Blank Map*/
   </script>
 
 

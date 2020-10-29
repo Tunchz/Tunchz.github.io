@@ -15,15 +15,15 @@
 
 // icon for each disaster type id
 var symbol = {'0':{'icon':"0"},
-/*1forest*/    '1':{'layername':"forest",    'icon': "❧",    'color':"rgba(52,168,83,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.6 ,'visibility':'visible', 'dbclick':false},
-/*2air*/       '2':{'layername':"air",       'icon':"☢",    'color':"rgba(108,132,146,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'visibility':'visible', 'dbclick':false},
-/*3landslide*/ '3':{'layername':"landslide", 'icon':"☳",     'color':"rgba(132,52,135,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'visibility':'visible', 'dbclick':false},
-/*4flood*/     '4':{'layername':"flood",     'icon':"♦",      'color':"rgba(49,76,205,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'visibility':'visible', 'dbclick':false},
-/*5drought*/   '5':{'layername':"drought",   'icon':"☭",     'color':"rgba(255,190,100,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'visibility':'visible', 'dbclick':false},
-/*6fire*/      '6':{'layername':"fire",      'icon':"♨",    'color':"rgba(227,116,0,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':1.2 ,'visibility':'visible', 'dbclick':false},
-/*7hotspot*/   '7':{'layername':"hotspot",   'icon':"☀",    'color':"rgba(197,34,31,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':1.3 ,'visibility':'visible', 'dbclick':false},
-/*8storm*/     '8':{'layername':"storm",     'icon':"♒",    'color':"rgba(18,158,175,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.1 ,'visibility':'visible', 'dbclick':false},
-/*9heavyrain*/ '9':{'layername':"heavyrain", 'icon':"☂",    'color':"rgba(156,192,249,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.4 ,'visibility':'visible', 'dbclick':false},
+/*1forest*/    '1':{'layername':"forest",    'icon': "❧",    'color':"rgba(52,168,83,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.6 ,'ispulse':0, 'visibility':'visible', 'dbclick':false},
+/*2air*/       '2':{'layername':"air",       'icon':"☢",    'color':"rgba(108,132,146,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
+/*3landslide*/ '3':{'layername':"landslide", 'icon':"☳",     'color':"rgba(132,52,135,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
+/*4flood*/     '4':{'layername':"flood",     'icon':"♦",      'color':"rgba(49,76,205,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':1,'visibility':'visible', 'dbclick':false},
+/*5drought*/   '5':{'layername':"drought",   'icon':"☭",     'color':"rgba(255,190,100,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
+/*6fire*/      '6':{'layername':"fire",      'icon':"♨",    'color':"rgba(227,116,0,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
+/*7hotspot*/   '7':{'layername':"hotspot",   'icon':"☀",    'color':"rgba(197,34,31,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':1.3 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
+/*8storm*/     '8':{'layername':"storm",     'icon':"♒",    'color':"rgba(18,158,175,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
+/*9heavyrain*/ '9':{'layername':"heavyrain", 'icon':"☂",    'color':"rgba(156,192,249,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
 /*riskplan*/  '91':{'layername':"risk_forest", 'icon':"█",   'color':"#ff0000",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
 /*riskplan*/  '94':{'layername':"risk_flood",  'icon':"█",   'color':"#0000ff",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
 /*riskplan*/  '95':{'layername':"risk_drought",'icon':"█",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
@@ -51,12 +51,12 @@ d3.select('#vertical-table-markers-container').append('table').attr("id","vertic
 
 initialize();
 
-
 var shortnoti = true;
 var rightpanel_isopen = true;
 switchRightpanel();
 
-load_map_layers();
+
+//load_map_layers();
 
 function resizeAdjust() {
   //console.log($("#video-container").width(),$("#video-container").height())
@@ -68,14 +68,18 @@ function resizeAdjust() {
     if (rightpanel_isopen) {
       document.getElementById("data-panel").style.display = "block";  
       document.getElementById("vertical-table-container-MAP").style.height = "57px";
-      document.getElementById("menu-container-bottom-right").style.bottom = ($("#wholecontent").height()*0.30+60).toString()+"px";
+      //document.getElementById("menu-container-bottom-right").style.bottom = ($("#wholecontent").height()*0.30+60).toString()+"px";
+      document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.bottom = ($("#wholecontent").height()*0.30+60).toString()+"px";
+      
       document.getElementById("data-panel").style.height = ($("#wholecontent").height()*0.30).toString()+"px";
       map_Yoffset = -$("#data-panel").height()/2 - 20;
     } else {
 
       document.getElementById("data-panel").style.display = "none";
       document.getElementById("vertical-table-container-MAP").style.height = "70px";
-      document.getElementById("menu-container-bottom-right").style.bottom = "75px";
+      //document.getElementById("menu-container-bottom-right").style.bottom = "75px";
+      document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.bottom = "75px";
+      
       map_Yoffset = -40
     }
     map_Xoffset = 0
@@ -88,7 +92,7 @@ function resizeAdjust() {
 
     $("#lp-button").appendTo("#menu-container-bottom-right");
     $("#bb-button").appendTo("#menu-container-bottom-right");
-    if (!rightpanel_isopen) icon = '⩓'; else icon = '⩔';
+    if (!rightpanel_isopen) icon = "<icon class='icon-menu'></icon>"; else icon = "<icon class='icon-ellipsis'></icon>";
 
     if (orientation == 0) {
       map.flyTo({
@@ -112,7 +116,7 @@ function resizeAdjust() {
       document.getElementById("data-panel").style.display = "block";  
       //document.getElementById("map-panel").style.width = "100%";
       document.getElementById("data-panel").style.width = ($("#wholecontent").width()*0.333).toString()+"px";
-      map_Xoffset = -$("#data-panel").width()/2 - 40;
+      map_Xoffset = -$("#data-panel").width()/2 - 20;
     } else {
       //document.getElementById("map-panel").style.width = "100%";
       document.getElementById("data-panel").style.display = "none";
@@ -124,7 +128,7 @@ function resizeAdjust() {
 
     $("#lp-button").appendTo("#menu-container-top-right");
     $("#bb-button").appendTo("#menu-container-top-right");
-    if (!rightpanel_isopen) icon = '⪡'; else icon = '⪢'; 
+    if (!rightpanel_isopen) icon = "<icon class='icon-list-bullet'></icon>"; else icon = "<icon class='icon-ellipsis-vert'></icon>"; 
 
     if (orientation == 1) {
       map.flyTo({
@@ -164,7 +168,7 @@ function load_map_layers() {
     $.getJSON('https://tunchz.github.io/ISOC/json/mapth_small.json', function(map_geojson) {
 
       // Add map province outline
-      map_addlayer(map_geojson);
+      //map_addlayer(map_geojson);
 
       // Add Risk Plan Layer ----------------------------------------------
       riskplan_list.forEach(function (item, index) {
@@ -213,13 +217,13 @@ function load_map_layers() {
 
         drm_geojson_filtered[item] = {"type": "FeatureCollection"};
         drm_geojson_filtered[item].features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == item});
-        map_add_pulsemarker(drm_geojson_filtered[item],symbol[item].layername,symbol[item].icon,symbol[item].color,symbol[item].outlinecolor,symbol[item].pulsecolor,symbol[item].size,false);
+        map_add_pulsemarker(drm_geojson_filtered[item],symbol[item].layername,symbol[item].icon,symbol[item].color,symbol[item].outlinecolor,symbol[item].pulsecolor,symbol[item].size,symbol[item].ispulse);
 
       });
 
 
       // Add Risk Notification Layer ----------------------------------------------
-      map_addpiecluster();
+      //map_addpiecluster();
 
 
       // Build array for table image marker
@@ -241,6 +245,10 @@ function load_map_layers() {
 
 
       setTimeout(function (){
+
+        var removebutton = document.getElementsByClassName('mgl-layerControl');
+        for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
+
         map.setStyle('mapbox://styles/mapbox/satellite-v9');
         display_table_markers(drm);
 
@@ -509,17 +517,15 @@ function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color
       'text-ignore-placement': true
     }
 
-    var basePaint = {
-      'text-color': color_base,
-      'text-opacity': 1,
-    }
-
     map.addLayer({
       'id': layername+'-pulse',
       'type': 'symbol',
       'source': layername,
       'layout': baseLayout,
-      'paint': basePaint
+        'paint': {
+            'text-color': color_pulse,
+            'text-opacity': ispulse,
+        }
     })
 
     map.addLayer({
@@ -566,7 +572,7 @@ function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color
         requestAnimationFrame(pulseMarker)
 
         multiplier += .1;
-        opacity -= ( .6 / framesPerSecond );
+        opacity -= ( .9 / framesPerSecond );
         textSize += ( Math.round(36*size) / framesPerSecond );
 
         map.setPaintProperty(layername+'-pulse', 'text-opacity', opacity)
@@ -720,179 +726,189 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
 //==CLUSTER================================================================================================
 
 
-// function map_addcluster() {
+function map_addcluster(layername,url,visibility) {
 
-//   map.on('load', function () {
-//       // Add a new source from our GeoJSON data and
-//       // set the 'cluster' option to true. GL-JS will
-//       // add the point_count property to your source data.
-//       map.addSource('earthquakes', {
-//           type: 'geojson',
-//           // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
-//           // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-//           data:
-//               'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson',
-//           cluster: true,
-//           clusterMaxZoom: 14, // Max zoom to cluster points on
-//           clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
-//       });
+  //var layername = 'hotspotth';
+//  map.on('load', function () {
+      // Add a new source from our GeoJSON data and
+      // set the 'cluster' option to true. GL-JS will
+      // add the point_count property to your source data.
+      map.addSource(layername, {
+          type: 'geojson',
+          // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
+          // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
+          data: url, //'https://tunchz.github.io/ISOC/json/hotspotth.geojson',
+          cluster: true,
+          clusterMaxZoom: 14, // Max zoom to cluster points on
+          clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
+      });
 
-//       map.addLayer({
-//           id: 'clusters',
-//           type: 'circle',
-//           source: 'earthquakes',
-//           filter: ['has', 'point_count'],
-//           paint: {
-//               // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-//               // with three steps to implement three types of circles:
-//               //   * Blue, 20px circles when point count is less than 100
-//               //   * Yellow, 30px circles when point count is between 100 and 750
-//               //   * Pink, 40px circles when point count is greater than or equal to 750
-//               'circle-color': [
-//                   'step',
-//                   ['get', 'point_count'],
-//                   '#51bbd6',
-//                   100,
-//                   '#f1f075',
-//                   750,
-//                   '#f28cb1'
-//               ],
-//               'circle-radius': [
-//                   'step',
-//                   ['get', 'point_count'],
-//                   10,
-//                   100,
-//                   15,
-//                   750,
-//                   20
-//               ]
-//           }
-//       });
+      map.addLayer({
+          id: layername + '-cluster',
+          type: 'circle',
+          source: layername,
+          filter: ['has', 'point_count'],
+          layout: {
+              'visibility': visibility
+          },           
+          paint: {
+              // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
+              // with three steps to implement three types of circles:
+              //   * Blue, 20px circles when point count is less than 100
+              //   * Yellow, 30px circles when point count is between 100 and 750
+              //   * Pink, 40px circles when point count is greater than or equal to 750
+              'circle-color': [
+                  'step',
+                  ['get', 'point_count'],
+                  '#51bbd6',
+                  100,
+                  '#f1f075',
+                  750,
+                  '#f28cb1'
+              ],
+              'circle-radius': [
+                  'step',
+                  ['get', 'point_count'],
+                  10,
+                  100,
+                  13,
+                  750,
+                  16
+              ],
+              'circle-stroke-width': 1,
+              'circle-stroke-color': '#000',
+              'circle-opacity': 0.7          
+          }
+      });
 
-//       map.addLayer({
-//           id: 'cluster-count',
-//           type: 'symbol',
-//           source: 'earthquakes',
-//           filter: ['has', 'point_count'],
-//           layout: {
-//               'text-field': '{point_count_abbreviated}',
-//               'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-//               'text-size': 12
-//           }
-//       });
+      map.addLayer({
+          id: layername + '-cluster-count',
+          type: 'symbol',
+          source: layername,
+          filter: ['has', 'point_count'],
+          layout: {
+              'text-field': '{point_count_abbreviated}',
+              'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+              'text-size': 12,
+              'visibility': visibility
+          }
+      });
 
-//       map.addLayer({
-//           id: 'unclustered-point',
-//           type: 'circle',
-//           source: 'earthquakes',
-//           filter: ['!', ['has', 'point_count']],
-//           paint: {
-//               'circle-color': '#11b4da',
-//               'circle-radius': 4,
-//               'circle-stroke-width': 1,
-//               'circle-stroke-color': '#fff'
-//           }
-//       });
+      map.addLayer({
+          id: layername + '-unclustered-point',
+          type: 'circle',
+          source: layername,
+          filter: ['!', ['has', 'point_count']],
+          layout: {
+              'visibility': visibility
+          },          
+          paint: {
+              'circle-color': '#11b4da',
+              'circle-radius': 4,
+              'circle-stroke-width': 1,
+              'circle-stroke-color': '#fff'
+          }
+      });
 
-//       // inspect a cluster on click
-//       map.on('click', 'clusters', function (e) {
-//           var features = map.queryRenderedFeatures(e.point, {
-//               layers: ['clusters']
-//           });
-//           var clusterId = features[0].properties.cluster_id;
-//           map.getSource('earthquakes').getClusterExpansionZoom(
-//               clusterId,
-//               function (err, zoom) {
-//                   if (err) return;
+      // // inspect a cluster on click
+      // map.on('click', 'clusters', function (e) {
+      //     var features = map.queryRenderedFeatures(e.point, {
+      //         layers: ['clusters']
+      //     });
+      //     var clusterId = features[0].properties.cluster_id;
+      //     map.getSource('earthquakes').getClusterExpansionZoom(
+      //         clusterId,
+      //         function (err, zoom) {
+      //             if (err) return;
 
-//                   map.easeTo({
-//                       center: features[0].geometry.coordinates,
-//                       zoom: zoom
-//                   });
-//               }
-//           );
-//       });
+      //             map.easeTo({
+      //                 center: features[0].geometry.coordinates,
+      //                 zoom: zoom
+      //             });
+      //         }
+      //     );
+      // });
 
-//       var popup = new mapboxgl.Popup({
-//         closeButton: false,
-//         closeOnClick: false
-//       });
-
-
-//       // When a click event occurs on a feature in
-//       // the unclustered-point layer, open a popup at
-//       // the location of the feature, with
-//       // description HTML from its properties.
-//       map.on('click', 'unclustered-point', function (e) {
-//           var coordinates = e.features[0].geometry.coordinates.slice();
-//           var mag = e.features[0].properties.mag;
-//           var tsunami;
-
-//           if (e.features[0].properties.tsunami === 1) {
-//               tsunami = 'yes';
-//           } else {
-//               tsunami = 'no';
-//           }
-
-//           // Ensure that if the map is zoomed out such that
-//           // multiple copies of the feature are visible, the
-//           // popup appears over the copy being pointed to.
-//           while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-//               coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-//           }
-
-//           popup
-//               .setLngLat(coordinates)
-//               .setHTML(
-//                   'magnitude: ' + mag + '<br>Was there a tsunami?: ' + tsunami
-//               )
-//               .addTo(map);
-//       });
-
-//       map.on('mouseenter', 'clusters', function () {
-//           map.getCanvas().style.cursor = 'pointer';
-//       });
-//       map.on('mouseleave', 'clusters', function () {
-//           map.getCanvas().style.cursor = '';
-//       });
-
-//       map.on('mouseenter', 'unclustered-point', function (e) {
-//           map.getCanvas().style.cursor = 'pointer';
-//           var coordinates = e.features[0].geometry.coordinates.slice();
-//           var mag = e.features[0].properties.mag;
-//           var tsunami;
-
-//           if (e.features[0].properties.tsunami === 1) {
-//               tsunami = 'yes';
-//           } else {
-//               tsunami = 'no';
-//           }
-
-//           // Ensure that if the map is zoomed out such that
-//           // multiple copies of the feature are visible, the
-//           // popup appears over the copy being pointed to.
-//           while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-//               coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-//           }
-
-//           popup
-//               .setLngLat(coordinates)
-//               .setHTML(
-//                   'magnitude: ' + mag + '<br>Was there a tsunami?: ' + tsunami
-//               )
-//               .addTo(map);
-//       });
-
-//       map.on('mouseleave', 'unclustered-point', function () {
-//           map.getCanvas().style.cursor = '';
-//           popup.remove();
-//       });
+      // var popup = new mapboxgl.Popup({
+      //   closeButton: false,
+      //   closeOnClick: false
+      // });
 
 
-//   });
+      // // When a click event occurs on a feature in
+      // // the unclustered-point layer, open a popup at
+      // // the location of the feature, with
+      // // description HTML from its properties.
+      // map.on('click', 'unclustered-point', function (e) {
+      //     var coordinates = e.features[0].geometry.coordinates.slice();
+      //     var mag = e.features[0].properties.mag;
+      //     var tsunami;
+
+      //     if (e.features[0].properties.tsunami === 1) {
+      //         tsunami = 'yes';
+      //     } else {
+      //         tsunami = 'no';
+      //     }
+
+      //     // Ensure that if the map is zoomed out such that
+      //     // multiple copies of the feature are visible, the
+      //     // popup appears over the copy being pointed to.
+      //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      //     }
+
+      //     popup
+      //         .setLngLat(coordinates)
+      //         .setHTML(
+      //             'magnitude: ' + mag + '<br>Was there a tsunami?: ' + tsunami
+      //         )
+      //         .addTo(map);
+      // });
+
+      // map.on('mouseenter', 'clusters', function () {
+      //     map.getCanvas().style.cursor = 'pointer';
+      // });
+      // map.on('mouseleave', 'clusters', function () {
+      //     map.getCanvas().style.cursor = '';
+      // });
+
+      // map.on('mouseenter', 'unclustered-point', function (e) {
+      //     map.getCanvas().style.cursor = 'pointer';
+      //     var coordinates = e.features[0].geometry.coordinates.slice();
+      //     var mag = e.features[0].properties.mag;
+      //     var tsunami;
+
+      //     if (e.features[0].properties.tsunami === 1) {
+      //         tsunami = 'yes';
+      //     } else {
+      //         tsunami = 'no';
+      //     }
+
+      //     // Ensure that if the map is zoomed out such that
+      //     // multiple copies of the feature are visible, the
+      //     // popup appears over the copy being pointed to.
+      //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      //     }
+
+      //     popup
+      //         .setLngLat(coordinates)
+      //         .setHTML(
+      //             'magnitude: ' + mag + '<br>Was there a tsunami?: ' + tsunami
+      //         )
+      //         .addTo(map);
+      // });
+
+      // map.on('mouseleave', 'unclustered-point', function () {
+      //     map.getCanvas().style.cursor = '';
+      //     popup.remove();
+      // });
 
 
-// }
+//  });
+
+
+}
 
 
 
@@ -1777,7 +1793,7 @@ function tabulateimg(data, columns) {
             curve : 1, 
             essential: true
           });
-          console.log(e.center);
+          //console.log(e.center);
         }
       })
       .on('dblclick', function(e) {  
@@ -1970,7 +1986,7 @@ function initialize() {
   menubtn.setAttribute('onclick', 'switchShortNoti()');
   document.getElementById("menu-container-top-right").append(menubtn);
   //document.getElementById("stop-button").innerHTML = "⍜☷■⌂";
-  document.getElementById("lp-button").innerHTML = "↹";
+  document.getElementById("lp-button").innerHTML = "<icon class='icon-circle-empty'></icon>";
 
 
   //document.getElementById("stop-button").innerHTML = "■";
@@ -2000,7 +2016,7 @@ function switchShortNoti() {
     document.getElementById('table-container-MAP').style.width = "70px";
     tabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
     vertabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
-    w = "59px";
+    w = "61px";
     
   } else {
     document.getElementById('table-container-MAP').style.width = "105px";

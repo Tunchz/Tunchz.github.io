@@ -34,7 +34,7 @@
   ****/
 
   .mgl-layerControl {
-    font-size: 16px;
+    font-size: 12px;
   }
 
   /****
@@ -48,6 +48,9 @@
     background-image: url("https://icongr.am/material/layers.svg");
     background-size: cover;
     background-position: center;
+    font-family: Serithai;
+    padding: 0px;
+    margin: 0px;
   }
 
   .mgl-layerControl.collapsed > div {
@@ -68,20 +71,22 @@
 
   /****
   ****/
+
   .mgl-layerControlLegend {
     margin-right: 4px;
     padding-right: 4px;
   }
   .mgl-layerControlGroupHeading {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 12px;
     cursor: pointer;
     display: inline-flex;
+    margin: 0px;
   }
 
   .mgl-layerControl button {
-    width: 30px;
-    height: 30px;
+    width: 29px;
+    height: 29px;
     border: none;
     opacity: 0.6;
     float: left;
@@ -89,11 +94,12 @@
     background-position: center center;
     background-color: transparent;
     background-repeat: no-repeat;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='mdi-minus' width='32' height='32' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M19,13H5V11H19V13Z'/%3E%3C/svg%3E");  }
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='mdi-minus' width='26' height='26' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M19,13H5V11H19V13Z'/%3E%3C/svg%3E");  
+  }
 
   .mgl-layerControl button.collapsed {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='mdi-plus' width='32' height='32' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z'/%3E%3C/svg%3E");
-   }
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='mdi-plus' width='26' height='26' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z'/%3E%3C/svg%3E");
+  }
 
   .mgl-layerControl icon {
     margin-right: 6px
@@ -102,21 +108,31 @@
   .mgl-layerControlLegend:not(label) {
     margin-left: 20px;
     max-width: calc(100% - 32px);
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 12px;
+    line-height: 10px;
   }
 
   .mgl-layerControlDirectory {
-    transition: height 0.4s ease-in-out;
+    transition: height 0.2s ease-in-out;
     height: auto;
     overflow: hidden;
     border-bottom: solid thin #e0e0e0;
+    color: #000;
+
   }
 
+.mgl-layerControlDirectoryCounter {
+  background-color: #555;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-right: 3px;
+  text-align: center;
+}
   .mgl-layerControlDirectory > .directory {
-    font-size: 18px;
+    font-size: 14px;
     background: #f8f9fa;
-    padding: 5px;
+    padding: 5px 0px;
     cursor: pointer;
   }
 
@@ -127,9 +143,6 @@
     cursor: pointer;
   }
 
-  .mgl-layerControl .checkbox {
-    margin: 6px 4px;
-  }
   /*https://codepen.io/takeradi/pen/rjJpKK*/
 
   /* .checkbox input[type="checkbox"] {
@@ -197,17 +210,23 @@
 INPUT SLIDERS
 ****/
 
+  .mgl-layerControl .checkbox {
+    margin: 0 0 0 20px;
+    /*margin-left: 20px;*/
+  }
+
 input.slide-toggle {
-  margin: 0 6px 0 0;
+  margin: 0 3px 0 0;
   cursor: pointer;
   border: solid thin #ccc;
   position: relative;
   -webkit-appearance: none;
   outline: none;
-  width: 26px;
-  height: 10px;
+  top: 6px;
+  width: 22px;
+  height: 8px;
   background-color: #eee;
-  border-radius: 25px;
+  border-radius: 22px;
   transition: 0.2s;
   background-clip: padding-box;
 }
@@ -216,12 +235,12 @@ input.slide-toggle:after {
   content: "";
   position: absolute;
   top: -2px;
-  left: 0px;
+  left: -2px;
   background: #fff;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height:10px;
   border-radius: 50%;
-  box-shadow: 0 0 1px 2px #ccc;
+  box-shadow: 0 0 1px 1px #ccc;
   transition: 0.2s;
 }
 
@@ -236,6 +255,6 @@ input.slide-toggle:checked {
 }
 
 input.slide-toggle:checked:after {
-  left: 14px;
+  left: 12px;
   box-shadow: 0 0 1px 2px #0d84b3;
 }
