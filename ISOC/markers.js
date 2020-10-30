@@ -14,7 +14,7 @@
 // };
 
 // icon for each disaster type id
-var symbol = {'0':{'icon':"0"},
+var symbol = {'0':{'icon':"0", 'visibility':'visible', 'dbclick':false},
 /*1forest*/    '1':{'layername':"forest",    'icon': "❧",    'color':"rgba(52,168,83,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.6 ,'ispulse':0, 'visibility':'visible', 'dbclick':false},
 /*2air*/       '2':{'layername':"air",       'icon':"☢",    'color':"rgba(108,132,146,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
 /*3landslide*/ '3':{'layername':"landslide", 'icon':"☳",     'color':"rgba(132,52,135,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
@@ -51,8 +51,9 @@ d3.select('#table-container').append('table').attr("id","table_image");
 
 initialize();
 
-var shortnoti = false;
-var rightpanel_isopen = true;
+var shortnoti = false,
+    allhide = false,
+    rightpanel_isopen = true;
 switchRightpanel();
 
 
@@ -1862,49 +1863,57 @@ function switchZoomMarker(disaster_type_id,disaster_id,iszoomed) {
 
 
 function switchUnselectVisibility(disaster_type_id) {
-      drm_list.forEach(function (item, index) {
-        if (!symbol[disaster_type_id].dbclick) {              
-            symbol[item].visibility = 'visible';     
-            filter_dataTable(disaster_type_id);                         
-        } else {
-            symbol[item].visibility = 'none';      
-            filter_dataTable('all');          
-        }
-        if (disaster_type_id == item) {
-          symbol[disaster_type_id].visibility = 'none';
-        } else {
-          symbol[item].dbclick = false;
-        }
-        switchLayerVisibility(item);
-        document.getElementById("table_row_marker_"+item.toString()).style.borderRight = '0px solid #000';
-        document.getElementById("table_col_marker_"+item.toString()).style.borderBottom = '0px solid #000';        
-      })
-      symbol[disaster_type_id].dbclick = !symbol[disaster_type_id].dbclick;
-      if (symbol[disaster_type_id].dbclick) {
-        document.getElementById("table_row_marker_"+disaster_type_id.toString()).style.borderRight = '3px solid '+ symbol[disaster_type_id].color;
-        document.getElementById("table_col_marker_"+disaster_type_id.toString()).style.borderBottom = '3px solid '+ symbol[disaster_type_id].color;
-      } 
-      // else {
-      //   document.getElementById("table_row_marker_"+disaster_type_id.toString()).style.borderRight = '0px solid #000';
-      //   document.getElementById("table_col_marker_"+disaster_type_id.toString()).style.borderBottom = '0px solid #000';
-      // }
-      //border-right: 3px solid #383838;
+  drm_list.forEach(function (item, index) {
+    if (!symbol[disaster_type_id].dbclick) {              
+        symbol[item].visibility = 'visible';     
+        filter_dataTable(disaster_type_id);                         
+    } else {
+        symbol[item].visibility = 'none';      
+        filter_dataTable('all');          
+    }
+    if (disaster_type_id == item) {
+      symbol[disaster_type_id].visibility = 'none';
+    } else {
+      symbol[item].dbclick = false;
+    }
+    switchLayerVisibility(item);
+    document.getElementById("table_row_marker_"+item.toString()).style.borderRight = '0px solid #000';
+    document.getElementById("table_col_marker_"+item.toString()).style.borderBottom = '0px solid #000';        
+  })
+  symbol[disaster_type_id].dbclick = !symbol[disaster_type_id].dbclick;
+
+  if (disaster_type_id == 0) {
+    if (symbol['0'].dbclick) {
+      document.getElementById("lp-button").innerHTML = "<icon class='icon-circle-empty'></icon>";
+    } else {
+      document.getElementById("lp-button").innerHTML = "<icon class='icon-circle'></icon>";
+    }
+  } else {
+    if (symbol[disaster_type_id].dbclick) {
+      document.getElementById("table_row_marker_"+disaster_type_id.toString()).style.borderRight = '3px solid '+ symbol[disaster_type_id].color;
+      document.getElementById("table_col_marker_"+disaster_type_id.toString()).style.borderBottom = '3px solid '+ symbol[disaster_type_id].color;
+    }     
+  }
 }
 
 function switchLayerVisibility(disaster_type_id) {
 
   var marker = document.getElementsByClassName('image_marker_'+disaster_type_id);
-  if (symbol[disaster_type_id].visibility == 'none') {            
-    marker[0].style.border = "2px solid " + symbol[disaster_type_id].color;
-    marker[0].style.backgroundColor = "#fff";
-    marker[1].style.border = "2px solid " + symbol[disaster_type_id].color;
-    marker[1].style.backgroundColor = "#fff";
+  if (symbol[disaster_type_id].visibility == 'none') {
+    for (i=0;i<marker.length;i++) {
+      marker[i].style.border = "2px solid " + symbol[disaster_type_id].color;
+      marker[i].style.backgroundColor = "#fff";
+      // marker[1].style.border = "2px solid " + symbol[disaster_type_id].color;
+      // marker[1].style.backgroundColor = "#fff";
+    }
     symbol[disaster_type_id].visibility = 'visible';
   } else {
-    marker[0].style.border = "2px solid " + unselectedcolor;
-    marker[0].style.backgroundColor = unselectedcolor;
-    marker[1].style.border = "2px solid " + unselectedcolor;
-    marker[1].style.backgroundColor = unselectedcolor;
+    for (i=0;i<marker.length;i++) {
+      marker[i].style.border = "2px solid " + unselectedcolor;
+      marker[i].style.backgroundColor = unselectedcolor;
+      // marker[1].style.border = "2px solid " + unselectedcolor;
+      // marker[1].style.backgroundColor = unselectedcolor;
+    }
     symbol[disaster_type_id].visibility = 'none';
   }
 
@@ -1990,7 +1999,7 @@ function initialize() {
   menubtn.setAttribute('oncontextmenu', 'switchUnselectVisibility(0)'); //switchUnselectVisibility(disaster_type_id)
   document.getElementById("menu-container-top-right").append(menubtn);
   //document.getElementById("stop-button").innerHTML = "⍜☷■⌂";
-  document.getElementById("lp-button").innerHTML = "<icon class='icon-circle-empty'></icon>";
+  document.getElementById("lp-button").innerHTML = "<icon class='icon-circle'></icon>";
 
 
   //document.getElementById("stop-button").innerHTML = "■";
