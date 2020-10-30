@@ -52,7 +52,6 @@ d3.select('#table-container').append('table').attr("id","table_image");
 initialize();
 
 var shortnoti = false,
-    allhide = false,
     rightpanel_isopen = true;
 switchRightpanel();
 
@@ -129,7 +128,7 @@ function resizeAdjust() {
 
     $("#lp-button").appendTo("#menu-container-top-right");
     $("#bb-button").appendTo("#menu-container-top-right");
-    if (!rightpanel_isopen) icon = "<icon class='icon-list-bullet'></icon>"; else icon = "<icon class='icon-ellipsis-vert'></icon>"; 
+    if (!rightpanel_isopen) icon = "<icon class='icon-menu'></icon>"; else icon = "<icon class='icon-ellipsis-vert'></icon>"; 
 
     if (orientation == 1) {
       map.flyTo({
