@@ -380,6 +380,25 @@
         'data': 'https://tunchz.github.io/ISOC/json/mapth_subd.json'
       });
 
+      map.addSource('drought_risk', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/Drought_Risk_34_10p.json'
+      });
+
+      map.addSource('flood_risk', {
+        'type': 'geojson',
+        'data': 'https://raw.githubusercontent.com/Tunchz/Tunchz.github.io/master/ISOC/json/Flood_Risk_35_10p.json'//'https://tunchz.github.io/ISOC/json/Flood_Risk_35_10p.json'
+      });
+
+      map.addSource('water_l', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/P_Water_L.geojson'
+      });
+
+      map.addSource('water_m', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/P_Water_M.geojson'
+      });
 
 
 
@@ -443,6 +462,72 @@
         }
       });
 
+      map.addLayer({
+        'id': 'drought_risk',
+        'type': 'fill',
+        'source': 'drought_risk',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': [
+              'case',
+              ['==', ['get', 'DROUGHT'], '3'], 'rgba(227,116,0,1)',
+              ['==', ['get', 'DROUGHT'], '4'], 'rgba(197,34,31,1)',
+              '#ffffff'
+          ],
+          // 'fill-outline-color': 'white',
+          'fill-opacity': 0.5
+        }
+      });
+
+      map.addLayer({
+        'id': 'flood_risk',
+        'type': 'fill',
+        'source': 'flood_risk',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': [
+              'case',
+              ['==', ['get', 'CODE_FLD'], '3'], 'rgba(100,100,255,1)',
+              ['==', ['get', 'CODE_FLD'], '5'], 'rgba(0,0,255,1)',
+              '#ffffff'
+          ],
+          // 'fill-outline-color': 'white',
+          'fill-opacity': 0.5
+        }
+      });
+
+      map.addLayer({
+        'id': 'water_l',
+        'type': 'fill',
+        'source': 'water_l',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': 'rgba(0,0,255,1)',
+          // 'fill-outline-color': 'white',
+          'fill-opacity': 0.5
+        }
+      });
+
+      map.addLayer({
+        'id': 'water_m',
+        'type': 'fill',
+        'source': 'water_m',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': 'rgba(0,0,255,1)',
+          // 'fill-outline-color': 'white',
+          'fill-opacity': 0.5
+        }
+      });
+
 
 
       map_addcluster('hotspotth','https://tunchz.github.io/ISOC/json/hotspotth.geojson','none');  
@@ -452,78 +537,78 @@
 
 
 
-      map.addLayer({
-        'id': 'Counties',
-        'type': 'fill',
-        'source': 'counties',
-        'layout': {
-          'visibility': 'none'
-        },
-        'paint': {
-          'fill-color': 'lightgray',
-          'fill-outline-color': 'white',
-          'fill-opacity': 0.9
-        }
-      });
+      // map.addLayer({
+      //   'id': 'Counties',
+      //   'type': 'fill',
+      //   'source': 'counties',
+      //   'layout': {
+      //     'visibility': 'none'
+      //   },
+      //   'paint': {
+      //     'fill-color': 'lightgray',
+      //     'fill-outline-color': 'white',
+      //     'fill-opacity': 0.9
+      //   }
+      // });
 
-      map.addLayer({
-        'id': 'Lakes',
-        'type': 'fill',
-        'source': 'lakes',
-        'layout': {
-          'visibility': 'none'
-        },
-        'paint': {
-          'fill-color': 'blue',
-          'fill-outline-color': 'white',
-          'fill-opacity': 0.9
-        }
-      });
+      // map.addLayer({
+      //   'id': 'Lakes',
+      //   'type': 'fill',
+      //   'source': 'lakes',
+      //   'layout': {
+      //     'visibility': 'none'
+      //   },
+      //   'paint': {
+      //     'fill-color': 'blue',
+      //     'fill-outline-color': 'white',
+      //     'fill-opacity': 0.9
+      //   }
+      // });
 
-      map.addLayer({
-        'id': 'riversCase',
-        'type': 'line',
-        'source': "rivers",
-        'layout': {
-          'visibility': 'none'
-        },
-        'paint': {
-          'line-color': 'white',
-          'line-width': 6
-        }
-      });
+      // map.addLayer({
+      //   'id': 'riversCase',
+      //   'type': 'line',
+      //   'source': "rivers",
+      //   'layout': {
+      //     'visibility': 'none'
+      //   },
+      //   'paint': {
+      //     'line-color': 'white',
+      //     'line-width': 6
+      //   }
+      // });
 
-      map.addLayer({
-        'id': 'rivers',
-        'type': 'line',
-        'source': "rivers",
-        'layout': {
-          'visibility': 'none'
-        },
-        'paint': {
-          'line-color': 'blue',
-          'line-width': 3
-        }
-      });
+      // map.addLayer({
+      //   'id': 'rivers',
+      //   'type': 'line',
+      //   'source': "rivers",
+      //   'layout': {
+      //     'visibility': 'none'
+      //   },
+      //   'paint': {
+      //     'line-color': 'blue',
+      //     'line-width': 3
+      //   }
+      // });
 
-      map.addLayer({
-        'id': 'Rail',
-        'type': 'line',
-        'source': "rail",
-        'layout': {
-          'visibility': 'none'
-        },
-        'paint': {
-          'line-color': {
-            stops: [
-              [0, "black"],
-              [14, "black"],
-              [18, "black"]
-            ]
-          },
-          'line-width': 3
-        }
-      });
+      // map.addLayer({
+      //   'id': 'Rail',
+      //   'type': 'line',
+      //   'source': "rail",
+      //   'layout': {
+      //     'visibility': 'none'
+      //   },
+      //   'paint': {
+      //     'line-color': {
+      //       stops: [
+      //         [0, "black"],
+      //         [14, "black"],
+      //         [18, "black"]
+      //       ]
+      //     },
+      //     'line-width': 3
+      //   }
+      // });
 
       var config = {
         options: {
@@ -554,7 +639,7 @@
             group: "ไฟ",
             children: true,
             directory: "สิ่งแวดล้อม",
-            legend: "<icon class='fa fa-circle' style='color:#51bbd6;'></icon> 1-100 จุด<br><icon class='fa fa-circle' style='color:#f1f075;'></icon> 101-750 จุด<br><icon class='fa fa-circle' style='color:#f28cb1;'></icon> มากกว่า 750 จุด"            
+            legend: "<icon class='icon-circle' style='color:#51bbd6;'></icon> 1-100 จุด<br><icon class='icon-circle' style='color:#f1f075;'></icon> 101-750 จุด<br><icon class='icon-circle' style='color:#f28cb1;'></icon> มากกว่า 750 จุด"            
           },
 
 
@@ -580,44 +665,82 @@
             group: "น้ำ",
             children: true,
             directory: "สิ่งแวดล้อม",
-            legend: "<icon class='fa fa-circle' style='color:#51bbd6;'></icon> 1-100 บ่อ<br><icon class='fa fa-circle' style='color:#f1f075;'></icon> 101-750 บ่อ<br><icon class='fa fa-circle' style='color:#f28cb1;'></icon> มากกว่า 750 บ่อ"            
+            legend: "<icon class='icon-circle' style='color:#51bbd6;'></icon> 1-100 บ่อ<br><icon class='icon-circle' style='color:#f1f075;'></icon> 101-750 บ่อ<br><icon class='icon-circle' style='color:#f28cb1;'></icon> มากกว่า 750 บ่อ"            
           },
 
 
 
 
+          // {
+          //   id: "Counties",
+          //   hidden: false,
+          //   group: "Cadastral",
+          //   directory: "การบริหาร"
+          // },
+          // {
+          //   id: "Lakes",
+          //   hidden: false,
+          //   group: "น้ำ",
+          //   directory: "สิ่งแวดล้อม"
+          // },
+          // {
+          //   id: "riversCase",
+          //   hidden: true,
+          //   group: "น้ำ",
+          //   parent: "rivers",
+          //   directory: "สิ่งแวดล้อม"
+          // },
+          // {
+          //   name: "Rivers",
+          //   id: "rivers",
+          //   hidden: false,
+          //   group: "น้ำ",
+          //   children: true,
+          //   directory: "สิ่งแวดล้อม"
+          // },
+          // {
+          //   id: "Rail",
+          //   hidden: false,
+          //   directory: "Cultural",
+          //   legend: "<icon class='fa fa-minus' style='color:red;'></icon> Legend defined in config<br><icon class='fa fa-minus' style='color:black;'></icon> Toggles when layer is off"
+          // },
+
+
           {
-            id: "Counties",
-            hidden: false,
-            group: "Cadastral",
-            directory: "การบริหาร"
-          },
-          {
-            id: "Lakes",
+            name: "แหล่งน้ำขนาดใหญ่",
+            id: "water_l",
             hidden: false,
             group: "น้ำ",
             directory: "สิ่งแวดล้อม"
           },
+
           {
-            id: "riversCase",
-            hidden: true,
-            group: "น้ำ",
-            parent: "rivers",
-            directory: "สิ่งแวดล้อม"
-          },
-          {
-            name: "Rivers",
-            id: "rivers",
+            name: "แหล่งน้ำขนาดกลาง",
+            id: "water_m",
             hidden: false,
             group: "น้ำ",
-            children: true,
             directory: "สิ่งแวดล้อม"
           },
+
           {
-            id: "Rail",
+            name: "พื้นที่เสี่ยงภัยแล้ง",
+            id: "drought_risk",
             hidden: false,
-            directory: "Cultural",
-            legend: "<icon class='fa fa-minus' style='color:red;'></icon> Legend defined in config<br><icon class='fa fa-minus' style='color:black;'></icon> Toggles when layer is off"
+            group: "น้ำ",
+            //children: true,
+            directory: "ผลการวิเคราะห์",
+            legend: "<icon class='icon-stop' style='color:rgba(227,116,0,0.7);'></icon> เสี่ยงปานกลาง<br><icon class='icon-stop' style='color:rgba(197,34,31,0.7);'></icon> เสี่ยงมาก"            
+          },
+
+
+          {
+            name: "พื้นที่เสี่ยงน้ำท่วม",
+            id: "flood_risk",
+            hidden: false,
+            group: "น้ำ",
+            //children: true,
+            directory: "ผลการวิเคราะห์",
+            legend: "<icon class='icon-stop' style='color:rgba(100,100,255,0.7);'></icon> เสี่ยงปานกลาง<br><icon class='icon-stop' style='color:rgba(0,0,255,0.7);'></icon> เสี่ยงมาก"            
           },
 
 
