@@ -153,7 +153,7 @@ class layerControlGrouped {
       });
   
       this._div.addEventListener("mouseleave", function (e) {
-        e.target.classList.add("collapsed")
+        //e.target.classList.add("collapsed")
         return
       });
     }
