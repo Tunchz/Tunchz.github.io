@@ -45,13 +45,13 @@ var drm_geojson,disaster_risk_list,disaster_risk_list_summary,
 
 
 d3.select('#table-container').append('table').attr("id","table_image");
-d3.select('#table-markers-container').append('table').attr("id","table_image_marker");
-d3.select('#vertical-table-markers-container').append('table').attr("id","vertical_table_image_marker");
+// d3.select('#table-markers-container').append('table').attr("id","table_image_marker");
+// d3.select('#vertical-table-markers-container').append('table').attr("id","vertical_table_image_marker");
 
 
 initialize();
 
-var shortnoti = true;
+var shortnoti = false;
 var rightpanel_isopen = true;
 switchRightpanel();
 
@@ -1956,7 +1956,10 @@ function display_table_markers(drm) {
 
     //tabulateimg(disaster_risk_list.dtype_id.bottom(Infinity), ["icon","disaster_type","source","updated_date","level_detail","DRM_state","response","contract","blank","color"]);
     filter_dataTable('all');
-    switchShortNoti();
+    //switchShortNoti();
+    // Display Table markers
+    tabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+    vertabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
 
     //requestFullScreen(document.getElementById('map-panel'));
 
@@ -2017,16 +2020,25 @@ function switchShortNoti() {
     tabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
     vertabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
     w = "61px";
-    
   } else {
     document.getElementById('table-container-MAP').style.width = "105px";
     tabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
     vertabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
     w = "96px";
-    shortnoti = 0;
   }
   var doc = document.getElementsByClassName('table_col_marker');
   for (i=0;i<doc.length;i++) {doc[i].style.width = w;} 
+
+  // Recheck and display table marker according to double click
+  drm_list.forEach(function (item, index) {
+    switchLayerVisibility(item);
+    switchLayerVisibility(item);
+    if (symbol[item].dbclick) {
+      document.getElementById("table_row_marker_"+item.toString()).style.borderRight = '3px solid '+ symbol[item].color;
+      document.getElementById("table_col_marker_"+item.toString()).style.borderBottom = '3px solid '+ symbol[item].color;
+    } 
+  })
+
 }
 
 function switchRightpanel() {
