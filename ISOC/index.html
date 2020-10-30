@@ -530,39 +530,20 @@
           collapsed: true
         },
         layers: [
-          {
-            id: "จังหวัด",
-            hidden: false,
-            group: "เขตการปกครอง",
-            directory: "การบริหาร"
-          },
-          {
-            id: "อำเภอ",
-            hidden: false,
-            group: "เขตการปกครอง",
-            directory: "การบริหาร"
-          },
-          {
-            id: "ตำบล",
-            hidden: false,
-            group: "เขตการปกครอง",
-            directory: "การบริหาร"
-          },
-
 
 
 
           {
             id: "hotspotth-cluster-count",
             hidden: true,
-            // group: "Heats",
+            group: "ไฟ",
             parent: "hotspotth-cluster",
             directory: "สิ่งแวดล้อม"
           },
           {
             id: "hotspotth-unclustered-point",
             hidden: true,
-            // group: "Heats",
+            group: "ไฟ",
             parent: "hotspotth-cluster",
             directory: "สิ่งแวดล้อม"
           },
@@ -570,7 +551,7 @@
             name: "จุดความร้อน",
             id: "hotspotth-cluster",
             hidden: false,
-            // group: "Heats",
+            group: "ไฟ",
             children: true,
             directory: "สิ่งแวดล้อม",
             legend: "<icon class='fa fa-circle' style='color:#51bbd6;'></icon> 1-100 จุด<br><icon class='fa fa-circle' style='color:#f1f075;'></icon> 101-750 จุด<br><icon class='fa fa-circle' style='color:#f28cb1;'></icon> มากกว่า 750 จุด"            
@@ -581,14 +562,14 @@
           {
             id: "well-cluster-count",
             hidden: true,
-            // group: "Heats",
+            group: "น้ำ",
             parent: "well-cluster",
             directory: "สิ่งแวดล้อม"
           },
           {
             id: "well-unclustered-point",
             hidden: true,
-            // group: "Heats",
+            group: "น้ำ",
             parent: "well-cluster",
             directory: "สิ่งแวดล้อม"
           },
@@ -596,7 +577,7 @@
             name: "บ่อบาดาล",
             id: "well-cluster",
             hidden: false,
-            // group: "Heats",
+            group: "น้ำ",
             children: true,
             directory: "สิ่งแวดล้อม",
             legend: "<icon class='fa fa-circle' style='color:#51bbd6;'></icon> 1-100 บ่อ<br><icon class='fa fa-circle' style='color:#f1f075;'></icon> 101-750 บ่อ<br><icon class='fa fa-circle' style='color:#f28cb1;'></icon> มากกว่า 750 บ่อ"            
@@ -637,7 +618,30 @@
             hidden: false,
             directory: "Cultural",
             legend: "<icon class='fa fa-minus' style='color:red;'></icon> Legend defined in config<br><icon class='fa fa-minus' style='color:black;'></icon> Toggles when layer is off"
+          },
+
+
+          {
+            id: "ตำบล",
+            hidden: false,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร"
+          },
+          {
+            id: "อำเภอ",
+            hidden: false,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร"
+          },
+          {
+            id: "จังหวัด",
+            hidden: false,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร"
           }
+
+
+
         ]
       }
 
