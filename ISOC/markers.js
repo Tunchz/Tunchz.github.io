@@ -1885,7 +1885,7 @@ function switchLayerVisibility(disaster_type_id) {
   var marker = document.getElementsByClassName('image_marker_'+disaster_type_id);
   if (symbol[disaster_type_id].visibility == 'none') {
     for (i=0;i<marker.length;i++) {
-      marker[i].style.border = "2px solid " + symbol[disaster_type_id].color;
+      marker[i].style.border = "3px solid " + symbol[disaster_type_id].color;
       marker[i].style.backgroundColor = "#fff";
       // marker[1].style.border = "2px solid " + symbol[disaster_type_id].color;
       // marker[1].style.backgroundColor = "#fff";
@@ -1893,7 +1893,7 @@ function switchLayerVisibility(disaster_type_id) {
     symbol[disaster_type_id].visibility = 'visible';
   } else {
     for (i=0;i<marker.length;i++) {
-      marker[i].style.border = "2px solid " + unselectedcolor;
+      marker[i].style.border = "3px solid " + unselectedcolor;
       marker[i].style.backgroundColor = unselectedcolor;
       // marker[1].style.border = "2px solid " + unselectedcolor;
       // marker[1].style.backgroundColor = unselectedcolor;
