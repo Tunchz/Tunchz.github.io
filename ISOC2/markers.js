@@ -14,16 +14,16 @@
 // };
 
 // icon for each disaster type id
-var symbol = {'0':{'icon':"0"},
-/*1forest*/    '1':{'layername':"forest",    'icon': "❧",    'color':"rgba(52,168,83,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.6 ,'ispulse':0, 'visibility':'visible', 'dbclick':false},
-/*2air*/       '2':{'layername':"air",       'icon':"☢",    'color':"rgba(108,132,146,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
-/*3landslide*/ '3':{'layername':"landslide", 'icon':"☳",     'color':"rgba(132,52,135,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
-/*4flood*/     '4':{'layername':"flood",     'icon':"♦",      'color':"rgba(49,76,205,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':1,'visibility':'visible', 'dbclick':false},
-/*5drought*/   '5':{'layername':"drought",   'icon':"☭",     'color':"rgba(255,190,100,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
-/*6fire*/      '6':{'layername':"fire",      'icon':"♨",    'color':"rgba(227,116,0,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
-/*7hotspot*/   '7':{'layername':"hotspot",   'icon':"☀",    'color':"rgba(197,34,31,1)",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':1.3 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
-/*8storm*/     '8':{'layername':"storm",     'icon':"♒",    'color':"rgba(18,158,175,1)",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
-/*9heavyrain*/ '9':{'layername':"heavyrain", 'icon':"☂",    'color':"rgba(156,192,249,1)",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false},
+var symbol = {'0':{'icon':"0", 'visibility':'visible', 'dbclick':false},
+/*1forest*/    '1':{'layername':"forest",    'icon': "❧",    'color':"#a2cc44",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.6 ,'ispulse':0, 'visibility':'visible', 'dbclick':false, 'url': "https://tunchz.github.io/ISOC/img/marker_forest.png"},
+/*2air*/       '2':{'layername':"air",       'icon':"☢",    'color':"#ed207b",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'url': "https://tunchz.github.io/ISOC/img/marker_air.png"},
+/*3landslide*/ '3':{'layername':"landslide", 'icon':"☳",     'color':"#a9753c",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'url': "https://tunchz.github.io/ISOC/img/marker_landslide.png"},
+/*4flood*/     '4':{'layername':"flood",     'icon':"♦",      'color':"#3b7dcb",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':1,'visibility':'visible', 'dbclick':false, 'url': "https://tunchz.github.io/ISOC/img/marker_flood.png"},
+/*5drought*/   '5':{'layername':"drought",   'icon':"☭",     'color':"#f7c851",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'url': "https://tunchz.github.io/ISOC/img/marker_drought.png"},
+/*6fire*/      '6':{'layername':"fire",      'icon':"♨",    'color':"#f47320",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'url': "https://tunchz.github.io/ISOC/img/marker_fire.png"},
+/*7hotspot*/   '7':{'layername':"hotspot",   'icon':"☀",    'color':"#e30713",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':1.3 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'url': "https://tunchz.github.io/ISOC/img/marker_hotspot.png"},
+/*8storm*/     '8':{'layername':"storm",     'icon':"♒",    'color':"#358ba4",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'url': "https://tunchz.github.io/ISOC/img/marker_highwave.png"},
+/*9heavyrain*/ '9':{'layername':"heavyrain", 'icon':"☂",    'color':"#33a1d2",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'url': "https://tunchz.github.io/ISOC/img/marker_heavyrain.png"},
 /*riskplan*/  '91':{'layername':"risk_forest", 'icon':"█",   'color':"#ff0000",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
 /*riskplan*/  '94':{'layername':"risk_flood",  'icon':"█",   'color':"#0000ff",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
 /*riskplan*/  '95':{'layername':"risk_drought",'icon':"█",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false},
@@ -45,14 +45,14 @@ var drm_geojson,disaster_risk_list,disaster_risk_list_summary,
 
 
 d3.select('#table-container').append('table').attr("id","table_image");
-d3.select('#table-markers-container').append('table').attr("id","table_image_marker");
-d3.select('#vertical-table-markers-container').append('table').attr("id","vertical_table_image_marker");
+// d3.select('#table-markers-container').append('table').attr("id","table_image_marker");
+// d3.select('#vertical-table-markers-container').append('table').attr("id","vertical_table_image_marker");
 
 
 initialize();
 
-var shortnoti = true;
-var rightpanel_isopen = true;
+var shortnoti = false,
+    rightpanel_isopen = true;
 switchRightpanel();
 
 
@@ -92,7 +92,7 @@ function resizeAdjust() {
 
     $("#lp-button").appendTo("#menu-container-bottom-right");
     $("#bb-button").appendTo("#menu-container-bottom-right");
-    if (!rightpanel_isopen) icon = '⩓'; else icon = '⩔';
+    if (!rightpanel_isopen) icon = "<icon class='icon-menu'></icon>"; else icon = "<icon class='icon-ellipsis'></icon>";
 
     if (orientation == 0) {
       map.flyTo({
@@ -116,7 +116,7 @@ function resizeAdjust() {
       document.getElementById("data-panel").style.display = "block";  
       //document.getElementById("map-panel").style.width = "100%";
       document.getElementById("data-panel").style.width = ($("#wholecontent").width()*0.333).toString()+"px";
-      map_Xoffset = -$("#data-panel").width()/2 - 40;
+      map_Xoffset = -$("#data-panel").width()/2 - 20;
     } else {
       //document.getElementById("map-panel").style.width = "100%";
       document.getElementById("data-panel").style.display = "none";
@@ -128,7 +128,7 @@ function resizeAdjust() {
 
     $("#lp-button").appendTo("#menu-container-top-right");
     $("#bb-button").appendTo("#menu-container-top-right");
-    if (!rightpanel_isopen) icon = '⪡'; else icon = '⪢'; 
+    if (!rightpanel_isopen) icon = "<icon class='icon-menu'></icon>"; else icon = "<icon class='icon-ellipsis-vert'></icon>"; 
 
     if (orientation == 1) {
       map.flyTo({
@@ -217,9 +217,10 @@ function load_map_layers() {
 
         drm_geojson_filtered[item] = {"type": "FeatureCollection"};
         drm_geojson_filtered[item].features = $(drm_geojson.features).filter(function (i,n){return n.properties.disaster_type_id == item});
-        map_add_pulsemarker(drm_geojson_filtered[item],symbol[item].layername,symbol[item].icon,symbol[item].color,symbol[item].outlinecolor,symbol[item].pulsecolor,symbol[item].size,symbol[item].ispulse);
-
+        // map_add_pulsemarker(drm_geojson_filtered[item],symbol[item].layername,symbol[item].icon,symbol[item].color,symbol[item].outlinecolor,symbol[item].pulsecolor,symbol[item].size,symbol[item].ispulse);
+        map_add_custommarker(drm_geojson_filtered[item],symbol[item].layername,symbol[item].url,symbol[item].color,0.15,45);
       });
+      
 
 
       // Add Risk Notification Layer ----------------------------------------------
@@ -455,44 +456,6 @@ function map_add_polygon(map_geojson,layername) {
 }
 
 
-// function map_addlayer2() {
-//   var url = "https://tunchz.github.io/mapth_small.json"
-//   map.on('load', function () {
-//     map.addSource('mapth', { type: 'geojson', data: url });
-//     map.addLayer({
-//       'id': 'th_prov',
-//       'type': 'fill',
-//       'source': 'mapth',
-//       'paint': {
-//         'fill-color': [
-//                   'case',
-//                   ['==', ['get', 'PROVINCE_C'], '63'],'#ff0',
-//                   ['==', ['get', 'PROVINCE_C'], '50'],'#f00',
-//                   ['==', ['get', 'PROVINCE_C'], '30'],'#00f',
-//                   '#2a58c3'],
-//         'fill-opacity': [
-//                   'case',
-//                   ['==', ['get', 'PROVINCE_C'], '63'],0.3,
-//                   ['==', ['get', 'PROVINCE_C'], '50'],0.3,
-//                   ['==', ['get', 'PROVINCE_C'], '30'],0.3,
-//                   0]
-//       }
-//     });
-//     map.addLayer({
-//       'id': 'th_prov_bound',
-//       'type': 'line',
-//       'source': 'mapth',
-//       'paint': {
-//         'line-width': 1,
-//         'line-color': '#ddd',
-//         'line-opacity': 0.5
-//       }
-//     });
-//   // //Filter map layer
-//   // map.setFilter('th_prov_bound',["in", "PROVINCE_C", '63','50'])
-//   });
-// }
-
 //==Pulsing Marker================================================================================================
 
 function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color_outline,color_pulse,size,ispulse) {
@@ -661,22 +624,27 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
                   }
               });
               // if (true) {
-                map.addLayer({
-                    'id': layername+'-label',
-                    'type': 'symbol',
-                    'source': layername,
-                    'layout': {
-                        'text-field': ['get', 'val'],
-                        'text-font': ['Roboto Black', 'Arial Unicode MS Bold'],
-                        'text-ignore-placement': true,
-                        'text-offset': [0, -size*3],
-                        'text-size': 8
-                    },
-                    'paint': {
-                        'text-color': textcolor,
-                        'text-opacity': 1,
-                    }
-                });
+
+              map.addLayer({
+                  'id': layername+'-label',
+                  'type': 'symbol',
+                  'source': layername,
+                  'layout': {
+                      'text-field': ['get', 'val'],
+                      'text-font': ['Roboto Black', 'Arial Unicode MS Bold'],
+                      'text-ignore-placement': true,
+                      'text-offset': [0, -4.9],
+                      'text-size': 8
+                  },
+                  'paint': {
+                      'text-color': textcolor,
+                      'text-opacity': 1,
+                      'text-halo-color': "rgba(255,255,255,1)",                  
+                      'text-halo-width': 1,
+                      'text-halo-blur': 0
+                  }
+              });
+
               // }
           }
       );
@@ -726,9 +694,9 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
 //==CLUSTER================================================================================================
 
 
-function map_addcluster() {
+function map_addcluster(layername,url,visibility) {
 
-  var layername = 'hotspot';
+  //var layername = 'hotspotth';
 //  map.on('load', function () {
       // Add a new source from our GeoJSON data and
       // set the 'cluster' option to true. GL-JS will
@@ -737,20 +705,19 @@ function map_addcluster() {
           type: 'geojson',
           // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
           // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-          data:
-              'https://tunchz.github.io/ISOC/json/hotspotth.geojson',
+          data: url, //'https://tunchz.github.io/ISOC/json/hotspotth.geojson',
           cluster: true,
           clusterMaxZoom: 14, // Max zoom to cluster points on
           clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
       });
 
       map.addLayer({
-          id: 'Hotspot-Cluster',
+          id: layername + '-cluster',
           type: 'circle',
           source: layername,
           filter: ['has', 'point_count'],
           layout: {
-              'visibility': 'none'
+              'visibility': visibility
           },           
           paint: {
               // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
@@ -772,15 +739,18 @@ function map_addcluster() {
                   ['get', 'point_count'],
                   10,
                   100,
-                  15,
+                  13,
                   750,
-                  20
-              ]
+                  16
+              ],
+              'circle-stroke-width': 1,
+              'circle-stroke-color': '#000',
+              'circle-opacity': 0.7          
           }
       });
 
       map.addLayer({
-          id: 'Hotspot-cluster-count',
+          id: layername + '-cluster-count',
           type: 'symbol',
           source: layername,
           filter: ['has', 'point_count'],
@@ -788,17 +758,17 @@ function map_addcluster() {
               'text-field': '{point_count_abbreviated}',
               'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
               'text-size': 12,
-              'visibility': 'none'
+              'visibility': visibility
           }
       });
 
       map.addLayer({
-          id: 'Hotspot-unclustered-point',
+          id: layername + '-unclustered-point',
           type: 'circle',
           source: layername,
           filter: ['!', ['has', 'point_count']],
           layout: {
-              'visibility': 'none'
+              'visibility': visibility
           },          
           paint: {
               'circle-color': '#11b4da',
@@ -808,99 +778,99 @@ function map_addcluster() {
           }
       });
 
-      // inspect a cluster on click
-      map.on('click', 'clusters', function (e) {
-          var features = map.queryRenderedFeatures(e.point, {
-              layers: ['clusters']
-          });
-          var clusterId = features[0].properties.cluster_id;
-          map.getSource('earthquakes').getClusterExpansionZoom(
-              clusterId,
-              function (err, zoom) {
-                  if (err) return;
+      // // inspect a cluster on click
+      // map.on('click', 'clusters', function (e) {
+      //     var features = map.queryRenderedFeatures(e.point, {
+      //         layers: ['clusters']
+      //     });
+      //     var clusterId = features[0].properties.cluster_id;
+      //     map.getSource('earthquakes').getClusterExpansionZoom(
+      //         clusterId,
+      //         function (err, zoom) {
+      //             if (err) return;
 
-                  map.easeTo({
-                      center: features[0].geometry.coordinates,
-                      zoom: zoom
-                  });
-              }
-          );
-      });
+      //             map.easeTo({
+      //                 center: features[0].geometry.coordinates,
+      //                 zoom: zoom
+      //             });
+      //         }
+      //     );
+      // });
 
-      var popup = new mapboxgl.Popup({
-        closeButton: false,
-        closeOnClick: false
-      });
+      // var popup = new mapboxgl.Popup({
+      //   closeButton: false,
+      //   closeOnClick: false
+      // });
 
 
-      // When a click event occurs on a feature in
-      // the unclustered-point layer, open a popup at
-      // the location of the feature, with
-      // description HTML from its properties.
-      map.on('click', 'unclustered-point', function (e) {
-          var coordinates = e.features[0].geometry.coordinates.slice();
-          var mag = e.features[0].properties.mag;
-          var tsunami;
+      // // When a click event occurs on a feature in
+      // // the unclustered-point layer, open a popup at
+      // // the location of the feature, with
+      // // description HTML from its properties.
+      // map.on('click', 'unclustered-point', function (e) {
+      //     var coordinates = e.features[0].geometry.coordinates.slice();
+      //     var mag = e.features[0].properties.mag;
+      //     var tsunami;
 
-          if (e.features[0].properties.tsunami === 1) {
-              tsunami = 'yes';
-          } else {
-              tsunami = 'no';
-          }
+      //     if (e.features[0].properties.tsunami === 1) {
+      //         tsunami = 'yes';
+      //     } else {
+      //         tsunami = 'no';
+      //     }
 
-          // Ensure that if the map is zoomed out such that
-          // multiple copies of the feature are visible, the
-          // popup appears over the copy being pointed to.
-          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-              coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-          }
+      //     // Ensure that if the map is zoomed out such that
+      //     // multiple copies of the feature are visible, the
+      //     // popup appears over the copy being pointed to.
+      //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      //     }
 
-          popup
-              .setLngLat(coordinates)
-              .setHTML(
-                  'magnitude: ' + mag + '<br>Was there a tsunami?: ' + tsunami
-              )
-              .addTo(map);
-      });
+      //     popup
+      //         .setLngLat(coordinates)
+      //         .setHTML(
+      //             'magnitude: ' + mag + '<br>Was there a tsunami?: ' + tsunami
+      //         )
+      //         .addTo(map);
+      // });
 
-      map.on('mouseenter', 'clusters', function () {
-          map.getCanvas().style.cursor = 'pointer';
-      });
-      map.on('mouseleave', 'clusters', function () {
-          map.getCanvas().style.cursor = '';
-      });
+      // map.on('mouseenter', 'clusters', function () {
+      //     map.getCanvas().style.cursor = 'pointer';
+      // });
+      // map.on('mouseleave', 'clusters', function () {
+      //     map.getCanvas().style.cursor = '';
+      // });
 
-      map.on('mouseenter', 'unclustered-point', function (e) {
-          map.getCanvas().style.cursor = 'pointer';
-          var coordinates = e.features[0].geometry.coordinates.slice();
-          var mag = e.features[0].properties.mag;
-          var tsunami;
+      // map.on('mouseenter', 'unclustered-point', function (e) {
+      //     map.getCanvas().style.cursor = 'pointer';
+      //     var coordinates = e.features[0].geometry.coordinates.slice();
+      //     var mag = e.features[0].properties.mag;
+      //     var tsunami;
 
-          if (e.features[0].properties.tsunami === 1) {
-              tsunami = 'yes';
-          } else {
-              tsunami = 'no';
-          }
+      //     if (e.features[0].properties.tsunami === 1) {
+      //         tsunami = 'yes';
+      //     } else {
+      //         tsunami = 'no';
+      //     }
 
-          // Ensure that if the map is zoomed out such that
-          // multiple copies of the feature are visible, the
-          // popup appears over the copy being pointed to.
-          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-              coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-          }
+      //     // Ensure that if the map is zoomed out such that
+      //     // multiple copies of the feature are visible, the
+      //     // popup appears over the copy being pointed to.
+      //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      //     }
 
-          popup
-              .setLngLat(coordinates)
-              .setHTML(
-                  'magnitude: ' + mag + '<br>Was there a tsunami?: ' + tsunami
-              )
-              .addTo(map);
-      });
+      //     popup
+      //         .setLngLat(coordinates)
+      //         .setHTML(
+      //             'magnitude: ' + mag + '<br>Was there a tsunami?: ' + tsunami
+      //         )
+      //         .addTo(map);
+      // });
 
-      map.on('mouseleave', 'unclustered-point', function () {
-          map.getCanvas().style.cursor = '';
-          popup.remove();
-      });
+      // map.on('mouseleave', 'unclustered-point', function () {
+      //     map.getCanvas().style.cursor = '';
+      //     popup.remove();
+      // });
 
 
 //  });
@@ -1565,53 +1535,6 @@ function vertabulateimg_marker(data, columns) {
 }
 
 
-function switchZoomLayer(disaster_type_id,iszoomed) {
-  
-  if (iszoomed) {
-
-      if (disaster_type_id < 90 ) {
-        map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', zoom*Math.round(24*symbol[disaster_type_id].size));
-        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 12);
-        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0, -1.8*symbol[disaster_type_id].size]);
-      } else {
-        map.setPaintProperty(symbol[disaster_type_id].layername, 'fill-opacity',1);
-        map.setPaintProperty(symbol[disaster_type_id].layername+'_bound','line-opacity',1);
-      }
-
-      // // Highlight table data rows
-      // var table_row = document.getElementsByClassName('datarow-'+disaster_type_id);
-      // //console.log(table_row.length,table_row);
-      // for (i=0;i<table_row.length;i++) {
-      //   table_row[i].style.backgroundColor = "#666666";
-      // }
-
-      if (symbol[disaster_type_id].visibility == 'visible') {
-        filter_dataTable(disaster_type_id);
-      } 
-
-  } else {
-      if (disaster_type_id < 90 ) {
-        map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', Math.round(24*symbol[disaster_type_id].size));
-        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 8);
-        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0, -1.7*symbol[disaster_type_id].size]);
-      } else {
-        map.setPaintProperty(symbol[disaster_type_id].layername, 'fill-opacity',symbol[disaster_type_id].opacity);
-        map.setPaintProperty(symbol[disaster_type_id].layername+'_bound','line-opacity',0);
-      }
-
-      // // Highlight table data rows
-      // var table_row = document.getElementsByClassName('datarow-'+disaster_type_id);
-      // for (i=0;i<table_row.length;i++) {
-      //   table_row[i].style.backgroundColor = "#494949";
-      // }
-
-      if ((symbol[disaster_type_id].visibility == 'visible')&&(!symbol[disaster_type_id].dbclick)) {
-        filter_dataTable("all");
-      }
-
-  }
-}
-
 
 //----Data Table ------------------------------------------
 
@@ -1791,7 +1714,7 @@ function tabulateimg(data, columns) {
             curve : 1, 
             essential: true
           });
-          console.log(e.center);
+          //console.log(e.center);
         }
       })
       .on('dblclick', function(e) {  
@@ -1825,18 +1748,75 @@ function tabulateimg(data, columns) {
 // }
 
 
-function switchZoomMarker(disaster_type_id,disaster_id,iszoomed) {
-
-  var size = symbol[disaster_type_id].size,
-      unzoomedSize = Math.round(28*size),
-      zoomedSize = zoom*unzoomedSize;
+function switchZoomLayer(disaster_type_id,iszoomed) {
+  
   if (iszoomed) {
 
       if (disaster_type_id < 90 ) {
-        map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', 'none');
-        map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', ['match',['get', 'disaster_id'], disaster_id, zoomedSize ,unzoomedSize]);
-        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', ['match',['get', 'disaster_id'], disaster_id, 12 ,8]);
-        //map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0,['match',['get', 'disaster_id'], disaster_id,-1.8,-1.7]]);
+        // map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', zoom*Math.round(24*symbol[disaster_type_id].size));
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 12);
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0, -1.8*symbol[disaster_type_id].size]);
+        map.setLayoutProperty(symbol[disaster_type_id].layername, 'icon-size', 0.21);
+        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 11);
+        //map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0, -4.9]);        
+      } else {
+        map.setPaintProperty(symbol[disaster_type_id].layername, 'fill-opacity',1);
+        map.setPaintProperty(symbol[disaster_type_id].layername+'_bound','line-opacity',1);
+      }
+
+      // // Highlight table data rows
+      // var table_row = document.getElementsByClassName('datarow-'+disaster_type_id);
+      // //console.log(table_row.length,table_row);
+      // for (i=0;i<table_row.length;i++) {
+      //   table_row[i].style.backgroundColor = "#666666";
+      // }
+
+      if (symbol[disaster_type_id].visibility == 'visible') {
+        filter_dataTable(disaster_type_id);
+      } 
+
+  } else {
+      if (disaster_type_id < 90 ) {
+        // map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', Math.round(24*symbol[disaster_type_id].size));
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 8);
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0, -1.7*symbol[disaster_type_id].size]);
+        map.setLayoutProperty(symbol[disaster_type_id].layername, 'icon-size', 0.15);
+        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 8);
+        //map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0, -4.9]);        
+      } else {
+        map.setPaintProperty(symbol[disaster_type_id].layername, 'fill-opacity',symbol[disaster_type_id].opacity);
+        map.setPaintProperty(symbol[disaster_type_id].layername+'_bound','line-opacity',0);
+      }
+
+      // // Highlight table data rows
+      // var table_row = document.getElementsByClassName('datarow-'+disaster_type_id);
+      // for (i=0;i<table_row.length;i++) {
+      //   table_row[i].style.backgroundColor = "#494949";
+      // }
+
+      if ((symbol[disaster_type_id].visibility == 'visible')&&(!symbol[disaster_type_id].dbclick)) {
+        filter_dataTable("all");
+      }
+
+  }
+}
+
+
+function switchZoomMarker(disaster_type_id,disaster_id,iszoomed) {
+
+  var size = symbol[disaster_type_id].size,
+      unzoomedSize = 0.15,//Math.round(28*size),
+      zoomedSize = 0.21;zoom*unzoomedSize;
+  if (iszoomed) {
+
+      if (disaster_type_id < 90 ) {
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', 'none');
+        // map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', ['match',['get', 'disaster_id'], disaster_id, zoomedSize ,unzoomedSize]);
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', ['match',['get', 'disaster_id'], disaster_id, 12 ,8]);
+        // //map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0,['match',['get', 'disaster_id'], disaster_id,-1.8,-1.7]]);
+        map.setLayoutProperty(symbol[disaster_type_id].layername, 'icon-size', ['match',['get', 'disaster_id'], disaster_id, zoomedSize ,unzoomedSize]);
+        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', ['match',['get', 'disaster_id'], disaster_id, 11 ,8]);
+
       } else {
         map.setPaintProperty(symbol[disaster_type_id].layername, 'fill-opacity',['match',['get', 'disaster_id'], disaster_id, 1 ,symbol[disaster_type_id].opacity]);
         map.setPaintProperty(symbol[disaster_type_id].layername+'_bound','line-opacity',['match',['get', 'disaster_id'], disaster_id, 1 ,0]);
@@ -1845,10 +1825,12 @@ function switchZoomMarker(disaster_type_id,disaster_id,iszoomed) {
 
   } else {
       if (disaster_type_id < 90 ) {
-        map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', 'visible');
-        map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', Math.round(24*symbol[disaster_type_id].size));
-        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 8);
-        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0, -1.7*symbol[disaster_type_id].size]);
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', 'visible');
+        // map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', Math.round(24*symbol[disaster_type_id].size));
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 8);
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0, -1.7*symbol[disaster_type_id].size]);
+        map.setLayoutProperty(symbol[disaster_type_id].layername, 'icon-size', 0.15);
+        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 8);        
       } else {
         map.setPaintProperty(symbol[disaster_type_id].layername, 'fill-opacity',symbol[disaster_type_id].opacity);
         map.setPaintProperty(symbol[disaster_type_id].layername+'_bound','line-opacity',0);
@@ -1860,49 +1842,57 @@ function switchZoomMarker(disaster_type_id,disaster_id,iszoomed) {
 
 
 function switchUnselectVisibility(disaster_type_id) {
-      drm_list.forEach(function (item, index) {
-        if (!symbol[disaster_type_id].dbclick) {              
-            symbol[item].visibility = 'visible';     
-            filter_dataTable(disaster_type_id);                         
-        } else {
-            symbol[item].visibility = 'none';      
-            filter_dataTable('all');          
-        }
-        if (disaster_type_id == item) {
-          symbol[disaster_type_id].visibility = 'none';
-        } else {
-          symbol[item].dbclick = false;
-        }
-        switchLayerVisibility(item);
-        document.getElementById("table_row_marker_"+item.toString()).style.borderRight = '0px solid #000';
-        document.getElementById("table_col_marker_"+item.toString()).style.borderBottom = '0px solid #000';        
-      })
-      symbol[disaster_type_id].dbclick = !symbol[disaster_type_id].dbclick;
-      if (symbol[disaster_type_id].dbclick) {
-        document.getElementById("table_row_marker_"+disaster_type_id.toString()).style.borderRight = '3px solid '+ symbol[disaster_type_id].color;
-        document.getElementById("table_col_marker_"+disaster_type_id.toString()).style.borderBottom = '3px solid '+ symbol[disaster_type_id].color;
-      } 
-      // else {
-      //   document.getElementById("table_row_marker_"+disaster_type_id.toString()).style.borderRight = '0px solid #000';
-      //   document.getElementById("table_col_marker_"+disaster_type_id.toString()).style.borderBottom = '0px solid #000';
-      // }
-      //border-right: 3px solid #383838;
+  drm_list.forEach(function (item, index) {
+    if (!symbol[disaster_type_id].dbclick) {              
+        symbol[item].visibility = 'visible';     
+        filter_dataTable(disaster_type_id);                         
+    } else {
+        symbol[item].visibility = 'none';      
+        filter_dataTable('all');          
+    }
+    if (disaster_type_id == item) {
+      symbol[disaster_type_id].visibility = 'none';
+    } else {
+      symbol[item].dbclick = false;
+    }
+    switchLayerVisibility(item);
+    document.getElementById("table_row_marker_"+item.toString()).style.borderRight = '0px solid #000';
+    document.getElementById("table_col_marker_"+item.toString()).style.borderBottom = '0px solid #000';        
+  })
+  symbol[disaster_type_id].dbclick = !symbol[disaster_type_id].dbclick;
+
+  if (disaster_type_id == 0) {
+    if (symbol['0'].dbclick) {
+      document.getElementById("lp-button").innerHTML = "<icon class='icon-circle-empty'></icon>";
+    } else {
+      document.getElementById("lp-button").innerHTML = "<icon class='icon-circle'></icon>";
+    }
+  } else {
+    if (symbol[disaster_type_id].dbclick) {
+      document.getElementById("table_row_marker_"+disaster_type_id.toString()).style.borderRight = '3px solid '+ symbol[disaster_type_id].color;
+      document.getElementById("table_col_marker_"+disaster_type_id.toString()).style.borderBottom = '3px solid '+ symbol[disaster_type_id].color;
+    }     
+  }
 }
 
 function switchLayerVisibility(disaster_type_id) {
 
   var marker = document.getElementsByClassName('image_marker_'+disaster_type_id);
-  if (symbol[disaster_type_id].visibility == 'none') {            
-    marker[0].style.border = "2px solid " + symbol[disaster_type_id].color;
-    marker[0].style.backgroundColor = "#fff";
-    marker[1].style.border = "2px solid " + symbol[disaster_type_id].color;
-    marker[1].style.backgroundColor = "#fff";
+  if (symbol[disaster_type_id].visibility == 'none') {
+    for (i=0;i<marker.length;i++) {
+      marker[i].style.border = "2px solid " + symbol[disaster_type_id].color;
+      marker[i].style.backgroundColor = "#fff";
+      // marker[1].style.border = "2px solid " + symbol[disaster_type_id].color;
+      // marker[1].style.backgroundColor = "#fff";
+    }
     symbol[disaster_type_id].visibility = 'visible';
   } else {
-    marker[0].style.border = "2px solid " + unselectedcolor;
-    marker[0].style.backgroundColor = unselectedcolor;
-    marker[1].style.border = "2px solid " + unselectedcolor;
-    marker[1].style.backgroundColor = unselectedcolor;
+    for (i=0;i<marker.length;i++) {
+      marker[i].style.border = "2px solid " + unselectedcolor;
+      marker[i].style.backgroundColor = unselectedcolor;
+      // marker[1].style.border = "2px solid " + unselectedcolor;
+      // marker[1].style.backgroundColor = unselectedcolor;
+    }
     symbol[disaster_type_id].visibility = 'none';
   }
 
@@ -1954,7 +1944,10 @@ function display_table_markers(drm) {
 
     //tabulateimg(disaster_risk_list.dtype_id.bottom(Infinity), ["icon","disaster_type","source","updated_date","level_detail","DRM_state","response","contract","blank","color"]);
     filter_dataTable('all');
-    switchShortNoti();
+    //switchShortNoti();
+    // Display Table markers
+    tabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+    vertabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
 
     //requestFullScreen(document.getElementById('map-panel'));
 
@@ -1982,9 +1975,10 @@ function initialize() {
   menubtn.setAttribute('type', 'button');
   //stopbtn.setAttribute('onclick', 'inputMenu()');
   menubtn.setAttribute('onclick', 'switchShortNoti()');
+  menubtn.setAttribute('oncontextmenu', 'switchUnselectVisibility(0)'); //switchUnselectVisibility(disaster_type_id)
   document.getElementById("menu-container-top-right").append(menubtn);
   //document.getElementById("stop-button").innerHTML = "⍜☷■⌂";
-  document.getElementById("lp-button").innerHTML = "↹";
+  document.getElementById("lp-button").innerHTML = "<icon class='icon-circle'></icon>";
 
 
   //document.getElementById("stop-button").innerHTML = "■";
@@ -2014,17 +2008,26 @@ function switchShortNoti() {
     document.getElementById('table-container-MAP').style.width = "70px";
     tabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
     vertabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
-    w = "59px";
-    
+    w = "61px";
   } else {
     document.getElementById('table-container-MAP').style.width = "105px";
     tabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
     vertabulateimg_marker(disaster_risk_list_summary, ["icon","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
     w = "96px";
-    shortnoti = 0;
   }
   var doc = document.getElementsByClassName('table_col_marker');
   for (i=0;i<doc.length;i++) {doc[i].style.width = w;} 
+
+  // Recheck and display table marker according to double click
+  drm_list.forEach(function (item, index) {
+    switchLayerVisibility(item);
+    switchLayerVisibility(item);
+    if (symbol[item].dbclick) {
+      document.getElementById("table_row_marker_"+item.toString()).style.borderRight = '3px solid '+ symbol[item].color;
+      document.getElementById("table_col_marker_"+item.toString()).style.borderBottom = '3px solid '+ symbol[item].color;
+    } 
+  })
+
 }
 
 function switchRightpanel() {

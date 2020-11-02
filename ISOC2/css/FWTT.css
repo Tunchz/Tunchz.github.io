@@ -282,7 +282,7 @@ table {
 
 .table_col_marker {
   height: 52px;
-  width: 100px;
+  width: 96px;
   /*border-top: 3px solid #383838;
   border-bottom: 3px solid #383838;*/
   cursor: pointer;
@@ -379,6 +379,7 @@ table {
   text-align: center;
   vertical-align: middle;
   margin-top: -9px;
+  /*font-family: "fontello";*/
 }
 
 
@@ -652,26 +653,26 @@ red:hover {
 }
 
 .map-menu-button, .map-menu-button:focus {
-  margin: 2px;
-  padding: 0 5px;
-  width: 30px;
-  height:30px;
+  margin: -5px 0 0 -3px;
+  /*padding: 0 5px;*/
+  width: 45px;
+  height:40px;
   border-radius: 2px;
-  background-color: #fff;
-  color: #000;
-  font-size: 18px;
+  background-color: #ffffff00;
+  color: #fff;
+  /*font-size: 18px;*/
   border-width: 0px;
   outline: none;
-  font: 22px Helvetica Neue, Arial, Helvetica, sans-serif;
+  font: 28px Serithai;
 }
 
 .map-menu-button:hover {
-  background-color: #fff;
+  background-color: #ffffff00;
   color: #2a58c3;
 }
 
 .map-menu-button:active {
-  background-color: #fff;
+  background-color: #ffffff00;
   color: #2a58c388;
 }
 
@@ -686,7 +687,7 @@ red:hover {
 }
 
 .map_addon_top_right { 
-  width:70px;
+  width:90px;
   padding: 0px; 
   margin: 0px; 
   position: absolute; 
@@ -787,7 +788,7 @@ red:hover {
   position: absolute;
   padding: 10px;
   border-radius:2px;
-  cursor: pointer;
+  /*cursor: pointer;*/
   pointer-events: auto;
 }
 #map_style_menu {
@@ -803,7 +804,9 @@ red:hover {
   margin-left: 38px;
 }
 
-
+input, label {
+  cursor: pointer;
+}
 
 
 /* custom scrollbar */
@@ -840,6 +843,7 @@ red:hover {
 
 #table-container-MAP {
   padding:50px 0px 10px 0px;
+  width: 105px;
 }
 
 #vertical-table-container-MAP {
