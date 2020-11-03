@@ -119,10 +119,15 @@ svg text {
   height: 100%;
 }
 
-
+#table-container {
+  box-shadow: 0 0 3px #777;
+}
 
 .table-container {
-  padding: 5px;
+  /*margin: 5px;
+  padding: 5px;*/
+  border-radius: 2px;
+  background-color: #ffffff;
   position: relative;
   left: 50%;
   top: 50%;
@@ -172,23 +177,24 @@ table {
   /*border-left: 5px solid #383838;
   border-right: 5px solid #383838;*/
   padding: 3px 0px; 
-  margin: 3px;
-  border-radius: 5px;
+  /*margin: 3px;
   background-color: #494949;
+  border-radius: 5px;
+  border-top: 1px solid #ddd;*/
+  border-bottom: 1px solid #ddd;
 }
 
 .table_row:hover {
-  background-color: #666;
+  background-color: #eee;
   /*opacity: 0.3;
   border-left: 7px solid #fff;*/
   /*border-left: 5px solid #2a58c3;
   border-right: 5px solid #2a58c3;*/
-  border-radius: 5px
 }
 
 .detail {
   font-size: 12px;
-  font-weight: normal;
+  font-weight: bold;
   padding: 0px 0px;
   /*text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
   text-shadow: 0 0 3px #fff;*/
@@ -203,7 +209,7 @@ table {
 .tag {
   font-size: 11px;
   padding: 0px 0px;
-  font-weight: normal;
+  font-weight: bold;
   justify-content: right;
   padding-right: 10px;
   text-align: right;
@@ -254,7 +260,7 @@ table {
 }
 
 #table_image {
-  color:#fff;
+  color:#000;
 }
 
 /*-------------Table Marker-----------------*/
@@ -311,6 +317,7 @@ table {
   vertical-align: middle;
   justify-content: center;
   padding-top: 0px;
+  box-shadow: 0 0 2px #777;
 }
 
 .tag_marker {
@@ -328,6 +335,7 @@ table {
   font-size: 10px;
   font-weight: bold;
   padding: 14px 0px 0px 3px;
+  text-shadow: 0px 0px 2px #777;
 }
 
 .detail_marker {
@@ -356,6 +364,8 @@ table {
   display: flex;
   background-color: #fff;
   border-radius: 50%;
+
+  box-shadow: 0 0 3px #777;
 }
 
 .table_img_marker {
@@ -664,6 +674,7 @@ red:hover {
   border-width: 0px;
   outline: none;
   font: 28px Serithai;
+  text-shadow: 0px 0px 3px #777;
 }
 
 .map-menu-button:hover {
@@ -692,7 +703,7 @@ red:hover {
   margin: 0px; 
   position: absolute; 
   right: 1px; 
-  top: 10px; 
+  top: 0px; 
   cursor: pointer; 
 }
 
@@ -710,7 +721,7 @@ red:hover {
 #notification-container-right{ 
   height: 100%;
   width: auto;
-  padding: 0px; 
+  padding: 10px 0 0 0; 
   margin: 0px; 
   position: relative;
   right: 0px; 
@@ -728,7 +739,7 @@ red:hover {
 #notification-container-bottom{ 
   width: 100%;
   height: auto;
-  padding: 0px; 
+  padding: 0 0 0 10px; 
   margin: 0px; 
   position: relative; 
   /*right: 0px; 
@@ -765,6 +776,7 @@ red:hover {
   border-radius:2px;
   /*opacity:0.6;*/
   cursor: pointer;
+  box-shadow: 0 0 3px #777;
 }
 
 #map_style_menu_button:hover {
@@ -802,6 +814,7 @@ red:hover {
   border-radius:2px;
   margin: 8px;
   margin-left: 38px;
+  box-shadow: 0 0 3px #777;
 }
 
 input, label {
@@ -842,7 +855,7 @@ input, label {
 }
 
 #table-container-MAP {
-  padding:50px 0px 10px 0px;
+  padding:40px 0px 10px 0px;
   width: 105px;
 }
 
