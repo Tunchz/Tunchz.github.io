@@ -564,7 +564,7 @@ function filterModal(map, layer) {
                 </div>
                 <div class="modal-body">
                 </div>
-                <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left">Made by CRMA Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left"></span><span class="pull-left"></span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
             </div>
         </div>
     </div>
