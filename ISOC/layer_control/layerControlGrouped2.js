@@ -355,7 +355,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
     let filterSpan = document.createElement("span");
     filterSpan.style.float = "right";
     filterSpan.style.height = "20px";
-    filterSpan.style.width = "24px";
+    filterSpan.style.width = "20px";
     filterSpan.style.opacity = 0.3;
     filterSpan.innerHTML = filterIcon();
     filterSpan.onclick = function() {
