@@ -355,7 +355,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
     let filterSpan = document.createElement("span");
     filterSpan.style.float = "right";
     filterSpan.style.height = "20px";
-    filterSpan.style.width = "24px";
+    filterSpan.style.width = "26px";
     filterSpan.style.marginTop = "-4px";
     filterSpan.style.opacity = 0.3;
     filterSpan.innerHTML = filterIcon();
@@ -558,13 +558,13 @@ function filterModal(map, layer) {
         <div class="modal-dialog">
             <div class="modal-content modal-container" style="width: 400px;">
                 <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
-                    <h2 class="modal-title h3">
+                    <h2 class="modal-title h4">
                       <span>Filter ${layer.name}</span>
                     </h2>
                 </div>
                 <div class="modal-body">
                 </div>
-                <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left"></span><span class="pull-left"></span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left"></span><span class="pull-left"></span></div>
             </div>
         </div>
     </div>
