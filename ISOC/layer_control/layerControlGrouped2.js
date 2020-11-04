@@ -18,7 +18,7 @@ class layerControlGrouped {
     this._collapsed = false;
 
     if (options.options && options.options.collapsed) {
-      //this._collapsed = true;
+      this._collapsed = true;
     }
 
     this._layers = options.layers.reverse().slice()
@@ -552,6 +552,8 @@ function filterModal(map, layer) {
       <div class="modal-footer">
       </div>
     </div>`
+
+    document.getElementById("header-container").appendChild(modal);
 
     var form = document.createElement("form");
     form.innerHTML = `
