@@ -538,20 +538,37 @@ function filterModal(map, layer) {
     modal.id = id;
     modal.classList = "modal fade"
     modal.style.alignItems = "flex-start";
+    // modal.innerHTML = `
+    // <a href="#close" class="modal-overlay" aria-label="Close" style="opacity: 0.8"></a>
+    // <div class="modal-container" style="width: 400px;">
+    //   <div class="modal-header">
+    //     <a href="#close" class="btn btn-clear float-right modal-close" aria-label="Close"></a>
+    //     <div class="modal-title h4">
+    //       <span>Filter ${layer.name}</span>
+    //     </div>
+    //   </div>
+    //   <div class="modal-body">
+    //   </div>
+    //   <div class="modal-footer">
+    //   </div>
+    // </div>
+    // `
     modal.innerHTML = `
-    <a href="#close" class="modal-overlay" aria-label="Close" style="opacity: 0.8"></a>
-    <div class="modal-container" style="width: 400px;">
-      <div class="modal-header">
-        <a href="#close" class="btn btn-clear float-right modal-close" aria-label="Close"></a>
-        <div class="modal-title h4">
-          <span>Filter ${layer.name}</span>
+    <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                    <h2 class="modal-title h3">
+                      <span>Filter ${layer.name}</span>
+                    </h2>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left">Made by CRMA Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+            </div>
         </div>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>`
+    </div>
+    `
 
 
     var form = document.createElement("form");
