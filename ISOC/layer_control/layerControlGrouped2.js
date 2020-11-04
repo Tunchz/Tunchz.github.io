@@ -554,7 +554,7 @@ function filterModal(map, layer) {
     // </div>
     // `
     modal.innerHTML = `
-    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="false">
+    <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="false">
         <div class="modal-dialog">
             <div class="modal-content modal-container" style="width: 400px;">
                 <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
