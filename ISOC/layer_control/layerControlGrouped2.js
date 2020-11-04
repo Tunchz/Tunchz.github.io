@@ -553,7 +553,6 @@ function filterModal(map, layer) {
       </div>
     </div>`
 
-    document.getElementById("header-container").appendChild(modal);
 
     var form = document.createElement("form");
     form.innerHTML = `
@@ -585,7 +584,7 @@ function filterModal(map, layer) {
     })
 
     modal.querySelector(".modal-body").appendChild(form)
-    document.body.appendChild(modal);
+    document.getElementById("header-container").appendChild(modal);  //document.body.appendChild(modal);
     window.location.hash = id
   }else{
     window.location.hash = id
