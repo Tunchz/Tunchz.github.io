@@ -328,7 +328,7 @@ SPECTRE MODAL
   flex-direction: column;
   max-height: 75vh;
   max-width: 640px;
-  /*padding: 0 .8rem;*/
+  padding: 0 .8rem;
   width: 100%;
   /*font-family: 'Serithai';*/
   color:#454d5d;
@@ -340,16 +340,16 @@ SPECTRE MODAL
 
 .modal-container .modal-header {
   color: #000; /*#454d5d;*/
-  /*padding: .8rem;*/
+  padding: .8rem;
 }
 
 .modal-container .modal-body {
   overflow-y: auto;
-  /*padding: .8rem;*/
+  padding: .8rem;
   position: relative;
 }
 
 .modal-container .modal-footer {
-  /*padding: .8rem;*/
+  padding: .8rem;
   text-align: right;
 }

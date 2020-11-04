@@ -365,7 +365,8 @@ function lcCreateLayerToggle(map, layer, checked, index) {
     filterSpan.oncontextmenu = function(e) {
       layer.metadata.layers.map(l => {
         map.setFilter(l)
-      })    
+      })
+    }    
     filterSpan.onmouseenter = function() {
       this.style.opacity = 1;
     }
