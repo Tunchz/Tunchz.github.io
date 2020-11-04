@@ -536,7 +536,7 @@ function filterModal(map, layer) {
   if (!document.getElementById(id)) {
     var modal = document.createElement("div");
     modal.id = id;
-    modal.classList = "modal"
+    modal.classList = "modal fade"
     modal.style.alignItems = "flex-start";
     modal.innerHTML = `
     <a href="#close" class="modal-overlay" aria-label="Close" style="opacity: 0.8"></a>
