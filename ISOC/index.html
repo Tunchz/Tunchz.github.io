@@ -33,7 +33,7 @@
               </div>
               <div id = "Text2_" class = "col-xs-4 height100p" style = "pointer-events: auto;display: flex;justify-content: left; align-items: center; padding : 11px 0px 0px 5px;">
                 <div type="button" class="btn btn-primary" style="width:18px; height:18px; border-radius: 50%; padding: 0px 5px; font-family: mitr;box-shadow: 0px 0px 3px #777;" data-toggle="modal" data-target="#info-modal">
-                  <div style="margin: -2px 0px 0px -1px;">?</div>
+                  <div style="margin: -2px 0px 0px 0px;">?</div>
                 </div>                          
               </div>
             </div>
@@ -472,8 +472,8 @@
         'paint': {
           'fill-color': [
               'case',
-              ['==', ['get', 'DROUGHT'], '3'], 'rgba(227,116,0,1)',
-              ['==', ['get', 'DROUGHT'], '4'], 'rgba(197,34,31,1)',
+              ['==', ['get', 'ระดับ'], '3'], 'rgba(227,116,0,1)',
+              ['==', ['get', 'ระดับ'], '4'], 'rgba(197,34,31,1)',
               '#ffffff'
           ],
           // 'fill-outline-color': 'white',
@@ -491,8 +491,8 @@
         'paint': {
           'fill-color': [
               'case',
-              ['==', ['get', 'CODE_FLD'], '3'], 'rgba(100,100,255,1)',
-              ['==', ['get', 'CODE_FLD'], '5'], 'rgba(0,0,255,1)',
+              ['==', ['get', 'ระดับ'], '3'], 'rgba(100,100,255,1)',
+              ['==', ['get', 'ระดับ'], '5'], 'rgba(0,0,255,1)',
               '#ffffff'
           ],
           // 'fill-outline-color': 'white',
@@ -678,53 +678,63 @@
             group: "น้ำ",
             children: true,
             directory: "สิ่งแวดล้อม",
-            legend: "<icon class='icon-circle' style='color:#51bbd6;'></icon> 1-100 บ่อ<br><icon class='icon-circle' style='color:#f1f075;'></icon> 101-750 บ่อ<br><icon class='icon-circle' style='color:#f28cb1;'></icon> มากกว่า 750 บ่อ"            
+            legend: "<icon class='icon-circle' style='color:#51bbd6;'></icon> 1-100 บ่อ<br><icon class='icon-circle' style='color:#f1f075;'></icon> 101-750 บ่อ<br><icon class='icon-circle' style='color:#f28cb1;'></icon> มากกว่า 750 บ่อ",            
+            metadata: {
+              filterSchema: {
+                "ประเภทบ่อ": {
+                  type: "select",
+                  options: ["", "บ่ออุปโภค-บริโภค","บ่อเกษตร"]
+                },
+                "ชื่อที่ตั้ง": {
+                  type: "string"
+                },                
+                // "ภาค": {
+                //   type: "select",
+                //   options: ["", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
+                // },                
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                },
+                "ตำบล": {
+                  type: "string"
+                }
+              }
+            }         
           },
-
-
-
-
-          // {
-          //   id: "Counties",
-          //   hidden: false,
-          //   group: "Cadastral",
-          //   directory: "การบริหาร"
-          // },
-          // {
-          //   id: "Lakes",
-          //   hidden: false,
-          //   group: "น้ำ",
-          //   directory: "สิ่งแวดล้อม"
-          // },
-          // {
-          //   id: "riversCase",
-          //   hidden: true,
-          //   group: "น้ำ",
-          //   parent: "rivers",
-          //   directory: "สิ่งแวดล้อม"
-          // },
-          // {
-          //   name: "Rivers",
-          //   id: "rivers",
-          //   hidden: false,
-          //   group: "น้ำ",
-          //   children: true,
-          //   directory: "สิ่งแวดล้อม"
-          // },
-          // {
-          //   id: "Rail",
-          //   hidden: false,
-          //   directory: "Cultural",
-          //   legend: "<icon class='fa fa-minus' style='color:red;'></icon> Legend defined in config<br><icon class='fa fa-minus' style='color:black;'></icon> Toggles when layer is off"
-          // },
-
 
           {
             name: "แหล่งน้ำขนาดใหญ่",
             id: "water_l",
             hidden: false,
             group: "น้ำ",
-            directory: "สิ่งแวดล้อม"
+            directory: "สิ่งแวดล้อม",            
+            metadata: {
+              filterSchema: {
+                "หน่วยงาน": {
+                  type: "select",
+                  options: ["", "แหล่งน้ำธรรมชาติขนาดใหญ่","กรมชลประทาน","การไฟฟ้าฝ่ายผลิตแห่งประเทศไทย"]
+                },
+                "ชื่อแหล่งน้ำ": {
+                  type: "string"
+                },                
+                // "ภาค": {
+                //   type: "select",
+                //   options: ["", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
+                // },                
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                },
+                "ตำบล": {
+                  type: "string"
+                }
+              }
+            }       
           },
 
           {
@@ -732,7 +742,31 @@
             id: "water_m",
             hidden: false,
             group: "น้ำ",
-            directory: "สิ่งแวดล้อม"
+            directory: "สิ่งแวดล้อม",            
+            metadata: {
+              filterSchema: {
+                "หน่วยงาน": {
+                  type: "select",
+                  options: ["", "แหล่งน้ำธรรมชาติขนาดกลาง","กรมชลประทาน","การไฟฟ้าฝ่ายผลิตแห่งประเทศ","กรมทรัพยากรน้ำ","กรมเจ้าท่า","กรมประมง","กรมพัฒนาพลังงานทดแทนและอนุ","อปท."]
+                },
+                "ชื่อแหล่งน้ำ": {
+                  type: "string"
+                },                
+                // "ภาค": {
+                //   type: "select",
+                //   options: ["", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
+                // },                
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                },
+                "ตำบล": {
+                  type: "string"
+                }
+              }
+            }       
           },
 
           {
@@ -742,7 +776,28 @@
             group: "น้ำ",
             //children: true,
             directory: "ผลการวิเคราะห์",
-            legend: "<icon class='icon-stop' style='color:rgba(227,116,0,0.7);'></icon> เสี่ยงปานกลาง<br><icon class='icon-stop' style='color:rgba(197,34,31,0.7);'></icon> เสี่ยงมาก"            
+            legend: "<icon class='icon-stop' style='color:rgba(227,116,0,0.7);'></icon> เสี่ยงปานกลาง<br><icon class='icon-stop' style='color:rgba(197,34,31,0.7);'></icon> เสี่ยงมาก",            
+            metadata: {
+              filterSchema: {
+                "ระดับความเสี่ยง": {
+                  type: "select",
+                  options: ["", "พื้นที่ที่เสี่ยงต่อการเกิดภัยแล้งปานกลาง","พื้นที่ที่เสี่ยงต่อการเกิดภัยแล้งสูง"]
+                },
+                "ภาค": {
+                  type: "select",
+                  options: ["", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
+                },                
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                },
+                "ตำบล": {
+                  type: "string"
+                }
+              }
+            }            
           },
 
 
@@ -753,7 +808,28 @@
             group: "น้ำ",
             //children: true,
             directory: "ผลการวิเคราะห์",
-            legend: "<icon class='icon-stop' style='color:rgba(100,100,255,0.7);'></icon> เสี่ยงปานกลาง<br><icon class='icon-stop' style='color:rgba(0,0,255,0.7);'></icon> เสี่ยงมาก"            
+            legend: "<icon class='icon-stop' style='color:rgba(100,100,255,0.7);'></icon> เสี่ยงปานกลาง<br><icon class='icon-stop' style='color:rgba(0,0,255,0.7);'></icon> เสี่ยงมาก",            
+            metadata: {
+              filterSchema: {
+                "ระดับความเสี่ยง": {
+                  type: "select",
+                  options: ["", "พื้นที่เสี่ยงต่อการถูกน้ำท่วมเสียหายซ้ำซากปานกลาง","พื้นที่เสี่ยงต่อการถูกน้ำท่วมเสียหายซ้ำซากสูง"]
+                },
+                "ภาค": {
+                  type: "select",
+                  options: ["", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
+                },                
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                },
+                "ตำบล": {
+                  type: "string"
+                }
+              }
+            }
           },
 
 
@@ -761,13 +837,36 @@
             id: "ตำบล",
             hidden: false,
             group: "เขตการปกครอง",
-            directory: "การบริหาร"
+            directory: "การบริหาร",
+            metadata: {
+              filterSchema: {
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                },
+                "ตำบล": {
+                  type: "string"
+                }
+              }
+            }
           },
           {
             id: "อำเภอ",
             hidden: false,
             group: "เขตการปกครอง",
-            directory: "การบริหาร"
+            directory: "การบริหาร",
+            metadata: {
+              filterSchema: {
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                }
+              }
+            }
           },
           {
             id: "จังหวัด",
@@ -777,7 +876,7 @@
 
             metadata: {
               filterSchema: {
-                "PROVINCE_N": {
+                "จังหวัด": {
                   type: "string"
                 }
                 // "scalerank": {
