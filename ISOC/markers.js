@@ -1903,7 +1903,7 @@ function switchLayerVisibility(disaster_type_id) {
 
 
   if (disaster_type_id < 90 ) {
-    map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', symbol[disaster_type_id].visibility);
+    //map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', symbol[disaster_type_id].visibility);
     map.setLayoutProperty(symbol[disaster_type_id].layername, 'visibility', symbol[disaster_type_id].visibility);
     map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'visibility', symbol[disaster_type_id].visibility);
     map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'visibility', symbol[disaster_type_id].visibility);
@@ -1982,7 +1982,7 @@ function initialize() {
   menubtn.setAttribute('type', 'button');
   //stopbtn.setAttribute('onclick', 'inputMenu()');
   menubtn.setAttribute('onclick', 'switchShortNoti()');
-  menubtn.setAttribute('oncontextmenu', 'switchUnselectVisibility(0)'); //switchUnselectVisibility(disaster_type_id)
+  menubtn.setAttribute('oncontextmenu', 'switchUnselectVisibility(0);return false;'); //switchUnselectVisibility(disaster_type_id)
   document.getElementById("menu-container-top-right").append(menubtn);
   //document.getElementById("stop-button").innerHTML = "⍜☷■⌂";
   document.getElementById("lp-button").innerHTML = "<icon class='icon-circle'></icon>";
@@ -2002,6 +2002,7 @@ function initialize() {
 
 
 }
+
 
 
 function switchShortNoti() {
