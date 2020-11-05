@@ -332,6 +332,8 @@ SPECTRE MODAL
   width: 100%;
   /*font-family: 'Serithai';*/
   color:#454d5d;
+  
+  border-radius: 5px;
 }
 
 .modal-container.modal-fullheight {

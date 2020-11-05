@@ -368,6 +368,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
       layer.metadata.layers.map(l => {
         map.setFilter(l)
       });
+      document.getElementById(layer.id).style.color = "#000";
     }    
     filterSpan.onmouseenter = function() {
       this.style.opacity = 1;
@@ -595,11 +596,13 @@ function filterModal(map, layer) {
       if (!filter) {
         layer.metadata.layers.map(l => {
           map.setFilter(l)
-        })
+        });
+        document.getElementById(layer.id).style.color = "#000";
       }else{
         layer.metadata.layers.map(l => {
           map.setFilter(l, filter)
-        })
+        });
+        document.getElementById(layer.id).style.color = "#2a58c3";
       }
     });
 
