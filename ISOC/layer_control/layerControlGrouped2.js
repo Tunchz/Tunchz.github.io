@@ -586,8 +586,8 @@ function filterModal(map, layer) {
       <button class="btn btn-outline" type="reset" style="float:right">Reset</button>
     `
     form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      window.location.hash = "#";
+      //e.preventDefault();
+      //window.location.hash = "#";
       var filter = buildFilter(new FormData(form), layer);
       console.log(filter)
       if (!filter) {
