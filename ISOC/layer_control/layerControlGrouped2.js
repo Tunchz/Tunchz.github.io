@@ -358,9 +358,9 @@ function lcCreateLayerToggle(map, layer, checked, index) {
     filterSpan.style.height = "20px";
     filterSpan.style.width = "26px";
     filterSpan.style.marginTop = "-4px";
-    filterSpan.style.fill = "#f00";
-    filterSpan.style.opacity = 0.3;
-    filterSpan.innerHTML = filterIcon(layer.id+'_filtericon');
+    filterSpan.style.fill = "#999";
+    filterSpan.style.opacity = 0.7;
+    filterSpan.innerHTML = filterIcon();
     filterSpan.onclick = function() {
       filterModal(map, layer)
     }
@@ -369,14 +369,14 @@ function lcCreateLayerToggle(map, layer, checked, index) {
       layer.metadata.layers.map(l => {
         map.setFilter(l)
       });
-      document.getElementById(layer.id+'_filtericon').style.fill = "#000";
-      console.log(layer.id+'_filtericon',"#000");
+      document.getElementById(layer.id+'_filtericon').style.fill = "#999";
+      //console.log(layer.id+'_filtericon',"#777");
     }    
     filterSpan.onmouseenter = function() {
       this.style.opacity = 1;
     }
     filterSpan.onmouseleave= function() {
-      this.style.opacity = 0.3;
+      this.style.opacity = 0.7;
     }
     div.appendChild(filterSpan)
   }
@@ -599,7 +599,7 @@ function filterModal(map, layer) {
         layer.metadata.layers.map(l => {
           map.setFilter(l)
         });
-        document.getElementById(layer.id+'_filtericon').style.fill = "#000";
+        document.getElementById(layer.id+'_filtericon').style.fill = "#999";
         console.log(layer.id+'_filtericon',"#000");
       }else{
         layer.metadata.layers.map(l => {
@@ -614,7 +614,7 @@ function filterModal(map, layer) {
       layer.metadata.layers.map(l => {
         map.setFilter(l)
       })
-      document.getElementById(layer.id+'_filtericon').style.fill = "#000";
+      document.getElementById(layer.id+'_filtericon').style.fill = "#999";
       console.log(layer.id+'_filtericon',"#000");      
     })
 
@@ -691,6 +691,6 @@ function createFormFields(schema) {
 }
 
 
-function filterIcon(id) {
+function filterIcon() {
   return `<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><path d="M0,0h24 M24,24H0" fill="none"/><path d="M4.25,5.61C6.27,8.2,10,13,10,13v6c0,0.55,0.45,1,1,1h2c0.55,0,1-0.45,1-1v-6c0,0,3.72-4.8,5.74-7.39 C20.25,4.95,19.78,4,18.95,4H5.04C4.21,4,3.74,4.95,4.25,5.61z"/><path d="M0,0h24v24H0V0z" fill="none"/></g></svg>`
 }
