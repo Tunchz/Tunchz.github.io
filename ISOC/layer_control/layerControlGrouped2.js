@@ -79,7 +79,7 @@ class layerControlGrouped {
 
     this._layerControlConfig = config
 
-    console.log(config)
+    //console.log(config)
 
     // TARGET CONFIG LAYOUT
     // this._layerControlConfig = {
@@ -541,7 +541,7 @@ function lcSetLegendVisibility(e) {
 }
 
 function filterModal(map, layer) {
-  console.log(layer)
+  //console.log(layer)
   var id = layer.id + "FilterModal";
   if (!document.getElementById(id)) {
     var modal = document.createElement("div");
@@ -594,19 +594,19 @@ function filterModal(map, layer) {
       e.preventDefault();
       window.location.hash = "#";
       var filter = buildFilter(new FormData(form), layer);
-      console.log(filter)
+      //console.log(filter)
       if (!filter) {
         layer.metadata.layers.map(l => {
           map.setFilter(l)
         });
         document.getElementById(layer.id+'_filtericon').style.fill = "#999";
-        console.log(layer.id+'_filtericon',"#000");
+        //console.log(layer.id+'_filtericon',"#000");
       }else{
         layer.metadata.layers.map(l => {
           map.setFilter(l, filter)
         });
         document.getElementById(layer.id+'_filtericon').style.fill = "#2a58c3";
-        console.log(layer.id+'_filtericon',"#2a58c3");
+        //console.log(layer.id+'_filtericon',"#2a58c3");
       }
     });
 
@@ -615,7 +615,7 @@ function filterModal(map, layer) {
         map.setFilter(l)
       })
       document.getElementById(layer.id+'_filtericon').style.fill = "#999";
-      console.log(layer.id+'_filtericon',"#000");      
+      //console.log(layer.id+'_filtericon',"#000");      
     })
 
     modal.querySelector(".modal-body").appendChild(form)
