@@ -353,6 +353,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
 
   if (layer.metadata && layer.metadata.filterSchema) {
     let filterSpan = document.createElement("span");
+    filterSpan.id = layer.id;
     filterSpan.style.float = "right";
     filterSpan.style.height = "20px";
     filterSpan.style.width = "26px";
