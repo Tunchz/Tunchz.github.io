@@ -564,7 +564,7 @@ function filterModal(map, layer) {
         <div class="modal-dialog" style="width: 400px;">
             <div class="modal-content modal-container" style="width: 400px;">
                 <div class="modal-header">
-                    <a href="#close" class="btn btn-clear float-right modal-close" aria-label="Close"></a>
+                    <a href="#close" class="btn btn-clear float-right modal-close" aria-label="Close">x</a>
                     <h2 class="modal-title h4">
                       <span>Filter ${layer.name}</span>
                     </h2>
