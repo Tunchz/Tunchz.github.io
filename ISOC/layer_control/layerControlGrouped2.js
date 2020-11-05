@@ -561,7 +561,7 @@ function filterModal(map, layer) {
     modal.innerHTML = `
     <div class="modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display:block;">
         <a href="#close" class="modal-overlay" aria-label="Close" style="opacity: 0.1"></a>
-        <div class="modal-dialog-filter">
+        <div class="modal-dialog modal-filter">
             <div class="modal-content modal-container">
                 <div class="modal-header">
                     <a href="#close" class="btn btn-clear float-right modal-close" aria-label="Close">X</a>
