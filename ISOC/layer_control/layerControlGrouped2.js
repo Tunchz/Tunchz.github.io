@@ -353,7 +353,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
 
   if (layer.metadata && layer.metadata.filterSchema) {
     let filterSpan = document.createElement("span");
-    filterSpan.id = layer.id;
+    filterSpan.id = layer.id+'_filtericon';
     filterSpan.style.float = "right";
     filterSpan.style.height = "20px";
     filterSpan.style.width = "26px";
@@ -368,7 +368,8 @@ function lcCreateLayerToggle(map, layer, checked, index) {
       layer.metadata.layers.map(l => {
         map.setFilter(l)
       });
-      document.getElementById(layer.id).style.color = "#000";
+      document.getElementById(layer.id+'_filtericon').style.color = "#000";
+      console.log(layer.id+'_filtericon',"#000");
     }    
     filterSpan.onmouseenter = function() {
       this.style.opacity = 1;
@@ -597,12 +598,14 @@ function filterModal(map, layer) {
         layer.metadata.layers.map(l => {
           map.setFilter(l)
         });
-        document.getElementById(layer.id).style.color = "#000";
+        document.getElementById(layer.id+'_filtericon').style.color = "#000";
+        console.log(layer.id+'_filtericon',"#000");
       }else{
         layer.metadata.layers.map(l => {
           map.setFilter(l, filter)
         });
-        document.getElementById(layer.id).style.color = "#2a58c3";
+        document.getElementById(layer.id+'_filtericon').style.color = "#2a58c3";
+        console.log(layer.id+'_filtericon',"#2a58c3");
       }
     });
 
@@ -610,6 +613,8 @@ function filterModal(map, layer) {
       layer.metadata.layers.map(l => {
         map.setFilter(l)
       })
+      document.getElementById(layer.id+'_filtericon').style.color = "#000";
+      console.log(layer.id+'_filtericon',"#000");      
     })
 
     modal.querySelector(".modal-body").appendChild(form)
