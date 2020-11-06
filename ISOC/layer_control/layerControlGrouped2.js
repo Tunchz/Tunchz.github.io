@@ -359,7 +359,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
     filterSpan.style.width = "26px";
     filterSpan.style.marginTop = "-4px";
     filterSpan.style.fill = "#999";
-    filterSpan.style.opacity = 0.7;
+    filterSpan.style.opacity = 1;
     filterSpan.innerHTML = filterIcon();
     filterSpan.onclick = function() {
       filterModal(map, layer)
@@ -373,10 +373,10 @@ function lcCreateLayerToggle(map, layer, checked, index) {
       //console.log(layer.id+'_filtericon',"#777");
     }    
     filterSpan.onmouseenter = function() {
-      this.style.opacity = 1;
+      this.style.opacity = 0.7;
     }
     filterSpan.onmouseleave= function() {
-      this.style.opacity = 0.7;
+      this.style.opacity = 1;
     }
     div.appendChild(filterSpan)
   }
