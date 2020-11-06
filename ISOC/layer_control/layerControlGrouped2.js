@@ -601,7 +601,6 @@ function filterModal(map, layer) {
         });
         document.getElementById(layer.id+'_filtericon').style.fill = "#999";
         //console.log(layer.id+'_filtericon',"#000");
-        window.location.hash = id;
       }else{
         layer.metadata.layers.map(l => {
           map.setFilter(l, filter)
@@ -609,6 +608,7 @@ function filterModal(map, layer) {
         document.getElementById(layer.id+'_filtericon').style.fill = "#2a58c3";
         //console.log(layer.id+'_filtericon',"#2a58c3");
       }
+      filterModal(map, layer);
     });
 
     form.addEventListener("reset", function(e) {
