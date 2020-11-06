@@ -601,6 +601,7 @@ function filterModal(map, layer) {
         });
         document.getElementById(layer.id+'_filtericon').style.fill = "#999";
         //console.log(layer.id+'_filtericon',"#000");
+        window.location.hash = id;
       }else{
         layer.metadata.layers.map(l => {
           map.setFilter(l, filter)
