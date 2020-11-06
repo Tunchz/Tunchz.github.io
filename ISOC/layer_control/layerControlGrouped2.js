@@ -326,6 +326,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
     lcSetActiveLayers(this.id, this.checked)
     lcSetLegendVisibility(this)
     lcSetDirectoryLayerCount(this);
+    console.log(this.id, this.checked, this);
   };
 
   let label = document.createElement("label");
@@ -363,11 +364,11 @@ function lcCreateLayerToggle(map, layer, checked, index) {
     filterSpan.innerHTML = filterIcon();
     filterSpan.onclick = function() {
       filterModal(map, layer)
-      
+
       lcSetActiveLayers(this.id, this.checked)
       lcSetLegendVisibility(this)
       lcSetDirectoryLayerCount(this);
-
+      console.log(this.id, this.checked, this);
     }
     filterSpan.oncontextmenu = function(e) {
       e.preventDefault();
