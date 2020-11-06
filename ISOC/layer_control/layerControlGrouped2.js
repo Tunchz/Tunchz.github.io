@@ -363,6 +363,11 @@ function lcCreateLayerToggle(map, layer, checked, index) {
     filterSpan.innerHTML = filterIcon();
     filterSpan.onclick = function() {
       filterModal(map, layer)
+      
+      lcSetActiveLayers(this.id, this.checked)
+      lcSetLegendVisibility(this)
+      lcSetDirectoryLayerCount(this);
+
     }
     filterSpan.oncontextmenu = function(e) {
       e.preventDefault();
