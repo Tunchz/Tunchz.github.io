@@ -587,10 +587,10 @@ function filterModal(map, layer) {
     form.innerHTML = `
       ${createFormFields(layer.metadata.filterSchema)}
       <br>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="apply" class="btn btn-primary">Apply</button>
       <button class="btn btn-outline" type="reset" style="float:right">Reset</button>
     `
-    form.addEventListener("submit", function(e) {
+    form.addEventListener("apply", function(e) {
       e.preventDefault();
       window.location.hash = "#";
       var filter = buildFilter(new FormData(form), layer);
