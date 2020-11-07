@@ -582,11 +582,12 @@ function filterModal(map, layer) {
                 </div>
                 <div class="modal-body">
                 </div>
-                <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left"></span><span class="pull-left"></span></div>
+                
             </div>
         </div>
     </div>
     `
+//                <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left"></span><span class="pull-left"></span></div>
 
 
     var form = document.createElement("form");
