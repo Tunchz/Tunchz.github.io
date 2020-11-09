@@ -368,6 +368,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
       // switch on layer
       if (!this.checked) {
         var thislayer = document.getElementById((this.id).substr(0,(this.id).length - 11));
+        thislayer.checked = true;
         lcSetActiveLayers(thislayer.id, this.checked);
         lcSetLegendVisibility(thislayer);
         lcSetDirectoryLayerCount(thislayer);
