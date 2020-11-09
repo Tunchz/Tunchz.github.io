@@ -326,7 +326,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
     lcSetActiveLayers(this.id, this.checked);
     lcSetLegendVisibility(this);
     lcSetDirectoryLayerCount(this);
-    console.log(this.id, this.checked, this);
+    //console.log(this.id, this.checked, this);
   };
 
   let label = document.createElement("label");
@@ -384,7 +384,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
         lcSetLegendVisibility(thislayer);
         lcSetDirectoryLayerCount(thislayer);
       }
-      console.log(thislayer.id, thislayer.checked, thislayer);
+      //console.log(thislayer.id, thislayer.checked, thislayer);
     }
     filterSpan.oncontextmenu = function(e) {
       e.preventDefault();
@@ -532,7 +532,6 @@ function isString(value) {
 }
 
 function lcSetActiveLayers(l, checked) {
-  console.log(l,checked);
   let _layer = l;
   let _visibility = checked;
   let params = new URLSearchParams(window.location.search);
