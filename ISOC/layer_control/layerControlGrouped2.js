@@ -365,10 +365,14 @@ function lcCreateLayerToggle(map, layer, checked, index) {
     filterSpan.onclick = function() {
       filterModal(map, layer)
 
-      lcSetActiveLayers(this.id, this.checked)
-      lcSetLegendVisibility(this)
+      // switch on layer
+      var thislayer = document.getElementById(substr(this.id,0,(this.id).length - 11);
+      lcSetActiveLayers(this.id, this.checked);
+      lcSetLegendVisibility(this);
       lcSetDirectoryLayerCount(this);
       console.log(this.id, this.checked, this);
+      console.log(thislayer.id, thislayer.checked, thislayer);
+
     }
     filterSpan.oncontextmenu = function(e) {
       e.preventDefault();
