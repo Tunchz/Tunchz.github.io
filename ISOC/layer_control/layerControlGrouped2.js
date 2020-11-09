@@ -366,13 +366,13 @@ function lcCreateLayerToggle(map, layer, checked, index) {
       filterModal(map, layer)
 
       // switch on layer
-      console.log(this.id,(this.id).substr(0,(this.id).length - 11));
-      //var thislayer = document.getElementById((this.id).substr(0,(this.id).length - 11));
-      lcSetActiveLayers(this.id, this.checked);
-      lcSetLegendVisibility(this);
-      lcSetDirectoryLayerCount(this);
-      console.log(this.id, this.checked, this);
-      //console.log(thislayer.id, thislayer.checked, thislayer);
+      //console.log(this.id,(this.id).substr(0,(this.id).length - 11));
+      var thislayer = document.getElementById((this.id).substr(0,(this.id).length - 11));
+      lcSetActiveLayers(thislayer.id, true);
+      lcSetLegendVisibility(thislayer);
+      lcSetDirectoryLayerCount(thislayer);
+      //console.log(this.id, this.checked, this);
+      console.log(thislayer.id, thislayer.checked, thislayer);
 
     }
     filterSpan.oncontextmenu = function(e) {
