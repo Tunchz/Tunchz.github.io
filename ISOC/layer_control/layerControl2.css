@@ -8,7 +8,7 @@
   }
   .mapboxgl-ctrl-group:not(:empty) {
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
+    /*border-radius: 2px;*/
   }
 
   /* .mapboxgl-ctrl-top-right {

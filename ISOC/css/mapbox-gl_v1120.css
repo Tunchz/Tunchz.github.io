@@ -99,7 +99,8 @@
 }
 
 .mapboxgl-ctrl-top-left .mapboxgl-ctrl {
-    margin: 10px 0 0 10px;
+    /*margin: 10px 0 0 10px;*/
+    margin: 2px 0 0 0px;
     float: left
 }
 
@@ -119,9 +120,9 @@
 }
 
 .mapboxgl-ctrl-group {
-    border-radius: 4px;
+    border-radius: 0 5px 5px 0;
     background: #fff;
-    opacity: 1;//0.4;
+    opacity: 1; /*0.4;*/
 }
 
 .mapboxgl-ctrl-group:not(:empty) {
@@ -147,6 +148,8 @@
     background-color: transparent;
     cursor: pointer;
     /*opacity: 0.5;*/
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .mapboxgl-ctrl-group button+button {

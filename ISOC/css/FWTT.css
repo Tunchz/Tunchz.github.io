@@ -764,16 +764,17 @@ red:hover {
   padding: 0;
 }
 
+
 #map_style_menu_button {
-  height: 30px;
+  /*height: 30px;
   width:30px;
-  /*left: 10px;
-  top: 245px;*/
-  /*position: absolute;*/
+  left: 10px;
+  top: 245px;
+  border-radius:2px;
+  position: absolute;*/
   background: #fff; /*#2a58c3;*/
   padding: 0px;
   font-family: 'impact', sans-serif;
-  border-radius:2px;
   /*opacity:0.6;*/
   cursor: pointer;
   box-shadow: 0 0 3px #777;
@@ -785,10 +786,10 @@ red:hover {
 }
 
 #map_style_menu_button_image {
-  height: 24px;
-  width: 24px;
-  margin:3px;
-  border-radius: 2px;
+  height: 25px;
+  width: 25px;
+  margin:2px;
+  border-radius: 0 4px 4px 0;
   /*border: 3px #2a58c3;*/
   background-image: url("images/MapStyle.png");
 }
@@ -796,12 +797,14 @@ red:hover {
 #map_style_menu_outline {
   height: auto;
   left: 0px;
-  top: 193px;
+  top: 169px;
   position: absolute;
   padding: 10px;
-  border-radius:2px;
+  padding-left: 0px;
+  border-radius:0 5px 5px 0;
   /*cursor: pointer;*/
   pointer-events: auto;
+  z-index: 100;
 }
 #map_style_menu {
   width: 100px;
@@ -811,9 +814,9 @@ red:hover {
   padding: 5px 15px 0px 15px;
   font-family: 'Serithai', sans-serif;
   font-size: 12px;
-  border-radius:2px;
+  border-radius: 0 5px 5px 0;
   margin: 8px;
-  margin-left: 38px;
+  margin-left: 0px;
   box-shadow: 0 0 3px #777;
 }
 
@@ -943,3 +946,5 @@ option {
   /*background: #fff url(data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204%205'%3E%3Cpath%20fill='%23667189'%20d='M2%200L0%202h4zm0%205L0%203h4z'/%3E%3C/svg%3E) no-repeat right .35rem center/.4rem .5rem;
   */padding-right: 1.2rem;
 }
+
+
