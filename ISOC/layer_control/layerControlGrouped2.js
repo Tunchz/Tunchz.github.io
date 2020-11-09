@@ -582,7 +582,7 @@ function filterModal(map, layer) {
                 </div>
                 <div class="modal-body">
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -596,6 +596,7 @@ function filterModal(map, layer) {
       <br>
       <button type="submit" class="btn btn-primary">Apply</button>
       <button class="btn btn-outline" type="reset" style="float:right">Reset</button>
+      <button class="btn btn-outline" style="float:right"><a href="#close" class="modal-close" aria-label="Close">Close</a></button>
     `
     form.addEventListener("submit", function(e) {
       e.preventDefault();
