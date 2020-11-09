@@ -370,14 +370,14 @@ function lcCreateLayerToggle(map, layer, checked, index) {
         thislayer.checked = true;
         
         mglHelper.SetLayerVisibility(map, thislayer.checked, thislayer.id);
-//         if (e.target.dataset.children) {
-//           let children = document.querySelectorAll("[data-parent]");
-//           for (let i = 0; i < children.length; i++) {
-//             if (children[i].dataset.parent === e.target.id) {
-//               children[i].click()
-//             }
-//           }
-//         }        
+        //if (e.target.dataset.children) {
+          let children = document.querySelectorAll("[data-parent]");
+          for (let i = 0; i < children.length; i++) {
+            if (children[i].dataset.parent === e.target.id) {
+              children[i].click()
+            }
+          }
+        //}        
         
         
         lcSetActiveLayers(thislayer.id, thislayer.checked);
