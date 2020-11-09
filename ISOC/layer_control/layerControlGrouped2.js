@@ -325,7 +325,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
   input.onclick = function () {
     lcSetActiveLayers(this.id, this.checked);
     lcSetLegendVisibility(this);
-    //lcSetDirectoryLayerCount(this);
+    lcSetDirectoryLayerCount(this);
     console.log(this.id, this.checked, this);
   };
 
