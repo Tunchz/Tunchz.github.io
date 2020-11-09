@@ -35,7 +35,36 @@
 
   .mgl-layerControl {
     font-size: 12px;
+    max-height: 400px;
+    overflow-y: auto;
+
   }
+
+
+/* custom scrollbar for layer control */
+/* width */
+
+.mgl-layerControl::-webkit-scrollbar {
+  width: 5px;
+  height: 0px;
+}
+
+/* Track */
+.mgl-layerControl::-webkit-scrollbar-track {
+  background: #fff0; 
+  padding-right: 2px;
+}
+ 
+/* Handle */
+.mgl-layerControl::-webkit-scrollbar-thumb {
+  background: #ccc; 
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+.mgl-layerControl::-webkit-scrollbar-thumb:hover {
+  background: #aaa; 
+}
 
   /****
   * COLLAPSED
@@ -332,7 +361,7 @@ SPECTRE MODAL
   width: 100%;
   /*font-family: 'Serithai';*/
   color:#454d5d;
-  
+
   border-radius: 5px;
 }
 
