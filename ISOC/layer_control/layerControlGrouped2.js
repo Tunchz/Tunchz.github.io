@@ -364,11 +364,22 @@ function lcCreateLayerToggle(map, layer, checked, index) {
     filterSpan.innerHTML = filterIcon();
     filterSpan.onclick = function() {
       filterModal(map, layer)
-
+      var thislayer = document.getElementById((this.id).substr(0,(this.id).length - 11));
       // switch on layer
-      if (!this.checked) {
-        var thislayer = document.getElementById((this.id).substr(0,(this.id).length - 11));
+      if (!thislayer.checked) {
         thislayer.checked = true;
+        
+        mglHelper.SetLayerVisibility(map, thislayer.checked, thislayer.id);
+//         if (e.target.dataset.children) {
+//           let children = document.querySelectorAll("[data-parent]");
+//           for (let i = 0; i < children.length; i++) {
+//             if (children[i].dataset.parent === e.target.id) {
+//               children[i].click()
+//             }
+//           }
+//         }        
+        
+        
         lcSetActiveLayers(thislayer.id, thislayer.checked);
         lcSetLegendVisibility(thislayer);
         lcSetDirectoryLayerCount(thislayer);
