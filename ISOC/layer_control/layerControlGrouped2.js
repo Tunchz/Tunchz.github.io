@@ -366,7 +366,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
       filterModal(map, layer)
 
       // switch on layer
-      var thislayer = document.getElementById(substr(this.id,0,(this.id).length - 11);
+      var thislayer = document.getElementById(substr(this.id,0,(this.id).length - 11));
       lcSetActiveLayers(this.id, this.checked);
       lcSetLegendVisibility(this);
       lcSetDirectoryLayerCount(this);
