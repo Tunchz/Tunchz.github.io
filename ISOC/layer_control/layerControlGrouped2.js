@@ -373,7 +373,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
         //if (e.target.dataset.children) {
           let children = document.querySelectorAll("[data-parent]");
           for (let i = 0; i < children.length; i++) {
-            if (children[i].dataset.parent === e.target.id) {
+            if (children[i].dataset.parent === thislayer.id) {
               children[i].click()
             }
           }
