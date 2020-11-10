@@ -369,8 +369,10 @@ function lcCreateLayerToggle(map, layer, checked, index) {
       if (!thislayer.checked) {
         thislayer.checked = true;
         
+        // switch on layer
         mglHelper.SetLayerVisibility(map, thislayer.checked, thislayer.id);
         //if (e.target.dataset.children) {
+          // switch on child layers
           let children = document.querySelectorAll("[data-parent]");
           for (let i = 0; i < children.length; i++) {
             if (children[i].dataset.parent === thislayer.id) {
@@ -378,7 +380,6 @@ function lcCreateLayerToggle(map, layer, checked, index) {
             }
           }
         //}        
-        
         
         lcSetActiveLayers(thislayer.id, thislayer.checked);
         lcSetLegendVisibility(thislayer);
@@ -668,7 +669,7 @@ function buildFilter(data, layer) {
     switch (layer.metadata.filterSchema[fields[i]].type) {
       case "date" : filter.push([values[i + 1], ["get", fields[i] ], values[i] ]); break;
       case "number" : filter.push([values[i + 1], ["get", fields[i] ], Number(values[i]) ]); break;
-      default: filter.push(["==", ["get", fields[i]], values[i]]);
+      default: filter.push(["match", ["get", fields[i]], values[i].split(','),true,false]); //build >> ["match",["get", "จังหวัด"],['น่าน','นครนายก'],true,false]
     }    
   }
 
