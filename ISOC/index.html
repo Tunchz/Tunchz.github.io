@@ -433,7 +433,7 @@
 
 
       map.addLayer({
-        'id': 'จังหวัด',
+        'id': 'เขตจังหวัด',
         'type': 'line',
         'source': 'mapth_prov',
         'layout': {
@@ -446,7 +446,7 @@
       });
 
       map.addLayer({
-        'id': 'อำเภอ',
+        'id': 'เขตอำเภอ',
         'type': 'line',
         'source': 'mapth_dist',
         'layout': {
@@ -459,7 +459,7 @@
       });
 
       map.addLayer({
-        'id': 'ตำบล',
+        'id': 'เขตตำบล',
         'type': 'line',
         'source': 'mapth_subd',
         'layout': {
@@ -782,7 +782,7 @@
             name: "พื้นที่เสี่ยงภัยแล้ง",
             id: "drought_risk",
             hidden: false,
-            group: "น้ำ",
+            group: "ด้านน้ำ",
             //children: true,
             directory: "ผลการวิเคราะห์",
             legend: "<icon class='icon-stop' style='color:rgba(227,116,0,0.7);'></icon> เสี่ยงปานกลาง<br><icon class='icon-stop' style='color:rgba(197,34,31,0.7);'></icon> เสี่ยงมาก",            
@@ -814,7 +814,7 @@
             name: "พื้นที่เสี่ยงน้ำท่วม",
             id: "flood_risk",
             hidden: false,
-            group: "น้ำ",
+            group: "ด้านน้ำ",
             //children: true,
             directory: "ผลการวิเคราะห์",
             legend: "<icon class='icon-stop' style='color:rgba(100,100,255,0.7);'></icon> เสี่ยงปานกลาง<br><icon class='icon-stop' style='color:rgba(0,0,255,0.7);'></icon> เสี่ยงมาก",            
@@ -843,7 +843,7 @@
 
 
           {
-            id: "ตำบล",
+            id: "เขตตำบล",
             hidden: false,
             group: "เขตการปกครอง",
             directory: "การบริหาร",
@@ -862,7 +862,7 @@
             }
           },
           {
-            id: "อำเภอ",
+            id: "เขตอำเภอ",
             hidden: false,
             group: "เขตการปกครอง",
             directory: "การบริหาร",
@@ -878,7 +878,7 @@
             }
           },
           {
-            id: "จังหวัด",
+            id: "เขตจังหวัด",
             hidden: false,
             group: "เขตการปกครอง",
             directory: "การบริหาร",
