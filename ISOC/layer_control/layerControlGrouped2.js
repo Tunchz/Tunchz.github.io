@@ -629,7 +629,6 @@ function filterModal(map, layer) {
         //console.log(layer.id+'_filtericon',"#000");
       }else{
         layer.metadata.layers.map(l => {
-          console.log(filter);
           map.setFilter(l, filter)
         });
         document.getElementById(layer.id+'_filtericon').style.fill = "#2a58c3";
