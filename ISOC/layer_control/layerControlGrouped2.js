@@ -650,10 +650,10 @@ function filterModal(map, layer) {
     document.getElementById("header-container").appendChild(modal);  //document.body.appendChild(modal);
     window.location.hash = id
 
-    for (let s in layer.metadata.filterSchema) {
+
       // add autocomplete
-      autocomplete_list(s);
-    }
+      autocomplete_list(layer);
+
   }else{
     window.location.hash = id
   }
