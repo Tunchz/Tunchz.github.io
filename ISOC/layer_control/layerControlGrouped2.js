@@ -699,9 +699,9 @@ function createFormFields(schema) {
       <label class="form-label" for="${s}">${name}</label>
       ${(!schema[s].options) 
           ?
-        `<input class="form-input ui-autocomplete-input" id="${s}" type="${schema[s].type}" name="${s}"  ${(!schema[s].readonly) ? '' : 'readonly="true"'} ${(!schema[s].required) ? '' : 'required="true"'}>`
+        `<input class="form-input" id="${s}" type="${schema[s].type}" name="${s}"  ${(!schema[s].readonly) ? '' : 'readonly="true"'} ${(!schema[s].required) ? '' : 'required="true"'}>`
           :
-        `<select id="${s}" class="form-select" name="${s}" ${(!schema[s].required) ? '' : 'required="true"'}>
+        `<select id="${s}" class="form-select ui-autocomplete-input" onchange="Alert('change!')" name="${s}" ${(!schema[s].required) ? '' : 'required="true"'}>
           ${schema[s].options.map(o => {
             return `<option>${o}</option>`
           })}
