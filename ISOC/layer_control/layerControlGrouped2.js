@@ -655,7 +655,7 @@ function filterModal(map, layer) {
 
 
     //add autocomplete to modal filter
-    autocomplete_list(layer);
+    autocomplete_list(layer,form);
 
   }else{
     window.location.hash = id
