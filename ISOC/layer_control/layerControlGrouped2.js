@@ -567,6 +567,7 @@ function lcSetLegendVisibility(e) {
 
 function filterModal(map, layer) {
   //console.log(layer)
+  pass_layer(layer);
   var id = layer.id + "FilterModal";
   if (!document.getElementById(id)) {
     var modal = document.createElement("div");
@@ -639,7 +640,7 @@ function filterModal(map, layer) {
         document.getElementById(layer.id+'_filtericon').style.fill = "#2a58c3";
         //console.log(layer.id+'_filtericon',"#2a58c3");
       }
-      filterModal(map, layer);
+      //filterModal(map, layer);
     });
 
     form.addEventListener("reset", function(e) {
@@ -690,10 +691,6 @@ function buildFilter(data, layer) {
   }
 }
 
-function call_filter(el) {
-  instance_filter(layer,el);
-}
-
 function createFormFields(schema) {
   let html = "";
   for (let s in schema) {
@@ -703,9 +700,9 @@ function createFormFields(schema) {
       <label class="form-label" for="${s}">${name}</label>
       ${(!schema[s].options) 
           ?
-        `<input class="form-input" onchange="call_filter(this)" id="${s}" type="${schema[s].type}" name="${s}"  ${(!schema[s].readonly) ? '' : 'readonly="true"'} ${(!schema[s].required) ? '' : 'required="true"'}>`
+        `<input class="form-input" onchange="instance_filter(this)" id="${s}" type="${schema[s].type}" name="${s}"  ${(!schema[s].readonly) ? '' : 'readonly="true"'} ${(!schema[s].required) ? '' : 'required="true"'}>`
           :
-        `<select id="${s}" class="form-select" onchange="call_filter(this)" name="${s}" ${(!schema[s].required) ? '' : 'required="true"'}>
+        `<select id="${s}" class="form-select" onchange="instance_filter(this)" name="${s}" ${(!schema[s].required) ? '' : 'required="true"'}>
           ${schema[s].options.map(o => {
             return `<option>${o}</option>`
           })}
