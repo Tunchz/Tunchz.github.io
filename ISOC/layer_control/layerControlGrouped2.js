@@ -391,6 +391,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
       e.preventDefault();
       layer.metadata.layers.map(l => {
         map.setFilter(l)
+        autocomplete_list_reset(l);
       });
       document.getElementById(layer.id+'_filtericon').style.fill = "#999";
       //console.log(layer.id+'_filtericon',"#777");
@@ -624,13 +625,14 @@ function filterModal(map, layer) {
       //console.log(filter)
       if (!filter) {
         layer.metadata.layers.map(l => {
-          map.setFilter(l)
+          map.setFilter(l);
+          autocomplete_list_reset(l);
         });
         document.getElementById(layer.id+'_filtericon').style.fill = "#999";
         //console.log(layer.id+'_filtericon',"#000");
       }else{
         layer.metadata.layers.map(l => {
-          map.setFilter(l, filter)
+          map.setFilter(l, filter);
         });
         document.getElementById(layer.id+'_filtericon').style.fill = "#2a58c3";
         //console.log(layer.id+'_filtericon',"#2a58c3");
@@ -640,7 +642,8 @@ function filterModal(map, layer) {
 
     form.addEventListener("reset", function(e) {
       layer.metadata.layers.map(l => {
-        map.setFilter(l)
+        map.setFilter(l);
+        autocomplete_list_reset(l);
       })
       document.getElementById(layer.id+'_filtericon').style.fill = "#999";
       //console.log(layer.id+'_filtericon',"#000");      
@@ -651,8 +654,8 @@ function filterModal(map, layer) {
     window.location.hash = id
 
 
-      // add autocomplete
-      autocomplete_list(layer);
+    //add autocomplete to modal filter
+    autocomplete_list(layer);
 
   }else{
     window.location.hash = id
