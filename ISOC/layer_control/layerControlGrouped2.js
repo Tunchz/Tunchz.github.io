@@ -391,6 +391,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
       e.preventDefault();
       layer.metadata.layers.map(l => {
         map.setFilter(l)
+        document.getElementById(l+"_form").reset();
         autocomplete_list_reset(l);
       });
       document.getElementById(layer.id+'_filtericon').style.fill = "#999";
@@ -611,6 +612,7 @@ function filterModal(map, layer) {
 
 
     var form = document.createElement("form");
+    form.id = layer.id + "_form";
     form.innerHTML = `
       ${createFormFields(layer.metadata.filterSchema)}
       <br>
