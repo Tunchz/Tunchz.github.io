@@ -135,10 +135,10 @@
           <div id="map_style_menu_outline" style="display: none" onmouseenter="switchStyleMenu(true)" onmouseleave="switchStyleMenu(false)"  >
             <div id="map_style_menu" >
               <div style="/*margin: 5px 17px 0px 5px; padding-top:3px;*/" onclick="switchStyleMenu(false)" >
-                <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" checked="checked" />
-                <label for="satellite-v9">satellite </label><br>
-                <input id="satellite-streets-v11" type="radio" name="rtoggle" value="sattellite-streets" />
+                <input id="satellite-streets-v11" type="radio" name="rtoggle" value="sattellite-streets" checked="checked" />
                 <label for="satellite-streets-v11">sattellite-streets </label><br>                
+                <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" />
+                <label for="satellite-v9">satellite </label><br>
                 <input id="streets-v11" type="radio" name="rtoggle" value="streets" />
                 <label for="streets-v11">streets </label><br>
                 <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors" />
@@ -220,8 +220,8 @@
       //style: 'mapbox://styles/mapbox/streets-v11',
       //style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',  // the outdoors-v10 style but without Hillshade layers
       //style: 'mapbox://styles/mapbox/outdoors-v10',
-      style: 'mapbox://styles/mapbox/dark-v10',
-      //style: 'mapbox://styles/mapbox/satellite-v9',
+      //style: 'mapbox://styles/mapbox/dark-v10',
+      style: 'mapbox://styles/mapbox/satellite-v9',
       //style: 'mapbox://styles/mapbox/satellite-streets-v11',
       //style: 'mapbox://styles/mapbox/light-v10',
 
@@ -290,7 +290,7 @@
 
     var layerList = document.getElementById('map_style_menu');
     var inputs = layerList.getElementsByTagName('input');
-    var currentLayer = "satellite-v9";
+    var currentLayer = "satellite-streets-v11";
      
     $("#map_style_menu_button").appendTo(".mapboxgl-ctrl-top-left");
     $("#map_style_menu_outline").appendTo(".mapboxgl-ctrl-top-left");

@@ -14,7 +14,7 @@
 // };
 
 // icon for each disaster type id
-var symbol = {'0':{'icon':"0", 'visibility':'visible', 'dbclick':false},
+var symbol = {'0':{'icon':"0", 'visibility':'visible', 'dbclick':false, 'itemselected':false},
 /*1forest*/    '1':{'layername':"forest",    'icon': "❧",    'color':"#a2cc44",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.6 ,'ispulse':0, 'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_forest.png", 'icon_url':'img/1.png'},
 /*2air*/       '2':{'layername':"air",       'icon':"☢",    'color':"#ed207b",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_air.png", 'icon_url':'img/2.png'},
 /*3landslide*/ '3':{'layername':"landslide", 'icon':"☳",     'color':"#a9753c",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_landslide.png", 'icon_url':'img/3.png'},
@@ -251,7 +251,7 @@ function load_map_layers() {
         var removebutton = document.getElementsByClassName('mgl-layerControl');
         for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
 
-        map.setStyle('mapbox://styles/mapbox/satellite-v9');
+        map.setStyle('mapbox://styles/mapbox/satellite-streets-v11');
         display_table_markers(drm);
 
       }, 1500);
@@ -1345,8 +1345,8 @@ function tabulateimg_marker(data, columns) {
     .on('mouseout', function(e) { 
       switchZoomLayer(e.disaster_type_id,false);
     })
-    .on('click', function(e) { })
-    .on('dblclick', function(e) {  
+    .on('dblclick', function(e) { })
+    .on('click', function(e) {  
       switchUnselectVisibility(e.disaster_type_id);
     })
     .on('contextmenu', function(e) { 
@@ -1525,8 +1525,8 @@ function vertabulateimg_marker(data, columns) {
     .on('mouseout', function(e) { 
       switchZoomLayer(e.disaster_type_id,false);
     })
-    .on('click', function(e) { })
-    .on('dblclick', function(e) {  
+    .on('dblclick', function(e) { })
+    .on('click', function(e) {  
       switchUnselectVisibility(e.disaster_type_id);
     })
     .on('contextmenu', function(e) { 
@@ -1724,7 +1724,7 @@ function tabulateimg(data, columns) {
       })
       .on('dblclick', function(e) {  
         //switchUnselectVisibility(e.disaster_type_id);
-        switchUnselectVisibility(e.disaster_type_id);
+        switchUnselectVisibility(e.disaster_type_id,e.disaster_id);
       })
       .on('contextmenu', function(e) { 
         //switchLayerVisibility(e.disaster_type_id);
@@ -1846,25 +1846,41 @@ function switchZoomMarker(disaster_type_id,disaster_id,iszoomed) {
 
 
 
-function switchUnselectVisibility(disaster_type_id) {
+function switchUnselectVisibility(disaster_type_id,disaster_id) {
+
+  if (!disaster_id) {
+    symbol[disaster_type_id].dbclick = !symbol[disaster_type_id].dbclick;
+    symbol[0].selecteditem = false;
+  } else {
+    symbol[disaster_type_id].dbclick = true;
+    symbol[0].selecteditem = !symbol[0].selecteditem;
+  }
+  //console.log(symbol[0].selecteditem);
+
   drm_list.forEach(function (item, index) {
-    if (!symbol[disaster_type_id].dbclick) {              
-        symbol[item].visibility = 'visible';     
-        filter_dataTable(disaster_type_id);                         
+    if (symbol[disaster_type_id].dbclick) {              
+        symbol[item].visibility = 'visible';                     
     } else {
-        symbol[item].visibility = 'none';      
-        filter_dataTable('all');          
+        symbol[item].visibility = 'none';            
     }
     if (disaster_type_id == item) {
       symbol[disaster_type_id].visibility = 'none';
+      if (symbol[item].dbclick) {
+
+        (symbol[0].selecteditem) ? switchLayerVisibility(item,disaster_id) : switchLayerVisibility(item,'all');
+      } else {
+        switchLayerVisibility(item);
+      }
     } else {
       symbol[item].dbclick = false;
+      switchLayerVisibility(item);
     }
-    switchLayerVisibility(item);
+    //switchLayerVisibility(item);
     document.getElementById("table_row_marker_"+item.toString()).style.borderRight = '0px solid #000';
     document.getElementById("table_col_marker_"+item.toString()).style.borderBottom = '0px solid #000';        
   })
-  symbol[disaster_type_id].dbclick = !symbol[disaster_type_id].dbclick;
+
+
 
   if (disaster_type_id == 0) {
     if (symbol['0'].dbclick) {
@@ -1876,11 +1892,29 @@ function switchUnselectVisibility(disaster_type_id) {
     if (symbol[disaster_type_id].dbclick) {
       document.getElementById("table_row_marker_"+disaster_type_id.toString()).style.borderRight = '3px solid '+ symbol[disaster_type_id].color;
       document.getElementById("table_col_marker_"+disaster_type_id.toString()).style.borderBottom = '3px solid '+ symbol[disaster_type_id].color;
-    }     
+
+      if (disaster_id) {
+        //symbol[disaster_type_id].selecteditem = !symbol[disaster_type_id].selecteditem;
+        if (symbol[0].selecteditem) {
+
+          filter_dataTable(disaster_type_id, disaster_id);
+        } else {
+          filter_dataTable(disaster_type_id, 'all');
+        }
+        
+      } else {
+        filter_dataTable(disaster_type_id);  
+      }   
+
+
+    } else {
+      filter_dataTable('all');
+    }
   }
+
 }
 
-function switchLayerVisibility(disaster_type_id) {
+function switchLayerVisibility(disaster_type_id,disaster_id) {
 
   var marker = document.getElementsByClassName('image_marker_'+disaster_type_id);
   if (symbol[disaster_type_id].visibility == 'none') {
@@ -1906,26 +1940,49 @@ function switchLayerVisibility(disaster_type_id) {
     //map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', symbol[disaster_type_id].visibility);
     map.setLayoutProperty(symbol[disaster_type_id].layername, 'visibility', symbol[disaster_type_id].visibility);
     map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'visibility', symbol[disaster_type_id].visibility);
-    map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'visibility', symbol[disaster_type_id].visibility);
+    //map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'visibility', symbol[disaster_type_id].visibility);
+
+    map.setFilter(symbol[disaster_type_id].layername);
+    map.setFilter(symbol[disaster_type_id].layername+'-label');
+    // filter marker if disaster id is passed
+    if ((disaster_id) && (disaster_id != 'all')) { 
+      map.setFilter(symbol[disaster_type_id].layername, ["==",["get", "disaster_id"],disaster_id]);
+      map.setFilter(symbol[disaster_type_id].layername+'-label', ["==",["get", "disaster_id"],disaster_id]);
+    }
   } else {
     map.setLayoutProperty(symbol[disaster_type_id].layername, 'visibility', symbol[disaster_type_id].visibility);
     map.setLayoutProperty(symbol[disaster_type_id].layername+'_bound', 'visibility', symbol[disaster_type_id].visibility);
     map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'visibility', symbol[disaster_type_id].visibility);
+
+    map.setFilter(symbol[disaster_type_id].layername);
+    map.setFilter(symbol[disaster_type_id].layername+'_bound');
+    map.setFilter(symbol[disaster_type_id].layername+'_label');
+    // filter marker if disaster id is passed
+    if ((disaster_id) && (disaster_id != 'all')) { 
+      map.setFilter(symbol[disaster_type_id].layername, ["==",["get", "disaster_id"],disaster_id]);
+      map.setFilter(symbol[disaster_type_id].layername+'_bound', ["==",["get", "disaster_id"],disaster_id]);
+      map.setFilter(symbol[disaster_type_id].layername+'_label', ["==",["get", "disaster_id"],disaster_id]);
+    } 
   }
+
+
 }
 
 
 
-function filter_dataTable(disaster_type_id) {
-    // dl.dept.filterAll();
-    // dl.verified.filterExact("unknown");    
-    // List_filtered = dl.id.top(Infinity);
+function filter_dataTable(disaster_type_id,disaster_id) {
 
-    // Clear previous filter
+    disaster_risk_list.d_id.filterAll();
     disaster_risk_list.dtype_id.filterAll();
+
     // Apply filter
-    if (disaster_type_id !== 'all') {disaster_risk_list.dtype_id.filterExact(disaster_type_id);}
-    //console.log(dl.top(Infinity));
+    if (disaster_type_id !== 'all') {
+      disaster_risk_list.dtype_id.filterExact(disaster_type_id);
+      if ((disaster_id) && (disaster_id != 'all')) { 
+
+         disaster_risk_list.d_id.filterExact(disaster_id);
+      } 
+    } 
 
     // Remove the previous display table
     var removetable = document.getElementById('table_image');
@@ -1944,6 +2001,7 @@ function display_table_markers(drm) {
     // Initialize crossfilter variable for Disaster Risk List
     disaster_risk_list = crossfilter(drm);
     disaster_risk_list.dtype_id = disaster_risk_list.dimension(function(d) { return d.disaster_type_id; });
+    disaster_risk_list.d_id = disaster_risk_list.dimension(function(d) { return d.disaster_id; });
     //dtype_id_group = drl.dtype_id.group();
 
 
