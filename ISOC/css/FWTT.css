@@ -807,7 +807,7 @@ red:hover {
   z-index: 100;
 }
 #map_style_menu {
-  width: 100px;
+  width: 135px;
   color:#383838;
   height: auto;
   background: #fff;
@@ -936,6 +936,7 @@ option {
   font-weight: 600;
   color: #2a58c3;
   border: 2px solid #2a58c3;
+  margin-left: 5px;
 }
 
 .btn-outline:hover {
@@ -947,4 +948,53 @@ option {
   */padding-right: 1.2rem;
 }
 
+
+/* autocomplete */
+
+.ui-autocomplete {
+  max-height: 100px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+}
+/* IE 6 doesn't support max-height
+ * we use height instead, but this forces the menu to always be this tall
+ */
+* html .ui-autocomplete {
+  height: 100px;
+}
+
+.ui-menu-item {
+  font-family: "Serithai";
+  font-size:12px;
+  background-color: #eee;
+}
+
+/* custom scrollbar autocomplete dropdown */
+/* width */
+
+.ui-autocomplete::-webkit-scrollbar {
+  width: 5px;
+  height: 0px;
+}
+
+/* Track */
+.ui-autocomplete::-webkit-scrollbar-track {
+  background: #fff0; 
+  padding-right: 2px;
+}
+ 
+/* Handle */
+.ui-autocomplete::-webkit-scrollbar-thumb {
+  background: #ccc; 
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+.ui-autocomplete::-webkit-scrollbar-thumb:hover {
+  background: #aaa; 
+}
+
+
+/*   */
 

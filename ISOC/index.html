@@ -137,6 +137,8 @@
               <div style="/*margin: 5px 17px 0px 5px; padding-top:3px;*/" onclick="switchStyleMenu(false)" >
                 <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" checked="checked" />
                 <label for="satellite-v9">satellite </label><br>
+                <input id="satellite-streets-v11" type="radio" name="rtoggle" value="sattellite-streets" />
+                <label for="satellite-streets-v11">sattellite-streets </label><br>                
                 <input id="streets-v11" type="radio" name="rtoggle" value="streets" />
                 <label for="streets-v11">streets </label><br>
                 <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors" />
@@ -191,10 +193,11 @@
   <script defer src="markers.js"></script>
   <!script defer src="ISOC.js"><!/script>
   <script defer src="swipedetect.js"></script>
+
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <script src="js/jquery-ui.js"></script>
+  <script src="autocomplete.js"></script>
   
-
-  <!script type="module" defer src="maplayergroupedcontrol.js"><!/script>
-
 
 
   <script>
@@ -205,10 +208,11 @@
     var z=4;  //default zoom level 0-4
     var flyspeed = 0.8;
 
-    //mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg';  //from mapbox
+    mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg';  //from mapbox
     //mapboxgl.accessToken ="pk.eyJ1IjoiYTEwayIsImEiOiJjaWdyMmVrazcwMXpsdTZtMThscWtiOTJtIn0.-A76dzJ0vsKULJdDxGvVXg";
     //mapboxgl.accessToken ='pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w';
-    mapboxgl.accessToken ='pk.eyJ1IjoiZHVlcm1hZWwiLCJhIjoiNTRmNjc2MjYzN2Y0NDk5ZjRjMTM1MDA2YjQzYTY4NjUifQ.zdJRPPXa8WvpcMZC1_RAyw';  //from jsfiddle
+    //mapboxgl.accessToken ='pk.eyJ1IjoiZHVlcm1hZWwiLCJhIjoiNTRmNjc2MjYzN2Y0NDk5ZjRjMTM1MDA2YjQzYTY4NjUifQ.zdJRPPXa8WvpcMZC1_RAyw';  //from jsfiddle
+    //mapboxgl.accessToken ='pk.eyJ1IjoiYXByZW5kZWdpcyIsImEiOiI1TmFvZGI4In0.ZicumXHvKqD1e6G_WH7B4g';  //from jsfiddle
 
     //Setup mapbox-gl map
     var map = new mapboxgl.Map({
@@ -218,6 +222,7 @@
       //style: 'mapbox://styles/mapbox/outdoors-v10',
       style: 'mapbox://styles/mapbox/dark-v10',
       //style: 'mapbox://styles/mapbox/satellite-v9',
+      //style: 'mapbox://styles/mapbox/satellite-streets-v11',
       //style: 'mapbox://styles/mapbox/light-v10',
 
       // Custom map style
@@ -445,6 +450,7 @@
         }
       });
 
+
       map.addLayer({
         'id': 'เขตอำเภอ',
         'type': 'line',
@@ -458,6 +464,7 @@
         }
       });
 
+
       map.addLayer({
         'id': 'เขตตำบล',
         'type': 'line',
@@ -470,6 +477,10 @@
           'line-opacity': 1
         }
       });
+
+      //map.setFilter('เขตจังหวัด',["match",["get", "จังหวัด"],['น่าน','นครนายก'],true,false]);
+      //map.setFilter('เขตจังหวัด',["in", "จังหวัด", 'น่าน','นครนายก']);
+      //map.setFilter('เขตอำเภอ',["all",["match",["get", "จังหวัด"],['นครนายก','น่าน'],true,false],["match",["get", "อำเภอ"],['เมืองนครนายก','บ้านนา','เมืองน่าน'],true,false]]);
 
       map.addLayer({
         'id': 'drought_risk',
