@@ -221,8 +221,8 @@
       //style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',  // the outdoors-v10 style but without Hillshade layers
       //style: 'mapbox://styles/mapbox/outdoors-v10',
       //style: 'mapbox://styles/mapbox/dark-v10',
-      style: 'mapbox://styles/mapbox/satellite-v9',
-      //style: 'mapbox://styles/mapbox/satellite-streets-v11',
+      //style: 'mapbox://styles/mapbox/satellite-v9',
+      style: 'mapbox://styles/mapbox/satellite-streets-v11',
       //style: 'mapbox://styles/mapbox/light-v10',
 
       // Custom map style
@@ -374,7 +374,8 @@
     //import { layerControlSimple } from "https://tunchz.github.io/ISOC/layer_control/layerControlSimple.js"
     import { layerControlGrouped } from "https://tunchz.github.io/ISOC/layer_control/layerControlGrouped2.js"
 
-      //map_addpiecluster();  
+ 
+    load_map_layers();
 
     map.on('style.load', function () {
 
@@ -401,7 +402,7 @@
 
       map.addSource('flood_risk', {
         'type': 'geojson',
-        'data': 'https://tunchz.github.io/ISOC/json/Flood_Risk_35_10p.json'//'https://tunchz.github.io/ISOC/json/Flood_Risk_35_10p.json'
+        'data': 'https://tunchz.github.io/ISOC/json/Flood_Risk_35_10p.json'
       });
 
       map.addSource('water_l', {
@@ -416,26 +417,45 @@
 
 
 
-      // map.addSource('counties', {
-      //   'type': 'geojson',
-      //   'data': 'https://tunchz.github.io/ISOC/layer_control/counties.min.geojson'
-      // });
+      map.addLayer({
+        'id': 'แจ้งเตือนภัย',
+        'type': 'circle',
+        'source': {
+          'type': 'geojson',
+          'data': {
+            'type': 'FeatureCollection',
+            'features': [{"type": "Feature","geometry": { "type": "Point", "coordinates": [101.6673626,13.2808669] }}]
+          }
+        },
+        'layout': {
+          'visibility': 'visible'
+        },
+        'paint': {
+            'circle-color': '#fff',
+            'circle-radius': 1,
+            'circle-opacity':0
+        }
+      });
 
-      // map.addSource('lakes', {
-      //   'type': 'geojson',
-      //   'data': 'https://tunchz.github.io/ISOC/layer_control/lakes.geojson'
-      // });     
-
-      // map.addSource('rivers', {
-      //   'type': 'geojson',
-      //   'data': 'https://tunchz.github.io/ISOC/layer_control/rivers.geojson'
-      // });
-
-      // map.addSource('rail', {
-      //   'type': 'geojson',
-      //   'data': 'https://tunchz.github.io/ISOC/layer_control/rail.geojson'
-      // });
-
+      map.addLayer({
+        'id': 'แจ้งเตือนวางแผน',
+        'type': 'circle',
+        'source': {
+          'type': 'geojson',
+          'data': {
+            'type': 'FeatureCollection',
+            'features': [{"type": "Feature","geometry": { "type": "Point", "coordinates": [101.6673626,13.2808669] }}]
+          }
+        },
+        'layout': {
+          'visibility': 'visible'
+        },
+        'paint': {
+            'circle-color': '#fff',
+            'circle-radius': 1,
+            'circle-opacity':0
+        }
+      });
 
       map.addLayer({
         'id': 'เขตจังหวัด',
@@ -478,6 +498,21 @@
         }
       });
 
+      map.addLayer({
+        'id': 'เขตพื้นที่ลุ่มน้ำ',
+        'type': 'line',
+        'source': {
+          'type': 'geojson',
+          'data': 'https://tunchz.github.io/ISOC/json/subbasin_10p.json'
+        },
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': '#00f',
+          'line-opacity': 1
+        }
+      });
       //map.setFilter('เขตจังหวัด',["match",["get", "จังหวัด"],['น่าน','นครนายก'],true,false]);
       //map.setFilter('เขตจังหวัด',["in", "จังหวัด", 'น่าน','นครนายก']);
       //map.setFilter('เขตอำเภอ',["all",["match",["get", "จังหวัด"],['นครนายก','น่าน'],true,false],["match",["get", "อำเภอ"],['เมืองนครนายก','บ้านนา','เมืองน่าน'],true,false]]);
@@ -554,94 +589,6 @@
 
       map_addcluster('well','https://tunchz.github.io/ISOC/json/well_small.geojson','none');  
 
-
-      // map.addLayer({
-      //   'id': 'States',
-      //   'type': 'line',
-      //   'source': {
-      //     type: "geojson",
-      //     data: "https://tunchz.github.io/ISOC/layer_control/states.geojson"
-      //   },
-      //   'layout': {
-      //     'visibility': 'none'
-      //   },
-      //   'paint': {
-      //     'line-color': '#121212',
-      //   }
-      // });
-
-      // map.addLayer({
-      //   'id': 'Counties',
-      //   'type': 'fill',
-      //   'source': 'counties',
-      //   'layout': {
-      //     'visibility': 'none'
-      //   },
-      //   'paint': {
-      //     'fill-color': 'lightgray',
-      //     'fill-outline-color': 'white',
-      //     'fill-opacity': 0.9
-      //   }
-      // });
-
-      // map.addLayer({
-      //   'id': 'Lakes',
-      //   'type': 'fill',
-      //   'source': 'lakes',
-      //   'layout': {
-      //     'visibility': 'none'
-      //   },
-      //   'paint': {
-      //     'fill-color': 'blue',
-      //     'fill-outline-color': 'white',
-      //     'fill-opacity': 0.9
-      //   }
-      // });
-
-      // map.addLayer({
-      //   'id': 'riversCase',
-      //   'type': 'line',
-      //   'source': "rivers",
-      //   'layout': {
-      //     'visibility': 'none'
-      //   },
-      //   'paint': {
-      //     'line-color': 'white',
-      //     'line-width': 6
-      //   }
-      // });
-
-      // map.addLayer({
-      //   'id': 'rivers',
-      //   'type': 'line',
-      //   'source': "rivers",
-      //   'layout': {
-      //     'visibility': 'none'
-      //   },
-      //   'paint': {
-      //     'line-color': 'blue',
-      //     'line-width': 3
-      //   }
-      // });
-
-      // map.addLayer({
-      //   'id': 'Rail',
-      //   'type': 'line',
-      //   'source': "rail",
-      //   'layout': {
-      //     'visibility': 'none'
-      //   },
-      //   'paint': {
-      //     'line-color': {
-      //       stops: [
-      //         [0, "black"],
-      //         [14, "black"],
-      //         [18, "black"]
-      //       ]
-      //     },
-      //     'line-width': 3
-      //   }
-      // });
 
       var config = {
         options: {
@@ -854,6 +801,22 @@
 
 
           {
+            id: "เขตพื้นที่ลุ่มน้ำ",
+            hidden: false,
+            group: "เขตลุ่มน้ำ",
+            directory: "การบริหาร",
+            metadata: {
+              filterSchema: {
+                "ลุ่มน้ำหลัก": {
+                  type: "string"
+                },
+                "ลุ่มน้ำย่อย": {
+                  type: "string"
+                }
+              }
+            }
+          },
+          {
             id: "เขตตำบล",
             hidden: false,
             group: "เขตการปกครอง",
@@ -904,18 +867,93 @@
                 // }
               }
             }
+          },
 
 
+          {
+            id: "แจ้งเตือนวางแผน",
+            hidden: false,
+            // group: "เขตการปกครอง",
+            directory: "การแจ้งเตือน",
+            children:true
+          },
+
+          {
+            id: "แจ้งเตือนภัย",
+            hidden: false,
+            // group: "เขตการปกครอง",
+            directory: "การแจ้งเตือน",
+            children:true
           }
+
+
+
+
+
+
+
+
+
 
         ]
       }
 
+      var l=[1,2,3,4,5,6,7,8,9,91,94,95];
+
+      l.forEach(function (item, index) {
+        //console.log(item);
+
+        if (item < 90) { 
+          config.layers.push({
+              id: symbol[item].layername,
+              hidden: true,
+              // group: "น้ำ",
+              parent: "แจ้งเตือนภัย",
+              directory: "การแจ้งเตือน"
+            });
+          config.layers.push({
+              id: symbol[item].layername+'_label',
+              hidden: true,
+              // group: "น้ำ",
+              parent: "แจ้งเตือนภัย",
+              directory: "การแจ้งเตือน"
+            });
+        } else {
+          config.layers.push({
+              id: symbol[item].layername,
+              hidden: true,
+              // group: "น้ำ",
+              parent: "แจ้งเตือนวางแผน",
+              directory: "การแจ้งเตือน"
+            });
+          config.layers.push({
+              id: symbol[item].layername+'_label',
+              hidden: true,
+              // group: "น้ำ",
+              parent: "แจ้งเตือนวางแผน",
+              directory: "การแจ้งเตือน"
+            });
+          config.layers.push({
+              id: symbol[item].layername+'_bound',
+              hidden: true,
+              // group: "น้ำ",
+              parent: "แจ้งเตือนวางแผน",
+              directory: "การแจ้งเตือน"
+            });
+        }
+      });
+
+      setTimeout(function (){
+
       map.addControl(new layerControlGrouped(config), "top-left");
+
+      }, 1500);
+
+
 
     });
 
-    load_map_layers();
+    //load_map_layers();
 
     /*End Blank Map*/
   </script>

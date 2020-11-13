@@ -251,7 +251,7 @@ function load_map_layers() {
         var removebutton = document.getElementsByClassName('mgl-layerControl');
         for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
 
-        map.setStyle('mapbox://styles/mapbox/satellite-streets-v11');
+        // map.setStyle('mapbox://styles/mapbox/satellite-streets-v11');
         display_table_markers(drm);
 
       }, 1500);
@@ -383,6 +383,9 @@ function map_add_polygon(map_geojson,layername) {
         'id': layername,
         'type': 'fill',
         'source': layername,
+          layout: {
+              'visibility': 'visible'
+          },
         'paint': {
           'fill-color': ['get', 'color'],
           'fill-opacity': ['get', 'opacity']
@@ -392,6 +395,9 @@ function map_add_polygon(map_geojson,layername) {
         'id': layername+'_bound',
         'type': 'line',
         'source': layername,
+          layout: {
+              'visibility': 'visible'
+          },
         'paint': {
           'line-width': 2,
           'line-color': '#fff',
@@ -404,6 +410,7 @@ function map_add_polygon(map_geojson,layername) {
           type: "symbol",
           source: layername,
           layout: {
+              'visibility': 'visible',
               "text-field": ['get','PROVINCE_N'],//"{PROVINCE_N}\n",
               "text-font": ['Open Sans Extrabold', 'Arial Unicode MS Bold'],//["Droid Sans Regular"],
               "text-size": 10,
@@ -473,6 +480,7 @@ function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color
     });
 
     var baseLayout = {
+      'visibility': 'visible',
       'text-field': marker_text,
       'text-font': ['Open Sans Extrabold', 'Arial Unicode MS Bold'],
       'text-size': Math.round(24*size),
@@ -482,7 +490,7 @@ function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color
     }
 
     map.addLayer({
-      'id': layername+'-pulse',
+      'id': layername+'_pulse',
       'type': 'symbol',
       'source': layername,
       'layout': baseLayout,
@@ -508,10 +516,11 @@ function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color
 
     // if (true) {
     map.addLayer({
-        'id': layername+'-label',
+        'id': layername+'_label',
         'type': 'symbol',
         'source': layername,
         'layout': {
+            'visibility': 'visible',
             'text-field': ['get', 'val'],
             'text-font': ['Roboto Black', 'Arial Unicode MS Bold'],
             'text-ignore-placement': true,
@@ -528,8 +537,8 @@ function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color
     });
     // }
 
-    map.setPaintProperty(layername+'-pulse', 'text-color', color_pulse)
-    map.setLayoutProperty(layername+'-pulse', 'text-size', 24)
+    map.setPaintProperty(layername+'_pulse', 'text-color', color_pulse)
+    map.setLayoutProperty(layername+'_pulse', 'text-size', 24)
 
     function pulseMarker(timestamp){
       setTimeout(function() {
@@ -539,8 +548,8 @@ function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color
         opacity -= ( .9 / framesPerSecond );
         textSize += ( Math.round(36*size) / framesPerSecond );
 
-        map.setPaintProperty(layername+'-pulse', 'text-opacity', opacity)
-        map.setLayoutProperty(layername+'-pulse', 'text-size', textSize)
+        map.setPaintProperty(layername+'_pulse', 'text-opacity', opacity)
+        map.setLayoutProperty(layername+'_pulse', 'text-size', textSize)
 
         if (opacity <= 0.1) {
           opacity = 1;
@@ -615,6 +624,7 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
                   'type': 'symbol',
                   'source': layername,
                   'layout': {
+                      'visibility': 'visible',
                       'icon-image': layername+'-icon',
                       'icon-size': size,
                       'icon-anchor': 'bottom',
@@ -627,10 +637,11 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
               // if (true) {
 
               map.addLayer({
-                  'id': layername+'-label',
+                  'id': layername+'_label',
                   'type': 'symbol',
                   'source': layername,
                   'layout': {
+                      'visibility': 'visible',
                       'text-field': ['get', 'val'],
                       'text-font': ['Roboto Black', 'Arial Unicode MS Bold'],
                       'text-ignore-placement': true,
@@ -1340,10 +1351,10 @@ function tabulateimg_marker(data, columns) {
 
   d3.select("#table-markers-container").selectAll(".table_row_marker")
     .on('mouseover', function(e) {
-      switchZoomLayer(e.disaster_type_id,true);
+      if (!symbol[0].selecteditem) switchZoomLayer(e.disaster_type_id,true);
     })
     .on('mouseout', function(e) { 
-      switchZoomLayer(e.disaster_type_id,false);
+      if (!symbol[0].selecteditem) switchZoomLayer(e.disaster_type_id,false);
     })
     .on('dblclick', function(e) { })
     .on('click', function(e) {  
@@ -1520,10 +1531,10 @@ function vertabulateimg_marker(data, columns) {
 
   d3.select("#vertical-table-markers-container").selectAll(".table_col_marker")
     .on('mouseover', function(e) {
-      switchZoomLayer(e.disaster_type_id,true);
+      if (!symbol[0].selecteditem) switchZoomLayer(e.disaster_type_id,true);
     })
     .on('mouseout', function(e) { 
-      switchZoomLayer(e.disaster_type_id,false);
+      if (!symbol[0].selecteditem) switchZoomLayer(e.disaster_type_id,false);
     })
     .on('dblclick', function(e) { })
     .on('click', function(e) {  
@@ -1759,11 +1770,11 @@ function switchZoomLayer(disaster_type_id,iszoomed) {
 
       if (disaster_type_id < 90 ) {
         // map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', zoom*Math.round(24*symbol[disaster_type_id].size));
-        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 12);
-        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0, -1.8*symbol[disaster_type_id].size]);
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-size', 12);
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-offset', [0, -1.8*symbol[disaster_type_id].size]);
         map.setLayoutProperty(symbol[disaster_type_id].layername, 'icon-size', 0.21);
-        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 11);
-        //map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0, -4.9]);        
+        map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-size', 11);
+        //map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-offset', [0, -4.9]);        
       } else {
         map.setPaintProperty(symbol[disaster_type_id].layername, 'fill-opacity',1);
         map.setPaintProperty(symbol[disaster_type_id].layername+'_bound','line-opacity',1);
@@ -1783,11 +1794,11 @@ function switchZoomLayer(disaster_type_id,iszoomed) {
   } else {
       if (disaster_type_id < 90 ) {
         // map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', Math.round(24*symbol[disaster_type_id].size));
-        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 8);
-        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0, -1.7*symbol[disaster_type_id].size]);
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-size', 8);
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-offset', [0, -1.7*symbol[disaster_type_id].size]);
         map.setLayoutProperty(symbol[disaster_type_id].layername, 'icon-size', 0.15);
-        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 8);
-        //map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0, -4.9]);        
+        map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-size', 8);
+        //map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-offset', [0, -4.9]);        
       } else {
         map.setPaintProperty(symbol[disaster_type_id].layername, 'fill-opacity',symbol[disaster_type_id].opacity);
         map.setPaintProperty(symbol[disaster_type_id].layername+'_bound','line-opacity',0);
@@ -1817,10 +1828,10 @@ function switchZoomMarker(disaster_type_id,disaster_id,iszoomed) {
       if (disaster_type_id < 90 ) {
         // map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', 'none');
         // map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', ['match',['get', 'disaster_id'], disaster_id, zoomedSize ,unzoomedSize]);
-        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', ['match',['get', 'disaster_id'], disaster_id, 12 ,8]);
-        // //map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0,['match',['get', 'disaster_id'], disaster_id,-1.8,-1.7]]);
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-size', ['match',['get', 'disaster_id'], disaster_id, 12 ,8]);
+        // //map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-offset', [0,['match',['get', 'disaster_id'], disaster_id,-1.8,-1.7]]);
         map.setLayoutProperty(symbol[disaster_type_id].layername, 'icon-size', ['match',['get', 'disaster_id'], disaster_id, zoomedSize ,unzoomedSize]);
-        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', ['match',['get', 'disaster_id'], disaster_id, 11 ,8]);
+        map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-size', ['match',['get', 'disaster_id'], disaster_id, 11 ,8]);
 
       } else {
         map.setPaintProperty(symbol[disaster_type_id].layername, 'fill-opacity',['match',['get', 'disaster_id'], disaster_id, 1 ,symbol[disaster_type_id].opacity]);
@@ -1832,10 +1843,10 @@ function switchZoomMarker(disaster_type_id,disaster_id,iszoomed) {
       if (disaster_type_id < 90 ) {
         // map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', 'visible');
         // map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', Math.round(24*symbol[disaster_type_id].size));
-        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 8);
-        // map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-offset', [0, -1.7*symbol[disaster_type_id].size]);
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-size', 8);
+        // map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-offset', [0, -1.7*symbol[disaster_type_id].size]);
         map.setLayoutProperty(symbol[disaster_type_id].layername, 'icon-size', 0.15);
-        map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'text-size', 8);        
+        map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-size', 8);        
       } else {
         map.setPaintProperty(symbol[disaster_type_id].layername, 'fill-opacity',symbol[disaster_type_id].opacity);
         map.setPaintProperty(symbol[disaster_type_id].layername+'_bound','line-opacity',0);
@@ -1939,15 +1950,15 @@ function switchLayerVisibility(disaster_type_id,disaster_id) {
   if (disaster_type_id < 90 ) {
     //map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', symbol[disaster_type_id].visibility);
     map.setLayoutProperty(symbol[disaster_type_id].layername, 'visibility', symbol[disaster_type_id].visibility);
-    map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'visibility', symbol[disaster_type_id].visibility);
-    //map.setLayoutProperty(symbol[disaster_type_id].layername+'-label', 'visibility', symbol[disaster_type_id].visibility);
+    map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'visibility', symbol[disaster_type_id].visibility);
+    //map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'visibility', symbol[disaster_type_id].visibility);
 
     map.setFilter(symbol[disaster_type_id].layername);
-    map.setFilter(symbol[disaster_type_id].layername+'-label');
+    map.setFilter(symbol[disaster_type_id].layername+'_label');
     // filter marker if disaster id is passed
     if ((disaster_id) && (disaster_id != 'all')) { 
       map.setFilter(symbol[disaster_type_id].layername, ["==",["get", "disaster_id"],disaster_id]);
-      map.setFilter(symbol[disaster_type_id].layername+'-label', ["==",["get", "disaster_id"],disaster_id]);
+      map.setFilter(symbol[disaster_type_id].layername+'_label', ["==",["get", "disaster_id"],disaster_id]);
     }
   } else {
     map.setLayoutProperty(symbol[disaster_type_id].layername, 'visibility', symbol[disaster_type_id].visibility);
