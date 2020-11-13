@@ -251,7 +251,7 @@ function load_map_layers() {
         var removebutton = document.getElementsByClassName('mgl-layerControl');
         for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
 
-        // map.setStyle('mapbox://styles/mapbox/satellite-streets-v11');
+        map.setStyle('mapbox://styles/mapbox/satellite-streets-v11');
         display_table_markers(drm);
 
       }, 1500);
