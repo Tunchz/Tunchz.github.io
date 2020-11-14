@@ -291,6 +291,7 @@
     var layerList = document.getElementById('map_style_menu');
     var inputs = layerList.getElementsByTagName('input');
     var currentLayer = "satellite-streets-v11";
+    var mapEvent = 'load'; //'idle'; //'styledata';
      
     $("#map_style_menu_button").appendTo(".mapboxgl-ctrl-top-left");
     $("#map_style_menu_outline").appendTo(".mapboxgl-ctrl-top-left");
@@ -375,10 +376,11 @@
     import { layerControlGrouped } from "https://tunchz.github.io/ISOC/layer_control/layerControlGrouped2.js"
 
     var config;
+    //var mapEvent = 'styledata';
 
     load_map_layers();
 
-    map.on('style.load', function () {
+    map.on(mapEvent, function () {
 
 
       map.addSource('mapth_prov', {
@@ -949,7 +951,7 @@
 
         map.addControl(new layerControlGrouped(config), "top-left");
 
-      }, 500);
+      }, 2000);
 
 
 

@@ -28,7 +28,7 @@ var symbol = {'0':{'icon':"0", 'visibility':'visible', 'dbclick':false, 'itemsel
 /*riskplan*/  '94':{'layername':"risk_flood",  'icon':"█",   'noti_type':'plan',       'color':"#0000ff",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/94.png'},
 /*riskplan*/  '95':{'layername':"risk_drought",'icon':"█",   'noti_type':'plan',       'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/95.png'},
 /*map_subd*/  '61':{'layername':"map_subd",    'icon':"T",   'color':"#a56400",'opacity':1   ,'visibility':'visible', 'dbclick':false},
-/*hotspot*/   '62':{'layername':"hotspot",     'icon':"H",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false}
+/*hotspot*/   '62':{'layername':"hotspott",     'icon':"H",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false}
                 }
 var drm_list = [1,2,3,4,5,6,7,8,9,91,94,95];
 var risknoti_list = [1,2,3,4,5,6,7,8,9];
@@ -248,15 +248,15 @@ function load_map_layers() {
 
       display_table_markers(drm);
 
-      setTimeout(function (){
+      // setTimeout(function (){
 
-        var removebutton = document.getElementsByClassName('mgl-layerControl');
-        for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
+      //   var removebutton = document.getElementsByClassName('mgl-layerControl');
+      //   for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
 
-        map.setStyle('mapbox://styles/mapbox/satellite-streets-v11');
-        //display_table_markers(drm);
+      //   map.setStyle('mapbox://styles/mapbox/satellite-streets-v11');
+      //   //display_table_markers(drm);
 
-      }, 1000);
+      // }, 1000);
 
       
 
@@ -296,7 +296,7 @@ function getCenter(data) {
 
 function map_addlayer(map_geojson) {
     var layername = 'map_th_prov'
-    map.on('style.load', function () {
+    map.on(mapEvent, function () {
       map.addSource(layername, { type: 'geojson', data: map_geojson });
       map.addLayer({
         'id': layername,
@@ -380,7 +380,7 @@ function map_addlayer(map_geojson) {
 
 function map_add_polygon(map_geojson,layername) {
     //var layername = 'map_th_prov'
-    map.on('style.load', function () {
+    map.on(mapEvent, function () {
       map.addSource(layername, { type: 'geojson', data: map_geojson });
       map.addLayer({
         'id': layername,
@@ -476,7 +476,7 @@ function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color
     var opacity = 1;
     var textSize = 24;
 
-  map.on('style.load', function(){
+  map.on(mapEvent, function(){
     map.addSource(layername, {
       'type': 'geojson',
       'data': data_geojson
@@ -613,7 +613,7 @@ function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color
 
 function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offset) {
   //console.log(datageojson);
-  map.on('style.load', function () {
+  map.on(mapEvent, function () {
       map.loadImage(imageurl,
           function (error, image) {
               if (error) throw error;
@@ -712,7 +712,7 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
 function map_addcluster(layername,url,visibility) {
 
   //var layername = 'hotspotth';
-//  map.on('load', function () {
+//  map.on(mapEvent, function () {
       // Add a new source from our GeoJSON data and
       // set the 'cluster' option to true. GL-JS will
       // add the point_count property to your source data.
@@ -919,7 +919,7 @@ function map_addpiecluster() {
   //var colors = ['#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c'];
   var colors = ['#fed976', '#feb24c', '#ff0', '#fa0', '#f00'];
 
-  map.on('style.load', function () {
+  map.on(mapEvent, function () {
       // add a clustered GeoJSON source for a sample set of earthquakes
       map.addSource('hotspotth', {
           'type': 'geojson',
@@ -1017,7 +1017,7 @@ function map_addpiecluster() {
 
 
       // after the GeoJSON data is loaded, update markers on the screen and do so on every map move/moveend
-      map.on('style.load', function (e) {
+      map.on(mapEvent, function (e) {
           //console.log('map on data : ',e.sourceId,e.isSourceLoaded);
           if (e.sourceId !== 'hotspotth' || !e.isSourceLoaded) return;
           updateMarkers();
@@ -2049,7 +2049,7 @@ function display_table_markers(drm) {
 function filterNotiType(type,filter) {
   var noti = {'แจ้งเตือนภัย':'disaster',
               'แจ้งเตือนวางแผน':'plan'};
-  console.log(type,filter);
+  //console.log(type,filter);
   //disaster_risk_list_summary[type].filterExact(!filter);
   if (filter) {
     disaster_risk_list_summary[noti[type]].filterAll(); 
