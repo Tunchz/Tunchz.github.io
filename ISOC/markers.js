@@ -2097,8 +2097,8 @@ function initialize() {
   //menubtn.style.padding = "0px 0px";
   menubtn.setAttribute('type', 'button');
   //stopbtn.setAttribute('onclick', 'inputMenu()');
-  menubtn.setAttribute('onclick', 'switchShortNoti()');
-  menubtn.setAttribute('oncontextmenu', 'switchUnselectVisibility(0);return false;'); //switchUnselectVisibility(disaster_type_id)
+  menubtn.setAttribute('oncontextmenu', 'switchShortNoti()');
+  menubtn.setAttribute('onclick', 'switchUnselectVisibility(0);return false;'); //switchUnselectVisibility(disaster_type_id)
   document.getElementById("menu-container-top-right").append(menubtn);
   //document.getElementById("stop-button").innerHTML = "⍜☷■⌂";
   document.getElementById("lp-button").innerHTML = "<icon class='icon-circle'></icon>";
@@ -2130,13 +2130,13 @@ function switchShortNoti() {
   shortnoti = !shortnoti;
   if (shortnoti) {
     document.getElementById('table-container-MAP').style.width = "70px";
-    tabulateimg_marker(disaster_risk_list_summary, ["icon_url","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
-    vertabulateimg_marker(disaster_risk_list_summary, ["icon_url","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
+    tabulateimg_marker(disaster_risk_list_summary.dtype_id.bottom(Infinity), ["icon_url","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
+    vertabulateimg_marker(disaster_risk_list_summary.dtype_id.bottom(Infinity), ["icon_url","num_rec","blank","\u00a0","blank","blank","blank","blank","blank","color"]);
     w = "61px";
   } else {
     document.getElementById('table-container-MAP').style.width = "105px";
-    tabulateimg_marker(disaster_risk_list_summary, ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
-    vertabulateimg_marker(disaster_risk_list_summary, ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+    tabulateimg_marker(disaster_risk_list_summary.dtype_id.bottom(Infinity), ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+    vertabulateimg_marker(disaster_risk_list_summary.dtype_id.bottom(Infinity), ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
     w = "96px";
   }
   var doc = document.getElementsByClassName('table_col_marker');
