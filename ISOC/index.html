@@ -374,7 +374,8 @@
     //import { layerControlSimple } from "https://tunchz.github.io/ISOC/layer_control/layerControlSimple.js"
     import { layerControlGrouped } from "https://tunchz.github.io/ISOC/layer_control/layerControlGrouped2.js"
 
- 
+    var config;
+
     load_map_layers();
 
     map.on('style.load', function () {
@@ -590,7 +591,7 @@
       map_addcluster('well','https://tunchz.github.io/ISOC/json/well_small.geojson','none');  
 
 
-      var config = {
+      config = {
         options: {
           collapsed: true
         },
@@ -943,9 +944,10 @@
         }
       });
 
+
       setTimeout(function (){
 
-      map.addControl(new layerControlGrouped(config), "top-left");
+        map.addControl(new layerControlGrouped(config), "top-left");
 
       }, 500);
 

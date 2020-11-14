@@ -15,18 +15,18 @@
 
 // icon for each disaster type id
 var symbol = {'0':{'icon':"0", 'visibility':'visible', 'dbclick':false, 'itemselected':false},
-/*1forest*/    '1':{'layername':"forest",    'icon': "❧",    'color':"#a2cc44",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.6 ,'ispulse':0, 'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_forest.png", 'icon_url':'img/1.png'},
-/*2air*/       '2':{'layername':"air",       'icon':"☢",    'color':"#ed207b",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_air.png", 'icon_url':'img/2.png'},
-/*3landslide*/ '3':{'layername':"landslide", 'icon':"☳",     'color':"#a9753c",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_landslide.png", 'icon_url':'img/3.png'},
-/*4flood*/     '4':{'layername':"flood",     'icon':"♦",      'color':"#3b7dcb",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':1,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_flood.png", 'icon_url':'img/4.png'},
-/*5drought*/   '5':{'layername':"drought",   'icon':"☭",     'color':"#f7c851",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_drought.png", 'icon_url':'img/5.png'},
-/*6fire*/      '6':{'layername':"fire",      'icon':"♨",    'color':"#f47320",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_fire.png", 'icon_url':'img/6.png'},
-/*7hotspot*/   '7':{'layername':"hotspot",   'icon':"☀",    'color':"#e30713",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':1.3 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_hotspot.png", 'icon_url':'img/7.png'},
-/*8storm*/     '8':{'layername':"storm",     'icon':"♒",    'color':"#358ba4",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_highwave.png", 'icon_url':'img/8.png'},
-/*9heavyrain*/ '9':{'layername':"heavyrain", 'icon':"☂",    'color':"#33a1d2",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_heavyrain.png", 'icon_url':'img/9.png'},
-/*riskplan*/  '91':{'layername':"risk_forest", 'icon':"█",   'color':"#ff0000",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/91.png'},
-/*riskplan*/  '94':{'layername':"risk_flood",  'icon':"█",   'color':"#0000ff",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/94.png'},
-/*riskplan*/  '95':{'layername':"risk_drought",'icon':"█",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/95.png'},
+/*1forest*/    '1':{'layername':"forest",    'icon': "❧",    'noti_type':'disaster',   'color':"#a2cc44",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.6 ,'ispulse':0, 'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_forest.png", 'icon_url':'img/1.png'},
+/*2air*/       '2':{'layername':"air",       'icon':"☢",    'noti_type':'disaster',   'color':"#ed207b",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_air.png", 'icon_url':'img/2.png'},
+/*3landslide*/ '3':{'layername':"landslide", 'icon':"☳",     'noti_type':'disaster',   'color':"#a9753c",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_landslide.png", 'icon_url':'img/3.png'},
+/*4flood*/     '4':{'layername':"flood",     'icon':"♦",      'noti_type':'disaster',   'color':"#3b7dcb",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':1,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_flood.png", 'icon_url':'img/4.png'},
+/*5drought*/   '5':{'layername':"drought",   'icon':"☭",     'noti_type':'disaster',   'color':"#f7c851",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_drought.png", 'icon_url':'img/5.png'},
+/*6fire*/      '6':{'layername':"fire",      'icon':"♨",    'noti_type':'disaster',   'color':"#f47320",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_fire.png", 'icon_url':'img/6.png'},
+/*7hotspot*/   '7':{'layername':"hotspot",   'icon':"☀",    'noti_type':'disaster',   'color':"#e30713",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':1.3 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_hotspot.png", 'icon_url':'img/7.png'},
+/*8storm*/     '8':{'layername':"storm",     'icon':"♒",    'noti_type':'disaster',   'color':"#358ba4",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_highwave.png", 'icon_url':'img/8.png'},
+/*9heavyrain*/ '9':{'layername':"heavyrain", 'icon':"☂",    'noti_type':'disaster',   'color':"#33a1d2",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_heavyrain.png", 'icon_url':'img/9.png'},
+/*riskplan*/  '91':{'layername':"risk_forest", 'icon':"█",   'noti_type':'plan',       'color':"#ff0000",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/91.png'},
+/*riskplan*/  '94':{'layername':"risk_flood",  'icon':"█",   'noti_type':'plan',       'color':"#0000ff",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/94.png'},
+/*riskplan*/  '95':{'layername':"risk_drought",'icon':"█",   'noti_type':'plan',       'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/95.png'},
 /*map_subd*/  '61':{'layername':"map_subd",    'icon':"T",   'color':"#a56400",'opacity':1   ,'visibility':'visible', 'dbclick':false},
 /*hotspot*/   '62':{'layername':"hotspot",     'icon':"H",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false}
                 }
@@ -235,7 +235,7 @@ function load_map_layers() {
         disaster_type_id = drm_geojson.features[i].properties.disaster_type_id;
         drm[i]['icon'] = symbol[disaster_type_id].icon;
         drm[i]['icon_url'] = symbol[disaster_type_id].icon_url;
-        if (disaster_type_id < 90) {
+        if (symbol[disaster_type_id].noti_type == 'disaster') {
           drm[i]['color'] = symbol[disaster_type_id].color;
           drm_geojson.features[i].properties['center'] = [0,0];
         } else {
@@ -246,15 +246,18 @@ function load_map_layers() {
       }
       //console.log(drm);
 
+      display_table_markers(drm);
+
       setTimeout(function (){
 
         var removebutton = document.getElementsByClassName('mgl-layerControl');
         for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
 
         map.setStyle('mapbox://styles/mapbox/satellite-streets-v11');
-        display_table_markers(drm);
+        //display_table_markers(drm);
 
-      }, 1500);
+      }, 1000);
+
       
 
 
@@ -262,7 +265,7 @@ function load_map_layers() {
 
   }); //get drm_geo_json
 
-
+  return true;
 }
 
 
@@ -1768,7 +1771,7 @@ function switchZoomLayer(disaster_type_id,iszoomed) {
   
   if (iszoomed) {
 
-      if (disaster_type_id < 90 ) {
+      if (symbol[disaster_type_id].noti_type == 'disaster') {
         // map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', zoom*Math.round(24*symbol[disaster_type_id].size));
         // map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-size', 12);
         // map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-offset', [0, -1.8*symbol[disaster_type_id].size]);
@@ -1792,7 +1795,7 @@ function switchZoomLayer(disaster_type_id,iszoomed) {
       } 
 
   } else {
-      if (disaster_type_id < 90 ) {
+      if (symbol[disaster_type_id].noti_type == 'disaster') {
         // map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', Math.round(24*symbol[disaster_type_id].size));
         // map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-size', 8);
         // map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-offset', [0, -1.7*symbol[disaster_type_id].size]);
@@ -1825,7 +1828,7 @@ function switchZoomMarker(disaster_type_id,disaster_id,iszoomed) {
       zoomedSize = 0.21;zoom*unzoomedSize;
   if (iszoomed) {
 
-      if (disaster_type_id < 90 ) {
+      if (symbol[disaster_type_id].noti_type == 'disaster') {
         // map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', 'none');
         // map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', ['match',['get', 'disaster_id'], disaster_id, zoomedSize ,unzoomedSize]);
         // map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-size', ['match',['get', 'disaster_id'], disaster_id, 12 ,8]);
@@ -1840,7 +1843,7 @@ function switchZoomMarker(disaster_type_id,disaster_id,iszoomed) {
       }
 
   } else {
-      if (disaster_type_id < 90 ) {
+      if (symbol[disaster_type_id].noti_type == 'disaster') {
         // map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', 'visible');
         // map.setLayoutProperty(symbol[disaster_type_id].layername, 'text-size', Math.round(24*symbol[disaster_type_id].size));
         // map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'text-size', 8);
@@ -1858,6 +1861,7 @@ function switchZoomMarker(disaster_type_id,disaster_id,iszoomed) {
 
 
 function switchUnselectVisibility(disaster_type_id,disaster_id) {
+
 
   if (!disaster_id) {
     symbol[disaster_type_id].dbclick = !symbol[disaster_type_id].dbclick;
@@ -1887,11 +1891,14 @@ function switchUnselectVisibility(disaster_type_id,disaster_id) {
       switchLayerVisibility(item);
     }
     //switchLayerVisibility(item);
-    document.getElementById("table_row_marker_"+item.toString()).style.borderRight = '0px solid #000';
-    document.getElementById("table_col_marker_"+item.toString()).style.borderBottom = '0px solid #000';        
+    try {
+      document.getElementById("table_row_marker_"+item.toString()).style.borderRight = '0px solid #000';
+      document.getElementById("table_col_marker_"+item.toString()).style.borderBottom = '0px solid #000';        
+    }
+    catch(err) {
+
+    }
   })
-
-
 
   if (disaster_type_id == 0) {
     if (symbol['0'].dbclick) {
@@ -1923,6 +1930,8 @@ function switchUnselectVisibility(disaster_type_id,disaster_id) {
     }
   }
 
+
+
 }
 
 function switchLayerVisibility(disaster_type_id,disaster_id) {
@@ -1947,7 +1956,7 @@ function switchLayerVisibility(disaster_type_id,disaster_id) {
   }
 
 
-  if (disaster_type_id < 90 ) {
+  if (symbol[disaster_type_id].noti_type == 'disaster') {
     //map.setLayoutProperty(symbol[disaster_type_id].layername+'-pulse', 'visibility', symbol[disaster_type_id].visibility);
     map.setLayoutProperty(symbol[disaster_type_id].layername, 'visibility', symbol[disaster_type_id].visibility);
     map.setLayoutProperty(symbol[disaster_type_id].layername+'_label', 'visibility', symbol[disaster_type_id].visibility);
@@ -2006,13 +2015,20 @@ function display_table_markers(drm) {
 
     //console.log(drm);
 
-    disaster_risk_list_summary = alasql('SELECT disaster_type_id, disaster_type, icon, icon_url, color, "" as blank, count(*) as num_rec \ FROM ?\ GROUP BY disaster_type_id, disaster_type, icon, icon_url, color',[drm]);
+    disaster_risk_list_summary_ = alasql('SELECT disaster_type_id, disaster_type, icon, icon_url, color, "" as blank, count(*) as num_rec \ FROM ?\ GROUP BY disaster_type_id, disaster_type, icon, icon_url, color',[drm]);
 
+    // Initialize crossfilter variable for Disaster Risk List summary
+    disaster_risk_list_summary = crossfilter(disaster_risk_list_summary_);
+    disaster_risk_list_summary.dtype_id = disaster_risk_list_summary.dimension(function(d) { return d.disaster_type_id; });
+    disaster_risk_list_summary.disaster = disaster_risk_list_summary.dimension(function(d) { return symbol[d.disaster_type_id].noti_type == 'disaster';});
+    disaster_risk_list_summary.plan = disaster_risk_list_summary.dimension(function(d) { return symbol[d.disaster_type_id].noti_type == 'plan';});
 
     // Initialize crossfilter variable for Disaster Risk List
     disaster_risk_list = crossfilter(drm);
     disaster_risk_list.dtype_id = disaster_risk_list.dimension(function(d) { return d.disaster_type_id; });
     disaster_risk_list.d_id = disaster_risk_list.dimension(function(d) { return d.disaster_id; });
+    disaster_risk_list.disaster = disaster_risk_list.dimension(function(d) { return symbol[d.disaster_type_id].noti_type == 'disaster';});
+    disaster_risk_list.plan = disaster_risk_list.dimension(function(d) { return symbol[d.disaster_type_id].noti_type == 'plan';});
     //dtype_id_group = drl.dtype_id.group();
 
 
@@ -2022,16 +2038,47 @@ function display_table_markers(drm) {
 
     //console.log(disaster_risk_list_summary);
     // Display Table markers
-    tabulateimg_marker(disaster_risk_list_summary, ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
-    vertabulateimg_marker(disaster_risk_list_summary, ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+    tabulateimg_marker(disaster_risk_list_summary.dtype_id.bottom(Infinity), ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+    vertabulateimg_marker(disaster_risk_list_summary.dtype_id.bottom(Infinity), ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
 
     //requestFullScreen(document.getElementById('map-panel'));
 
 
 }
 
+function filterNotiType(type,filter) {
+  var noti = {'แจ้งเตือนภัย':'disaster',
+              'แจ้งเตือนวางแผน':'plan'};
+  console.log(type,filter);
+  //disaster_risk_list_summary[type].filterExact(!filter);
+  if (filter) {
+    disaster_risk_list_summary[noti[type]].filterAll(); 
+    disaster_risk_list[noti[type]].filterAll(); 
+  } else {
+    disaster_risk_list_summary[noti[type]].filterExact(false); 
+    disaster_risk_list[noti[type]].filterExact(false); 
+  }
 
 
+
+
+
+
+
+  var removetable = document.getElementById('table_image');
+  removetable.parentElement.removeChild(removetable);    
+  removetable = document.getElementById('table_image_marker');
+  removetable.parentElement.removeChild(removetable);
+  removetable = document.getElementById('vertical_table_image_marker');
+  removetable.parentElement.removeChild(removetable);
+
+  tabulateimg(disaster_risk_list.dtype_id.bottom(Infinity), ["icon_url","disaster_type","source","updated_date","level_detail","DRM_state","response","contract","blank","color"]);
+
+  tabulateimg_marker(disaster_risk_list_summary.dtype_id.bottom(Infinity), ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+  vertabulateimg_marker(disaster_risk_list_summary.dtype_id.bottom(Infinity), ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+
+
+}
 
 
 
@@ -2100,8 +2147,13 @@ function switchShortNoti() {
     switchLayerVisibility(item);
     switchLayerVisibility(item);
     if (symbol[item].dbclick) {
+      try {
       document.getElementById("table_row_marker_"+item.toString()).style.borderRight = '3px solid '+ symbol[item].color;
       document.getElementById("table_col_marker_"+item.toString()).style.borderBottom = '3px solid '+ symbol[item].color;
+      }
+      catch(err) {
+
+      }      
     } 
   })
 
