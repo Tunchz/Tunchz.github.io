@@ -179,3 +179,10 @@ function autocomplete_list(layer,form) {
   }
   
 }
+
+function layerswitchAction(layer,checked) {
+  //console.log(layer,checked);
+  if (['แจ้งเตือนภัย','แจ้งเตือนวางแผน'].includes(layer)) {
+    filterNotiType(layer,checked);
+  }
+}
