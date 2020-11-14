@@ -327,6 +327,7 @@ function lcCreateLayerToggle(map, layer, checked, index) {
     lcSetLegendVisibility(this);
     lcSetDirectoryLayerCount(this);
     //console.log(this.id, this.checked, this);
+    layerswitchAction(this.id,this.checked);
   };
 
   let label = document.createElement("label");
