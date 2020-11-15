@@ -2601,12 +2601,13 @@ function display_detailTable(disaster_type_id,disaster_id) {
   $(".detailTable").css("color", symbol[disaster_type_id].color);
   document.getElementById("detailTable-container").style.backgroundColor = symbol[disaster_type_id].color+"ff";
 
-  $(".detailHeader").css("border", "1px solid "+ symbol[disaster_type_id].color + "00");
-  topics = document.getElementsByClassName("detailHeader");
-  for (i=0; i<topics.length; i++) {
-    console.log(i);
-    topics[i].style.backgroundColor = symbol[disaster_type_id].color+"99";
-  }
+  $(".detailHeader").css("border", "1px solid "+ symbol[disaster_type_id].color + "77");
+  $(".detailHeader").css("border-left", "5px solid "+ symbol[disaster_type_id].color + "77");
+  // topics = document.getElementsByClassName("detailHeader");
+  // for (i=0; i<topics.length; i++) {
+  //   console.log(i);
+  //   topics[i].style.backgroundColor = symbol[disaster_type_id].color+"99";
+  // }
 
   topics = document.getElementsByClassName("topic");
   for (i=0; i<topics.length; i++) {
