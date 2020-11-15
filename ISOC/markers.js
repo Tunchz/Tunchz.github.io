@@ -71,7 +71,7 @@ function resizeAdjust() {
       //document.getElementById("menu-container-bottom-right").style.bottom = ($("#wholecontent").height()*0.30+60).toString()+"px";
       document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.bottom = ($("#wholecontent").height()*0.30+60).toString()+"px";
       
-      document.getElementById("data-panel").style.height = ($("#wholecontent").height()*0.30).toString()+"px";
+      document.getElementById("data-panel").style.height = ($("#wholecontent").height()*0.40).toString()+"px";
       map_Yoffset = -$("#data-panel").height()/2 - 20;
     } else {
 
