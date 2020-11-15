@@ -807,7 +807,7 @@ red:hover {
   z-index: 100;
 }
 #map_style_menu {
-  width: 135px;
+  width: 140px;
   color:#383838;
   height: auto;
   background: #fff;
@@ -996,5 +996,122 @@ option {
 }
 
 
-/*   */
+/* detail table  ********************************/
+
+    .detailTable>tbody {
+      border-top: 10px solid white;
+      padding-top: 5px;
+    }
+
+    .detailTable>tbody>tr>td {
+      padding: 0 5px;
+      border-radius: 5px;
+      background-color: #7777770f;
+      border: 2px solid #fff;
+    }
+
+    .detailTable-container {
+      width: 100%;
+      padding: 5px;
+      background-color: #7777770f;
+    }
+
+    .detailTable {
+      width: 100%;
+      padding: 5px 5px 10px 0px;
+      border-collapse: separate;
+      border-spacing: 0px;
+      font-family: Serithai;
+      font-size: 12px;
+      background-color: #fff;
+      color: #2a58c3;
+      border-radius: 5px;
+    }
+    .parent ~ .cchild {
+      display: none;
+    }
+    .open .parent ~ .cchild {
+      display: table-row;
+    }
+    .parent {
+      cursor: pointer;
+    }
+
+    .open>.parent>.detailHeader {
+/*      background-color: #2a58c3;
+      color: #fff;*/
+    }
+
+    .parent > *:last-child {
+      width: 30px;
+    }
+    .parent i {
+      transform: rotate(0deg);
+      transition: transform .3s cubic-bezier(.4,0,.2,1);
+      margin: -.5rem;
+      padding: .5rem;
+     
+    }
+    .open .parent i {
+      transform: rotate(180deg)
+    }
+
+    .header {
+      font-weight: bold;
+    }
+
+
+    .detailTable>tbody>tr>.dstep {
+      padding-left: 0px;      
+      background-color: #fff;
+    }
+
+    .detailTable>tbody>tr>.dstep_date {
+      float:right;
+      background-color: #fff;
+    }
+
+    .detailTable>tbody>tr>.detailHeader {
+      margin-top:3px;
+      padding: 3px 5px 0 5px;
+      background-color: #fff;
+      color: #fff;
+/*      color: #000;*/
+      border: 1px solid #2a58c333;
+      border-radius: 5px;
+    }
+
+    .detailHeader_col1 {
+
+    }
+
+    .detailHeader_col2 {
+      float: right;
+    }
+
+    .icon_dropdown {
+      margin-left:10px;
+    }
+
+    .cchild {
+      vertical-align: text-top;
+    }
+
+    .topic {
+      border-radius: 0;
+      background-color: #3332;
+      /*color: #fff; */     
+      border: 0px  solid #fff;
+      border-top: 3px solid #fff;
+      border-bottom: 1px solid #fff;
+      font-weight: bold;
+    }
+
+    .detailTable>tbody>tr>.bgblank, .detailTable>tbody>tr>.icon-circle, .detailTable>tbody>.topic>.bgblank {
+      background-color: #fff;
+    }
+
+    .detailTable>tbody>tr>.icon-circle {
+      width: 20px;
+    }
 

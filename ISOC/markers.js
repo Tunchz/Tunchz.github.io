@@ -1916,17 +1916,22 @@ function switchUnselectVisibility(disaster_type_id,disaster_id) {
         if (symbol[0].selecteditem) {
 
           filter_dataTable(disaster_type_id, disaster_id);
+          display_detailTable(disaster_type_id,disaster_id);
+
         } else {
           filter_dataTable(disaster_type_id, 'all');
+          display_detailTable('none');
         }
         
       } else {
         filter_dataTable(disaster_type_id);  
+        display_detailTable('none');
       }   
 
 
     } else {
       filter_dataTable('all');
+      display_detailTable('none');
     }
   }
 
@@ -2010,6 +2015,16 @@ function filter_dataTable(disaster_type_id,disaster_id) {
 
     tabulateimg(disaster_risk_list.dtype_id.bottom(Infinity), ["icon_url","disaster_type","source","updated_date","level_detail","DRM_state","response","contract","blank","color"]);
 }
+
+
+// function display_detailTable(disaster_id) {
+//   console.log(disaster_id);
+
+
+
+
+// }
+
 
 function display_table_markers(drm) {
 
@@ -2097,7 +2112,7 @@ function initialize() {
   //menubtn.style.padding = "0px 0px";
   menubtn.setAttribute('type', 'button');
   //stopbtn.setAttribute('onclick', 'inputMenu()');
-  menubtn.setAttribute('oncontextmenu', 'switchShortNoti()');
+  menubtn.setAttribute('oncontextmenu', 'switchShortNoti();return false;');
   menubtn.setAttribute('onclick', 'switchUnselectVisibility(0);return false;'); //switchUnselectVisibility(disaster_type_id)
   document.getElementById("menu-container-top-right").append(menubtn);
   //document.getElementById("stop-button").innerHTML = "⍜☷■⌂";
@@ -2229,3 +2244,379 @@ function switchRightpanel() {
 //     }
 // 
 
+function display_detailTable(disaster_type_id,disaster_id) {
+
+  console.log(disaster_id);  
+  if (disaster_type_id != 'none') {
+    //console.log("create table");
+    var tbl = document.createElement("div");
+    tbl.id = "detailTable-container";
+    tbl.className = "detailTable-container";
+    tbl.innerHTML = `
+        <table id="datailTable" class="detailTable">
+          <tbody>
+            <tr><td class="bgblank" colspan="6"></td></tr>                     
+            <tr class="header bgblank">
+                <td class="icon-circle"></td>
+                <td class="dstep" colspan="3">ประกาศ</td>
+                <td class="dstep_date" colspan="2">9 ต.ค. 63</td>
+            </tr>
+            <tr class="parent">
+                <td class="bgblank"></td>
+                <td class="detailHeader"  colspan="5">
+                <span class="detailHeader_col1">พื้นที่</span>
+                <span class="detailHeader_col2">2 จังหวัด<span class="icon_dropdown"><i class="fa icon-down-open"></i></spand></span>               
+                </td>
+            </tr>
+            <tr class="cchild topic">
+                <td class="bgblank"></td>
+                <td>นครนายก</td>
+                <td>1 อำเภอ</td>
+                <td colspan="2">5 ตำบล</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  รายละเอียด</td>
+                <td colspan="4">รายละเอียดการดำเนินการ  ********************************* ****************************</td>
+            </tr>             
+            <tr class="cchild topic">
+                <td class="bgblank"></td>
+                <td>อุบลราชธานี</td>
+                <td>3 อำเภอ</td>
+                <td colspan="2">15 ตำบล</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  รายละเอียด</td>
+                <td colspan="4">รายละเอียดการดำเนินการ  ********************************* ****************************</td>
+            </tr>             
+          <tbody>
+            <tr><td class="bgblank" colspan="6"></td></tr>                     
+            <tr class="header">
+                <td class="icon-circle"></td>
+                <td class="dstep" colspan="3">ดำเนินการ</td>
+                <td class="dstep_date" colspan="2">14 ต.ค. 63</td>
+            </tr>
+            <tr class="parent">
+                <td class="bgblank"></td>
+                <td class="detailHeader"  colspan="5">
+                <span class="detailHeader_col1">เผชิญเหตุ</span>
+                <span class="detailHeader_col2">3 ปฏิบัติการ<span class="icon_dropdown"><i class="fa icon-down-open"></i></spand></span>               
+                </td>
+            </tr>
+            <tr class="cchild topic">
+                <td class="bgblank"></td>
+                <td colspan="1">หน่วย 01</td>
+                <td colspan="2">หัวข้อการช่วยเหลือ</td>
+                <td colspan="2">14 ต.ค. 63 0930</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  พื้นที่</td>
+                <td colspan="4">  จ.นครนายก อ.ปากพลี</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  รายละเอียด</td>
+                <td colspan="4">รายละเอียดการดำเนินการ  ********************************* ****************************</td>
+            </tr>    
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  ติดต่อ</td>
+                <td colspan="2">คุณวิชัย จันทร์แสง</td>
+                <td colspan="2">0909123456</td>
+            </tr>                    
+            <tr class="cchild topic">
+                <td class="bgblank"></td>
+                <td colspan="1">หน่วย 02</td>
+                <td colspan="2">หัวข้อการช่วยเหลือ</td>
+                <td colspan="2">14 ต.ค. 63 0930</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  พื้นที่</td>
+                <td colspan="4">  จ.นครนายก อ.ปากพลี</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  รายละเอียด</td>
+                <td colspan="4">รายละเอียดการดำเนินการ  ********************************* ****************************</td>
+            </tr>    
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  ติดต่อ</td>
+                <td colspan="2">คุณวิชัย จันทร์แสง</td>
+                <td colspan="2">0909123456</td>
+            </tr>         
+            <tr class="cchild topic">
+                <td class="bgblank"></td>
+                <td colspan="1">หน่วย 03</td>
+                <td colspan="2">หัวข้อการช่วยเหลือ</td>
+                <td colspan="2">14 ต.ค. 63 0930</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  พื้นที่</td>
+                <td colspan="4">  จ.นครนายก อ.ปากพลี</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  รายละเอียด</td>
+                <td colspan="4">รายละเอียดการดำเนินการ  ********************************* ****************************</td>
+            </tr>    
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  ติดต่อ</td>
+                <td colspan="2">คุณวิชัย จันทร์แสง</td>
+                <td colspan="2">0909123456</td>
+            </tr>   
+          </tbody>    
+          <tbody>        
+            <tr><td class="bgblank" colspan="6"></td></tr>                     
+            <tr class="parent">
+                <td class="bgblank"></td>
+                <td class="detailHeader"  colspan="5">
+                <span class="detailHeader_col1">ช่วยชีวิต</span>
+                <span class="detailHeader_col2">1 ปฏิบัติการ<span class="icon_dropdown"><i class="fa icon-down-open"></i></spand></span>               
+                </td>
+            </tr>
+            <tr class="cchild topic">
+                <td class="bgblank"></td>
+                <td colspan="1">หน่วย 01</td>
+                <td colspan="2">หัวข้อช่วยขนย้ายผู้บาดเจ็บ</td>
+                <td colspan="2">14 ต.ค. 63 1040</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  พื้นที่</td>
+                <td colspan="4">  จ.นครนายก อ.ปากพลี</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  รายละเอียด</td>
+                <td colspan="4">รายละเอียดการดำเนินการ  ********************************* ****************************</td>
+            </tr>    
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  ติดต่อ</td>
+                <td colspan="2">คุณวิชัย จันทร์แสง</td>
+                <td colspan="2">0909123456</td>
+            </tr>                    
+
+          </tbody>    
+          <tbody>
+            <tr><td class="bgblank" colspan="6"></td></tr>                     
+            <tr class="header">
+                <td class="icon-circle"></td>
+                <td class="dstep" colspan="3">คำร้องขอความช่วยเหลือ</td>
+                <td class="dstep_date" colspan="2">15 ต.ค. 63</td>
+            </tr>
+            <tr class="parent">
+                <td class="bgblank"></td>
+                <td class="detailHeader"  colspan="5">
+                <span class="detailHeader_col1">ต้องการอาหาร</span>
+                <span class="detailHeader_col2">2 คำร้อง<span class="icon_dropdown"><i class="fa icon-down-open"></i></spand></span>               
+                </td>
+            </tr>
+            <tr class="cchild topic">
+                <td class="bgblank"></td>
+                <td colspan="1">หน่วย 01</td>
+                <td colspan="2">หัวข้อการช่วยเหลือ</td>
+                <td colspan="2">14 ต.ค. 63 0930</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  พื้นที่</td>
+                <td colspan="4">  จ.นครนายก อ.ปากพลี</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  รายละเอียด</td>
+                <td colspan="4">รายละเอียดการดำเนินการ  ********************************* ****************************</td>
+            </tr>    
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  ติดต่อ</td>
+                <td colspan="2">คุณวิชัย จันทร์แสง</td>
+                <td colspan="2">0909123456</td>
+            </tr>                    
+            <tr class="cchild topic">
+                <td class="bgblank"></td>
+                <td colspan="1">หน่วย 02</td>
+                <td colspan="2">หัวข้อการช่วยเหลือ</td>
+                <td colspan="2">14 ต.ค. 63 0930</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  พื้นที่</td>
+                <td colspan="4">  จ.นครนายก อ.ปากพลี</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  รายละเอียด</td>
+                <td colspan="4">รายละเอียดการดำเนินการ  ********************************* ****************************</td>
+            </tr>    
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  ติดต่อ</td>
+                <td colspan="2">คุณวิชัย จันทร์แสง</td>
+                <td colspan="2">0909123456</td>
+            </tr>         
+          </tbody>
+          <tbody>        
+            <tr><td class="bgblank" colspan="6"></td></tr>                     
+            <tr class="parent">
+                <td class="bgblank"></td>
+                <td class="detailHeader"  colspan="5">
+                <span class="detailHeader_col1">เคลื่อนย้ายออกจากพื้นที่อันตราย</span>
+                <span class="detailHeader_col2">1 คำร้อง<span class="icon_dropdown"><i class="fa icon-down-open"></i></spand></span>               
+                </td>
+            </tr>
+            <tr class="cchild topic">
+                <td class="bgblank"></td>
+                <td colspan="1">หน่วย 01</td>
+                <td colspan="2">หัวข้อช่วยขนย้ายผู้บาดเจ็บ</td>
+                <td colspan="2">14 ต.ค. 63 1040</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  พื้นที่</td>
+                <td colspan="4">  จ.นครนายก อ.ปากพลี</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  รายละเอียด</td>
+                <td colspan="4">รายละเอียดการดำเนินการ  ********************************* ****************************</td>
+            </tr>    
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  ติดต่อ</td>
+                <td colspan="2">คุณวิชัย จันทร์แสง</td>
+                <td colspan="2">0909123456</td>
+            </tr>                    
+
+          </tbody>                 
+          <tbody>
+            <tr><td class="bgblank" colspan="6"></td></tr>                     
+            <tr class="header">
+                <td class="icon-circle"></td>
+                <td class="dstep" colspan="3">ฟื้นฟู</td>
+                <td class="dstep_date" colspan="2">29 ต.ค. 63</td>
+            </tr>
+            <tr class="parent">
+                <td class="bgblank"></td>
+                <td class="detailHeader"  colspan="5">
+                <span class="detailHeader_col1">บูรณะที่พักอาศัย</span>
+                <span class="detailHeader_col2">2 จังหวัด<span class="icon_dropdown"><i class="fa icon-down-open"></i></spand></span>               
+                </td>
+            </tr>
+            <tr class="cchild topic">
+                <td class="bgblank"></td>
+                <td colspan="1">หน่วย 01</td>
+                <td colspan="2">หัวข้อการช่วยเหลือ</td>
+                <td colspan="2">14 ต.ค. 63 0930</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  พื้นที่</td>
+                <td colspan="4">  จ.นครนายก อ.ปากพลี</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  รายละเอียด</td>
+                <td colspan="4">รายละเอียดการดำเนินการ  ********************************* ****************************</td>
+            </tr>    
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  ติดต่อ</td>
+                <td colspan="2">คุณวิชัย จันทร์แสง</td>
+                <td colspan="2">0909123456</td>
+            </tr>                    
+            <tr class="cchild topic">
+                <td class="bgblank"></td>
+                <td colspan="1">หน่วย 02</td>
+                <td colspan="2">หัวข้อการช่วยเหลือ</td>
+                <td colspan="2">14 ต.ค. 63 0930</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  พื้นที่</td>
+                <td colspan="4">  จ.นครนายก อ.ปากพลี</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  รายละเอียด</td>
+                <td colspan="4">รายละเอียดการดำเนินการ  ********************************* ****************************</td>
+            </tr>    
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  ติดต่อ</td>
+                <td colspan="2">คุณวิชัย จันทร์แสง</td>
+                <td colspan="2">0909123456</td>
+            </tr>         
+          </tbody>
+          <tbody>        
+            <tr><td class="bgblank" colspan="6"></td></tr>                     
+            <tr class="parent">
+                <td class="bgblank"></td>
+                <td class="detailHeader"  colspan="5">
+                <span class="detailHeader_col1">ตรวจสุขภาพ</span>
+                <span class="detailHeader_col2">1 อำเภอ<span class="icon_dropdown"><i class="fa icon-down-open"></i></spand></span>               
+                </td>
+            </tr>
+            <tr class="cchild topic">
+                <td class="bgblank"></td>
+                <td colspan="1">หน่วย 01</td>
+                <td colspan="2">หัวข้อช่วยขนย้ายผู้บาดเจ็บ</td>
+                <td colspan="2">14 ต.ค. 63 1040</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  พื้นที่</td>
+                <td colspan="4">  จ.นครนายก อ.ปากพลี</td>
+            </tr>
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  รายละเอียด</td>
+                <td colspan="4">รายละเอียดการดำเนินการ  ********************************* ****************************</td>
+            </tr>    
+            <tr class="cchild">
+                <td class="bgblank"></td>
+                <td colspan="1">  ติดต่อ</td>
+                <td colspan="2">คุณวิชัย จันทร์แสง</td>
+                <td colspan="2">0909123456</td>
+            </tr>                    
+
+          </tbody>    
+        </table>
+    `
+    //console.log("append table");
+    document.getElementById("table-container").appendChild(tbl);
+
+
+    $('table').on('click', '.parent ', function(){
+      $(this).closest('tbody').toggleClass('open');
+    });
+
+  $(".detailTable").css("color", symbol[disaster_type_id].color);
+  document.getElementById("detailTable-container").style.backgroundColor = symbol[disaster_type_id].color+"ff";
+
+  $(".detailHeader").css("border", "1px solid "+ symbol[disaster_type_id].color + "00");
+  topics = document.getElementsByClassName("detailHeader");
+  for (i=0; i<topics.length; i++) {
+    console.log(i);
+    topics[i].style.backgroundColor = symbol[disaster_type_id].color+"99";
+  }
+
+  topics = document.getElementsByClassName("topic");
+  for (i=0; i<topics.length; i++) {
+    console.log(i);
+    topics[i].style.backgroundColor = symbol[disaster_type_id].color+"33";
+  }
+
+  } else {
+    //console.log("remove table");
+    var removetable = document.getElementById('detailTable-container');
+    removetable.parentElement.removeChild(removetable); 
+  }
+}
