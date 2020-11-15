@@ -1069,6 +1069,7 @@ option {
     .detailTable>tbody>tr>.dstep_date {
       float:right;
       background-color: #fff;
+      margin-right:20px;
     }
 
     .detailTable>tbody>tr>.detailHeader {
