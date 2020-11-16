@@ -2595,39 +2595,57 @@ function display_detailTable(disaster_type_id,disaster_id) {
     //console.log("append table");
     document.getElementById("table-container").appendChild(tbl);
 
-
+    // toggle one click topic
     $('table').on('click', '.parent ', function(){
       $(this).closest('tbody').toggleClass('open');
     });
 
-  // set color corresponding to disaster_type
-  document.getElementById("dynamic_style").innerHTML = `
+    // open all on doubleclick header
+    $('table').on('dblclick', '.header ', function(){
+      $(".parent").each(function() {
+        $(this).closest('tbody').addClass('open');
+      });
+    });
+
+    // close all on right click header
+    $('table').on('contextmenu', '.header ', function(){
+      $(".parent").each(function() {
+        $(this).closest('tbody').removeClass('open');
+      });
+    });
+
+    // set color corresponding to disaster_type
+    document.getElementById("dynamic_style").innerHTML = `
         .detailTable>tbody>tr>td {
-        background-color: `+ symbol[disaster_type_id].color +`0f;
-      }
-      .open>.parent>.detailHeader {
-        background-color: `+ symbol[disaster_type_id].color +`;
-        color: #fff;
-      }`;
+          background-color: `+ symbol[disaster_type_id].color +`0f;
+        }
+        .open>.parent>.detailHeader {
+          background-color: `+ symbol[disaster_type_id].color +`;
+          color: #fff;
+        }
+        .detailTable{
+          color: `+ symbol[disaster_type_id].color +`;
+        }
+        .detailTable-container{
+          background-color : `+ symbol[disaster_type_id].color +`ff;
+        }
+        .detailTable>tbody>tr>.detailHeader {
+          border: 1px solid `+ symbol[disaster_type_id].color +`77;
+        }
+        .topic {
+          background-color: `+ symbol[disaster_type_id].color +`33;
+        }`;
 
+    // $(".detailTable").css("color", symbol[disaster_type_id].color);
+    // document.getElementById("detailTable-container").style.backgroundColor = symbol[disaster_type_id].color+"ff";
 
-  $(".detailTable").css("color", symbol[disaster_type_id].color);
-  document.getElementById("detailTable-container").style.backgroundColor = symbol[disaster_type_id].color+"ff";
+    // $(".detailHeader").css("border", "1px solid "+ symbol[disaster_type_id].color + "77");
 
-  $(".detailHeader").css("border", "1px solid "+ symbol[disaster_type_id].color + "77");
-  //$(".detailHeader").css("border-left", "5px solid "+ symbol[disaster_type_id].color + "77");
-  // topics = document.getElementsByClassName("detailHeader");
-  // for (i=0; i<topics.length; i++) {
-  //   console.log(i);
-  //   topics[i].style.backgroundColor = symbol[disaster_type_id].color+"99";
-  // }
-
-
-  topics = document.getElementsByClassName("topic");
-  for (i=0; i<topics.length; i++) {
-    console.log(i);
-    topics[i].style.backgroundColor = symbol[disaster_type_id].color+"33";
-  }
+    // topics = document.getElementsByClassName("topic");
+    // for (i=0; i<topics.length; i++) {
+    //   console.log(i);
+    //   topics[i].style.backgroundColor = symbol[disaster_type_id].color+"33";
+    // }
 
   } else {
     //console.log("remove table");
