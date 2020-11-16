@@ -1908,8 +1908,8 @@ function switchUnselectVisibility(disaster_type_id,disaster_id) {
     }
   } else {
     if (symbol[disaster_type_id].dbclick) {
-      document.getElementById("table_row_marker_"+disaster_type_id.toString()).style.borderRight = '3px solid '+ symbol[disaster_type_id].color;
-      document.getElementById("table_col_marker_"+disaster_type_id.toString()).style.borderBottom = '3px solid '+ symbol[disaster_type_id].color;
+      document.getElementById("table_row_marker_"+disaster_type_id.toString()).style.borderRight = '5px solid '+ symbol[disaster_type_id].color;
+      document.getElementById("table_col_marker_"+disaster_type_id.toString()).style.borderBottom = '5px solid '+ symbol[disaster_type_id].color;
 
       if (disaster_id) {
         //symbol[disaster_type_id].selecteditem = !symbol[disaster_type_id].selecteditem;
@@ -2253,6 +2253,7 @@ function display_detailTable(disaster_type_id,disaster_id) {
     tbl.id = "detailTable-container";
     tbl.className = "detailTable-container";
     tbl.innerHTML = `
+      <div class="datailTable-scroll-container">
         <table id="datailTable" class="detailTable">
           <tbody>
             <tr><td class="bgblank" colspan="6"></td></tr>                     
@@ -2589,6 +2590,7 @@ function display_detailTable(disaster_type_id,disaster_id) {
 
           </tbody>    
         </table>
+      </div>
     `
     //console.log("append table");
     document.getElementById("table-container").appendChild(tbl);
@@ -2598,16 +2600,28 @@ function display_detailTable(disaster_type_id,disaster_id) {
       $(this).closest('tbody').toggleClass('open');
     });
 
+  // set color corresponding to disaster_type
+  document.getElementById("dynamic_style").innerHTML = `
+        .detailTable>tbody>tr>td {
+        background-color: `+ symbol[disaster_type_id].color +`0f;
+      }
+      .open>.parent>.detailHeader {
+        background-color: `+ symbol[disaster_type_id].color +`;
+        color: #fff;
+      }`;
+
+
   $(".detailTable").css("color", symbol[disaster_type_id].color);
   document.getElementById("detailTable-container").style.backgroundColor = symbol[disaster_type_id].color+"ff";
 
   $(".detailHeader").css("border", "1px solid "+ symbol[disaster_type_id].color + "77");
-  $(".detailHeader").css("border-left", "5px solid "+ symbol[disaster_type_id].color + "77");
+  //$(".detailHeader").css("border-left", "5px solid "+ symbol[disaster_type_id].color + "77");
   // topics = document.getElementsByClassName("detailHeader");
   // for (i=0; i<topics.length; i++) {
   //   console.log(i);
   //   topics[i].style.backgroundColor = symbol[disaster_type_id].color+"99";
   // }
+
 
   topics = document.getElementsByClassName("topic");
   for (i=0; i<topics.length; i++) {

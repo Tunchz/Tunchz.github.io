@@ -14,7 +14,15 @@
     <link rel="stylesheet" href="css/FWTT.css">
     <link rel="stylesheet" href="css/fonts.css">
 
-
+    <style id="dynamic_style">
+      .detailTable>tbody>tr>td {
+        background-color: #7777770f;
+      }
+      .open>.parent>.detailHeader {
+        background-color: #2a58c3;
+        color: #fff;
+      }
+    </style>
   </head>
   <body onresize="resizeAdjust();">
     <div id = "wholecontent" class = "section-container">
@@ -45,30 +53,30 @@
                             <h2 class="modal-title h3" id="myModalLabel"><a href="https://www.maholan.co.th/">DRM</a> &gt; Disaster Risk Management Dashboard </h2>
                         </div>
                         <div class="modal-body">
-                            <h3 style="margin-top:0">การใช้งาน</h3>
-                            <p>ระบบจะตรวจจับใบหน้าและวาดกรอบสี่เหลี่ยมล้อมรอบใบหน้า ชื่อของใบหน้าจะถูกแสดงมุมบนซ้าย และแสดงสีตามกรณีดังนี้ </p>
+                            <h3 style="margin-top:0">วัตถุประสงค์</h3>
+                            <p>รายงานการจัดการความเสี่ยงภัยพิบัติ ใช้เพื่อช่วยบริหารจัดการความเสี่ยงการเกิดภัยพิบัติ แจ้งเตือนการวางแผนรับมือภัย แจ้งเตือนภัยพิบัติเมื่อมีการประกาศภัย และใช้เป็นข้อมูลประกอบในการวิเคราะห์เพื่อการตัดสินใจในการดำเนินการปฏิบัติงานเพื่อรับมือกับภัยพิบัติอย่างมีปรุสิทธิภาพ โดยรายงานมีการแสดงข้อมูลดังนี้/p>
                             <ol>
-                                <li>สีส้ม     --> ใบหน้ากำลังถูกยืนยันตัวตนจากระบบ</li>
-                                <li>สีเขียว   --> ใบหน้าถูกยืนยันเรียบร้อยพร้อมแสดงรูปโปรไฟล์มุมล่างซ้าย</li>
-                                <li>สีแดง    --> ใบหน้าไม่ได้ลงทะเบียนในระบบหรือระบบไม่สามารถยืนยันใบหน้าได้</li>
+                                <li>ข้อมูลแจ้งเตือนภัยพิบัติตามประการศจาก ปภ. พร้อมรายละเอียดการดำเนินการ</li>
+                                <li>ข้อมูลแจ้งเตือนการวางแผนรับมือภัยพิบัติ พร้อมรายละเอียดข้อแนะนำ</li>
+                                <li>ข้อมูลพื้นฐานและผลการวิเคราะห์เพื่อใช้ประกอบในการวิเคราะห์สถานการณ์เกี่ยวกับภัยพิบัติต่างๆ</li>
                             </ol>
 
-                            <h3 class="">การแสดงรายละเอียดบนแถบด้านขวา</h3>
-                            <p>ในโหมดหน้าจอแคบแถบจะถูกแสดงดัานล่างถัดจากกรอบการแสดงภาพกล้อง ซึ่งสามารถเลื่อนหน้าจอขึ้นเพื่อดูรายละเอียด</p>
+                            <h3 class="">การใช้งาน</h3>
+                            <p>สามารถโหลด<a href="https://tunchz.github.io/ISOC/Manual_DRM.pdf">คู่มือการใช้งาน</a>ได้ที่นี่ </p>
                             <ol>
-                                <li>ส่วนตัวกรอง เป็นแถบบนสุดแสดงตัวกรองใช้ในการเลือกช่วงเวลาในการแสดงผลการตรวจจับใบหน้า</li>
-                                <li>ส่วนตัวเลขสรุป เป็นแถบแสดงตัวเลขสรุปผลการตรวจจับใบหน้าแบ่งประเภทตามรหัสสี (คลิ๊กเลือกประเภทเพื่อเรียกดูรายชื่อตามประเภทที่ต้องการ)</li>
-                                <li>ส่วนตาราง แสดงรูปใบหน้าพร้อมรายละเอียดการตรวจับใบหน้า ได้แก่ ชื่อ ชื่อกลุ่ม วัน ห้วงเวลา อารมณ์ใบหน้า และสถานะการจัดเก็บข้อมูลใบหน้า</li>
+                                <li>Map Menu ด้านซ้ายขอบจอภาพใช้ควบคุมการแสงผลบนแผนที่ รวมถึงการจัดการชั้นข้อมูล ซ่อน/แสดงและกรองชั้นข้อมูลต่างๆ ได้แก่ ชั้นข้อมูลการแจ้งเตือน   ชั้นข้อมูลประกอบการวิเคราะห์ และชั้นข้อมูลภาพแผนที่พื้นหลัง</li>
+                                <li>Notification Menu และ Notification Icon ด้านขวาขอบจอภาพใช้ควบคุมชั้นข้อมูลการแจ้งเตือน การซ่อน/แสดงสัญลักษณ์แจ้งเตือนบนแผนที่ การเปิด/ปิด ถาดข้อมูลแจ้งเตือน การกรองและแสดงข้อมูลรายละเอียดการแจ้งเตือนต่างๆ</li>
+                                <li>รายงานสามารถแสดงผลใช้งานได้บนอุปกรณ์โทรศัพท์เคลี่อนที่โดยที่ Notification Menu และ Notification Icon จะแสดงขอบด้านล่างจอภาพ แทนที่ขอบจอภาพด้านขวา</li>
                             </ol>
                             <h3>ข้อมูล</h3>
-                            <p>ข้อมูลใบหน้า เป็นข้อมูลใบหน้าของข้าราชการในกองคณิตศาสตร์และคอมพิวเตอร์ ส่วนการศึกษา โรงเรียนนายร้อยพระจุลจอมเกล้า<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a></p>
+                            <p>ข้อมูลใช้ในรายงานได้ถูกเชื่อมต่อจากหน่วยงานราชการที่มีหน้าที่รับผิดชอบดำเนินการภัยพิบัติด้านต่างๆ เพื่อนำมาบูรณาการใช้ประโยชน์จากข้อมูลในระบบ Bigdata Platform สามารถ<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a>ได้ที่นี่</p>
                             <ul>
-                                <li>ระบบตรวจจับใบหน้า Face.Rex ถูกพัฒนาขึ้นเพื่อใช้ศึกษา Maching Learning และการนำเทคโนโลยีและ AI มาสนับสนุนในการปฏิบัติงานและการเรียนการสอน เพื่อประโยชน์กับสาธารณะชน ติดต่อผู้จัดทำระบบเพื่อขออนุญาตในการใช้งานข้อมูลใดๆ ที่เป็นผลลัพธ์จากระบบก่อนนำไปใช้งาน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง </li>
+                                <li>ระบบรายงาน ถูกพัฒนาขึ้นเพื่อใช้บูรณาการข้อมูลด้านต่างๆ เพื่อช่วยในการบริหารจัดการภัยพิบัติ และเพื่อประโยชน์กับสาธารณะชน กรุณาติดต่อผู้จัดทำระบบเพื่อขออนุญาตในการใช้งานข้อมูลใดๆ ที่เป็นผลลัพธ์จากระบบก่อนนำไปใช้งาน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง </li>
                             </ul>
                             <h3>ติดต่อ</h3>
-                            <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">tunchz@gmail.com</a>.</p>
+                            <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com"></a>ISOC Bigdata Team</p>
                         </div>
-                        <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left">Made by CRMA Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                        <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left">Made by ISOC Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
                     </div>
                 </div>
             </div>
@@ -84,19 +92,32 @@
                                     <tr>
                                         <th>ชุดข้อมูล</th>
                                         <th>แหล่งข้อมูล</th>
+                                        <th>อัปเดตล่าสุด</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     <tr>
-                                        <td>ข้อมูลรายชื่อข้าราชการกองคณิตศาสตร์และคอมพิวเตอร์</td>
-                                        <td>https://macs.crma.ac.th</td>
+                                        <td>ข้อมูลการแจ้งเตือนภัย</td>
+                                        <td>ระบบรายงานของ ปภ.</td>
+                                        <td>ต.ค. 63</td>
                                     </tr>
                                     <tr>
-                                        <td>ข้อมูลรายชื่อข้าราชการกองอื่นๆ</td>
-                                        <td>https://acadiv.crma.ac.th</td>
+                                        <td>ข้อมูลการแจ้งเตือนวางแผน</td>
+                                        <td>ระบบแผนงานด้านภัยพิบัติ</td>
+                                        <td>ต.ค. 63</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ข้อมูลผลการวิเคราะห์ด้านน้ำ</td>
+                                        <td>สำนักงานทรัพยากรน้ำแห่งชาติ</td>
+                                        <td>ต.ค. 63</td>
                                     </tr>
 
+                                    <tr>
+                                        <td>ข้อมูลทรัพยากรน้ำ</td>
+                                        <td>กรมทรัพยากรน้ำ กระทรวงทรัพยากรธรรมชาติ</td>
+                                        <td>ต.ค. 63</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -125,7 +146,7 @@
 
 
           <div id='notification-container-bottom' class='map_addon_bottom' style = "height: auto; display:block; margin:0px;">
-            <div id='vertical-table-container-MAP' class = "col-sm-12 height100p">
+            <div id='vertical-table-container-MAP' class = "col-sm-12 height105p">
               <div id="vertical-table-markers-container" class="table-container" oncontextmenu="return false;" style = "padding: 0px 5px; background-color: #fff0;/*-webkit-transform: translateX(-50%) translateY(-50%);*/">
               </div>
             </div>
@@ -951,7 +972,7 @@
 
         map.addControl(new layerControlGrouped(config), "top-left");
 
-      }, 500);
+      }, 800);
 
 
 

@@ -122,6 +122,8 @@ svg text {
 #table-container {
   border-radius: 5px;
   box-shadow: 0 0 3px #777;
+  overflow: auto;
+
 }
 
 .table-container {
@@ -142,7 +144,6 @@ svg text {
   width: 100%;
   height: 100%;
   /*background-color: #ffcc00;*/
-  overflow: auto;
 }
 
 
@@ -287,7 +288,7 @@ table {
 }
 
 .table_col_marker {
-  height: 52px;
+  height: 55px;
   width: 96px;
   /*border-top: 3px solid #383838;
   border-bottom: 3px solid #383838;*/
@@ -704,7 +705,7 @@ red:hover {
   position: absolute; 
   right: 1px; 
   top: 0px; 
-  cursor: pointer; 
+  /*cursor: pointer; */
 }
 
 #menu-container-bottom-right { 
@@ -714,7 +715,7 @@ red:hover {
   position: relative; 
   /*right: 10px; 
   bottom: 75px; */
-  cursor: pointer; 
+  /*cursor: pointer; */
   pointer-events: auto;
 }
 
@@ -727,7 +728,7 @@ red:hover {
   right: 0px; 
   /*top: 0px; 
   bottom: 0px; */
-  cursor: pointer; 
+  /*cursor: pointer; */
   /*border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;*/
   display: block;
@@ -745,7 +746,7 @@ red:hover {
   /*right: 0px; 
   left: 0px; */
   bottom: 0px; 
-  cursor: pointer; 
+  /*cursor: pointer; */
   /*border-top-left-radius: 3px;
   border-top-right-radius: 3px;*/
   display: block;
@@ -1006,14 +1007,24 @@ option {
     .detailTable>tbody>tr>td {
       padding: 0 5px;
       border-radius: 5px;
-      background-color: #7777770f;
+      /*background-color: #7777770f;*/
       border: 2px solid #fff;
     }
 
     .detailTable-container {
       width: 100%;
+      height: calc(100% - 63px);
       padding: 5px;
       background-color: #7777770f;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+    .datailTable-scroll-container {
+      width: 100%;
+      height: 100%;
+      padding: 0px;
+      border-radius: 0px;
+      overflow: auto;
     }
 
     .detailTable {
@@ -1026,6 +1037,7 @@ option {
       background-color: #fff;
       color: #2a58c3;
       border-radius: 5px;
+      cursor: normal;
     }
     .parent ~ .cchild {
       display: none;
@@ -1038,6 +1050,7 @@ option {
     }
 
     .open>.parent>.detailHeader {
+      font-weight: bold;
 /*      background-color: #2a58c3;
       color: #fff;*/
     }
