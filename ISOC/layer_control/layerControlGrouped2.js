@@ -676,12 +676,13 @@ function buildFilter(data, layer) {
 
   for (var i = 0; i < fields.length; i++) {
     if (fields[i].includes("operator")) continue;
+    values[i] = values[i].replace("-- ทั้งหมด --", "");
     if (!values[i]) continue;
     //DATES AND INTEGERS MUST HAVE AN OPERATOR OPTION AS THE SECOND VALUE IN THE FORM
     switch (layer.metadata.filterSchema[fields[i]].type) {
       case "date" : filter.push([values[i + 1], ["get", fields[i] ], values[i] ]); break;
       case "number" : filter.push([values[i + 1], ["get", fields[i] ], Number(values[i]) ]); break;
-      default: filter.push(["match", ["get", fields[i]], values[i].replace("-- ทั้งหมด --", "").split(','),true,false]); //build >> ["match",["get", "จังหวัด"],['น่าน','นครนายก'],true,false]
+      default: filter.push(["match", ["get", fields[i]], values[i].split(','),true,false]); //build >> ["match",["get", "จังหวัด"],['น่าน','นครนายก'],true,false]
     }    
   }
 
