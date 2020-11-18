@@ -521,13 +521,13 @@ function lcCreateLegend(style) {
   let type = Object.keys(style)
   let legend = false;
   if (type.indexOf("line-color") > -1 && isString(style["line-color"])) {
-    legend = `<icon class='icon-minus' style='color:${style["line-color"]};margin-right:6px;'></icon>`;
+    legend = `<icon class='icon-minus' style='color:${style["line-color"]};margin-right:6px;' onclick="showcolorPicker(this)" onmouseout="hidecolorPicker(this)"></icon>`;
   }
   if (type.indexOf("fill-color") > -1 && isString(style["fill-color"])) {
-    legend = `<icon class='icon-stop' style='color:${style["fill-color"]};margin-right:6px;'></icon>`;
+    legend = `<icon class='icon-stop' style='color:${style["fill-color"]};margin-right:6px;' onclick="showcolorPicker(this)" onmouseout="hidecolorPicker(this)"></icon>`;
   }
   if (type.indexOf("circle-color") > -1 && isString(style["circle-color"])) {
-    legend = `<icon class='icon-circle' style='color:${style["circle-color"]};margin-right:6px;'></icon>`;
+    legend = `<icon class='icon-circle' style='color:${style["circle-color"]};margin-right:6px;' onclick="showcolorPicker(this)" onmouseout="hidecolorPicker(this)"></icon>`;
   }
 
   return legend
