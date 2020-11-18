@@ -513,7 +513,8 @@ function lcCreateButton(collapsed) {
   div.className = 'mapboxgl-ctrl mapboxgl-ctrl-group mgl-layerControl';
   if (collapsed) div.classList.add("collapsed");
   // add color-picker
-  div.appendChild(create_colorPicker());
+  // div.appendChild(create_colorPicker());
+  div.innerHTML = create_colorPicker();
   return div
 }
 
@@ -521,13 +522,13 @@ function lcCreateLegend(style) {
   let type = Object.keys(style)
   let legend = false;
   if (type.indexOf("line-color") > -1 && isString(style["line-color"])) {
-    legend = `<icon class='icon-minus' style='color:${style["line-color"]};margin-right:6px;' onclick="showcolorPicker(this)" onmouseout="hidecolorPicker(this)"></icon>`;
+    legend = `<icon class='icon-minus' style='color:${style["line-color"]};margin-right:6px;' onclick="showcolorPicker(this)"></icon>`;
   }
   if (type.indexOf("fill-color") > -1 && isString(style["fill-color"])) {
-    legend = `<icon class='icon-stop' style='color:${style["fill-color"]};margin-right:6px;' onclick="showcolorPicker(this)" onmouseout="hidecolorPicker(this)"></icon>`;
+    legend = `<icon class='icon-stop' style='color:${style["fill-color"]};margin-right:6px;' onclick="showcolorPicker(this)"></icon>`;
   }
   if (type.indexOf("circle-color") > -1 && isString(style["circle-color"])) {
-    legend = `<icon class='icon-circle' style='color:${style["circle-color"]};margin-right:6px;' onclick="showcolorPicker(this)" onmouseout="hidecolorPicker(this)"></icon>`;
+    legend = `<icon class='icon-circle' style='color:${style["circle-color"]};margin-right:6px;' onclick="showcolorPicker(this)"></icon>`;
   }
 
   return legend
@@ -741,14 +742,12 @@ function filterIcon() {
 
 function create_colorPicker() {
   // create color-picker-pallete for layer-control button
-  var color_picker = document.createElement("div");
-  color_picker.id = "color_picker";
-  color_picker.className = "color_picker";
-  color_picker.style.position = "aboslute";
-  color_picker.style.zIndex = "110";
-  color_picker.style.visibility = "hidden";
+  // var color_picker = document.createElement("div");
+  // color_picker.id = "color_picker";
+  // color_picker.className = "color_picker";
+  // color_picker.style.position = "aboslute";
+  // color_picker.style.zIndex = "110";
+  // color_picker.style.visibility = "hidden";
 
-  //document.getElementById("mgl-layerControl-button").appendChild(color_picker);
-
-  return color_picker;
+  return `<div id="color_picker" class="color_picker" style="visibility = hidden;" onmouseout="hidecolorPicker()></div>`; //color_picker;
 }
