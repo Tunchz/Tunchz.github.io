@@ -36,10 +36,8 @@
 
   .mgl-layerControl {
     font-size: 12px;
-    max-height: 450px;
+    max-height: calc(100vh - 70px);
     overflow-y: auto;
-
-
   }
 
 
@@ -96,6 +94,7 @@
   .mgl-layerControl:not(.collapsed) {
     height: auto;
     width:  calc(100% + 20px);
+    min-width: 200px;
     overflow-x: hidden;
     display: block;
     overflow-y: auto;
@@ -388,4 +387,17 @@ SPECTRE MODAL
   /*padding: .8rem;*/
   padding: 0px;
   text-align: right;
+}
+
+
+#mgl-layerControl-button {
+  left: 0px;
+  top: 50px;
+  position: absolute;
+/*  padding: 10px;
+  padding-left: 0px;
+  border-radius:0 5px 5px 0;*/
+  /*cursor: pointer;*/
+/*  pointer-events: auto;
+  z-index: 100;*/
 }

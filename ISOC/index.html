@@ -31,7 +31,7 @@
         <div id="map-container">
           <div id="map" class='blue'></div>
 
-          <div id='header-container' class='map_addon_top_left' style = "width:123px;">
+          <div id='header-container' class='map_addon_top_left' style = "">
             <div id = "logo-container" class = "col-xs-3" style = "display: flex;justify-content: center; align-items: center;">
               <img id = "logo" src = 'img/isoc.png' style = "padding: 5px; width : 40px; height : 40px;"></img>
             </div>
@@ -74,7 +74,7 @@
                                 <li>ระบบรายงาน ถูกพัฒนาขึ้นเพื่อใช้บูรณาการข้อมูลด้านต่างๆ เพื่อช่วยในการบริหารจัดการภัยพิบัติ และเพื่อประโยชน์กับสาธารณะชน กรุณาติดต่อผู้จัดทำระบบเพื่อขออนุญาตในการใช้งานข้อมูลใดๆ ที่เป็นผลลัพธ์จากระบบก่อนนำไปใช้งาน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง </li>
                             </ul>
                             <h3>ติดต่อ</h3>
-                            <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com"></a>ISOC Bigdata Team</p>
+                            <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">Bigdata Team</a> สดม.กอ.รมน.</p>
                         </div>
                         <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left">Made by ISOC Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
                     </div>
@@ -133,7 +133,7 @@
           <div id='notification-container-right' class='map_addon_right' style = "width: auto; display:block; margin:0px;">
             
             <div id='table-container-MAP' class = "col-sm-12 height100p" style="display: block;">
-              <div id="table-markers-container" class="table-container" oncontextmenu="return false;" style = "padding-right:0px; background-color: #fff0;/*-webkit-transform: translateX(-50%) translateY(0%);*/"></div>
+              <div id="table-markers-container" class="table-container" oncontextmenu="return false;" style = "padding-right:2px; background-color: #fff0;/*-webkit-transform: translateX(-50%) translateY(0%);*/"></div>
               <div id='menu-container-top-right' class='map_addon_top_right' style = "padding: 0px 0px 0px 0px;"></div>
             </div>
             <div id = "data-panel" class = "col-xs-12 height100p" style = "/*background-color: #383838;*/">
@@ -674,7 +674,7 @@
               filterSchema: {
                 "ประเภทบ่อ": {
                   type: "select",
-                  options: ["", "บ่ออุปโภค-บริโภค","บ่อเกษตร"]
+                  options: ["-- ทั้งหมด --", "บ่ออุปโภค-บริโภค","บ่อเกษตร"]
                 },
                 "ชื่อที่ตั้ง": {
                   type: "string"
@@ -706,7 +706,7 @@
               filterSchema: {
                 "หน่วยงาน": {
                   type: "select",
-                  options: ["", "แหล่งน้ำธรรมชาติขนาดใหญ่","กรมชลประทาน","การไฟฟ้าฝ่ายผลิตแห่งประเทศไทย"]
+                  options: ["-- ทั้งหมด --", "แหล่งน้ำธรรมชาติขนาดใหญ่","กรมชลประทาน","การไฟฟ้าฝ่ายผลิตแห่งประเทศไทย"]
                 },
                 "ชื่อแหล่งน้ำ": {
                   type: "string"
@@ -738,7 +738,7 @@
               filterSchema: {
                 "หน่วยงาน": {
                   type: "select",
-                  options: ["", "แหล่งน้ำธรรมชาติขนาดกลาง","กรมชลประทาน","การไฟฟ้าฝ่ายผลิตแห่งประเทศ","กรมทรัพยากรน้ำ","กรมเจ้าท่า","กรมประมง","กรมพัฒนาพลังงานทดแทนและอนุ","อปท."]
+                  options: ["-- ทั้งหมด --", "แหล่งน้ำธรรมชาติขนาดกลาง","กรมชลประทาน","การไฟฟ้าฝ่ายผลิตแห่งประเทศ","กรมทรัพยากรน้ำ","กรมเจ้าท่า","กรมประมง","กรมพัฒนาพลังงานทดแทนและอนุ","อปท."]
                 },
                 "ชื่อแหล่งน้ำ": {
                   type: "string"
@@ -772,11 +772,11 @@
               filterSchema: {
                 "ระดับความเสี่ยง": {
                   type: "select",
-                  options: ["", "พื้นที่ที่เสี่ยงต่อการเกิดภัยแล้งปานกลาง","พื้นที่ที่เสี่ยงต่อการเกิดภัยแล้งสูง"]
+                  options: ["-- ทั้งหมด --", "พื้นที่ที่เสี่ยงต่อการเกิดภัยแล้งปานกลาง","พื้นที่ที่เสี่ยงต่อการเกิดภัยแล้งสูง"]
                 },
                 "ภาค": {
                   type: "select",
-                  options: ["", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
+                  options: ["-- ทั้งหมด --", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
                 },                
                 "จังหวัด": {
                   type: "string"
@@ -804,11 +804,11 @@
               filterSchema: {
                 "ระดับความเสี่ยง": {
                   type: "select",
-                  options: ["", "พื้นที่เสี่ยงต่อการถูกน้ำท่วมเสียหายซ้ำซากปานกลาง","พื้นที่เสี่ยงต่อการถูกน้ำท่วมเสียหายซ้ำซากสูง"]
+                  options: ["-- ทั้งหมด --", "พื้นที่เสี่ยงต่อการถูกน้ำท่วมเสียหายซ้ำซากปานกลาง","พื้นที่เสี่ยงต่อการถูกน้ำท่วมเสียหายซ้ำซากสูง"]
                 },
                 "ภาค": {
                   type: "select",
-                  options: ["", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
+                  options: ["-- ทั้งหมด --", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
                 },                
                 "จังหวัด": {
                   type: "string"

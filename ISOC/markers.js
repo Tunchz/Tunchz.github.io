@@ -2246,7 +2246,7 @@ function switchRightpanel() {
 
 function display_detailTable(disaster_type_id,disaster_id) {
 
-  console.log(disaster_id);  
+  //console.log(disaster_id);  
   if (disaster_type_id != 'none') {
     //console.log("create table");
     var tbl = document.createElement("div");
@@ -2648,8 +2648,38 @@ function display_detailTable(disaster_type_id,disaster_id) {
     // }
 
   } else {
-    //console.log("remove table");
-    var removetable = document.getElementById('detailTable-container');
-    removetable.parentElement.removeChild(removetable); 
+    try {
+      //console.log("remove table");
+      var removetable = document.getElementById('detailTable-container');
+      removetable.parentElement.removeChild(removetable);        
+    }
+    catch(err) {
+
+    }    
   }
+}
+
+function showAgeDetail() {
+
+    // show tooltip with information from the __data__ property of the element
+    var d = this.__data__;
+    //var program = d.layer;
+    var value = d.data.value;
+    var key = d.data.key;
+    
+    var content = "อายุ <b>" + key + "<br><span style=\" font-size : 30px\">" + value + "</span><b><br>ราย";
+
+    return tooltip.style({
+            "visibility": "visible",
+            "text-align": "center",
+            "top": (event.pageY - 10) + "px",
+            "left": (event.pageX + 10) + "px"
+        })
+        .html(content);
+}
+
+function hideDetail() {
+
+    // hide tooltip
+    return tooltip.style("visibility", "hidden");
 }
