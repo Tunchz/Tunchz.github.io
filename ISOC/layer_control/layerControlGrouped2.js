@@ -509,6 +509,7 @@ function lcCreateButton(collapsed) {
   let div = document.createElement('div');
   div["aria-label"] = "Layer Control";
   div.dataset.layerControl = "true"
+  div.id = 'mgl-layerControl-button';
   div.className = 'mapboxgl-ctrl mapboxgl-ctrl-group mgl-layerControl';
   if (collapsed) div.classList.add("collapsed");
 
