@@ -253,8 +253,9 @@ function load_map_layers() {
         var removebutton = document.getElementsByClassName('mgl-layerControl');
         for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
 
-        map.setStyle('mapbox://styles/mapbox/satellite-streets-v11');
+        map.setStyle('mapbox://styles/mapbox/satellite-v9');
         //display_table_markers(drm);
+        firstrun = false;
 
       }, 1000);
 
@@ -2659,27 +2660,111 @@ function display_detailTable(disaster_type_id,disaster_id) {
   }
 }
 
-function showAgeDetail() {
+var hexDigits = new Array
+        ("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"); 
 
-    // show tooltip with information from the __data__ property of the element
-    var d = this.__data__;
-    //var program = d.layer;
-    var value = d.data.value;
-    var key = d.data.key;
-    
-    var content = "อายุ <b>" + key + "<br><span style=\" font-size : 30px\">" + value + "</span><b><br>ราย";
-
-    return tooltip.style({
-            "visibility": "visible",
-            "text-align": "center",
-            "top": (event.pageY - 10) + "px",
-            "left": (event.pageX + 10) + "px"
-        })
-        .html(content);
+//Function to convert rgb color to hex format
+function rgb2hex(rgb) {
+ rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+ return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
 }
 
-function hideDetail() {
+function hex(x) {
+  return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+}
 
-    // hide tooltip
-    return tooltip.style("visibility", "hidden");
+function showcolorPicker(el) {
+  console.log("show",el.parentElement,el.style.color);
+
+  layer = el.parentElement.textContent;
+
+  if (!["แจ้งเตือนภัย","แจ้งเตือนวางแผน"].includes(layer)) {
+    colorpicker = document.getElementById('color_picker');
+    colorpicker.innerHTML ="";
+    colorpicker.innerHTML += `
+    <div>
+      <div style="width:100%;height:28px;color:#000;border-bottom:1px solid #0004;margin-bottom:3px;padding-top:10px;">
+        <span style="margin:5px 0 0 3px; top:">`+layer+`</span>
+        <input id="color_picker_input" type="color" id="body" style="float:right;padding:0px;margin:-10px 1px 1px 1px;" value=`+rgb2hex(el.style.color)+`>
+      </div>
+    </div>`;    
+    colorpicker.style.display = "block";
+    colorpicker.style.top = ((event.pageY - 165) < 0) ? 0 : (event.pageY - 165) + "px";
+    colorpicker.style.left = (event.pageX - 50) + "px";
+    //colorpicker.innerHTML = content;
+    colorpicker.innerHTML += `
+    
+    `;  
+    document.getElementById("color_picker_input").addEventListener('change', function () {
+      //map.setPaintProperty(layer.value, 'fill-color', color);
+      layerSetcolor(el,layer,this.value);
+    }); 
+    var colors = [
+      '#ffffcc',
+      '#a1dab4',
+      '#41b6c4',
+      '#2c7fb8',
+      '#253494',
+      '#fed976',
+      '#feb24c',
+      '#fd8d3c',
+      '#f03b20',
+      '#bd0026'
+    ];
+     
+    colors.forEach(function (color) {
+      var color_rec = document.createElement('button');
+      color_rec.className = "color_picker_button";
+      color_rec.style.backgroundColor = color;
+      color_rec.style.width = "35px";
+      color_rec.style.height = "30px";
+      color_rec.style.margin = "1px";
+      color_rec.style.borderRadius = "2px";
+      color_rec.style.border = "1px solid #000";
+      color_rec.style.backgroundImage = "none";
+      color_rec.addEventListener('click', function () {
+        //map.setPaintProperty(layer.value, 'fill-color', color);
+        layerSetcolor(el,layer,color);
+        document.getElementById("color_picker_input").value = color;
+      });
+      colorpicker.appendChild(document.createElement('div').appendChild(color_rec));
+    });
+    // colorpicker.innerHTML += `
+    // <div id="color_picker_input">
+    // <input type="color" id="body" name="body" onchange="layerSetcolor(el,layer,color);" value=`+rgb2hex(el.style.color)+`>
+    // </div>`;
+
+  }
+
+
+  //return colorpicker;
+}
+
+function hidecolorPicker() {
+  colorpicker = document.getElementById('color_picker');
+  colorpicker.style.display = "none";
+}
+
+function layerSetcolor(el,layer,color) {
+  //map.setPaintProperty(layer.value, 'fill-color', color);
+  el.style.color = color;
+  
+  switch(el.className) {
+    case "icon-minus":
+      // line
+      map.setPaintProperty(layer, 'line-color', color);
+      break;
+    case "icon-stop":
+      // fill area
+      map.setPaintProperty(layer, 'fill-color', color);
+      break;
+    case "icon-circle":
+      // point
+      map.setPaintProperty(layer, 'circle-color', color);
+      break;
+    default:
+      console.log("layer type is unrecognized!")
+  }
+        
+  console.log("set color",layer,color,el.className);  
 }

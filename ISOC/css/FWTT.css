@@ -692,7 +692,7 @@ red:hover {
   width:123px;
   height: 30px;
   padding: 0px; 
-  margin: 5px 0px 45px 10px; 
+  margin: 5px 0px 46px 10px; 
   position: relative; 
   /*left: 0px; 
   top: 0px; */
@@ -799,7 +799,7 @@ red:hover {
 #map_style_menu_outline {
   height: auto;
   left: 0px;
-  top: 184px;
+  top: 185px;
   position: absolute;
   padding: 10px;
   padding-left: 0px;

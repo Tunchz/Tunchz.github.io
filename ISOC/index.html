@@ -156,10 +156,10 @@
           <div id="map_style_menu_outline" style="display: none" onmouseenter="switchStyleMenu(true)" onmouseleave="switchStyleMenu(false)"  >
             <div id="map_style_menu" >
               <div style="/*margin: 5px 17px 0px 5px; padding-top:3px;*/" onclick="switchStyleMenu(false)" >
-                <input id="satellite-streets-v11" type="radio" name="rtoggle" value="sattellite-streets" checked="checked" />
-                <label for="satellite-streets-v11">sattellite-streets </label><br>                
-                <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" />
-                <label for="satellite-v9">satellite </label><br>
+                <input id="satellite-v9" type="radio" name="rtoggle" value="sattellite-streets" checked="checked" />
+                <label for="satellite-v9">sattellite</label><br>                
+                <input id="satellite-streets-v11" type="radio" name="rtoggle" value="satellite" />
+                <label for="satellite-streets-v11">satellite-streets </label><br>
                 <input id="streets-v11" type="radio" name="rtoggle" value="streets" />
                 <label for="streets-v11">streets </label><br>
                 <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors" />
@@ -242,8 +242,8 @@
       //style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',  // the outdoors-v10 style but without Hillshade layers
       //style: 'mapbox://styles/mapbox/outdoors-v10',
       //style: 'mapbox://styles/mapbox/dark-v10',
-      style: 'mapbox://styles/mapbox/satellite-v9',
-      //style: 'mapbox://styles/mapbox/satellite-streets-v11',
+      //style: 'mapbox://styles/mapbox/satellite-v9',
+      style: 'mapbox://styles/mapbox/satellite-streets-v11',
       //style: 'mapbox://styles/mapbox/light-v10',
 
       // Custom map style
@@ -313,6 +313,7 @@
     var inputs = layerList.getElementsByTagName('input');
     var currentLayer = "satellite-streets-v11";
     var mapEvent = 'style.load'; //'idle'; //'styledata';
+    var firstrun = true;
      
     $("#map_style_menu_button").appendTo(".mapboxgl-ctrl-top-left");
     $("#map_style_menu_outline").appendTo(".mapboxgl-ctrl-top-left");
@@ -455,7 +456,7 @@
           'visibility': 'visible'
         },
         'paint': {
-            'circle-color': '#fff',
+            'circle-color': '#fff',  //set color #0000 means no color layer
             'circle-radius': 1,
             'circle-opacity':0
         }
@@ -475,7 +476,7 @@
           'visibility': 'visible'
         },
         'paint': {
-            'circle-color': '#fff',
+            'circle-color': '#fff',  //set color #0000 means no color layer
             'circle-radius': 1,
             'circle-opacity':0
         }
@@ -580,7 +581,7 @@
       });
 
       map.addLayer({
-        'id': 'water_l',
+        'id': 'แหล่งน้ำขนาดใหญ่',
         'type': 'fill',
         'source': 'water_l',
         'layout': {
@@ -594,7 +595,7 @@
       });
 
       map.addLayer({
-        'id': 'water_m',
+        'id': 'แหล่งน้ำขนาดกลาง',
         'type': 'fill',
         'source': 'water_m',
         'layout': {
@@ -697,8 +698,8 @@
           },
 
           {
-            name: "แหล่งน้ำขนาดใหญ่",
-            id: "water_l",
+            // name: "แหล่งน้ำขนาดใหญ่",
+            id: "แหล่งน้ำขนาดใหญ่",
             hidden: false,
             group: "น้ำ",
             directory: "สิ่งแวดล้อม",            
@@ -729,8 +730,8 @@
           },
 
           {
-            name: "แหล่งน้ำขนาดกลาง",
-            id: "water_m",
+            // name: "แหล่งน้ำขนาดกลาง",
+            id: "แหล่งน้ำขนาดกลาง",
             hidden: false,
             group: "น้ำ",
             directory: "สิ่งแวดล้อม",            
@@ -970,7 +971,7 @@
 
       setTimeout(function (){
 
-        map.addControl(new layerControlGrouped(config), "top-left");
+        if (!firstrun) map.addControl(new layerControlGrouped(config), "top-left");
 
       }, 800);
 
