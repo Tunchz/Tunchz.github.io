@@ -692,7 +692,7 @@ red:hover {
   width:123px;
   height: 30px;
   padding: 0px; 
-  margin: 5px 0px 46px 10px; 
+  margin: 0px 0px 51px 5px; 
   position: relative; 
   /*left: 0px; 
   top: 0px; */
@@ -1129,4 +1129,41 @@ option {
     .detailTable>tbody>tr>.icon-circle {
       width: 20px;
     }
+
+/*// Header-Menu*/
+#header-menu-container {
+  position:absolute;
+  width: 100vw;
+  top:0;
+  left:auto;
+  right:auto;
+  margin: 0 auto;
+}
+
+#header-menu {
+  width:214px;
+  height:30px;
+  /*position:absolute;*/
+  margin: 5px auto;
+
+  border-radius: 15px;
+  border:2px solid #fff;
+}
+
+.header-menu-button {
+  width: 70px;
+  height: 26px;
+  color:#2a58c3;
+  margin:0;
+  position:relative;
+  display: inline-block;
+  float:left;
+  background-color: #fff0;
+  font-family: Serithai;
+  font-size: 14px;
+  font-weight: bold;
+  padding-top:4px;
+  cursor:pointer;
+  pointer-events: auto;
+}
 

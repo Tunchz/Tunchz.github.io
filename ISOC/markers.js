@@ -54,6 +54,7 @@ initialize();
 var shortnoti = false,
     rightpanel_isopen = true;
 switchRightpanel();
+switchHeadermenu(1);
 
 
 //load_map_layers();
@@ -72,7 +73,7 @@ function resizeAdjust() {
       document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.bottom = ($("#wholecontent").height()*0.40+60).toString()+"px";
       
       document.getElementById("data-panel").style.height = ($("#wholecontent").height()*0.40).toString()+"px";
-      map_Yoffset = -$("#data-panel").height()/2 - 20;
+      map_Yoffset = -$("#data-panel").height()/2;// - 20;
     } else {
 
       document.getElementById("data-panel").style.display = "none";
@@ -80,7 +81,7 @@ function resizeAdjust() {
       //document.getElementById("menu-container-bottom-right").style.bottom = "75px";
       document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.bottom = "75px";
       
-      map_Yoffset = -40
+      map_Yoffset = -20; //-40;
     }
     map_Xoffset = 0
 
@@ -122,7 +123,7 @@ function resizeAdjust() {
       document.getElementById("data-panel").style.display = "none";
       map_Xoffset = -20;
     }
-    map_Yoffset = -30;
+    map_Yoffset = 10; //-30;
 
     $("#data-panel").appendTo("#notification-container-right");
 
@@ -2671,6 +2672,24 @@ function rgb2hex(rgb) {
 
 function hex(x) {
   return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+}
+
+function switchHeadermenu(op) {
+  console.log(op);
+  for (m=0;m<3;m++) {
+    if (m+1 == op) {
+      document.getElementById("headermenu"+(m+1)).style.backgroundColor = "#fff";
+      document.getElementById("headermenu"+(m+1)).style.color = "#2a58c3";
+    } else {
+      document.getElementById("headermenu"+(m+1)).style.backgroundColor = "#fff0";
+      document.getElementById("headermenu"+(m+1)).style.color = "#fff";
+    }
+  }
+
+
+
+
+
 }
 
 function showcolorPicker(el) {
