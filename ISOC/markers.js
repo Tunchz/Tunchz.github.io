@@ -133,7 +133,7 @@ function resizeAdjust() {
       document.getElementById("data-panel").style.display = "none";
       map_Xoffset = -20;
     }
-    map_Yoffset = -30; //-30;
+    map_Yoffset = -10; //-30;
 
     $("#data-panel").appendTo("#notification-container-right");
 
@@ -195,6 +195,7 @@ function load_map_layers() {
           // Color of each plan risk
           prov_color[prov_code]={
             'disaster_type':drm_geojson_riskplan.features[i].properties.disaster_type,
+            'disaster_type_id':drm_geojson_riskplan.features[i].properties.disaster_type_id,
             'disaster_id':drm_geojson_riskplan.features[i].properties.disaster_id
           };
         }
@@ -209,10 +210,11 @@ function load_map_layers() {
         for (i = 0; i < map_geojson_riskplan[item].features.length; i++) {
           var prov_c = map_geojson_riskplan[item].features[i].properties.PROVINCE_C;
           map_geojson_riskplan[item].features[i].properties['disaster_type'] = prov_color[prov_c].disaster_type;
+          map_geojson_riskplan[item].features[i].properties['disaster_type_id'] = prov_color[prov_c].disaster_type_id;
           map_geojson_riskplan[item].features[i].properties['disaster_id'] = prov_color[prov_c].disaster_id;
           map_geojson_riskplan[item].features[i].properties['color'] = symbol[item].color;//prov_color[prov_c].color;
           map_geojson_riskplan[item].features[i].properties['opacity'] = symbol[item].opacity;
-          //map_geojson_riskplan[item].features[i].properties['center'] = getCenter(map_geojson_riskplan[item]);
+          map_geojson_riskplan[item].features[i].properties['center'] = getCenter(map_geojson_riskplan[item]);
           
         }      
         // Add map with color province corresponding to risk plan
@@ -283,7 +285,7 @@ function load_map_layers() {
 
 
 function getCenter(data) {
-  var bounds = {}, coords, point, latitude, longitude;
+  var bounds = {}, coords, point, latitude, longitude,center;
   for (var i = 0; i < data.features.length; i++) {
     coords = data.features[i].geometry.coordinates;
 
@@ -298,8 +300,11 @@ function getCenter(data) {
       }
     }
   }
-
-  return [(bounds.xMin+bounds.xMax)/2,(bounds.yMin+bounds.yMax)/2];
+  // center = [0,0];
+  // center[0] = (bounds.xMin+bounds.xMax)/2;
+  // center[1] = (bounds.yMin+bounds.yMax)/2;
+  
+  return {"lng":(bounds.xMin+bounds.xMax)/2, "lat":(bounds.yMin+bounds.yMax)/2};  //[(bounds.xMin+bounds.xMax)/2,(bounds.yMin+bounds.yMax)/2];//
 }
 
 //==Map Polygon================================================================================================
@@ -459,6 +464,21 @@ function map_add_polygon(map_geojson,layername) {
               'ภัย : ' + a1 + '<br>จังหวัด : ' + a2
           )
           .addTo(map);
+        console.log(e.features[0].properties.disaster_type_id,e.features[0].properties.disaster_id);
+        switchUnselectVisibility(e.features[0].properties.disaster_type_id,e.features[0].properties.disaster_id);
+        if (datapanel_isopen == 0) switchDatapanel(1);
+
+        //console.log(JSON.parse(e.features[0].properties.center));
+        map.flyTo({
+          center: JSON.parse(e.features[0].properties.center),
+          offset: [map_Xoffset, map_Yoffset],
+          //zoom : zoom(z), 
+          speed : flyspeed, 
+          curve : 1, 
+          essential: true
+        });
+
+
     });
 
     map.on('mouseenter', layername, function () {
@@ -589,6 +609,7 @@ function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color
         var a2 = e.features[0].properties.level_detail;
         console.log(a1,a2)
         //map.flyTo({center: e.features[0].geometry.coordinates});
+
     });
 
     map.on('mouseenter', layername, function (e) {
@@ -688,6 +709,22 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
         var a1 = e.features[0].properties.disaster_type
         var a2 = e.features[0].properties.level_detail;
         console.log(a1,a2)
+        switchUnselectVisibility(e.features[0].properties.disaster_type_id,e.features[0].properties.disaster_id);
+        if (datapanel_isopen == 0) switchDatapanel(1);
+        //console.log(e.features[0].geometry.coordinates.slice());
+        map.flyTo({
+          center: e.features[0].geometry.coordinates.slice(),
+          offset: [map_Xoffset, map_Yoffset],
+          //zoom : zoom(z), 
+          speed : flyspeed, 
+          curve : 1, 
+          essential: true
+        });
+
+
+
+
+
     });
 
     map.on('mouseenter', layername, function (e) {
