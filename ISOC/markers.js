@@ -49,12 +49,13 @@ d3.select('#table-container').append('table').attr("id","table_image");
 // d3.select('#vertical-table-markers-container').append('table').attr("id","vertical_table_image_marker");
 
 
-initialize();
+//initialize();
 
 var shortnoti = false,
-    rightpanel_isopen = true;
-switchRightpanel();
-switchHeadermenu(1);
+    datapanel_isopen = 0,
+    datapanel = {xw:0.33,xh:0.4};
+switchDatapanel(0);
+//switchHeadermenu(1);
 
 
 //load_map_layers();
@@ -63,16 +64,17 @@ function resizeAdjust() {
   //console.log($("#video-container").width(),$("#video-container").height())
 
   if($("#wholecontent").width() < 768){
-
+    document.getElementById("Text1_").style.display = "none";
+    document.getElementById("header-menu-container").style.width = "100vw";
     document.getElementById("data-panel").style.width = "100%";
 
-    if (rightpanel_isopen) {
+    if (datapanel_isopen>0) {
       document.getElementById("data-panel").style.display = "block";  
       document.getElementById("vertical-table-container-MAP").style.height = "57px";
       //document.getElementById("menu-container-bottom-right").style.bottom = ($("#wholecontent").height()*0.30+60).toString()+"px";
-      document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.bottom = ($("#wholecontent").height()*0.40+60).toString()+"px";
+      document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.bottom = ($("#wholecontent").height()*datapanel.xh+60).toString()+"px";
       
-      document.getElementById("data-panel").style.height = ($("#wholecontent").height()*0.40).toString()+"px";
+      document.getElementById("data-panel").style.height = ($("#wholecontent").height()*datapanel.xh).toString()+"px";
       map_Yoffset = -$("#data-panel").height()/2;// - 20;
     } else {
 
@@ -93,7 +95,7 @@ function resizeAdjust() {
 
     $("#lp-button").appendTo("#menu-container-bottom-right");
     $("#bb-button").appendTo("#menu-container-bottom-right");
-    if (!rightpanel_isopen) icon = "<icon class='icon-menu'></icon>"; else icon = "<icon class='icon-ellipsis'></icon>";
+    if (!datapanel_isopen) icon = "<icon class='icon-menu'></icon>"; else icon = "<icon class='icon-ellipsis'></icon>";
 
     if (orientation == 0) {
       map.flyTo({
@@ -108,18 +110,25 @@ function resizeAdjust() {
     }
 
   } else {
+    document.getElementById("Text1_").style.display = "block";
     document.getElementById("map-panel").style.width = "100%";
     document.getElementById("data-panel").style.height = "100%";
     document.getElementById("notification-container-bottom").style.display = "none";
     document.getElementById("notification-container-right").style.display = "block";
 
-    if (rightpanel_isopen) {
+    if (datapanel_isopen>0) {
+      // if (datapanel_isopen = 1) {
+      //   document.getElementById("header-menu-container").style.width = (100*(1-datapanel.xw)+"vw";
+      // } else {
+      //   document.getElementById("header-menu-container").style.width = "100vw";
+      // }
+      document.getElementById("header-menu-container").style.width = "calc("+(100*(1-datapanel.xw))+"vw - 60px)";
       document.getElementById("data-panel").style.display = "block";  
       //document.getElementById("map-panel").style.width = "100%";
-      document.getElementById("data-panel").style.width = ($("#wholecontent").width()*0.333).toString()+"px";
+      document.getElementById("data-panel").style.width = ($("#wholecontent").width()*datapanel.xw).toString()+"px";
       map_Xoffset = -$("#data-panel").width()/2 - 20;
     } else {
-      //document.getElementById("map-panel").style.width = "100%";
+      document.getElementById("header-menu-container").style.width = "calc(100vw - 60px)";
       document.getElementById("data-panel").style.display = "none";
       map_Xoffset = -20;
     }
@@ -129,7 +138,7 @@ function resizeAdjust() {
 
     $("#lp-button").appendTo("#menu-container-top-right");
     $("#bb-button").appendTo("#menu-container-top-right");
-    if (!rightpanel_isopen) icon = "<icon class='icon-menu'></icon>"; else icon = "<icon class='icon-ellipsis-vert'></icon>"; 
+    //if (datapanel_isopen=0) icon = "<icon class='icon-menu'></icon>"; else icon = "<icon class='icon-ellipsis-vert'></icon>"; 
 
     if (orientation == 1) {
       map.flyTo({
@@ -146,7 +155,7 @@ function resizeAdjust() {
   }
 
   // Update map menu icon
-  document.getElementById("bb-button").innerHTML = icon;
+  //document.getElementById("bb-button").innerHTML = icon;
 
   map.resize();
 }
@@ -2129,7 +2138,7 @@ function initialize() {
   //menubtn.style.padding = "0px 0px";
   menubtn.setAttribute('type', 'button');
   //stopbtn.setAttribute('onclick', 'inputMenu()');
-  menubtn.setAttribute('onclick', 'switchRightpanel()');
+  menubtn.setAttribute('onclick', 'switchDatapanel()');
   document.getElementById("menu-container-top-right").append(menubtn);
   //document.getElementById("stop-button").innerHTML = "☰⌷↹■⌂";
 
@@ -2176,8 +2185,40 @@ function switchShortNoti() {
 
 }
 
-function switchRightpanel() {
-  rightpanel_isopen = !rightpanel_isopen;
+function switchDatapanel(op) {
+  switch(op) {  
+    case 0:
+      // map layout
+      datapanel_isopen = 0;
+      break;
+    case 1:
+      // map&table layout
+      datapanel_isopen = 1;
+      datapanel = {xw:0.33,xh:0.4};
+      break;
+    case 2:
+      // table layout
+      datapanel_isopen = 2;
+      datapanel = {xw:0.55,xh:0.85};
+      break;
+    default:
+      console.log("layout type is unrecognized!")
+      datapanel_isopen = !datapanel_isopen;
+  }
+
+  for (m=0;m<3;m++) {
+    if (m == op) {
+      document.getElementById("headermenu"+m).style.backgroundColor = "#fff";
+      document.getElementById("headermenu"+m).style.color = "#2a58c3";
+    } else {
+      document.getElementById("headermenu"+m).style.backgroundColor = "#fff0";
+      document.getElementById("headermenu"+m).style.color = "#fff";
+    }
+  }
+
+
+
+  //datapanel_isopen = !datapanel_isopen;
   resizeAdjust()  
   map.flyTo({
     center: [101.6673626,13.2808669],
@@ -2197,11 +2238,11 @@ function switchRightpanel() {
 //     // Move menu buttons position
 //     $("#lp-button").appendTo("#menu-container-bottom-right");
 //     $("#bb-button").appendTo("#menu-container-bottom-right");
-//     if (rightpanel_isopen == 0) icon = '⊼'; else icon = '⊻';
+//     if (datapanel_isopen == 0) icon = '⊼'; else icon = '⊻';
 //   } else {
 //     $("#lp-button").appendTo("#menu-container-top-right");
 //     $("#bb-button").appendTo("#menu-container-top-right");
-//     if (rightpanel_isopen == 0) icon = '<'; else icon = '>';
+//     if (datapanel_isopen == 0) icon = '<'; else icon = '>';
 //   }
 //   document.getElementById("bb-button").innerHTML = icon;//"☷";
 // }
@@ -2684,13 +2725,11 @@ function switchHeadermenu(op) {
       document.getElementById("headermenu"+(m+1)).style.backgroundColor = "#fff0";
       document.getElementById("headermenu"+(m+1)).style.color = "#fff";
     }
+
+
   }
-
-
-
-
-
 }
+
 
 function showcolorPicker(el) {
   console.log("show",el.parentElement,el.style.color);
