@@ -74,8 +74,9 @@ function resizeAdjust() {
       //document.getElementById("menu-container-bottom-right").style.bottom = ($("#wholecontent").height()*0.30+60).toString()+"px";
       document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.bottom = ($("#wholecontent").height()*datapanel.xh+60).toString()+"px";
       
-      document.getElementById("data-panel").style.height = ($("#wholecontent").height()*datapanel.xh).toString()+"px";
-      map_Yoffset = -$("#data-panel").height()/2;// - 20;
+      //document.getElementById("data-panel").style.height = ($("#wholecontent").height()*datapanel.xh).toString()+"px";
+      document.getElementById("data-panel").style.height = (datapanel_isopen==1) ?  (100*datapanel.xh)+"vh" : "calc(100vh - 180px)";
+      map_Yoffset = -$("#data-panel").height()/2+10;// - 20;
     } else {
 
       document.getElementById("data-panel").style.display = "none";
@@ -83,7 +84,7 @@ function resizeAdjust() {
       //document.getElementById("menu-container-bottom-right").style.bottom = "75px";
       document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.bottom = "75px";
       
-      map_Yoffset = -20; //-40;
+      map_Yoffset = -40; //-40;
     }
     map_Xoffset = 0
 
@@ -132,7 +133,7 @@ function resizeAdjust() {
       document.getElementById("data-panel").style.display = "none";
       map_Xoffset = -20;
     }
-    map_Yoffset = 10; //-30;
+    map_Yoffset = -30; //-30;
 
     $("#data-panel").appendTo("#notification-container-right");
 
