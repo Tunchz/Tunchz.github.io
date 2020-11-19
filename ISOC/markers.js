@@ -2778,9 +2778,9 @@ function showcolorPicker(el) {
       color_rec.style.opacity = "1";
       color_rec.style.width = "35px";
       color_rec.style.height = "30px";
-      color_rec.style.margin = "1px";
+      color_rec.style.margin = "2px";
       color_rec.style.borderRadius = "2px";
-      color_rec.style.border = "1px solid #000";
+      //color_rec.style.border = "1px solid #000";
       color_rec.style.backgroundImage = "none";
       color_rec.addEventListener('click', function () {
         //map.setPaintProperty(layer.value, 'fill-color', color);
