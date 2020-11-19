@@ -2689,8 +2689,8 @@ function showcolorPicker(el) {
       </div>
     </div>`;    
     colorpicker.style.display = "block";
-    colorpicker.style.top = ((event.pageY - 165) < 0) ? 0 : (event.pageY - 165) + "px";
-    colorpicker.style.left = (event.pageX - 50) + "px";
+    colorpicker.style.top = ((event.pageY - 165) < 0) ? 0 : (event.pageY - 170) + "px";
+    colorpicker.style.left = "2px";//(event.pageX - 50) + "px";
     //colorpicker.innerHTML = content;
     colorpicker.innerHTML += `
     
@@ -2716,6 +2716,7 @@ function showcolorPicker(el) {
       var color_rec = document.createElement('button');
       color_rec.className = "color_picker_button";
       color_rec.style.backgroundColor = color;
+      color_rec.style.opacity = "1";
       color_rec.style.width = "35px";
       color_rec.style.height = "30px";
       color_rec.style.margin = "1px";
@@ -2766,5 +2767,5 @@ function layerSetcolor(el,layer,color) {
       console.log("layer type is unrecognized!")
   }
         
-  console.log("set color",layer,color,el.className);  
+  //console.log("set color",layer,color,el.className);  
 }
