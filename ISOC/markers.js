@@ -75,7 +75,7 @@ function resizeAdjust() {
       document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.bottom = ($("#wholecontent").height()*datapanel.xh+60).toString()+"px";
       
       //document.getElementById("data-panel").style.height = ($("#wholecontent").height()*datapanel.xh).toString()+"px";
-      document.getElementById("data-panel").style.height = (datapanel_isopen==1) ?  (100*datapanel.xh)+"vh" : "calc(100vh - 180px)";
+      document.getElementById("data-panel").style.height = (datapanel_isopen==1) ?  (100*datapanel.xh)+"vh" : ($("#wholecontent").height()-180).toString()+"px";;//"calc(100vh - 180px)";
       map_Yoffset = -$("#data-panel").height()/2+10;// - 20;
     } else {
 
