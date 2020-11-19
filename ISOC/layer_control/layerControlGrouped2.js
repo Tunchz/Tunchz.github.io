@@ -749,5 +749,5 @@ function create_colorPicker() {
   // color_picker.style.zIndex = "110";
   // color_picker.style.visibility = "hidden";
 
-  return `<div id="color_picker" class="color_picker" style="display:none" onmouseleave="hidecolorPicker()" onfocusout="hidecolorPicker()"></div>`; //color_picker;
+  return `<div id="color_picker" class="color_picker" style="display:none" onmouseleave="hidecolorPicker()"></div>`; //color_picker;
 }
