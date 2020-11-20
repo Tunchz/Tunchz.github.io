@@ -142,9 +142,9 @@
 }
 
 .mapboxgl-ctrl-geocoder--icon-close {
-  width: 20px;
-  height: 20px;
-  margin-top: 0px;
+  width: 26px;
+  height: 26px;
+  margin-top: -3px;
   margin-right: 0px;
 }
 
@@ -208,9 +208,9 @@
   }
 
   .mapboxgl-ctrl-geocoder--icon-close {
-    width: 20px;
-    height: 20px;
-    margin-top: 0px;
+    width: 26px;
+    height: 26px;
+    margin-top: -3px;
     margin-right: 0;
   }
 
