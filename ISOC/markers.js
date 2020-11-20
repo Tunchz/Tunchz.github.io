@@ -285,16 +285,17 @@ function load_map_layers() {
 
       display_table_markers(drm);
 
-      setTimeout(function (){
+      // setTimeout(function (){
 
-        var removebutton = document.getElementsByClassName('mgl-layerControl');
-        for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
+      //   // var removebutton = document.getElementsByClassName('mgl-layerControl');
+      //   // for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
 
-        map.setStyle('mapbox://styles/mapbox/satellite-v9');
-        //display_table_markers(drm);
-        firstrun = false;
+      //   // map.deleteAll().getAll();
+      //   // map.setStyle('mapbox://styles/mapbox/satellite-v9');
 
-      }, 1000);
+      //   firstrun = false;
+
+      // }, 500);
 
       
 
@@ -477,48 +478,48 @@ function map_add_polygon(map_geojson,layername) {
         closeOnClick: false
       }*/);
 
-      map.on('click', layername, function (e) {
-          map.getCanvas().style.cursor = 'pointer';
-          //var coordinates = e.features[0].geometry.coordinates.slice();
-          var a1 = e.features[0].properties.disaster_type
-          var a2 = e.features[0].properties.PROVINCE_N;
-           popup
-            .setLngLat(e.lngLat)
-            .setHTML(
-                'ภัย : ' + a1 + '<br>จังหวัด : ' + a2
-            )
-            .addTo(map);
-          console.log(e.features[0].properties.disaster_type_id,e.features[0].properties.disaster_id);
-          switchUnselectVisibility(e.features[0].properties.disaster_type_id,e.features[0].properties.disaster_id);
-          if (datapanel_isopen == 0) switchDatapanel(1);
+      if (firstrun) {
+        map.on('click', layername, function (e) {
+            map.getCanvas().style.cursor = 'pointer';
+            //var coordinates = e.features[0].geometry.coordinates.slice();
+            var a1 = e.features[0].properties.disaster_type
+            var a2 = e.features[0].properties.จังหวัด;
+             popup
+              .setLngLat(e.lngLat)
+              .setHTML(
+                  'ภัย : ' + a1 + '<br>จังหวัด : ' + a2
+              )
+              .addTo(map);
+            //console.log(e.features[0].properties.disaster_type_id,e.features[0].properties.disaster_id);
+            switchUnselectVisibility(e.features[0].properties.disaster_type_id,e.features[0].properties.disaster_id);
+            if (datapanel_isopen == 0) switchDatapanel(1);
 
-          //console.log(JSON.parse(e.features[0].properties.center));
-          centerMap(JSON.parse(e.features[0].properties.center));
+            //console.log(JSON.parse(e.features[0].properties.center));
+            centerMap(JSON.parse(e.features[0].properties.center));
 
-      });
-
-      map.on('mouseenter', layername, function () {
-        map.getCanvas().style.cursor = 'pointer';
-      });
-
-      map.on('mouseleave', layername, function () {
-        map.getCanvas().style.cursor = '';
-        popup.remove();
-      });
-
-      map.on('contextmenu', layername, function (e) {
-        switchUnselectVisibility(e.features[0].properties.disaster_type_id);
-        map.flyTo({
-          center: [101.6673626,13.2808669],
-          offset: [map_Xoffset, map_Yoffset],
-          zoom : 4.8, 
-          speed : flyspeed, 
-          curve : 1, 
-          essential: true
         });
-      });
-      
 
+        map.on('mouseenter', layername, function () {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+
+        map.on('mouseleave', layername, function () {
+          map.getCanvas().style.cursor = '';
+          popup.remove();
+        });
+
+        map.on('contextmenu', layername, function (e) {
+          switchUnselectVisibility(e.features[0].properties.disaster_type_id);
+          map.flyTo({
+            center: [101.6673626,13.2808669],
+            offset: [map_Xoffset, map_Yoffset],
+            zoom : 4.8, 
+            speed : flyspeed, 
+            curve : 1, 
+            essential: true
+          });
+        });
+      }
     });
 
   //console.log("map done")
@@ -730,49 +731,50 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
       closeOnClick: false
     });
 
-    map.on('click', layername, function (e) {
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var a1 = e.features[0].properties.disaster_type
-        var a2 = e.features[0].properties.level_detail;
-        console.log(a1,a2)
-        switchUnselectVisibility(e.features[0].properties.disaster_type_id,e.features[0].properties.disaster_id);
-        if (datapanel_isopen == 0) switchDatapanel(1);
-        //console.log(e.features[0].geometry.coordinates.slice());
-        centerMap(e.features[0].geometry.coordinates.slice());
-    });
+    if (firstrun) {
+      map.on('click', layername, function (e) {
+          var coor = e.features[0].geometry.coordinates.slice();
+          var a1 = e.features[0].properties.disaster_type
+          var a2 = e.features[0].properties.level_detail;
+          //console.log(a1,a2)
+          switchUnselectVisibility(e.features[0].properties.disaster_type_id,e.features[0].properties.disaster_id);
+          if (datapanel_isopen == 0) switchDatapanel(1);
+          //console.log(e.features[0].geometry.coordinates.slice());
+          centerMap({"lng":coor[0],"lat":coor[1]});
+      });
 
-    map.on('mouseenter', layername, function (e) {
-        map.getCanvas().style.cursor = 'pointer';
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var a1 = e.features[0].properties.disaster_type
-        var a2 = e.features[0].properties.level_detail;
-        var a3 = e.features[0].properties.attr
-        var a4 = e.features[0].properties.val;
-         popup
-          .setLngLat(coordinates)
-          .setHTML(
-              'ภัย : ' + a1 + '<br>ระดับ : ' + a2 + '<br>'+ a3 +' : ' + a4
-          )
-          .addTo(map);
-    });
+      map.on('mouseenter', layername, function (e) {
+          map.getCanvas().style.cursor = 'pointer';
+          var coordinates = e.features[0].geometry.coordinates.slice();
+          var a1 = e.features[0].properties.disaster_type
+          var a2 = e.features[0].properties.level_detail;
+          var a3 = e.features[0].properties.attr
+          var a4 = e.features[0].properties.val;
+           popup
+            .setLngLat(coordinates)
+            .setHTML(
+                'ภัย : ' + a1 + '<br>ระดับ : ' + a2 + '<br>'+ a3 +' : ' + a4
+            )
+            .addTo(map);
+      });
 
-    map.on('mouseleave', layername, function () {
-      map.getCanvas().style.cursor = '';
-      popup.remove();
-    });
+      map.on('mouseleave', layername, function () {
+        map.getCanvas().style.cursor = '';
+        popup.remove();
+      });
 
-    map.on('contextmenu', layername, function (e) {
-      switchUnselectVisibility(e.features[0].properties.disaster_type_id);
-      map.flyTo({
-        center: [101.6673626,13.2808669],
-        offset: [map_Xoffset, map_Yoffset],
-        zoom : 4.8, 
-        speed : flyspeed, 
-        curve : 1, 
-        essential: true
-      });      
-    });
-
+      map.on('contextmenu', layername, function (e) {
+        switchUnselectVisibility(e.features[0].properties.disaster_type_id);
+        map.flyTo({
+          center: [101.6673626,13.2808669],
+          offset: [map_Xoffset, map_Yoffset],
+          zoom : 4.8, 
+          speed : flyspeed, 
+          curve : 1, 
+          essential: true
+        });      
+      });
+    }
   });
 
   //console.log("layer", layername)
@@ -1943,6 +1945,7 @@ function switchZoomMarker(disaster_type_id,disaster_id,iszoomed) {
 
 function switchUnselectVisibility(disaster_type_id,disaster_id) {
 
+  console.log(disaster_type_id,disaster_id);
 
   if (!disaster_id) {
     symbol[disaster_type_id].dbclick = !symbol[disaster_type_id].dbclick;

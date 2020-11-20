@@ -249,8 +249,8 @@
       //style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',  // the outdoors-v10 style but without Hillshade layers
       //style: 'mapbox://styles/mapbox/outdoors-v10',
       //style: 'mapbox://styles/mapbox/dark-v10',
-      //style: 'mapbox://styles/mapbox/satellite-v9',
-      style: 'mapbox://styles/mapbox/satellite-streets-v11',
+      style: 'mapbox://styles/mapbox/satellite-v9',
+      //style: 'mapbox://styles/mapbox/satellite-streets-v11',
       //style: 'mapbox://styles/mapbox/light-v10',
 
       // Custom map style
@@ -372,13 +372,14 @@
 
 
     function switchLayer(layer) {      
-
+      firstrun = false;
       var layerId = layer.target.id;
       if (layerId != currentLayer) {
 
         var removebutton = document.getElementsByClassName('mgl-layerControl');
         //console.log("length",removebutton.length);
         for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
+
         map.setStyle('mapbox://styles/mapbox/' + layerId);
         currentLayer = layerId;
       }
@@ -444,7 +445,6 @@
     import { layerControlGrouped } from "https://tunchz.github.io/ISOC/layer_control/layerControlGrouped2.js"
 
     var config;
-    //var mapEvent = 'styledata';
 
     load_map_layers();
 
@@ -1017,7 +1017,8 @@
 
       setTimeout(function (){
 
-        if (!firstrun) map.addControl(new layerControlGrouped(config), "top-left");
+        //if (!firstrun) 
+        map.addControl(new layerControlGrouped(config), "top-left");
 
       }, 2000);
 
