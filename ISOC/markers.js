@@ -133,7 +133,7 @@ function resizeAdjust() {
       document.getElementById("data-panel").style.display = "none";
       map_Xoffset = -20;
     }
-    map_Yoffset = -10; //-30;
+    map_Yoffset = 10; //-30;
 
     $("#data-panel").appendTo("#notification-container-right");
 
@@ -444,54 +444,64 @@ function map_add_polygon(map_geojson,layername) {
           }
       });
 
-    // //Filter map layer
-    // map.setFilter('th_prov_bound',["in", "PROVINCE_C", '63','50'])
+      // //Filter map layer
+      // map.setFilter('th_prov_bound',["in", "PROVINCE_C", '63','50'])
 
-    var popup = new mapboxgl.Popup(/*{
-      offset: 10,
-      closeButton: false,
-      closeOnClick: false
-    }*/);
+      var popup = new mapboxgl.Popup(/*{
+        offset: 10,
+        closeButton: false,
+        closeOnClick: false
+      }*/);
 
-    map.on('click', layername, function (e) {
+      map.on('click', layername, function (e) {
+          map.getCanvas().style.cursor = 'pointer';
+          //var coordinates = e.features[0].geometry.coordinates.slice();
+          var a1 = e.features[0].properties.disaster_type
+          var a2 = e.features[0].properties.PROVINCE_N;
+           popup
+            .setLngLat(e.lngLat)
+            .setHTML(
+                'ภัย : ' + a1 + '<br>จังหวัด : ' + a2
+            )
+            .addTo(map);
+          console.log(e.features[0].properties.disaster_type_id,e.features[0].properties.disaster_id);
+          switchUnselectVisibility(e.features[0].properties.disaster_type_id,e.features[0].properties.disaster_id);
+          if (datapanel_isopen == 0) switchDatapanel(1);
+
+          //console.log(JSON.parse(e.features[0].properties.center));
+          map.flyTo({
+            center: JSON.parse(e.features[0].properties.center),
+            offset: [map_Xoffset, map_Yoffset],
+            //zoom : zoom(z), 
+            speed : flyspeed, 
+            curve : 1, 
+            essential: true
+          });
+
+
+      });
+
+      map.on('mouseenter', layername, function () {
         map.getCanvas().style.cursor = 'pointer';
-        //var coordinates = e.features[0].geometry.coordinates.slice();
-        var a1 = e.features[0].properties.disaster_type
-        var a2 = e.features[0].properties.PROVINCE_N;
-         popup
-          .setLngLat(e.lngLat)
-          .setHTML(
-              'ภัย : ' + a1 + '<br>จังหวัด : ' + a2
-          )
-          .addTo(map);
-        console.log(e.features[0].properties.disaster_type_id,e.features[0].properties.disaster_id);
-        switchUnselectVisibility(e.features[0].properties.disaster_type_id,e.features[0].properties.disaster_id);
-        if (datapanel_isopen == 0) switchDatapanel(1);
+      });
 
-        //console.log(JSON.parse(e.features[0].properties.center));
+      map.on('mouseleave', layername, function () {
+        map.getCanvas().style.cursor = '';
+        popup.remove();
+      });
+
+      map.on('contextmenu', layername, function (e) {
+        switchUnselectVisibility(e.features[0].properties.disaster_type_id);
         map.flyTo({
-          center: JSON.parse(e.features[0].properties.center),
+          center: [101.6673626,13.2808669],
           offset: [map_Xoffset, map_Yoffset],
-          //zoom : zoom(z), 
+          zoom : 4.8, 
           speed : flyspeed, 
           curve : 1, 
           essential: true
         });
-
-
-    });
-
-    map.on('mouseenter', layername, function () {
-      map.getCanvas().style.cursor = 'pointer';
-    });
-
-    map.on('mouseleave', layername, function () {
-      map.getCanvas().style.cursor = '';
-      popup.remove();
-    });
-
-
-
+      });
+      
 
     });
 
@@ -747,6 +757,17 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
       popup.remove();
     });
 
+    map.on('contextmenu', layername, function (e) {
+      switchUnselectVisibility(e.features[0].properties.disaster_type_id);
+      map.flyTo({
+        center: [101.6673626,13.2808669],
+        offset: [map_Xoffset, map_Yoffset],
+        zoom : 4.8, 
+        speed : flyspeed, 
+        curve : 1, 
+        essential: true
+      });      
+    });
 
   });
 
@@ -1791,6 +1812,15 @@ function tabulateimg(data, columns) {
       })
       .on('contextmenu', function(e) { 
         //switchLayerVisibility(e.disaster_type_id);
+        switchUnselectVisibility(e.disaster_type_id);
+        map.flyTo({
+          center: [101.6673626,13.2808669],
+          offset: [map_Xoffset, map_Yoffset],
+          zoom : 4.8, 
+          speed : flyspeed, 
+          curve : 1, 
+          essential: true
+        });        
       });
 
 
@@ -2770,7 +2800,7 @@ function switchHeadermenu(op) {
 
 
 function showcolorPicker(el) {
-  console.log("show",el.parentElement,el.style.color);
+  //console.log("show",el.parentElement,el.style.color);
 
   layer = el.parentElement.textContent;
 
@@ -2813,8 +2843,8 @@ function showcolorPicker(el) {
       color_rec.className = "color_picker_button";
       color_rec.style.backgroundColor = color;
       color_rec.style.opacity = "1";
-      color_rec.style.width = "35px";
-      color_rec.style.height = "30px";
+      color_rec.style.width = "33px";
+      color_rec.style.height = "28px";
       color_rec.style.margin = "2px";
       color_rec.style.borderRadius = "2px";
       //color_rec.style.border = "1px solid #000";

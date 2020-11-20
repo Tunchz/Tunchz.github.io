@@ -1171,3 +1171,7 @@ option {
   pointer-events: auto;
 }
 
+input[type="color" i] {
+  /*border-color:#fff;*/
+  border-width: 0px;
+}
