@@ -34,7 +34,7 @@
             <div id="header-menu" align="center">
               <span id="home-toggle-icon"><icon class="icon-home"></icon></span>
               <div id="headermenu2" class="header-menu-button" onclick="switchDatapanel(2)" style="border-top-left-radius: 15px;border-bottom-left-radius: 15px;">ตาราง</div>
-              <div id="headermenu1" class="header-menu-button" onclick="switchDatapanel(1)"><icon class='icon-circle'></icon> | <icon class='icon-stop'></icon></div>
+              <div id="headermenu1" class="header-menu-button" onclick="switchDatapanel(1)">สมดุล</div>
               <div id="headermenu0" class="header-menu-button" onclick="switchDatapanel(0)" style="border-top-right-radius: 15px;border-bottom-right-radius: 15px;">แผนที่</div>
               <span id="geocoder-toggle-icon"><icon class="icon-search"></icon></span>
             </div>
@@ -232,8 +232,9 @@
     var formatDateTime = d3.time.format("%d %B %Y %H:%M:%S");
 
     //---- Mapbox GL Initialization--------
-    var z=4;  //default zoom level 0-4
-    var flyspeed = 0.8;
+    var z=4,  //default zoom level 0-4
+        flyspeed = 0.8,
+        mapcenter = {"lng":101.6673626,"lat":13.2808669};
 
     mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg';  //from mapbox
     //mapboxgl.accessToken ="pk.eyJ1IjoiYTEwayIsImEiOiJjaWdyMmVrazcwMXpsdTZtMThscWtiOTJtIn0.-A76dzJ0vsKULJdDxGvVXg";
@@ -280,7 +281,7 @@
 
 
       container: 'map', // container id
-      center: [101.6673626,13.2808669],
+      center: mapcenter,
       //center: [13.79,53.545],
       minZoom: 0.3,
       maxZoom: 20,
@@ -319,8 +320,10 @@
     });
     $('#home-toggle-icon').on('click', function(){
       // reset zoom and map center
+      resize = 1;
+      mapcenter = {"lng":101.6673626,"lat":13.2808669};
       map.flyTo({
-        center: [101.6673626,13.2808669],
+        center: mapcenter,
         offset: [map_Xoffset, map_Yoffset],
         zoom : 4.8, 
         speed : flyspeed, 
@@ -1009,7 +1012,7 @@
 
         if (!firstrun) map.addControl(new layerControlGrouped(config), "top-left");
 
-      }, 800);
+      }, 2000);
 
 
 

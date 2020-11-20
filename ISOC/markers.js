@@ -39,8 +39,12 @@ var drm_geojson,disaster_risk_list,disaster_risk_list_summary,
     zoom = 2,
     map_Xoffset = 0,
     map_Yoffset = 0,
-    orientation=0;
-
+    orientation=0,
+    shortnoti = false,
+    datapanel_isopen = 0,
+    resize = 0,
+    move_start = 0,
+    datapanel = {xw:0.4,xh:0.4};
 //var isonMobile = onMobile();
 
 
@@ -51,19 +55,32 @@ d3.select('#table-container').append('table').attr("id","table_image");
 
 //initialize();
 
-var shortnoti = false,
-    datapanel_isopen = 0,
-    datapanel = {xw:0.33,xh:0.4};
 switchDatapanel(0);
 //switchHeadermenu(1);
+map.on('movestart', function (){
+  if (resize == 0) move_start = 1;
+});
 
-
-//load_map_layers();
+map.on('moveend', function (){  
+  if (resize == 0 && move_start == 1) {
+    console.log("move");
+  } else {
+    setTimeout(function (){
+      resize = 0; 
+      move_start = 0;
+    }, 300);    
+  }
+});
 
 function resizeAdjust() {
+  resize = 1;
   //console.log($("#video-container").width(),$("#video-container").height())
+  // mapcenter = map.getCenter({offset: [-map_Xoffset, -map_Yoffset]});
+  // console.log(mapcenter);
+  // mapcenter.lng += map_Xoffset;
+  // mapcenter.lat += map_Yoffset;
 
-  if($("#wholecontent").width() < 768){
+  if($("#wholecontent").width() < 768) {
     document.getElementById("Text1_").style.display = "none";
     document.getElementById("header-menu-container").style.width = "100vw";
     document.getElementById("data-panel").style.width = "100%";
@@ -75,7 +92,7 @@ function resizeAdjust() {
       document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.bottom = ($("#wholecontent").height()*datapanel.xh+60).toString()+"px";
       
       //document.getElementById("data-panel").style.height = ($("#wholecontent").height()*datapanel.xh).toString()+"px";
-      document.getElementById("data-panel").style.height = (datapanel_isopen==1) ?  (100*datapanel.xh)+"vh" : ($("#wholecontent").height()-280).toString()+"px";;//"calc(100vh - 180px)";
+      document.getElementById("data-panel").style.height = (datapanel_isopen==1) ?  (100*datapanel.xh)+"vh" : ($("#wholecontent").height()-200).toString()+"px";;//"calc(100vh - 180px)";
       map_Yoffset = -$("#data-panel").height()/2+10;// - 20;
     } else {
 
@@ -99,17 +116,17 @@ function resizeAdjust() {
     if (!datapanel_isopen) icon = "<icon class='icon-menu'></icon>"; else icon = "<icon class='icon-ellipsis'></icon>";
 
     if (orientation == 0) {
+      //console.log("switch to portrait");
       map.flyTo({
-        center: [101.6673626,13.2808669],
+        center: mapcenter, //[101.6673626,13.2808669],
         offset: [map_Xoffset, map_Yoffset],
         //zoom : zoom(z), 
         //speed : flyspeed, 
         //curve : 1, 
-        //essential: true
+        essential: true
       });
-      orientation = 1;
     }
-
+    orientation = 1;
   } else {
     document.getElementById("Text1_").style.display = "block";
     document.getElementById("map-panel").style.width = "100%";
@@ -142,17 +159,17 @@ function resizeAdjust() {
     //if (datapanel_isopen=0) icon = "<icon class='icon-menu'></icon>"; else icon = "<icon class='icon-ellipsis-vert'></icon>"; 
 
     if (orientation == 1) {
+      //console.log("switch to lanscape");
       map.flyTo({
-        center: [101.6673626,13.2808669],
+        center: mapcenter,//[101.6673626,13.2808669],
         offset: [map_Xoffset, map_Yoffset],
         //zoom : zoom(z), 
         //speed : flyspeed, 
         //curve : 1, 
-        //essential: true
+        essential: true
       });
-      orientation = 0;
     }
-
+    orientation = 0;
   }
 
   // Update map menu icon
@@ -469,15 +486,7 @@ function map_add_polygon(map_geojson,layername) {
           if (datapanel_isopen == 0) switchDatapanel(1);
 
           //console.log(JSON.parse(e.features[0].properties.center));
-          map.flyTo({
-            center: JSON.parse(e.features[0].properties.center),
-            offset: [map_Xoffset, map_Yoffset],
-            //zoom : zoom(z), 
-            speed : flyspeed, 
-            curve : 1, 
-            essential: true
-          });
-
+          centerMap(JSON.parse(e.features[0].properties.center));
 
       });
 
@@ -722,19 +731,7 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
         switchUnselectVisibility(e.features[0].properties.disaster_type_id,e.features[0].properties.disaster_id);
         if (datapanel_isopen == 0) switchDatapanel(1);
         //console.log(e.features[0].geometry.coordinates.slice());
-        map.flyTo({
-          center: e.features[0].geometry.coordinates.slice(),
-          offset: [map_Xoffset, map_Yoffset],
-          //zoom : zoom(z), 
-          speed : flyspeed, 
-          curve : 1, 
-          essential: true
-        });
-
-
-
-
-
+        centerMap(e.features[0].geometry.coordinates.slice());
     });
 
     map.on('mouseenter', layername, function (e) {
@@ -1785,24 +1782,11 @@ function tabulateimg(data, columns) {
       })
       .on('click', function(e) { 
         if (e.disaster_type_id < 90) {
-          map.flyTo({
-            center: ($(drm_geojson.features).filter(function (i,n){return n.properties.disaster_id == e.disaster_id}))[0].geometry.coordinates,
-            offset: [map_Xoffset, map_Yoffset],
-            //zoom : zoom(z), 
-            speed : flyspeed, 
-            curve : 1, 
-            essential: true
-          });
+          var coor = ($(drm_geojson.features).filter(function (i,n){return n.properties.disaster_id == e.disaster_id}))[0].geometry.coordinates;
+          centerMap({"lng":coor[0],"lat":coor[1]});
         } else {
           //zoomtoPolygon(map_geojson_riskplan[e.disaster_type_id].features[0].geometry.coordinates,false);
-          map.flyTo({
-            center: e.center,//map_geojson_riskplan[e.disaster_type_id].features[0].properties.center,
-            offset: [map_Xoffset, map_Yoffset],
-            //zoom : zoom(z), 
-            speed : flyspeed, 
-            curve : 1, 
-            essential: true
-          });
+          centerMap(e.center);
           //console.log(e.center);
         }
       })
@@ -1845,7 +1829,18 @@ function tabulateimg(data, columns) {
 //   if (!zoom) map.setZoom(currentzoom)
 // }
 
-
+function centerMap(lnglat) {
+  resize = 1;
+  mapcenter = lnglat;
+  map.flyTo({
+    center: lnglat,
+    offset: [map_Xoffset, map_Yoffset],
+    //zoom : zoom(z), 
+    speed : flyspeed, 
+    curve : 1, 
+    essential: true
+  }); 
+}
 function switchZoomLayer(disaster_type_id,iszoomed) {
   
   if (iszoomed) {
@@ -2262,7 +2257,7 @@ function switchDatapanel(op) {
     case 1:
       // map&table layout
       datapanel_isopen = 1;
-      datapanel = {xw:0.33,xh:0.4};
+      datapanel = {xw:0.4,xh:0.4};
       break;
     case 2:
       // table layout
@@ -2289,7 +2284,7 @@ function switchDatapanel(op) {
   //datapanel_isopen = !datapanel_isopen;
   resizeAdjust()  
   map.flyTo({
-    center: [101.6673626,13.2808669],
+    center: mapcenter, //[101.6673626,13.2808669],
     offset: [map_Xoffset, map_Yoffset],
     //zoom : zoom(z), 
     speed : flyspeed, 
