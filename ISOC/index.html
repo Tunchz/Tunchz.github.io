@@ -32,6 +32,7 @@
           <div id="map" class='blue'></div>
           <div id='header-menu-container'>
             <div id="header-menu" align="center">
+              <span id="home-toggle-icon"><icon class="icon-home"></icon></span>
               <div id="headermenu2" class="header-menu-button" onclick="switchDatapanel(2)" style="border-top-left-radius: 15px;border-bottom-left-radius: 15px;">ตาราง</div>
               <div id="headermenu1" class="header-menu-button" onclick="switchDatapanel(1)"><icon class='icon-circle'></icon> | <icon class='icon-stop'></icon></div>
               <div id="headermenu0" class="header-menu-button" onclick="switchDatapanel(0)" style="border-top-right-radius: 15px;border-bottom-right-radius: 15px;">แผนที่</div>
@@ -44,7 +45,7 @@
               <img id = "logo" src = 'img/isoc.png' style = "padding: 5px; width : 40px; height : 40px;"></img>
             </div>
             <div id = "title-container" class = "col-xs-9 height100p" style = "">
-              <div id = "Text1_" class = "col-xs-8 height100p" style = "padding: 0px 0px 0px 5px;margin:0px;margin-top: 10px; max-width: 65px; ">
+              <div id = "Text1_" class = "col-xs-8 height100p" style = "padding: 0px 0px 0px 5px;margin:0px;margin-top: 10px; max-width: 65px; display:none;">
                 <span style="font-family: Impact;font-size: 30px; color: #fff;text-shadow: 0px 0px 3px #777;">DRM </span>
               </div>
               <div id = "Text2_" class = "col-xs-4 height100p" style = "pointer-events: auto;display: flex;justify-content: left; align-items: center; padding : 11px 0px 0px 5px;">
@@ -310,11 +311,24 @@
       (el.style.display == "none") ? el.style.display = "block" : el.style.display = "none";
     });
     $('#geocoder').focusout(function(){
-      if (document.getElementsByClassName("suggestions")[0].style.display == 'none') document.getElementById("geocoder").style.display = "none";
+      if (document.getElementsByClassName("suggestions")[0].style.display == 'none') {       
+        setTimeout(function (){
+          document.getElementById("geocoder").style.display = "none";
+        }, 200);
+      }
     });
+    $('#home-toggle-icon').on('click', function(){
+      // reset zoom and map center
+      map.flyTo({
+        center: [101.6673626,13.2808669],
+        offset: [map_Xoffset, map_Yoffset],
+        zoom : 4.8, 
+        speed : flyspeed, 
+        curve : 1, 
+        essential: true
+      });   
+    });    
 
-
-    //document.getElementById("geocoder").style.display = "none";
 
     // disable map rotation using touch rotation gesture
     //map.touchZoomRotate.disableRotation();
