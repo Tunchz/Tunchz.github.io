@@ -74,8 +74,8 @@
     width: 29px;
     height: 29px;
     overflow: hidden;
-    /*background-image: url("https://icongr.am/material/layers.svg");*/
-    background-image: url("layers.svg");
+    background-image: url("https://icongr.am/material/layers.svg");
+    /*background-image: url("layers.svg");*/
     background-size: cover;
     background-position: center;
     font-family: Serithai;
