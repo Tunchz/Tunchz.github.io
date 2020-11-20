@@ -2798,6 +2798,14 @@ function switchHeadermenu(op) {
   }
 }
 
+// function hidegeocoderserchbar() {
+//   console.log("geocoder hide");
+//   $('div.password-suggestions').hide();
+// }
+
+
+
+
 
 function showcolorPicker(el) {
   //console.log("show",el.parentElement,el.style.color);

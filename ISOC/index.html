@@ -35,7 +35,9 @@
               <div id="headermenu2" class="header-menu-button" onclick="switchDatapanel(2)" style="border-top-left-radius: 15px;border-bottom-left-radius: 15px;">ตาราง</div>
               <div id="headermenu1" class="header-menu-button" onclick="switchDatapanel(1)"><icon class='icon-circle'></icon> | <icon class='icon-stop'></icon></div>
               <div id="headermenu0" class="header-menu-button" onclick="switchDatapanel(0)" style="border-top-right-radius: 15px;border-bottom-right-radius: 15px;">แผนที่</div>
+              <span id="geocoder-toggle-icon"><icon class="icon-search"></icon></span>
             </div>
+            <div id="geocoder" class="geocoder" style="display: none;"></div>
           </div>
           <div id='header-container' class='map_addon_top_left'>
             <div id = "logo-container" class = "col-xs-3" style = "display: flex;justify-content: center; align-items: center;">
@@ -281,7 +283,7 @@
       //center: [13.79,53.545],
       minZoom: 0.3,
       maxZoom: 20,
-      zoom: 4.7,
+      zoom: 4.8,
       pitch: 0,
       // pitch: 90,
       //bearing: -17.6,
@@ -297,6 +299,22 @@
     // map.addControl(new MapboxGeocoder({
     //   accessToken: mapboxgl.accessToken
     // }), 'top-left');
+    var geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      //marker: {color: 'blue'},
+      mapboxgl: mapboxgl
+    });
+    document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+    $('#geocoder-toggle-icon').on('click', function(){
+      el = document.getElementById("geocoder");
+      (el.style.display == "none") ? el.style.display = "block" : el.style.display = "none";
+    });
+    $('#geocoder').focusout(function(){
+      if (document.getElementsByClassName("suggestions")[0].style.display == 'none') document.getElementById("geocoder").style.display = "none";
+    });
+
+
+    //document.getElementById("geocoder").style.display = "none";
 
     // disable map rotation using touch rotation gesture
     //map.touchZoomRotate.disableRotation();
@@ -309,8 +327,8 @@
 
 
     // Add geolocate control to the map.
-    //map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true}), 'top-left');
-    map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+    map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true}), 'top-left');
+    map.addControl(new mapboxgl.NavigationControl({showCompass: true,showZoom:false}), 'top-left');
 
 
     var layerList = document.getElementById('map_style_menu');
