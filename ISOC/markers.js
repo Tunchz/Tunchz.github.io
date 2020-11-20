@@ -44,6 +44,7 @@ var drm_geojson,disaster_risk_list,disaster_risk_list_summary,
     datapanel_isopen = 0,
     resize = 0,
     move_start = 0,
+    startlnglat,
     datapanel = {xw:0.4,xh:0.4};
 //var isonMobile = onMobile();
 
@@ -58,12 +59,18 @@ d3.select('#table-container').append('table').attr("id","table_image");
 switchDatapanel(0);
 //switchHeadermenu(1);
 map.on('movestart', function (){
-  if (resize == 0) move_start = 1;
+  if (resize == 0) {
+    move_start = 1;
+    startlnglat = map.getCenter();
+  }
 });
 
 map.on('moveend', function (){  
   if (resize == 0 && move_start == 1) {
-    console.log("move");
+    console.log("move from ",mapcenter);
+    mapcenter.lng += (map.getCenter().lng-startlnglat.lng);
+    mapcenter.lat += (map.getCenter().lat-startlnglat.lat );
+    console.log("to ",mapcenter);
   } else {
     setTimeout(function (){
       resize = 0; 

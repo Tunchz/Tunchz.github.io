@@ -233,7 +233,7 @@
 
     //---- Mapbox GL Initialization--------
     var z=4,  //default zoom level 0-4
-        flyspeed = 0.8,
+        flyspeed = 2,
         mapcenter = {"lng":101.6673626,"lat":13.2808669};
 
     mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg';  //from mapbox
@@ -301,10 +301,17 @@
     // map.addControl(new MapboxGeocoder({
     //   accessToken: mapboxgl.accessToken
     // }), 'top-left');
+
+    // Setting up GeoCoder
     var geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
+      flyTo:false,
       //marker: {color: 'blue'},
       mapboxgl: mapboxgl
+    });
+    geocoder.on('result', function(e) {
+      resize = 1;
+      centerMap({"lng":e.result.center[0],"lat":e.result.center[1]});
     });
     document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
     $('#geocoder-toggle-icon').on('click', function(){
