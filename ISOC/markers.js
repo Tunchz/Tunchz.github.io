@@ -285,17 +285,16 @@ function load_map_layers() {
 
       display_table_markers(drm);
 
-      // setTimeout(function (){
+      setTimeout(function (){
 
-      //   // var removebutton = document.getElementsByClassName('mgl-layerControl');
-      //   // for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
+        var removebutton = document.getElementsByClassName('mgl-layerControl');
+        for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
+ 
+        map.setStyle('mapbox://styles/mapbox/satellite-v9');
 
-      //   // map.deleteAll().getAll();
-      //   // map.setStyle('mapbox://styles/mapbox/satellite-v9');
+        firstrun = false;
 
-      //   firstrun = false;
-
-      // }, 500);
+      }, 1000);
 
       
 
