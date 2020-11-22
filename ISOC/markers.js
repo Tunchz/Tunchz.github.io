@@ -88,7 +88,8 @@ function resizeAdjust() {
   // mapcenter.lat += map_Yoffset;
 
   if($("#wholecontent").width() < 768) {
-    document.getElementById("Text1_").style.display = "none";
+    //document.getElementById("title-container").style.display = "none";
+    document.getElementById("title-container").style.visibility = "hidden";
     document.getElementById("header-menu-container").style.width = "100vw";
     document.getElementById("data-panel").style.width = "100%";
 
@@ -134,7 +135,8 @@ function resizeAdjust() {
     }
     orientation = 1;
   } else {
-    document.getElementById("Text1_").style.display = "block";
+    //document.getElementById("title-container").style.display = "block";
+    document.getElementById("title-container").style.visibility = "visible";
     document.getElementById("map-panel").style.width = "100%";
     document.getElementById("data-panel").style.height = "100%";
     document.getElementById("notification-container-bottom").style.display = "none";
@@ -2817,60 +2819,66 @@ function showcolorPicker(el) {
 
   if (!["แจ้งเตือนภัย","แจ้งเตือนวางแผน"].includes(layer)) {
     colorpicker = document.getElementById('color_picker');
-    colorpicker.innerHTML ="";
-    colorpicker.innerHTML += `
-    <div>
-      <div style="width:100%;height:28px;color:#000;border-bottom:1px solid #0004;margin-bottom:3px;padding-top:10px;">
-        <span style="margin:5px 0 0 3px; top:">`+layer+`</span>
-        <input id="color_picker_input" type="color" id="body" style="float:right;padding:0px;margin:-10px 1px 1px 1px;" value=`+rgb2hex(el.style.color)+`>
-      </div>
-    </div>`;    
-    colorpicker.style.display = "block";
-    colorpicker.style.top = ((event.pageY - 165) < 0) ? 0 : (event.pageY - 170) + "px";
-    colorpicker.style.left = "2px";//(event.pageX - 50) + "px";
-    //colorpicker.innerHTML = content;
-    colorpicker.innerHTML += `
-    
-    `;  
-    document.getElementById("color_picker_input").addEventListener('change', function () {
-      //map.setPaintProperty(layer.value, 'fill-color', color);
-      layerSetcolor(el,layer,this.value);
-    }); 
-    var colors = [
-      '#ffffcc',
-      '#a1dab4',
-      '#41b6c4',
-      '#2c7fb8',
-      '#253494',
-      '#fed976',
-      '#feb24c',
-      '#fd8d3c',
-      '#f03b20',
-      '#bd0026'
-    ];
-     
-    colors.forEach(function (color) {
-      var color_rec = document.createElement('button');
-      color_rec.className = "color_picker_button";
-      color_rec.style.backgroundColor = color;
-      color_rec.style.opacity = "1";
-      color_rec.style.width = "33px";
-      color_rec.style.height = "28px";
-      color_rec.style.margin = "2px";
-      color_rec.style.borderRadius = "2px";
-      //color_rec.style.border = "1px solid #000";
-      color_rec.style.backgroundImage = "none";
-      color_rec.addEventListener('click', function () {
+    if (colorpicker.style.display == "none") {
+      colorpicker.style.display = "block";
+      colorpicker.innerHTML ="";
+      colorpicker.innerHTML += `
+      <div>
+        <div style="width:100%;height:28px;color:#000;border-bottom:1px solid #0004;margin-bottom:3px;padding-top:10px;">
+          <span style="margin:5px 0 0 3px; top:">`+layer+`</span>
+          <input id="color_picker_input" type="color" id="body" style="float:right;padding:0px;margin:-10px 1px 1px 1px;" value=`+rgb2hex(el.style.color)+`>
+        </div>
+      </div>`;    
+      colorpicker.style.top = ((event.pageY - 165) < 0) ? 0 : (event.pageY - 170) + "px";
+      colorpicker.style.left = "2px";//(event.pageX - 50) + "px";
+      //colorpicker.innerHTML = content;
+      colorpicker.innerHTML += `
+      
+      `;  
+      document.getElementById("color_picker_input").addEventListener('change', function () {
         //map.setPaintProperty(layer.value, 'fill-color', color);
-        layerSetcolor(el,layer,color);
-        document.getElementById("color_picker_input").value = color;
+        layerSetcolor(el,layer,this.value);
+      }); 
+      var colors = [
+        '#ffffcc',
+        '#a1dab4',
+        '#41b6c4',
+        '#2c7fb8',
+        '#253494',
+        '#fed976',
+        '#feb24c',
+        '#fd8d3c',
+        '#f03b20',
+        '#bd0026'
+      ];
+       
+      colors.forEach(function (color) {
+        var color_rec = document.createElement('button');
+        color_rec.className = "color_picker_button";
+        color_rec.style.backgroundColor = color;
+        color_rec.style.opacity = "1";
+        color_rec.style.width = "33px";
+        color_rec.style.height = "28px";
+        color_rec.style.margin = "2px";
+        color_rec.style.borderRadius = "2px";
+        //color_rec.style.border = "1px solid #000";
+        color_rec.style.backgroundImage = "none";
+        color_rec.addEventListener('click', function () {
+          //map.setPaintProperty(layer.value, 'fill-color', color);
+          layerSetcolor(el,layer,color);
+          document.getElementById("color_picker_input").value = color;
+        });
+        colorpicker.appendChild(document.createElement('div').appendChild(color_rec));
       });
-      colorpicker.appendChild(document.createElement('div').appendChild(color_rec));
-    });
-    // colorpicker.innerHTML += `
-    // <div id="color_picker_input">
-    // <input type="color" id="body" name="body" onchange="layerSetcolor(el,layer,color);" value=`+rgb2hex(el.style.color)+`>
-    // </div>`;
+      // colorpicker.innerHTML += `
+      // <div id="color_picker_input">
+      // <input type="color" id="body" name="body" onchange="layerSetcolor(el,layer,color);" value=`+rgb2hex(el.style.color)+`>
+      // </div>`;
+      colorpicker.focus();
+    } else {
+      colorpicker.style.display = "none";
+    }
+
 
   }
 

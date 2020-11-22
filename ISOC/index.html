@@ -32,20 +32,20 @@
           <div id="map" class='blue'></div>
           <div id='header-menu-container'>
             <div id="header-menu" align="center">
-              <span id="home-toggle-icon"><icon class="icon-home"></icon></span>
+              <span id="home-toggle-icon"><icon class="icon-home" oncontextmenu="return false;"></icon></span>
               <div id="headermenu2" class="header-menu-button" onclick="switchDatapanel(2)" style="border-top-left-radius: 15px;border-bottom-left-radius: 15px;">ตาราง</div>
               <div id="headermenu1" class="header-menu-button" onclick="switchDatapanel(1)">สมดุล</div>
               <div id="headermenu0" class="header-menu-button" onclick="switchDatapanel(0)" style="border-top-right-radius: 15px;border-bottom-right-radius: 15px;">แผนที่</div>
-              <span id="geocoder-toggle-icon"><icon class="icon-search"></icon></span>
+              <span id="geocoder-toggle-icon"><icon class="icon-search" oncontextmenu="return false;"></icon></span>
             </div>
             <div id="geocoder" class="geocoder" style="display: none;"></div>
           </div>
           <div id='header-container' class='map_addon_top_left'>
-            <div id = "logo-container" class = "col-xs-3" style = "display: flex;justify-content: center; align-items: center;">
+            <div id = "logo-container" class = "col-xs-3" style = "display: flex;justify-content: center; align-items: center;" data-toggle="modal" data-target="#info-modal">
               <img id = "logo" src = 'img/isoc.png' style = "padding: 5px; width : 40px; height : 40px;"></img>
             </div>
             <div id = "title-container" class = "col-xs-9 height100p" style = "">
-              <div id = "Text1_" class = "col-xs-8 height100p" style = "padding: 0px 0px 0px 5px;margin:0px;margin-top: 10px; max-width: 65px; display:none;">
+              <div id = "Text1_" class = "col-xs-8 height100p" style = "padding: 0px 0px 0px 5px;margin:0px;margin-top: 10px; max-width: 65px;">
                 <span style="font-family: Impact;font-size: 30px; color: #fff;text-shadow: 0px 0px 3px #777;">DRM </span>
               </div>
               <div id = "Text2_" class = "col-xs-4 height100p" style = "pointer-events: auto;display: flex;justify-content: left; align-items: center; padding : 11px 0px 0px 5px;">
@@ -306,7 +306,7 @@
     var geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       flyTo:false,
-      //marker: {color: 'blue'},
+      marker: {color: 'red'},
       mapboxgl: mapboxgl
     });
     geocoder.on('result', function(e) {
@@ -317,7 +317,14 @@
     $('#geocoder-toggle-icon').on('click', function(){
       el = document.getElementById("geocoder");
       (el.style.display == "none") ? el.style.display = "block" : el.style.display = "none";
+      document.getElementsByClassName('mapboxgl-ctrl-geocoder--input')[0].focus();
     });
+    $('#geocoder-toggle-icon').on('contextmenu', function(){
+      geocoder.clear();
+      document.getElementsByClassName('mapboxgl-ctrl-geocoder--input')[0].blur();
+    });
+
+
     $('#geocoder').focusout(function(){
       if (document.getElementsByClassName("suggestions")[0].style.display == 'none') {       
         setTimeout(function (){
@@ -1016,7 +1023,7 @@
 
 
       setTimeout(function (){
-        console.log(run);
+        //console.log(run);
         if (run > 0) {
         //   map.setStyle('mapbox://styles/mapbox/satellite-v9');
         //   run++;

@@ -696,7 +696,16 @@ red:hover {
   position: relative; 
   /*left: 0px; 
   top: 0px; */
+}
+
+#logo-container {
   cursor: pointer; 
+  pointer-events: auto;
+}
+
+#title-container {
+  display:block;
+  visibility: hidden;
 }
 
 .map_addon_top_right { 
