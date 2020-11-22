@@ -359,7 +359,7 @@
     var inputs = layerList.getElementsByTagName('input');
     var currentLayer = "satellite-v9";
     var mapEvent = 'style.load'; //'idle'; //'styledata';
-    var firstrun = true;
+    var run = 0;
      
     $("#map_style_menu_button").appendTo(".mapboxgl-ctrl-top-left");
     $("#map_style_menu_outline").appendTo(".mapboxgl-ctrl-top-left");
@@ -372,7 +372,7 @@
 
 
     function switchLayer(layer) {      
-      firstrun = false;
+      //firstrun = false;
       var layerId = layer.target.id;
       if (layerId != currentLayer) {
 
@@ -1016,8 +1016,16 @@
 
 
       setTimeout(function (){
-
-        if (!firstrun) map.addControl(new layerControlGrouped(config), "top-left");
+        console.log(run);
+        if (run > 0) {
+        //   map.setStyle('mapbox://styles/mapbox/satellite-v9');
+        //   run++;
+        // } else {
+          var removebutton = document.getElementsByClassName('mgl-layerControl');
+          for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}   
+          map.addControl(new layerControlGrouped(config), "top-left");
+          run++;          
+        }
 
       }, 3000);
 

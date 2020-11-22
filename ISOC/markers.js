@@ -67,10 +67,10 @@ map.on('movestart', function (){
 
 map.on('moveend', function (){  
   if (resize == 0 && move_start == 1) {
-    console.log("move from ",mapcenter);
+    //console.log("move from ",mapcenter);
     mapcenter.lng += (map.getCenter().lng-startlnglat.lng);
     mapcenter.lat += (map.getCenter().lat-startlnglat.lat );
-    console.log("to ",mapcenter);
+    //console.log("to ",mapcenter);
   } else {
     setTimeout(function (){
       resize = 0; 
@@ -116,7 +116,6 @@ function resizeAdjust() {
     document.getElementById("notification-container-bottom").style.display = "block";
 
     $("#data-panel").appendTo("#notification-container-bottom");
-
 
     $("#lp-button").appendTo("#menu-container-bottom-right");
     $("#bb-button").appendTo("#menu-container-bottom-right");
@@ -287,14 +286,14 @@ function load_map_layers() {
 
       setTimeout(function (){
 
-        var removebutton = document.getElementsByClassName('mgl-layerControl');
-        for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
+        // var removebutton = document.getElementsByClassName('mgl-layerControl');
+        // for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
  
         map.setStyle('mapbox://styles/mapbox/satellite-v9');
 
-        firstrun = false;
+        run = 1;
 
-      }, 1000);
+      }, 500);
 
       
 
@@ -477,7 +476,7 @@ function map_add_polygon(map_geojson,layername) {
         closeOnClick: false
       }*/);
 
-      if (firstrun) {
+      if (run == 1) {
         map.on('click', layername, function (e) {
             map.getCanvas().style.cursor = 'pointer';
             //var coordinates = e.features[0].geometry.coordinates.slice();
@@ -730,7 +729,7 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
       closeOnClick: false
     });
 
-    if (firstrun) {
+    if (run == 1) {
       map.on('click', layername, function (e) {
           var coor = e.features[0].geometry.coordinates.slice();
           var a1 = e.features[0].properties.disaster_type
