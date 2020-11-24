@@ -187,11 +187,11 @@ class layerControlGrouped {
         console.log("hold",hold);
         var dirs = document.getElementsByClassName("directory");
         console.log(dirs.length);
-        for (let i = 0; i++; i<dirs.length) {
+        for (let i = 0; i<dirs.length; i++) {
           console.log(i);
           dirs[i].style.backgroundColor = (hold) ? "#2a58c333":"#f8f9fa";
         }
-        document.getElementById("mgl-layerControl-button").style.opacity = (hold) ? "0.6":"1";
+        // document.getElementById("mgl-layerControl-button").style.opacity = (hold) ? "0.8":"1";
         if (!hold) e.target.classList.add("collapsed");
       }
      return
