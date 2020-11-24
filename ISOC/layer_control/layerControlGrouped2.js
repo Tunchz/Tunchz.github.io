@@ -184,11 +184,11 @@ class layerControlGrouped {
       e.preventDefault();
       if (e.target.dataset.directoryToggle) {
         hold = !hold;
-        console.log("hold",hold);
+        // console.log("hold",hold);
         var dirs = document.getElementsByClassName("directory");
-        console.log(dirs.length);
+        // console.log(dirs.length);
         for (let i = 0; i<dirs.length; i++) {
-          console.log(i);
+          // console.log(i);
           dirs[i].style.backgroundColor = (hold) ? "#d8d9da":"#f8f9fa";
         }
         // document.getElementById("mgl-layerControl-button").style.opacity = (hold) ? "0.8":"1";
