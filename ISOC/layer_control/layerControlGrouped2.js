@@ -187,7 +187,7 @@ class layerControlGrouped {
         console.log("hold",hold);
         var dirs = document.getElementsByClassName("directory");
         console.log(dirs.length);
-        for (d = 0; d++; d<dirs.length) {
+        for (let i = 0; i++; i<dirs.length) {
           dirs[i].style.background = (hold) ? "#2a58c333":"#f8f9fa";
         }
       }
