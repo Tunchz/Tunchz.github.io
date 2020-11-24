@@ -163,6 +163,7 @@ class layerControlGrouped {
     /****
      * ADD EVENT LISTENERS FOR THE LAYER CONTROL ALL ON THE CONTROL ITSELF
      ****/
+    var hold = false;
     if (this._collapsed) {
       this._div.addEventListener("mouseenter", function (e) {
         setTimeout(function () {
@@ -172,9 +173,16 @@ class layerControlGrouped {
       });
   
       this._div.addEventListener("mouseleave", function (e) {
-        e.target.classList.add("collapsed")
+        if (!hold) e.target.classList.add("collapsed")
         return
       });
+
+      // add right click to hold control group menu
+      this._div.addEventListener("contextmenu", function (e) {
+        hold = !hold;
+        return
+      });
+
     }
 
     this._div.addEventListener("click", function (e) {
