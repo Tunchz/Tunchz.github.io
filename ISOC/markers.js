@@ -15,18 +15,18 @@
 
 // icon for each disaster type id
 var symbol = {'0':{'icon':"0", 'visibility':'visible', 'dbclick':false, 'itemselected':false},
-/*1forest*/    '1':{'layername':"forest",    'icon': "❧",    'noti_type':'disaster',   'color':"#a2cc44",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.6 ,'ispulse':0, 'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_forest.png", 'icon_url':'img/1.png'},
-/*2air*/       '2':{'layername':"air",       'icon':"☢",    'noti_type':'disaster',   'color':"#ed207b",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_air.png", 'icon_url':'img/2.png'},
-/*3landslide*/ '3':{'layername':"landslide", 'icon':"☳",     'noti_type':'disaster',   'color':"#a9753c",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_landslide.png", 'icon_url':'img/3.png'},
-/*4flood*/     '4':{'layername':"flood",     'icon':"♦",      'noti_type':'disaster',   'color':"#3b7dcb",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':1,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_flood.png", 'icon_url':'img/4.png'},
-/*5drought*/   '5':{'layername':"drought",   'icon':"☭",     'noti_type':'disaster',   'color':"#f7c851",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_drought.png", 'icon_url':'img/5.png'},
-/*6fire*/      '6':{'layername':"fire",      'icon':"♨",    'noti_type':'disaster',   'color':"#f47320",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_fire.png", 'icon_url':'img/6.png'},
-/*7hotspot*/   '7':{'layername':"hotspot",   'icon':"☀",    'noti_type':'disaster',   'color':"#e30713",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':1.3 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_hotspot.png", 'icon_url':'img/7.png'},
-/*8storm*/     '8':{'layername':"storm",     'icon':"♒",    'noti_type':'disaster',   'color':"#358ba4",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_highwave.png", 'icon_url':'img/8.png'},
-/*9heavyrain*/ '9':{'layername':"heavyrain", 'icon':"☂",    'noti_type':'disaster',   'color':"#33a1d2",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_heavyrain.png", 'icon_url':'img/9.png'},
-/*riskplan*/  '91':{'layername':"risk_forest", 'icon':"█",   'noti_type':'plan',       'color':"#ff0000",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/91.png'},
-/*riskplan*/  '94':{'layername':"risk_flood",  'icon':"█",   'noti_type':'plan',       'color':"#0000ff",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/94.png'},
-/*riskplan*/  '95':{'layername':"risk_drought",'icon':"█",   'noti_type':'plan',       'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/95.png'},
+/*1forest*/    '1':{'layername':"บุกรุกป่า",    'icon': "❧",    'noti_type':'disaster',   'color':"#a2cc44",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.6 ,'ispulse':0, 'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_forest.png", 'icon_url':'img/1.png'},
+/*2air*/       '2':{'layername':"มลพิษ",       'icon':"☢",    'noti_type':'disaster',   'color':"#ed207b",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_air.png", 'icon_url':'img/2.png'},
+/*3landslide*/ '3':{'layername':"ดินถล่ม", 'icon':"☳",     'noti_type':'disaster',   'color':"#a9753c",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_landslide.png", 'icon_url':'img/3.png'},
+/*4flood*/     '4':{'layername':"น้ำท่วม",     'icon':"♦",      'noti_type':'disaster',   'color':"#3b7dcb",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':1,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_flood.png", 'icon_url':'img/4.png'},
+/*5drought*/   '5':{'layername':"น้ำแล้ง",   'icon':"☭",     'noti_type':'disaster',   'color':"#f7c851",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_drought.png", 'icon_url':'img/5.png'},
+/*6fire*/      '6':{'layername':"ไฟป่า",      'icon':"♨",    'noti_type':'disaster',   'color':"#f47320",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_fire.png", 'icon_url':'img/6.png'},
+/*7hotspot*/   '7':{'layername':"จุดความร้อน",   'icon':"☀",    'noti_type':'disaster',   'color':"#e30713",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':1.3 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_hotspot.png", 'icon_url':'img/7.png'},
+/*8storm*/     '8':{'layername':"พายุ",     'icon':"♒",    'noti_type':'disaster',   'color':"#358ba4",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_highwave.png", 'icon_url':'img/8.png'},
+/*9heavyrain*/ '9':{'layername':"ฝนตกหนัก", 'icon':"☂",    'noti_type':'disaster',   'color':"#33a1d2",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_heavyrain.png", 'icon_url':'img/9.png'},
+/*riskplan*/  '91':{'layername':"เสี่ยงมลพิษ", 'icon':"█",   'noti_type':'plan',       'color':"#ff0000",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/91.png'},
+/*riskplan*/  '94':{'layername':"เสี่ยงน้ำท่วม",  'icon':"█",   'noti_type':'plan',       'color':"#0000ff",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/94.png'},
+/*riskplan*/  '95':{'layername':"เสี่ยงน้ำแล้ง",'icon':"█",   'noti_type':'plan',       'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/95.png'},
 /*map_subd*/  '61':{'layername':"map_subd",    'icon':"T",   'color':"#a56400",'opacity':1   ,'visibility':'visible', 'dbclick':false},
 /*hotspot*/   '62':{'layername':"hotspott",     'icon':"H",   'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false}
                 }
@@ -484,7 +484,7 @@ function map_add_polygon(map_geojson,layername) {
 
            
         map.on('click', layername, function (e) {
-          if (maptools == 0) {
+          if (disinteract == 0) {
             map.getCanvas().style.cursor = 'pointer';
             //var coordinates = e.features[0].geometry.coordinates.slice();
             var a1 = e.features[0].properties.disaster_type
@@ -505,27 +505,33 @@ function map_add_polygon(map_geojson,layername) {
         });
 
         map.on('mouseenter', layername, function () {
-          if (map.getCanvas().style.cursor != 'pointer') {
-            previous_cursor = map.getCanvas().style.cursor;
-            map.getCanvas().style.cursor = 'pointer';            
+          if (disinteract == 0) {
+            if (map.getCanvas().style.cursor != 'pointer') {
+              previous_cursor = map.getCanvas().style.cursor;
+              map.getCanvas().style.cursor = 'pointer';            
+            }
           }
         });
 
         map.on('mouseleave', layername, function () {
-          map.getCanvas().style.cursor = previous_cursor;
-          popup.remove();
+          if (disinteract == 0) {
+            map.getCanvas().style.cursor = previous_cursor;
+            popup.remove();
+          }
         });
 
         map.on('contextmenu', layername, function (e) {
+          if (disinteract == 0) {
           switchUnselectVisibility(e.features[0].properties.disaster_type_id);
-          map.flyTo({
-            center: [101.6673626,13.2808669],
-            offset: [map_Xoffset, map_Yoffset],
-            zoom : 4.8, 
-            speed : flyspeed, 
-            curve : 1, 
-            essential: true
-          });
+            map.flyTo({
+              center: [101.6673626,13.2808669],
+              offset: [map_Xoffset, map_Yoffset],
+              zoom : 4.8, 
+              speed : flyspeed, 
+              curve : 1, 
+              essential: true
+            });
+          }
         });
       }
     });
@@ -741,7 +747,7 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
       });
 
       map.on('click', layername, function (e) {
-        if (maptools == 0) {
+        if (disinteract == 0) {
           var coor = e.features[0].geometry.coordinates.slice();
           var a1 = e.features[0].properties.disaster_type
           var a2 = e.features[0].properties.level_detail;
@@ -754,6 +760,7 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
       });
 
       map.on('mouseenter', layername, function (e) { 
+        if (disinteract == 0) {
           if (map.getCanvas().style.cursor != 'pointer') {
             previous_cursor = map.getCanvas().style.cursor;
             map.getCanvas().style.cursor = 'pointer';            
@@ -770,23 +777,28 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
                 'ภัย : ' + a1 + '<br>ระดับ : ' + a2 + '<br>'+ a3 +' : ' + a4
             )
             .addTo(map);
+        }
       });
 
       map.on('mouseleave', layername, function () {
-        map.getCanvas().style.cursor = previous_cursor;
-        popup.remove();
+        if (disinteract == 0) {
+          map.getCanvas().style.cursor = previous_cursor;
+          popup.remove();
+        }
       });
 
       map.on('contextmenu', layername, function (e) {
-        switchUnselectVisibility(e.features[0].properties.disaster_type_id);
-        map.flyTo({
-          center: [101.6673626,13.2808669],
-          offset: [map_Xoffset, map_Yoffset],
-          zoom : 4.8, 
-          speed : flyspeed, 
-          curve : 1, 
-          essential: true
-        });      
+        if (disinteract == 0) {
+          switchUnselectVisibility(e.features[0].properties.disaster_type_id);
+          map.flyTo({
+            center: [101.6673626,13.2808669],
+            offset: [map_Xoffset, map_Yoffset],
+            zoom : 4.8, 
+            speed : flyspeed, 
+            curve : 1, 
+            essential: true
+          });     
+        }  
       });
     }
   });

@@ -162,14 +162,14 @@ function autocomplete_list(layer,form) {
               admin_filtered[item].push(ui.item.value);
               console.log(admin_filtered[item]);
 
-  // filter map layer
-  var filter = buildFilter(new FormData(form), layer);
-  //console.log("filter",layer.id, filter);
-  map.setFilter(layer.id, filter);
-  // highlight filter icon
-  document.getElementById(layer.id+'_filtericon').style.fill = "#2a58c3";
-
-
+              // filter map layer
+              var filter = buildFilter(new FormData(form), layer);
+              //console.log("filter",layer.id, filter);
+              layer_.metadata.layers.map(l => {
+                map.setFilter(l, filter);
+              });
+              // highlight filter icon
+              document.getElementById(layer.id+'_filtericon').style.fill = "#2a58c3";
 
               return false;
             }

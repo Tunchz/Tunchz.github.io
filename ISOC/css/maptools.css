@@ -95,6 +95,11 @@
 .mapboxgl-ctrl-inspect-next {
     margin-left: 6px;
   }
+.mapboxgl-ctrl-inspect-feature-header {
+    font-family: 'Serithai';
+    font-weight: bold;
+    text-decoration: underline;
+}
 .mapboxgl-ctrl-inspect-feature-container {
     max-width: 90vw;
     max-height: 60vh;
@@ -102,7 +107,6 @@
 }
 .mapboxgl-ctrl-inspect-feature {
     width: 100%;
-    height: 300px;
     min-width: 200px;
     border-collapse: collapse;
   }

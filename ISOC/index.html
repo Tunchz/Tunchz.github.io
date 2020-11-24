@@ -235,7 +235,7 @@
     var z=4,  //default zoom level 0-4
         flyspeed = 2,
         mapcenter = {"lng":101.6673626,"lat":13.2808669},
-        maptools = 0;
+        disinteract = 0;
 
     mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg';  //from mapbox
     //mapboxgl.accessToken ="pk.eyJ1IjoiYTEwayIsImEiOiJjaWdyMmVrazcwMXpsdTZtMThscWtiOTJtIn0.-A76dzJ0vsKULJdDxGvVXg";
@@ -539,6 +539,21 @@
         }
       });
 
+
+      map.addLayer({
+        'id': 'พื้นที่จังหวัด',
+        'type': 'fill',
+        'source': 'mapth_prov',
+        'layout': {
+          'visibility': 'visible'
+        },
+        'paint': {
+          'fill-color': '#ffffff',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0
+        }
+      });
+
       map.addLayer({
         'id': 'เขตจังหวัด',
         'type': 'line',
@@ -552,6 +567,19 @@
         }
       });
 
+      map.addLayer({
+        'id': 'พื้นที่อำเภอ',
+        'type': 'fill',
+        'source': 'mapth_dist',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': '#ffffff',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0
+        }
+      });
 
       map.addLayer({
         'id': 'เขตอำเภอ',
@@ -566,6 +594,19 @@
         }
       });
 
+      map.addLayer({
+        'id': 'พื้นที่ตำบล',
+        'type': 'fill',
+        'source': 'mapth_subd',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': '#ffffff',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0
+        }
+      });
 
       map.addLayer({
         'id': 'เขตตำบล',
@@ -975,6 +1016,7 @@
             hidden: false,
             group: "เขตการปกครอง",
             directory: "การบริหาร",
+            children:true,
             metadata: {
               filterSchema: {
                 "จังหวัด": {
@@ -990,10 +1032,29 @@
             }
           },
           {
+            id: "พื้นที่ตำบล",
+            hidden: true,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร",
+            parent: "เขตตำบล"
+
+            // metadata: {
+            //   filterSchema: {
+            //     "จังหวัด": {
+            //       type: "string"
+            //     }
+            //     // "scalerank": {
+            //     //   "type": "number"
+            //     // }
+            //   }
+            // }
+          },            
+          {
             id: "เขตอำเภอ",
             hidden: false,
             group: "เขตการปกครอง",
             directory: "การบริหาร",
+            children:true,
             metadata: {
               filterSchema: {
                 "จังหวัด": {
@@ -1006,10 +1067,47 @@
             }
           },
           {
+            id: "พื้นที่อำเภอ",
+            hidden: true,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร",
+            parent: "เขตอำเภอ"
+
+            // metadata: {
+            //   filterSchema: {
+            //     "จังหวัด": {
+            //       type: "string"
+            //     }
+            //     // "scalerank": {
+            //     //   "type": "number"
+            //     // }
+            //   }
+            // }
+          },          
+          {
+            // name: "เขตจังหวัด",
             id: "เขตจังหวัด",
             hidden: false,
             group: "เขตการปกครอง",
             directory: "การบริหาร",
+            children:true,
+            metadata: {
+              filterSchema: {
+                "จังหวัด": {
+                  type: "string"
+                }
+                // "scalerank": {
+                //   "type": "number"
+                // }
+              }
+            }
+          },
+          {
+            id: "พื้นที่จังหวัด",
+            hidden: true,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร",
+            parent: "เขตจังหวัด",
 
             metadata: {
               filterSchema: {
@@ -1121,19 +1219,19 @@
 
     map.on('ruler.on', function () {
       console.log("ruler on");
-      maptools++;
+      disinteract++;
     });
     map.on('ruler.off', function () {
       console.log("ruler off");
-      maptools--;
+      disinteract--;
     });
     map.on('inspect.on', function () {
       console.log("inspect on");
-      maptools++;
+      disinteract++;
     });
     map.on('inspect.off', function () {
       console.log("inspect off");
-      maptools--;
+      disinteract--;
     });
 
 

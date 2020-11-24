@@ -1442,6 +1442,8 @@
 	  };
 
 	  var templateFeature = function templateFeature(feature) {
+	  	var outercontainer = document.createElement('div');
+	  	outercontainer.style.textAlign = "center";
 	    var table = document.createElement('table');
 	    table.classList.add('mapboxgl-ctrl-inspect-feature');
 	    var data = featureData(feature);
@@ -1449,16 +1451,24 @@
 	      var row = document.createElement('tr');
 	      var key = document.createElement('th');
 	      var value = document.createElement('td');
-	      key.textContent = prop.key;
-	      value.textContent = prop.value;
-	      row.appendChild(key);
-	      row.appendChild(value);
-	      table.append(row);
+      
+	      if (!['$type','source','source-layer'].includes(prop.key)) {
+	      	if (prop.key == "$id") {
+	      	  outercontainer.innerHTML = `<span class = "mapboxgl-ctrl-inspect-feature-header">ชั้นข้อมูล : ${prop.value}</span>`
+	      	} else {
+		      key.textContent = prop.key;
+		      value.textContent = prop.value;
+		      row.appendChild(key);
+		      row.appendChild(value);
+		      table.append(row);	
+		  	}
+	      } 
 	    });
 	  	var table_container = document.createElement('div');
 	  	table_container.classList.add('mapboxgl-ctrl-inspect-feature-container');
 	  	table_container.appendChild(table);
-	    return table_container;
+	  	outercontainer.appendChild(table_container);
+	    return outercontainer;
 	  };
 
 	  function goTo(dir) {
