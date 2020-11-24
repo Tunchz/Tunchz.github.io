@@ -191,6 +191,7 @@ class layerControlGrouped {
           dirs[i].style.backgroundColor = (hold) ? "#2a58c333":"#f8f9fa";
         }
         document.getElementById("mgl-layerControl-button").style.opacity = (hold) ? "0.6":"1";
+        if (!hold) e.target.classList.add("collapsed");
       }
      return
     });
