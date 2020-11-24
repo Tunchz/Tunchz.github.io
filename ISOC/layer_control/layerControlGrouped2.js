@@ -269,7 +269,7 @@ class layerControlGrouped {
 
     if (this._collapsed) {
       this._map.on("click", function () {
-        _this._div.classList.add("collapsed")
+        if (!hold) _this._div.classList.add("collapsed")
       })
     }
 
