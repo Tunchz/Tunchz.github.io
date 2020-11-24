@@ -164,6 +164,7 @@ class layerControlGrouped {
      * ADD EVENT LISTENERS FOR THE LAYER CONTROL ALL ON THE CONTROL ITSELF
      ****/
     var hold = false;
+
     if (this._collapsed) {
       this._div.addEventListener("mouseenter", function (e) {
         setTimeout(function () {
@@ -176,14 +177,21 @@ class layerControlGrouped {
         if (!hold) e.target.classList.add("collapsed")
         return
       });
-
-      // add right click to hold control group menu
-      this._div.addEventListener("contextmenu", function (e) {
-        hold = !hold;
-        return
-      });
-
     }
+
+    // add right click to hold control group menu
+    this._div.addEventListener("contextmenu", function (e) {
+      if (e.target.dataset.directoryToggle) {
+        hold = !hold;
+        console.log("hold",hold);
+        var dirs = document.getElementsByClassName("directory");
+        dirs.forEach(function (item, index) {
+          item.style.background = (hold) ? "#2a58c333":"#f8f9fa";
+        });
+      }
+       e.preventDefault;
+     return
+    });
 
     this._div.addEventListener("click", function (e) {
       // console.log(e.target);
