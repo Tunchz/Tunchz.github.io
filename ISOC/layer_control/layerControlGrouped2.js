@@ -55,7 +55,7 @@ class layerControlGrouped {
     })
 
     this._layers.forEach(function (l) {
-      config[l.directory][l.group].shift(l)
+      config[l.directory][l.group].push(l)
     });
 
     let layersClone = this._layers.slice();
