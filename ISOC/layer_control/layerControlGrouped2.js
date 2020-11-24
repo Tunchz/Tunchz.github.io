@@ -181,15 +181,16 @@ class layerControlGrouped {
 
     // add right click to hold control group menu
     this._div.addEventListener("contextmenu", function (e) {
+      e.preventDefault;
       if (e.target.dataset.directoryToggle) {
         hold = !hold;
         console.log("hold",hold);
         var dirs = document.getElementsByClassName("directory");
-        dirs.forEach(function (item, index) {
-          item.style.background = (hold) ? "#2a58c333":"#f8f9fa";
-        });
+        console.log(dirs.length);
+        for (d = 0; d++; d<dirs.length) {
+          dirs[i].style.background = (hold) ? "#2a58c333":"#f8f9fa";
+        }
       }
-       e.preventDefault;
      return
     });
 
