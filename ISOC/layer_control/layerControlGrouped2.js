@@ -189,10 +189,10 @@ class layerControlGrouped {
         console.log(dirs.length);
         for (let i = 0; i<dirs.length; i++) {
           console.log(i);
-          dirs[i].style.backgroundColor = (hold) ? "#2a58c333":"#f8f9fa";
+          dirs[i].style.backgroundColor = (hold) ? "#d8d9da":"#f8f9fa";
         }
         // document.getElementById("mgl-layerControl-button").style.opacity = (hold) ? "0.8":"1";
-        if (!hold) e.target.classList.add("collapsed");
+        // if (!hold) e.target.classList.add("collapsed");
       }
      return
     });
