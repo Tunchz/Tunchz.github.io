@@ -181,13 +181,14 @@ class layerControlGrouped {
 
     // add right click to hold control group menu
     this._div.addEventListener("contextmenu", function (e) {
-      e.preventDefault;
+      e.preventDefault();
       if (e.target.dataset.directoryToggle) {
         hold = !hold;
         console.log("hold",hold);
         var dirs = document.getElementsByClassName("directory");
         console.log(dirs.length);
         for (let i = 0; i++; i<dirs.length) {
+          console.log(i);
           dirs[i].style.backgroundColor = (hold) ? "#2a58c333":"#f8f9fa";
         }
         document.getElementById("mgl-layerControl-button").style.opacity = (hold) ? "0.6":"1";
