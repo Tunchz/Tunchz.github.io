@@ -188,8 +188,9 @@ class layerControlGrouped {
         var dirs = document.getElementsByClassName("directory");
         console.log(dirs.length);
         for (let i = 0; i++; i<dirs.length) {
-          dirs[i].style.background = (hold) ? "#2a58c333":"#f8f9fa";
+          dirs[i].style.backgroundColor = (hold) ? "#2a58c333":"#f8f9fa";
         }
+        document.getElementById("mgl-layerControl-button").style.opacity = (hold) ? "0.6":"1";
       }
      return
     });
