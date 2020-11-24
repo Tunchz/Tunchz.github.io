@@ -45,7 +45,8 @@ var drm_geojson,disaster_risk_list,disaster_risk_list_summary,
     resize = 0,
     move_start = 0,
     startlnglat,
-    datapanel = {xw:0.4,xh:0.4};
+    datapanel = {xw:0.4,xh:0.4},
+    previous_cursor;
 //var isonMobile = onMobile();
 
 
@@ -472,14 +473,18 @@ function map_add_polygon(map_geojson,layername) {
       // //Filter map layer
       // map.setFilter('th_prov_bound',["in", "PROVINCE_C", '63','50'])
 
-      var popup = new mapboxgl.Popup(/*{
-        offset: 10,
-        closeButton: false,
-        closeOnClick: false
-      }*/);
 
       if (run == 1) {
+        
+        var popup = new mapboxgl.Popup(/*{
+          offset: 10,
+          closeButton: false,
+          closeOnClick: false
+        }*/);
+
+           
         map.on('click', layername, function (e) {
+          if (maptools == 0) {
             map.getCanvas().style.cursor = 'pointer';
             //var coordinates = e.features[0].geometry.coordinates.slice();
             var a1 = e.features[0].properties.disaster_type
@@ -496,15 +501,18 @@ function map_add_polygon(map_geojson,layername) {
 
             //console.log(JSON.parse(e.features[0].properties.center));
             centerMap(JSON.parse(e.features[0].properties.center));
-
+          }
         });
 
         map.on('mouseenter', layername, function () {
-          map.getCanvas().style.cursor = 'pointer';
+          if (map.getCanvas().style.cursor != 'pointer') {
+            previous_cursor = map.getCanvas().style.cursor;
+            map.getCanvas().style.cursor = 'pointer';            
+          }
         });
 
         map.on('mouseleave', layername, function () {
-          map.getCanvas().style.cursor = '';
+          map.getCanvas().style.cursor = previous_cursor;
           popup.remove();
         });
 
@@ -725,14 +733,15 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
       );
 
 
-    var popup = new mapboxgl.Popup({
-      offset: offset,
-      closeButton: false,
-      closeOnClick: false
-    });
-
     if (run == 1) {
+      var popup = new mapboxgl.Popup({
+        offset: offset,
+        closeButton: false,
+        closeOnClick: false
+      });
+
       map.on('click', layername, function (e) {
+        if (maptools == 0) {
           var coor = e.features[0].geometry.coordinates.slice();
           var a1 = e.features[0].properties.disaster_type
           var a2 = e.features[0].properties.level_detail;
@@ -741,10 +750,15 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
           if (datapanel_isopen == 0) switchDatapanel(1);
           //console.log(e.features[0].geometry.coordinates.slice());
           centerMap({"lng":coor[0],"lat":coor[1]});
+        }
       });
 
-      map.on('mouseenter', layername, function (e) {
-          map.getCanvas().style.cursor = 'pointer';
+      map.on('mouseenter', layername, function (e) { 
+          if (map.getCanvas().style.cursor != 'pointer') {
+            previous_cursor = map.getCanvas().style.cursor;
+            map.getCanvas().style.cursor = 'pointer';            
+          }
+
           var coordinates = e.features[0].geometry.coordinates.slice();
           var a1 = e.features[0].properties.disaster_type
           var a2 = e.features[0].properties.level_detail;
@@ -759,7 +773,7 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
       });
 
       map.on('mouseleave', layername, function () {
-        map.getCanvas().style.cursor = '';
+        map.getCanvas().style.cursor = previous_cursor;
         popup.remove();
       });
 

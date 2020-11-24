@@ -154,7 +154,7 @@
 
   .mgl-layerControlDirectory > .directory {
     font-size: 14px;
-    background: #f8f9fa;
+    background-color: #f8f9fa;
     padding: 5px 0px;
     cursor: pointer;
   }

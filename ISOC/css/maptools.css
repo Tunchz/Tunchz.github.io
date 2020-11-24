@@ -36,6 +36,7 @@
     position: absolute;
     padding-top: 5px;
     transform: translate(-50%, 0);
+    color:#000;
   }
 .mapboxgl-ctrl-inspect-content {
     position: relative;
@@ -45,6 +46,8 @@
     background: #fff;
     border-radius: 4px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+/*    max-height: 400px;
+    overflow: auto;   */ 
   }
 .mapboxgl-ctrl-inspect-content:before {
       content: '';
@@ -61,15 +64,19 @@
 .mapboxgl-ctrl-inspect-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    /*align-items: center;*/
     text-align: center;
     white-space: nowrap;
     user-select: none;
   }
 .mapboxgl-ctrl-inspect-prev,
   .mapboxgl-ctrl-inspect-next {
-    padding: 2px 12px;
+    /*padding: 2px 12px;*/
+    margin-top: -2px;
     border-radius: 4px;
+    height: 24px;
+    width: 24px;
+    text-align: center;
   }
 .mapboxgl-ctrl-inspect-prev:hover, .mapboxgl-ctrl-inspect-next:hover {
       background: rgba(0, 0, 0, 0.05);
@@ -80,6 +87,7 @@
       }
 .mapboxgl-ctrl-inspect-prev svg, .mapboxgl-ctrl-inspect-next svg {
       vertical-align: top;
+      position: relative;
     }
 .mapboxgl-ctrl-inspect-prev {
     margin-right: 6px;
@@ -87,8 +95,14 @@
 .mapboxgl-ctrl-inspect-next {
     margin-left: 6px;
   }
+.mapboxgl-ctrl-inspect-feature-container {
+    max-width: 90vw;
+    max-height: 60vh;
+    overflow-y: auto;    
+}
 .mapboxgl-ctrl-inspect-feature {
     width: 100%;
+    height: 300px;
     min-width: 200px;
     border-collapse: collapse;
   }
@@ -118,4 +132,28 @@
 /* show tooltip over controls buttons with z-index 2 */
 .mapboxgl-ctrl-tooltip:empty {
     display: none;
-  }
+}
+
+
+/* scroller bar */
+.mapboxgl-ctrl-inspect-feature-container::-webkit-scrollbar {
+  width: 5px;
+  height: 0px;
+}
+
+/* Track */
+.mapboxgl-ctrl-inspect-feature-container::-webkit-scrollbar-track {
+  background: #fff0; 
+  padding-right: 2px;
+}
+ 
+/* Handle */
+.mapboxgl-ctrl-inspect-feature-container::-webkit-scrollbar-thumb {
+  background: #ccc; 
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+.mapboxgl-ctrl-inspect-feature-container::-webkit-scrollbar-thumb:hover {
+  background: #aaa; 
+}

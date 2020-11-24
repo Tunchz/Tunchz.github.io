@@ -1149,7 +1149,7 @@
 	        source: SOURCE_LINE,
 	        paint: {
 	          'line-color': this.mainColor,
-	          'line-width': 2
+	          'line-width': 3
 	        }
 	      });
 	      this.map.addLayer({
@@ -1211,12 +1211,12 @@
 	      var index = this.labels.length;
 	      var markerNode = document.createElement('div');
 	      markerNode.id = (index+1);
-	      markerNode.style.width = '10px';
-	      markerNode.style.height = '10px';
+	      markerNode.style.width = '20px';
+	      markerNode.style.height = '20px';
 	      markerNode.style.borderRadius = '50%';
-	      markerNode.style.background = this.secondaryColor;
+	      markerNode.style.background = (index == 0)? "#f00" : this.secondaryColor;
 	      markerNode.style.boxSizing = 'border-box';
-	      markerNode.style.border = "2px solid ".concat(this.mainColor);
+	      markerNode.style.border = "3px solid ".concat(this.mainColor);
 	      markerNode.style.cursor = 'pointer';
 	      var marker = new mapboxgl.Marker({
 	        element: markerNode,
@@ -1361,15 +1361,15 @@
 	}
 
 	function iconInspect() {
-	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n    <path d=\"M20 19.59V8l-6-6H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.74.83-2.76.83-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5c0 1.02-.31 1.96-.83 2.75L20 19.59zM9 13c0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3-3 1.34-3 3z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#000\">\n    <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n    <path d=\"M20 19.59V8l-6-6H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.74.83-2.76.83-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5c0 1.02-.31 1.96-.83 2.75L20 19.59zM9 13c0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3-3 1.34-3 3z\"/>\n</svg>", 'image/svg+xml')).firstChild;
 	}
 
 	function iconLeft() {
-	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M14 7l-5 5 5 5V7z\"/>\n    <path fill=\"none\" d=\"M24 0v24H0V0h24z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#000\">\n    <path d=\"M14 7l-5 5 5 5V7z\"/>\n    <path fill=\"none\" d=\"M24 0v24H0V0h24z\"/>\n</svg>", 'image/svg+xml')).firstChild;
 	}
 
 	function iconRight() {
-	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M10 17l5-5-5-5v10z\"/>\n    <path fill=\"none\" d=\"M0 24V0h24v24H0z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#000\">\n    <path d=\"M10 17l5-5-5-5v10z\"/>\n    <path fill=\"none\" d=\"M0 24V0h24v24H0z\"/>\n</svg>", 'image/svg+xml')).firstChild;
 	}
 
 	function featureData(feature) {
@@ -1455,7 +1455,10 @@
 	      row.appendChild(value);
 	      table.append(row);
 	    });
-	    return table;
+	  	var table_container = document.createElement('div');
+	  	table_container.classList.add('mapboxgl-ctrl-inspect-feature-container');
+	  	table_container.appendChild(table);
+	    return table_container;
 	  };
 
 	  function goTo(dir) {
@@ -1517,7 +1520,8 @@
 	      this.button.classList.add('-active');
 	      this.map.on('click', this.clickListener);
 	      this.map.on('move', this.updatePosition);
-	      this.map.getCanvas().style.cursor = 'pointer';
+	      this.map.getCanvas().style.cursor = 'crosshair';
+	      this.map.fire('inspect.on');
 	    }
 	  }, {
 	    key: "inspectingOff",
@@ -1528,6 +1532,7 @@
 	      this.map.off('click', this.clickListener);
 	      this.map.off('move', this.updatePosition);
 	      this.map.getCanvas().style.cursor = '';
+	      this.map.fire('inspect.off');
 	    }
 	  }, {
 	    key: "getFeatures",
@@ -1568,6 +1573,7 @@
 	      var features = this.getFeatures(event);
 	      this.removePopup();
 	      this.addPopup(features);
+	      // event.stopPropagation();
 	    }
 	  }, {
 	    key: "onAdd",
@@ -1735,7 +1741,7 @@
 	map.addControl(new RulerControl(), 'top-left');
 
 	/* Inspect */
-	// map.addControl(new InspectControl(), 'top-left');
+	map.addControl(new InspectControl(), 'top-left');
 
 
 

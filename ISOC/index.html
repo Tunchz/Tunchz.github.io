@@ -234,7 +234,8 @@
     //---- Mapbox GL Initialization--------
     var z=4,  //default zoom level 0-4
         flyspeed = 2,
-        mapcenter = {"lng":101.6673626,"lat":13.2808669};
+        mapcenter = {"lng":101.6673626,"lat":13.2808669},
+        maptools = 0;
 
     mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg';  //from mapbox
     //mapboxgl.accessToken ="pk.eyJ1IjoiYTEwayIsImEiOiJjaWdyMmVrazcwMXpsdTZtMThscWtiOTJtIn0.-A76dzJ0vsKULJdDxGvVXg";
@@ -305,8 +306,8 @@
     // Setting up GeoCoder
     var geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
-      flyTo:false,
-      marker: {color: 'red'},
+      flyTo:true,
+      marker: {offset: [-13,-36],color: 'red'},
       mapboxgl: mapboxgl
     });
     geocoder.on('result', function(e) {
@@ -664,6 +665,41 @@
         }
       });
 
+      map.addLayer({
+        'id': 'well_circle',
+        'type': 'circle',
+        'source': {
+          'type': 'geojson',
+          'data': 'https://tunchz.github.io/ISOC/json/well_small.geojson'
+        },
+        layout: {
+            'visibility': 'none'
+        },          
+        paint: {
+            'circle-color': '#0f0',
+            'circle-radius': 2,
+            'circle-stroke-width': 0,
+            'circle-stroke-color': '#fff'
+        }
+      });
+
+      map.addLayer({
+        'id': 'hotspot_circle',
+        'type': 'circle',
+        'source': {
+          'type': 'geojson',
+          'data': 'https://tunchz.github.io/ISOC/json/hotspotth.geojson'
+        },
+        layout: {
+            'visibility': 'none'
+        },          
+        paint: {
+            'circle-color': '#f00',
+            'circle-radius': 2,
+            'circle-stroke-width': 0,
+            'circle-stroke-color': '#fff'
+        }
+      });
 
 
       map_addcluster('hotspotth','https://tunchz.github.io/ISOC/json/hotspotth.geojson','none');  
@@ -676,6 +712,7 @@
           collapsed: true
         },
         layers: [
+
 
 
 
@@ -694,7 +731,7 @@
             directory: "สิ่งแวดล้อม"
           },
           {
-            name: "จุดความร้อน",
+            name: "จุดความร้อน (Cluster)",
             id: "hotspotth-cluster",
             hidden: false,
             group: "ไฟ",
@@ -702,7 +739,13 @@
             directory: "สิ่งแวดล้อม",
             legend: "<icon class='icon-circle' style='color:#51bbd6;'></icon> 1-100 จุด<br><icon class='icon-circle' style='color:#f1f075;'></icon> 101-750 จุด<br><icon class='icon-circle' style='color:#f28cb1;'></icon> มากกว่า 750 จุด"            
           },
-
+          {
+            name: "จุดความร้อน (จุด)",
+            hidden: false,
+            id: "hotspot_circle",
+            group: "ไฟ",
+            directory: "สิ่งแวดล้อม"
+          },
 
 
           {
@@ -720,7 +763,7 @@
             directory: "สิ่งแวดล้อม"
           },
           {
-            name: "บ่อบาดาล",
+            name: "บ่อบาดาล (Cluster)",
             id: "well-cluster",
             hidden: false,
             group: "น้ำ",
@@ -752,7 +795,37 @@
               }
             }         
           },
-
+          {
+            name: "บ่อบาดาล (จุด)",
+            hidden: false,
+            id: "well_circle",
+            group: "น้ำ",
+            directory: "สิ่งแวดล้อม",
+            metadata: {
+              filterSchema: {
+                "ประเภทบ่อ": {
+                  type: "select",
+                  options: ["-- ทั้งหมด --", "บ่ออุปโภค-บริโภค","บ่อเกษตร"]
+                },
+                "ชื่อที่ตั้ง": {
+                  type: "string"
+                },                
+                // "ภาค": {
+                //   type: "select",
+                //   options: ["", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
+                // },                
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                },
+                "ตำบล": {
+                  type: "string"
+                }
+              }
+            }             
+          },
           {
             // name: "แหล่งน้ำขนาดใหญ่",
             id: "แหล่งน้ำขนาดใหญ่",
@@ -954,7 +1027,7 @@
           {
             id: "แจ้งเตือนวางแผน",
             hidden: false,
-            // group: "เขตการปกครอง",
+            group: "ข้อมูลปฏิบัติการ",
             directory: "การแจ้งเตือน",
             children:true
           },
@@ -962,7 +1035,7 @@
           {
             id: "แจ้งเตือนภัย",
             hidden: false,
-            // group: "เขตการปกครอง",
+            group: "ข้อมูลปฏิบัติการ",
             directory: "การแจ้งเตือน",
             children:true
           }
@@ -988,14 +1061,14 @@
           config.layers.push({
               id: symbol[item].layername,
               hidden: true,
-              // group: "น้ำ",
+              group: "ข้อมูลปฏิบัติการ",
               parent: "แจ้งเตือนภัย",
               directory: "การแจ้งเตือน"
             });
           config.layers.push({
               id: symbol[item].layername+'_label',
               hidden: true,
-              // group: "น้ำ",
+              group: "ข้อมูลปฏิบัติการ",
               parent: "แจ้งเตือนภัย",
               directory: "การแจ้งเตือน"
             });
@@ -1003,21 +1076,21 @@
           config.layers.push({
               id: symbol[item].layername,
               hidden: true,
-              // group: "น้ำ",
+              group: "ข้อมูลปฏิบัติการ",
               parent: "แจ้งเตือนวางแผน",
               directory: "การแจ้งเตือน"
             });
           config.layers.push({
               id: symbol[item].layername+'_label',
               hidden: true,
-              // group: "น้ำ",
+              group: "ข้อมูลปฏิบัติการ",
               parent: "แจ้งเตือนวางแผน",
               directory: "การแจ้งเตือน"
             });
           config.layers.push({
               id: symbol[item].layername+'_bound',
               hidden: true,
-              // group: "น้ำ",
+              group: "ข้อมูลปฏิบัติการ",
               parent: "แจ้งเตือนวางแผน",
               directory: "การแจ้งเตือน"
             });
@@ -1042,6 +1115,27 @@
 
 
     });
+
+
+    /* testing */
+
+    map.on('ruler.on', function () {
+      console.log("ruler on");
+      maptools++;
+    });
+    map.on('ruler.off', function () {
+      console.log("ruler off");
+      maptools--;
+    });
+    map.on('inspect.on', function () {
+      console.log("inspect on");
+      maptools++;
+    });
+    map.on('inspect.off', function () {
+      console.log("inspect off");
+      maptools--;
+    });
+
 
     //load_map_layers();
 
