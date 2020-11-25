@@ -1,5 +1,5 @@
 
-  .mapboxgl-ctrl-ruler button, .mapboxgl-ctrl-inspect button, button.maptools-btn {
+  .mapboxgl-ctrl-ruler button, .mapboxgl-ctrl-inspect button, button.maptools-btn, button.ruler-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -151,3 +151,8 @@ button.maptools-btn {
   height: 15px;
   /*background-color: #eee;*/
 }
+
+/*button.active {
+  color: #4264fb;
+  background-color: #4264fb;
+}*/

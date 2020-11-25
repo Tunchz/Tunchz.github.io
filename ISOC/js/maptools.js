@@ -1129,6 +1129,7 @@
 	      this.container.classList.add('mapboxgl-ctrl-ruler');
 	      this.button = document.createElement('button');
 	      this.button.setAttribute('type', 'button');
+	      this.button.classList.add('ruler-btn');
 	      this.button.appendChild(iconRuler());
 	      this.container.appendChild(this.button);
 	    }
@@ -1801,7 +1802,8 @@
 	      this.button.appendChild(iconDownArrow());
 	      this.container.appendChild(this.button);
 	      this.draw = new MapboxDraw({displayControlsDefault: false,controls: {point: true,line_string: true,polygon: true,trash: true,combine_features: false,uncombine_features: false}});
-
+	      this.ruler = new RulerControl();
+	      //map.addControl(new RulerControl(), 'top-left');
 	      // this.popup = null;
 	      // this.lngLat = null;
 	      // this.clickListener = this.clickListener.bind(this);
@@ -1818,7 +1820,8 @@
 	      this.button.innerHTML = '';
 	      this.button.appendChild(iconUpArrow());
 	      this.map.addControl(this.draw, "top-left");
-	      //this.draw.appendChild(this.button);
+	      this.map.addControl(this.ruler, "top-left");
+	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.appendChild(document.getElementsByClassName('ruler-btn')[0]);
 	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.appendChild(this.button);
 	      this.container.style.display = 'none';
 	      this.map.fire('maptools.on');
@@ -1826,7 +1829,7 @@
 	  }, {
 	    key: "MaptoolsOff",
 	    value: function MaptoolsOff() {
-	      this.removePopup();
+	      //this.removePopup();
 	      this.isMaptools = false;
 	      this.button.classList.remove('-active');
 	      // this.map.off('click', this.clickListener);
@@ -1836,49 +1839,51 @@
 	      this.button.appendChild(iconDownArrow());
 	      this.container.style.display = 'block';
 	      this.container.appendChild(this.button);
+	      document.getElementsByClassName('mapboxgl-ctrl-ruler')[0].appendChild(document.getElementsByClassName('ruler-btn')[0]);
 	      this.map.removeControl(this.draw);
+	      this.map.removeControl(this.ruler);
 	      this.map.fire('maptools.off');
 	    }
-	  }, {
-	    key: "getFeatures",
-	    value: function getFeatures(event) {
-	      var selectThreshold = 3;
-	      var queryBox = [[event.point.x - selectThreshold, event.point.y + selectThreshold], // bottom left (SW)
-	      [event.point.x + selectThreshold, event.point.y - selectThreshold] // top right (NE)
-	      ];
-	      return this.map.queryRenderedFeatures(queryBox);
-	    }
-	  }, {
-	    key: "addPopup",
-	    value: function addPopup(features) {
-	      this.popup = popup(features);
-	      this.mapContainer.appendChild(this.popup);
-	      this.updatePosition();
-	    }
-	  }, {
-	    key: "removePopup",
-	    value: function removePopup() {
-	      if (!this.popup) return;
-	      this.mapContainer.removeChild(this.popup);
-	      this.popup = null;
-	    }
-	  }, {
-	    key: "updatePosition",
-	    value: function updatePosition() {
-	      if (!this.lngLat) return;
-	      var canvasRect = this.canvas.getBoundingClientRect();
-	      var pos = this.map.project(this.lngLat);
-	      this.popup.style.left = "".concat(pos.x - canvasRect.left, "px");
-	      this.popup.style.top = "".concat(pos.y - canvasRect.top, "px");
-	    }
-	  }, {
-	    key: "clickListener",
-	    value: function clickListener(event) {
-	      this.lngLat = event.lngLat;
-	      var features = this.getFeatures(event);
-	      this.removePopup();
-	      this.addPopup(features);
-	    }
+	  // }, {
+	  //   key: "getFeatures",
+	  //   value: function getFeatures(event) {
+	  //     var selectThreshold = 3;
+	  //     var queryBox = [[event.point.x - selectThreshold, event.point.y + selectThreshold], // bottom left (SW)
+	  //     [event.point.x + selectThreshold, event.point.y - selectThreshold] // top right (NE)
+	  //     ];
+	  //     return this.map.queryRenderedFeatures(queryBox);
+	  //   }
+	  // }, {
+	  //   key: "addPopup",
+	  //   value: function addPopup(features) {
+	  //     this.popup = popup(features);
+	  //     this.mapContainer.appendChild(this.popup);
+	  //     this.updatePosition();
+	  //   }
+	  // }, {
+	  //   key: "removePopup",
+	  //   value: function removePopup() {
+	  //     if (!this.popup) return;
+	  //     this.mapContainer.removeChild(this.popup);
+	  //     this.popup = null;
+	  //   }
+	  // }, {
+	  //   key: "updatePosition",
+	  //   value: function updatePosition() {
+	  //     if (!this.lngLat) return;
+	  //     var canvasRect = this.canvas.getBoundingClientRect();
+	  //     var pos = this.map.project(this.lngLat);
+	  //     this.popup.style.left = "".concat(pos.x - canvasRect.left, "px");
+	  //     this.popup.style.top = "".concat(pos.y - canvasRect.top, "px");
+	  //   }
+	  // }, {
+	  //   key: "clickListener",
+	  //   value: function clickListener(event) {
+	  //     this.lngLat = event.lngLat;
+	  //     var features = this.getFeatures(event);
+	  //     this.removePopup();
+	  //     this.addPopup(features);
+	  //   }
 	  }, {
 	    key: "onAdd",
 	    value: function onAdd(map) {
@@ -1914,7 +1919,7 @@
 	map.addControl(new InspectControl(), 'top-left');
 
 	/* Ruler */
-	map.addControl(new RulerControl(), 'top-left');
+	// map.addControl(new RulerControl(), 'top-left');
 
 
 	/* Maptools */
