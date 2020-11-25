@@ -1,5 +1,5 @@
 
-  .mapboxgl-ctrl-ruler button, .mapboxgl-ctrl-inspect button {
+  .mapboxgl-ctrl-ruler button, .mapboxgl-ctrl-inspect button, button.maptools-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -137,4 +137,17 @@
 /* Handle on hover */
 .mapboxgl-ctrl-inspect-feature-container::-webkit-scrollbar-thumb:hover {
   background: #aaa; 
+}
+
+.mapboxgl-ctrl-tooltip:empty {
+  display: none;
+}
+
+button.-active svg {
+  fill: #4264fb;
+}
+
+button.maptools-btn {
+  height: 15px;
+  /*background-color: #eee;*/
 }

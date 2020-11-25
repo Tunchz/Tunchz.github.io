@@ -1746,14 +1746,179 @@
 	  return TooltipControl;
 	}();
 
+//===========================================================================================================================
 
-	/* Ruler */
-	map.addControl(new RulerControl(), 'top-left');
+
+	function _classCallCheck$1(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	}
+
+	function _defineProperties$1(target, props) {
+	  for (var i = 0; i < props.length; i++) {
+	    var descriptor = props[i];
+	    descriptor.enumerable = descriptor.enumerable || false;
+	    descriptor.configurable = true;
+	    if ("value" in descriptor) descriptor.writable = true;
+	    Object.defineProperty(target, descriptor.key, descriptor);
+	  }
+	}
+
+	function _createClass$1(Constructor, protoProps, staticProps) {
+	  if (protoProps) _defineProperties$1(Constructor.prototype, protoProps);
+	  if (staticProps) _defineProperties$1(Constructor, staticProps);
+	  return Constructor;
+	}
+
+	function iconMaptools() {
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n    <path d=\"M20 19.59V8l-6-6H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.74.83-2.76.83-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5c0 1.02-.31 1.96-.83 2.75L20 19.59zM9 13c0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3-3 1.34-3 3z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	}
+
+	function iconUpArrow() {
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M7 14l 5-5 5 5H7z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	}
+
+	function iconDownArrow() {
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M7 9l5 5 5-5H7z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	}
+
+	var MaptoolsControl = /*#__PURE__*/function () {
+	  function MaptoolsControl() {
+	    _classCallCheck$1(this, MaptoolsControl);
+	  }
+
+	  _createClass$1(MaptoolsControl, [{
+	    key: "MaptoolsControls",
+	    value: function MaptoolsControls() {
+	      this.container = document.createElement('div');
+	      this.container.classList.add('mapboxgl-ctrl');
+	      this.container.classList.add('mapboxgl-ctrl-group');
+	      this.container.classList.add('mapboxgl-ctrl-maptools');
+	      this.button = document.createElement('button');
+	      this.button.setAttribute('type', 'button');
+	      this.button.classList.add('maptools-btn');
+	      this.button.appendChild(iconDownArrow());
+	      this.container.appendChild(this.button);
+	      this.draw = new MapboxDraw({displayControlsDefault: false,controls: {point: true,line_string: true,polygon: true,trash: true,combine_features: false,uncombine_features: false}});
+
+	      // this.popup = null;
+	      // this.lngLat = null;
+	      // this.clickListener = this.clickListener.bind(this);
+	      // this.updatePosition = this.updatePosition.bind(this);
+	    }
+	  }, {
+	    key: "MaptoolsOn",
+	    value: function MaptoolsOn() {
+	      this.isMaptools = true;
+	      this.button.classList.add('-active');
+	      // this.map.on('click', this.clickListener);
+	      // this.map.on('move', this.updatePosition);
+	      // this.map.getCanvas().style.cursor = 'pointer';
+	      this.button.innerHTML = '';
+	      this.button.appendChild(iconUpArrow());
+	      this.map.addControl(this.draw, "top-left");
+	      //this.draw.appendChild(this.button);
+	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.appendChild(this.button);
+	      this.container.style.display = 'none';
+	      this.map.fire('maptools.on');
+	    }
+	  }, {
+	    key: "MaptoolsOff",
+	    value: function MaptoolsOff() {
+	      this.removePopup();
+	      this.isMaptools = false;
+	      this.button.classList.remove('-active');
+	      // this.map.off('click', this.clickListener);
+	      // this.map.off('move', this.updatePosition);
+	      // this.map.getCanvas().style.cursor = '';
+	      this.button.innerHTML = '';
+	      this.button.appendChild(iconDownArrow());
+	      this.container.style.display = 'block';
+	      this.container.appendChild(this.button);
+	      this.map.removeControl(this.draw);
+	      this.map.fire('maptools.off');
+	    }
+	  }, {
+	    key: "getFeatures",
+	    value: function getFeatures(event) {
+	      var selectThreshold = 3;
+	      var queryBox = [[event.point.x - selectThreshold, event.point.y + selectThreshold], // bottom left (SW)
+	      [event.point.x + selectThreshold, event.point.y - selectThreshold] // top right (NE)
+	      ];
+	      return this.map.queryRenderedFeatures(queryBox);
+	    }
+	  }, {
+	    key: "addPopup",
+	    value: function addPopup(features) {
+	      this.popup = popup(features);
+	      this.mapContainer.appendChild(this.popup);
+	      this.updatePosition();
+	    }
+	  }, {
+	    key: "removePopup",
+	    value: function removePopup() {
+	      if (!this.popup) return;
+	      this.mapContainer.removeChild(this.popup);
+	      this.popup = null;
+	    }
+	  }, {
+	    key: "updatePosition",
+	    value: function updatePosition() {
+	      if (!this.lngLat) return;
+	      var canvasRect = this.canvas.getBoundingClientRect();
+	      var pos = this.map.project(this.lngLat);
+	      this.popup.style.left = "".concat(pos.x - canvasRect.left, "px");
+	      this.popup.style.top = "".concat(pos.y - canvasRect.top, "px");
+	    }
+	  }, {
+	    key: "clickListener",
+	    value: function clickListener(event) {
+	      this.lngLat = event.lngLat;
+	      var features = this.getFeatures(event);
+	      this.removePopup();
+	      this.addPopup(features);
+	    }
+	  }, {
+	    key: "onAdd",
+	    value: function onAdd(map) {
+	      var _this = this;
+
+	      this.map = map;
+	      this.mapContainer = this.map.getContainer();
+	      this.canvas = this.map.getCanvas();
+	      this.isMaptools = false;
+	      this.MaptoolsControls();
+	      this.button.addEventListener('click', function () {
+	        if (_this.isMaptools) {
+	          _this.MaptoolsOff();
+	        } else {
+	          _this.MaptoolsOn();
+	        }
+	      });
+	      return this.container;
+	    }
+	  }, {
+	    key: "onRemove",
+	    value: function onRemove() {
+	      this.MaptoolsOff();
+	      this.container.parentNode.removeChild(this.container);
+	      this.map = undefined;
+	    }
+	  }]);
+
+	  return MaptoolsControl;
+	}();
 
 	/* Inspect */
 	map.addControl(new InspectControl(), 'top-left');
 
+	/* Ruler */
+	map.addControl(new RulerControl(), 'top-left');
 
+
+	/* Maptools */
+	map.addControl(new MaptoolsControl(), 'top-left');
 
 }());
 //# sourceMappingURL=docs.bundle.js.map

@@ -224,7 +224,8 @@
   <link rel="stylesheet" href="css/jquery-ui.css">
   <script src="js/jquery-ui.js"></script>
   <script src="autocomplete.js"></script>
-  
+
+  <link rel="stylesheet" href="css/mapbox-gl-draw.css">
   <link rel="stylesheet" href="css/maptools.css">
 
   <script>
@@ -447,6 +448,7 @@
 
   </script>
 
+  <script src="js/mapbox-gl-draw.js"></script>
   <script src="js/maptools.js"></script>
 
 
@@ -837,7 +839,7 @@
             }         
           },
           {
-            name: "บ่อบาดาล (จุด)",
+            //name: "บ่อบาดาล (จุด)",
             hidden: false,
             id: "well_circle",
             group: "น้ำ",
@@ -1233,7 +1235,14 @@
       console.log("inspect off");
       disinteract--;
     });
-
+    map.on('maptools.on', function () {
+      console.log("maptools on");
+      disinteract++;
+    });
+    map.on('maptools.off', function () {
+      console.log("maptools off");
+      disinteract--;
+    });
 
     //load_map_layers();
 
