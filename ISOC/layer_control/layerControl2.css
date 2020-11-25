@@ -395,6 +395,7 @@ SPECTRE MODAL
   left: 0px;
   top: 55px;
   position: absolute;
+  z-index: 3;
 /*  padding: 10px;
   padding-left: 0px;
   border-radius:0 5px 5px 0;*/
