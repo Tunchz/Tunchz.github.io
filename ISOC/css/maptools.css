@@ -9,6 +9,10 @@
   fill: #4264fb;
 }
 
+canvas.ruler, canvas.inspect{
+    cursor: crosshair !important;
+}
+
 button.mapboxgl-ctrl-compass {
   position: relative;
   overflow: visible;

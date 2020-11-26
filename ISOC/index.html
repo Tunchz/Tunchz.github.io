@@ -1216,10 +1216,26 @@
 
     });
 
+  /* Inspect */
+  var inspect = new InspectControl();
+  map.addControl(inspect, 'top-left');
+
+  /* Ruler */
+  // map.addControl(new RulerControl(), 'top-left');
+
+
+  /* Maptools */
+  var maptools = new MaptoolsControl();
+  map.addControl(maptools, 'top-left');
+
+  // /* Compass */
+  // map.addControl(new CompassControl(), 'top-left');  
+
 
     /* testing */
 
     map.on('ruler.on', function () {
+      if (inspect.isInspecting) inspect.inspectingOff();
       console.log("ruler on");
       disinteract++;
     });
@@ -1228,6 +1244,7 @@
       disinteract--;
     });
     map.on('inspect.on', function () {
+      if (maptools.ruler.isMeasuring) maptools.ruler.measuringOff();
       console.log("inspect on");
       disinteract++;
     });

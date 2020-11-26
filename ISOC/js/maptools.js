@@ -1,4 +1,4 @@
-(function () {
+// (function () {
 	'use strict';
 
 	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -1045,6 +1045,7 @@
 	var SOURCE_SYMBOL = 'controls-source-symbol';
 	var MAIN_COLOR = '#0000ff'; //'#263238';
 	var HALO_COLOR = '#fff';
+	var SELECT_COLOR = '#fbb03b';
 
 	function geoLineString() {
 	  var coordinates = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -1106,9 +1107,12 @@
 	    _classCallCheck$2(this, RulerControl);
 
 	    this.isMeasuring = false;
-	    this.markers = [];
-	    this.coordinates = [];
-	    this.labels = [];
+	    this.mode = "";
+	    this.linenum = 0;
+	    this.linetotal = 0;
+	    this.markers = {};
+	    this.coordinates = {};
+	    this.labels = {};
 	    this.units = options.units || 'kilometers';
 	    this.font = options.font || ['Roboto Medium'];
 	    this.fontSize = options.fontSize || 12;
@@ -1116,6 +1120,7 @@
 	    this.labelFormat = options.labelFormat || defaultLabelFormat;
 	    this.mainColor = options.mainColor || MAIN_COLOR;
 	    this.secondaryColor = options.secondaryColor || HALO_COLOR;
+	    this.selectColor = options.selectColor || SELECT_COLOR;
 	    this.mapClickListener = this.mapClickListener.bind(this);
 	    this.styleLoadListener = this.styleLoadListener.bind(this);
 	  }
@@ -1136,27 +1141,28 @@
 	  }, {
 	    key: "draw",
 	    value: function draw() {
-	      this.map.addSource(SOURCE_LINE, {
+	      this.map.addSource(SOURCE_LINE+this.linenum, {
 	        type: 'geojson',
-	        data: geoLineString(this.coordinates)
+	        data: geoLineString(this.coordinates[this.linenum])
 	      });
-	      this.map.addSource(SOURCE_SYMBOL, {
+	      this.map.addSource(SOURCE_SYMBOL+this.linenum, {
 	        type: 'geojson',
-	        data: geoPoint(this.coordinates, this.labels)
+	        data: geoPoint(this.coordinates[this.linenum], this.labels[this.linenum])
 	      });
 	      this.map.addLayer({
-	        id: LAYER_LINE,
+	        id: LAYER_LINE+this.linenum,
 	        type: 'line',
-	        source: SOURCE_LINE,
+	        source: SOURCE_LINE+this.linenum,
 	        paint: {
 	          'line-color': this.mainColor,
-	          'line-width': 3
+	          'line-width': 2,
+	          'line-dasharray': [1, 1],
 	        }
 	      });
 	      this.map.addLayer({
-	        id: LAYER_SYMBOL,
+	        id: LAYER_SYMBOL+this.linenum,
 	        type: 'symbol',
-	        source: SOURCE_SYMBOL,
+	        source: SOURCE_SYMBOL+this.linenum,
 	        layout: {
 	          'text-field': '{text}',
 	          'text-font': this.font,
@@ -1170,18 +1176,58 @@
 	          'text-halo-width': this.fontHalo
 	        }
 	      });
+	      // this.map.addSource('SOURCE_NEW_LINE', {
+	      //   type: 'geojson',
+	      //   data: geoLineString([[0,0],[0,0]])
+	      // });
+	      // this.map.addLayer({
+	      //   id: 'LAYER_NEW_LINE',
+	      //   type: 'line',
+	      //   source: 'SOURCE_NEW_LINE',
+	      //   paint: {
+	      //     'line-color': this.selectColor,
+	      //     'line-width': 2,
+	      //     'line-dasharray': [1, 1],
+	      //   }
+	      // });	      
 	    }
 	  }, {
+	    key: "modeupdate",
+	    value: function modeupdate(mode) {
+	    	this.mode = mode;
+	    	if (this.linenum > 0) {
+		    	if (mode == '') {
+		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-dasharray', [1, 0]);
+		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-color', this.mainColor);
+		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-color', this.mainColor);
+		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-halo-color', this.secondaryColor);
+		    	} else {
+		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-dasharray', [1, 1]);
+		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-color', this.selectColor);
+		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-color', this.selectColor);
+		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-halo-color', "#000");
+		    	}	    		
+	    	}
+	    }
+	  }, {
+
 	    key: "measuringOn",
 	    value: function measuringOn() {
 	      this.isMeasuring = true;
-	      this.markers = [];
-	      this.coordinates = [];
-	      this.labels = [];
-	      this.map.getCanvas().style.cursor = 'crosshair';
+	      if (this.linetotal>0) this.modeupdate(''); else this.map.on('click', this.mapClickListener);
+	      this.linetotal++;
+	      this.linenum = this.linetotal;
+	      // console.log(this.linenum,this.linetotal);
+	      this.markers[this.linenum] = [];
+	      this.coordinates[this.linenum] = [];
+	      this.labels[this.linenum] = [];
+	      //this.map.getCanvas().style.cursor = 'crosshair';
+	      this.map.getCanvas().classList.add('ruler');
 	      this.button.classList.add('-active');
 	      this.draw();
-	      this.map.on('click', this.mapClickListener);
+	      this.modeupdate('edit');
+	      // this.map.on('click', this.mapClickListener);
+	      // this.map.on('mousemove', this.mapMouseMoveListener);
 	      this.map.on('dblclick', this.mapDblClickListener);
 	      this.map.on('contextmenu', this.mapContextMenuListener);
 	      this.map.on('style.load', this.styleLoadListener);
@@ -1191,87 +1237,170 @@
 	    key: "measuringOff",
 	    value: function measuringOff() {
 	      this.isMeasuring = false;
+	      this.modeupdate('');
+	      this.linenum = 0;
 	      this.map.getCanvas().style.cursor = '';
+	      this.map.getCanvas().classList.remove('ruler');
 	      this.button.classList.remove('-active'); // remove layers, sources and event listeners
 
-	      this.map.removeLayer(LAYER_LINE);
-	      this.map.removeLayer(LAYER_SYMBOL);
-	      this.map.removeSource(SOURCE_LINE);
-	      this.map.removeSource(SOURCE_SYMBOL);
-	      this.markers.forEach(function (m) {
-	        return m.remove();
-	      });
-	      this.map.off('click', this.mapClickListener);
+	      // this.map.removeLayer(LAYER_LINE);
+	      // this.map.removeLayer(LAYER_SYMBOL);
+	      // this.map.removeSource(SOURCE_LINE);
+	      // this.map.removeSource(SOURCE_SYMBOL);
+	      // this.markers.forEach(function (m) {
+	      //   return m.remove();
+	      // });
+	      // this.map.off('click', this.mapClickListener);
+	      // this.map.off('mousemove', this.mapMouseMoveListener);
+	   	  // this.map.removeLayer('LAYER_NEW_LINE');
+		  // this.map.removeSource('SOURCE_NEW_LINE');
 	      this.map.off('style.load', this.styleLoadListener);
 	      this.map.fire('ruler.off');
 	    }
 	  }, {
+	    key: "mapMouseMoveListener",
+	    value: function mapMouseMoveListener(event) {
+	    	// console.log(event,this);
+		    // if (this.coordinates[this.linenum].length) {
+			   //  var index = this.coordinates[this.linenum].length;
+			   //  var lngLat = e.lngLat.wrap();
+			   //  // this.coordinates[this.linenum][nodeindex-1] = [lngLat.lng, lngLat.lat];
+			   //  this.map.getSource('SOURCE_NEW_LINE').setData(geoLineString([this.coordinates[this.linenum][nodeindex-1],[lngLat.lng,lngLat.lat]]));		    	
+		    // }
+	
+	    }
+	  }, {
+	    key: "deleteSelectLine",
+	    value: function deleteSelectLine() {
+	    	console.log("deleteSelectLine",this.mode,this.linenum);
+	    	console.log(this.mode);
+	    	if (this.mode != '') {
+	    		this.measuringOff;	    		
+		        this.map.removeLayer(LAYER_LINE+this.linenum);
+		        this.map.removeLayer(LAYER_SYMBOL+this.linenum);
+		        this.map.removeSource(SOURCE_LINE+this.linenum);
+		        this.map.removeSource(SOURCE_SYMBOL+this.linenum);
+		        this.markers[this.linenum].forEach(function (m) {
+		        	return m.remove();
+		        });				
+				this.coordinates[this.linenum] = [];
+				this.labels[this.linenum] = [];
+				this.markers[this.linenum] = [];
+	    	}
+	    }
+	  }, {	  	
 	    key: "mapClickListener",
 	    value: function mapClickListener(event) {
-	      var _this = this;
-	      var index = this.labels.length;
-	      var markerNode = document.createElement('div');
-	      markerNode.id = (index+1);
-	      markerNode.style.width = '20px';
-	      markerNode.style.height = '20px';
-	      markerNode.style.borderRadius = '50%';
-	      markerNode.style.background = (index == 0)? "#f00" : this.secondaryColor;
-	      markerNode.style.boxSizing = 'border-box';
-	      markerNode.style.border = "3px solid ".concat(this.mainColor);
-	      markerNode.style.cursor = 'pointer';
-	      var marker = new mapboxgl.Marker({
-	        element: markerNode,
-	        draggable: true
-	      }).setLngLat(event.lngLat).addTo(this.map);
+		    if (this.isMeasuring) {
+				var _this = this;
+				var index = this.labels[this.linenum].length + 1;
+				var markerNode = document.createElement('div');
+				markerNode.id = this.linenum + "#" + index;
+				markerNode.style.width = '11px';
+				markerNode.style.height = '11px';
+				markerNode.style.borderRadius = '50%';
+				markerNode.style.background = (index == 1)? "#f00" : this.mainColor;
+				markerNode.style.boxSizing = 'border-box';
+				markerNode.style.border = "3px solid ".concat(this.secondaryColor);
+				markerNode.style.cursor = 'pointer';
+				var marker = new mapboxgl.Marker({
+				element: markerNode,
+				draggable: true
+				}).setLngLat(event.lngLat).addTo(this.map);
 
-	      markerNode.addEventListener('click', function(e){
-	      	e.stopPropagation();
-	      	// line point event
-	      	console.log("click",this);
-	      });
+				markerNode.addEventListener('click', function(e){
+					e.stopPropagation();
+					// line point event
+					var linenum = this.id.split("#")[0],
+						nodeindex = this.id.split("#")[1];
+					// console.log(_this.isMeasuring,"current line "+_this.linenum,"select "+this.id);	      	
+					// if ((!_this.isMeasuring)&&(_this.linenum != linenum)) {
+					// 	_this.modeupdate('');
+					// 	_this.linenum = linenum;
+					// 	_this.modeupdate('select');
+					// }
+					if ((nodeindex == _this.labels[linenum].length)&&(_this.mode=='edit')) {
+						_this.measuringOff();
+					}
 
-	      markerNode.addEventListener('contextmenu', function(e){
-	      	// stop event sending to layer underneath
-	      	e.stopPropagation();
-	      	// stop context menu showing up
-	      	e.preventDefault();
-	      	// line point event
-	      	//console.log(this.id,_this.labels.length);
+				});
 
-	      	// check if is on the last node
-	      	if (this.id == _this.labels.length) {
-				this.parentElement.removeChild(this);  
-				_this.coordinates.pop();
-				_this.labels.pop();
-				_this.map.getSource(SOURCE_LINE).setData(geoLineString(_this.coordinates));
-				_this.map.getSource(SOURCE_SYMBOL).setData(geoPoint(_this.coordinates, _this.labels));
-				_this.markers.pop();
-	      	}
-	      });
+				markerNode.addEventListener('mousedown', function(e){
+					// line point event
+					// console.log("mousedown Node");
+					// console.log(this.id,this.id.split("#"));
+					var linenum = this.id.split("#")[0],
+						nodeindex = this.id.split("#")[1];
+					// console.log("line "+linenum, "node index "+nodeindex);	      	
 
-	      //console.log(this,this.coordinates);
+					// console.log(_this.isMeasuring,"current line "+_this.linenum,"select "+this.id);	      	
+					if ((!_this.isMeasuring)&&(_this.linenum != linenum)) {
+						_this.modeupdate('');
+						_this.linenum = linenum;
+						_this.modeupdate('select');
+					}
+					// if ((nodeindex == _this.labels[linenum].length)&&(_this.mode=='edit')) {
+					// 	_this.measuringOff();
+					// }
 
-	      this.coordinates.push([event.lngLat.lng, event.lngLat.lat]);
-	      this.labels = this.coordinatesToLabels();
-	      this.map.getSource(SOURCE_LINE).setData(geoLineString(this.coordinates));
-	      this.map.getSource(SOURCE_SYMBOL).setData(geoPoint(this.coordinates, this.labels));
-	      this.markers.push(marker);
-	      marker.on('drag', function () {
-	        var index = _this.markers.indexOf(marker);
 
-	        var lngLat = marker.getLngLat();
-	        _this.coordinates[index] = [lngLat.lng, lngLat.lat];
-	        _this.labels = _this.coordinatesToLabels();
 
-	        _this.map.getSource(SOURCE_LINE).setData(geoLineString(_this.coordinates));
+					if ((linenum = _this.linenum)&&(_this.mode!='')) {
+				  marker.on('drag', function (e) {
+				  	// console.log("drag " + linenum);
+				    var lngLat = marker.getLngLat();
+				    _this.coordinates[linenum][nodeindex-1] = [lngLat.lng, lngLat.lat];
+				    _this.labels[linenum] = _this.coordinatesToLabels(linenum);
+				    _this.map.getSource(SOURCE_LINE+linenum).setData(geoLineString(_this.coordinates[linenum]));
+				    _this.map.getSource(SOURCE_SYMBOL+linenum).setData(geoPoint(_this.coordinates[linenum], _this.labels[linenum]));
+				  });
+				}  
+				});
 
-	        _this.map.getSource(SOURCE_SYMBOL).setData(geoPoint(_this.coordinates, _this.labels));
-	      });
+				markerNode.addEventListener('dblclick', function(e){
+					e.stopPropagation();
+					console.log("double click Node");
+					_this.measuringOff();
+				});
+
+				markerNode.addEventListener('contextmenu', function(e){
+					// stop event sending to layer underneath
+					e.stopPropagation();
+					// stop context menu showing up
+					e.preventDefault();
+					// line point event
+					var linenum = this.id.split("#")[0],
+						nodeindex = this.id.split("#")[1];
+
+					// check if is on the last node
+					if (nodeindex == _this.labels[linenum].length) {
+					this.parentElement.removeChild(this);  
+					_this.coordinates[linenum].pop();
+					_this.labels[linenum].pop();
+					_this.map.getSource(SOURCE_LINE+linenum).setData(geoLineString(_this.coordinates[linenum]));
+					_this.map.getSource(SOURCE_SYMBOL+linenum).setData(geoPoint(_this.coordinates[linenum], _this.labels[linenum]));
+					_this.markers[linenum].pop();
+					}	    	
+
+
+				});
+
+			      //console.log(this,this.coordinates);
+
+				this.coordinates[this.linenum].push([event.lngLat.lng, event.lngLat.lat]);
+				this.labels[this.linenum] = this.coordinatesToLabels(this.linenum);
+				this.map.getSource(SOURCE_LINE+this.linenum).setData(geoLineString(this.coordinates[this.linenum]));
+				this.map.getSource(SOURCE_SYMBOL+this.linenum).setData(geoPoint(this.coordinates[this.linenum], this.labels[this.linenum]));
+				this.markers[this.linenum].push(marker);
+
+		    } else {
+		    	this.measuringOff();
+		    }
 	    }
 	  }, {
 	    key: "coordinatesToLabels",
-	    value: function coordinatesToLabels() {
-	      var coordinates = this.coordinates,
+	    value: function coordinatesToLabels(linenum) {
+	      var coordinates = this.coordinates[linenum],
 	          units = this.units,
 	          labelFormat = this.labelFormat;
 	      var sum = 0,dis = 0;
@@ -1312,7 +1441,26 @@
 	        this.measuringOff();
 	      }
 
+	      for(var j=1; j<this.linetotal+1; j++) {
+		      this.map.removeLayer(LAYER_LINE+j);
+		      this.map.removeLayer(LAYER_SYMBOL+j);
+		      this.map.removeSource(SOURCE_LINE+j);
+		      this.map.removeSource(SOURCE_SYMBOL+j);
+		      this.markers[j].forEach(function (m) {
+		        return m.remove();
+		      });
+	      }
+	      this.linetotal = 0;
+		  this.linenum = 0;
+		  this.markers = {};
+		  this.coordinates = {};
+		  this.labels = {};
+
+
 	      this.map.off('click', this.mapClickListener);
+	      this.map.off('dblclick', this.mapDblClickListener);
+	      this.map.off('contextmenu', this.mapContextMenuListener);
+	      this.map.off('style.load', this.styleLoadListener);	      
 	      this.container.parentNode.removeChild(this.container);
 	      this.map = undefined;
 	    }
@@ -1321,7 +1469,6 @@
 	    value: function mapDblClickListener() {
 	    	// Map event
 	    	console.log("double click!")
-
 	    }
 	  }, {
 	    key: "mapContextMenuListener",
@@ -1531,7 +1678,8 @@
 	      this.button.classList.add('-active');
 	      this.map.on('click', this.clickListener);
 	      this.map.on('move', this.updatePosition);
-	      this.map.getCanvas().style.cursor = 'crosshair';
+	      //this.map.getCanvas().style.cursor = 'crosshair';
+	      this.map.getCanvas().classList.add('inspect');
 	      this.map.fire('inspect.on');
 	    }
 	  }, {
@@ -1542,7 +1690,8 @@
 	      this.button.classList.remove('-active');
 	      this.map.off('click', this.clickListener);
 	      this.map.off('move', this.updatePosition);
-	      this.map.getCanvas().style.cursor = '';
+	      //this.map.getCanvas().style.cursor = '';
+	      this.map.getCanvas().classList.remove('inspect');
 	      this.map.fire('inspect.off');
 	    }
 	  }, {
@@ -1928,6 +2077,16 @@
 	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.appendChild(document.getElementsByClassName('ruler-btn')[0]);
 	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.appendChild(this.button);
 	      this.container.style.display = 'none';
+	      var _this = this;
+	      document.getElementsByClassName('mapbox-gl-draw_trash')[0].addEventListener('click', function () {
+	      	console.log("click trash");
+	      	_this.ruler.deleteSelectLine();
+
+	      });
+
+
+
+
 	      this.map.fire('maptools.on');
 	    }
 	  }, {
@@ -2020,17 +2179,17 @@
 	}();
 
 	/* Inspect */
-	map.addControl(new InspectControl(), 'top-left');
+	// map.addControl(new InspectControl(), 'top-left');
 
 	/* Ruler */
 	// map.addControl(new RulerControl(), 'top-left');
 
 
 	/* Maptools */
-	map.addControl(new MaptoolsControl(), 'top-left');
+	// map.addControl(new MaptoolsControl(), 'top-left');
 
 	// /* Compass */
 	// map.addControl(new CompassControl(), 'top-left');	
 
-}());
+// }());
 //# sourceMappingURL=docs.bundle.js.map
