@@ -1273,19 +1273,21 @@
 	    key: "deleteSelectLine",
 	    value: function deleteSelectLine() {
 	    	console.log("deleteSelectLine",this.mode,this.linenum);
-	    	console.log(this.mode);
+	    	console.log("mode: "+this.mode);
 	    	if (this.mode != '') {
-	    		this.measuringOff;	    		
-		        this.map.removeLayer(LAYER_LINE+this.linenum);
-		        this.map.removeLayer(LAYER_SYMBOL+this.linenum);
-		        this.map.removeSource(SOURCE_LINE+this.linenum);
-		        this.map.removeSource(SOURCE_SYMBOL+this.linenum);
-		        this.markers[this.linenum].forEach(function (m) {
+	    		var linenum = this.linenum;
+	    		this.measuringOff();    		
+		        this.map.removeLayer(LAYER_LINE+linenum);
+		        this.map.removeLayer(LAYER_SYMBOL+linenum);
+		        this.map.removeSource(SOURCE_LINE+linenum);
+		        this.map.removeSource(SOURCE_SYMBOL+linenum);
+		        this.markers[linenum].forEach(function (m) {
 		        	return m.remove();
 		        });				
-				this.coordinates[this.linenum] = [];
-				this.labels[this.linenum] = [];
-				this.markers[this.linenum] = [];
+				this.coordinates[linenum] = [];
+				this.labels[linenum] = [];
+				this.markers[linenum] = [];
+				console.log("delete :"+ this.mode, this.linenum);
 	    	}
 	    }
 	  }, {	  	
