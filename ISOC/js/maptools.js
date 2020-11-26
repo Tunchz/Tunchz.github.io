@@ -1749,6 +1749,110 @@
 
 //===========================================================================================================================
 
+	function _classCallCheck$3(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	}
+
+	function _defineProperties$3(target, props) {
+	  for (var i = 0; i < props.length; i++) {
+	    var descriptor = props[i];
+	    descriptor.enumerable = descriptor.enumerable || false;
+	    descriptor.configurable = true;
+	    if ("value" in descriptor) descriptor.writable = true;
+	    Object.defineProperty(target, descriptor.key, descriptor);
+	  }
+	}
+
+	function _createClass$3(Constructor, protoProps, staticProps) {
+	  if (protoProps) _defineProperties$1(Constructor.prototype, protoProps);
+	  if (staticProps) _defineProperties$1(Constructor, staticProps);
+	  return Constructor;
+	}
+
+	function iconPointer() {
+	  return (new DOMParser().parseFromString("<svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" xmlns=\"http://www.w3.org/2000/svg\">\n    <g fill=\"none\" fill-rule=\"evenodd\">\n        <path d=\"M0 0h24v24H0z\"/>\n        <path fill=\"#f44336\" d=\"M12 3l4 8H8z\"/>\n        <path fill=\"#9E9E9E\" d=\"M12 21l-4-8h8z\"/>\n    </g>\n</svg>", 'image/svg+xml')).firstChild;
+	}
+
+	/**
+	 * Simple compass
+	 * @param {Object} options
+	 * @param {Boolean} [options.instant=true] - Show compass if bearing is 0
+	 */
+
+	var CompassControl = /*#__PURE__*/function () {
+	  function CompassControl() {
+	    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+	    _classCallCheck$1(this, CompassControl);
+
+	    this.instant = typeof options.instant === 'boolean' ? options.instant : true;
+	    this.onRotate = this.onRotate.bind(this);
+	  }
+
+	  _createClass$3(CompassControl, [{
+	    key: "insertControls",
+	    value: function insertControls() {
+	      this.container = document.createElement('div');
+	      this.button = document.createElement('button');
+	      this.button.setAttribute('type', 'button');
+	      this.container.classList.add('mapboxgl-ctrl');
+	      this.container.classList.add('mapboxgl-ctrl-group');
+	      this.container.classList.add('mapboxgl-ctrl-compass');
+	      this.pointer = iconPointer();
+
+	      if (this.instant) {
+	        this.container.classList.add('-active');
+	      }
+
+	      this.container.appendChild(this.button);
+	      this.button.appendChild(this.pointer);
+	    }
+	  }, {
+	    key: "onAdd",
+	    value: function onAdd(map) {
+	      var _this = this;
+
+	      this.map = map;
+	      this.insertControls();
+	      this.button.addEventListener('click', function () {
+	        _this.map.easeTo({
+	          bearing: 0,
+	          pitch: 0
+	        });
+	      });
+	      this.map.on('rotate', this.onRotate);
+	      this.onRotate();
+	      return this.container;
+	    }
+	  }, {
+	    key: "onRemove",
+	    value: function onRemove() {
+	      this.container.parentNode.removeChild(this.container);
+	      this.map = undefined;
+	    }
+	  }, {
+	    key: "onRotate",
+	    value: function onRotate() {
+	      var angle = this.map.getBearing() * -1;
+
+	      if (!this.instant) {
+	        if (angle === 0) {
+	          this.container.classList.remove('-active');
+	        } else {
+	          this.container.classList.add('-active');
+	        }
+	      }
+
+	      this.pointer.style.transform = "rotate(".concat(angle, "deg)");
+	    }
+	  }]);
+
+	  return CompassControl;
+	}();
+
+//==================================================================================================================
 
 	function _classCallCheck$1(instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
@@ -1773,15 +1877,15 @@
 	}
 
 	function iconMaptools() {
-	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n    <path d=\"M20 19.59V8l-6-6H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.74.83-2.76.83-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5c0 1.02-.31 1.96-.83 2.75L20 19.59zM9 13c0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3-3 1.34-3 3z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#000000\">\n    <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n    <path d=\"M20 19.59V8l-6-6H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.74.83-2.76.83-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5c0 1.02-.31 1.96-.83 2.75L20 19.59zM9 13c0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3-3 1.34-3 3z\"/>\n</svg>", 'image/svg+xml')).firstChild;
 	}
 
 	function iconUpArrow() {
-	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M7 14l 5-5 5 5H7z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#000000\">\n    <path d=\"M7 14l 5-5 5 5H7z\"/>\n</svg>", 'image/svg+xml')).firstChild;
 	}
 
 	function iconDownArrow() {
-	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M7 9l5 5 5-5H7z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#000000\">\n    <path d=\"M7 9l5 5 5-5H7z\"/>\n</svg>", 'image/svg+xml')).firstChild;
 	}
 
 	var MaptoolsControl = /*#__PURE__*/function () {
@@ -1801,7 +1905,7 @@
 	      this.button.classList.add('maptools-btn');
 	      this.button.appendChild(iconDownArrow());
 	      this.container.appendChild(this.button);
-	      this.draw = new MapboxDraw({displayControlsDefault: false,controls: {point: true,line_string: true,polygon: true,trash: true,combine_features: false,uncombine_features: false}});
+	      this.draw = new MapboxDraw({displayControlsDefault: false,controls: {point: true,line_string: true,polygon: true,trash: true,combine_features: false,uncombine_features: false},touchBuffer:35});
 	      this.ruler = new RulerControl();
 	      //map.addControl(new RulerControl(), 'top-left');
 	      // this.popup = null;
@@ -1924,6 +2028,9 @@
 
 	/* Maptools */
 	map.addControl(new MaptoolsControl(), 'top-left');
+
+	// /* Compass */
+	// map.addControl(new CompassControl(), 'top-left');	
 
 }());
 //# sourceMappingURL=docs.bundle.js.map

@@ -21,7 +21,7 @@
 }
 
 .mapboxgl-canvas-container.mapboxgl-interactive,
-.mapboxgl-ctrl-group button.mapboxgl-ctrl-compass {
+.mapboxgl-ctrl-group /*button.mapboxgl-ctrl-compass*/ {
     cursor: -webkit-grab;
     cursor: -moz-grab;
     /*cursor: grab;*/

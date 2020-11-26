@@ -792,6 +792,7 @@ red:hover {
   /*opacity:0.6;*/
   cursor: pointer;
   box-shadow: 0 0 3px #777;
+  cursor: pointer !important;
 }
 
 #map_style_menu_button:hover {
@@ -1157,7 +1158,7 @@ option {
   width:214px;
   height:30px;
   /*position:absolute;*/
-  margin: 5px auto;
+  margin: 10px auto;
   margin-top: 10px;
   border-radius: 15px;
   border:2px solid #fff;

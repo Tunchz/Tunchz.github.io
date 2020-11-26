@@ -709,7 +709,7 @@
       });
 
       map.addLayer({
-        'id': 'well_circle',
+        'id': 'บ่อบาดาล (จุด)',
         'type': 'circle',
         'source': {
           'type': 'geojson',
@@ -727,7 +727,7 @@
       });
 
       map.addLayer({
-        'id': 'hotspot_circle',
+        'id': 'จุดความร้อน (จุด)',
         'type': 'circle',
         'source': {
           'type': 'geojson',
@@ -783,9 +783,9 @@
             legend: "<icon class='icon-circle' style='color:#51bbd6;'></icon> 1-100 จุด<br><icon class='icon-circle' style='color:#f1f075;'></icon> 101-750 จุด<br><icon class='icon-circle' style='color:#f28cb1;'></icon> มากกว่า 750 จุด"            
           },
           {
-            name: "จุดความร้อน (จุด)",
+            // name: "จุดความร้อน (จุด)",
             hidden: false,
-            id: "hotspot_circle",
+            id: "จุดความร้อน (จุด)",
             group: "ไฟ",
             directory: "สิ่งแวดล้อม"
           },
@@ -841,7 +841,7 @@
           {
             //name: "บ่อบาดาล (จุด)",
             hidden: false,
-            id: "well_circle",
+            id: "บ่อบาดาล (จุด)",
             group: "น้ำ",
             directory: "สิ่งแวดล้อม",
             metadata: {
@@ -1243,6 +1243,11 @@
       console.log("maptools off");
       disinteract--;
     });
+
+    map.on('draw.modechange', function () {
+      console.log("draw modechange");
+    });
+
 
     //load_map_layers();
 
