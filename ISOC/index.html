@@ -1217,8 +1217,8 @@
     });
 
   /* Inspect */
-  var inspect = new InspectControl();
-  map.addControl(inspect, 'top-left');
+  // var inspect = new InspectControl();
+  // map.addControl(inspect, 'top-left');
 
   /* Ruler */
   // map.addControl(new RulerControl(), 'top-left');
@@ -1234,17 +1234,17 @@
 
     /* testing */
 
-    map.on('ruler.on', function () {
-      if (inspect.isInspecting) inspect.inspectingOff();
-      console.log("ruler on");
-      disinteract++;
-    });
-    map.on('ruler.off', function () {
-      console.log("ruler off");
-      disinteract--;
-    });
+    // map.on('ruler.on', function () {
+    //   //if (inspect.isInspecting) inspect.inspectingOff();
+    //   console.log("ruler on");
+    //   disinteract++;
+    // });
+    // map.on('ruler.off', function () {
+    //   console.log("ruler off");
+    //   disinteract--;
+    // });
     map.on('inspect.on', function () {
-      if (maptools.ruler.isMeasuring) maptools.ruler.measuringOff();
+      //if (maptools.ruler.isMeasuring) maptools.ruler.measuringOff();
       console.log("inspect on");
       disinteract++;
     });
@@ -1261,9 +1261,9 @@
       disinteract--;
     });
 
-    map.on('draw.modechange', function () {
-      console.log("draw modechange");
-    });
+    // map.on('draw.modechange', function () {
+    //   console.log("draw modechange");
+    // });
 
 
     //load_map_layers();
