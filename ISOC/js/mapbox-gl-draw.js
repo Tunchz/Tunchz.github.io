@@ -922,7 +922,7 @@
                         }, i.mouseout = function(t) {
                             s.mouseout(t)
                         }, i.touchstart = function(e) {
-                            if (e.originalEvent.preventDefault(), t.options.touchEnabled) {
+                            if (e.originalEvent, t.options.touchEnabled) {
                                 r = {
                                     time: (new Date).getTime(),
                                     point: e.point
@@ -931,9 +931,9 @@
                                 e.featureTarget = n, s.touchstart(e)
                             }
                         }, i.touchmove = function(e) {
-                            if (e.originalEvent.preventDefault(), t.options.touchEnabled) return s.touchmove(e), i.touchdrag(e)
+                            if (e.originalEvent, t.options.touchEnabled) return s.touchmove(e), i.touchdrag(e)
                         }, i.touchend = function(e) {
-                            if (e.originalEvent.preventDefault(), t.options.touchEnabled) {
+                            if (e.originalEvent, t.options.touchEnabled) {
                                 var n = I.touch(e, null, t)[0];
                                 e.featureTarget = n, R(r, {
                                     time: (new Date).getTime(),
