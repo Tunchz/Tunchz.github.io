@@ -97,7 +97,7 @@ function resizeAdjust() {
 
     //document.getElementById("title-container").style.display = "none";
     document.getElementById("title-container").style.visibility = "hidden";
-    document.getElementById("header-menu-container").style.width = "100vw";
+    document.getElementById("header-menu-container-wrap").style.width = "100vw";
     document.getElementById("data-panel").style.width = "100%";
 
     if (datapanel_isopen>0) {
@@ -160,13 +160,13 @@ function resizeAdjust() {
       // } else {
       //   document.getElementById("header-menu-container").style.width = "100vw";
       // }
-      document.getElementById("header-menu-container").style.width = "calc("+(100*(1-datapanel.xw))+"vw - 60px)";
+      document.getElementById("header-menu-container-wrap").style.width = "calc("+(100*(1-datapanel.xw))+"vw - 60px)";
       document.getElementById("data-panel").style.display = "block";  
       //document.getElementById("map-panel").style.width = "100%";
       document.getElementById("data-panel").style.width = ($("#wholecontent").width()*datapanel.xw).toString()+"px";
       map_Xoffset = -$("#data-panel").width()/2 - 20;
     } else {
-      document.getElementById("header-menu-container").style.width = "calc(100vw - 60px)";
+      document.getElementById("header-menu-container-wrap").style.width = "calc(100vw - 60px)";
       document.getElementById("data-panel").style.display = "none";
       map_Xoffset = -20;
     }
@@ -2309,7 +2309,7 @@ function switchDatapanel(op) {
     case 2:
       // table layout
       datapanel_isopen = 2;
-      datapanel = {xw:0.55,xh:0.85};
+      datapanel = {xw:0.55,xh:0.75};
       break;
     default:
       console.log("layout type is unrecognized!")
