@@ -74,7 +74,8 @@
     width: 29px;
     height: 29px;
     overflow: hidden;
-    background-image: url("https://icongr.am/material/layers.svg");
+    /*background-image: url("https://icongr.am/material/layers.svg");*/
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJtZGktbGF5ZXJzIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBkPSJNMTIsMTZMMTkuMzYsMTAuMjdMMjEsOUwxMiwyTDMsOUw0LjYzLDEwLjI3TTEyLDE4LjU0TDQuNjIsMTIuODFMMywxNC4wN0wxMiwyMS4wN0wyMSwxNC4wN0wxOS4zNywxMi44TDEyLDE4LjU0WiIvPjwvc3ZnPg==);
     /*background-image: url("layers.svg");*/
     background-size: cover;
     background-position: center;

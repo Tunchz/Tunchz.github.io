@@ -696,6 +696,7 @@ red:hover {
   position: relative; 
   /*left: 0px; 
   top: 0px; */
+  z-index: 100;
 }
 
 #logo-container {
@@ -763,7 +764,7 @@ red:hover {
   /*border-top-left-radius: 3px;
   border-top-right-radius: 3px;*/
   display: block;
-  background-color: #ffffff00;
+  /*background-color: #ffffff00;*/
   pointer-events: auto;
   font: 0px Serithai;
   opacity: 1;
@@ -1221,4 +1222,21 @@ input[type="color" i] {
   margin-left:-30px;
   pointer-events: auto;
   cursor: pointer;
+}
+
+.-phone-layout {
+  background-color: #eee; /*#7fadf8;*/
+  box-shadow: 0 0 3px #777;
+}
+
+#notification-container-bottom-handle {
+  height: 6px;
+  width: 100px;
+  border-radius: 3px;
+  background-color: #7773;
+  margin: 5px;
+  float: center;
+  display:flex;
+  margin-right: auto;
+  margin-left: auto;
 }
