@@ -29,7 +29,7 @@
       <div id = "map-panel" class = "col-sm-7 height100p" onresize="map.resize()">
 
         <div id="map-container">
-          <div id="map" class='blue'></div>
+          <div id="map"></div>
           <div id="header-menu-container">
             <div id="header-menu-container-wrap">
               <div id="header-menu" align="center">
@@ -448,7 +448,22 @@
       }
     }
 
-
+    function setfullscreen() {
+      element = document.getElementById("map-container");
+      // console.log(element);
+      if (!(document.fullscreenElement||document.webkitFullscreenElement||document.mozFullScreenElement||document.msFullscreenElement)) {
+        if (element.requestFullscreen) {
+          element.requestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+          element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullscreen) {
+          element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+        } else if (element.msRequestFullscreen) {
+          element.msRequestFullscreen();
+        }          
+      }
+    
+    }
 
   </script>
 
