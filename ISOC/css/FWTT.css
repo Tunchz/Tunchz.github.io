@@ -1213,6 +1213,7 @@ input[type="color" i] {
   margin-right:-30px;
   pointer-events: auto;
   cursor: pointer;
+  text-shadow: 0 0 3px #777;
 }
 
 #home-toggle-icon {
@@ -1222,6 +1223,7 @@ input[type="color" i] {
   margin-left:-30px;
   pointer-events: auto;
   cursor: pointer;
+  text-shadow: 0 0 3px #777;
 }
 
 .-phone-layout {
