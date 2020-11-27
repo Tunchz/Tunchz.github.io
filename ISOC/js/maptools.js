@@ -1242,8 +1242,8 @@
 	      this.modeupdate('edit');
 	      // this.map.on('click', this.mapClickListener);
 	      // this.map.on('mousemove', this.mapMouseMoveListener);
-	      this.map.on('dblclick', this.mapDblClickListener);
-	      this.map.on('contextmenu', this.mapContextMenuListener);
+	      // this.map.on('dblclick', this.mapDblClickListener);
+	      // this.map.on('contextmenu', this.mapContextMenuListener);
 	      this.map.fire('ruler.on');
 	    }
 	  }, {
@@ -1464,9 +1464,8 @@
 
 	      this.map.off('click', this.mapClickListener);
 		  this.map.off('style.load', this.styleLoadListener);
-	      this.map.off('dblclick', this.mapDblClickListener);
-	      this.map.off('contextmenu', this.mapContextMenuListener);
-	      this.map.off('style.load', this.styleLoadListener);	      
+	      // this.map.off('dblclick', this.mapDblClickListener);
+	      // this.map.off('contextmenu', this.mapContextMenuListener);   
 	      this.container.parentNode.removeChild(this.container);
 	      this.map = undefined;
 	    }
