@@ -89,7 +89,7 @@ function resizeAdjust() {
   // mapcenter.lat += map_Yoffset;
 
   if($("#wholecontent").width() < 768) {
-    document.getElementById("header-menu-container").classList.add('-phone-layout');
+    document.getElementById("header-menu-container-wrap").classList.add('-phone-layout');
     document.getElementsByClassName("mapboxgl-ctrl-bottom-left")[0].classList.add('-phone-layout');
 
 
@@ -143,7 +143,7 @@ function resizeAdjust() {
     orientation = 1;
   } else {
 
-    document.getElementById("header-menu-container").classList.remove('-phone-layout');
+    document.getElementById("header-menu-container-wrap").classList.remove('-phone-layout');
     document.getElementsByClassName("mapboxgl-ctrl-bottom-left")[0].classList.remove('-phone-layout');
 
 
@@ -2318,11 +2318,11 @@ function switchDatapanel(op) {
 
   for (m=0;m<3;m++) {
     if (m == op) {
-      document.getElementById("headermenu"+m).style.backgroundColor = "#fff";
-      document.getElementById("headermenu"+m).style.color = "#2a58c3";
+      document.getElementById("headermenu"+m).style.backgroundColor = "#2a58c3";//"#fff";
+      document.getElementById("headermenu"+m).style.color = "#fff";//"#2a58c3";
     } else {
-      document.getElementById("headermenu"+m).style.backgroundColor = "#fff0";
-      document.getElementById("headermenu"+m).style.color = "#fff";
+      document.getElementById("headermenu"+m).style.backgroundColor = "#fff";//"#fff0";
+      document.getElementById("headermenu"+m).style.color = "#2a58c3";//"#fff";
     }
   }
 

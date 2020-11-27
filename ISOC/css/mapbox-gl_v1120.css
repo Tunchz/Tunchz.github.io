@@ -126,9 +126,12 @@
 }
 
 .mapboxgl-ctrl-group:not(:empty) {
-    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, .1);
+    -moz-box-shadow: 0 0 3px #999;
+    -webkit-box-shadow: 0 0 3px #999;
+    box-shadow: 0 0 3px #999;    
+/*    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, .1);
     -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .1);
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, .1)
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, .1)*/
 }
 
 @media (-ms-high-contrast:active) {

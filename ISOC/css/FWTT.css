@@ -121,7 +121,7 @@ svg text {
 
 #table-container {
   border-radius: 5px;
-  box-shadow: 0 0 3px #777;
+  box-shadow: 0 0 2px #999;
 
 }
 
@@ -754,7 +754,7 @@ red:hover {
 #notification-container-bottom{ 
   width: 100%;
   height: auto;
-  padding: 0 0 0 10px; 
+  padding: 0 0 0 5px; 
   margin: 0px; 
   position: relative; 
   /*right: 0px; 
@@ -880,7 +880,7 @@ input, label {
 }
 
 #vertical-table-container-MAP {
-  padding:0px 10px 0px 0px;
+  padding:0px 5px 0px 0px;
 }
 
 .modal {
@@ -1155,15 +1155,22 @@ option {
   /*background-color: #fff4*/
 }
 
+#header-menu-container-wrap {
+  position: relative;
+  display: block;
+  width: 100vw;
+  padding: 10px 0;
+
+}
+
 #header-menu {
   width:214px;
   height:30px;
   /*position:absolute;*/
-  margin: 10px auto;
-  margin-top: 10px;
+  margin: 0px auto;
   border-radius: 15px;
   border:2px solid #fff;
-  box-shadow: 0px 0px 3px #777;
+  box-shadow: 0px 0px 2px #999;
 }
 
 .header-menu-button {
@@ -1195,7 +1202,7 @@ input[type="color" i] {
   height: 30px;
   /*left: 50%;*/
   margin: 0 auto;
-  top: 10px;
+  margin-top: 5px;
 }
 /*.mapboxgl-ctrl-geocoder {
   min-width: 100%;  
@@ -1213,7 +1220,7 @@ input[type="color" i] {
   margin-right:-30px;
   pointer-events: auto;
   cursor: pointer;
-  text-shadow: 0 0 3px #777;
+  text-shadow: 0 0 2px #999;
 }
 
 #home-toggle-icon {
@@ -1223,7 +1230,7 @@ input[type="color" i] {
   margin-left:-30px;
   pointer-events: auto;
   cursor: pointer;
-  text-shadow: 0 0 3px #777;
+  text-shadow: 0 0 2px #999;
 }
 
 .-phone-layout {
@@ -1235,7 +1242,7 @@ input[type="color" i] {
   height: 6px;
   width: 100px;
   border-radius: 3px;
-  background-color: #7773;
+  background-color: #9993;
   margin: 5px;
   float: center;
   display:flex;
