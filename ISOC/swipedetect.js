@@ -5,9 +5,9 @@ function detectswipe(el,func) {
   swipe_det.sY = 0;
   swipe_det.eX = 0;
   swipe_det.eY = 0;
-  var min = 40, //required min distance traveled to be considered swipe
+  var min = 30, //required min distance traveled to be considered swipe
   max = 20, // maximum distance allowed at the same time in perpendicular direction
-  allowedTime = 300, // maximum time allowed to travel that distance
+  allowedTime = 700, // maximum time allowed to travel that distance
   direc, elapsedTime, startTime;
   ele = document.getElementById(el);
   ele.addEventListener('touchstart',function(e){
