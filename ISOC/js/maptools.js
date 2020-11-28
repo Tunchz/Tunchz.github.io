@@ -2083,7 +2083,7 @@
 	    key: "MaptoolsOn",
 	    value: function MaptoolsOn() {
 	      this.isMaptools = true;
-	      this.button.classList.add('-active');
+	      this.buttonc
 	      // this.map.on('click', this.clickListener);
 	      // this.map.on('move', this.updatePosition);
 	      // this.map.getCanvas().style.cursor = 'pointer';
@@ -2091,6 +2091,7 @@
 	      this.button.appendChild(iconUpArrow());
 	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.style.display = "block";
 	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.appendChild(this.button);
+	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.classList.add('mapboxgl-ctrl-maptools-active');
 	      this.container.style.display = 'none';
 	      this.map.fire('maptools.on');
 	    }
@@ -2108,6 +2109,7 @@
 	      this.container.style.display = 'block';
 	      this.container.appendChild(this.button);
 	      // document.getElementsByClassName('mapboxgl-ctrl-ruler')[0].appendChild(document.getElementsByClassName('ruler-btn')[0]);
+	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.classList.remove('mapboxgl-ctrl-maptools-active');
 	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.style.display = "none";
 	      // this.map.removeControl(this.draw);
 	      // this.map.removeControl(this.ruler);

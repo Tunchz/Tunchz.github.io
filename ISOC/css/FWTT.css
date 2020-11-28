@@ -1259,12 +1259,12 @@ input[type="color" i] {
   margin-left: auto;
 }
 
-.mapboxgl-ctrl-group:hover button {
-  height: 40px;
-  width: 40px;
+.mapboxgl-ctrl-group:hover button, .mapboxgl-ctrl-maptools-active button {
+  height: 40px !important;
+  width: 40px !important;
 }
 
-.mapboxgl-ctrl-group:hover button.maptools-btn {
-  height: 20px;
+.mapboxgl-ctrl-group:hover button.maptools-btn, .mapboxgl-ctrl-maptools-active button.maptools-btn {
+  height: 20px !important;
   width: 40px;
 }
