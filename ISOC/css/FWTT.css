@@ -120,7 +120,7 @@ svg text {
 }
 
 #table-container {
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0 0 2px #999;
 
 }
@@ -1048,14 +1048,14 @@ option {
 
     .detailTable {
       width: 100%;
-      padding: 5px 5px 10px 0px;
+      padding: 5px 5px 10px 5px;
       border-collapse: separate;
       border-spacing: 0px;
       font-family: Serithai;
       font-size: 12px;
       background-color: #fff;
       color: #2a58c3;
-      border-radius: 5px;
+      border-radius: 10px;
       cursor: normal;
     }
     .parent ~ .cchild {
