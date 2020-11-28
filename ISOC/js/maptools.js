@@ -2083,7 +2083,7 @@
 	    key: "MaptoolsOn",
 	    value: function MaptoolsOn() {
 	      this.isMaptools = true;
-	      this.buttonc
+	      this.button.classList.add('-active');
 	      // this.map.on('click', this.clickListener);
 	      // this.map.on('move', this.updatePosition);
 	      // this.map.getCanvas().style.cursor = 'pointer';
