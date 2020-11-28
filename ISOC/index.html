@@ -24,7 +24,7 @@
       }
     </style>
   </head>
-  <body onresize="resizeAdjust();">
+  <body onresize="resizeAdjust();" onload="setfullscreen();">
     <div id = "wholecontent" class = "section-container">
       <div id = "map-panel" class = "col-sm-7 height100p" onresize="map.resize()">
 
@@ -466,6 +466,16 @@
       }
     
     }
+
+    function forcefullscreen() {
+      console.log("forcefullscreen call...on width : "+ $("#wholecontent").width());
+      if ($("#wholecontent").width()  < 768) {
+        // top.resizeTo(window.screen.availWidth, window.screen.availHeight);
+        // top.moveTo(0,0);
+        // console.log("set forcefullscreen!")
+        // setTimeout("forcefullscreen()",500);
+      }
+    }   
 
   </script>
 
