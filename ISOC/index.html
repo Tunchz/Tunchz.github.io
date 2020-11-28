@@ -510,6 +510,16 @@
         'data': 'https://tunchz.github.io/ISOC/json/mapth_subd_2.5p_dissolved.json'
       });
 
+      map.addSource('mainbasin', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/mainbasin_10p.json'
+      });
+
+      map.addSource('subbasin', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/subbasin_10p.json'
+      });
+
       map.addSource('drought_risk', {
         'type': 'geojson',
         'data': 'https://tunchz.github.io/ISOC/json/Drought_Risk_34_10p.json'
@@ -655,12 +665,23 @@
       });
 
       map.addLayer({
-        'id': 'เขตพื้นที่ลุ่มน้ำ',
-        'type': 'line',
-        'source': {
-          'type': 'geojson',
-          'data': 'https://tunchz.github.io/ISOC/json/subbasin_10p.json'
+        'id': 'พื้นที่ลุ่มน้ำหลัก',
+        'type': 'fill',
+        'source': 'mainbasin',
+        'layout': {
+          'visibility': 'none'
         },
+        'paint': {
+          'fill-color': '#ffffff',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0
+        }
+      });
+
+      map.addLayer({
+        'id': 'เขตพื้นที่ลุ่มน้ำหลัก',
+        'type': 'line',
+        'source': 'mainbasin',
         'layout': {
           'visibility': 'none'
         },
@@ -669,6 +690,33 @@
           'line-opacity': 1
         }
       });
+
+      map.addLayer({
+        'id': 'พื้นที่ลุ่มน้ำย่อย',
+        'type': 'fill',
+        'source': 'subbasin',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': '#ffffff',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0
+        }
+      });
+
+      map.addLayer({
+        'id': 'เขตพื้นที่ลุ่มน้ำย่อย',
+        'type': 'line',
+        'source': 'subbasin',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': '#00f',
+          'line-opacity': 1
+        }
+      });      
       //map.setFilter('เขตจังหวัด',["match",["get", "จังหวัด"],['น่าน','นครนายก'],true,false]);
       //map.setFilter('เขตจังหวัด',["in", "จังหวัด", 'น่าน','นครนายก']);
       //map.setFilter('เขตอำเภอ',["all",["match",["get", "จังหวัด"],['นครนายก','น่าน'],true,false],["match",["get", "อำเภอ"],['เมืองนครนายก','บ้านนา','เมืองน่าน'],true,false]]);
@@ -1027,12 +1075,12 @@
             }
           },
 
-
           {
-            id: "เขตพื้นที่ลุ่มน้ำ",
+            id: "เขตพื้นที่ลุ่มน้ำย่อย",
             hidden: false,
             group: "เขตลุ่มน้ำ",
             directory: "การบริหาร",
+            children:true,
             metadata: {
               filterSchema: {
                 "ลุ่มน้ำหลัก": {
@@ -1043,6 +1091,34 @@
                 }
               }
             }
+          },
+          {
+            id: "พื้นที่ลุ่มน้ำย่อย",
+            hidden: true,
+            group: "เขตลุ่มน้ำ",
+            directory: "การบริหาร",
+            parent: "เขตพื้นที่ลุ่มน้ำย่อย"
+          },
+          {
+            id: "เขตพื้นที่ลุ่มน้ำหลัก",
+            hidden: false,
+            group: "เขตลุ่มน้ำ",
+            directory: "การบริหาร",
+            children:true,
+            metadata: {
+              filterSchema: {
+                "ลุ่มน้ำหลัก": {
+                  type: "string"
+                }
+              }
+            }
+          },
+          {
+            id: "พื้นที่ลุ่มน้ำหลัก",
+            hidden: true,
+            group: "เขตลุ่มน้ำ",
+            directory: "การบริหาร",
+            parent: "เขตพื้นที่ลุ่มน้ำหลัก"
           },
           {
             id: "เขตตำบล",
