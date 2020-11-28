@@ -115,7 +115,6 @@ function resizeAdjust() {
 
       document.getElementById("data-panel").style.display = "none";
       document.getElementById("vertical-table-container-MAP").style.height = "60px";
-      document.getElementById("vertical-table-container").style.height = "60px";
       //document.getElementById("menu-container-bottom-right").style.bottom = "75px";
       document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.bottom = "75px";
       
