@@ -89,6 +89,7 @@ function resizeAdjust() {
   // mapcenter.lat += map_Yoffset;
 
   if($("#wholecontent").width() < 768) {
+    setfullscreen();
     document.getElementById("header-menu-container-wrap").classList.add('-phone-layout');
     document.getElementsByClassName("mapboxgl-ctrl-bottom-left")[0].classList.add('-phone-layout');
 
@@ -165,6 +166,7 @@ function resizeAdjust() {
       //document.getElementById("map-panel").style.width = "100%";
       document.getElementById("data-panel").style.width = ($("#wholecontent").width()*datapanel.xw).toString()+"px";
       map_Xoffset = -$("#data-panel").width()/2 - 20;
+      if (datapanel_isopen == 2) document.getElementById("title-container").style.visibility = "hidden";
     } else {
       document.getElementById("header-menu-container-wrap").style.width = "calc(100vw - 60px)";
       document.getElementById("data-panel").style.display = "none";
