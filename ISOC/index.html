@@ -674,7 +674,7 @@
       //map.setFilter('เขตอำเภอ',["all",["match",["get", "จังหวัด"],['นครนายก','น่าน'],true,false],["match",["get", "อำเภอ"],['เมืองนครนายก','บ้านนา','เมืองน่าน'],true,false]]);
 
       map.addLayer({
-        'id': 'drought_risk',
+        'id': 'พื้นที่เสี่ยงภัยแล้ง',
         'type': 'fill',
         'source': 'drought_risk',
         'layout': {
@@ -693,7 +693,7 @@
       });
 
       map.addLayer({
-        'id': 'flood_risk',
+        'id': 'พื้นที่เสี่ยงน้ำท่วม',
         'type': 'fill',
         'source': 'flood_risk',
         'layout': {
@@ -965,8 +965,8 @@
           },
 
           {
-            name: "พื้นที่เสี่ยงภัยแล้ง",
-            id: "drought_risk",
+            // name: "พื้นที่เสี่ยงภัยแล้ง",
+            id: "พื้นที่เสี่ยงภัยแล้ง",
             hidden: false,
             group: "ด้านน้ำ",
             //children: true,
@@ -997,8 +997,8 @@
 
 
           {
-            name: "พื้นที่เสี่ยงน้ำท่วม",
-            id: "flood_risk",
+            // name: "พื้นที่เสี่ยงน้ำท่วม",
+            id: "พื้นที่เสี่ยงน้ำท่วม",
             hidden: false,
             group: "ด้านน้ำ",
             //children: true,
