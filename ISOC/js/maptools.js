@@ -2052,7 +2052,12 @@
 	    value: function MaptoolsControls() {
 	      this.inspect = new InspectControl();
 	      this.map.addControl(this.inspect, "top-left");
-	      this.draw = new MapboxDraw({displayControlsDefault: false,controls: {point: true,line_string: true,polygon: true,trash: true,combine_features: false,uncombine_features: false},touchBuffer:35});
+		  const StaticMode = {};
+		  StaticMode.onSetup = function() {this.setActionableState();return {};};
+		  StaticMode.toDisplayFeatures = function(state, geojson, display) {display(geojson);};	      
+	      const modes = MapboxDraw.modes;
+		  modes.static = StaticMode;
+	      this.draw = new MapboxDraw({modes,displayControlsDefault: false,controls: {point: true,line_string: true,polygon: true,trash: true,combine_features: false,uncombine_features: false},touchBuffer:35});
 	      this.map.addControl(this.draw, "top-left");
 	      this.ruler = new RulerControl();
 	      this.map.addControl(this.ruler, "top-left");
@@ -2093,6 +2098,7 @@
 	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.appendChild(this.button);
 	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.classList.add('mapboxgl-ctrl-maptools-active');
 	      this.container.style.display = 'none';
+	      this.draw.changeMode('simple_select');
 	      this.map.fire('maptools.on');
 	    }
 	  }, {
@@ -2113,6 +2119,7 @@
 	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.style.display = "none";
 	      // this.map.removeControl(this.draw);
 	      // this.map.removeControl(this.ruler);
+	      this.draw.changeMode('static');
 	      this.map.fire('maptools.off');
 	    }
 	  }, {
@@ -2143,7 +2150,7 @@
 	      });
 	      map.on('ruler.on', function () {
 	        if (_this.inspect.isInspecting) _this.inspect.inspectingOff();
-	        _this.draw.changeMode('simple_select');
+	        _this.changeMode('simple_select');
 	      });
 
 

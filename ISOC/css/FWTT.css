@@ -1259,7 +1259,7 @@ input[type="color" i] {
   margin-left: auto;
 }
 
-.mapboxgl-ctrl-group:hover button, .mapboxgl-ctrl-maptools-active button {
+.mapboxgl-ctrl-group:hover>button, .mapboxgl-ctrl-maptools-active>button {
   height: 40px !important;
   width: 40px !important;
 }

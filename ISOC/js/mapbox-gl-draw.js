@@ -2411,8 +2411,8 @@
                     ["!=", "mode", "static"]
                 ],
                 paint: {
-                    "fill-color": "#0000ff", //"#3bb2d0",
-                    "fill-outline-color": "#0000ff", //"#3bb2d0",
+                    "fill-color": "#00ff00", //"#3bb2d0",
+                    "fill-outline-color": "#00ff00", //"#3bb2d0",
                     "fill-opacity": .1
                 }
             }, {
@@ -2448,7 +2448,7 @@
                     "line-join": "round"
                 },
                 paint: {
-                    "line-color": "#0000ff",//"#3bb2d0",
+                    "line-color": "#00ff00",//"#3bb2d0",
                     "line-width": 2
                 }
             }, {
@@ -2478,7 +2478,7 @@
                     "line-join": "round"
                 },
                 paint: {
-                    "line-color": "#3bb2d0",
+                    "line-color": "#00ff00", //"#3bb2d0",
                     "line-width": 2
                 }
             }, {
@@ -2541,7 +2541,7 @@
                 ],
                 paint: {
                     "circle-radius": 3,
-                    "circle-color": "#3bb2d0"
+                    "circle-color": "#00ff00" //"#3bb2d0"
                 }
             }, {
                 id: "gl-draw-point-stroke-active",
@@ -2572,8 +2572,8 @@
                     ["==", "$type", "Polygon"]
                 ],
                 paint: {
-                    "fill-color": "#404040",
-                    "fill-outline-color": "#404040",
+                    "fill-color": "#2a58c3", //"#404040",
+                    "fill-outline-color": "#2a58c3", //"#404040",
                     "fill-opacity": .1
                 }
             }, {
@@ -2587,7 +2587,7 @@
                     "line-join": "round"
                 },
                 paint: {
-                    "line-color": "#404040",
+                    "line-color": "#2a58c3", //"#404040",
                     "line-width": 2
                 }
             }, {
@@ -2601,7 +2601,7 @@
                     "line-join": "round"
                 },
                 paint: {
-                    "line-color": "#404040",
+                    "line-color": "#2a58c3", //"#404040",
                     "line-width": 2
                 }
             }, {
@@ -2612,7 +2612,7 @@
                 ],
                 paint: {
                     "circle-radius": 5,
-                    "circle-color": "#404040"
+                    "circle-color": "#2a58c3" //"#404040"
                 }
             }],
             modes: Yt,
