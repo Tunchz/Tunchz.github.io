@@ -321,39 +321,7 @@
       resize = 1;
       centerMap({"lng":e.result.center[0],"lat":e.result.center[1]});
     });
-    document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
-    $('#geocoder-toggle-icon').on('click', function(){
-      el = document.getElementById("geocoder");
-      (el.style.display == "none") ? el.style.display = "block" : el.style.display = "none";
-      document.getElementsByClassName('mapboxgl-ctrl-geocoder--input')[0].focus();
-    });
-    $('#geocoder-toggle-icon').on('contextmenu', function(){
-      geocoder.clear();
-      document.getElementsByClassName('mapboxgl-ctrl-geocoder--input')[0].blur();
-    });
-
-
-    $('#geocoder').focusout(function(){
-      if (document.getElementsByClassName("suggestions")[0].style.display == 'none') {       
-        setTimeout(function (){
-          document.getElementById("geocoder").style.display = "none";
-        }, 200);
-      }
-    });
-    $('#home-toggle-icon').on('click', function(){
-      // reset zoom and map center
-      resize = 1;
-      mapcenter = {"lng":101.6673626,"lat":13.2808669};
-      map.flyTo({
-        center: mapcenter,
-        offset: [map_Xoffset, map_Yoffset],
-        zoom : 4.8, 
-        speed : flyspeed, 
-        curve : 1, 
-        essential: true
-      });   
-    });    
-
+    document.getElementById('geocoder').appendChild(geocoder.onAdd(map)); 
 
     // disable map rotation using touch rotation gesture
     //map.touchZoomRotate.disableRotation();
@@ -362,8 +330,6 @@
     map.doubleClickZoom.disable();
     //map.addControl(new mapboxgl.Navigation());
     map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
-
-
 
     // Add geolocate control to the map.
     map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true}), 'top-left');
@@ -451,19 +417,19 @@
     }
 
     function setfullscreen() {
-      element = document.getElementById("map-container");
-      // console.log(element);
-      if (!(document.fullscreenElement||document.webkitFullscreenElement||document.mozFullScreenElement||document.msFullscreenElement)) {
-        if (element.requestFullscreen) {
-          element.requestFullscreen();
-        } else if (element.mozRequestFullScreen) {
-          element.mozRequestFullScreen();
-        } else if (element.webkitRequestFullscreen) {
-          element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-        } else if (element.msRequestFullscreen) {
-          element.msRequestFullscreen();
-        }          
-      }
+      // element = document.getElementById("map-container");
+      // // console.log(element);
+      // if (!(document.fullscreenElement||document.webkitFullscreenElement||document.mozFullScreenElement||document.msFullscreenElement)) {
+      //   if (element.requestFullscreen) {
+      //     element.requestFullscreen();
+      //   } else if (element.mozRequestFullScreen) {
+      //     element.mozRequestFullScreen();
+      //   } else if (element.webkitRequestFullscreen) {
+      //     element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      //   } else if (element.msRequestFullscreen) {
+      //     element.msRequestFullscreen();
+      //   }          
+      // }
     
     }
 

@@ -1,4 +1,4 @@
-// (function () {
+(function () {
 	'use strict';
 
 	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -1036,17 +1036,15 @@
 	}
 
 	function iconRuler() {
-	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"12\" viewBox=\"0 0 22 12\" fill=\"#000\">\n    <path fill-rule=\"evenodd\" fill=\"none\" d=\"M-1-6h24v24H-1z\"/>\n    <path d=\"M20 0H2C.9 0 0 .9 0 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V2c0-1.1-.9-2-2-2zm0 10H2V2h2v4h2V2h2v4h2V2h2v4h2V2h2v4h2V2h2v8z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"12\" viewBox=\"0 0 22 12\" fill=\"#505050\">\n    <path fill-rule=\"evenodd\" fill=\"none\" d=\"M-1-6h24v24H-1z\"/>\n    <path d=\"M20 0H2C.9 0 0 .9 0 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V2c0-1.1-.9-2-2-2zm0 10H2V2h2v4h2V2h2v4h2V2h2v4h2V2h2v4h2V2h2v8z\"/>\n</svg>", 'image/svg+xml')).firstChild;
 	}
 
 	var LAYER_LINE = 'controls-layer-line';
 	var LAYER_SYMBOL = 'controls-layer-symbol';
 	var SOURCE_LINE = 'controls-source-line';
 	var SOURCE_SYMBOL = 'controls-source-symbol';
-	var MAIN_COLOR = '#00ff00'; //'#263238';
+	var MAIN_COLOR = '#0000ff'; //'#263238';
 	var HALO_COLOR = '#fff';
-	var SELECT_COLOR = '#fbb03b';
-	var STATIC_COLOR = "#2a58c3";
 
 	function geoLineString() {
 	  var coordinates = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -1108,24 +1106,18 @@
 	    _classCallCheck$2(this, RulerControl);
 
 	    this.isMeasuring = false;
-	    this.mode = "";
-	    this.linenum = 0;
-	    this.linetotal = 0;
-	    this.markers = {};
-	    this.coordinates = {};
-	    this.labels = {};
+	    this.markers = [];
+	    this.coordinates = [];
+	    this.labels = [];
 	    this.units = options.units || 'kilometers';
 	    this.font = options.font || ['Roboto Medium'];
-	    this.fontSize = options.fontSize || 10;
+	    this.fontSize = options.fontSize || 12;
 	    this.fontHalo = options.fontHalo || 1;
 	    this.labelFormat = options.labelFormat || defaultLabelFormat;
 	    this.mainColor = options.mainColor || MAIN_COLOR;
 	    this.secondaryColor = options.secondaryColor || HALO_COLOR;
-	    this.selectColor = options.selectColor || SELECT_COLOR;
-	    this.staticColor = options.staticColor || STATIC_COLOR;
 	    this.mapClickListener = this.mapClickListener.bind(this);
 	    this.styleLoadListener = this.styleLoadListener.bind(this);
-	    // this.mapClickListener = this.mapMouseMoveListener.bind(this);
 	  }
 
 	  _createClass$2(RulerControl, [{
@@ -1137,35 +1129,33 @@
 	      this.container.classList.add('mapboxgl-ctrl-ruler');
 	      this.button = document.createElement('button');
 	      this.button.setAttribute('type', 'button');
-	      this.button.classList.add('ruler-btn');
 	      this.button.appendChild(iconRuler());
 	      this.container.appendChild(this.button);
 	    }
 	  }, {
 	    key: "draw",
 	    value: function draw() {
-	      this.map.addSource(SOURCE_LINE+this.linenum, {
+	      this.map.addSource(SOURCE_LINE, {
 	        type: 'geojson',
-	        data: geoLineString(this.coordinates[this.linenum])
+	        data: geoLineString(this.coordinates)
 	      });
-	      this.map.addSource(SOURCE_SYMBOL+this.linenum, {
+	      this.map.addSource(SOURCE_SYMBOL, {
 	        type: 'geojson',
-	        data: geoPoint(this.coordinates[this.linenum], this.labels[this.linenum])
+	        data: geoPoint(this.coordinates, this.labels)
 	      });
 	      this.map.addLayer({
-	        id: LAYER_LINE+this.linenum,
+	        id: LAYER_LINE,
 	        type: 'line',
-	        source: SOURCE_LINE+this.linenum,
+	        source: SOURCE_LINE,
 	        paint: {
 	          'line-color': this.mainColor,
-	          'line-width': 2,
-	          'line-dasharray': [1, 0],
+	          'line-width': 2
 	        }
 	      });
 	      this.map.addLayer({
-	        id: LAYER_SYMBOL+this.linenum,
+	        id: LAYER_SYMBOL,
 	        type: 'symbol',
-	        source: SOURCE_SYMBOL+this.linenum,
+	        source: SOURCE_SYMBOL,
 	        layout: {
 	          'text-field': '{text}',
 	          'text-font': this.font,
@@ -1179,268 +1169,108 @@
 	          'text-halo-width': this.fontHalo
 	        }
 	      });
-	      // this.map.addSource('SOURCE_NEW_LINE', {
-	      //   type: 'geojson',
-	      //   data: geoLineString([[0,0],[0,0]])
-	      // });
-	      // this.map.addLayer({
-	      //   id: 'LAYER_NEW_LINE',
-	      //   type: 'line',
-	      //   source: 'SOURCE_NEW_LINE',
-	      //   paint: {
-	      //     'line-color': this.selectColor,
-	      //     'line-width': 2,
-	      //     'line-dasharray': [1, 1],
-	      //   }
-	      // });	      
 	    }
 	  }, {
-	    key: "modeupdate",
-	    value: function modeupdate(mode) {
-	    	this.mode = mode;
-	    	if (this.linenum > 0) {
-		    	if (mode == 'simple_select') {
-		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-dasharray', [1, 0]);
-		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-color', this.mainColor);
-		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-color', this.mainColor);
-		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-halo-color', "#000");
-		    		var mainColor = this.mainColor;
-		    		this.markers[this.linenum].forEach(function (markernode) {
-		    			//console.log(markernode._element.id);
-		    			markernode._element.style.backgroundColor = mainColor;
-		    		});		    		
-		    	} else if (mode == 'static') {
-		    		//console.log('static');
-		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-dasharray', [1, 0]);
-		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-color', this.staticColor);
-		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-color', this.staticColor);
-		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-halo-color', this.secondaryColor);
-		    		var staticColor = this.staticColor;
-		    		this.markers[this.linenum].forEach(function (markernode,index) {
-		    			// console.log(markernode._element.id);
-		    			markernode._element.style.backgroundColor = staticColor; //(index == 0) ? "#f00" : staticColor;
-		    		});
-		    		this.linenum = 0;
-		    		this.measuringOff('static');
-		    	} else {
-		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-dasharray', [1, 1]);
-		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-color', this.selectColor);
-		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-color', this.selectColor);
-		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-halo-color', "#000");
-		    		var selectColor = this.selectColor;
-		    		this.markers[this.linenum].forEach(function (markernode,index) {
-		    			// console.log(markernode._element.id);
-		    			markernode._element.style.backgroundColor = (index == 0) ? "#f00" : selectColor;
-		    		});
-		    	}	   
-	    	} else {
-	    		var _this = this;
-	    		Object.keys(this.labels).forEach(function (linenum) {
-		    		if (mode == 'static') {
-			    		console.log('static');
-			    		_this.map.setPaintProperty(LAYER_LINE+linenum, 'line-dasharray', [1, 0]);
-			    		_this.map.setPaintProperty(LAYER_LINE+linenum, 'line-color', _this.staticColor);
-			    		_this.map.setPaintProperty(LAYER_SYMBOL+linenum, 'text-color', _this.staticColor);
-			    		_this.map.setPaintProperty(LAYER_SYMBOL+linenum, 'text-halo-color', _this.secondaryColor);
-			    		var staticColor = _this.staticColor;
-			    		_this.markers[linenum].forEach(function (markernode,index) {
-			    			// console.log(markernode._element.id);
-			    			markernode._element.style.display = "none"; //(index == 0) ? "#f00" : staticColor;
-			    		});
-			    	} else {
-			    		_this.map.setPaintProperty(LAYER_LINE+linenum, 'line-dasharray', [1, 0]);
-			    		_this.map.setPaintProperty(LAYER_LINE+linenum, 'line-color', _this.mainColor);
-			    		_this.map.setPaintProperty(LAYER_SYMBOL+linenum, 'text-color', _this.mainColor);
-			    		_this.map.setPaintProperty(LAYER_SYMBOL+linenum, 'text-halo-color', "#000");
-			    		var mainColor = _this.mainColor;
-			    		_this.markers[linenum].forEach(function (markernode,index) {
-			    			// console.log(markernode._element.id);
-			    			markernode._element.style.display = "block";
-			    			markernode._element.style.backgroundColor = mainColor;
-			    		});
-			    	}
-			    });
-	    	}
-	    }
-	  }, {
-
 	    key: "measuringOn",
 	    value: function measuringOn() {
 	      this.isMeasuring = true;
-	      if (this.linetotal>0) this.modeupdate('simple_select'); else {
-	      	this.map.on('click', this.mapClickListener);
-	      	this.map.on('style.load', this.styleLoadListener);
-	      }
-	      this.linetotal++;
-	      this.linenum = this.linetotal;//.toString();
-	      // console.log(this.linenum,this.linetotal);
-	      this.markers[this.linenum] = [];
-	      this.coordinates[this.linenum] = [];
-	      this.labels[this.linenum] = [];
-	      //this.map.getCanvas().style.cursor = 'crosshair';
-	      this.map.getCanvas().classList.add('ruler');
+	      this.markers = [];
+	      this.coordinates = [];
+	      this.labels = [];
+	      this.map.getCanvas().style.cursor = 'crosshair';
 	      this.button.classList.add('-active');
 	      this.draw();
-	      this.modeupdate('edit');
-	      // this.map.on('click', this.mapClickListener);
-	      // this.map.on('mousemove', this.mapMouseMoveListener);
-	      // this.map.on('dblclick', this.mapDblClickListener);
-	      // this.map.on('contextmenu', this.mapContextMenuListener);
+	      this.map.on('click', this.mapClickListener);
+	      this.map.on('dblclick', this.mapDblClickListener);
+	      this.map.on('contextmenu', this.mapContextMenuListener);
+	      this.map.on('style.load', this.styleLoadListener);
 	      this.map.fire('ruler.on');
 	    }
 	  }, {
 	    key: "measuringOff",
-	    value: function measuringOff(mode) {
-	    	console.log((mode)? mode : 'simple_select');
+	    value: function measuringOff() {
 	      this.isMeasuring = false;
-	      this.modeupdate((mode)? mode : 'simple_select');
-	      this.linenum = 0;
 	      this.map.getCanvas().style.cursor = '';
-	      this.map.getCanvas().classList.remove('ruler');
 	      this.button.classList.remove('-active'); // remove layers, sources and event listeners
 
-	      // this.map.removeLayer(LAYER_LINE);
-	      // this.map.removeLayer(LAYER_SYMBOL);
-	      // this.map.removeSource(SOURCE_LINE);
-	      // this.map.removeSource(SOURCE_SYMBOL);
-	      // this.markers.forEach(function (m) {
-	      //   return m.remove();
-	      // });
-	      // this.map.off('click', this.mapClickListener);
-	      // this.map.off('mousemove', this.mapMouseMoveListener);
-	   	  // this.map.removeLayer('LAYER_NEW_LINE');
-		  // this.map.removeSource('SOURCE_NEW_LINE');
-	      
+	      this.map.removeLayer(LAYER_LINE);
+	      this.map.removeLayer(LAYER_SYMBOL);
+	      this.map.removeSource(SOURCE_LINE);
+	      this.map.removeSource(SOURCE_SYMBOL);
+	      this.markers.forEach(function (m) {
+	        return m.remove();
+	      });
+	      this.map.off('click', this.mapClickListener);
+	      this.map.off('style.load', this.styleLoadListener);
 	      this.map.fire('ruler.off');
 	    }
 	  }, {
-	  //   key: "mapMouseMoveListener",
-	  //   value: function mapMouseMoveListener(event) {
-	  //   	 console.log(event.lngLat,this.linenum);
-		 //    // if (this.coordinates[this.linenum].length) {
-			//    //  var index = this.coordinates[this.linenum].length;
-			//    //  var lngLat = e.lngLat.wrap();
-			//    //  // this.coordinates[this.linenum][nodeindex-1] = [lngLat.lng, lngLat.lat];
-			//    //  this.map.getSource('SOURCE_NEW_LINE').setData(geoLineString([this.coordinates[this.linenum][nodeindex-1],[lngLat.lng,lngLat.lat]]));		    	
-		 //    // }
-	
-	  //   }
-	  // }, {
-	    key: "deleteSelectLine",
-	    value: function deleteSelectLine() {
-	    	// console.log("deleteSelectLine",this.mode,this.linenum);
-	    	//console.log(Object.keys(this.labels).includes(this.linenum));
-	    	if ((this.mode != '') && (Object.keys(this.labels).includes(this.linenum))) {
-	    		var linenum = this.linenum;
-	    		this.measuringOff();    		
-		        this.map.removeLayer(LAYER_LINE+linenum);
-		        this.map.removeLayer(LAYER_SYMBOL+linenum);
-		        this.map.removeSource(SOURCE_LINE+linenum);
-		        this.map.removeSource(SOURCE_SYMBOL+linenum);
-		        this.markers[linenum].forEach(function (m) {
-		        	return m.remove();
-		        });				
-				delete this.coordinates[linenum];// = [];
-				delete this.labels[linenum];// = [];
-				delete this.markers[linenum];// = [];
-				// console.log("delete :"+ this.mode, linenum);
-				// console.log(this.labels, this.labels.length);
-	    	}
-	    }
-	  }, {	  	
 	    key: "mapClickListener",
 	    value: function mapClickListener(event) {
-		    if (this.isMeasuring) {
-				var _this = this;
-				var index = this.labels[this.linenum].length + 1;
-				var markerNode = document.createElement('div');
-				markerNode.id = this.linenum + "#" + index;
-				markerNode.style.width = '11px';
-				markerNode.style.height = '11px';
-				markerNode.style.borderRadius = '50%';
-				markerNode.style.background = (index == 1)? "#f00" : this.selectColor;
-				markerNode.style.boxSizing = 'border-box';
-				markerNode.style.border = "2px solid ".concat(this.secondaryColor);
-				markerNode.style.cursor = 'pointer';
-				var marker = new mapboxgl.Marker({
-				element: markerNode,
-				draggable: true
-				}).setLngLat(event.lngLat).addTo(this.map);
+	      var _this = this;
+	      var index = this.labels.length;
+	      var markerNode = document.createElement('div');
+	      markerNode.id = (index+1);
+	      markerNode.style.width = '10px';
+	      markerNode.style.height = '10px';
+	      markerNode.style.borderRadius = '50%';
+	      markerNode.style.background = this.secondaryColor;
+	      markerNode.style.boxSizing = 'border-box';
+	      markerNode.style.border = "2px solid ".concat(this.mainColor);
+	      markerNode.style.cursor = 'pointer';
+	      var marker = new mapboxgl.Marker({
+	        element: markerNode,
+	        draggable: true
+	      }).setLngLat(event.lngLat).addTo(this.map);
 
-				markerNode.addEventListener('click', function(e){
-						e.stopPropagation();
-						// line point event
-						var linenum = this.id.split("#")[0],
-							nodeindex = this.id.split("#")[1];
-						if ((nodeindex == _this.labels[linenum].length)&&(_this.mode=='edit')) {
-							_this.measuringOff('');
-						}	
-				});
+	      markerNode.addEventListener('click', function(e){
+	      	e.stopPropagation();
+	      	// line point event
+	      	console.log("click",this);
+	      });
 
-				markerNode.addEventListener('mousedown', function(e){
-						var linenum = this.id.split("#")[0],
-							nodeindex = this.id.split("#")[1];
-	   	
-						if ((!_this.isMeasuring)&&(_this.linenum != linenum)) {
-							_this.modeupdate('simple_select');
-							_this.linenum = linenum;
-							_this.modeupdate('select');
-						}
+	      markerNode.addEventListener('contextmenu', function(e){
+	      	// stop event sending to layer underneath
+	      	e.stopPropagation();
+	      	// stop context menu showing up
+	      	e.preventDefault();
+	      	// line point event
+	      	//console.log(this.id,_this.labels.length);
 
-						if ((linenum = _this.linenum)&&(_this.mode!='')) {
-						  marker.on('drag', function (e) {
-						  	// console.log("drag " + linenum);
-						    var lngLat = marker.getLngLat();
-						    _this.coordinates[linenum][nodeindex-1] = [lngLat.lng, lngLat.lat];
-						    _this.labels[linenum] = _this.coordinatesToLabels(linenum);
-						    _this.map.getSource(SOURCE_LINE+linenum).setData(geoLineString(_this.coordinates[linenum]));
-						    _this.map.getSource(SOURCE_SYMBOL+linenum).setData(geoPoint(_this.coordinates[linenum], _this.labels[linenum]));
-						  });
-						}  	
-				});
+	      	// check if is on the last node
+	      	if (this.id == _this.labels.length) {
+				this.parentElement.removeChild(this);  
+				_this.coordinates.pop();
+				_this.labels.pop();
+				_this.map.getSource(SOURCE_LINE).setData(geoLineString(_this.coordinates));
+				_this.map.getSource(SOURCE_SYMBOL).setData(geoPoint(_this.coordinates, _this.labels));
+				_this.markers.pop();
+	      	}
+	      });
 
-				markerNode.addEventListener('dblclick', function(e){
-					e.stopPropagation();
-					console.log("double click Node");
-					_this.measuringOff();
-				});
+	      //console.log(this,this.coordinates);
 
-				markerNode.addEventListener('contextmenu', function(e){
-					// stop event sending to layer underneath
-					e.stopPropagation();
-					// stop context menu showing up
-					e.preventDefault();
-					// line point event
-					var linenum = this.id.split("#")[0],
-						nodeindex = this.id.split("#")[1];
+	      this.coordinates.push([event.lngLat.lng, event.lngLat.lat]);
+	      this.labels = this.coordinatesToLabels();
+	      this.map.getSource(SOURCE_LINE).setData(geoLineString(this.coordinates));
+	      this.map.getSource(SOURCE_SYMBOL).setData(geoPoint(this.coordinates, this.labels));
+	      this.markers.push(marker);
+	      marker.on('drag', function () {
+	        var index = _this.markers.indexOf(marker);
 
-					// check if is on the last node
-					if (nodeindex == _this.labels[linenum].length) {
-					this.parentElement.removeChild(this);  
-					_this.coordinates[linenum].pop();
-					_this.labels[linenum].pop();
-					_this.map.getSource(SOURCE_LINE+linenum).setData(geoLineString(_this.coordinates[linenum]));
-					_this.map.getSource(SOURCE_SYMBOL+linenum).setData(geoPoint(_this.coordinates[linenum], _this.labels[linenum]));
-					_this.markers[linenum].pop();
-					}	    	
-				});
+	        var lngLat = marker.getLngLat();
+	        _this.coordinates[index] = [lngLat.lng, lngLat.lat];
+	        _this.labels = _this.coordinatesToLabels();
 
-			      //console.log(this,this.coordinates);
+	        _this.map.getSource(SOURCE_LINE).setData(geoLineString(_this.coordinates));
 
-				this.coordinates[this.linenum].push([event.lngLat.lng, event.lngLat.lat]);
-				this.labels[this.linenum] = this.coordinatesToLabels(this.linenum);
-				this.map.getSource(SOURCE_LINE+this.linenum).setData(geoLineString(this.coordinates[this.linenum]));
-				this.map.getSource(SOURCE_SYMBOL+this.linenum).setData(geoPoint(this.coordinates[this.linenum], this.labels[this.linenum]));
-				this.markers[this.linenum].push(marker);
-
-		    } else if (this.mode != 'static') {
-		    	this.measuringOff();
-		    }
+	        _this.map.getSource(SOURCE_SYMBOL).setData(geoPoint(_this.coordinates, _this.labels));
+	      });
 	    }
 	  }, {
 	    key: "coordinatesToLabels",
-	    value: function coordinatesToLabels(linenum) {
-	      var coordinates = this.coordinates[linenum],
+	    value: function coordinatesToLabels() {
+	      var coordinates = this.coordinates,
 	          units = this.units,
 	          labelFormat = this.labelFormat;
 	      var sum = 0,dis = 0;
@@ -1456,13 +1286,7 @@
 	  }, {
 	    key: "styleLoadListener",
 	    value: function styleLoadListener() {
-	      // console.log("style load reload1")
-	      var _this = this;
-	      Object.keys(this.labels).forEach(function (linenum) {
-	      	_this.linenum = linenum;
-	      	_this.draw();
-	      });
-	      // console.log("style load reload2")
+	      this.draw();
 	    }
 	  }, {
 	    key: "onAdd",
@@ -1486,28 +1310,8 @@
 	      if (this.isMeasuring) {
 	        this.measuringOff();
 	      }
-	      // console.log(Object.keys(this.labels));
-	      //for(var j=1; j<this.linetotal+1; j++) {
-	      var _this = this;
-	      Object.keys(this.labels).forEach(function (j) {
-		      _this.map.removeLayer(LAYER_LINE+j);
-		      _this.map.removeLayer(LAYER_SYMBOL+j);
-		      _this.map.removeSource(SOURCE_LINE+j);
-		      _this.map.removeSource(SOURCE_SYMBOL+j);
-		      _this.markers[j].forEach(function (m) {
-		        return m.remove();
-		      });
-	      });
-	      this.linetotal = 0;
-		  this.linenum = 0;
-		  this.markers = {};
-		  this.coordinates = {};
-		  this.labels = {};
 
 	      this.map.off('click', this.mapClickListener);
-		  this.map.off('style.load', this.styleLoadListener);
-	      // this.map.off('dblclick', this.mapDblClickListener);
-	      // this.map.off('contextmenu', this.mapContextMenuListener);   
 	      this.container.parentNode.removeChild(this.container);
 	      this.map = undefined;
 	    }
@@ -1516,6 +1320,7 @@
 	    value: function mapDblClickListener() {
 	    	// Map event
 	    	console.log("double click!")
+
 	    }
 	  }, {
 	    key: "mapContextMenuListener",
@@ -1556,15 +1361,15 @@
 	}
 
 	function iconInspect() {
-	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#000\">\n    <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n    <path d=\"M20 19.59V8l-6-6H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.74.83-2.76.83-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5c0 1.02-.31 1.96-.83 2.75L20 19.59zM9 13c0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3-3 1.34-3 3z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n    <path d=\"M20 19.59V8l-6-6H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.74.83-2.76.83-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5c0 1.02-.31 1.96-.83 2.75L20 19.59zM9 13c0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3-3 1.34-3 3z\"/>\n</svg>", 'image/svg+xml')).firstChild;
 	}
 
 	function iconLeft() {
-	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#000\">\n    <path d=\"M14 7l-5 5 5 5V7z\"/>\n    <path fill=\"none\" d=\"M24 0v24H0V0h24z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M14 7l-5 5 5 5V7z\"/>\n    <path fill=\"none\" d=\"M24 0v24H0V0h24z\"/>\n</svg>", 'image/svg+xml')).firstChild;
 	}
 
 	function iconRight() {
-	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#000\">\n    <path d=\"M10 17l5-5-5-5v10z\"/>\n    <path fill=\"none\" d=\"M0 24V0h24v24H0z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M10 17l5-5-5-5v10z\"/>\n    <path fill=\"none\" d=\"M0 24V0h24v24H0z\"/>\n</svg>", 'image/svg+xml')).firstChild;
 	}
 
 	function featureData(feature) {
@@ -1637,8 +1442,6 @@
 	  };
 
 	  var templateFeature = function templateFeature(feature) {
-	  	var outercontainer = document.createElement('div');
-	  	outercontainer.style.textAlign = "center";
 	    var table = document.createElement('table');
 	    table.classList.add('mapboxgl-ctrl-inspect-feature');
 	    var data = featureData(feature);
@@ -1646,24 +1449,13 @@
 	      var row = document.createElement('tr');
 	      var key = document.createElement('th');
 	      var value = document.createElement('td');
-      
-	      if (!['$type','source','source-layer'].includes(prop.key)) {
-	      	if (prop.key == "$id") {
-	      	  outercontainer.innerHTML = `<span class = "mapboxgl-ctrl-inspect-feature-header">ชั้นข้อมูล : ${prop.value}</span>`
-	      	} else {
-		      key.textContent = prop.key;
-		      value.textContent = prop.value;
-		      row.appendChild(key);
-		      row.appendChild(value);
-		      table.append(row);	
-		  	}
-	      } 
+	      key.textContent = prop.key;
+	      value.textContent = prop.value;
+	      row.appendChild(key);
+	      row.appendChild(value);
+	      table.append(row);
 	    });
-	  	var table_container = document.createElement('div');
-	  	table_container.classList.add('mapboxgl-ctrl-inspect-feature-container');
-	  	table_container.appendChild(table);
-	  	outercontainer.appendChild(table_container);
-	    return outercontainer;
+	    return table;
 	  };
 
 	  function goTo(dir) {
@@ -1725,9 +1517,7 @@
 	      this.button.classList.add('-active');
 	      this.map.on('click', this.clickListener);
 	      this.map.on('move', this.updatePosition);
-	      //this.map.getCanvas().style.cursor = 'crosshair';
-	      this.map.getCanvas().classList.add('inspect');
-	      this.map.fire('inspect.on');
+	      this.map.getCanvas().style.cursor = 'pointer';
 	    }
 	  }, {
 	    key: "inspectingOff",
@@ -1737,9 +1527,7 @@
 	      this.button.classList.remove('-active');
 	      this.map.off('click', this.clickListener);
 	      this.map.off('move', this.updatePosition);
-	      //this.map.getCanvas().style.cursor = '';
-	      this.map.getCanvas().classList.remove('inspect');
-	      this.map.fire('inspect.off');
+	      this.map.getCanvas().style.cursor = '';
 	    }
 	  }, {
 	    key: "getFeatures",
@@ -1780,7 +1568,6 @@
 	      var features = this.getFeatures(event);
 	      this.removePopup();
 	      this.addPopup(features);
-	      // event.stopPropagation();
 	    }
 	  }, {
 	    key: "onAdd",
@@ -1943,15 +1730,17 @@
 	  return TooltipControl;
 	}();
 
+
 //===========================================================================================================================
 
-	function _classCallCheck$3(instance, Constructor) {
+
+	function _classCallCheck$7(instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError("Cannot call a class as a function");
 	  }
 	}
 
-	function _defineProperties$3(target, props) {
+	function _defineProperties$7(target, props) {
 	  for (var i = 0; i < props.length; i++) {
 	    var descriptor = props[i];
 	    descriptor.enumerable = descriptor.enumerable || false;
@@ -1961,153 +1750,32 @@
 	  }
 	}
 
-	function _createClass$3(Constructor, protoProps, staticProps) {
-	  if (protoProps) _defineProperties$1(Constructor.prototype, protoProps);
-	  if (staticProps) _defineProperties$1(Constructor, staticProps);
-	  return Constructor;
-	}
-
-	function iconPointer() {
-	  return (new DOMParser().parseFromString("<svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" xmlns=\"http://www.w3.org/2000/svg\">\n    <g fill=\"none\" fill-rule=\"evenodd\">\n        <path d=\"M0 0h24v24H0z\"/>\n        <path fill=\"#f44336\" d=\"M12 3l4 8H8z\"/>\n        <path fill=\"#9E9E9E\" d=\"M12 21l-4-8h8z\"/>\n    </g>\n</svg>", 'image/svg+xml')).firstChild;
-	}
-
-	/**
-	 * Simple compass
-	 * @param {Object} options
-	 * @param {Boolean} [options.instant=true] - Show compass if bearing is 0
-	 */
-
-	var CompassControl = /*#__PURE__*/function () {
-	  function CompassControl() {
-	    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-	    _classCallCheck$1(this, CompassControl);
-
-	    this.instant = typeof options.instant === 'boolean' ? options.instant : true;
-	    this.onRotate = this.onRotate.bind(this);
-	  }
-
-	  _createClass$3(CompassControl, [{
-	    key: "insertControls",
-	    value: function insertControls() {
-	      this.container = document.createElement('div');
-	      this.button = document.createElement('button');
-	      this.button.setAttribute('type', 'button');
-	      this.container.classList.add('mapboxgl-ctrl');
-	      this.container.classList.add('mapboxgl-ctrl-group');
-	      this.container.classList.add('mapboxgl-ctrl-compass');
-	      this.pointer = iconPointer();
-
-	      if (this.instant) {
-	        this.container.classList.add('-active');
-	      }
-
-	      this.container.appendChild(this.button);
-	      this.button.appendChild(this.pointer);
-	    }
-	  }, {
-	    key: "onAdd",
-	    value: function onAdd(map) {
-	      var _this = this;
-
-	      this.map = map;
-	      this.insertControls();
-	      this.button.addEventListener('click', function () {
-	        _this.map.easeTo({
-	          bearing: 0,
-	          pitch: 0
-	        });
-	      });
-	      this.map.on('rotate', this.onRotate);
-	      this.onRotate();
-	      return this.container;
-	    }
-	  }, {
-	    key: "onRemove",
-	    value: function onRemove() {
-	      this.container.parentNode.removeChild(this.container);
-	      this.map = undefined;
-	    }
-	  }, {
-	    key: "onRotate",
-	    value: function onRotate() {
-	      var angle = this.map.getBearing() * -1;
-
-	      if (!this.instant) {
-	        if (angle === 0) {
-	          this.container.classList.remove('-active');
-	        } else {
-	          this.container.classList.add('-active');
-	        }
-	      }
-
-	      this.pointer.style.transform = "rotate(".concat(angle, "deg)");
-	    }
-	  }]);
-
-	  return CompassControl;
-	}();
-
-//==================================================================================================================
-
-	function _classCallCheck$1(instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError("Cannot call a class as a function");
-	  }
-	}
-
-	function _defineProperties$1(target, props) {
-	  for (var i = 0; i < props.length; i++) {
-	    var descriptor = props[i];
-	    descriptor.enumerable = descriptor.enumerable || false;
-	    descriptor.configurable = true;
-	    if ("value" in descriptor) descriptor.writable = true;
-	    Object.defineProperty(target, descriptor.key, descriptor);
-	  }
-	}
-
-	function _createClass$1(Constructor, protoProps, staticProps) {
-	  if (protoProps) _defineProperties$1(Constructor.prototype, protoProps);
-	  if (staticProps) _defineProperties$1(Constructor, staticProps);
+	function _createClass$7(Constructor, protoProps, staticProps) {
+	  if (protoProps) _defineProperties$7(Constructor.prototype, protoProps);
+	  if (staticProps) _defineProperties$7(Constructor, staticProps);
 	  return Constructor;
 	}
 
 	function iconMaptools() {
-	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#000000\">\n    <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n    <path d=\"M20 19.59V8l-6-6H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.74.83-2.76.83-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5c0 1.02-.31 1.96-.83 2.75L20 19.59zM9 13c0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3-3 1.34-3 3z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n    <path d=\"M20 19.59V8l-6-6H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.74.83-2.76.83-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5c0 1.02-.31 1.96-.83 2.75L20 19.59zM9 13c0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3-3 1.34-3 3z\"/>\n</svg>", 'image/svg+xml')).firstChild;
 	}
 
 	function iconUpArrow() {
-	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#000000\">\n    <path d=\"M7 14l 5-5 5 5H7z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M7 14l 5-5 5 5H7z\"/>\n</svg>", 'image/svg+xml')).firstChild;
 	}
 
 	function iconDownArrow() {
-	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#000000\">\n    <path d=\"M7 9l5 5 5-5H7z\"/>\n</svg>", 'image/svg+xml')).firstChild;
+	  return (new DOMParser().parseFromString("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#505050\">\n    <path d=\"M7 9l5 5 5-5H7z\"/>\n</svg>", 'image/svg+xml')).firstChild;
 	}
 
 	var MaptoolsControl = /*#__PURE__*/function () {
 	  function MaptoolsControl() {
-	    _classCallCheck$1(this, MaptoolsControl);
+	    _classCallCheck$7(this, MaptoolsControl);
 	  }
 
-	  _createClass$1(MaptoolsControl, [{
+	  _createClass$7(MaptoolsControl, [{
 	    key: "MaptoolsControls",
 	    value: function MaptoolsControls() {
-	      this.inspect = new InspectControl();
-	      this.map.addControl(this.inspect, "top-left");
-		  const StaticMode = {};
-		  StaticMode.onSetup = function() {this.setActionableState();return {};};
-		  StaticMode.toDisplayFeatures = function(state, geojson, display) {display(geojson);};	      
-	      const modes = MapboxDraw.modes;
-		  modes.static = StaticMode;
-	      this.draw = new MapboxDraw({modes,displayControlsDefault: false,controls: {point: true,line_string: true,polygon: true,trash: true,combine_features: false,uncombine_features: false},touchBuffer:35});
-	      this.map.addControl(this.draw, "top-left");
-	      this.ruler = new RulerControl();
-	      this.map.addControl(this.ruler, "top-left");
-	      //document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.appendChild(document.getElementsByClassName('ruler-btn')[0]);
-	      var drawtools_container = document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement;
-	      drawtools_container.insertBefore(document.getElementsByClassName('ruler-btn')[0], drawtools_container.childNodes[0]);
-	      document.getElementsByClassName('mapboxgl-ctrl-ruler')[0].style.display = "none";
-	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.style.display = "none";
 	      this.container = document.createElement('div');
 	      this.container.classList.add('mapboxgl-ctrl');
 	      this.container.classList.add('mapboxgl-ctrl-group');
@@ -2117,14 +1785,12 @@
 	      this.button.classList.add('maptools-btn');
 	      this.button.appendChild(iconDownArrow());
 	      this.container.appendChild(this.button);
-	      //map.addControl(new RulerControl(), 'top-left');
+	      this.draw = new MapboxDraw({displayControlsDefault: false,controls: {point: true,line_string: true,polygon: true,trash: true,combine_features: false,uncombine_features: false}});
+
 	      // this.popup = null;
 	      // this.lngLat = null;
 	      // this.clickListener = this.clickListener.bind(this);
 	      // this.updatePosition = this.updatePosition.bind(this);
-	      this.addControlListeners();
-
-
 	    }
 	  }, {
 	    key: "MaptoolsOn",
@@ -2136,18 +1802,16 @@
 	      // this.map.getCanvas().style.cursor = 'pointer';
 	      this.button.innerHTML = '';
 	      this.button.appendChild(iconUpArrow());
-	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.style.display = "block";
+	      this.map.addControl(this.draw, "top-left");
+	      //this.draw.appendChild(this.button);
 	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.appendChild(this.button);
-	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.classList.add('mapboxgl-ctrl-maptools-active');
 	      this.container.style.display = 'none';
-	      this.draw.changeMode('simple_select');
-	      this.ruler.modeupdate('simple_select');
 	      this.map.fire('maptools.on');
 	    }
 	  }, {
 	    key: "MaptoolsOff",
 	    value: function MaptoolsOff() {
-	      //this.removePopup();
+	      this.removePopup();
 	      this.isMaptools = false;
 	      this.button.classList.remove('-active');
 	      // this.map.off('click', this.clickListener);
@@ -2157,108 +1821,49 @@
 	      this.button.appendChild(iconDownArrow());
 	      this.container.style.display = 'block';
 	      this.container.appendChild(this.button);
-	      // document.getElementsByClassName('mapboxgl-ctrl-ruler')[0].appendChild(document.getElementsByClassName('ruler-btn')[0]);
-	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.classList.remove('mapboxgl-ctrl-maptools-active');
-	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.style.display = "none";
-	      // this.map.removeControl(this.draw);
-	      // this.map.removeControl(this.ruler);
-	      this.draw.changeMode('static');
-	      this.ruler.measuringOff('static');
+	      this.map.removeControl(this.draw);
 	      this.map.fire('maptools.off');
 	    }
 	  }, {
-	    key: "addControlListeners",
-	    value: function addControlListeners() {
-
-	      var _this = this;
-
-	      document.getElementsByClassName('mapbox-gl-draw_trash')[0].addEventListener('click', function () {
-	      	// console.log("click trash");
-	      	_this.ruler.deleteSelectLine();
-
-	      });
-	      document.getElementsByClassName('mapbox-gl-draw_trash')[0].addEventListener('contextmenu', function (e) {
-	      	// console.log("trash all!!!");
-	      	e.preventDefault();
-	      	_this.reloadComponents();
-
-	      });	      
-	      map.on('draw.modechange', function () {
-			if (_this.inspect.isInspecting) _this.inspect.inspectingOff();
-			if (_this.ruler.isMeasuring) _this.ruler.measuringOff();
-	      });
-
-	      map.on('inspect.on', function () {
-	        _this.draw.changeMode('simple_select');
-	        if (_this.ruler.isMeasuring) _this.ruler.measuringOff();
-	      });
-	      map.on('ruler.on', function () {
-	        _this.draw.changeMode('simple_select');
-	        if (_this.inspect.isInspecting) _this.inspect.inspectingOff();
-	      });
-
-
-	      // document.getElementsByClassName('mapbox-gl-draw_line')[0].addEventListener('click', function () {
-	      // 	console.log(_this.draw.getMode());
-
-	      // });
-
-	      // document.getElementsByClassName('mapbox-gl-draw_polygon')[0].addEventListener('click', function () {
-	      // 	console.log("click polygon");
-
-	      // });
-	    }	    
-	  }, {
-	    key: "reloadComponents",
-	    value: function reloadComponents() {
-	      this.container.appendChild(this.button);
-	      document.getElementsByClassName('mapboxgl-ctrl-ruler')[0].appendChild(document.getElementsByClassName('ruler-btn')[0]);
-	      this.map.removeControl(this.draw);
-	      this.map.removeControl(this.ruler);
-
-	      this.map.addControl(this.draw, "top-left");
-	      this.map.addControl(this.ruler, "top-left");
-	      //document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.appendChild(document.getElementsByClassName('ruler-btn')[0]);
-	      var drawtools_container = document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement;
-	      drawtools_container.insertBefore(document.getElementsByClassName('ruler-btn')[0], drawtools_container.childNodes[0]);
-	      document.getElementsByClassName('mapboxgl-ctrl-ruler')[0].style.display = "none";
-	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.style.display = "block";
-	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.appendChild(this.button);
-	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.classList.add('mapboxgl-ctrl-maptools-active');
-	      this.container.style.display = 'none';
-	      this.addControlListeners();
+	    key: "getFeatures",
+	    value: function getFeatures(event) {
+	      var selectThreshold = 3;
+	      var queryBox = [[event.point.x - selectThreshold, event.point.y + selectThreshold], // bottom left (SW)
+	      [event.point.x + selectThreshold, event.point.y - selectThreshold] // top right (NE)
+	      ];
+	      return this.map.queryRenderedFeatures(queryBox);
 	    }
-	  // }, {
-	  //   key: "addPopup",
-	  //   value: function addPopup(features) {
-	  //     this.popup = popup(features);
-	  //     this.mapContainer.appendChild(this.popup);
-	  //     this.updatePosition();
-	  //   }
-	  // }, {
-	  //   key: "removePopup",
-	  //   value: function removePopup() {
-	  //     if (!this.popup) return;
-	  //     this.mapContainer.removeChild(this.popup);
-	  //     this.popup = null;
-	  //   }
-	  // }, {
-	  //   key: "updatePosition",
-	  //   value: function updatePosition() {
-	  //     if (!this.lngLat) return;
-	  //     var canvasRect = this.canvas.getBoundingClientRect();
-	  //     var pos = this.map.project(this.lngLat);
-	  //     this.popup.style.left = "".concat(pos.x - canvasRect.left, "px");
-	  //     this.popup.style.top = "".concat(pos.y - canvasRect.top, "px");
-	  //   }
-	  // }, {
-	  //   key: "clickListener",
-	  //   value: function clickListener(event) {
-	  //     this.lngLat = event.lngLat;
-	  //     var features = this.getFeatures(event);
-	  //     this.removePopup();
-	  //     this.addPopup(features);
-	  //   }
+	  }, {
+	    key: "addPopup",
+	    value: function addPopup(features) {
+	      this.popup = popup(features);
+	      this.mapContainer.appendChild(this.popup);
+	      this.updatePosition();
+	    }
+	  }, {
+	    key: "removePopup",
+	    value: function removePopup() {
+	      if (!this.popup) return;
+	      this.mapContainer.removeChild(this.popup);
+	      this.popup = null;
+	    }
+	  }, {
+	    key: "updatePosition",
+	    value: function updatePosition() {
+	      if (!this.lngLat) return;
+	      var canvasRect = this.canvas.getBoundingClientRect();
+	      var pos = this.map.project(this.lngLat);
+	      this.popup.style.left = "".concat(pos.x - canvasRect.left, "px");
+	      this.popup.style.top = "".concat(pos.y - canvasRect.top, "px");
+	    }
+	  }, {
+	    key: "clickListener",
+	    value: function clickListener(event) {
+	      this.lngLat = event.lngLat;
+	      var features = this.getFeatures(event);
+	      this.removePopup();
+	      this.addPopup(features);
+	    }
 	  }, {
 	    key: "onAdd",
 	    value: function onAdd(map) {
@@ -2290,18 +1895,95 @@
 	  return MaptoolsControl;
 	}();
 
-	/* Inspect */
-	// map.addControl(new InspectControl(), 'top-left');
+//===========================================================================================================================
 
+	// mapboxgl.accessToken = 'pk.eyJ1IjoiYnJhdmVjb3ciLCJhIjoiY2o1ODEwdWljMThwbTJ5bGk0a294ZmVybiJ9.kErON3w2kwEVxU5aNa-EqQ';
+
+	// const map = new mapboxgl.Map({
+	//   container: 'map',
+	//   style: 'mapbox://styles/mapbox/streets-v11',
+	//   zoom: 14,
+	//   center: [30.5234, 50.4501],
+	// });
+	// const geoJSON = {
+	//   type: 'Feature',
+	//   geometry: {
+	//     type: 'Polygon',
+	//     coordinates: [
+	//       [
+	//         [30.51611423492432, 50.452667766971196],
+	//         [30.514655113220215, 50.449006093706274],
+	//         [30.516843795776367, 50.44862351447756],
+	//         [30.518345832824707, 50.45217591688964],
+	//         [30.51611423492432, 50.452667766971196],
+	//       ],
+	//     ],
+	//   },
+	// };
+
+	// map.doubleClickZoom.disable();
+
+
+	let ruler = new RulerControl();
 	/* Ruler */
-	// map.addControl(new RulerControl(), 'top-left');
+	map.addControl(ruler, 'top-left');
+
+	/* Inspect */
+	map.addControl(new InspectControl(), 'top-left');
+
+	// /* Compass */
+	// map.addControl(new CompassControl(), 'bottom-right');
 
 
 	/* Maptools */
-	// map.addControl(new MaptoolsControl(), 'top-left');
+	map.addControl(new MaptoolsControl(), 'top-left');
 
-	// /* Compass */
-	// map.addControl(new CompassControl(), 'top-left');	
 
-// }());
 
+	map.on('load', () => {
+	  map.addLayer({
+	    id: '$fill',
+	    type: 'fill',
+	    source: {
+	      type: 'geojson',
+	      data: geoJSON,
+	    },
+	    paint: {
+	      'fill-opacity': 0.3,
+	      'fill-color': '#4264fb',
+	    },
+	  });
+	  map.addLayer({
+	    id: '$line',
+	    type: 'line',
+	    source: {
+	      type: 'geojson',
+	      data: geoJSON,
+	    },
+	    paint: {
+	      'line-width': 2,
+	      'line-color': '#4264fb',
+	    },
+	  });
+	  map.addControl(new TooltipControl({
+	    layer: '$fill',
+	  }));
+	});
+
+map.on('maptools.on', () => {
+	console.log("maptools.on",ruler);
+	ruler.measuringOff();
+});
+map.on('maptools.off', () => {
+	console.log("maptools.off");
+});
+
+map.on('ruler.off', () => {
+	console.log("ruler.off");
+});
+
+}());
+
+
+
+//# sourceMappingURL=docs.bundle.js.map
