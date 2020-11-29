@@ -3000,6 +3000,7 @@ function layerswitchAction(layer,checked) {
     // console.log(noti_left);
     if (noti_left == 0) {
       document.getElementById("vertical-table-container-MAP").style.display = "none";
+      switchDatapanel(0);
       datapanel_isopen = -1;
       map_Xoffset = 0;
       map_Yoffset = 15;
