@@ -186,24 +186,3 @@ function autocomplete_list(layer,form) {
   }
   
 }
-
-function layerswitchAction(layer,checked) {
-  //console.log(layer,checked);
-  var noti_layer = ['แจ้งเตือนภัย','แจ้งเตือนวางแผน'],
-      admin_layer = ['เขตจังหวัด','เขตอำเภอ','เขตตำบล'];
-
-  // if switch notification layer, filter notificaton marker and data
-  if (noti_layer.includes(layer)) {
-    filterNotiType(layer,checked);
-  }
-
-  // Set admin layers to be "ONLY ONE ON"  -- to be complete
-  // if (admin_layer.includes(layer) && checked) {
-  //   console.log(layer,checked);
-  //   admin_layer.forEach(function (item, index) {
-  //     if (item != layer) {
-  //       console.log("turn off", item);
-  //     }
-  //   });
-  // }
-}

@@ -118,7 +118,7 @@ function resizeAdjust() {
       //document.getElementById("menu-container-bottom-right").style.bottom = "75px";
       document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.bottom = "75px";
       
-      map_Yoffset = -40; //-40;
+      map_Yoffset = -20; //-40;
     }
     map_Xoffset = 0
 
@@ -2201,11 +2201,6 @@ function filterNotiType(type,filter) {
   }
 
 
-
-
-
-
-
   var removetable = document.getElementById('table_image');
   removetable.parentElement.removeChild(removetable);    
   removetable = document.getElementById('table_image_marker');
@@ -2218,7 +2213,7 @@ function filterNotiType(type,filter) {
   tabulateimg_marker(disaster_risk_list_summary.dtype_id.bottom(Infinity), ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
   vertabulateimg_marker(disaster_risk_list_summary.dtype_id.bottom(Infinity), ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
 
-
+  return disaster_risk_list.dtype_id.bottom(Infinity).length;
 }
 
 
@@ -2301,48 +2296,51 @@ function switchShortNoti() {
 }
 
 function switchDatapanel(op) {
-  switch(op) {  
-    case 0:
-      // map layout
-      datapanel_isopen = 0;
-      break;
-    case 1:
-      // map&table layout
-      datapanel_isopen = 1;
-      datapanel = {xw:0.4,xh:0.4};
-      break;
-    case 2:
-      // table layout
-      datapanel_isopen = 2;
-      datapanel = {xw:0.55,xh:0.75};
-      break;
-    default:
-      console.log("layout type is unrecognized!")
-      datapanel_isopen = !datapanel_isopen;
-  }
-
-  for (m=0;m<3;m++) {
-    if (m == op) {
-      document.getElementById("headermenu"+m).style.backgroundColor = "#2a58c3";//"#fff";
-      document.getElementById("headermenu"+m).style.color = "#fff";//"#2a58c3";
-    } else {
-      document.getElementById("headermenu"+m).style.backgroundColor = "#fff";//"#fff0";
-      document.getElementById("headermenu"+m).style.color = "#2a58c3";//"#fff";
+  if (datapanel_isopen != -1) {
+    switch(op) {  
+      case 0:
+        // map layout
+        datapanel_isopen = 0;
+        break;
+      case 1:
+        // map&table layout
+        datapanel_isopen = 1;
+        datapanel = {xw:0.4,xh:0.4};
+        break;
+      case 2:
+        // table layout
+        datapanel_isopen = 2;
+        datapanel = {xw:0.55,xh:0.75};
+        break;
+      default:
+        console.log("layout type is unrecognized!")
+        datapanel_isopen = !datapanel_isopen;
     }
+
+    for (m=0;m<3;m++) {
+      if (m == op) {
+        document.getElementById("headermenu"+m).style.backgroundColor = "#2a58c3";//"#fff";
+        document.getElementById("headermenu"+m).style.color = "#fff";//"#2a58c3";
+      } else {
+        document.getElementById("headermenu"+m).style.backgroundColor = "#fff";//"#fff0";
+        document.getElementById("headermenu"+m).style.color = "#2a58c3";//"#fff";
+      }
+    }
+
+
+
+    //datapanel_isopen = !datapanel_isopen;
+    resizeAdjust()  
+    map.flyTo({
+      center: mapcenter, //[101.6673626,13.2808669],
+      offset: [map_Xoffset, map_Yoffset],
+      //zoom : zoom(z), 
+      speed : flyspeed, 
+      curve : 1, 
+      essential: true
+    });    
   }
 
-
-
-  //datapanel_isopen = !datapanel_isopen;
-  resizeAdjust()  
-  map.flyTo({
-    center: mapcenter, //[101.6673626,13.2808669],
-    offset: [map_Xoffset, map_Yoffset],
-    //zoom : zoom(z), 
-    speed : flyspeed, 
-    curve : 1, 
-    essential: true
-  });
 }
 
 
@@ -2955,4 +2953,28 @@ function layerSetcolor(el,layer,color) {
   }
         
   //console.log("set color",layer,color,el.className);  
+}
+
+function layerswitchAction(layer,checked) {
+  //console.log(layer,checked);
+  var noti_layer = ['แจ้งเตือนภัย','แจ้งเตือนวางแผน'],
+      admin_layer = ['เขตจังหวัด','เขตอำเภอ','เขตตำบล'];
+
+  // if switch notification layer, filter notificaton marker and data
+  if (noti_layer.includes(layer)) {
+    var noti_left = filterNotiType(layer,checked);
+    // console.log(noti_left);
+    if (noti_left == 0) {
+      document.getElementById("vertical-table-container-MAP").style.display = "none";
+      datapanel_isopen = -1;
+      map_Xoffset = 0;
+      map_Yoffset = 15;
+    } else if (datapanel_isopen == -1) {
+      document.getElementById("vertical-table-container-MAP").style.display = "block";
+      datapanel_isopen = 0;
+      switchDatapanel(0);
+    }
+
+  }
+
 }
