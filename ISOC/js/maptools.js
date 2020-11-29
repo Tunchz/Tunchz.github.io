@@ -1043,9 +1043,10 @@
 	var LAYER_SYMBOL = 'controls-layer-symbol';
 	var SOURCE_LINE = 'controls-source-line';
 	var SOURCE_SYMBOL = 'controls-source-symbol';
-	var MAIN_COLOR = '#0000ff'; //'#263238';
+	var MAIN_COLOR = '#00ff00'; //'#263238';
 	var HALO_COLOR = '#fff';
 	var SELECT_COLOR = '#fbb03b';
+	var STATIC_COLOR = "#2a58c3";
 
 	function geoLineString() {
 	  var coordinates = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -1115,12 +1116,13 @@
 	    this.labels = {};
 	    this.units = options.units || 'kilometers';
 	    this.font = options.font || ['Roboto Medium'];
-	    this.fontSize = options.fontSize || 12;
+	    this.fontSize = options.fontSize || 10;
 	    this.fontHalo = options.fontHalo || 1;
 	    this.labelFormat = options.labelFormat || defaultLabelFormat;
 	    this.mainColor = options.mainColor || MAIN_COLOR;
 	    this.secondaryColor = options.secondaryColor || HALO_COLOR;
 	    this.selectColor = options.selectColor || SELECT_COLOR;
+	    this.staticColor = options.staticColor || STATIC_COLOR;
 	    this.mapClickListener = this.mapClickListener.bind(this);
 	    this.styleLoadListener = this.styleLoadListener.bind(this);
 	    // this.mapClickListener = this.mapMouseMoveListener.bind(this);
@@ -1197,16 +1199,29 @@
 	    value: function modeupdate(mode) {
 	    	this.mode = mode;
 	    	if (this.linenum > 0) {
-		    	if (mode == '') {
+		    	if (mode == 'simple_select') {
 		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-dasharray', [1, 0]);
 		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-color', this.mainColor);
 		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-color', this.mainColor);
-		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-halo-color', this.secondaryColor);
+		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-halo-color', "#000");
 		    		var mainColor = this.mainColor;
 		    		this.markers[this.linenum].forEach(function (markernode) {
-		    			console.log(markernode._element.id);
+		    			//console.log(markernode._element.id);
 		    			markernode._element.style.backgroundColor = mainColor;
 		    		});		    		
+		    	} else if (mode == 'static') {
+		    		//console.log('static');
+		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-dasharray', [1, 0]);
+		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-color', this.staticColor);
+		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-color', this.staticColor);
+		    		this.map.setPaintProperty(LAYER_SYMBOL+this.linenum, 'text-halo-color', this.secondaryColor);
+		    		var staticColor = this.staticColor;
+		    		this.markers[this.linenum].forEach(function (markernode,index) {
+		    			// console.log(markernode._element.id);
+		    			markernode._element.style.backgroundColor = staticColor; //(index == 0) ? "#f00" : staticColor;
+		    		});
+		    		this.linenum = 0;
+		    		this.measuringOff('static');
 		    	} else {
 		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-dasharray', [1, 1]);
 		    		this.map.setPaintProperty(LAYER_LINE+this.linenum, 'line-color', this.selectColor);
@@ -1217,7 +1232,34 @@
 		    			// console.log(markernode._element.id);
 		    			markernode._element.style.backgroundColor = (index == 0) ? "#f00" : selectColor;
 		    		});
-		    	}	    		
+		    	}	   
+	    	} else {
+	    		var _this = this;
+	    		Object.keys(this.labels).forEach(function (linenum) {
+		    		if (mode == 'static') {
+			    		console.log('static');
+			    		_this.map.setPaintProperty(LAYER_LINE+linenum, 'line-dasharray', [1, 0]);
+			    		_this.map.setPaintProperty(LAYER_LINE+linenum, 'line-color', _this.staticColor);
+			    		_this.map.setPaintProperty(LAYER_SYMBOL+linenum, 'text-color', _this.staticColor);
+			    		_this.map.setPaintProperty(LAYER_SYMBOL+linenum, 'text-halo-color', _this.secondaryColor);
+			    		var staticColor = _this.staticColor;
+			    		_this.markers[linenum].forEach(function (markernode,index) {
+			    			// console.log(markernode._element.id);
+			    			markernode._element.style.display = "none"; //(index == 0) ? "#f00" : staticColor;
+			    		});
+			    	} else {
+			    		_this.map.setPaintProperty(LAYER_LINE+linenum, 'line-dasharray', [1, 0]);
+			    		_this.map.setPaintProperty(LAYER_LINE+linenum, 'line-color', _this.mainColor);
+			    		_this.map.setPaintProperty(LAYER_SYMBOL+linenum, 'text-color', _this.mainColor);
+			    		_this.map.setPaintProperty(LAYER_SYMBOL+linenum, 'text-halo-color', "#000");
+			    		var mainColor = _this.mainColor;
+			    		_this.markers[linenum].forEach(function (markernode,index) {
+			    			// console.log(markernode._element.id);
+			    			markernode._element.style.display = "block";
+			    			markernode._element.style.backgroundColor = mainColor;
+			    		});
+			    	}
+			    });
 	    	}
 	    }
 	  }, {
@@ -1225,7 +1267,7 @@
 	    key: "measuringOn",
 	    value: function measuringOn() {
 	      this.isMeasuring = true;
-	      if (this.linetotal>0) this.modeupdate(''); else {
+	      if (this.linetotal>0) this.modeupdate('simple_select'); else {
 	      	this.map.on('click', this.mapClickListener);
 	      	this.map.on('style.load', this.styleLoadListener);
 	      }
@@ -1248,9 +1290,10 @@
 	    }
 	  }, {
 	    key: "measuringOff",
-	    value: function measuringOff() {
+	    value: function measuringOff(mode) {
+	    	console.log((mode)? mode : 'simple_select');
 	      this.isMeasuring = false;
-	      this.modeupdate('');
+	      this.modeupdate((mode)? mode : 'simple_select');
 	      this.linenum = 0;
 	      this.map.getCanvas().style.cursor = '';
 	      this.map.getCanvas().classList.remove('ruler');
@@ -1286,8 +1329,8 @@
 	    key: "deleteSelectLine",
 	    value: function deleteSelectLine() {
 	    	// console.log("deleteSelectLine",this.mode,this.linenum);
-	    	// console.log("mode: "+this.mode);
-	    	if (this.mode != '') {
+	    	//console.log(Object.keys(this.labels).includes(this.linenum));
+	    	if ((this.mode != '') && (Object.keys(this.labels).includes(this.linenum))) {
 	    		var linenum = this.linenum;
 	    		this.measuringOff();    		
 		        this.map.removeLayer(LAYER_LINE+linenum);
@@ -1325,36 +1368,35 @@
 				}).setLngLat(event.lngLat).addTo(this.map);
 
 				markerNode.addEventListener('click', function(e){
-					e.stopPropagation();
-					// line point event
-					var linenum = this.id.split("#")[0],
-						nodeindex = this.id.split("#")[1];
-					if ((nodeindex == _this.labels[linenum].length)&&(_this.mode=='edit')) {
-						_this.measuringOff();
-					}
-
+						e.stopPropagation();
+						// line point event
+						var linenum = this.id.split("#")[0],
+							nodeindex = this.id.split("#")[1];
+						if ((nodeindex == _this.labels[linenum].length)&&(_this.mode=='edit')) {
+							_this.measuringOff('');
+						}	
 				});
 
 				markerNode.addEventListener('mousedown', function(e){
-					var linenum = this.id.split("#")[0],
-						nodeindex = this.id.split("#")[1];
-   	
-					if ((!_this.isMeasuring)&&(_this.linenum != linenum)) {
-						_this.modeupdate('');
-						_this.linenum = linenum;
-						_this.modeupdate('select');
-					}
+						var linenum = this.id.split("#")[0],
+							nodeindex = this.id.split("#")[1];
+	   	
+						if ((!_this.isMeasuring)&&(_this.linenum != linenum)) {
+							_this.modeupdate('simple_select');
+							_this.linenum = linenum;
+							_this.modeupdate('select');
+						}
 
-					if ((linenum = _this.linenum)&&(_this.mode!='')) {
-				  marker.on('drag', function (e) {
-				  	// console.log("drag " + linenum);
-				    var lngLat = marker.getLngLat();
-				    _this.coordinates[linenum][nodeindex-1] = [lngLat.lng, lngLat.lat];
-				    _this.labels[linenum] = _this.coordinatesToLabels(linenum);
-				    _this.map.getSource(SOURCE_LINE+linenum).setData(geoLineString(_this.coordinates[linenum]));
-				    _this.map.getSource(SOURCE_SYMBOL+linenum).setData(geoPoint(_this.coordinates[linenum], _this.labels[linenum]));
-				  });
-				}  
+						if ((linenum = _this.linenum)&&(_this.mode!='')) {
+						  marker.on('drag', function (e) {
+						  	// console.log("drag " + linenum);
+						    var lngLat = marker.getLngLat();
+						    _this.coordinates[linenum][nodeindex-1] = [lngLat.lng, lngLat.lat];
+						    _this.labels[linenum] = _this.coordinatesToLabels(linenum);
+						    _this.map.getSource(SOURCE_LINE+linenum).setData(geoLineString(_this.coordinates[linenum]));
+						    _this.map.getSource(SOURCE_SYMBOL+linenum).setData(geoPoint(_this.coordinates[linenum], _this.labels[linenum]));
+						  });
+						}  	
 				});
 
 				markerNode.addEventListener('dblclick', function(e){
@@ -1391,7 +1433,7 @@
 				this.map.getSource(SOURCE_SYMBOL+this.linenum).setData(geoPoint(this.coordinates[this.linenum], this.labels[this.linenum]));
 				this.markers[this.linenum].push(marker);
 
-		    } else {
+		    } else if (this.mode != 'static') {
 		    	this.measuringOff();
 		    }
 	    }
@@ -1414,13 +1456,13 @@
 	  }, {
 	    key: "styleLoadListener",
 	    value: function styleLoadListener() {
-	      console.log("style load reload1")
+	      // console.log("style load reload1")
 	      var _this = this;
 	      Object.keys(this.labels).forEach(function (linenum) {
 	      	_this.linenum = linenum;
 	      	_this.draw();
 	      });
-	      console.log("style load reload2")
+	      // console.log("style load reload2")
 	    }
 	  }, {
 	    key: "onAdd",
@@ -2099,6 +2141,7 @@
 	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.classList.add('mapboxgl-ctrl-maptools-active');
 	      this.container.style.display = 'none';
 	      this.draw.changeMode('simple_select');
+	      this.ruler.modeupdate('simple_select');
 	      this.map.fire('maptools.on');
 	    }
 	  }, {
@@ -2120,6 +2163,7 @@
 	      // this.map.removeControl(this.draw);
 	      // this.map.removeControl(this.ruler);
 	      this.draw.changeMode('static');
+	      this.ruler.measuringOff('static');
 	      this.map.fire('maptools.off');
 	    }
 	  }, {
@@ -2145,24 +2189,24 @@
 	      });
 
 	      map.on('inspect.on', function () {
-	        if (_this.ruler.isMeasuring) _this.ruler.measuringOff();
 	        _this.draw.changeMode('simple_select');
+	        if (_this.ruler.isMeasuring) _this.ruler.measuringOff();
 	      });
 	      map.on('ruler.on', function () {
+	        _this.draw.changeMode('simple_select');
 	        if (_this.inspect.isInspecting) _this.inspect.inspectingOff();
-	        _this.changeMode('simple_select');
 	      });
 
 
-	      document.getElementsByClassName('mapbox-gl-draw_line')[0].addEventListener('click', function () {
-	      	console.log(_this.draw.getMode());
+	      // document.getElementsByClassName('mapbox-gl-draw_line')[0].addEventListener('click', function () {
+	      // 	console.log(_this.draw.getMode());
 
-	      });
+	      // });
 
-	      document.getElementsByClassName('mapbox-gl-draw_polygon')[0].addEventListener('click', function () {
-	      	console.log("click polygon");
+	      // document.getElementsByClassName('mapbox-gl-draw_polygon')[0].addEventListener('click', function () {
+	      // 	console.log("click polygon");
 
-	      });
+	      // });
 	    }	    
 	  }, {
 	    key: "reloadComponents",
@@ -2180,6 +2224,7 @@
 	      document.getElementsByClassName('mapboxgl-ctrl-ruler')[0].style.display = "none";
 	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.style.display = "block";
 	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.appendChild(this.button);
+	      document.getElementsByClassName('mapbox-gl-draw_ctrl-draw-btn')[0].parentElement.classList.add('mapboxgl-ctrl-maptools-active');
 	      this.container.style.display = 'none';
 	      this.addControlListeners();
 	    }
