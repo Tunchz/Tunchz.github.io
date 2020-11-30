@@ -693,6 +693,8 @@ function buildFilter(data, layer) {
   const fields = [...data.keys()];
   const values = [...data.values()];
 
+  // remove duplicate
+  values = [...new Set(values)];
   // console.log(fields[0], values[0])
 
   var filter = [];
@@ -700,6 +702,7 @@ function buildFilter(data, layer) {
   for (var i = 0; i < fields.length; i++) {
     if (fields[i].includes("operator")) continue;
     values[i] = values[i].replace("-- ทั้งหมด --", "");
+
     if (!values[i]) continue;
     //DATES AND INTEGERS MUST HAVE AN OPERATOR OPTION AS THE SECOND VALUE IN THE FORM
     switch (layer.metadata.filterSchema[fields[i]].type) {
@@ -761,13 +764,5 @@ function filterIcon() {
 
 
 function create_colorPicker() {
-  // create color-picker-pallete for layer-control button
-  // var color_picker = document.createElement("div");
-  // color_picker.id = "color_picker";
-  // color_picker.className = "color_picker";
-  // color_picker.style.position = "aboslute";
-  // color_picker.style.zIndex = "110";
-  // color_picker.style.visibility = "hidden";
-
   return `<div id="color_picker" class="color_picker" style="display:none" onmouseleave="hidecolorPicker()"></div>`; //color_picker;
 }
