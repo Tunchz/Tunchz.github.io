@@ -693,8 +693,6 @@ function buildFilter(data, layer) {
   const fields = [...data.keys()];
   const values = [...data.values()];
 
-  // remove duplicate
-  values = [...new Set(values)];
   // console.log(fields[0], values[0])
 
   var filter = [];
@@ -708,7 +706,7 @@ function buildFilter(data, layer) {
     switch (layer.metadata.filterSchema[fields[i]].type) {
       case "date" : filter.push([values[i + 1], ["get", fields[i] ], values[i] ]); break;
       case "number" : filter.push([values[i + 1], ["get", fields[i] ], Number(values[i]) ]); break;
-      default: filter.push(["match", ["get", fields[i]], values[i].split(','),true,false]); //build >> ["match",["get", "จังหวัด"],['น่าน','นครนายก'],true,false]
+      default: filter.push(["match", ["get", fields[i]], [...new Set(values[i].split(','))],true,false]); //build >> ["match",["get", "จังหวัด"],['น่าน','นครนายก'],true,false]
     }    
   }
 

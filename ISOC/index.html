@@ -25,7 +25,10 @@
     </style>
   </head>
   <body onresize="resizeAdjust();" onload="setfullscreen();">
-    <div id = "wholecontent" class = "section-container">
+    <div id="ptr">
+        ...
+    </div>
+    <div id = "wholecontent">
       <div id = "map-panel" class = "col-sm-7 height100p" onresize="map.resize()">
 
         <div id="map-container">
@@ -201,6 +204,7 @@
   </body>
 
   <!script defer src="js/face-api.min.js"><!/script>
+<!--   <script src="js/pull-to-reload.js"></script> -->
   <script src="js/covid19.js"></script>
 
   <!link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
@@ -234,6 +238,24 @@
   <link rel="stylesheet" href="css/maptools.css">
 
   <script>
+/*
+    var ptr;
+
+    document.addEventListener("DOMContentLoaded", function() {
+      ptr = new PullToReload({ 
+        'callback-loading': function(){
+          alert("refresh!!!");
+          ptr.loadingEnd();
+          //setTimeout(function(){
+          //    ptr.loadingEnd();
+          //}, 5000);
+        }
+      });
+                
+    });
+
+*/
+
 
     var formatDateTime = d3.time.format("%d %B %Y %H:%M:%S");
 
@@ -486,6 +508,11 @@
         'data': 'https://tunchz.github.io/ISOC/json/subbasin_10p.json'
       });
 
+      map.addSource('mainriver', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/main_river.json'
+      });
+
       map.addSource('drought_risk', {
         'type': 'geojson',
         'data': 'https://tunchz.github.io/ISOC/json/Drought_Risk_34_10p.json'
@@ -683,7 +710,21 @@
           'line-opacity': 1
         }
       });      
-      //map.setFilter('เขตจังหวัด',["match",["get", "จังหวัด"],['น่าน','นครนายก'],true,false]);
+
+
+      map.addLayer({
+        'id': 'แม่น้ำสายหลัก',
+        'type': 'line',
+        'source': 'mainriver',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': '#00f',
+          'line-width': 2,
+          'line-opacity': 1
+        }
+      });      //map.setFilter('เขตจังหวัด',["match",["get", "จังหวัด"],['น่าน','นครนายก'],true,false]);
       //map.setFilter('เขตจังหวัด',["in", "จังหวัด", 'น่าน','นครนายก']);
       //map.setFilter('เขตอำเภอ',["all",["match",["get", "จังหวัด"],['นครนายก','น่าน'],true,false],["match",["get", "อำเภอ"],['เมืองนครนายก','บ้านนา','เมืองน่าน'],true,false]]);
 
@@ -914,7 +955,7 @@
               }
             }             
           },
-          {
+        {
             // name: "แหล่งน้ำขนาดใหญ่",
             id: "แหล่งน้ำขนาดใหญ่",
             hidden: false,
@@ -1041,6 +1082,20 @@
             }
           },
 
+          {
+            // name: "",
+            id: "แม่น้ำสายหลัก",
+            hidden: false,
+            group: "แม่น้ำ",
+            directory: "การบริหาร",            
+            metadata: {
+              filterSchema: {
+                "ชื่อแม่น้ำ": {
+                  type: "string"
+                }
+              }
+            }       
+          },
           {
             id: "เขตพื้นที่ลุ่มน้ำย่อย",
             hidden: false,
