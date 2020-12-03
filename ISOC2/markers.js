@@ -224,8 +224,8 @@ function resizeAdjust() {
 
 
 function load_map_layers() {
-//$.getJSON('https://tunchz.github.io/ISOC/json/thaiwater30_public_thailand.json', function(thaiwatergeojson) {
-$.getJSON('http://api2.thaiwater.net:9200/api/v1/thaiwater30/public/thailand', function(thaiwatergeojson) {
+$.getJSON('https://tunchz.github.io/ISOC/json/thaiwater30_public_thailand.json', function(thaiwatergeojson) {
+//$.getJSON('http://api2.thaiwater.net:9200/api/v1/thaiwater30/public/thailand', function(thaiwatergeojson) {
   thaiwater_geojson = get_thaiwater_geojson(thaiwatergeojson);
 
   $.getJSON('https://tunchz.github.io/ISOC/json/DRM.json', function(drmgeojson) {
