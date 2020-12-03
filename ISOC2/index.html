@@ -14,65 +14,87 @@
     <link rel="stylesheet" href="css/FWTT.css">
     <link rel="stylesheet" href="css/fonts.css">
 
-
+    <style id="dynamic_style">
+      .detailTable>tbody>tr>td {
+        background-color: #7777770f;
+      }
+      .open>.parent>.detailHeader {
+        background-color: #2a58c3;
+        color: #fff;
+      }
+    </style>
   </head>
-  <body onresize="resizeAdjust();">
-    <div id = "wholecontent" class = "section-container">
+  <body onresize="resizeAdjust();" onload="setfullscreen();">
+<!--     <div id="ptr">
+        ...
+    </div> -->
+    <div id = "wholecontent">
       <div id = "map-panel" class = "col-sm-7 height100p" onresize="map.resize()">
 
         <div id="map-container">
-          <div id="map" class='blue'></div>
-
-          <div id='header-container' class='map_addon_top_left' style = "width:123px;">
-            <div id = "logo-container" class = "col-xs-3" style = "display: flex;justify-content: center; align-items: center;">
+          <div id="map"></div>
+          <div id="header-menu-container">
+            <div id="header-menu-container-wrap">
+              <div id="header-menu" align="center">
+                <span id="home-toggle-icon"><icon class="icon-home" oncontextmenu="return false;"></icon></span>
+                <div id="headermenu2" class="header-menu-button" onclick="switchDatapanel(2)" style="border-top-left-radius: 15px;border-bottom-left-radius: 15px;">ตาราง</div>
+                <div id="headermenu1" class="header-menu-button" onclick="switchDatapanel(1)">สมดุล</div>
+                <div id="headermenu0" class="header-menu-button" onclick="switchDatapanel(0)" style="border-top-right-radius: 15px;border-bottom-right-radius: 15px;">แผนที่</div>
+                <span id="geocoder-toggle-icon"><icon class="icon-search" oncontextmenu="return false;"></icon></span>
+              </div>
+            </div>
+            <div id="geocoder" class="geocoder" style="display: none;"></div>
+          </div>
+          <div id='header-container' class='map_addon_top_left'>
+            <div id = "logo-container" class = "col-xs-3" style = "display: flex;justify-content: center; align-items: center;" data-toggle="modal" data-target="#info-modal">
               <img id = "logo" src = 'img/isoc.png' style = "padding: 5px; width : 40px; height : 40px;"></img>
             </div>
             <div id = "title-container" class = "col-xs-9 height100p" style = "">
-              <div id = "Text1_" class = "col-xs-8 height100p" style = "padding: 0px 0px 0px 5px;margin:0px;margin-top: 10px; max-width: 65px; ">
-                <span style="font-family: Impact;font-size: 30px; color: #fff;">DRM </span>
+              <div id = "Text1_" class = "col-xs-8 height100p" style = "padding: 0px 0px 0px 5px;margin:0px;margin-top: 10px; max-width: 65px;">
+                <span style="font-family: Impact;font-size: 30px; color: #fff;text-shadow: 0px 0px 3px #777;">DRM </span>
               </div>
               <div id = "Text2_" class = "col-xs-4 height100p" style = "pointer-events: auto;display: flex;justify-content: left; align-items: center; padding : 11px 0px 0px 5px;">
-                <div type="button" class="btn btn-primary" style="width:18px; height:18px; border-radius: 50%; padding: 0px 5px; font-family: mitr;" data-toggle="modal" data-target="#info-modal">
-                  <div style="margin: -2px 0px 0px 0px;">?</div>
+                <div type="button" class="btn btn-primary" style="width:18px; height:18px; border-radius: 50%; padding: 0px 5px; font-family: mitr;box-shadow: 0px 0px 3px #777;" data-toggle="modal" data-target="#info-modal">
+                  <div style="margin: -1px 0px 0px 0px;">?</div>
                 </div>                          
               </div>
             </div>
 
-            <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true" style="pointer-events: auto; font-family: Serithai;font: 12px/16px Serithai;">
+            <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
                             <h2 class="modal-title h3" id="myModalLabel"><a href="https://www.maholan.co.th/">DRM</a> &gt; Disaster Risk Management Dashboard </h2>
                         </div>
                         <div class="modal-body">
-                            <h3 style="margin-top:0">การใช้งาน</h3>
-                            <p>ระบบจะตรวจจับใบหน้าและวาดกรอบสี่เหลี่ยมล้อมรอบใบหน้า ชื่อของใบหน้าจะถูกแสดงมุมบนซ้าย และแสดงสีตามกรณีดังนี้ </p>
+                            <h3 style="margin-top:0">วัตถุประสงค์</h3>
+                            <p>รายงานการจัดการความเสี่ยงภัยพิบัติ ใช้เพื่อช่วยบริหารจัดการความเสี่ยงการเกิดภัยพิบัติ แจ้งเตือนการวางแผนรับมือภัย แจ้งเตือนภัยพิบัติเมื่อมีการประกาศภัย และใช้เป็นข้อมูลประกอบในการวิเคราะห์เพื่อการตัดสินใจในการดำเนินการปฏิบัติงานเพื่อรับมือกับภัยพิบัติอย่างมีปรุสิทธิภาพ โดยรายงานมีการแสดงข้อมูลดังนี้/p>
                             <ol>
-                                <li>สีส้ม     --> ใบหน้ากำลังถูกยืนยันตัวตนจากระบบ</li>
-                                <li>สีเขียว   --> ใบหน้าถูกยืนยันเรียบร้อยพร้อมแสดงรูปโปรไฟล์มุมล่างซ้าย</li>
-                                <li>สีแดง    --> ใบหน้าไม่ได้ลงทะเบียนในระบบหรือระบบไม่สามารถยืนยันใบหน้าได้</li>
+                                <li>ข้อมูลแจ้งเตือนภัยพิบัติตามประการศจาก ปภ. พร้อมรายละเอียดการดำเนินการ</li>
+                                <li>ข้อมูลแจ้งเตือนการวางแผนรับมือภัยพิบัติ พร้อมรายละเอียดข้อแนะนำ</li>
+                                <li>ข้อมูลพื้นฐานและผลการวิเคราะห์เพื่อใช้ประกอบในการวิเคราะห์สถานการณ์เกี่ยวกับภัยพิบัติต่างๆ</li>
                             </ol>
 
-                            <h3 class="">การแสดงรายละเอียดบนแถบด้านขวา</h3>
-                            <p>ในโหมดหน้าจอแคบแถบจะถูกแสดงดัานล่างถัดจากกรอบการแสดงภาพกล้อง ซึ่งสามารถเลื่อนหน้าจอขึ้นเพื่อดูรายละเอียด</p>
+                            <h3 class="">การใช้งาน</h3>
+                            <p>สามารถโหลด<a href="https://tunchz.github.io/ISOC/Manual_DRM.pdf">คู่มือการใช้งาน</a>ได้ที่นี่ </p>
                             <ol>
-                                <li>ส่วนตัวกรอง เป็นแถบบนสุดแสดงตัวกรองใช้ในการเลือกช่วงเวลาในการแสดงผลการตรวจจับใบหน้า</li>
-                                <li>ส่วนตัวเลขสรุป เป็นแถบแสดงตัวเลขสรุปผลการตรวจจับใบหน้าแบ่งประเภทตามรหัสสี (คลิ๊กเลือกประเภทเพื่อเรียกดูรายชื่อตามประเภทที่ต้องการ)</li>
-                                <li>ส่วนตาราง แสดงรูปใบหน้าพร้อมรายละเอียดการตรวจับใบหน้า ได้แก่ ชื่อ ชื่อกลุ่ม วัน ห้วงเวลา อารมณ์ใบหน้า และสถานะการจัดเก็บข้อมูลใบหน้า</li>
+                                <li>Map Menu ด้านซ้ายขอบจอภาพใช้ควบคุมการแสงผลบนแผนที่ รวมถึงการจัดการชั้นข้อมูล ซ่อน/แสดงและกรองชั้นข้อมูลต่างๆ ได้แก่ ชั้นข้อมูลการแจ้งเตือน   ชั้นข้อมูลประกอบการวิเคราะห์ และชั้นข้อมูลภาพแผนที่พื้นหลัง</li>
+                                <li>Notification Menu และ Notification Icon ด้านขวาขอบจอภาพใช้ควบคุมชั้นข้อมูลการแจ้งเตือน การซ่อน/แสดงสัญลักษณ์แจ้งเตือนบนแผนที่ การเปิด/ปิด ถาดข้อมูลแจ้งเตือน การกรองและแสดงข้อมูลรายละเอียดการแจ้งเตือนต่างๆ</li>
+                                <li>รายงานสามารถแสดงผลใช้งานได้บนอุปกรณ์โทรศัพท์เคลี่อนที่โดยที่ Notification Menu และ Notification Icon จะแสดงขอบด้านล่างจอภาพ แทนที่ขอบจอภาพด้านขวา</li>
                             </ol>
                             <h3>ข้อมูล</h3>
-                            <p>ข้อมูลใบหน้า เป็นข้อมูลใบหน้าของข้าราชการในกองคณิตศาสตร์และคอมพิวเตอร์ ส่วนการศึกษา โรงเรียนนายร้อยพระจุลจอมเกล้า<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a></p>
+                            <p>ข้อมูลใช้ในรายงานได้ถูกเชื่อมต่อจากหน่วยงานราชการที่มีหน้าที่รับผิดชอบดำเนินการภัยพิบัติด้านต่างๆ เพื่อนำมาบูรณาการใช้ประโยชน์จากข้อมูลในระบบ Bigdata Platform สามารถ<a data-toggle="modal" data-target="#datasource-modal" href="">ดูรายละเอียดชุดข้อมูล</a>ได้ที่นี่</p>
                             <ul>
-                                <li>ระบบตรวจจับใบหน้า Face.Rex ถูกพัฒนาขึ้นเพื่อใช้ศึกษา Maching Learning และการนำเทคโนโลยีและ AI มาสนับสนุนในการปฏิบัติงานและการเรียนการสอน เพื่อประโยชน์กับสาธารณะชน ติดต่อผู้จัดทำระบบเพื่อขออนุญาตในการใช้งานข้อมูลใดๆ ที่เป็นผลลัพธ์จากระบบก่อนนำไปใช้งาน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง </li>
+                                <li>ระบบรายงาน ถูกพัฒนาขึ้นเพื่อใช้บูรณาการข้อมูลด้านต่างๆ เพื่อช่วยในการบริหารจัดการภัยพิบัติ และเพื่อประโยชน์กับสาธารณะชน กรุณาติดต่อผู้จัดทำระบบเพื่อขออนุญาตในการใช้งานข้อมูลใดๆ ที่เป็นผลลัพธ์จากระบบก่อนนำไปใช้งาน ผู้จัดทำจะไม่รับผิดชอบการกระทำใดๆ ที่ก่อให้เกิดความเสียหายจากการนำข้อมูลไปใช้หรืออ้างอิง </li>
                             </ul>
                             <h3>ติดต่อ</h3>
-                            <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">tunchz@gmail.com</a>.</p>
+                            <p>สำหรับคำถามและข้อเสนอแนะติดต่อ <a href="mailto:tunchz@gmail.com">Bigdata Team</a> สดม.กอ.รมน.</p>
                         </div>
-                        <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left">Made by CRMA Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+                        <div class="modal-footer" style="margin-top: 0px; padding-top: 0px;"><span class="pull-left">Made by ISOC Bigdata Team</span><br><span class="pull-left">Copyright &#169; Mholan Co,lmd., All Rights Reserved.</span> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="datasource-modal" tabindex="-1" role="dialog" aria-labelledby="datasource-modalLabel" aria-hidden="true" style="pointer-events: auto; font-family: Serithai;font: 12px/16px Serithai;">
+            <div class="modal fade" id="datasource-modal" tabindex="-1" role="dialog" aria-labelledby="datasource-modalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -84,19 +106,32 @@
                                     <tr>
                                         <th>ชุดข้อมูล</th>
                                         <th>แหล่งข้อมูล</th>
+                                        <th>อัปเดตล่าสุด</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     <tr>
-                                        <td>ข้อมูลรายชื่อข้าราชการกองคณิตศาสตร์และคอมพิวเตอร์</td>
-                                        <td>https://macs.crma.ac.th</td>
+                                        <td>ข้อมูลการแจ้งเตือนภัย</td>
+                                        <td>ระบบรายงานของ ปภ.</td>
+                                        <td>ต.ค. 63</td>
                                     </tr>
                                     <tr>
-                                        <td>ข้อมูลรายชื่อข้าราชการกองอื่นๆ</td>
-                                        <td>https://acadiv.crma.ac.th</td>
+                                        <td>ข้อมูลการแจ้งเตือนวางแผน</td>
+                                        <td>ระบบแผนงานด้านภัยพิบัติ</td>
+                                        <td>ต.ค. 63</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ข้อมูลผลการวิเคราะห์ด้านน้ำ</td>
+                                        <td>สำนักงานทรัพยากรน้ำแห่งชาติ</td>
+                                        <td>ต.ค. 63</td>
                                     </tr>
 
+                                    <tr>
+                                        <td>ข้อมูลทรัพยากรน้ำ</td>
+                                        <td>กรมทรัพยากรน้ำ กระทรวงทรัพยากรธรรมชาติ</td>
+                                        <td>ต.ค. 63</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -104,19 +139,16 @@
                     </div>
                 </div>
             </div>
-
-
-
           </div>
 
           <div id='notification-container-right' class='map_addon_right' style = "width: auto; display:block; margin:0px;">
             
             <div id='table-container-MAP' class = "col-sm-12 height100p" style="display: block;">
-              <div id="table-markers-container" class="table-container" oncontextmenu="return false;" style = "padding-right:0px; background-color: #fff0;/*-webkit-transform: translateX(-50%) translateY(0%);*/"></div>
+              <div id="table-markers-container" class="table-container" oncontextmenu="return false;" style = "padding-right:2px; background-color: #fff0;/*-webkit-transform: translateX(-50%) translateY(0%);*/"></div>
               <div id='menu-container-top-right' class='map_addon_top_right' style = "padding: 0px 0px 0px 0px;"></div>
             </div>
             <div id = "data-panel" class = "col-xs-12 height100p" style = "/*background-color: #383838;*/">
-              <div id='table-container-BG' class = "col-xs-12 height100p" style = "background-color: #ffffff22">
+              <div id='table-container-BG' class = "col-xs-12 height100p" style = "padding: 0 5px 5px 0;/*background-color: #ffffff22*/">
                 <div id="table-container" class="table-container" oncontextmenu="return false;"></div> 
               </div>                
             </div>
@@ -124,8 +156,9 @@
           </div>
 
 
-          <div id='notification-container-bottom' class='map_addon_bottom' style = "height: auto; display:block; margin:0px;">
-            <div id='vertical-table-container-MAP' class = "col-sm-12 height100p">
+          <div id='notification-container-bottom' class='map_addon_bottom' style = "height: auto; margin:0px;">
+            <div id='notification-container-bottom-handle'></div>
+            <div id='vertical-table-container-MAP' class = "col-sm-12 height105p">
               <div id="vertical-table-markers-container" class="table-container" oncontextmenu="return false;" style = "padding: 0px 5px; background-color: #fff0;/*-webkit-transform: translateX(-50%) translateY(-50%);*/">
               </div>
             </div>
@@ -135,8 +168,10 @@
           <div id="map_style_menu_outline" style="display: none" onmouseenter="switchStyleMenu(true)" onmouseleave="switchStyleMenu(false)"  >
             <div id="map_style_menu" >
               <div style="/*margin: 5px 17px 0px 5px; padding-top:3px;*/" onclick="switchStyleMenu(false)" >
-                <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" checked="checked" />
-                <label for="satellite-v9">satellite </label><br>
+                <input id="satellite-v9" type="radio" name="rtoggle" value="sattellite-streets" checked="checked" />
+                <label for="satellite-v9">sattellite</label><br>                
+                <input id="satellite-streets-v11" type="radio" name="rtoggle" value="satellite" />
+                <label for="satellite-streets-v11">satellite-streets </label><br>
                 <input id="streets-v11" type="radio" name="rtoggle" value="streets" />
                 <label for="streets-v11">streets </label><br>
                 <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors" />
@@ -148,8 +183,10 @@
               </div>
             </div>
           </div>
-          <div id="map_style_menu_button" class="mapboxgl-ctrl" onclick="switchStyleMenu(true)" onmouseleave="switchStyleMenu(false)">
-            <div id="map_style_menu_button_image" class="mapboxgl-ctrl"></div>
+          <div id="map_style_menu_button" class="mapboxgl-ctrl mapboxgl-ctrl-group" onclick="switchStyleMenu(true)" onmouseleave="switchStyleMenu(false)">
+            <button style="padding:2px;" type="button">
+              <div id="map_style_menu_button_image"></div>
+            </button>
           </div>
 
 
@@ -167,17 +204,20 @@
   </body>
 
   <!script defer src="js/face-api.min.js"><!/script>
+<!--   <script src="js/pull-to-reload.js"></script> -->
   <script src="js/covid19.js"></script>
 
   <!link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
     integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
-  <link rel="stylesheet" href="layer_control/layerControl.css">
+  <link rel="stylesheet" href="layer_control/layerControl2.css">
 
 
   <script src='js/mapbox-gl_v1120.js'></script>
   <link rel="stylesheet" href="css/mapbox-gl_v1120.css">
   <!script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"><!/script>
   <!link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+  <script src='js/mapbox-gl-geocoder.js'></script>
+  <link rel="stylesheet" href="css/mapbox-gl-geocoder.css">
 
   <!script src="js/bootstrap-datepicker.min.js"><!/script>
   <!script src="js/d3.min.js"><!/script>
@@ -189,31 +229,58 @@
   <script defer src="markers.js"></script>
   <!script defer src="ISOC.js"><!/script>
   <script defer src="swipedetect.js"></script>
-  
 
-  <!script type="module" defer src="maplayergroupedcontrol.js"><!/script>
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <script src="js/jquery-ui.js"></script>
+  <script src="autocomplete.js"></script>
+  <script src="getthaiwatergeojson.js"></script>
 
-
+  <link rel="stylesheet" href="css/mapbox-gl-draw.css">
+  <link rel="stylesheet" href="css/maptools.css">
 
   <script>
+/*
+    var ptr;
+
+    document.addEventListener("DOMContentLoaded", function() {
+      ptr = new PullToReload({ 
+        'callback-loading': function(){
+          alert("refresh!!!");
+          ptr.loadingEnd();
+          //setTimeout(function(){
+          //    ptr.loadingEnd();
+          //}, 5000);
+        }
+      });
+                
+    });
+
+*/
+
 
     var formatDateTime = d3.time.format("%d %B %Y %H:%M:%S");
 
     //---- Mapbox GL Initialization--------
-    var z=4;  //default zoom level 0-4
-    var flyspeed = 0.8;
+    var z=4,  //default zoom level 0-4
+        flyspeed = 2,
+        mapcenter = {"lng":101.6673626,"lat":13.2808669},
+        disinteract = 0;
 
-    //mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg'
-    mapboxgl.accessToken ="pk.eyJ1IjoiYTEwayIsImEiOiJjaWdyMmVrazcwMXpsdTZtMThscWtiOTJtIn0.-A76dzJ0vsKULJdDxGvVXg";
-    //mapboxgl.accessToken ='';
+    mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg';  //from mapbox
+    //mapboxgl.accessToken ="pk.eyJ1IjoiYTEwayIsImEiOiJjaWdyMmVrazcwMXpsdTZtMThscWtiOTJtIn0.-A76dzJ0vsKULJdDxGvVXg";
+    //mapboxgl.accessToken ='pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w';
+    //mapboxgl.accessToken ='pk.eyJ1IjoiZHVlcm1hZWwiLCJhIjoiNTRmNjc2MjYzN2Y0NDk5ZjRjMTM1MDA2YjQzYTY4NjUifQ.zdJRPPXa8WvpcMZC1_RAyw';  //from jsfiddle
+    //mapboxgl.accessToken ='pk.eyJ1IjoiYXByZW5kZWdpcyIsImEiOiI1TmFvZGI4In0.ZicumXHvKqD1e6G_WH7B4g';  //from jsfiddle
+
     //Setup mapbox-gl map
     var map = new mapboxgl.Map({
       //style: 'mapbox://styles/tunchz/ck9litjbw2soc1iqo4rysy4nt',
       //style: 'mapbox://styles/mapbox/streets-v11',
       //style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',  // the outdoors-v10 style but without Hillshade layers
       //style: 'mapbox://styles/mapbox/outdoors-v10',
-      style: 'mapbox://styles/mapbox/dark-v10',
+      //style: 'mapbox://styles/mapbox/dark-v10',
       //style: 'mapbox://styles/mapbox/satellite-v9',
+      style: 'mapbox://styles/mapbox/satellite-streets-v11',
       //style: 'mapbox://styles/mapbox/light-v10',
 
       // Custom map style
@@ -244,11 +311,11 @@
 
 
       container: 'map', // container id
-      center: [101.6673626,13.2808669],
+      center: mapcenter,
       //center: [13.79,53.545],
       minZoom: 0.3,
       maxZoom: 20,
-      zoom: 4.7,
+      zoom: 4.8,
       pitch: 0,
       // pitch: 90,
       //bearing: -17.6,
@@ -257,9 +324,28 @@
     })
 
     $("#header-container").appendTo(".mapboxgl-ctrl-top-left");
+    $("#header-menu-container").appendTo(".mapboxgl-ctrl-top-left");
+    $("#header-geocoder-container").appendTo(".mapboxgl-ctrl-top-left");
     // disable map rotation using right click + drag
     //map.dragRotate.disable();
      
+    // map.addControl(new MapboxGeocoder({
+    //   accessToken: mapboxgl.accessToken
+    // }), 'top-left');
+
+    // Setting up GeoCoder
+    var geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      flyTo:true,
+      marker: {offset: [-13,-36],color: 'red'},
+      mapboxgl: mapboxgl
+    });
+    geocoder.on('result', function(e) {
+      resize = 1;
+      centerMap({"lng":e.result.center[0],"lat":e.result.center[1]});
+    });
+    document.getElementById('geocoder').appendChild(geocoder.onAdd(map)); 
+
     // disable map rotation using touch rotation gesture
     //map.touchZoomRotate.disableRotation();
 
@@ -268,15 +354,16 @@
     //map.addControl(new mapboxgl.Navigation());
     map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
 
-
-
     // Add geolocate control to the map.
-    //map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true}), 'top-left');
-    map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+    map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true}), 'top-left');
+    map.addControl(new mapboxgl.NavigationControl({showCompass: true,showZoom:false}), 'top-left');
+
 
     var layerList = document.getElementById('map_style_menu');
     var inputs = layerList.getElementsByTagName('input');
     var currentLayer = "satellite-v9";
+    var mapEvent = 'style.load'; //'idle'; //'styledata';
+    var run = 0;
      
     $("#map_style_menu_button").appendTo(".mapboxgl-ctrl-top-left");
     $("#map_style_menu_outline").appendTo(".mapboxgl-ctrl-top-left");
@@ -289,13 +376,14 @@
 
 
     function switchLayer(layer) {      
-
+      //firstrun = false;
       var layerId = layer.target.id;
       if (layerId != currentLayer) {
 
         var removebutton = document.getElementsByClassName('mgl-layerControl');
         //console.log("length",removebutton.length);
         for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}
+
         map.setStyle('mapbox://styles/mapbox/' + layerId);
         currentLayer = layerId;
       }
@@ -351,80 +439,166 @@
       }
     }
 
+    function setfullscreen() {
+      // element = document.getElementById("map-container");
+      // // console.log(element);
+      // if (!(document.fullscreenElement||document.webkitFullscreenElement||document.mozFullScreenElement||document.msFullscreenElement)) {
+      //   if (element.requestFullscreen) {
+      //     element.requestFullscreen();
+      //   } else if (element.mozRequestFullScreen) {
+      //     element.mozRequestFullScreen();
+      //   } else if (element.webkitRequestFullscreen) {
+      //     element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      //   } else if (element.msRequestFullscreen) {
+      //     element.msRequestFullscreen();
+      //   }          
+      // }
+    
+    }
 
+    function forcefullscreen() {
+      console.log("forcefullscreen call...on width : "+ $("#wholecontent").width());
+      if ($("#wholecontent").width()  < 768) {
+        // top.resizeTo(window.screen.availWidth, window.screen.availHeight);
+        // top.moveTo(0,0);
+        // console.log("set forcefullscreen!")
+        // setTimeout("forcefullscreen()",500);
+      }
+    }   
 
   </script>
+
+  <script src="js/mapbox-gl-draw.js"></script>
+  <script src="js/maptools.js"></script>
+
 
   <script type="module">
 //=======Map Layer Control ========================================================================================
     //import { layerControlSimple } from "https://tunchz.github.io/ISOC/layer_control/layerControlSimple.js"
-    import { layerControlGrouped } from "https://tunchz.github.io/ISOC/layer_control/layerControlGrouped.js"
+    import { layerControlGrouped } from "https://tunchz.github.io/ISOC/layer_control/layerControlGrouped2.js"
 
-      //map_addpiecluster();  
+    var config;
 
-    map.on('style.load', function () {
+    load_map_layers();
+    // load_thaiwater();
+var empty_geojson = {
+      'type': 'FeatureCollection',
+      'features': []
+    };
+
+
+    map.on(mapEvent, function () {
 
 
       map.addSource('mapth_prov', {
         'type': 'geojson',
-        'data': 'https://tunchz.github.io/ISOC/json/mapth_small.json'
+        'data': 'https://tunchz.github.io/ISOC/json/mapth_prov_2.5p.json'
       });
 
       map.addSource('mapth_dist', {
         'type': 'geojson',
-        'data': 'https://tunchz.github.io/ISOC/json/mapth_dist.json'
+        'data': 'https://tunchz.github.io/ISOC/json/mapth_dist_2.5p.json'
       });
 
       map.addSource('mapth_subd', {
         'type': 'geojson',
-        'data': 'https://tunchz.github.io/ISOC/json/mapth_subd.json'
+        'data': empty_geojson//'https://tunchz.github.io/ISOC/json/mapth_subd_2.5p_dissolved.json'
+      });
+
+      map.addSource('mainbasin', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/mainbasin_10p.json'
+      });
+
+      map.addSource('subbasin', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/subbasin_10p.json'
+      });
+
+      map.addSource('mainriver', {
+        'type': 'geojson',
+        'data': 'https://tunchz.github.io/ISOC/json/main_river.json'
       });
 
       map.addSource('drought_risk', {
         'type': 'geojson',
-        'data': 'https://tunchz.github.io/ISOC/json/Drought_Risk_34_10p.json'
+        'data': empty_geojson//'https://tunchz.github.io/ISOC/json/Drought_Risk_34_10p.json'
       });
 
       map.addSource('flood_risk', {
         'type': 'geojson',
-        'data': 'https://tunchz.github.io/ISOC/json/Flood_Risk_35_10p.json'//'https://tunchz.github.io/ISOC/json/Flood_Risk_35_10p.json'
+        'data': empty_geojson//'https://tunchz.github.io/ISOC/json/Flood_Risk_35_10p.json'
       });
 
       map.addSource('water_l', {
         'type': 'geojson',
-        'data': 'https://tunchz.github.io/ISOC/json/P_Water_L.geojson'
+        'data': empty_geojson//'https://tunchz.github.io/ISOC/json/P_Water_L.geojson'
       });
 
       map.addSource('water_m', {
         'type': 'geojson',
-        'data': 'https://tunchz.github.io/ISOC/json/P_Water_M.geojson'
+        'data': empty_geojson//'https://tunchz.github.io/ISOC/json/P_Water_M.geojson'
       });
 
 
 
-      map.addSource('counties', {
-        'type': 'geojson',
-        'data': 'https://tunchz.github.io/ISOC/layer_control/counties.min.geojson'
+      map.addLayer({
+        'id': 'แจ้งเตือนภัย',
+        'type': 'circle',
+        'source': {
+          'type': 'geojson',
+          'data': {
+            'type': 'FeatureCollection',
+            'features': [{"type": "Feature","geometry": { "type": "Point", "coordinates": [101.6673626,13.2808669] }}]
+          }
+        },
+        'layout': {
+          'visibility': 'visible'
+        },
+        'paint': {
+            'circle-color': '#fff',  //set color #0000 means no color layer
+            'circle-radius': 1,
+            'circle-opacity':0
+        }
       });
 
-      map.addSource('lakes', {
-        'type': 'geojson',
-        'data': 'https://tunchz.github.io/ISOC/layer_control/lakes.geojson'
-      });     
-
-      map.addSource('rivers', {
-        'type': 'geojson',
-        'data': 'https://tunchz.github.io/ISOC/layer_control/rivers.geojson'
-      });
-
-      map.addSource('rail', {
-        'type': 'geojson',
-        'data': 'https://tunchz.github.io/ISOC/layer_control/rail.geojson'
+      map.addLayer({
+        'id': 'แจ้งเตือนวางแผน',
+        'type': 'circle',
+        'source': {
+          'type': 'geojson',
+          'data': {
+            'type': 'FeatureCollection',
+            'features': [{"type": "Feature","geometry": { "type": "Point", "coordinates": [101.6673626,13.2808669] }}]
+          }
+        },
+        'layout': {
+          'visibility': 'visible'
+        },
+        'paint': {
+            'circle-color': '#fff',  //set color #0000 means no color layer
+            'circle-radius': 1,
+            'circle-opacity':0
+        }
       });
 
 
       map.addLayer({
-        'id': 'จังหวัด',
+        'id': 'พื้นที่จังหวัด',
+        'type': 'fill',
+        'source': 'mapth_prov',
+        'layout': {
+          'visibility': 'visible'
+        },
+        'paint': {
+          'fill-color': '#ffffff',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0
+        }
+      });
+
+      map.addLayer({
+        'id': 'เขตจังหวัด',
         'type': 'line',
         'source': 'mapth_prov',
         'layout': {
@@ -432,12 +606,26 @@
         },
         'paint': {
           'line-color': '#dddddd',
-          'line-opacity': 0.5
+          'line-opacity': 1
         }
       });
 
       map.addLayer({
-        'id': 'อำเภอ',
+        'id': 'พื้นที่อำเภอ',
+        'type': 'fill',
+        'source': 'mapth_dist',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': '#ffffff',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0
+        }
+      });
+
+      map.addLayer({
+        'id': 'เขตอำเภอ',
         'type': 'line',
         'source': 'mapth_dist',
         'layout': {
@@ -445,12 +633,26 @@
         },
         'paint': {
           'line-color': '#dddddd',
-          'line-opacity': 0.5
+          'line-opacity': 1
         }
       });
 
       map.addLayer({
-        'id': 'ตำบล',
+        'id': 'พื้นที่ตำบล',
+        'type': 'fill',
+        'source': 'mapth_subd',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': '#ffffff',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0
+        }
+      });
+
+      map.addLayer({
+        'id': 'เขตตำบล',
         'type': 'line',
         'source': 'mapth_subd',
         'layout': {
@@ -458,12 +660,83 @@
         },
         'paint': {
           'line-color': '#bbbbbb',
-          'line-opacity': 0.5
+          'line-opacity': 1
         }
       });
 
       map.addLayer({
-        'id': 'drought_risk',
+        'id': 'พื้นที่ลุ่มน้ำหลัก',
+        'type': 'fill',
+        'source': 'mainbasin',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': '#ffffff',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0
+        }
+      });
+
+      map.addLayer({
+        'id': 'เขตพื้นที่ลุ่มน้ำหลัก',
+        'type': 'line',
+        'source': 'mainbasin',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': '#00f',
+          'line-opacity': 1
+        }
+      });
+
+      map.addLayer({
+        'id': 'พื้นที่ลุ่มน้ำย่อย',
+        'type': 'fill',
+        'source': 'subbasin',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'fill-color': '#ffffff',
+          'fill-outline-color': 'white',
+          'fill-opacity': 0
+        }
+      });
+
+      map.addLayer({
+        'id': 'เขตพื้นที่ลุ่มน้ำย่อย',
+        'type': 'line',
+        'source': 'subbasin',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': '#00f',
+          'line-opacity': 1
+        }
+      });      
+
+
+      map.addLayer({
+        'id': 'แม่น้ำสายหลัก',
+        'type': 'line',
+        'source': 'mainriver',
+        'layout': {
+          'visibility': 'none'
+        },
+        'paint': {
+          'line-color': '#00f',
+          'line-width': 2,
+          'line-opacity': 1
+        }
+      });      //map.setFilter('เขตจังหวัด',["match",["get", "จังหวัด"],['น่าน','นครนายก'],true,false]);
+      //map.setFilter('เขตจังหวัด',["in", "จังหวัด", 'น่าน','นครนายก']);
+      //map.setFilter('เขตอำเภอ',["all",["match",["get", "จังหวัด"],['นครนายก','น่าน'],true,false],["match",["get", "อำเภอ"],['เมืองนครนายก','บ้านนา','เมืองน่าน'],true,false]]);
+
+      map.addLayer({
+        'id': 'พื้นที่เสี่ยงภัยแล้ง',
         'type': 'fill',
         'source': 'drought_risk',
         'layout': {
@@ -472,8 +745,8 @@
         'paint': {
           'fill-color': [
               'case',
-              ['==', ['get', 'DROUGHT'], '3'], 'rgba(227,116,0,1)',
-              ['==', ['get', 'DROUGHT'], '4'], 'rgba(197,34,31,1)',
+              ['==', ['get', 'ระดับ'], '3'], 'rgba(227,116,0,1)',
+              ['==', ['get', 'ระดับ'], '4'], 'rgba(197,34,31,1)',
               '#ffffff'
           ],
           // 'fill-outline-color': 'white',
@@ -482,7 +755,7 @@
       });
 
       map.addLayer({
-        'id': 'flood_risk',
+        'id': 'พื้นที่เสี่ยงน้ำท่วม',
         'type': 'fill',
         'source': 'flood_risk',
         'layout': {
@@ -491,8 +764,8 @@
         'paint': {
           'fill-color': [
               'case',
-              ['==', ['get', 'CODE_FLD'], '3'], 'rgba(100,100,255,1)',
-              ['==', ['get', 'CODE_FLD'], '5'], 'rgba(0,0,255,1)',
+              ['==', ['get', 'ระดับ'], '3'], 'rgba(100,100,255,1)',
+              ['==', ['get', 'ระดับ'], '5'], 'rgba(0,0,255,1)',
               '#ffffff'
           ],
           // 'fill-outline-color': 'white',
@@ -501,7 +774,7 @@
       });
 
       map.addLayer({
-        'id': 'water_l',
+        'id': 'แหล่งน้ำขนาดใหญ่',
         'type': 'fill',
         'source': 'water_l',
         'layout': {
@@ -515,7 +788,7 @@
       });
 
       map.addLayer({
-        'id': 'water_m',
+        'id': 'แหล่งน้ำขนาดกลาง',
         'type': 'fill',
         'source': 'water_m',
         'layout': {
@@ -528,93 +801,54 @@
         }
       });
 
+      map.addLayer({
+        'id': 'บ่อบาดาล (จุด)',
+        'type': 'circle',
+        'source': {
+          'type': 'geojson',
+          'data': empty_geojson//'https://tunchz.github.io/ISOC/json/well_small.geojson'
+        },
+        layout: {
+            'visibility': 'none'
+        },          
+        paint: {
+            'circle-color': '#0f0',
+            'circle-radius': 2,
+            'circle-stroke-width': 0,
+            'circle-stroke-color': '#fff'
+        }
+      });
+
+      map.addLayer({
+        'id': 'จุดความร้อน (จุด)',
+        'type': 'circle',
+        'source': {
+          'type': 'geojson',
+          'data': empty_geojson//'https://tunchz.github.io/ISOC/json/hotspotth.geojson'
+        },
+        layout: {
+            'visibility': 'none'
+        },          
+        paint: {
+            'circle-color': '#f00',
+            'circle-radius': 2,
+            'circle-stroke-width': 0,
+            'circle-stroke-color': '#fff'
+        }
+      });
 
 
-      map_addcluster('hotspotth','https://tunchz.github.io/ISOC/json/hotspotth.geojson','none');  
+      map_addcluster('hotspotth',empty_geojson/*'https://tunchz.github.io/ISOC/json/hotspotth.geojson'*/,'none');  
 
-      map_addcluster('well','https://tunchz.github.io/ISOC/json/well_small.geojson','none');  
-
-
+      map_addcluster('well',empty_geojson/*'https://tunchz.github.io/ISOC/json/well_small.geojson'*/,'none');  
 
 
-      // map.addLayer({
-      //   'id': 'Counties',
-      //   'type': 'fill',
-      //   'source': 'counties',
-      //   'layout': {
-      //     'visibility': 'none'
-      //   },
-      //   'paint': {
-      //     'fill-color': 'lightgray',
-      //     'fill-outline-color': 'white',
-      //     'fill-opacity': 0.9
-      //   }
-      // });
-
-      // map.addLayer({
-      //   'id': 'Lakes',
-      //   'type': 'fill',
-      //   'source': 'lakes',
-      //   'layout': {
-      //     'visibility': 'none'
-      //   },
-      //   'paint': {
-      //     'fill-color': 'blue',
-      //     'fill-outline-color': 'white',
-      //     'fill-opacity': 0.9
-      //   }
-      // });
-
-      // map.addLayer({
-      //   'id': 'riversCase',
-      //   'type': 'line',
-      //   'source': "rivers",
-      //   'layout': {
-      //     'visibility': 'none'
-      //   },
-      //   'paint': {
-      //     'line-color': 'white',
-      //     'line-width': 6
-      //   }
-      // });
-
-      // map.addLayer({
-      //   'id': 'rivers',
-      //   'type': 'line',
-      //   'source': "rivers",
-      //   'layout': {
-      //     'visibility': 'none'
-      //   },
-      //   'paint': {
-      //     'line-color': 'blue',
-      //     'line-width': 3
-      //   }
-      // });
-
-      // map.addLayer({
-      //   'id': 'Rail',
-      //   'type': 'line',
-      //   'source': "rail",
-      //   'layout': {
-      //     'visibility': 'none'
-      //   },
-      //   'paint': {
-      //     'line-color': {
-      //       stops: [
-      //         [0, "black"],
-      //         [14, "black"],
-      //         [18, "black"]
-      //       ]
-      //     },
-      //     'line-width': 3
-      //   }
-      // });
-
-      var config = {
+      config = {
         options: {
           collapsed: true
         },
         layers: [
+
 
 
 
@@ -633,7 +867,7 @@
             directory: "สิ่งแวดล้อม"
           },
           {
-            name: "จุดความร้อน",
+            name: "จุดความร้อน (Cluster)",
             id: "hotspotth-cluster",
             hidden: false,
             group: "ไฟ",
@@ -641,7 +875,13 @@
             directory: "สิ่งแวดล้อม",
             legend: "<icon class='icon-circle' style='color:#51bbd6;'></icon> 1-100 จุด<br><icon class='icon-circle' style='color:#f1f075;'></icon> 101-750 จุด<br><icon class='icon-circle' style='color:#f28cb1;'></icon> มากกว่า 750 จุด"            
           },
-
+          {
+            // name: "จุดความร้อน (จุด)",
+            hidden: false,
+            id: "จุดความร้อน (จุด)",
+            group: "ไฟ",
+            directory: "สิ่งแวดล้อม"
+          },
 
 
           {
@@ -659,120 +899,571 @@
             directory: "สิ่งแวดล้อม"
           },
           {
-            name: "บ่อบาดาล",
+            name: "บ่อบาดาล (Cluster)",
             id: "well-cluster",
             hidden: false,
             group: "น้ำ",
             children: true,
             directory: "สิ่งแวดล้อม",
-            legend: "<icon class='icon-circle' style='color:#51bbd6;'></icon> 1-100 บ่อ<br><icon class='icon-circle' style='color:#f1f075;'></icon> 101-750 บ่อ<br><icon class='icon-circle' style='color:#f28cb1;'></icon> มากกว่า 750 บ่อ"            
+            legend: "<icon class='icon-circle' style='color:#51bbd6;'></icon> 1-100 บ่อ<br><icon class='icon-circle' style='color:#f1f075;'></icon> 101-750 บ่อ<br><icon class='icon-circle' style='color:#f28cb1;'></icon> มากกว่า 750 บ่อ",            
+            metadata: {
+              filterSchema: {
+                "ประเภทบ่อ": {
+                  type: "select",
+                  options: ["-- ทั้งหมด --", "บ่ออุปโภค-บริโภค","บ่อเกษตร"]
+                },
+                "ชื่อที่ตั้ง": {
+                  type: "string"
+                },                
+                // "ภาค": {
+                //   type: "select",
+                //   options: ["", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
+                // },                
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                },
+                "ตำบล": {
+                  type: "string"
+                }
+              }
+            }         
           },
-
-
-
-
-          // {
-          //   id: "Counties",
-          //   hidden: false,
-          //   group: "Cadastral",
-          //   directory: "การบริหาร"
-          // },
-          // {
-          //   id: "Lakes",
-          //   hidden: false,
-          //   group: "น้ำ",
-          //   directory: "สิ่งแวดล้อม"
-          // },
-          // {
-          //   id: "riversCase",
-          //   hidden: true,
-          //   group: "น้ำ",
-          //   parent: "rivers",
-          //   directory: "สิ่งแวดล้อม"
-          // },
-          // {
-          //   name: "Rivers",
-          //   id: "rivers",
-          //   hidden: false,
-          //   group: "น้ำ",
-          //   children: true,
-          //   directory: "สิ่งแวดล้อม"
-          // },
-          // {
-          //   id: "Rail",
-          //   hidden: false,
-          //   directory: "Cultural",
-          //   legend: "<icon class='fa fa-minus' style='color:red;'></icon> Legend defined in config<br><icon class='fa fa-minus' style='color:black;'></icon> Toggles when layer is off"
-          // },
-
-
           {
-            name: "แหล่งน้ำขนาดใหญ่",
-            id: "water_l",
+            //name: "บ่อบาดาล (จุด)",
+            hidden: false,
+            id: "บ่อบาดาล (จุด)",
+            group: "น้ำ",
+            directory: "สิ่งแวดล้อม",
+            metadata: {
+              filterSchema: {
+                "ประเภทบ่อ": {
+                  type: "select",
+                  options: ["-- ทั้งหมด --", "บ่ออุปโภค-บริโภค","บ่อเกษตร"]
+                },
+                "ชื่อที่ตั้ง": {
+                  type: "string"
+                },                
+                // "ภาค": {
+                //   type: "select",
+                //   options: ["", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
+                // },                
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                },
+                "ตำบล": {
+                  type: "string"
+                }
+              }
+            }             
+          },
+        {
+            // name: "แหล่งน้ำขนาดใหญ่",
+            id: "แหล่งน้ำขนาดใหญ่",
             hidden: false,
             group: "น้ำ",
-            directory: "สิ่งแวดล้อม"
+            directory: "สิ่งแวดล้อม",            
+            metadata: {
+              filterSchema: {
+                "หน่วยงาน": {
+                  type: "select",
+                  options: ["-- ทั้งหมด --", "แหล่งน้ำธรรมชาติขนาดใหญ่","กรมชลประทาน","การไฟฟ้าฝ่ายผลิตแห่งประเทศไทย"]
+                },
+                "ชื่อแหล่งน้ำ": {
+                  type: "string"
+                },                
+                // "ภาค": {
+                //   type: "select",
+                //   options: ["", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
+                // },                
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                },
+                "ตำบล": {
+                  type: "string"
+                }
+              }
+            }       
           },
 
           {
-            name: "แหล่งน้ำขนาดกลาง",
-            id: "water_m",
+            // name: "แหล่งน้ำขนาดกลาง",
+            id: "แหล่งน้ำขนาดกลาง",
             hidden: false,
             group: "น้ำ",
-            directory: "สิ่งแวดล้อม"
+            directory: "สิ่งแวดล้อม",            
+            metadata: {
+              filterSchema: {
+                "หน่วยงาน": {
+                  type: "select",
+                  options: ["-- ทั้งหมด --", "แหล่งน้ำธรรมชาติขนาดกลาง","กรมชลประทาน","การไฟฟ้าฝ่ายผลิตแห่งประเทศ","กรมทรัพยากรน้ำ","กรมเจ้าท่า","กรมประมง","กรมพัฒนาพลังงานทดแทนและอนุ","อปท."]
+                },
+                "ชื่อแหล่งน้ำ": {
+                  type: "string"
+                },                
+                // "ภาค": {
+                //   type: "select",
+                //   options: ["", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
+                // },                
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                },
+                "ตำบล": {
+                  type: "string"
+                }
+              }
+            }       
           },
 
           {
-            name: "พื้นที่เสี่ยงภัยแล้ง",
-            id: "drought_risk",
+            // name: "พื้นที่เสี่ยงภัยแล้ง",
+            id: "พื้นที่เสี่ยงภัยแล้ง",
             hidden: false,
-            group: "น้ำ",
+            group: "ด้านน้ำ",
             //children: true,
             directory: "ผลการวิเคราะห์",
-            legend: "<icon class='icon-stop' style='color:rgba(227,116,0,0.7);'></icon> เสี่ยงปานกลาง<br><icon class='icon-stop' style='color:rgba(197,34,31,0.7);'></icon> เสี่ยงมาก"            
+            legend: "<icon class='icon-stop' style='color:rgba(227,116,0,0.7);'></icon> เสี่ยงปานกลาง<br><icon class='icon-stop' style='color:rgba(197,34,31,0.7);'></icon> เสี่ยงมาก",            
+            metadata: {
+              filterSchema: {
+                "ระดับความเสี่ยง": {
+                  type: "select",
+                  options: ["-- ทั้งหมด --", "พื้นที่ที่เสี่ยงต่อการเกิดภัยแล้งปานกลาง","พื้นที่ที่เสี่ยงต่อการเกิดภัยแล้งสูง"]
+                },
+                "ภาค": {
+                  type: "select",
+                  options: ["-- ทั้งหมด --", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
+                },                
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                },
+                "ตำบล": {
+                  type: "string"
+                }
+              }
+            }            
           },
 
 
           {
-            name: "พื้นที่เสี่ยงน้ำท่วม",
-            id: "flood_risk",
+            // name: "พื้นที่เสี่ยงน้ำท่วม",
+            id: "พื้นที่เสี่ยงน้ำท่วม",
             hidden: false,
-            group: "น้ำ",
+            group: "ด้านน้ำ",
             //children: true,
             directory: "ผลการวิเคราะห์",
-            legend: "<icon class='icon-stop' style='color:rgba(100,100,255,0.7);'></icon> เสี่ยงปานกลาง<br><icon class='icon-stop' style='color:rgba(0,0,255,0.7);'></icon> เสี่ยงมาก"            
+            legend: "<icon class='icon-stop' style='color:rgba(100,100,255,0.7);'></icon> เสี่ยงปานกลาง<br><icon class='icon-stop' style='color:rgba(0,0,255,0.7);'></icon> เสี่ยงมาก",            
+            metadata: {
+              filterSchema: {
+                "ระดับความเสี่ยง": {
+                  type: "select",
+                  options: ["-- ทั้งหมด --", "พื้นที่เสี่ยงต่อการถูกน้ำท่วมเสียหายซ้ำซากปานกลาง","พื้นที่เสี่ยงต่อการถูกน้ำท่วมเสียหายซ้ำซากสูง"]
+                },
+                "ภาค": {
+                  type: "select",
+                  options: ["-- ทั้งหมด --", "เหนือ","ตะวันออกเฉียงเหนือ", "กลาง","ตะวันออก", "ใต้"]
+                },                
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                },
+                "ตำบล": {
+                  type: "string"
+                }
+              }
+            }
+          },
+
+          {
+            // name: "",
+            id: "แม่น้ำสายหลัก",
+            hidden: false,
+            group: "แม่น้ำ",
+            directory: "การบริหาร",            
+            metadata: {
+              filterSchema: {
+                "ชื่อแม่น้ำ": {
+                  type: "string"
+                }
+              }
+            }       
+          },
+          {
+            id: "เขตพื้นที่ลุ่มน้ำย่อย",
+            hidden: false,
+            group: "เขตลุ่มน้ำ",
+            directory: "การบริหาร",
+            children:true,
+            metadata: {
+              filterSchema: {
+                "ลุ่มน้ำหลัก": {
+                  type: "string"
+                },
+                "ลุ่มน้ำย่อย": {
+                  type: "string"
+                }
+              }
+            }
+          },
+          {
+            id: "พื้นที่ลุ่มน้ำย่อย",
+            hidden: true,
+            group: "เขตลุ่มน้ำ",
+            directory: "การบริหาร",
+            parent: "เขตพื้นที่ลุ่มน้ำย่อย"
+          },
+          {
+            id: "เขตพื้นที่ลุ่มน้ำหลัก",
+            hidden: false,
+            group: "เขตลุ่มน้ำ",
+            directory: "การบริหาร",
+            children:true,
+            metadata: {
+              filterSchema: {
+                "ลุ่มน้ำหลัก": {
+                  type: "string"
+                }
+              }
+            }
+          },
+          {
+            id: "พื้นที่ลุ่มน้ำหลัก",
+            hidden: true,
+            group: "เขตลุ่มน้ำ",
+            directory: "การบริหาร",
+            parent: "เขตพื้นที่ลุ่มน้ำหลัก"
+          },
+          {
+            id: "เขตตำบล",
+            hidden: false,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร",
+            children:true,
+            metadata: {
+              filterSchema: {
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                },
+                "ตำบล": {
+                  type: "string"
+                }
+              }
+            }
+          },
+          {
+            id: "พื้นที่ตำบล",
+            hidden: true,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร",
+            parent: "เขตตำบล"
+
+            // metadata: {
+            //   filterSchema: {
+            //     "จังหวัด": {
+            //       type: "string"
+            //     }
+            //     // "scalerank": {
+            //     //   "type": "number"
+            //     // }
+            //   }
+            // }
+          },            
+          {
+            id: "เขตอำเภอ",
+            hidden: false,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร",
+            children:true,
+            metadata: {
+              filterSchema: {
+                "จังหวัด": {
+                  type: "string"
+                },
+                "อำเภอ": {
+                  type: "string"
+                }
+              }
+            }
+          },
+          {
+            id: "พื้นที่อำเภอ",
+            hidden: true,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร",
+            parent: "เขตอำเภอ"
+
+            // metadata: {
+            //   filterSchema: {
+            //     "จังหวัด": {
+            //       type: "string"
+            //     }
+            //     // "scalerank": {
+            //     //   "type": "number"
+            //     // }
+            //   }
+            // }
+          },          
+          {
+            // name: "เขตจังหวัด",
+            id: "เขตจังหวัด",
+            hidden: false,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร",
+            children:true,
+            metadata: {
+              filterSchema: {
+                "จังหวัด": {
+                  type: "string"
+                }
+                // "scalerank": {
+                //   "type": "number"
+                // }
+              }
+            }
+          },
+          {
+            id: "พื้นที่จังหวัด",
+            hidden: true,
+            group: "เขตการปกครอง",
+            directory: "การบริหาร",
+            parent: "เขตจังหวัด",
+
+            metadata: {
+              filterSchema: {
+                "จังหวัด": {
+                  type: "string"
+                }
+                // "scalerank": {
+                //   "type": "number"
+                // }
+              }
+            }
           },
 
 
           {
-            id: "ตำบล",
+            id: "สถานการณ์น้ำ",
             hidden: false,
-            group: "เขตการปกครอง",
-            directory: "การบริหาร"
+            group: "ข้อมูลปฏิบัติการน้ำ",
+            directory: "การแจ้งเตือน",
+            children:true
           },
+
+          // {
+          //   id: "การคาดการณ์",
+          //   hidden: false,
+          //   group: "ข้อมูลปฏิบัติการน้ำ",
+          //   directory: "การแจ้งเตือน",
+          //   children:true
+          // },
+
+
           {
-            id: "อำเภอ",
+            id: "แจ้งเตือนวางแผน",
             hidden: false,
-            group: "เขตการปกครอง",
-            directory: "การบริหาร"
+            group: "ข้อมูลปฏิบัติการ",
+            directory: "การแจ้งเตือน",
+            children:true
           },
+
           {
-            id: "จังหวัด",
+            id: "แจ้งเตือนภัย",
             hidden: false,
-            group: "เขตการปกครอง",
-            directory: "การบริหาร"
+            group: "ข้อมูลปฏิบัติการ",
+            directory: "การแจ้งเตือน",
+            children:true
           }
+
+
+
+
+
+
+
 
 
 
         ]
       }
 
-      map.addControl(new layerControlGrouped(config), "top-left");
+      // var l=[1,2,3,4,5,6,7,8,9,91,94,95];
+
+      // l.forEach(function (item, index) {
+      //   //console.log(item);
+
+      //   if (item < 90) { 
+      //     config.layers.push({
+      //         id: symbol[item].layername,
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการ",
+      //         parent: "แจ้งเตือนภัย",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      //     config.layers.push({
+      //         id: symbol[item].layername+'_label',
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการ",
+      //         parent: "แจ้งเตือนภัย",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      //   } else {
+      //     config.layers.push({
+      //         id: symbol[item].layername,
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการ",
+      //         parent: "แจ้งเตือนวางแผน",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      //     config.layers.push({
+      //         id: symbol[item].layername+'_label',
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการ",
+      //         parent: "แจ้งเตือนวางแผน",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      //     config.layers.push({
+      //         id: symbol[item].layername+'_bound',
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการ",
+      //         parent: "แจ้งเตือนวางแผน",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      //   }
+      // });
+
+
+
+
+      // Object.values(['21-1'/*,'21-6','22-1','22-5','23-3','24-6','24-7'*/]).forEach(function (item) {
+      //   //console.log(item);
+      //     config.layers.push({
+      //         id: symbol[item].layername,
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการน้ำ",
+      //         parent: "สถานการณ์น้ำ",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      //     config.layers.push({
+      //         id: symbol[item].layername+'_label',
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการน้ำ",
+      //         parent: "สถานการณ์น้ำ",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      // });
+
+      // ['26-4','26-5'].forEach(function (item, index) {
+      //   //console.log(item);
+      //     config.layers.push({
+      //         id: symbol[item].layername,
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการน้ำ",
+      //         parent: "การคาดการณ์",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      //     config.layers.push({
+      //         id: symbol[item].layername+'_label',
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการน้ำ",
+      //         parent: "การคาดการณ์",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      //     config.layers.push({
+      //         id: symbol[item].layername+'_bound',
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการน้ำ",
+      //         parent: "การคาดการณ์",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      // });
+
+      setTimeout(function (){
+        //console.log(run);
+        if (run > 0) {
+        //   map.setStyle('mapbox://styles/mapbox/satellite-v9');
+        //   run++;
+        // } else {
+          var removebutton = document.getElementsByClassName('mgl-layerControl');
+          for (i=0;i<removebutton.length;i++) {removebutton[i].parentElement.removeChild(removebutton[i]);}   
+          map.addControl(new layerControlGrouped(config), "top-left");
+          run++;          
+        }
+
+      }, 3000);
+
+
 
     });
 
-    load_map_layers();
+  /* Inspect */
+  // var inspect = new InspectControl();
+  // map.addControl(inspect, 'top-left');
+
+  /* Ruler */
+  // map.addControl(new RulerControl(), 'top-left');
+
+
+  /* Maptools */
+  var maptools = new MaptoolsControl();
+  map.addControl(maptools, 'top-left');
+
+  // /* Compass */
+  // map.addControl(new CompassControl(), 'top-left');  
+
+
+    /* testing */
+
+    // map.on('ruler.on', function () {
+    //   //if (inspect.isInspecting) inspect.inspectingOff();
+    //   console.log("ruler on");
+    //   disinteract++;
+    // });
+    // map.on('ruler.off', function () {
+    //   console.log("ruler off");
+    //   disinteract--;
+    // });
+    map.on('inspect.on', function () {
+      //if (maptools.ruler.isMeasuring) maptools.ruler.measuringOff();
+      console.log("inspect on");
+      disinteract++;
+    });
+    map.on('inspect.off', function () {
+      console.log("inspect off");
+      disinteract--;
+    });
+    map.on('maptools.on', function () {
+      console.log("maptools on");
+      disinteract++;
+    });
+    map.on('maptools.off', function () {
+      console.log("maptools off");
+      disinteract--;
+    });
+
+    // map.on('draw.modechange', function () {
+    //   console.log("draw modechange");
+    // });
+
+
+    //load_map_layers();
 
     /*End Blank Map*/
   </script>

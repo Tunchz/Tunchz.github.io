@@ -5,9 +5,9 @@ function detectswipe(el,func) {
   swipe_det.sY = 0;
   swipe_det.eX = 0;
   swipe_det.eY = 0;
-  var min = 40, //required min distance traveled to be considered swipe
+  var min = 30, //required min distance traveled to be considered swipe
   max = 20, // maximum distance allowed at the same time in perpendicular direction
-  allowedTime = 300, // maximum time allowed to travel that distance
+  allowedTime = 700, // maximum time allowed to travel that distance
   direc, elapsedTime, startTime;
   ele = document.getElementById(el);
   ele.addEventListener('touchstart',function(e){
@@ -51,12 +51,24 @@ detectswipe('notification-container-right',LRactions);
 detectswipe('vertical-table-container-MAP',UDactions);
 
 function LRactions(el,swipedir) {
-    if ((swipedir == 'l' && rightpanel_isopen == 0)||(swipedir == 'r' && rightpanel_isopen == 1)) {switchRightpanel()}
+    if ((swipedir == 'l' && datapanel_isopen == 0)||(swipedir == 'r' && datapanel_isopen == 2)) {
+      switchDatapanel(1);
+    } else {
+    if (swipedir == 'l' && datapanel_isopen == 1) switchDatapanel(2);
+    if (swipedir == 'r' && datapanel_isopen == 1) switchDatapanel(0);      
+    }
+
     //console.log(el+" : "+swipedir);
 }
 
 function UDactions(el,swipedir) {
-    if ((swipedir == 'u' && rightpanel_isopen == 0)||(swipedir == 'd' && rightpanel_isopen == 1)) {switchRightpanel()}
+    if ((swipedir == 'u' && datapanel_isopen == 0)||(swipedir == 'd' && datapanel_isopen == 2)) {
+      switchDatapanel(1);
+    }  else {
+    if (swipedir == 'u' && datapanel_isopen == 1) switchDatapanel(2);
+    if (swipedir == 'd' && datapanel_isopen == 1) switchDatapanel(0);      
+    }
+
     //console.log(el+" : "+swipedir);
 }
 

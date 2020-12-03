@@ -97,6 +97,15 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
+.fa {
+    display: inline-block;
+    font: normal normal normal 12px/1 fontello;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
 .icon-plus:before { content: '\2b'; } /* '+' */
 .icon-minus:before { content: '\2d'; } /* '-' */
 .icon-left-big:before { content: '\2190'; } /* '←' */

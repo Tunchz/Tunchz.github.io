@@ -1,0 +1,188 @@
+
+.mapboxgl-ctrl-ruler button, .mapboxgl-ctrl-inspect button, button.maptools-btn, button.ruler-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapboxgl-ctrl-ruler button.-active svg {
+  fill: #4264fb;
+}
+
+canvas.ruler, canvas.inspect{
+    cursor: crosshair !important;
+}
+
+button.mapboxgl-ctrl-compass {
+  position: relative;
+  overflow: visible;
+/*  opacity: 0;
+  visibility: hidden;
+  transition: .1s all ease-in-out;*/
+  cursor: pointer;
+}
+.mapboxgl-ctrl-compass.-active {
+  opacity: 1;
+  visibility: visible;
+  border-radius: 50%;
+}
+.mapboxgl-ctrl-compass button {
+  position: relative;
+  border-radius: 50%;
+}
+.mapboxgl-ctrl-compass svg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -11px;
+  margin-top: -11px;
+}   
+
+
+.mapboxgl-ctrl-inspect-popup {
+  position: absolute;
+  padding-top: 5px;
+  transform: translate(-50%, 0);
+  color:#000;
+}
+.mapboxgl-ctrl-inspect-content {
+  position: relative;
+  padding: 5px;
+  font-size: 12px;
+  font-family: sans-serif;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+/*    max-height: 400px;
+  overflow: auto;   */ 
+}
+.mapboxgl-ctrl-inspect-content:before {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #fff;
+}
+.mapboxgl-ctrl-inspect-header {
+  display: flex;
+  justify-content: space-between;
+  /*align-items: center;*/
+  text-align: center;
+  white-space: nowrap;
+  user-select: none;
+}
+.mapboxgl-ctrl-inspect-prev,
+.mapboxgl-ctrl-inspect-next {
+  /*padding: 2px 12px;*/
+  margin-top: -2px;
+  border-radius: 4px;
+  height: 24px;
+  width: 24px;
+  text-align: center;
+}
+.mapboxgl-ctrl-inspect-prev:hover, .mapboxgl-ctrl-inspect-next:hover {
+  background: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+.mapboxgl-ctrl-inspect-prev:hover svg, .mapboxgl-ctrl-inspect-next:hover svg {
+  fill: #4264fb;
+}
+.mapboxgl-ctrl-inspect-prev svg, .mapboxgl-ctrl-inspect-next svg {
+  vertical-align: top;
+  position: relative;
+}
+.mapboxgl-ctrl-inspect-prev {
+  margin-right: 6px;
+}
+.mapboxgl-ctrl-inspect-next {
+  margin-left: 6px;
+}
+.mapboxgl-ctrl-inspect-feature-header {
+  font-family: 'Serithai';
+  font-weight: bold;
+  text-decoration: underline;
+}
+.mapboxgl-ctrl-inspect-feature-container {
+  max-width: 90vw;
+  max-height: 60vh;
+  overflow-y: auto;    
+}
+.mapboxgl-ctrl-inspect-feature {
+  width: 100%;
+  min-width: 200px;
+  border-collapse: collapse;
+}
+.mapboxgl-ctrl-inspect-feature th, .mapboxgl-ctrl-inspect-feature td {
+  padding: 5px;
+}
+.mapboxgl-ctrl-inspect-feature th {
+  text-align: right;
+}
+.mapboxgl-ctrl-inspect-feature tr:not(:last-child) td, .mapboxgl-ctrl-inspect-feature tr:not(:last-child) th {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.mapboxgl-ctrl-inspect button.-active svg {
+  fill: #4264fb;
+}
+.mapboxgl-ctrl-tooltip {
+  padding: 5px 7px;
+  background: #fff;
+  border-radius: 2px;
+  position: absolute;
+  transform: translate(-50%, 0);
+  margin-top: 24px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 3;
+}
+/* show tooltip over controls buttons with z-index 2 */
+.mapboxgl-ctrl-tooltip:empty {
+    display: none;
+}
+
+
+/* scroller bar */
+.mapboxgl-ctrl-inspect-feature-container::-webkit-scrollbar {
+  width: 5px;
+  height: 0px;
+}
+
+/* Track */
+.mapboxgl-ctrl-inspect-feature-container::-webkit-scrollbar-track {
+  background: #fff0; 
+  padding-right: 2px;
+}
+ 
+/* Handle */
+.mapboxgl-ctrl-inspect-feature-container::-webkit-scrollbar-thumb {
+  background: #ccc; 
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+.mapboxgl-ctrl-inspect-feature-container::-webkit-scrollbar-thumb:hover {
+  background: #aaa; 
+}
+
+.mapboxgl-ctrl-tooltip:empty {
+  display: none;
+}
+
+button.-active svg {
+  fill: #4264fb;
+}
+
+button.maptools-btn {
+  height: 15px;
+  /*background-color: #eee;*/
+}
+
+/*button.active {
+  color: #4264fb;
+  background-color: #4264fb;
+}*/
