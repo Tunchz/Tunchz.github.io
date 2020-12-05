@@ -153,13 +153,12 @@ function get_thaiwater_geojson(url) {
                           response:"response",
                           contract:"contract",
                           attr:"จังหวัด",
-                          val:'96'
                         },
                     cols:{lat:"",lon:"",
                           name:"province_name/th",
                           จังหวัด:"province_name/th",
                           ระดับ:"rainforecast_level",
-                          //val:"province_code",
+                          val:"province_code",
                           updated_date:""
                         },
                     levels:[{attr:"ระดับ",op:'=',val:5,level:5,detail:"ฝนตกหนักมาก",color:'#ff0000',warning:'แจ้งเตือน'},
@@ -232,7 +231,8 @@ function get_thaiwater_geojson(url) {
       var data_arr;
       // console.log("key",key);
       data_arr = getdata(data[key.key],key.data_str.split("/"));
-      // console.log(data[key.key],key.data_str.split("/"));
+
+      //console.log(key.key,data_arr);
       if (!data_arr) data_arr = [];
       // console.log(data_arr.length);
       //var index=0;
@@ -269,7 +269,8 @@ function get_thaiwater_geojson(url) {
               i = key.levels.length;
             }
           }
-          row.disaster_type_id += "-"+row.level_id;
+          row.disaster_type_id = 10*row.disaster_type_id + row.level_id;
+          row.updated_date = row.updated_date.split(" ")[0];
           //console.log(row.disaster_type_id);
 
         }
@@ -299,7 +300,7 @@ function get_thaiwater_geojson(url) {
     for (var i=0; i<str_arr.length; i++) {
       json_data = json_data[str_arr[i]];
     }
-    return json_data;
+    return (json_data == null)? []: json_data;
   }
 
 // var symbol2 = {'20':{'icon':"0", 'visibility':'visible', 'dbclick':false, 'itemselected':false},
