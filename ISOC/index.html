@@ -233,6 +233,7 @@
   <link rel="stylesheet" href="css/jquery-ui.css">
   <script src="js/jquery-ui.js"></script>
   <script src="autocomplete.js"></script>
+  <script src="getthaiwatergeojson.js"></script>
 
   <link rel="stylesheet" href="css/mapbox-gl-draw.css">
   <link rel="stylesheet" href="css/maptools.css">
@@ -479,6 +480,12 @@
     var config;
 
     load_map_layers();
+    // load_thaiwater();
+var empty_geojson = {
+      'type': 'FeatureCollection',
+      'features': []
+    };
+
 
     map.on(mapEvent, function () {
 
@@ -532,12 +539,73 @@
         'type': 'geojson',
         'data': 'https://tunchz.github.io/ISOC/json/P_Water_M.geojson'
       });
+//------------------------Warnining ---------------------------------
+      // map.addLayer({
+      //   'id': 'สถานการณ์น้ำ',
+      //   'type': 'circle',
+      //   'source': {
+      //     'type': 'geojson',
+      //     'data': {
+      //       'type': 'FeatureCollection',
+      //       'features': []
+      //     }
+      //   },
+      //   'layout': {
+      //     'visibility': 'visible'
+      //   },
+      //   'paint': {
+      //       'circle-color': '#fff',  //set color #0000 means no color layer
+      //       'circle-radius': 1,
+      //       'circle-opacity':0
+      //   }
+      // });
+
+      // map.addLayer({
+      //   'id': 'การคาดการณ์',
+      //   'type': 'circle',
+      //   'source': {
+      //     'type': 'geojson',
+      //     'data': {
+      //       'type': 'FeatureCollection',
+      //       'features': []
+      //     }
+      //   },
+      //   'layout': {
+      //     'visibility': 'visible'
+      //   },
+      //   'paint': {
+      //       'circle-color': '#fff',  //set color #0000 means no color layer
+      //       'circle-radius': 1,
+      //       'circle-opacity':0
+      //   }
+      // });
+
+              // map.addLayer({
+              //     'id': layername+'_label',
+              //     'type': 'symbol',
+              //     'source': layername,
+              //     'layout': {
+              //         'visibility': 'visible',
+              //         'text-field': '',//['get', 'val'],
+              //         'text-font': ['Roboto Black', 'Arial Unicode MS Bold'],
+              //         'text-ignore-placement': true,
+              //         'text-offset': [0, -4.9],
+              //         'text-size': 8
+              //     },
+              //     'paint': {
+              //         'text-color': textcolor,
+              //         'text-opacity': 1,
+              //         'text-halo-color': "rgba(255,255,255,1)",                  
+              //         'text-halo-width': 1,
+              //         'text-halo-blur': 0
+              //     }
+              // });
 
 
 
       map.addLayer({
         'id': 'แจ้งเตือนภัย',
-        'type': 'circle',
+        'type': 'symbol',
         'source': {
           'type': 'geojson',
           'data': {
@@ -546,18 +614,18 @@
           }
         },
         'layout': {
-          'visibility': 'visible'
+          'visibility': 'visible',
+          'text-field': ''
         },
         'paint': {
-            'circle-color': '#fff',  //set color #0000 means no color layer
-            'circle-radius': 1,
-            'circle-opacity':0
+            'text-color': '#fff',
+            'text-opacity':0
         }
       });
 
       map.addLayer({
         'id': 'แจ้งเตือนวางแผน',
-        'type': 'circle',
+        'type': 'symbol',
         'source': {
           'type': 'geojson',
           'data': {
@@ -566,12 +634,12 @@
           }
         },
         'layout': {
-          'visibility': 'visible'
+          'visibility': 'visible',
+          'text-field': ''
         },
         'paint': {
-            'circle-color': '#fff',  //set color #0000 means no color layer
-            'circle-radius': 1,
-            'circle-opacity':0
+            'text-color': '#fff',
+            'text-opacity':0
         }
       });
 
@@ -1252,6 +1320,184 @@
           },
 
 
+          // {
+          //   id: "การคาดการณ์",
+          //   hidden: false,
+          //   group: "ข้อมูลปฏิบัติการน้ำ",
+          //   directory: "การแจ้งเตือน",
+          //   children:true
+          // },
+
+          // {
+          //   id: "สถานการณ์น้ำ",
+          //   hidden: false,
+          //   group: "ข้อมูลปฏิบัติการน้ำ",
+          //   directory: "การแจ้งเตือน",
+          //   children:true
+          // },
+
+          //-------------------Thaiwater Start--------------------
+
+// Object.values(['21-1','21-6','22-1','22-5','23-3','24-6','24-7'])
+
+
+          {
+            id: symbol[264].layername,
+            hidden: false,
+            group: "สถานการณ์น้ำ",
+            directory: "การแจ้งเตือน",
+            children:true,
+          },
+          {
+            id: symbol[264].layername+'_label',
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[264].layername,
+            directory: "การแจ้งเตือน"
+          },
+          {
+            id: symbol[264].layername+'_bound',
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[264].layername,
+            directory: "การแจ้งเตือน"
+          },
+
+          {
+            id: symbol[265].layername,
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[264].layername,
+            directory: "การแจ้งเตือน"
+          },
+          {
+            id: symbol[265].layername+'_label',
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[264].layername,
+            directory: "การแจ้งเตือน"
+          },
+          {
+            id: symbol[265].layername+'_bound',
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[264].layername,
+            directory: "การแจ้งเตือน"
+          },
+
+
+          {
+            id: symbol[246].layername,
+            hidden: false,
+            group: "สถานการณ์น้ำ",
+            directory: "การแจ้งเตือน",
+            children:true,
+          },
+          {
+            id: symbol[246].layername+'_label',
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[246].layername,
+            directory: "การแจ้งเตือน"
+          },
+          {
+            id: symbol[247].layername,
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[246].layername,
+            directory: "การแจ้งเตือน"
+          },
+          {
+            id: symbol[247].layername+'_label',
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[246].layername,
+            directory: "การแจ้งเตือน"
+          },
+
+
+
+          {
+            id: symbol[233].layername,
+            hidden: false,
+            group: "สถานการณ์น้ำ",
+            directory: "การแจ้งเตือน",
+            children:true,
+          },
+          {
+            id: symbol[233].layername+'_label',
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[233].layername,
+            directory: "การแจ้งเตือน"
+          },
+
+
+
+          {
+            id: symbol[221].layername,
+            hidden: false,
+            group: "สถานการณ์น้ำ",
+            directory: "การแจ้งเตือน",
+            children:true,
+          },
+          {
+            id: symbol[221].layername+'_label',
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[221].layername,
+            directory: "การแจ้งเตือน"
+          },
+          {
+            id: symbol[225].layername,
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[221].layername,
+            directory: "การแจ้งเตือน"
+          },
+          {
+            id: symbol[225].layername+'_label',
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[221].layername,
+            directory: "การแจ้งเตือน"
+          },
+
+
+
+
+          {
+            id: symbol[211].layername,
+            hidden: false,
+            group: "สถานการณ์น้ำ",
+            directory: "การแจ้งเตือน",
+            children:true,
+          },
+          {
+            id: symbol[211].layername+'_label',
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[211].layername,
+            directory: "การแจ้งเตือน"
+          },
+          {
+            id: symbol[216].layername,
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[211].layername,
+            directory: "การแจ้งเตือน"
+          },
+          {
+            id: symbol[216].layername+'_label',
+            hidden: true,
+            group: "สถานการณ์น้ำ",
+            parent: symbol[211].layername,
+            directory: "การแจ้งเตือน"
+          },
+
+
+          //-------------------Thaiwater End --------------------
+
           {
             id: "แจ้งเตือนวางแผน",
             hidden: false,
@@ -1324,6 +1570,55 @@
             });
         }
       });
+
+
+
+
+      // Object.values(['21-1','21-6','22-1','22-5','23-3','24-6','24-7']).forEach(function (item) {
+      //   //console.log(item);
+      //     config.layers.push({
+      //         id: symbol[item].layername,
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการน้ำ",
+      //         parent: "สถานการณ์น้ำ",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      //     config.layers.push({
+      //         id: symbol[item].layername+'_label',
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการน้ำ",
+      //         parent: "สถานการณ์น้ำ",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      // });
+
+      // Object.values(['26-4','26-5']).forEach(function (item) {
+      //   //console.log(item);
+      //     config.layers.push({
+      //         id: symbol[item].layername,
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการน้ำ",
+      //         parent: "การคาดการณ์",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      //     config.layers.push({
+      //         id: symbol[item].layername+'_label',
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการน้ำ",
+      //         parent: "การคาดการณ์",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      //     config.layers.push({
+      //         id: symbol[item].layername+'_bound',
+      //         hidden: true,
+      //         group: "ข้อมูลปฏิบัติการน้ำ",
+      //         parent: "การคาดการณ์",
+      //         directory: "การแจ้งเตือน"
+      //       });
+      // });
+
+
+
 
 
       setTimeout(function (){
