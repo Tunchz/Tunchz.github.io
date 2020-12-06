@@ -547,6 +547,8 @@ function lcCreateLegend(style) {
     legend = `<icon class='icon-stop' style='color:${style["fill-color"]};margin-right:6px;' onclick="showcolorPicker(this); return false;"></icon>`;
   } else if (type.indexOf("circle-color") > -1 && isString(style["circle-color"])) {
     legend = `<icon class='icon-circle' style='color:${style["circle-color"]};margin-right:6px;' onclick="showcolorPicker(this); return false;"></icon>`;
+  } else if (type.indexOf("heatmap-color") > -1 && isString(style["heatmap-color"])) {
+    legend = `<icon class='icon-blank' style='color:#ccc;margin-right:6px;' return false;"></icon>`;
   } else {
     legend = `<icon class='icon-location' style='color:#ccc;margin-right:6px;' return false;"></icon>`;
   }
