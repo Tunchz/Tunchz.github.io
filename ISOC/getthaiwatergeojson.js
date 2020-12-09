@@ -300,7 +300,7 @@ function get_thaiwater_geojson(url) {
     for (var i=0; i<str_arr.length; i++) {
       json_data = json_data[str_arr[i]];
     }
-    return (json_data == null)? []: json_data;
+    return json_data;//(json_data == null)? []: json_data;
   }
 
 // var symbol2 = {'20':{'icon':"0", 'visibility':'visible', 'dbclick':false, 'itemselected':false},

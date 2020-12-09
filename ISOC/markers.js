@@ -15,36 +15,37 @@
 
 // icon for each disaster type id
 var symbol = {'0':{'icon':"0", 'visibility':'visible', 'dbclick':false, 'itemselected':false},
-/*1forest*/    '1':{'layername':"บุกรุกป่า",  'icon': "❧",    'noti_type':'disaster',   'color':"#a2cc44",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.6 ,'ispulse':0, 'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_forest.png", 'icon_url':'img/1.png'},
-/*2air*/       '2':{'layername':"มลพิษ",    'icon':"☢",    'noti_type':'disaster',   'color':"#ed207b",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_air.png", 'icon_url':'img/2.png'},
-/*3landslide*/ '3':{'layername':"ดินถล่ม",   'icon':"☳",     'noti_type':'disaster',   'color':"#a9753c",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_landslide.png", 'icon_url':'img/3.png'},
-/*4flood*/     '4':{'layername':"น้ำท่วม",    'icon':"♦",      'noti_type':'disaster',   'color':"#3b7dcb",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':1,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_flood.png", 'icon_url':'img/4.png'},
-/*5drought*/   '5':{'layername':"น้ำแล้ง",    'icon':"☭",     'noti_type':'disaster',   'color':"#f7c851",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_drought.png", 'icon_url':'img/5.png'},
-/*6fire*/      '6':{'layername':"ไฟป่า",     'icon':"♨",    'noti_type':'disaster',   'color':"#f47320",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_fire.png", 'icon_url':'img/6.png'},
-/*7hotspot*/   '7':{'layername':"จุดความร้อน",'icon':"☀",    'noti_type':'disaster',   'color':"#e30713",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':1.3 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_hotspot.png", 'icon_url':'img/7.png'},
-/*8storm*/     '8':{'layername':"พายุ",     'icon':"♒",    'noti_type':'disaster',   'color':"#358ba4",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_highwave.png", 'icon_url':'img/8.png'},
-/*9heavyrain*/ '9':{'layername':"ฝนตกหนัก", 'icon':"☂",    'noti_type':'disaster',   'color':"#33a1d2",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_heavyrain.png", 'icon_url':'img/9.png'},
-/*riskplan*/  '91':{'layername':"เสี่ยงมลพิษ", 'icon':"█",   'noti_type':'plan',       'color':"#ff0000",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/91.png'},
-/*riskplan*/  '94':{'layername':"เสี่ยงน้ำท่วม", 'icon':"█",   'noti_type':'plan',       'color':"#0000ff",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/94.png'},
-/*riskplan*/  '95':{'layername':"เสี่ยงน้ำแล้ง", 'icon':"█",   'noti_type':'plan',       'color':"#f6b513",'opacity':0.3 ,'visibility':'visible', 'dbclick':false, 'icon_url':'img/95.png'},
-/*1forest*/    '211':{'layername':"เขื่อน",    'icon':"☳",     'noti_type':'dam',   'color':"#a9753c",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/dam-1.png", 'icon_url':'https://tunchz.github.io/ISOC/img//21-1.png'},
-/*1forest*/    '216':{'layername':"เขื่อน ",    'icon':"☳",     'noti_type':'dam',   'color':"#a9753c",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/dam-6.png", 'icon_url':'https://tunchz.github.io/ISOC/img/21-6.png'},
-/*2air*/       '221':{'layername':"ระดับน้ำ",   'icon':"☢",    'noti_type':'waterlevel',   'color':"#718097",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/waterlevel-1.png", 'icon_url':'https://tunchz.github.io/ISOC/img/22-1.png'},
-/*2air*/       '225':{'layername':"ระดับน้ำ ",   'icon':"☢",    'noti_type':'waterlevel',   'color':"#718097",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/waterlevel-5.png", 'icon_url':'https://tunchz.github.io/ISOC/img/22-5.png'},
-/*3landslide*/ '233':{'layername':"คุณภาพน้ำ", 'icon':"☳",     'noti_type':'waterquality',   'color':"#3cc3b2",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/waterquality-3.png", 'icon_url':'https://tunchz.github.io/ISOC/img/23-3.png'},
-/*4flood*/     '246':{'layername':"ฝน",      'icon':"♦",      'noti_type':'rain',   'color':"#3b7dcb",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':1,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/rain-6.png", 'icon_url':'https://tunchz.github.io/ISOC/img/24-6.png'},
-/*4flood*/     '247':{'layername':"ฝน ",      'icon':"♦",      'noti_type':'rain',   'color':"#3b7dcb",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':1,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/rain-7.png", 'icon_url':'https://tunchz.github.io/ISOC/img/24-7.png'},
-/*5drought*/   '25':{'layername':"พายุ",     'icon':"☭",     'noti_type':'storm',   'color':"#7572c1",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/storm_.png", 'icon_url':'https://tunchz.github.io/ISOC/img/5.png'},
-/*6fire*/      '264':{'layername':"คาดการณ์ฝน",'icon':"♨",    'noti_type':'rainforecast',   'color':"#0047e1",'opacity':0.8 ,'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/rainforecast4.png", 'icon_url':'https://tunchz.github.io/ISOC/img/26-4.png'},
-/*6fire*/      '265':{'layername':"คาดการณ์ฝน ",'icon':"♨",    'noti_type':'rainforecast',   'color':"#0047e1",'opacity':0.8 ,'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':1.2 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/rainforecast5.png", 'icon_url':'https://tunchz.github.io/ISOC/img/26-5.png'},
-/*7hotspot*/   '27':{'layername':"พื้นที่เกิดสาธารณภัย",'icon':"☀",    'noti_type':'disasterwarning',   'color':"#f3e141",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':1.3 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/warning_.png", 'icon_url':'https://tunchz.github.io/ISOC/img/7.png'},
-/*8storm*/     '28':{'layername':"คาดการณ์คลื่น",    'icon':"♒",    'noti_type':'waveforecast',   'color':"#358ba4",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.1 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/wave_.png", 'icon_url':'https://tunchz.github.io/ISOC/img/8.png'},
-/*9heavyrain*/ '29':{'layername':"คาดการณ์น้ำหลาก", 'icon':"☢",    'noti_type':'flashfloodforecast',   'color':"#ed207b",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/flashflood_.png", 'icon_url':'https://tunchz.github.io/ISOC/img/2.png'},
+/*1forest*/    '1':{'layername':"บุกรุกป่า",  'icon': "❧",    'noti_type':'แจ้งเตือนภัย',   'color':"#a2cc44",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,255,200,1)",  'size':1.6 ,'ispulse':0,'initialvis':'none','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_forest.png", 'icon_url':'img/1.png'},
+/*2air*/       '2':{'layername':"มลพิษ",    'icon':"☢",    'noti_type':'แจ้งเตือนภัย',   'color':"#ed207b",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'initialvis':'none','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_air.png", 'icon_url':'img/2.png'},
+/*3landslide*/ '3':{'layername':"ดินถล่ม",   'icon':"☳",     'noti_type':'แจ้งเตือนภัย',   'color':"#a9753c",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'initialvis':'none','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_landslide.png", 'icon_url':'img/3.png'},
+/*4flood*/     '4':{'layername':"น้ำท่วม",    'icon':"♦",      'noti_type':'แจ้งเตือนภัย',   'color':"#3b7dcb",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':1,'initialvis':'none','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_flood.png", 'icon_url':'img/4.png'},
+/*5drought*/   '5':{'layername':"น้ำแล้ง",    'icon':"☭",     'noti_type':'แจ้งเตือนภัย',   'color':"#f7c851",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':0,'initialvis':'none','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_drought.png", 'icon_url':'img/5.png'},
+/*6fire*/      '6':{'layername':"ไฟป่า",     'icon':"♨",    'noti_type':'แจ้งเตือนภัย',   'color':"#f47320",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':1.2 ,'ispulse':0,'initialvis':'none','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_fire.png", 'icon_url':'img/6.png'},
+/*7hotspot*/   '7':{'layername':"จุดความร้อน",'icon':"☀",    'noti_type':'แจ้งเตือนภัย',   'color':"#e30713",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':1.3 ,'ispulse':0,'initialvis':'none','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_hotspot.png", 'icon_url':'img/7.png'},
+/*8storm*/     '8':{'layername':"พายุ",     'icon':"♒",    'noti_type':'แจ้งเตือนภัย',   'color':"#358ba4",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.1 ,'ispulse':0,'initialvis':'none','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_highwave.png", 'icon_url':'img/8.png'},
+/*9heavyrain*/ '9':{'layername':"ฝนตกหนัก", 'icon':"☂",    'noti_type':'แจ้งเตือนภัย',   'color':"#33a1d2",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.4 ,'ispulse':0,'initialvis':'none','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/marker_heavyrain.png", 'icon_url':'img/9.png'},
+/*riskplan*/  '91':{'layername':"เสี่ยงมลพิษ", 'icon':"█",   'noti_type':'แจ้งเตือนวางแผน',       'color':"#ff0000",'opacity':0.3 ,'initialvis':'none','visibility':'visible', 'dbclick':false, 'icon_url':'img/91.png'},
+/*riskplan*/  '94':{'layername':"เสี่ยงน้ำท่วม", 'icon':"█",   'noti_type':'แจ้งเตือนวางแผน',       'color':"#0000ff",'opacity':0.3 ,'initialvis':'none','visibility':'visible', 'dbclick':false, 'icon_url':'img/94.png'},
+/*riskplan*/  '95':{'layername':"เสี่ยงน้ำแล้ง", 'icon':"█",   'noti_type':'แจ้งเตือนวางแผน',       'color':"#f6b513",'opacity':0.3 ,'initialvis':'none','visibility':'visible', 'dbclick':false, 'icon_url':'img/95.png'},
+/*1forest*/    '211':{'layername':"เขื่อน",    'icon':"☳",     'noti_type':'เขื่อน',   'color':"#a9753c",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'initialvis':'visible','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/dam-1.png", 'icon_url':'https://tunchz.github.io/ISOC/img//21-1.png'},
+/*1forest*/    '216':{'layername':"เขื่อน ",    'icon':"☳",     'noti_type':'เขื่อน',   'color':"#a9753c",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'initialvis':'visible','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/dam-6.png", 'icon_url':'https://tunchz.github.io/ISOC/img/21-6.png'},
+/*2air*/       '221':{'layername':"ระดับน้ำ",   'icon':"☢",    'noti_type':'ระดับน้ำ',   'color':"#718097",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'initialvis':'none','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/waterlevel-1.png", 'icon_url':'https://tunchz.github.io/ISOC/img/22-1.png'},
+/*2air*/       '225':{'layername':"ระดับน้ำ ",   'icon':"☢",    'noti_type':'ระดับน้ำ',   'color':"#718097",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'initialvis':'none','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/waterlevel-5.png", 'icon_url':'https://tunchz.github.io/ISOC/img/22-5.png'},
+/*3landslide*/ '233':{'layername':"คุณภาพน้ำ", 'icon':"☳",     'noti_type':'คุณภาพน้ำ',   'color':"#3cc3b2",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(210,200,255,1)",  'size':1.1 ,'ispulse':0,'initialvis':'visible','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/waterquality-3.png", 'icon_url':'https://tunchz.github.io/ISOC/img/23-3.png'},
+/*4flood*/     '246':{'layername':"ฝน",      'icon':"♦",      'noti_type':'ฝน',   'color':"#3b7dcb",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':1,'initialvis':'visible','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/rain-6.png", 'icon_url':'https://tunchz.github.io/ISOC/img/24-6.png'},
+/*4flood*/     '247':{'layername':"ฝน ",      'icon':"♦",      'noti_type':'ฝน',   'color':"#3b7dcb",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':1,'initialvis':'visible','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/rain-7.png", 'icon_url':'https://tunchz.github.io/ISOC/img/24-7.png'},
+/*5drought*/   '25':{'layername':"พายุ",     'icon':"☭",     'noti_type':'พายุ',   'color':"#7572c1",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.2 ,'ispulse':0,'initialvis':'visible','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/storm_.png", 'icon_url':'https://tunchz.github.io/ISOC/img/5.png'},
+/*6fire*/      '264':{'layername':"คาดการณ์ฝน",'icon':"♨",    'noti_type':'คาดการณ์ฝน',   'color':"#0047e1",'opacity':0.7 ,'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':1.2 ,'ispulse':0,'initialvis':'visible','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/rainforecast4.png", 'icon_url':'https://tunchz.github.io/ISOC/img/26-4.png'},
+/*6fire*/      '265':{'layername':"คาดการณ์ฝน ",'icon':"♨",    'noti_type':'คาดการณ์ฝน',   'color':"#0047e1",'opacity':0.7 ,'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,235,200,1)",  'size':1.2 ,'ispulse':0,'initialvis':'visible','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/rainforecast5.png", 'icon_url':'https://tunchz.github.io/ISOC/img/26-5.png'},
+/*7hotspot*/   '27':{'layername':"พื้นที่เกิดสาธารณภัย",'icon':"☀",    'noti_type':'พื้นที่เกิดสาธารณภัย',   'color':"#f3e141",     'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,200,200,1)",  'size':1.3 ,'ispulse':0,'initialvis':'visible','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/warning_.png", 'icon_url':'https://tunchz.github.io/ISOC/img/7.png'},
+/*8storm*/     '28':{'layername':"คาดการณ์คลื่น",    'icon':"♒",    'noti_type':'คาดการณ์คลื่น',   'color':"#358ba4",    'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(200,200,255,1)",  'size':1.1 ,'ispulse':0,'initialvis':'visible','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/wave_.png", 'icon_url':'https://tunchz.github.io/ISOC/img/8.png'},
+/*9heavyrain*/ '29':{'layername':"คาดการณ์น้ำหลาก", 'icon':"☢",    'noti_type':'คาดการณ์น้ำหลาก',   'color':"#ed207b",   'outlinecolor':"rgba(255,255,255,1)",  'pulsecolor':"rgba(255,255,200,1)",  'size':1.4 ,'ispulse':0,'initialvis':'visible','visibility':'visible', 'dbclick':false, 'marker_url': "https://tunchz.github.io/ISOC/img/flashflood_.png", 'icon_url':'https://tunchz.github.io/ISOC/img/2.png'},
                 }
-var risknoti_list = [1,2,3,4,5,6,7,8,9,211,216,221,225,233,246,247/*,25,27,28,29*/];
-var riskplan_list = [91,94,95,264,265];
-var drm_list = [].concat(risknoti_list,riskplan_list);
-var drm_geojson,thaiwater_geojson,
+var NotiType_filteredSet = [/*"แจ้งเตือนภัย","แจ้งเตือนวางแผน",*/"เขื่อน",/*"ระดับน้ำ",*/"คุณภาพน้ำ","ฝน",/*"พายุ",*/"คาดการณ์ฝน"/*,"พื้นที่เกิดสาธารณภัย","คาดการณ์คลื่น","คาดการณ์น้ำหลาก"*/],
+    risknoti_list = [1,2,3,4,5,6,7,8,9,211,216,221,225,233,246,247/*,25,27,28,29*/],
+    riskplan_list = [91,94,95,264,265],
+    drm_list = [].concat(risknoti_list,riskplan_list),
+    drm_geojson,thaiwater_geojson,
     disaster_risk_list,disaster_risk_list_summary,
     map_geojson_riskplan = {},
     unselectedcolor = "#555",
@@ -244,91 +245,54 @@ $.getJSON('https://tunchz.github.io/ISOC/json/thaiwater30_public_thailand.json',
     //console.log(drm_geojson);
     $.getJSON('https://tunchz.github.io/ISOC/json/mapth_small.json', function(map_geojson) {
 
-      // Add map province outline
-      //map_addlayer(map_geojson);
-
-      // Add Risk Plan Layer ----------------------------------------------
+      var plan = {},
+          noti = {};
+      var drm = [];     
       riskplan_list.forEach(function (item, index) {
-        //console.log(index,item); 
-        // filter : risk plan color for provinces 
-        var drm_geojson_riskplan = {"type": "FeatureCollection"};
-        drm_geojson_riskplan.features = $.grep(drm_geojson.features,function (n,i){return n.properties.disaster_type_id == item});
-        prov_color = {};
-        for (i = 0; i < drm_geojson_riskplan.features.length; i++) {
-          var prov_code = (drm_geojson_riskplan.features[i].properties.val).toString();
-          //var riskplan_code = drm_geojson_riskplan.features[i].properties.disaster_type_id - 90;
-          var pcolor;
-          // Color of each plan risk
-          prov_color[prov_code]={
-            'disaster_type':drm_geojson_riskplan.features[i].properties.disaster_type,
-            'disaster_type_id':drm_geojson_riskplan.features[i].properties.disaster_type_id,
-            'disaster_id':drm_geojson_riskplan.features[i].properties.disaster_id,
-            'color': (drm_geojson_riskplan.features[i].properties.color) ? drm_geojson_riskplan.features[i].properties.color : symbol[item].color
-          };
-          //console.log(prov_color);
-        }
-
-
-
-        // filter : risk plan provinces
-        map_geojson_riskplan[item] = {"type": "FeatureCollection"}
-        map_geojson_riskplan[item].features = $.grep(map_geojson.features,function (n,i){return (typeof prov_color[n.properties.PROVINCE_C] !== 'undefined')});
-        //console.log("riskplan ",map_geojson_riskplan);
-
-        //console.log("----",map_geojson_riskplan[item]);
-        // Add color & opacity for risk plan in each province
-        for (i = 0; i < map_geojson_riskplan[item].features.length; i++) {
-          var prov_c = map_geojson_riskplan[item].features[i].properties.PROVINCE_C;
-          map_geojson_riskplan[item].features[i].properties['disaster_type'] = prov_color[prov_c].disaster_type;
-          map_geojson_riskplan[item].features[i].properties['disaster_type_id'] = prov_color[prov_c].disaster_type_id;
-          map_geojson_riskplan[item].features[i].properties['disaster_id'] = prov_color[prov_c].disaster_id;
-          map_geojson_riskplan[item].features[i].properties['color'] = prov_color[prov_c].color;
-          map_geojson_riskplan[item].features[i].properties['opacity'] = symbol[item].opacity;
-          map_geojson_riskplan[item].features[i].properties['center'] = getCenter(map_geojson_riskplan[item].features[i].geometry.coordinates);
-        }      
-        // Add map with color province corresponding to risk plan
-        if (map_geojson_riskplan[item].features.length > 0) map_add_polygon(map_geojson_riskplan[item],symbol[item].layername);
-
-      
+        plan[item] = {"type": "FeatureCollection"};
+        plan[item].features = [];
       });
-   
 
-      // Add Risk Notification Layer ----------------------------------------------
-      var drm_geojson_filtered = {};
       risknoti_list.forEach(function (item, index) {
-
-        drm_geojson_filtered[item] = {"type": "FeatureCollection"};
-        drm_geojson_filtered[item].features = $.grep(drm_geojson.features,function (n,i){return n.properties.disaster_type_id == item});
-        // map_add_pulsemarker(drm_geojson_filtered[item],symbol[item].layername,symbol[item].icon,symbol[item].color,symbol[item].outlinecolor,symbol[item].pulsecolor,symbol[item].size,symbol[item].ispulse);
-        if (drm_geojson_filtered[item].features.length > 0) map_add_custommarker(drm_geojson_filtered[item],symbol[item].layername,symbol[item].marker_url,symbol[item].color,icon_zoom.unzoomed,45);
+        noti[item] = {"type": "FeatureCollection"};
+        noti[item].features = [];
       });
-      
 
+      drm_geojson.features.forEach(function (item, index) {
+        var disaster_type_id = item.properties.disaster_type_id;
+        item.properties['icon'] = symbol[disaster_type_id].icon;
+        item.properties['icon_url'] = symbol[disaster_type_id].icon_url;
+        if (!item.properties.color) item.properties['color'] = symbol[disaster_type_id].color;
 
-      // Add Risk Notification Layer ----------------------------------------------
-      //map_addpiecluster();
+        if (riskplan_list.includes(disaster_type_id)) {
+          var prov_id = item.properties.val,
+              prov_rec;
+          prov_rec = $.grep(map_geojson.features,function (n,i){return n.properties.PROVINCE_C == prov_id;})[0];
+          item.geometry = prov_rec.geometry;
+          item.properties.val = prov_rec.properties.จังหวัด;
+          item.properties['opacity'] = symbol[disaster_type_id].opacity;
+          item.properties['center'] = getCenter(item.geometry.coordinates);
+          plan[disaster_type_id].features.push(item);
 
-      //console.log(drm_geojson);
-      // Build array for table image marker
-      var drm = [];
-      var disaster_type_id;
-      //console.log("----",drm_geojson);
-      for (i = 0; i < drm_geojson.features.length; i++) {
-        //console.log(disaster_type_id);
-        drm.push(drm_geojson.features[i].properties);
-        disaster_type_id = drm_geojson.features[i].properties.disaster_type_id;
-        drm[i]['icon'] = symbol[disaster_type_id].icon;
-        drm[i]['icon_url'] = symbol[disaster_type_id].icon_url;
-        //console.log("--",disaster_type_id);
-        if (!riskplan_list.includes(disaster_type_id)) {//(symbol[disaster_type_id].noti_type == 'disaster') {
-          if (!drm_geojson.features[i].properties.color) drm[i]['color'] = symbol[disaster_type_id].color;
-          drm_geojson.features[i].properties['center'] = [0,0];
-        } else {
-          if (!drm_geojson.features[i].properties.color) drm[i]['color'] = symbol[disaster_type_id].color+"66";
-          drm_geojson.features[i].properties['center'] = getCenter(map_geojson_riskplan[disaster_type_id].features[0].geometry.coordinates);
+        } else if (risknoti_list.includes(disaster_type_id)) {
+          noti[disaster_type_id].features.push(item);
+          item.properties['center'] = {lng:item.properties.lon,lat:item.properties.lon}
         }
-        
-      }
+        drm.push(item.properties);
+      });
+
+      //console.log("plan",plan);
+      //console.log("noti",noti);
+
+      Object.keys(plan).forEach(function (item) {
+        if (plan[item].features.length > 0) map_add_polygon(plan[item],symbol[item].layername,symbol[item].initialvis);
+      });
+      Object.keys(noti).forEach(function (item) {
+        if (noti[item].features.length > 0) map_add_custommarker(noti[item],symbol[item].layername,symbol[item].marker_url,symbol[item].color,icon_zoom.unzoomed,45,symbol[item].initialvis);
+      });
+
+
+
       //console.log(drm);
 
       display_table_markers(drm);
@@ -471,7 +435,7 @@ function map_addlayer(map_geojson) {
   //console.log("map done")
 }
 
-function map_add_polygon(map_geojson,layername) {
+function map_add_polygon(map_geojson,layername,visibility) {
     //var layername = 'map_th_prov'
     map.on(mapEvent, function () {
       map.addSource(layername, { type: 'geojson', data: map_geojson });
@@ -480,7 +444,7 @@ function map_add_polygon(map_geojson,layername) {
         'type': 'fill',
         'source': layername,
           layout: {
-              'visibility': 'visible'
+              'visibility': visibility
           },
         'paint': {
           'fill-color': ['get', 'color'],
@@ -492,7 +456,7 @@ function map_add_polygon(map_geojson,layername) {
         'type': 'line',
         'source': layername,
           layout: {
-              'visibility': 'visible'
+              'visibility': visibility
           },
         'paint': {
           'line-width': 2,
@@ -506,8 +470,8 @@ function map_add_polygon(map_geojson,layername) {
           type: "symbol",
           source: layername,
           layout: {
-              'visibility': 'visible',
-              "text-field": ['get','PROVINCE_N'],//"{PROVINCE_N}\n",
+              'visibility': visibility,
+              "text-field": ['get','val'],//"{PROVINCE_N}\n",
               "text-font": ['Open Sans Extrabold', 'Arial Unicode MS Bold'],//["Droid Sans Regular"],
               "text-size": 10,
               'symbol-placement': "point"
@@ -590,152 +554,9 @@ function map_add_polygon(map_geojson,layername) {
 }
 
 
-//==Pulsing Marker================================================================================================
-
-function map_add_pulsemarker(data_geojson,layername,marker_text,color_base,color_outline,color_pulse,size,ispulse) {
-  //console.log("start",marker_text);
-    var framesPerSecond = 30;
-    var multiplier = 1;
-    var opacity = 1;
-    var textSize = 24;
-
-  map.on(mapEvent, function(){
-    map.addSource(layername, {
-      'type': 'geojson',
-      'data': data_geojson
-    });
-
-    var baseLayout = {
-      'visibility': 'visible',
-      'text-field': marker_text,
-      'text-font': ['Open Sans Extrabold', 'Arial Unicode MS Bold'],
-      'text-size': Math.round(24*size),
-      // 'text-padding': 60,
-      'text-allow-overlap': true,
-      'text-ignore-placement': true
-    }
-
-    map.addLayer({
-      'id': layername+'_pulse',
-      'type': 'symbol',
-      'source': layername,
-      'layout': baseLayout,
-        'paint': {
-            'text-color': color_pulse,
-            'text-opacity': ispulse,
-        }
-    })
-
-    map.addLayer({
-      'id': layername,
-      'type': 'symbol',
-      'source': layername,
-      'layout': baseLayout,
-        'paint': {
-            'text-color': color_base,
-            'text-opacity': 1,
-            'text-halo-color': "rgba(255,255,255,1)",                  
-            'text-halo-width': 1,
-            'text-halo-blur': 0
-        }
-    });
-
-    // if (true) {
-    map.addLayer({
-        'id': layername+'_label',
-        'type': 'symbol',
-        'source': layername,
-        'layout': {
-            'visibility': 'visible',
-            'text-field': ['get', 'val'],
-            'text-font': ['Roboto Black', 'Arial Unicode MS Bold'],
-            'text-ignore-placement': true,
-            'text-offset': [0, -1.7*size],
-            'text-size': 8
-        },
-        'paint': {
-            'text-color': color_base,
-            'text-opacity': 1,
-            'text-halo-color': "rgba(255,255,255,1)",                  
-            'text-halo-width': 1,
-            'text-halo-blur': 0
-        }
-    });
-    // }
-
-    map.setPaintProperty(layername+'_pulse', 'text-color', color_pulse)
-    map.setLayoutProperty(layername+'_pulse', 'text-size', 24)
-
-    function pulseMarker(timestamp){
-      setTimeout(function() {
-        requestAnimationFrame(pulseMarker)
-
-        multiplier += .1;
-        opacity -= ( .9 / framesPerSecond );
-        textSize += ( Math.round(36*size) / framesPerSecond );
-
-        map.setPaintProperty(layername+'_pulse', 'text-opacity', opacity)
-        map.setLayoutProperty(layername+'_pulse', 'text-size', textSize)
-
-        if (opacity <= 0.1) {
-          opacity = 1;
-          textSize = Math.round(24*size);
-        }
-
-      }, 1000 / framesPerSecond );
-    }
-
-    if (ispulse) {pulseMarker(0);}
-
-    var popup = new mapboxgl.Popup({
-      offset: 10,
-      closeButton: false,
-      closeOnClick: false
-    });
-
-
-    map.on('click', layername, function (e) {
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var a1 = e.features[0].properties.disaster_type
-        var a2 = e.features[0].properties.level_detail;
-        console.log(a1,a2)
-        //map.flyTo({center: e.features[0].geometry.coordinates});
-
-    });
-
-    map.on('mouseenter', layername, function (e) {
-        map.getCanvas().style.cursor = 'pointer';
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var a1 = e.features[0].properties.disaster_type
-        var a2 = e.features[0].properties.level_detail;
-        var a3 = e.features[0].properties.attr
-        var a4 = e.features[0].properties.val;
-         popup
-          .setLngLat(coordinates)
-          .setHTML(
-              'ภัย : ' + a1 + '<br>ระดับ : ' + a2 + '<br>'+ a3 +' : ' + a4
-          )
-          .addTo(map);
-    });
-
-    map.on('mouseleave', layername, function () {
-      map.getCanvas().style.cursor = '';
-      popup.remove();
-    });
-
-
-  })
-
-  //console.log("layer",marker_text);
-}
-
 //==CUSTOM MARKER================================================================================================
 
-
-//map_addcustommarker()
-
-
-function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offset) {
+function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offset,visibility) {
   //console.log(datageojson);
   map.on(mapEvent, function () {
       map.loadImage(imageurl,
@@ -751,7 +572,7 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
                   'type': 'symbol',
                   'source': layername,
                   'layout': {
-                      'visibility': 'visible',
+                      'visibility': visibility,
                       'icon-image': layername+'-icon',
                       'icon-size': size,
                       'icon-anchor': 'bottom',
@@ -768,7 +589,7 @@ function map_add_custommarker(datageojson,layername,imageurl,textcolor,size,offs
                   'type': 'symbol',
                   'source': layername,
                   'layout': {
-                      'visibility': 'visible',
+                      'visibility': visibility,
                       'text-field': '',//['get', 'val'],
                       'text-font': ['Roboto Black', 'Arial Unicode MS Bold'],
                       'text-ignore-placement': true,
@@ -2188,69 +2009,53 @@ function display_table_markers(drm) {
     disaster_risk_list_summary = crossfilter(disaster_risk_list_summary_);
     disaster_risk_list_summary.dtype_id = disaster_risk_list_summary.dimension(function(d) { return d.disaster_type_id; });
     disaster_risk_list_summary.notitype = disaster_risk_list_summary.dimension(function(d) { return symbol[d.disaster_type_id].noti_type;});
-    // disaster_risk_list_summary.disaster = disaster_risk_list_summary.dimension(function(d) { return (!riskplan_list.includes(d.disaster_type_id));});
-    // disaster_risk_list_summary.plan = disaster_risk_list_summary.dimension(function(d) { return (riskplan_list.includes(d.disaster_type_id));});
 
     // Initialize crossfilter variable for Disaster Risk List
     disaster_risk_list = crossfilter(drm);
     disaster_risk_list.dtype_id = disaster_risk_list.dimension(function(d) { return d.disaster_type_id; });
     disaster_risk_list.d_id = disaster_risk_list.dimension(function(d) { return d.disaster_id; });
     disaster_risk_list.notitype = disaster_risk_list.dimension(function(d) { return symbol[d.disaster_type_id].noti_type;});
-    // disaster_risk_list.disaster = disaster_risk_list.dimension(function(d) { return symbol[d.disaster_type_id].noti_type == 'disaster';});
-    // disaster_risk_list.plan = disaster_risk_list.dimension(function(d) { return symbol[d.disaster_type_id].noti_type == 'plan';});
-    //dtype_id_group = drl.dtype_id.group();
 
 
-    //tabulateimg(disaster_risk_list.dtype_id.bottom(Infinity), ["icon","disaster_type","source","updated_date","level_detail","DRM_state","response","contract","blank","color"]);
-    filter_dataTable('all');
-    //switchShortNoti();
+    // filter_dataTable('all');
 
-    //console.log(disaster_risk_list_summary);
-    // Display Table markers
-    tabulateimg_marker(disaster_risk_list_summary.dtype_id.bottom(Infinity), ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
-    vertabulateimg_marker(disaster_risk_list_summary.dtype_id.bottom(Infinity), ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+    // // Display Table markers
+    // tabulateimg_marker(disaster_risk_list_summary.dtype_id.bottom(Infinity), ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+    // vertabulateimg_marker(disaster_risk_list_summary.dtype_id.bottom(Infinity), ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
 
-    //requestFullScreen(document.getElementById('map-panel'));
-
-
+    tabulateimg_marker([], ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+    vertabulateimg_marker([], ["icon_url","num_rec","blank","disaster_type","blank","blank","blank","blank","blank","color"]);
+    filterNotiType();
 }
 
 
-var NotiType_filteredSet = ['disaster','plan','dam','waterlevel','waterquality','rain','rainforecast'];//["แจ้งเตือนภัย","แจ้งเตือนวางแผน","เขื่อน","ระดับน้ำ","คุณภาพน้ำ","ฝน","พายุ","คาดการณ์ฝน","พื้นที่เกิดสาธารณภัย","คาดการณ์คลื่น","คาดการณ์น้ำหลาก"];
 
 function filterNotiType(type,filter) {
-  var noti = {'แจ้งเตือนภัย':'disaster',
-              'แจ้งเตือนวางแผน':'plan',
-              'เขื่อน':'dam',
-              'ระดับน้ำ':'waterlevel',
-              'คุณภาพน้ำ':'waterquality',
-              'ฝน':'rain',
-              'คาดการณ์ฝน':'rainforecast',
-              };
+  // var noti = {'แจ้งเตือนภัย':'disaster',
+  //             'แจ้งเตือนวางแผน':'plan',
+  //             'เขื่อน':'dam',
+  //             'ระดับน้ำ':'waterlevel',
+  //             'คุณภาพน้ำ':'waterquality',
+  //             'ฝน':'rain',
+  //             'คาดการณ์ฝน':'rainforecast',
+  //             };
   //console.log(type,filter);
   //disaster_risk_list_summary[type].filterExact(!filter);
-
-  if (!filter) {
-    NotiType_filteredSet = NotiType_filteredSet.filter(function(value, index, arr){ 
-      return value != noti[type];
-    });    
-  } else {
-    NotiType_filteredSet.push(noti[type]);
+  if (typeof type !== 'undefined') {
+    if (!filter) {
+      NotiType_filteredSet = NotiType_filteredSet.filter(function(value, index, arr){ 
+        return value != type;
+      });    
+    } else {
+      NotiType_filteredSet.push(type);
+    }
   }
+
 
   disaster_risk_list_summary.notitype.filter(function(d) { return NotiType_filteredSet.includes(d); });
   disaster_risk_list.notitype.filter(function(d) { return NotiType_filteredSet.includes(d); });
 
   console.log(NotiType_filteredSet);
-
-  // if (filter) {
-  //   disaster_risk_list_summary[type].filterAll(); 
-  //   disaster_risk_list[noti[type]].filterAll(); 
-  // } else {
-  //   disaster_risk_list_summary[noti[type]].filterExact(false); 
-  //   disaster_risk_list[noti[type]].filterExact(false); 
-  // }
-
 
   var removetable = document.getElementById('table_image');
   removetable.parentElement.removeChild(removetable);    

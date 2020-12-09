@@ -271,6 +271,9 @@
     //mapboxgl.accessToken ='pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w';
     //mapboxgl.accessToken ='pk.eyJ1IjoiZHVlcm1hZWwiLCJhIjoiNTRmNjc2MjYzN2Y0NDk5ZjRjMTM1MDA2YjQzYTY4NjUifQ.zdJRPPXa8WvpcMZC1_RAyw';  //from jsfiddle
     //mapboxgl.accessToken ='pk.eyJ1IjoiYXByZW5kZWdpcyIsImEiOiI1TmFvZGI4In0.ZicumXHvKqD1e6G_WH7B4g';  //from jsfiddle
+    //mapboxgl.accessToken ='pk.eyJ1IjoiZGFuc3dpY2siLCJhIjoiY2l1dTUzcmgxMDJ0djJ0b2VhY2sxNXBiMyJ9.25Qs4HNEkHubd4_Awbd8Og';  //
+    //mapboxgl.accessToken ='pk.eyJ1IjoiZWRlbnJheWdhcmRuZXIiLCJhIjoiRlZRVlhqOCJ9.tDrWaeNRbMCtXAovQLYuzA';  //
+    //mapboxgl.accessToken ='pk.eyJ1IjoiaWFtYW52ZXNoIiwiYSI6ImNrMDJpdGdiMTFsOXMzY3Byd285MXMzZ3kifQ.d-3i64qeGwMjSZcBQ2EQvQ';  //
 
     //Setup mapbox-gl map
     var map = new mapboxgl.Map({
@@ -610,11 +613,11 @@ var empty_geojson = {
           'type': 'geojson',
           'data': {
             'type': 'FeatureCollection',
-            'features': [{"type": "Feature","geometry": { "type": "Point", "coordinates": [101.6673626,13.2808669] }}]
+            'features': []
           }
         },
         'layout': {
-          'visibility': 'visible',
+          'visibility': 'none',
           'text-field': ''
         },
         'paint': {
@@ -625,24 +628,22 @@ var empty_geojson = {
 
       map.addLayer({
         'id': 'แจ้งเตือนวางแผน',
-        'type': 'symbol',
+        'type': 'heatmap',
         'source': {
           'type': 'geojson',
           'data': {
             'type': 'FeatureCollection',
-            'features': [{"type": "Feature","geometry": { "type": "Point", "coordinates": [101.6673626,13.2808669] }}]
+            'features': []
           }
         },
         'layout': {
-          'visibility': 'visible',
-          'text-field': ''
+          'visibility': symbol[1].initialvis
         },
         'paint': {
-            'text-color': '#fff',
-            'text-opacity':0
+            'heatmap-color': '#ffffff',
+            'heatmap-opacity': 0
         }
       });
-
 
       map.addLayer({
         'id': 'พื้นที่จังหวัด',
