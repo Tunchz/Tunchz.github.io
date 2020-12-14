@@ -194,7 +194,7 @@ table {
 }
 
 .detail {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
   padding: 0px 0px;
   /*text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
@@ -202,13 +202,13 @@ table {
 }
 
 .subdetail {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: normal;
   padding: 0px 0px;
 }
 
 .tag {
-  font-size: 11px;
+  font-size: 12px;
   padding: 0px 0px;
   font-weight: bold;
   justify-content: right;
@@ -217,7 +217,7 @@ table {
 }
 
 .subtag {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: normal;
   padding: 0px 0px;
   padding-right: 10px;
@@ -225,8 +225,8 @@ table {
 }
 
 .table_img_container{
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   margin: 2px 10px 2px 10px;
   justify-content: center;
   align-items: center;  
@@ -256,7 +256,7 @@ table {
 }
 
 .detail_col {
-  min-width:70px;
+  min-width:90px;
   padding-left: 5px;
 }
 
@@ -289,7 +289,7 @@ table {
 
 .table_col_marker {
   height: 55px;
-  width: 96px;
+  width: 100px;
   /*border-top: 3px solid #383838;
   border-bottom: 3px solid #383838;*/
   cursor: pointer;
@@ -311,12 +311,14 @@ table {
 
 
 .tag_marker_bg {
-  width:  15px;
+  width:  auto;
   height: 15px;
   margin: 3px 0px 0px 1px;
-  border-radius: 50%;
+  border-radius: 7px;
   vertical-align: middle;
-  justify-content: center;
+  display : flex;
+  float: left;
+  /*justify-content: center;*/
   padding-top: 0px;
   box-shadow: 0 0 2px #777;
 }
