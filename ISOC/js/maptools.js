@@ -2142,6 +2142,7 @@
 	      this.container.style.display = 'none';
 	      this.draw.changeMode('simple_select');
 	      this.ruler.modeupdate('simple_select');
+	      if (this.inspect.isInspecting) this.inspect.inspectingOff();
 	      this.map.fire('maptools.on');
 	    }
 	  }, {
@@ -2190,8 +2191,9 @@
 	      });
 
 	      map.on('inspect.on', function () {
-	        _this.draw.changeMode('simple_select');
-	        if (_this.ruler.isMeasuring) _this.ruler.measuringOff();
+	        // _this.draw.changeMode('simple_select');
+	        // if (_this.ruler.isMeasuring) _this.ruler.measuringOff();
+	        if (_this.isMaptools) _this.MaptoolsOff();
 	      });
 	      map.on('ruler.on', function () {
 	        _this.draw.changeMode('simple_select');
