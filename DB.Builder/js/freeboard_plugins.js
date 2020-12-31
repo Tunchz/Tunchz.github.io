@@ -1491,7 +1491,7 @@ $.extend(freeboard, jQuery.eventEmitter),
                 g = a;
             c(1e3 * g.refresh), this.updateNow = function() {
                 $.ajax({
-                    url: "http://api.openweathermap.org/data/2.5/weather?APPID=" + g.api_key + "&q=" + encodeURIComponent(g.location) + "&units=" + g.units,
+                    url: "https://api.openweathermap.org/data/2.5/weather?APPID=" + g.api_key + "&q=" + encodeURIComponent(g.location) + "&units=" + g.units,
                     dataType: "JSONP",
                     success: function(a) {
                         var c = {
