@@ -4,12 +4,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/2607bfc30afc84ea4e21.worker.js"
   },
   {
-    "revision": "197e6719f86022e0fead1721b80e8209",
+    "revision": "ff91039975d6ee2f68f3ddb915dbfb91",
     "url": "/index.html"
   },
   {
-    "revision": "92f95d582d5e0ca98b44",
-    "url": "/static/css/15.ffc9389a.chunk.css"
+    "revision": "f10b98b0e4ebf3fdf403",
+    "url": "/static/css/15.ee8cf4ce.chunk.css"
   },
   {
     "revision": "a2faf2738bd786873e78",
@@ -40,8 +40,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/14.6bbd4f44.chunk.js"
   },
   {
-    "revision": "92f95d582d5e0ca98b44",
-    "url": "/static/js/15.68e30eba.chunk.js"
+    "revision": "f10b98b0e4ebf3fdf403",
+    "url": "/static/js/15.5feb4f33.chunk.js"
   },
   {
     "revision": "52934081d7b3ae3c80b4",
@@ -56,8 +56,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/17.cfb58ddf.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "98e29edb5b9f62036d1f",
-    "url": "/static/js/18.3c72adac.chunk.js"
+    "revision": "ff989834be3e06b92004",
+    "url": "/static/js/18.2232a5a8.chunk.js"
   },
   {
     "revision": "3fb2cf60a950cd832a84",
@@ -172,12 +172,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/9.4b27beea.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c34535dbb4c97e7970ab",
-    "url": "/static/js/main.abb79441.chunk.js"
+    "revision": "7f5f39af3ad1376119a5",
+    "url": "/static/js/main.2eb82fad.chunk.js"
   },
   {
-    "revision": "03051e3a61aebb4bf94f",
-    "url": "/static/js/runtime-main.e10d8de1.js"
+    "revision": "5ca5d231bf851b09eefc",
+    "url": "/static/js/runtime-main.47589435.js"
+  },
+  {
+    "revision": "ad8463d1313fed60e1d10324511efdc3",
+    "url": "/static/media/archia-bold-webfont.ad8463d1.woff2"
+  },
+  {
+    "revision": "80da55a565ba8976b8e9e84e8c511bf7",
+    "url": "/static/media/archia-medium-webfont.80da55a5.woff2"
+  },
+  {
+    "revision": "890ee929da47c4931933ff77fd557520",
+    "url": "/static/media/archia-semibold-webfont.890ee929.woff2"
   },
   {
     "revision": "013f0b90a4cae7b8bbf13e3fd9e7dc4a",
