@@ -1,0 +1,34 @@
+{
+	"faq": [
+		{
+			"answer": "This project is a management system for CIA : Camera Investigation Agency",
+			"category": "General",
+			"qno": "1",
+			"question": "What is this about?"
+		},
+		{
+			"answer": "Blah...Blah...Blah...",
+			"category": "General",
+			"qno": "2",
+			"question": "question 2"
+		},
+		{
+			"answer": "All the data is available through an API for further analysis and development here : <a href=\"https://covid19.ddc.moph.go.th/th/api\" target=\"_blank\">https://covid19.ddc.moph.go.th/th/api</a>",
+			"category": "General",
+			"qno": "3",
+			"question": "question 3"
+		},
+		{
+			"answer": "Blah...Blah...Blah...",
+			"category": "General",
+			"qno": "4",
+			"question": "question 4"
+		},
+		{
+			"answer": "Blah...Blah...Blah...",
+			"category": "General",
+			"qno": "5",
+			"question": "question 5"
+		}
+	]
+}
