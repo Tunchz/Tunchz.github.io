@@ -2,31 +2,31 @@
 	"faq": [
 		{
 			"answer": "This project is a management system for CIA : Camera Investigation Agency",
-			"category": "General",
+			"category": "general",
 			"qno": "1",
 			"question": "What is this about?"
 		},
 		{
 			"answer": "Blah...Blah...Blah...",
-			"category": "General",
+			"category": "general",
 			"qno": "2",
 			"question": "question 2"
 		},
 		{
 			"answer": "Blah...Blah...Blah...",
-			"category": "General",
+			"category": "settings",
 			"qno": "3",
 			"question": "question 3"
 		},
 		{
 			"answer": "Blah...Blah...Blah...",
-			"category": "General",
+			"category": "none",
 			"qno": "4",
 			"question": "question 4"
 		},
 		{
 			"answer": "Blah...Blah...Blah... here : <a href=\"https://tunchz.github.io/ReactCovidTh/index.html\" target=\"_blank\">https://tunchz.github.io/ReactCovidTh/index.html</a>",
-			"category": "General",
+			"category": "settings",
 			"qno": "5",
 			"question": "question 5"
 		}
