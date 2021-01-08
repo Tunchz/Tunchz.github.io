@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.01922016.chunk.css",
-    "main.js": "/static/js/main.1e2fefcf.chunk.js",
-    "main.js.map": "/static/js/main.1e2fefcf.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.a6cf2a25.js",
-    "runtime-main.js.map": "/static/js/runtime-main.a6cf2a25.js.map",
-    "static/css/2.b4c8bb4e.chunk.css": "/static/css/2.b4c8bb4e.chunk.css",
-    "static/js/2.cef3e052.chunk.js": "/static/js/2.cef3e052.chunk.js",
-    "static/js/2.cef3e052.chunk.js.map": "/static/js/2.cef3e052.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/2.b4c8bb4e.chunk.css.map": "/static/css/2.b4c8bb4e.chunk.css.map",
-    "static/css/main.01922016.chunk.css.map": "/static/css/main.01922016.chunk.css.map",
-    "static/js/2.cef3e052.chunk.js.LICENSE.txt": "/static/js/2.cef3e052.chunk.js.LICENSE.txt",
-    "static/media/fonts.css": "/static/media/impact.c5185aab.woff",
-    "static/media/index.css": "/static/media/union.2cd460cb.svg",
-    "static/media/mapbox-gl-style-switcher.css": "/static/media/style.478187f2.svg"
+    "main.css": "/ISOC2/static/css/main.c494d457.chunk.css",
+    "main.js": "/ISOC2/static/js/main.24245cf5.chunk.js",
+    "main.js.map": "/ISOC2/static/js/main.24245cf5.chunk.js.map",
+    "runtime-main.js": "/ISOC2/static/js/runtime-main.6363f139.js",
+    "runtime-main.js.map": "/ISOC2/static/js/runtime-main.6363f139.js.map",
+    "static/css/2.219948fb.chunk.css": "/ISOC2/static/css/2.219948fb.chunk.css",
+    "static/js/2.5d249fe3.chunk.js": "/ISOC2/static/js/2.5d249fe3.chunk.js",
+    "static/js/2.5d249fe3.chunk.js.map": "/ISOC2/static/js/2.5d249fe3.chunk.js.map",
+    "index.html": "/ISOC2/index.html",
+    "static/css/2.219948fb.chunk.css.map": "/ISOC2/static/css/2.219948fb.chunk.css.map",
+    "static/css/main.c494d457.chunk.css.map": "/ISOC2/static/css/main.c494d457.chunk.css.map",
+    "static/js/2.5d249fe3.chunk.js.LICENSE.txt": "/ISOC2/static/js/2.5d249fe3.chunk.js.LICENSE.txt",
+    "static/media/fonts.css": "/ISOC2/static/media/impact.c5185aab.woff",
+    "static/media/index.css": "/ISOC2/static/media/union.2cd460cb.svg",
+    "static/media/mapbox-gl-style-switcher.css": "/ISOC2/static/media/style.478187f2.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.a6cf2a25.js",
-    "static/css/2.b4c8bb4e.chunk.css",
-    "static/js/2.cef3e052.chunk.js",
-    "static/css/main.01922016.chunk.css",
-    "static/js/main.1e2fefcf.chunk.js"
+    "static/js/runtime-main.6363f139.js",
+    "static/css/2.219948fb.chunk.css",
+    "static/js/2.5d249fe3.chunk.js",
+    "static/css/main.c494d457.chunk.css",
+    "static/js/main.24245cf5.chunk.js"
   ]
 }
