@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ReactCovidTh/f75ee72a9857e4539e3c.worker.js"
   },
   {
-    "revision": "5d186f8125bdfb8067fd5b9efa28fd3f",
+    "revision": "3b061277927df76cb1a02c82af0e6030",
     "url": "/ReactCovidTh/index.html"
   },
   {
@@ -88,8 +88,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ReactCovidTh/static/js/23.0efc7ec4.chunk.js"
   },
   {
-    "revision": "be2d3a471a3e7f8ba4b0",
-    "url": "/ReactCovidTh/static/js/24.ad4cddb3.chunk.js"
+    "revision": "c8524bb985488bf14185",
+    "url": "/ReactCovidTh/static/js/24.369437cd.chunk.js"
   },
   {
     "revision": "57e6b51ce9020f014121",
@@ -160,8 +160,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ReactCovidTh/static/js/5.259dd5ac.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5cf527763c4b7be8cbe4",
-    "url": "/ReactCovidTh/static/js/6.7ec8bee1.chunk.js"
+    "revision": "715580f5cef7525f1e1f",
+    "url": "/ReactCovidTh/static/js/6.00ea695f.chunk.js"
   },
   {
     "revision": "0d7e5c167ad181074f85",
@@ -176,8 +176,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ReactCovidTh/static/js/main.ec1cf1e0.chunk.js"
   },
   {
-    "revision": "2b60bedc0f2f5293137a",
-    "url": "/ReactCovidTh/static/js/runtime-main.80f14b9a.js"
+    "revision": "1db37ad9e42e64ee772c",
+    "url": "/ReactCovidTh/static/js/runtime-main.e9fdf065.js"
   },
   {
     "revision": "ad8463d1313fed60e1d10324511efdc3",
