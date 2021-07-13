@@ -43,9 +43,9 @@ function getUrlVars() {
 function getUrlParam(parameter, defaultvalue){
     var urlparameter = defaultvalue;
     if(window.location.href.indexOf(parameter) > -1){
-        console.log("parameters : " + getUrlVars());
-        console.log(parameter + " : " + getUrlVars()[parameter]);
-        urlparameter = getUrlVars()[parameter];
+        //console.log("parameters : " + getUrlVars());
+        //console.log(parameter + " : " + getUrlVars()[parameter]);
+        urlparameter = decodeURI(getUrlVars()[parameter]);
         }
     return urlparameter;
 }  
