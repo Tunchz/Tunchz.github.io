@@ -30,11 +30,27 @@ var extraStuff = '<div style="position:absolute; margin:.3em; bottom:0em; right:
 
 var old = '';
          
+// START----- added codes for getting html text from url
+         
+function getUrlParam(parameter, defaultvalue){
+    var urlparameter = defaultvalue;
+    if(window.location.href.indexOf(parameter) > -1){
+        urlparameter = getUrlVars()[parameter];
+        }
+    return urlparameter;
+}  
+         
+var htmltext = getUrlParam('htmltext', defaultStuff );          
+         
+// END----- added codes for getting html text from url
+         
+        
+         
 function init()
 {
   window.editbox.document.write(editboxHTML);
   window.editbox.document.close();
-  window.editbox.document.f.ta.value = defaultStuff;
+  window.editbox.document.f.ta.value = htmltext;  //defaultStuff;
   update();
 }
 
@@ -51,6 +67,7 @@ function update()
       d.write(extraStuff);
     d.close();
   }
+     
 
   window.setTimeout(update, 150);
 }
