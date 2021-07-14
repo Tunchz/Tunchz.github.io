@@ -34,6 +34,8 @@ var old = '';
          
 function getUrlVars() {
     var vars = {};
+	
+    // replace & to prevent spliting and replace %; to prevent error decode for decodeURI()
     var urltext = window.location.href.split('&').join('ฅ').split('%;').join('ฃ');
 
     //console.log('>>>> url text : ',urltext)
