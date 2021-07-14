@@ -34,7 +34,10 @@ var old = '';
          
 function getUrlVars() {
     var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    var urltext = window.location.href.split('&').join('ฅ').split('%;').join('ฃ');
+
+    //console.log('>>>> url text : ',urltext)
+    var parts = urltext.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
         vars[key] = value;
     });
     return vars;
@@ -46,7 +49,9 @@ function getUrlParam(parameter, defaultvalue){
         //console.log("parameters : " + getUrlVars());
         //console.log(parameter + " : " + getUrlVars()[parameter]);
         // decode string into aschii code
-        urlparameter = decodeURI(getUrlVars()[parameter]);
+         var htmlstring = getUrlVars()[parameter].split('ฅ').join('&')  
+	//console.log('>>>> html string : ',htmlstring)
+         urlparameter = decodeURI(htmlstring).split('ฃ').join('%;');
         }
     return urlparameter;
 }  
