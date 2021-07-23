@@ -13,7 +13,8 @@
 <style>
 html,
 body,
-#viewDiv {padding: 0;margin: 0;height: 98%;width: 100%;}
+#viewDiv {padding: 0;margin: 0;height: 100%;width: 100%;}
+.esri-attribution, .esri-attribution__powered-by {height:0px !important;}
 </style>
 <script type="text/javascript">
 require([
@@ -33,21 +34,21 @@ require([
         });
         view.ui.add(homeBtn, "top-left");
         var layer = null,
-        layerUrl = "http://gisonline.mwa.co.th/arcgis/rest/services/mobileCache/mobileCache/MapServer",
+        layerUrl = "https://gisonline.mwa.co.th/arcgis/rest/services/mobileCache/mobileCache/MapServer",
         layer = new TileLayer(layerUrl, null);
         map.layers.add(layer);
     });
 </script>
 </head>
 <body>
-<table class="navTable" style="width:100%">
+<!--table class="navTable" style="width:100%">
 <tbody>
 <tr valign="top">
 <td class="breadcrumbs">ArcGIS JavaScript API: mobileCache/mobileCache (MapServer)</td>
 <td align="right" id="help">Built using the <a target="sdkView" href="//developers.arcgis.com/javascript">ArcGIS API for JavaScript</a></td>
 </tr>
 </tbody>
-</table>
+</table-->
 <div id="viewDiv">
 </div>
 </body>
