@@ -1,9 +1,9 @@
 URL,Time (seconds)
 http://public.tableausoftware.com/views/WeatherEyeWebVersion/Weather,10
-http://public.tableausoftware.com/views/POC_TCPH/TPCHDashboard,10
-http://public.tableausoftware.com/views/POC_AdventureWork/SaleOverview,10
-http://public.tableausoftware.com/views/POC_AdventureWork/ProductInsight,10
-http://public.tableausoftware.com/views/POC_AdventureWork/QuadrantAnalysis,10
+http://public.tableausoftware.com/views/TCPH/TPCHDashboard,10
+http://public.tableausoftware.com/views/SaleReportAdventurework/SaleOverview,10
+http://public.tableausoftware.com/views/SaleReportAdventurework/ProductInsight,10
+http://public.tableausoftware.com/views/SaleReportAdventurework/QuadrantAnalysis,10
 http://public.tableausoftware.com/views/PolarClock_15618292145450/PolarClock1,10
 http://public.tableausoftware.com/views/PolarClock_15618292145450/PolarClock2,10
 http://public.tableausoftware.com/views/PolarClock_15618292145450/PolarClock3,10
