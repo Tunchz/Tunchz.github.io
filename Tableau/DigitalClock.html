@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>Tableau JavaScript API</title>
+<script type='text/javascript' src='https://online.tableausoftware.com/javascripts/api/tableau_v8.js'></script>
+</head>
+<body style="width: 100%; height: 100vh; background-color: #000; margin:0px;">
+<div id='tableauViz' style="width: 100%; height: 100vh; background-color: #000; margin:-5px;" ></div>
+
+<script>
+	var placeholderDiv = document.getElementById('tableauViz');
+	// Replace 'https://public.tableau.com/app/profile/xxxxxxxxx/viz/' with 'http://public.tableausoftware.com/views/'
+	var url = 'http://public.tableausoftware.com/views/DigitalClockTest_16283585047640/DigitalClock';//?:refresh=yes';
+	//'http://public.tableausoftware.com/views/WeatherEyeWebVersion/Weather?:refresh=yes';
+	var options = {
+	    hideTabs: true,
+	    hideToolbar: true,
+		width: '100%',
+		height: '100%'
+	};
+	var viz = new tableauSoftware.Viz(placeholderDiv, url, options);
+	// var toolbars = document.getElementsByClassName('tab-toolbar')//[0].style.display = 'None';
+	// console.log('>>>> toolbars : ', toolbars)
+
+	setInterval(function () {viz.refreshDataAsync(); console.log(">>>> refresh data")}, 2000);  // 1000 = 1sec
+
+</script>
+</body>
