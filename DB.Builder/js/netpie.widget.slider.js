@@ -13,7 +13,7 @@ if (typeof sliderObject == "undefined") {
 
     freeboard.loadWidgetPlugin({
         "type_name"   : "Slider",
-        "display_name": "Slider",
+        "display_name": "Range Slider",
         "description" : "A slider widget that can perform Javascript action.",
         "fill_size" : false,
         "external_scripts" : ["plugins/thirdparty/rangeslider.js"],
