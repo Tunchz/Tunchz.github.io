@@ -74,7 +74,7 @@
                 const height = document.getElementById("container").getBoundingClientRect().height;
 
                 // console.log(">>> width : "+width+" | height : "+height)
-                container.mount("container", width, height);
+                container.mount("container", width-1, height);
                 window.addEventListener("resize", function() {
                   container.resize(
                     document.getElementById("container").getBoundingClientRect().width,
