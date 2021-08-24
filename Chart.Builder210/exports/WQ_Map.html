@@ -16,7 +16,7 @@
               }
             </style>
           </head>
-          <body>
+          <body style="background-color: #252525;">
             <div id="container"></div>
             <script type="text/javascript">
               CharticulatorContainer.initialize().then(function() {
@@ -74,6 +74,7 @@
                 const height = document.getElementById("container").getBoundingClientRect().height;
 
                 // console.log(">>> width : "+width+" | height : "+height)
+                document.getElementById("container").style.visibility = "hidden";
                 container.mount("container", width-1, height);
                 window.addEventListener("resize", function() {
                   container.resize(
@@ -81,13 +82,17 @@
                     document.getElementById("container").getBoundingClientRect().height
                   );
                 });
-                
+
                 setTimeout(function(){ 
                   console.log(">>> container resize");
                   container.resize(
                       document.getElementById("container").getBoundingClientRect().width,
                       document.getElementById("container").getBoundingClientRect().height
                   );
+                  // document.getElementById("container").style.visibility = "visible";
+                  setTimeout(function(){
+                    document.getElementById("container").style.visibility = "visible";
+                  },1000);
                 }, 100);
               });
             </script>
