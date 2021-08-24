@@ -7,6 +7,7 @@
             <script type="text/javascript" src='https://tunchz.github.io/Chart.Builder210/scripts/TunchzChartBuilder210.js'></script>
             <script type="text/javascript" src='data.js'></script>
             <script type="text/javascript" src='template.js'></script>
+            <link rel="stylesheet" href="LoadingAnimation.css">
 
             <style type="text/css">
               #container {
@@ -17,6 +18,14 @@
             </style>
           </head>
           <body style="background-color: #252525;">
+            <div class="loader">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+              <div class="bar3"></div>
+              <div class="bar4"></div>
+              <div class="bar5"></div>
+              <div class="bar6"></div>
+            </div>
             <div id="container"></div>
             <script type="text/javascript">
               CharticulatorContainer.initialize().then(function() {
