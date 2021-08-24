@@ -81,11 +81,14 @@
                     document.getElementById("container").getBoundingClientRect().height
                   );
                 });
-                // console.log(">>> width : "+document.getElementById("container").getBoundingClientRect().width+" | height : "+document.getElementById("container").getBoundingClientRect().height)
-                container.resize(
-                    document.getElementById("container").getBoundingClientRect().width,
-                    document.getElementById("container").getBoundingClientRect().height
-                );
+                
+                setTimeout(function(){ 
+                  console.log(">>> container resize");
+                  container.resize(
+                      document.getElementById("container").getBoundingClientRect().width,
+                      document.getElementById("container").getBoundingClientRect().height
+                  );
+                }, 1000);
               });
             </script>
           </body>
