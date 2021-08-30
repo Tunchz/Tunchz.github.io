@@ -9,6 +9,8 @@
             <script type="text/javascript" src='template.js'></script>
             <link rel="stylesheet" href="LoadingAnimation.css">
 
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+
             <style type="text/css">
               #container {
                 display: block;
@@ -93,7 +95,7 @@
                 });
 
                 setTimeout(function(){ 
-                  console.log(">>> container resize");
+                  // console.log(">>> container resize");
                   container.resize(
                       document.getElementById("container").getBoundingClientRect().width,
                       document.getElementById("container").getBoundingClientRect().height
@@ -101,9 +103,171 @@
                   // document.getElementById("container").style.visibility = "visible";
                   setTimeout(function(){
                     document.getElementById("container").style.visibility = "visible";
+
+
+                    // add event listener for tooltips
+            // d3.selectAll("#container svg g g g g text").on("mouseover", showTooltips).on("mouseout", hideTooltips);
+            // d3.selectAll("#container svg g g g g g g g path").on("mouseover", showTooltips).on("mouseout", hideTooltips);
+            // d3.selectAll("#container svg g g g g g g g circle").on("mouseover", showTooltips).on("mouseout", hideTooltips);
+            d3.selectAll("#container").on("click", clearSelection);
+
+
+                    setTimeout(function(){
+                      // container.unmount();
+                      // console.log(">>> Data Schema : ",chartTemplate.getDatasetSchema());
+                      // container.addSelectionListener(showTooltips);
+                      // container.addContextMenuListener(clearSelection);
+                      container.addMouseEnterListener(showTooltips);
+                      container.addMouseLeaveListener(hideTooltips);
+                      // container.setSelection("Samlae_WQ_Preped",[0,6,7,356]);
+
+                    },1000);
+
+
+
                   },1000);
                 }, 100);
+
+          function clearSelection() {
+
+              // clear selection
+              container.clearSelection();
+              // return false;
+          }
+
               });
+
+            // tooltips
+          var tooltip = d3.select("body")
+              .append("div")
+              .style({
+                "background-color": "#555555aa",
+                "color": "#ffffff",
+                "font-size": "10px",
+                  "position": "absolute",
+                  "z-index": "10",
+                  "visibility": "hidden",
+                  "padding": "10px",
+                  "border-radius": "3px"
+              })
+              .attr({
+                  "class": "tooltip"
+              });
+
+            const arrMin = arr => (Math.min(...arr)).toFixed(2)
+            const arrMax = arr => (Math.max(...arr)).toFixed(2)
+          const arrSum = arr => (arr.reduce((a,b) => a + b, 0) / 60).toFixed(2)
+      const arrAvg = arr => (arr.reduce((a,b) => a + b, 0) / arr.length).toFixed(2)
+
+        function showTooltips(a,b,c) {
+
+          var date = new Date(dataset.tables[0].rows[b[0]].Date)
+          // console.log('>>>> : ', date)
+          var day = date.getUTCDate();
+          var month = dataset.tables[0].rows[b[0]].Month_Th
+          var year = date.getUTCFullYear() + 543;
+          // console.log('>>>> : ', day+' '+month+' '+year)
+
+          if (b.length == 1) {
+            // console.log('>>>> : ', dataset.tables[0].rows[b[0]]["P2 "])
+            var content =  "<b>" + day+' '+month+' '+year +'  เวลา '+dataset.tables[0].rows[b[0]]["Hour  "]+ ":00 น.</b><br>" + 
+              "<b>-----------------------------------------------------</b><br>" + 
+                  `<table>
+
+                <tbody>
+                    <tr>
+                        <td>CD:ค่าความนำไฟฟ้า</td>
+                        <td>▸ `+ dataset.tables[0].rows[b[0]]["P2 "] +`</td>
+                    </tr>
+                    <tr>
+                        <td>WQ:ระดับความเค็ม</td>
+                        <td>▸ `+ dataset.tables[0].rows[b[0]].P2LevelDesc +`</td>
+                    </tr>
+                </tbody>
+            </table>`;
+          } else {
+            var CD=[],
+              FL=[],
+              DO=[],
+              TB=[];
+            var CD_warn = [], FL_warn = [], DO_warn = [], TB_warn = [];
+            for (i in b) {
+              CD.push(dataset.tables[0].rows[b[i]]["P2 "]);
+              FL.push(dataset.tables[0].rows[b[i]]["P3 "]);
+              DO.push(dataset.tables[0].rows[b[i]]["P4 "]);
+              TB.push(dataset.tables[0].rows[b[i]]["P5 "]);
+              CD_warn.push(dataset.tables[0].rows[b[i]]["P2_warning"]);
+              FL_warn.push(dataset.tables[0].rows[b[i]]["P3_warning"]);
+              DO_warn.push(dataset.tables[0].rows[b[i]]["P4_warning"]);
+              TB_warn.push(dataset.tables[0].rows[b[i]]["P5_warning"]);
+            }
+            console.log('>>>> : ', (arrSum(CD_warn)>0)?arrSum(CD_warn):'-')
+            var content =  "<b>" + day+' '+month+' '+year + "</b><br>" + 
+              "<b>-----------------------------------------------------------------------------</b><br>" + 
+                  `<table>
+                <thead>
+                    <tr>
+                        <th colspan="1">parameter       </th>
+                        <th colspan="1"></th>
+                        <th colspan="1">|  min   </th>
+                        <th colspan="1">|  avg   </th>
+                        <th colspan="1">|  max   </th>
+                        <th colspan="1">|  warning</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CD:ค่าความนำไฟฟ้า</td>
+                        <td>▸</td>
+                        <td>| `+ arrMin(CD) +`</td>
+                        <td>| `+ arrAvg(CD) +`</td>
+                        <td>| `+ arrMax(CD) +`</td>
+                        <td>| `+ ((arrSum(CD_warn)>0)?arrSum(CD_warn)+' ชม.':'-') +`</td>
+                    </tr>
+                    <tr>
+                        <td>FL:อัตราการไหล</td>
+                        <td>▸</td>
+                        <td>| `+ arrMin(FL) +`</td>
+                        <td>| `+ arrAvg(FL) +`</td>
+                        <td>| `+ arrMax(FL) +`</td>
+                        <td>| `+ ((arrSum(FL_warn)>0)?arrSum(FL_warn)+' ชม.':'-') +`</td>
+                    </tr>
+                    <tr>
+                        <td>DO:ปริมาณออกซิเจน</td>
+                        <td>▸</td>
+                        <td>| `+ arrMin(DO) +`</td>
+                        <td>| `+ arrAvg(DO) +`</td>
+                        <td>| `+ arrMax(DO) +`</td>
+                        <td>| `+ ((arrSum(DO_warn)>0)?arrSum(DO_warn)+' ชม.':'-') +`</td>
+                    </tr>
+                    <tr>
+                        <td>TB:ระดับความขุ่น</td>
+                        <td>▸</td>
+                        <td>| `+ arrMin(TB) +`</td>
+                        <td>| `+ arrAvg(TB) +`</td>
+                        <td>| `+ arrMax(TB) +`</td>
+                        <td>| `+ ((arrSum(TB_warn)>0)?arrSum(TB_warn)+' ชม.':'-') +`</td>
+                    </tr>
+                </tbody>
+            </table>`;
+          }
+
+            return tooltip.style({
+                    "visibility": "visible",
+                    "text-align": "left",
+                    "top": (event.pageY - 10) + "px",
+                    "left": (event.pageX + 10) + "px"
+                })
+                .html(content);
+        }
+
+        function hideTooltips() {
+
+            // hide tooltip
+            return tooltip.style("visibility", "hidden");
+        }
+
+
             </script>
           </body>
           </html>
