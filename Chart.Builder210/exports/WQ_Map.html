@@ -106,24 +106,19 @@
 
 
                     // add event listener for tooltips
-            // d3.selectAll("#container svg g g g g text").on("mouseover", showTooltips).on("mouseout", hideTooltips);
-            // d3.selectAll("#container svg g g g g g g g path").on("mouseover", showTooltips).on("mouseout", hideTooltips);
-            // d3.selectAll("#container svg g g g g g g g circle").on("mouseover", showTooltips).on("mouseout", hideTooltips);
-            d3.selectAll("#container").on("click", clearSelection);
+                    // d3.selectAll("#container svg g g g g text").on("mouseover", showTooltips).on("mouseout", hideTooltips);
+                    // d3.selectAll("#container svg g g g g g g g path").on("mouseover", showTooltips).on("mouseout", hideTooltips);
+                    // d3.selectAll("#container svg g g g g g g g circle").on("mouseover", showTooltips).on("mouseout", hideTooltips);
+                    // d3.selectAll("#container").on("click", clearSelection);
 
 
-                    setTimeout(function(){
-                      // container.unmount();
-                      // console.log(">>> Data Schema : ",chartTemplate.getDatasetSchema());
-                      // container.addSelectionListener(showTooltips);
-                      // container.addContextMenuListener(clearSelection);
-                      container.addMouseEnterListener(showTooltips);
-                      container.addMouseLeaveListener(hideTooltips);
-                      // container.setSelection("Samlae_WQ_Preped",[0,6,7,356]);
-
-                    },1000);
-
-
+                    // container.unmount();
+                    // console.log(">>> Data Schema : ",chartTemplate.getDatasetSchema());
+                    // container.addSelectionListener(showTooltips);
+                    // container.addContextMenuListener(clearSelection);
+                    container.addMouseEnterListener(showTooltips);
+                    container.addMouseLeaveListener(hideTooltips);
+                    // container.setSelection("Samlae_WQ_Preped",[0,6,7,356]);
 
                   },1000);
                 }, 100);
@@ -201,7 +196,7 @@
               DO_warn.push(dataset.tables[0].rows[b[i]]["P4_warning"]);
               TB_warn.push(dataset.tables[0].rows[b[i]]["P5_warning"]);
             }
-            console.log('>>>> : ', (arrSum(CD_warn)>0)?arrSum(CD_warn):'-')
+            // console.log('>>>> : ', (arrSum(CD_warn)>0)?arrSum(CD_warn):'-')
             var content =  "<b>" + day+' '+month+' '+year + "</b><br>" + 
               "<b>-----------------------------------------------------------------------------</b><br>" + 
                   `<table>
@@ -212,7 +207,7 @@
                         <th colspan="1">|  min   </th>
                         <th colspan="1">|  avg   </th>
                         <th colspan="1">|  max   </th>
-                        <th colspan="1">|  warning</th>
+                        <th colspan="1">|  เกินเกณฑ์</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -222,7 +217,7 @@
                         <td>| `+ arrMin(CD) +`</td>
                         <td>| `+ arrAvg(CD) +`</td>
                         <td>| `+ arrMax(CD) +`</td>
-                        <td>| `+ ((arrSum(CD_warn)>0)?arrSum(CD_warn)+' ชม.':'-') +`</td>
+                        <td>| `+ ((arrSum(CD_warn)>0)?'<span style="color:#FF0000;">'+arrSum(CD_warn)+' ชม.</span>':'-') +`</td>
                     </tr>
                     <tr>
                         <td>FL:อัตราการไหล</td>
@@ -230,7 +225,7 @@
                         <td>| `+ arrMin(FL) +`</td>
                         <td>| `+ arrAvg(FL) +`</td>
                         <td>| `+ arrMax(FL) +`</td>
-                        <td>| `+ ((arrSum(FL_warn)>0)?arrSum(FL_warn)+' ชม.':'-') +`</td>
+                        <td>| `+ ((arrSum(FL_warn)>0)?'<span style="color:#FF0000;">'+arrSum(FL_warn)+' ชม.</span>':'-') +`</td>
                     </tr>
                     <tr>
                         <td>DO:ปริมาณออกซิเจน</td>
@@ -238,7 +233,7 @@
                         <td>| `+ arrMin(DO) +`</td>
                         <td>| `+ arrAvg(DO) +`</td>
                         <td>| `+ arrMax(DO) +`</td>
-                        <td>| `+ ((arrSum(DO_warn)>0)?arrSum(DO_warn)+' ชม.':'-') +`</td>
+                        <td>| `+ ((arrSum(DO_warn)>0)?'<span style="color:#FF0000;">'+arrSum(DO_warn)+' ชม.</span>':'-') +`</td>
                     </tr>
                     <tr>
                         <td>TB:ระดับความขุ่น</td>
@@ -246,7 +241,7 @@
                         <td>| `+ arrMin(TB) +`</td>
                         <td>| `+ arrAvg(TB) +`</td>
                         <td>| `+ arrMax(TB) +`</td>
-                        <td>| `+ ((arrSum(TB_warn)>0)?arrSum(TB_warn)+' ชม.':'-') +`</td>
+                        <td>| `+ ((arrSum(TB_warn)>0)?'<span style="color:#FF0000;">'+arrSum(TB_warn)+' ชม.</span>':'-') +`</td>
                     </tr>
                 </tbody>
             </table>`;
