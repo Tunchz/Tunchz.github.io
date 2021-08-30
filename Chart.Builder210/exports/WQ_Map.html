@@ -103,32 +103,31 @@
                   // document.getElementById("container").style.visibility = "visible";
                   setTimeout(function(){
                     document.getElementById("container").style.visibility = "visible";
-
-
-                    // add event listener for tooltips
-                    // d3.selectAll("#container svg g g g g text").on("mouseover", showTooltips).on("mouseout", hideTooltips);
-                    // d3.selectAll("#container svg g g g g g g g path").on("mouseover", showTooltips).on("mouseout", hideTooltips);
-                    // d3.selectAll("#container svg g g g g g g g circle").on("mouseover", showTooltips).on("mouseout", hideTooltips);
-                    // d3.selectAll("#container").on("click", clearSelection);
-
-
-                    // container.unmount();
-                    // console.log(">>> Data Schema : ",chartTemplate.getDatasetSchema());
-                    // container.addSelectionListener(showTooltips);
-                    // container.addContextMenuListener(clearSelection);
-                    container.addMouseEnterListener(showTooltips);
-                    container.addMouseLeaveListener(hideTooltips);
-                    // container.setSelection("Samlae_WQ_Preped",[0,6,7,356]);
-
                   },1000);
                 }, 100);
 
-          function clearSelection() {
+                function clearSelection() {
 
-              // clear selection
-              container.clearSelection();
-              // return false;
-          }
+                    // clear selection
+                    container.clearSelection();
+                    // return false;
+                }
+
+
+                // add event listener for tooltips
+                // d3.selectAll("#container svg g g g g text").on("mouseover", showTooltips).on("mouseout", hideTooltips);
+                // d3.selectAll("#container svg g g g g g g g path").on("mouseover", showTooltips).on("mouseout", hideTooltips);
+                // d3.selectAll("#container svg g g g g g g g circle").on("mouseover", showTooltips).on("mouseout", hideTooltips);
+                // d3.selectAll("#container").on("click", clearSelection);
+
+
+                // container.unmount();
+                // console.log(">>> Data Schema : ",chartTemplate.getDatasetSchema());
+                // container.addSelectionListener(showTooltips);
+                // container.addContextMenuListener(clearSelection);
+                container.addMouseEnterListener(showTooltips);
+                container.addMouseLeaveListener(hideTooltips);
+                // container.setSelection("Samlae_WQ_Preped",[0,6,7,356]);
 
               });
 
