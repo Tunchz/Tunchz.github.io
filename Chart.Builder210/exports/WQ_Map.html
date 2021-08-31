@@ -163,37 +163,44 @@
           // console.log('>>>> : ', day+' '+month+' '+year)
 
           if (b.length == 1) {
-            // console.log('>>>> : ', dataset.tables[0].rows[b[0]]["P2 "])
-            var content =  "<b>" + day+' '+month+' '+year +'  เวลา '+dataset.tables[0].rows[b[0]]["Hour  "]+ ":00 น.</b><br>" + 
-              "<b>-----------------------------------------------------</b><br>" + 
-                  `<table>
+          // console.log('>>>> : ', dataset.tables[0].rows[b[0]]["P2 "])
+          var content =  "<b>" + day+' '+month+' '+year +'  เวลา '+dataset.tables[0].rows[b[0]]["Hour  "]+ ":00 น.</b><br>" + 
+            "<b>-----------------------------------------------------</b><br>" + 
+                `<table>
 
-                <tbody>
-                    <tr>
-                        <td>CD:ค่าความนำไฟฟ้า</td>
-                        <td>▸ `+ dataset.tables[0].rows[b[0]]["P2 "] +`</td>
-                    </tr>
-                    <tr>
-                        <td>SL:ค่าความเค็ม</td>
-                        <td>▸ `+ dataset.tables[0].rows[b[0]]["P1"] +`</td>
-                    </tr>
-                    <tr>
-                        <td>WQ:ระดับความเค็ม</td>
-                        <td>▸ `+ dataset.tables[0].rows[b[0]].P2LevelDesc +`</td>
-                    </tr>
-                </tbody>
+              <tbody>
+                  <tr>
+                      <td>CD:ค่าความนำไฟฟ้า</td>
+                      <td>▸ `+ dataset.tables[0].rows[b[0]]["P2 "] +`</td>
+                  </tr>
+                  <tr>
+                      <td>SL:ค่าความเค็ม</td>
+                      <td>▸ `+ dataset.tables[0].rows[b[0]]["P1"] +`</td>
+                  </tr>
+                  <tr>
+                      <td>WQ:ระดับความเค็ม</td>
+                      <td>▸ `+ dataset.tables[0].rows[b[0]].P2LevelDesc +`</td>
+                  </tr>
+              </tbody>
             </table>`;
           } else {
             var CD=[],
+              SL=[],
               FL=[],
               DO=[],
               TB=[];
-            var CD_warn = [], FL_warn = [], DO_warn = [], TB_warn = [];
+            var CD_warn = [], 
+              SL_warn = [], 
+              FL_warn = [], 
+              DO_warn = [], 
+              TB_warn = [];
             for (i in b) {
+              SL.push(dataset.tables[0].rows[b[i]]["P1"]);
               CD.push(dataset.tables[0].rows[b[i]]["P2 "]);
               FL.push(dataset.tables[0].rows[b[i]]["P3 "]);
               DO.push(dataset.tables[0].rows[b[i]]["P4 "]);
               TB.push(dataset.tables[0].rows[b[i]]["P5 "]);
+              SL_warn.push(dataset.tables[0].rows[b[i]]["P1_warning"]);
               CD_warn.push(dataset.tables[0].rows[b[i]]["P2_warning"]);
               FL_warn.push(dataset.tables[0].rows[b[i]]["P3_warning"]);
               DO_warn.push(dataset.tables[0].rows[b[i]]["P4_warning"]);
@@ -223,6 +230,14 @@
                         <td>| `+ ((arrSum(CD_warn)>0)?'<span style="color:#FF0000;">'+arrSum(CD_warn)+' ชม.</span>':'-') +`</td>
                     </tr>
                     <tr>
+                        <td>SL:ค่าความเค็ม</td>
+                        <td>▸</td>
+                        <td>| `+ arrMin(SL) +`</td>
+                        <td>| `+ arrAvg(SL) +`</td>
+                        <td>| `+ arrMax(SL) +`</td>
+                        <td>| `+ ((arrSum(SL_warn)>0)?'<span style="color:#FF0000;">'+arrSum(SL_warn)+' ชม.</span>':'-') +`</td>
+                    </tr>
+                    <tr>
                         <td>FL:อัตราการไหล</td>
                         <td>▸</td>
                         <td>| `+ arrMin(FL) +`</td>
@@ -250,23 +265,23 @@
             </table>`;
           }
 
-            return tooltip.style({
-                    "visibility": "visible",
-                    "text-align": "left",
-                    "top": (event.pageY - 10) + "px",
-                    "left": (event.pageX + 10) + "px"
-                })
-                .html(content);
-        }
+          return tooltip.style({
+                  "visibility": "visible",
+                  "text-align": "left",
+                  "top": (event.pageY - 10) + "px",
+                  "left": (event.pageX + 10) + "px"
+              })
+              .html(content);
+          }
 
-        function hideTooltips() {
+          function hideTooltips() {
 
-            // hide tooltip
-            return tooltip.style("visibility", "hidden");
-        }
+              // hide tooltip
+              return tooltip.style("visibility", "hidden");
+          }
 
 
-            </script>
+          </script>
           </body>
           </html>
         
