@@ -113,118 +113,62 @@
 
             <script type="text/javascript">
 
-				CharticulatorContainer.initialize().then(function() {
+            	function draw(dataset, template, containerName) {
 
-	                const chartTemplate = new CharticulatorContainer.ChartTemplate(
-	                  template_g1
-	                );
+					CharticulatorContainer.initialize().then(function() {
 
-	                const defaultTable = dataset_14d.tables[0];
-	                const columns = defaultTable.columns;
-	                chartTemplate.assignTable(defaultTable.name, defaultTable.name);
-	                for (const column of columns) {
-	                  chartTemplate.assignColumn(
-	                    defaultTable.name,
-	                    column.name,
-	                    column.name
-	                  );
-	                }
+		                const chartTemplate = new CharticulatorContainer.ChartTemplate(
+		                  template
+		                );
+	                	// chartTemplate.reset();
 
-	                // links table
-	                const linksTable = dataset_14d.tables[1];
-	                const links = linksTable && (linksTable.columns);
-	                if (links) {
-	                  chartTemplate.assignTable(linksTable.name, linksTable.name);
-	                  for (const column of links) {
-	                    chartTemplate.assignColumn(
-	                      linksTable.name,
-	                      column.name,
-	                      column.name
-	                    );
-	                  }
-	                }
-	                const instance = chartTemplate.instantiate(dataset_14d);
+		                const defaultTable = dataset.tables[0];
+		                const columns = defaultTable.columns;
+		                chartTemplate.assignTable(defaultTable.name, defaultTable.name);
+		                for (const column of columns) {
+		                  chartTemplate.assignColumn(
+		                    defaultTable.name,
+		                    column.name,
+		                    column.name
+		                  );
+		                }
 
-	                const { chart } = instance;
+		                // links table
+		                const linksTable = dataset.tables[1];
+		                const links = linksTable && (linksTable.columns);
+		                if (links) {
+		                  chartTemplate.assignTable(linksTable.name, linksTable.name);
+		                  for (const column of links) {
+		                    chartTemplate.assignColumn(
+		                      linksTable.name,
+		                      column.name,
+		                      column.name
+		                    );
+		                  }
+		                }
+		                const instance = chartTemplate.instantiate(dataset_14d);
 
-	                const container_g1 = new CharticulatorContainer.ChartContainer({ chart: chart }, dataset_14d);
-	                // const width = document.getElementById("container_g1").getBoundingClientRect().width;
-	                // const height = document.getElementById("container_g1").getBoundingClientRect().height;
+		                const { chart } = instance;
 
-	                // console.log(">>> width : "+width+" | height : "+height)
-	                // document.getElementById("container_g1").style.visibility = "hidden";
-	                container_g1.mount("container_g1", document.getElementById("container_g1").getBoundingClientRect().width, document.getElementById("container_g1").getBoundingClientRect().height);
-	                window.addEventListener("resize", function() {
-	                  container_g1.resize(
-	                    document.getElementById("container_g1").getBoundingClientRect().width,
-	                    document.getElementById("container_g1").getBoundingClientRect().height
-	                  );
-	                });
+		                const container = new CharticulatorContainer.ChartContainer({ chart: chart }, dataset);
+		                // const width = document.getElementById("container_g1").getBoundingClientRect().width;
+		                // const height = document.getElementById("container_g1").getBoundingClientRect().height;
 
+		                // console.log(">>> width : "+width+" | height : "+height)
+		                // document.getElementById("container_g1").style.visibility = "hidden";
+		                container.mount(containerName, document.getElementById(containerName).getBoundingClientRect().width, document.getElementById(containerName).getBoundingClientRect().height);
+		                window.addEventListener("resize", function() {
+		                  container.resize(
+		                    document.getElementById(containerName).getBoundingClientRect().width,
+		                    document.getElementById(containerName).getBoundingClientRect().height
+		                  );
+		                });
+		       		});
+				}
 
+				draw(dataset_14d, template_g1, "container_g1");
 
-	       		});
-
-				CharticulatorContainer.initialize().then(function() {
-
-	                const chartTemplate = new CharticulatorContainer.ChartTemplate(
-	                  template_g2
-	                );
-
-	                const defaultTable = dataset_14d.tables[0];
-	                const columns = defaultTable.columns;
-	                chartTemplate.assignTable(defaultTable.name, defaultTable.name);
-	                for (const column of columns) {
-	                  chartTemplate.assignColumn(
-	                    defaultTable.name,
-	                    column.name,
-	                    column.name
-	                  );
-	                }
-
-	                // links table
-	                const linksTable = dataset_14d.tables[1];
-	                const links = linksTable && (linksTable.columns);
-	                if (links) {
-	                  chartTemplate.assignTable(linksTable.name, linksTable.name);
-	                  for (const column of links) {
-	                    chartTemplate.assignColumn(
-	                      linksTable.name,
-	                      column.name,
-	                      column.name
-	                    );
-	                  }
-	                }
-	                const instance = chartTemplate.instantiate(dataset_14d);
-
-	                const { chart } = instance;
-
-	                const container_g2 = new CharticulatorContainer.ChartContainer({ chart: chart }, dataset_14d);
-
-	                // document.getElementById("container_g2").style.visibility = "hidden";
-	                container_g2.mount("container_g2", document.getElementById("container_g2").getBoundingClientRect().width, document.getElementById("container_g2").getBoundingClientRect().height);
-	                window.addEventListener("resize", function() {
-	                  container_g2.resize(
-	                    document.getElementById("container_g2").getBoundingClientRect().width,
-	                    document.getElementById("container_g2").getBoundingClientRect().height
-	                  );
-	                });
-
-	                // setTimeout(function(){ 
-	                // 	// console.log(">>> container resize");
-		               //  container_g2.resize(
-		               //      document.getElementById("container_g2").getBoundingClientRect().width,
-		               //      document.getElementById("container_g2").getBoundingClientRect().height
-		               //  );
-		               //  // document.getElementById("container").style.visibility = "visible";
-		               //  setTimeout(function(){
-			              //   document.getElementById("container_g2").style.visibility = "visible";
-		               //  },0);
-	                // }, 10);
-
-
-	       		});
-
+				draw(dataset_14d, template_g2, "container_g2");
 
 				CharticulatorContainer.initialize().then(function() {
 
@@ -307,6 +251,7 @@
 
 				        // clear selection
 				        container.clearSelection();
+				        console.log('>>>> clear selection');
 				        // return false;
 				    }
 
@@ -319,13 +264,13 @@
 	                // d3.selectAll("#container svg g g g g text").on("mouseover", showTooltips).on("mouseout", hideTooltips);
 	                // d3.selectAll("#container svg g g g g g g g path").on("mouseover", showTooltips).on("mouseout", hideTooltips);
 	                // d3.selectAll("#container svg g g g g g g g circle").on("mouseover", showTooltips).on("mouseout", hideTooltips);
-	                // d3.selectAll("#container").on("click", clearSelection);
+	                d3.selectAll("#container").on("click", clearSelection);
 
 
 	                // container.unmount();
 	                // console.log(">>> Data Schema : ",chartTemplate.getDatasetSchema());
-	                // container.addSelectionListener(contextMenu);
-	                // container.addContextMenuListener(contextMenu);
+	                container.addSelectionListener(selectionAction);
+	                // container.addContextMenuListener(clearSelection);
 	                container.addMouseEnterListener(showTooltips);
 	                container.addMouseLeaveListener(hideTooltips);
 	                // container.setSelection("Samlae_WQ_Preped",[0,6,7,356]);
@@ -334,6 +279,11 @@
 	                // console.log(">>> get chart name : ", temp)
 
 	              });
+
+
+
+				// draw(dataset_14d, template_g2, "container_g1");
+
 
 	            // tooltips
 		        var tooltip = d3.select("body")
@@ -356,6 +306,15 @@
 	            const arrMax = arr => (Math.max(...arr)).toFixed(2)
 		        const arrSum = arr => (arr.reduce((a,b) => a + b, 0) / 60).toFixed(2)
 				const arrAvg = arr => (arr.reduce((a,b) => a + b, 0) / arr.length).toFixed(2)
+
+				function selectionAction(a,b,c) {
+		    		var date = new Date(dataset.tables[0].rows[b[0]].Date)
+		    		// console.log('>>>> : ', date)
+		    		var day = date.getUTCDate();
+		    		var month = dataset.tables[0].rows[b[0]].Month_Th
+		    		var year = date.getUTCFullYear() + 543;
+		    		console.log('>>>> : ', day+' '+month+' '+year)
+				}
 
 			    function showTooltips(a,b,c) {
 
