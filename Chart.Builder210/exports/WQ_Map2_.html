@@ -14,55 +14,67 @@
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
 
-            <style type="text/css">
+             <style type="text/css">
+            	.box {
+            		border-width: 0px;
+            		margin: 0px;/*
+					margin-right: -4px;
+					margin-top: -5px;*/
+					display: inline-block;
+					position: relative;
+					padding : 0px;
+					/*background-color: #252525;*/
+            	}
 
-				#container, #container_g1, #container_g2 {
+				body {
 					display: block;
 					position: relative;
+					width: calc(100% - 10px);
+					height: calc(100% - 10px);
+					margin: 5px;
+					background-color: #000;
+  					font-size: 0;
+  					overflow: hidden;
+				}
+				#container, #container_g1{
+					display: block;
+					position: absolute;
 					width: 100%;
 					height: 100%;
+					/*background-color: #252525;*/
+				}
+				#container_g2 {
+					display: block;
+					position: absolute;
+					width: 100%;
+					height: calc(100% - 20px);
+					/*background-color: #252525;*/
 				}
 				#left {
-					display: inline-block;
-					position: relative;
 					width: 55%;
 					height: 100%;
+					margin-bottom: -5px;
 				}
 				#right {
-					display: inline-block;
-					position: relative;
-					width: calc(45% - 15px);
-					height: 100%;
-					padding-right: 10px;
+					width: calc(45% - 5px);
+					height: calc(100% - 5px);
+					margin-right: 5px;
+					/*margin-bottom: -4px;*/
 				}
 				#r1 {
-					display: inline-block;
-					position: relative;
 					width: 100%;
 					height: 50%;
 				}
 				#r2 {
-					display: inline-block;
-					position: relative;
 					width: 100%;
-					height: 50%;
+					height: calc(50% - 5px);
+					margin-top: 5px;
 				}
             </style>
           </head>
-          <body style="background-color: #252525; margin: 0;" oncontextmenu="return false;">
-			<div id="left">
-				<div class="loader">
-				  <div class="bar1"></div>
-				  <div class="bar2"></div>
-				  <div class="bar3"></div>
-				  <div class="bar4"></div>
-				  <div class="bar5"></div>
-				  <div class="bar6"></div>
-				</div>
-				<div id="container"></div>
-			</div>
-			<div id="right">
-				<div id="r1">
+          <body oncontextmenu="return false;">
+			<div id="right" class="box">
+				<div id="r1" class="box">
 					<div class="loader">
 					  <div class="bar1"></div>
 					  <div class="bar2"></div>
@@ -73,7 +85,7 @@
 					</div>
 					<div id="container_g1"></div>
 				</div>
-				<div id="r2">
+				<div id="r2" class="box">
 					<div class="loader">
 					  <div class="bar1"></div>
 					  <div class="bar2"></div>
@@ -85,6 +97,17 @@
 					<div id="container_g2"></div>
 				</div>
 				
+			</div>
+			<div id="left" class="box">
+				<div class="loader">
+				  <div class="bar1"></div>
+				  <div class="bar2"></div>
+				  <div class="bar3"></div>
+				  <div class="bar4"></div>
+				  <div class="bar5"></div>
+				  <div class="bar6"></div>
+				</div>
+				<div id="container"></div>
 			</div>
 
             <script type="text/javascript">

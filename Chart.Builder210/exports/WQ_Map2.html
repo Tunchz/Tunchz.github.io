@@ -23,6 +23,7 @@
 					display: inline-block;
 					position: relative;
 					padding : 0px;
+  					font-size: 0;
 					/*background-color: #252525;*/
             	}
 
@@ -36,29 +37,29 @@
   					font-size: 0;
   					overflow: hidden;
 				}
-				#container, #container_g1{
+				#container, #container_g1, #container_g2 {
 					display: block;
 					position: absolute;
 					width: 100%;
 					height: 100%;
 					/*background-color: #252525;*/
 				}
-				#container_g2 {
+/*				#container_g2 {
 					display: block;
 					position: absolute;
 					width: 100%;
-					height: calc(100% - 20px);
-					/*background-color: #252525;*/
-				}
+					height: 100%;
+				}*/
 				#left {
 					width: 55%;
 					height: 100%;
-					margin-bottom: -5px;
+					/*margin-bottom: -5px;*/
 				}
 				#right {
 					width: calc(45% - 5px);
 					height: calc(100% - 5px);
 					margin-right: 5px;
+					margin-bottom: -5px;
 					/*margin-bottom: -4px;*/
 				}
 				#r1 {
@@ -67,7 +68,7 @@
 				}
 				#r2 {
 					width: 100%;
-					height: calc(50% - 5px);
+					height: 50%;
 					margin-top: 5px;
 				}
             </style>
@@ -199,12 +200,9 @@
 	                const { chart } = instance;
 
 	                const container_g2 = new CharticulatorContainer.ChartContainer({ chart: chart }, dataset_14d);
-	                // const width = document.getElementById("container_g1").getBoundingClientRect().width;
-	                // const height = document.getElementById("container_g1").getBoundingClientRect().height;
 
-	                // console.log(">>> width : "+width+" | height : "+height)
-	                // document.getElementById("container_g1").style.visibility = "hidden";
-	                container_g2.mount("container_g2", document.getElementById("container_g2").getBoundingClientRect().width, document.getElementById("container_g1").getBoundingClientRect().height);
+	                // document.getElementById("container_g2").style.visibility = "hidden";
+	                container_g2.mount("container_g2", document.getElementById("container_g2").getBoundingClientRect().width, document.getElementById("container_g2").getBoundingClientRect().height);
 	                window.addEventListener("resize", function() {
 	                  container_g2.resize(
 	                    document.getElementById("container_g2").getBoundingClientRect().width,
@@ -212,6 +210,17 @@
 	                  );
 	                });
 
+	                // setTimeout(function(){ 
+	                // 	// console.log(">>> container resize");
+		               //  container_g2.resize(
+		               //      document.getElementById("container_g2").getBoundingClientRect().width,
+		               //      document.getElementById("container_g2").getBoundingClientRect().height
+		               //  );
+		               //  // document.getElementById("container").style.visibility = "visible";
+		               //  setTimeout(function(){
+			              //   document.getElementById("container_g2").style.visibility = "visible";
+		               //  },0);
+	                // }, 10);
 
 
 	       		});
@@ -301,6 +310,10 @@
 				        // return false;
 				    }
 
+				    function contextMenu(a,b,c) {
+
+				        console.log('>>>> a,b,c : ',a,b,c);
+				    }
 
 	                // add event listener for tooltips
 	                // d3.selectAll("#container svg g g g g text").on("mouseover", showTooltips).on("mouseout", hideTooltips);
@@ -311,11 +324,14 @@
 
 	                // container.unmount();
 	                // console.log(">>> Data Schema : ",chartTemplate.getDatasetSchema());
-	                // container.addSelectionListener(showTooltips);
-	                // container.addContextMenuListener(clearSelection);
+	                // container.addSelectionListener(contextMenu);
+	                // container.addContextMenuListener(contextMenu);
 	                container.addMouseEnterListener(showTooltips);
 	                container.addMouseLeaveListener(hideTooltips);
 	                // container.setSelection("Samlae_WQ_Preped",[0,6,7,356]);
+
+	                // var temp = container.getProperty("rffyz0o4ie","name")
+	                // console.log(">>> get chart name : ", temp)
 
 	              });
 
@@ -343,6 +359,7 @@
 
 			    function showTooltips(a,b,c) {
 
+		    		console.log('>>>> c : ', c)
 		    		var date = new Date(dataset.tables[0].rows[b[0]].Date)
 		    		// console.log('>>>> : ', date)
 		    		var day = date.getUTCDate();
@@ -480,6 +497,8 @@
 			        // hide tooltip
 			        return tooltip.style("visibility", "hidden");
 			    }
+
+
 
 
             </script>
