@@ -4,15 +4,16 @@
           <head>
             <meta charset="utf-8" />
             <title>Chart.Builder HTML Export</title>
-            <script type="text/javascript" src='https://tunchz.github.io/Chart.Builder210/scripts/TunchzChartBuilder210.js'></script>
+            <script type="text/javascript" src='https://tunchz.github.io/Chart.Builder210/scripts/TunchzChartBuilder210x.js'></script>
             <script type="text/javascript" src='data.js'></script>
             <script type="text/javascript" src='template.js'></script>
-            <script type="text/javascript" src='data_14d.js'></script>
+            <!-- <script type="text/javascript" src='data_14d.js'></script> -->
             <script type="text/javascript" src='template_g1.js'></script>
             <script type="text/javascript" src='template_g2.js'></script>
             <link rel="stylesheet" href="LoadingAnimation.css">
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+  			<script src="https://tunchz.github.io/ISOC/js/jquery.min.js"></script>
 
              <style type="text/css">
             	.box {
@@ -44,12 +45,6 @@
 					height: 100%;
 					/*background-color: #252525;*/
 				}
-/*				#container_g2 {
-					display: block;
-					position: absolute;
-					width: 100%;
-					height: 100%;
-				}*/
 				#left {
 					width: 55%;
 					height: 100%;
@@ -113,6 +108,15 @@
 
             <script type="text/javascript">
 
+            	let currentdayNumber;
+				// let dayNumber;
+
+            	function removeAllChildNodes(parent) {
+				    while (parent.firstChild) {
+				        parent.removeChild(parent.firstChild);
+				    }
+				}
+
             	function draw(dataset, template, containerName) {
 
 					CharticulatorContainer.initialize().then(function() {
@@ -146,9 +150,25 @@
 		                    );
 		                  }
 		                }
-		                const instance = chartTemplate.instantiate(dataset_14d);
+
+		                const instance = chartTemplate.instantiate(dataset);
 
 		                const { chart } = instance;
+
+		                // for (const property of template.properties) {
+		                //   if (property.target.attribute) {
+		                //     CharticulatorContainer.ChartTemplate.SetChartAttributeMapping(
+		                //       chart,
+		                //       property.objectID,
+		                //       property.target.attribute,
+		                //       {
+		                //         type: "value",
+		                //         value: property.default,
+		                //       }
+		                //     );
+		                //   }
+		                  
+		                // }
 
 		                const container = new CharticulatorContainer.ChartContainer({ chart: chart }, dataset);
 		                // const width = document.getElementById("container_g1").getBoundingClientRect().width;
@@ -156,6 +176,9 @@
 
 		                // console.log(">>> width : "+width+" | height : "+height)
 		                // document.getElementById("container_g1").style.visibility = "hidden";
+
+		                // removeAllChildNodes(document.getElementById(containerName));
+		                
 		                container.mount(containerName, document.getElementById(containerName).getBoundingClientRect().width, document.getElementById(containerName).getBoundingClientRect().height);
 		                window.addEventListener("resize", function() {
 		                  container.resize(
@@ -166,9 +189,42 @@
 		       		});
 				}
 
-				draw(dataset_14d, template_g1, "container_g1");
+				// console.log(dataset_filter.tables[0].rows)
+				// let index = -30;
+				// dataset_filter.tables[0].rows = $.grep(dataset.tables[0].rows,function (n,i){return (n["Day#Recent"] > (index - 7) && (index + 7) > n["Day#Recent"] )});
 
-				draw(dataset_14d, template_g2, "container_g2");
+				// console.log((dataset_filter.tables[0].rows).length)
+
+
+				function filterChart(index) {
+
+					if (currentdayNumber !== index) {
+						// dataset_filter.tables[0].rows = [];
+						// console.log((dataset.tables[0].rows).length)
+						dataset_filter.tables[0].rows = $.grep(dataset.tables[0].rows,function (n,i){ 
+							/*console.log(">>> ",n["Day#Recent"]," : ",n._id);*/ 
+							return (n["Day#"] > (index - 7) && (index + 8) >= n["Day#"] )
+						});
+						// console.log((dataset_filter.tables[0].rows).length)
+						// console.log(dataset_filter.tables[0].rows[0]._id)
+						draw(dataset_filter, template_g1, "container_g1");
+						draw(dataset_filter, template_g2, "container_g2");
+						currentdayNumber = index;
+						console.log(">>> filter chart : date# ", currentdayNumber)
+
+					} else {
+						console.log(">>> : no need to filter")
+					}
+
+				}
+
+
+				
+				filterChart(195);
+
+				// draw(dataset_14d, template_g1, "container_g1");
+
+				// draw(dataset_14d, template_g2, "container_g2");
 
 				CharticulatorContainer.initialize().then(function() {
 
@@ -242,6 +298,7 @@
 		                    document.getElementById("container").getBoundingClientRect().height
 		                );
 		                // document.getElementById("container").style.visibility = "visible";
+
 		                setTimeout(function(){
 			                document.getElementById("container").style.visibility = "visible";
 		                },1000);
@@ -250,26 +307,66 @@
 				    function clearSelection() {
 
 				        // clear selection
-				        container.clearSelection();
+				        // container.clearSelection();
 				        console.log('>>>> clear selection');
 				        // return false;
+				        filterChart(195);
 				    }
+
+					function selectionAction2(a,b,c) {
+
+			    		console.log('>>>> : select', c);
+			    		// console.log('>>>> : select', dayNumber);
+			    		filterChart(dataset.tables[0].rows[b[0]]["Day#"]);
+			    		// filterChart(dayNumber);
+
+					}
 
 				    function contextMenu(a,b,c) {
 
-				        console.log('>>>> a,b,c : ',a,b,c);
+				        console.log('>>>> context menu');
 				    }
 
+				 //    document.addEventListener('click', function (event) {
+					// 	if (!event.target.matches('#container_g1')) return;
+					// 	console.log('>>>  click : ',event.target);
+					// }, false);
+
+					// var elem = document.getElementById('container');
+					// // document.addEventListener('click', function( event ) {
+					// //   if (elem !== event.target && elem.contains(event.target)) {    
+					// //     console.log('clicking inside the div >> ', event.target);
+					// //   }
+					// // });
+					// document.addEventListener('click', function( event ) {
+					//   // if (elem !== event.target && elem.contains(event.target)) {    
+					//   //   console.log('clicking inside the div >> ', event.target);
+					//   // }
+					//   console.log('target click >> ', event.target);
+					// });
+
+
+
+					// $("svg>g").on("click", function(e){ console.log('target click >> ', e.target); });
+
+
+
 	                // add event listener for tooltips
-	                // d3.selectAll("#container svg g g g g text").on("mouseover", showTooltips).on("mouseout", hideTooltips);
-	                // d3.selectAll("#container svg g g g g g g g path").on("mouseover", showTooltips).on("mouseout", hideTooltips);
-	                // d3.selectAll("#container svg g g g g g g g circle").on("mouseover", showTooltips).on("mouseout", hideTooltips);
+	                // d3.selectAll("#container svg").on("mouseover", selectionAction2).on("mouseout", hideTooltips);
+	                // d3.selectAll("#container svg g g g g g g g text").on("mouseover", contextMenu).on("mouseout", hideTooltips);
+	                // d3.selectAll("#container svg g g g g g g g path").on("mouseover", selectionAction2).on("mouseout", hideTooltips);
+	                // d3.selectAll("#container svg g g g g g g g circle").on("mouseover", contextMenu).on("mouseout", hideTooltips);
+	                // d3.selectAll("path").on("click", selectionAction2);
+	                // d3.selectAll("circle").on("click", selectionAction2);
+	                // d3.selectAll("#container svg g g g g g g g path").on("mouseover", selectionAction2).on("mouseout", hideTooltips);
+
+	                // d3.selectAll("#container svg").on("click", contextMenu);
 	                d3.selectAll("#container").on("click", clearSelection);
 
 
 	                // container.unmount();
 	                // console.log(">>> Data Schema : ",chartTemplate.getDatasetSchema());
-	                container.addSelectionListener(selectionAction);
+	                container.addSelectionListener(selectionAction2);
 	                // container.addContextMenuListener(clearSelection);
 	                container.addMouseEnterListener(showTooltips);
 	                container.addMouseLeaveListener(hideTooltips);
@@ -278,8 +375,16 @@
 	                // var temp = container.getProperty("rffyz0o4ie","name")
 	                // console.log(">>> get chart name : ", temp)
 
-	              });
+	            });
 
+// $("#container>svg>g").on("click", function(e){ console.log('target click >> ', e.target); });
+
+// document.addEventListener('click', function( event ) {
+//   // if (elem !== event.target && elem.contains(event.target)) {    
+//   //   console.log('clicking inside the div >> ', event.target);
+//   // }
+//   console.log('target click >> ', event.target);
+// });
 
 
 				// draw(dataset_14d, template_g2, "container_g1");
@@ -311,14 +416,16 @@
 		    		var date = new Date(dataset.tables[0].rows[b[0]].Date)
 		    		// console.log('>>>> : ', date)
 		    		var day = date.getUTCDate();
-		    		var month = dataset.tables[0].rows[b[0]].Month_Th
+		    		var month = dataset.tables[0].rows[b[0]].Month_Th;
 		    		var year = date.getUTCFullYear() + 543;
-		    		console.log('>>>> : ', day+' '+month+' '+year)
+		    		console.log('>>>> : ', day+' '+month+' '+year);
+
+		    		filterChart(dataset.tables[0].rows[b[0]]["Day#"]);
 				}
 
-			    function showTooltips(a,b,c) {
-
-		    		console.log('>>>> c : ', c)
+			    function showTooltips(a,b) {
+			    	// dayNumber = dataset.tables[0].rows[b[0]]["Day#"];
+		    		// console.log('>>>> : ', dayNumber);
 		    		var date = new Date(dataset.tables[0].rows[b[0]].Date)
 		    		// console.log('>>>> : ', date)
 		    		var day = date.getUTCDate();

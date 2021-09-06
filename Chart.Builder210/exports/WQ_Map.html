@@ -3,578 +3,285 @@
           <html lang='th'>
           <head>
             <meta charset="utf-8" />
-            <title>Chart.Builder HTML Export</title>
-            <script type="text/javascript" src='https://tunchz.github.io/Chart.Builder210/scripts/TunchzChartBuilder210x.js'></script>
+            <title>WQ Map created by FWTT</title>
+            <script type="text/javascript" src='https://tunchz.github.io/Chart.Builder210/scripts/TunchzChartBuilder210.js'></script>
             <script type="text/javascript" src='data.js'></script>
             <script type="text/javascript" src='template.js'></script>
-            <!-- <script type="text/javascript" src='data_14d.js'></script> -->
-            <script type="text/javascript" src='template_g1.js'></script>
-            <script type="text/javascript" src='template_g2.js'></script>
             <link rel="stylesheet" href="LoadingAnimation.css">
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-  			<script src="https://tunchz.github.io/ISOC/js/jquery.min.js"></script>
 
-             <style type="text/css">
-            	.box {
-            		border-width: 0px;
-            		margin: 0px;/*
-					margin-right: -4px;
-					margin-top: -5px;*/
-					display: inline-block;
-					position: relative;
-					padding : 0px;
-  					font-size: 0;
-					/*background-color: #252525;*/
-            	}
-
-				body {
-					display: block;
-					position: relative;
-					width: calc(100% - 10px);
-					height: calc(100% - 10px);
-					margin: 5px;
-					background-color: #000;
-  					font-size: 0;
-  					overflow: hidden;
-				}
-				#container, #container_g1, #container_g2 {
-					display: block;
-					position: absolute;
-					width: 100%;
-					height: 100%;
-					/*background-color: #252525;*/
-				}
-				#left {
-					width: 55%;
-					height: 100%;
-					/*margin-bottom: -5px;*/
-				}
-				#right {
-					width: calc(45% - 5px);
-					height: calc(100% - 5px);
-					margin-right: 5px;
-					margin-bottom: -5px;
-					/*margin-bottom: -4px;*/
-				}
-				#r1 {
-					width: 100%;
-					height: 50%;
-				}
-				#r2 {
-					width: 100%;
-					height: 50%;
-					margin-top: 5px;
-				}
+            <style type="text/css">
+              #container {
+                display: block;
+                position: absolute;
+                left: 0; right: 0; top: 0; bottom: 0;
+              }
             </style>
           </head>
-          <body oncontextmenu="return false;">
-			<div id="right" class="box">
-				<div id="r1" class="box">
-					<div class="loader">
-					  <div class="bar1"></div>
-					  <div class="bar2"></div>
-					  <div class="bar3"></div>
-					  <div class="bar4"></div>
-					  <div class="bar5"></div>
-					  <div class="bar6"></div>
-					</div>
-					<div id="container_g1"></div>
-				</div>
-				<div id="r2" class="box">
-					<div class="loader">
-					  <div class="bar1"></div>
-					  <div class="bar2"></div>
-					  <div class="bar3"></div>
-					  <div class="bar4"></div>
-					  <div class="bar5"></div>
-					  <div class="bar6"></div>
-					</div>
-					<div id="container_g2"></div>
-				</div>
-				
-			</div>
-			<div id="left" class="box">
-				<div class="loader">
-				  <div class="bar1"></div>
-				  <div class="bar2"></div>
-				  <div class="bar3"></div>
-				  <div class="bar4"></div>
-				  <div class="bar5"></div>
-				  <div class="bar6"></div>
-				</div>
-				<div id="container"></div>
-			</div>
-
+          <body style="background-color: #252525;">
+            <div class="loader">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+              <div class="bar3"></div>
+              <div class="bar4"></div>
+              <div class="bar5"></div>
+              <div class="bar6"></div>
+            </div>
+            <div id="container"></div>
             <script type="text/javascript">
-
-            	let currentdayNumber;
-				// let dayNumber;
-
-            	function removeAllChildNodes(parent) {
-				    while (parent.firstChild) {
-				        parent.removeChild(parent.firstChild);
-				    }
-				}
-
-            	function draw(dataset, template, containerName) {
-
-					CharticulatorContainer.initialize().then(function() {
-
-		                const chartTemplate = new CharticulatorContainer.ChartTemplate(
-		                  template
-		                );
-	                	// chartTemplate.reset();
-
-		                const defaultTable = dataset.tables[0];
-		                const columns = defaultTable.columns;
-		                chartTemplate.assignTable(defaultTable.name, defaultTable.name);
-		                for (const column of columns) {
-		                  chartTemplate.assignColumn(
-		                    defaultTable.name,
-		                    column.name,
-		                    column.name
-		                  );
-		                }
-
-		                // links table
-		                const linksTable = dataset.tables[1];
-		                const links = linksTable && (linksTable.columns);
-		                if (links) {
-		                  chartTemplate.assignTable(linksTable.name, linksTable.name);
-		                  for (const column of links) {
-		                    chartTemplate.assignColumn(
-		                      linksTable.name,
-		                      column.name,
-		                      column.name
-		                    );
-		                  }
-		                }
-
-		                const instance = chartTemplate.instantiate(dataset);
-
-		                const { chart } = instance;
-
-		                // for (const property of template.properties) {
-		                //   if (property.target.attribute) {
-		                //     CharticulatorContainer.ChartTemplate.SetChartAttributeMapping(
-		                //       chart,
-		                //       property.objectID,
-		                //       property.target.attribute,
-		                //       {
-		                //         type: "value",
-		                //         value: property.default,
-		                //       }
-		                //     );
-		                //   }
-		                  
-		                // }
-
-		                const container = new CharticulatorContainer.ChartContainer({ chart: chart }, dataset);
-		                // const width = document.getElementById("container_g1").getBoundingClientRect().width;
-		                // const height = document.getElementById("container_g1").getBoundingClientRect().height;
-
-		                // console.log(">>> width : "+width+" | height : "+height)
-		                // document.getElementById("container_g1").style.visibility = "hidden";
-
-		                // removeAllChildNodes(document.getElementById(containerName));
-		                
-		                container.mount(containerName, document.getElementById(containerName).getBoundingClientRect().width, document.getElementById(containerName).getBoundingClientRect().height);
-		                window.addEventListener("resize", function() {
-		                  container.resize(
-		                    document.getElementById(containerName).getBoundingClientRect().width,
-		                    document.getElementById(containerName).getBoundingClientRect().height
-		                  );
-		                });
-		       		});
-				}
-
-				// let dataset_filter = {"name":"PivotedReduceCols4","tables":[{"name":"PivotedReduceCols4","displayName":"PivotedReduceCols4_14D","columns":[{"name":"Hour#","displayName":"Hour#","type":"number","metadata":{"kind":"numerical"}},{"name":"P1_warning","displayName":"P1_warning","type":"number","metadata":{"kind":"numerical"}},{"name":"P2_warning","displayName":"P2_warning","type":"number","metadata":{"kind":"numerical"}},{"name":"P3_warning","displayName":"P3_warning","type":"number","metadata":{"kind":"numerical"}},{"name":"P4_warning","displayName":"P4_warning","type":"number","metadata":{"kind":"numerical"}},{"name":"P5 ","displayName":"P5 ","type":"number","metadata":{"kind":"numerical"}},{"name":"P5_warning","displayName":"P5_warning","type":"number","metadata":{"kind":"numerical"}},{"name":"Date","displayName":"Date","type":"date","metadata":{"kind":"temporal","format":"%Y-%m-%d","rawColumnName":"Date_raw"}},{"name":"Time","displayName":"Time","type":"date","metadata":{"kind":"temporal","format":null,"rawColumnName":"Time_raw"}},{"name":"Station","displayName":"Station","type":"string","metadata":{"kind":"categorical","orderMode":"alphabetically"}},{"name":"Day#","displayName":"Day#","type":"number","metadata":{"kind":"numerical"}},{"name":"Day#Recent","displayName":"Day#Recent","type":"number","metadata":{"kind":"categorical"}},{"name":"Today","displayName":"Today","type":"number","metadata":{"kind":"numerical"}},{"name":"Type","displayName":"Type","type":"string","metadata":{"kind":"categorical","orderMode":"alphabetically"}},{"name":"HourShow","displayName":"HourShow","type":"number","metadata":{"kind":"numerical"}},{"name":"P4 ","displayName":"P4 ","type":"number","metadata":{"kind":"numerical"}},{"name":"P3 ","displayName":"P3 ","type":"number","metadata":{"kind":"numerical"}},{"name":"Now","displayName":"Now","type":"number","metadata":{"kind":"numerical"}},{"name":"Month","displayName":"Month","type":"number","metadata":{"kind":"numerical"}},{"name":"Month_Th","displayName":"Month_Th","type":"string","metadata":{"kind":"categorical","orderMode":"alphabetically"}},{"name":"P1","displayName":"P1","type":"number","metadata":{"kind":"numerical"}},{"name":"P2 ","displayName":"P2 ","type":"number","metadata":{"kind":"numerical"}},{"name":"P2Level","displayName":"P2Level","type":"number","metadata":{"kind":"numerical"}},{"name":"P2LevelDesc","displayName":"P2LevelDesc","type":"string","metadata":{"kind":"categorical","orderMode":"alphabetically"}},{"name":"Hour  ","displayName":"Hour  ","type":"number","metadata":{"kind":"numerical","order":null,"orderMode":null,"rawColumnName":null,"unit":null,"isRaw":null,"format":null,"examples":null}},{"name":"Date_raw","displayName":"Date_raw","type":"date","metadata":{"kind":"temporal","format":"%Y-%m-%d","isRaw":true}},{"name":"Time_raw","displayName":"Time_raw","type":"date","metadata":{"kind":"temporal","format":null,"isRaw":true}}],"rows":[],"type":"Main","localeNumberFormat":{"decimal":".","remove":","}}]};
-
-
-				// let dataset_filter = {"name":"PivotedReduceCols4","tables":[{"name":"PivotedReduceCols4","displayName":"PivotedReduceCols4","columns":[{"name":"Hour#","displayName":"Hour#","type":"number","metadata":{"kind":"numerical"}},{"name":"P1_warning","displayName":"P1_warning","type":"number","metadata":{"kind":"numerical"}},{"name":"P2_warning","displayName":"P2_warning","type":"number","metadata":{"kind":"numerical"}},{"name":"P3_warning","displayName":"P3_warning","type":"number","metadata":{"kind":"numerical"}},{"name":"P4_warning","displayName":"P4_warning","type":"number","metadata":{"kind":"numerical"}},{"name":"P5 ","displayName":"P5 ","type":"number","metadata":{"kind":"numerical"}},{"name":"P5_warning","displayName":"P5_warning","type":"number","metadata":{"kind":"numerical"}},{"name":"Date","displayName":"Date","type":"date","metadata":{"kind":"temporal","format":"%Y-%m-%d","rawColumnName":"Date_raw"}},{"name":"Time","displayName":"Time","type":"date","metadata":{"kind":"temporal","format":null,"rawColumnName":"Time_raw"}},{"name":"Station","displayName":"Station","type":"string","metadata":{"kind":"categorical","orderMode":"alphabetically"}},{"name":"Day#","displayName":"Day#","type":"number","metadata":{"kind":"numerical"}},{"name":"Day#Recent","displayName":"Day#Recent","type":"number","metadata":{"kind":"numerical"}},{"name":"Today","displayName":"Today","type":"number","metadata":{"kind":"numerical"}},{"name":"Type","displayName":"Type","type":"string","metadata":{"kind":"categorical","orderMode":"alphabetically"}},{"name":"HourShow","displayName":"HourShow","type":"number","metadata":{"kind":"numerical"}},{"name":"P4 ","displayName":"P4 ","type":"number","metadata":{"kind":"numerical"}},{"name":"P3 ","displayName":"P3 ","type":"number","metadata":{"kind":"numerical"}},{"name":"Now","displayName":"Now","type":"number","metadata":{"kind":"numerical"}},{"name":"Month","displayName":"Month","type":"number","metadata":{"kind":"numerical"}},{"name":"Month_Th","displayName":"Month_Th","type":"string","metadata":{"kind":"categorical","orderMode":"alphabetically"}},{"name":"P1","displayName":"P1","type":"number","metadata":{"kind":"numerical"}},{"name":"P2 ","displayName":"P2 ","type":"number","metadata":{"kind":"numerical"}},{"name":"P2Level","displayName":"P2Level","type":"number","metadata":{"kind":"numerical"}},{"name":"P2LevelDesc","displayName":"P2LevelDesc","type":"string","metadata":{"kind":"categorical","orderMode":"alphabetically"}},{"name":"Hour  ","displayName":"Hour  ","type":"number","metadata":{"kind":"numerical"}},{"name":"Date_raw","displayName":"Date_raw","type":"date","metadata":{"kind":"temporal","format":"%Y-%m-%d","isRaw":true}},{"name":"Time_raw","displayName":"Time_raw","type":"date","metadata":{"kind":"temporal","format":null,"isRaw":true}}],"rows":[],"type":"Main","localeNumberFormat":{"decimal":".","remove":","}}]};
-
-
-
-				// console.log(dataset_filter.tables[0].rows)
-				// let index = -30;
-				// dataset_filter.tables[0].rows = $.grep(dataset.tables[0].rows,function (n,i){return (n["Day#Recent"] > (index - 7) && (index + 7) > n["Day#Recent"] )});
-
-				// console.log((dataset_filter.tables[0].rows).length)
-
-
-				function filterChart(index) {
-
-					if (currentdayNumber !== index) {
-						// dataset_filter.tables[0].rows = [];
-						// console.log((dataset.tables[0].rows).length)
-						dataset_filter.tables[0].rows = $.grep(dataset.tables[0].rows,function (n,i){ 
-							/*console.log(">>> ",n["Day#Recent"]," : ",n._id);*/ 
-							return (n["Day#"] > (index - 7) && (index + 8) >= n["Day#"] )
-						});
-						// console.log((dataset_filter.tables[0].rows).length)
-						// console.log(dataset_filter.tables[0].rows[0]._id)
-						draw(dataset_filter, template_g1, "container_g1");
-						draw(dataset_filter, template_g2, "container_g2");
-						currentdayNumber = index;
-						console.log(">>> filter chart : date# ", currentdayNumber)
-
-					} else {
-						console.log(">>> : no need to filter")
-					}
-
-				}
-
-
-				
-				filterChart(195);
-
-				// draw(dataset_14d, template_g1, "container_g1");
-
-				// draw(dataset_14d, template_g2, "container_g2");
-
-				CharticulatorContainer.initialize().then(function() {
-
-                                             
-	                const chartTemplate = new CharticulatorContainer.ChartTemplate(
-	                  template
-	                );
-	                // chartTemplate.reset();
-
-	                const defaultTable = dataset.tables[0];
-	                const columns = defaultTable.columns;
-	                chartTemplate.assignTable(defaultTable.name, defaultTable.name);
-	                for (const column of columns) {
-	                  chartTemplate.assignColumn(
-	                    defaultTable.name,
-	                    column.name,
-	                    column.name
-	                  );
-	                }
-
-	                // links table
-	                const linksTable = dataset.tables[1];
-	                const links = linksTable && (linksTable.columns);
-	                if (links) {
-	                  chartTemplate.assignTable(linksTable.name, linksTable.name);
-	                  for (const column of links) {
-	                    chartTemplate.assignColumn(
-	                      linksTable.name,
-	                      column.name,
-	                      column.name
-	                    );
-	                  }
-	                }
-	                const instance = chartTemplate.instantiate(dataset);
-
-	                const { chart } = instance;
-
-	                // for (const property of template.properties) {
-	                //   if (property.target.attribute) {
-	                //     CharticulatorContainer.ChartTemplate.SetChartAttributeMapping(
-	                //       chart,
-	                //       property.objectID,
-	                //       property.target.attribute,
-	                //       {
-	                //         type: "value",
-	                //         value: property.default,
-	                //       }
-	                //     );
-	                //   }
-	                  
-	                // }
-
-	                const container = new CharticulatorContainer.ChartContainer({ chart: chart }, dataset);
-	                const width = document.getElementById("container").getBoundingClientRect().width;
-	                const height = document.getElementById("container").getBoundingClientRect().height;
-
-	                // console.log(">>> width : "+width+" | height : "+height)
-	                document.getElementById("container").style.visibility = "hidden";
-	                container.mount("container", width-1, height);
-	                window.addEventListener("resize", function() {
-	                  container.resize(
-	                    document.getElementById("container").getBoundingClientRect().width,
-	                    document.getElementById("container").getBoundingClientRect().height
-	                  );
-	                });
-
-	                setTimeout(function(){ 
-	                	// console.log(">>> container resize");
-		                container.resize(
-		                    document.getElementById("container").getBoundingClientRect().width,
-		                    document.getElementById("container").getBoundingClientRect().height
-		                );
-		                // document.getElementById("container").style.visibility = "visible";
-
-		                setTimeout(function(){
-			                document.getElementById("container").style.visibility = "visible";
-		                },1000);
-	                }, 100);
-
-				    function clearSelection() {
-
-				        // clear selection
-				        // container.clearSelection();
-				        console.log('>>>> clear selection');
-				        // return false;
-				        filterChart(195);
-				    }
-
-					function selectionAction2(a,b,c) {
-
-			    		console.log('>>>> : select', c);
-			    		// console.log('>>>> : select', dayNumber);
-			    		filterChart(dataset.tables[0].rows[b[0]]["Day#"]);
-			    		// filterChart(dayNumber);
-
-					}
-
-				    function contextMenu(a,b,c) {
-
-				        console.log('>>>> context menu');
-				    }
-
-				 //    document.addEventListener('click', function (event) {
-					// 	if (!event.target.matches('#container_g1')) return;
-					// 	console.log('>>>  click : ',event.target);
-					// }, false);
-
-					// var elem = document.getElementById('container');
-					// // document.addEventListener('click', function( event ) {
-					// //   if (elem !== event.target && elem.contains(event.target)) {    
-					// //     console.log('clicking inside the div >> ', event.target);
-					// //   }
-					// // });
-					// document.addEventListener('click', function( event ) {
-					//   // if (elem !== event.target && elem.contains(event.target)) {    
-					//   //   console.log('clicking inside the div >> ', event.target);
-					//   // }
-					//   console.log('target click >> ', event.target);
-					// });
-
-
-
-					// $("svg>g").on("click", function(e){ console.log('target click >> ', e.target); });
-
-
-
-	                // add event listener for tooltips
-	                // d3.selectAll("#container svg").on("mouseover", selectionAction2).on("mouseout", hideTooltips);
-	                // d3.selectAll("#container svg g g g g g g g text").on("mouseover", contextMenu).on("mouseout", hideTooltips);
-	                // d3.selectAll("#container svg g g g g g g g path").on("mouseover", selectionAction2).on("mouseout", hideTooltips);
-	                // d3.selectAll("#container svg g g g g g g g circle").on("mouseover", contextMenu).on("mouseout", hideTooltips);
-	                // d3.selectAll("path").on("click", selectionAction2);
-	                // d3.selectAll("circle").on("click", selectionAction2);
-	                // d3.selectAll("#container svg g g g g g g g path").on("mouseover", selectionAction2).on("mouseout", hideTooltips);
-
-	                // d3.selectAll("#container svg").on("click", contextMenu);
-	                d3.selectAll("#container").on("click", clearSelection);
-
-
-	                // container.unmount();
-	                // console.log(">>> Data Schema : ",chartTemplate.getDatasetSchema());
-	                container.addSelectionListener(selectionAction2);
-	                // container.addContextMenuListener(clearSelection);
-	                container.addMouseEnterListener(showTooltips);
-	                container.addMouseLeaveListener(hideTooltips);
-	                // container.setSelection("Samlae_WQ_Preped",[0,6,7,356]);
-
-	                // var temp = container.getProperty("rffyz0o4ie","name")
-	                // console.log(">>> get chart name : ", temp)
-
-	            });
-
-// $("#container>svg>g").on("click", function(e){ console.log('target click >> ', e.target); });
-
-// document.addEventListener('click', function( event ) {
-//   // if (elem !== event.target && elem.contains(event.target)) {    
-//   //   console.log('clicking inside the div >> ', event.target);
-//   // }
-//   console.log('target click >> ', event.target);
-// });
-
-
-				// draw(dataset_14d, template_g2, "container_g1");
-
-
-	            // tooltips
-		        var tooltip = d3.select("body")
-		            .append("div")
-		            .style({
-		            	"background-color": "#555555aa",
-		            	"color": "#ffffff",
-		            	"font-size": "10px",
-		                "position": "absolute",
-		                "z-index": "10",
-		                "visibility": "hidden",
-		                "padding": "10px",
-		                "border-radius": "3px"
-		            })
-		            .attr({
-		                "class": "tooltip"
-		            });
-
-	            const arrMin = arr => (Math.min(...arr)).toFixed(2)
-	            const arrMax = arr => (Math.max(...arr)).toFixed(2)
-		        const arrSum = arr => (arr.reduce((a,b) => a + b, 0) / 60).toFixed(2)
-				const arrAvg = arr => (arr.reduce((a,b) => a + b, 0) / arr.length).toFixed(2)
-
-				function selectionAction(a,b,c) {
-		    		var date = new Date(dataset.tables[0].rows[b[0]].Date)
-		    		// console.log('>>>> : ', date)
-		    		var day = date.getUTCDate();
-		    		var month = dataset.tables[0].rows[b[0]].Month_Th;
-		    		var year = date.getUTCFullYear() + 543;
-		    		console.log('>>>> : ', day+' '+month+' '+year);
-
-		    		filterChart(dataset.tables[0].rows[b[0]]["Day#"]);
-				}
-
-			    function showTooltips(a,b) {
-			    	// dayNumber = dataset.tables[0].rows[b[0]]["Day#"];
-		    		// console.log('>>>> : ', dayNumber);
-		    		var date = new Date(dataset.tables[0].rows[b[0]].Date)
-		    		// console.log('>>>> : ', date)
-		    		var day = date.getUTCDate();
-		    		var month = dataset.tables[0].rows[b[0]].Month_Th
-		    		var year = date.getUTCFullYear() + 543;
-		    		// console.log('>>>> : ', day+' '+month+' '+year)
-
-			    	if (b.length == 1) {
-			    		// console.log('>>>> : ', dataset.tables[0].rows[b[0]]["P2 "])
-				    	var content =  "<b>" + day+' '+month+' '+year +'  เวลา '+dataset.tables[0].rows[b[0]]["Hour  "]+ ":00 น.</b><br>" + 
-				    		"<b>-----------------------------------------------------</b><br>" + 
-				            `<table>
-
-							    <tbody>
-							        <tr>
-							            <td>CD:ค่าความนำไฟฟ้า</td>
-							            <td>▸ `+ dataset.tables[0].rows[b[0]]["P2 "] +`</td>
-							        </tr>
-				                    <tr>
-				                        <td>SL:ค่าความเค็ม</td>
-				                        <td>▸ `+ dataset.tables[0].rows[b[0]]["P1"] +`</td>
-				                    </tr>
-							        <tr>
-							            <td>WQ:ระดับความเค็ม</td>
-							            <td>▸ `+ dataset.tables[0].rows[b[0]].P2LevelDesc +`</td>
-							        </tr>
-							    </tbody>
-							</table>`;
-			    	} else {
-			    		var CD=[],
-			    			SL=[],
-			    			FL=[],
-			    			DO=[],
-			    			TB=[];
-			    		var CD_warn = [], 
-			    			SL_warn = [], 
-			    			FL_warn = [], 
-			    			DO_warn = [], 
-			    			TB_warn = [];
-			    		for (i in b) {
-			    			SL.push(dataset.tables[0].rows[b[i]]["P1"]);
-			    			CD.push(dataset.tables[0].rows[b[i]]["P2 "]);
-			    			FL.push(dataset.tables[0].rows[b[i]]["P3 "]);
-			    			DO.push(dataset.tables[0].rows[b[i]]["P4 "]);
-			    			TB.push(dataset.tables[0].rows[b[i]]["P5 "]);
-			    			SL_warn.push(dataset.tables[0].rows[b[i]]["P1_warning"]);
-			    			CD_warn.push(dataset.tables[0].rows[b[i]]["P2_warning"]);
-			    			FL_warn.push(dataset.tables[0].rows[b[i]]["P3_warning"]);
-			    			DO_warn.push(dataset.tables[0].rows[b[i]]["P4_warning"]);
-			    			TB_warn.push(dataset.tables[0].rows[b[i]]["P5_warning"]);
-			    		}
-			    		// console.log('>>>> : ', (arrSum(CD_warn)>0)?arrSum(CD_warn):'-')
-			    		var content =  "<b>" + day+' '+month+' '+year + "</b><br>" + 
-				    		"<b>-----------------------------------------------------------------------------</b><br>" + 
-				            `<table>
-							    <thead>
-							        <tr>
-							            <th colspan="1">parameter       </th>
-							            <th colspan="1"></th>
-							            <th colspan="1">|  min   </th>
-							            <th colspan="1">|  avg   </th>
-							            <th colspan="1">|  max   </th>
-							            <th colspan="1">|  เกินเกณฑ์</th>
-							        </tr>
-							    </thead>
-							    <tbody>
-							        <tr>
-							            <td>CD:ค่าความนำไฟฟ้า</td>
-							            <td>▸</td>
-							            <td>| `+ arrMin(CD) +`</td>
-							            <td>| `+ arrAvg(CD) +`</td>
-							            <td>| `+ arrMax(CD) +`</td>
-							            <td>| `+ ((arrSum(CD_warn)>0)?'<span style="color:#FF0000;">'+arrSum(CD_warn)+' ชม.</span>':'-') +`</td>
-							        </tr>
-							        <tr>
-							            <td>SL:ค่าความเค็ม</td>
-							            <td>▸</td>
-							            <td>| `+ arrMin(SL) +`</td>
-							            <td>| `+ arrAvg(SL) +`</td>
-							            <td>| `+ arrMax(SL) +`</td>
-							            <td>| `+ ((arrSum(SL_warn)>0)?'<span style="color:#FF0000;">'+arrSum(SL_warn)+' ชม.</span>':'-') +`</td>
-							        </tr>
-							        <tr>
-							            <td>FL:อัตราการไหล</td>
-							            <td>▸</td>
-							            <td>| `+ arrMin(FL) +`</td>
-							            <td>| `+ arrAvg(FL) +`</td>
-							            <td>| `+ arrMax(FL) +`</td>
-							            <td>| `+ ((arrSum(FL_warn)>0)?'<span style="color:#FF0000;">'+arrSum(FL_warn)+' ชม.</span>':'-') +`</td>
-							        </tr>
-							        <tr>
-							            <td>DO:ปริมาณออกซิเจน</td>
-							            <td>▸</td>
-							            <td>| `+ arrMin(DO) +`</td>
-							            <td>| `+ arrAvg(DO) +`</td>
-							            <td>| `+ arrMax(DO) +`</td>
-							            <td>| `+ ((arrSum(DO_warn)>0)?'<span style="color:#FF0000;">'+arrSum(DO_warn)+' ชม.</span>':'-') +`</td>
-							        </tr>
-							        <tr>
-							            <td>TB:ระดับความขุ่น</td>
-							            <td>▸</td>
-							            <td>| `+ arrMin(TB) +`</td>
-							            <td>| `+ arrAvg(TB) +`</td>
-							            <td>| `+ arrMax(TB) +`</td>
-							            <td>| `+ ((arrSum(TB_warn)>0)?'<span style="color:#FF0000;">'+arrSum(TB_warn)+' ชม.</span>':'-') +`</td>
-							        </tr>
-							    </tbody>
-							</table>`;
-			    	}
-			        // show tooltip with information from the __data__ property of the element
-			        // var d = this;
-			        // console.log('>>>> object : ', d)
-			        // var layer = d.layer;
-			        // var value = d.data.value;
-			        // var key = d.data.key;
-			        // //console.log(d);
-			        // var content =  "<b>" + layer + "</b><br>" + "วัน <b> " + 
-			        //     key.getDate()+"/"+(key.getMonth()+1)+"/"+(key.getYear()+1900) + 
-			        //     "</b><br>" + value + " ราย";
-			        // var content =  "<b>" + a + "</b><br>" + "row <b> " + 
-			        //     b + 
-			        //     "</b><br>" + '-------------------';
-
-			        return tooltip.style({
-			                "visibility": "visible",
-			                "text-align": "left",
-			                "top": (event.pageY - 10) + "px",
-			                "left": (event.pageX + 10) + "px"
-			            })
-			            .html(content);
-			    }
-
-			    function hideTooltips() {
-
-			        // hide tooltip
-			        return tooltip.style("visibility", "hidden");
-			    }
-
-
-
-
-            </script>
+              CharticulatorContainer.initialize().then(function() {
+                                              
+                const chartTemplate = new CharticulatorContainer.ChartTemplate(
+                  template
+                );
+                // chartTemplate.reset();
+
+                const defaultTable = dataset.tables[0];
+                const columns = defaultTable.columns;
+                chartTemplate.assignTable(defaultTable.name, defaultTable.name);
+                for (const column of columns) {
+                  chartTemplate.assignColumn(
+                    defaultTable.name,
+                    column.name,
+                    column.name
+                  );
+                }
+
+                // links table
+                const linksTable = dataset.tables[1];
+                const links = linksTable && (linksTable.columns);
+                if (links) {
+                  chartTemplate.assignTable(linksTable.name, linksTable.name);
+                  for (const column of links) {
+                    chartTemplate.assignColumn(
+                      linksTable.name,
+                      column.name,
+                      column.name
+                    );
+                  }
+                }
+                const instance = chartTemplate.instantiate(dataset);
+
+                const { chart } = instance;
+
+                // for (const property of template.properties) {
+                //   if (property.target.attribute) {
+                //     CharticulatorContainer.ChartTemplate.SetChartAttributeMapping(
+                //       chart,
+                //       property.objectID,
+                //       property.target.attribute,
+                //       {
+                //         type: "value",
+                //         value: property.default,
+                //       }
+                //     );
+                //   }
+                  
+                // }
+
+                const container = new CharticulatorContainer.ChartContainer({ chart: chart }, dataset);
+                const width = document.getElementById("container").getBoundingClientRect().width;
+                const height = document.getElementById("container").getBoundingClientRect().height;
+
+                // console.log(">>> width : "+width+" | height : "+height)
+                document.getElementById("container").style.visibility = "hidden";
+                container.mount("container", width-1, height);
+                window.addEventListener("resize", function() {
+                  container.resize(
+                    document.getElementById("container").getBoundingClientRect().width,
+                    document.getElementById("container").getBoundingClientRect().height
+                  );
+                });
+
+                setTimeout(function(){ 
+                  // console.log(">>> container resize");
+                  container.resize(
+                      document.getElementById("container").getBoundingClientRect().width,
+                      document.getElementById("container").getBoundingClientRect().height
+                  );
+                  // document.getElementById("container").style.visibility = "visible";
+                  setTimeout(function(){
+                    document.getElementById("container").style.visibility = "visible";
+                  },1000);
+                }, 100);
+
+                function clearSelection() {
+
+                    // clear selection
+                    container.clearSelection();
+                    // return false;
+                }
+
+
+                // add event listener for tooltips
+                // d3.selectAll("#container svg g g g g text").on("mouseover", showTooltips).on("mouseout", hideTooltips);
+                // d3.selectAll("#container svg g g g g g g g path").on("mouseover", showTooltips).on("mouseout", hideTooltips);
+                // d3.selectAll("#container svg g g g g g g g circle").on("mouseover", showTooltips).on("mouseout", hideTooltips);
+                // d3.selectAll("#container").on("click", clearSelection);
+
+
+                // container.unmount();
+                // console.log(">>> Data Schema : ",chartTemplate.getDatasetSchema());
+                // container.addSelectionListener(showTooltips);
+                // container.addContextMenuListener(clearSelection);
+                container.addMouseEnterListener(showTooltips);
+                container.addMouseLeaveListener(hideTooltips);
+                // container.setSelection("Samlae_WQ_Preped",[0,6,7,356]);
+
+              });
+
+            // tooltips
+          var tooltip = d3.select("body")
+              .append("div")
+              .style({
+                "background-color": "#555555aa",
+                "color": "#ffffff",
+                "font-size": "10px",
+                  "position": "absolute",
+                  "z-index": "10",
+                  "visibility": "hidden",
+                  "padding": "10px",
+                  "border-radius": "3px"
+              })
+              .attr({
+                  "class": "tooltip"
+              });
+
+            const arrMin = arr => (Math.min(...arr)).toFixed(2)
+            const arrMax = arr => (Math.max(...arr)).toFixed(2)
+          const arrSum = arr => (arr.reduce((a,b) => a + b, 0) / 60).toFixed(2)
+      const arrAvg = arr => (arr.reduce((a,b) => a + b, 0) / arr.length).toFixed(2)
+
+        function showTooltips(a,b,c) {
+
+          var date = new Date(dataset.tables[0].rows[b[0]].Date)
+          // console.log('>>>> : ', date)
+          var day = date.getUTCDate();
+          var month = dataset.tables[0].rows[b[0]].Month_Th
+          var year = date.getUTCFullYear() + 543;
+          // console.log('>>>> : ', day+' '+month+' '+year)
+
+          if (b.length == 1) {
+          // console.log('>>>> : ', dataset.tables[0].rows[b[0]]["P2 "])
+          var content =  "<b>" + day+' '+month+' '+year +'  เวลา '+dataset.tables[0].rows[b[0]]["Hour  "]+ ":00 น.</b><br>" + 
+            "<b>-----------------------------------------------------</b><br>" + 
+                `<table>
+
+              <tbody>
+                  <tr>
+                      <td>CD:ค่าความนำไฟฟ้า</td>
+                      <td>▸ `+ dataset.tables[0].rows[b[0]]["P2 "] +`</td>
+                  </tr>
+                  <tr>
+                      <td>SL:ค่าความเค็ม</td>
+                      <td>▸ `+ dataset.tables[0].rows[b[0]]["P1"] +`</td>
+                  </tr>
+                  <tr>
+                      <td>WQ:ระดับความเค็ม</td>
+                      <td>▸ `+ dataset.tables[0].rows[b[0]].P2LevelDesc +`</td>
+                  </tr>
+              </tbody>
+            </table>`;
+          } else {
+            var CD=[],
+              SL=[],
+              FL=[],
+              DO=[],
+              TB=[];
+            var CD_warn = [], 
+              SL_warn = [], 
+              FL_warn = [], 
+              DO_warn = [], 
+              TB_warn = [];
+            for (i in b) {
+              SL.push(dataset.tables[0].rows[b[i]]["P1"]);
+              CD.push(dataset.tables[0].rows[b[i]]["P2 "]);
+              FL.push(dataset.tables[0].rows[b[i]]["P3 "]);
+              DO.push(dataset.tables[0].rows[b[i]]["P4 "]);
+              TB.push(dataset.tables[0].rows[b[i]]["P5 "]);
+              SL_warn.push(dataset.tables[0].rows[b[i]]["P1_warning"]);
+              CD_warn.push(dataset.tables[0].rows[b[i]]["P2_warning"]);
+              FL_warn.push(dataset.tables[0].rows[b[i]]["P3_warning"]);
+              DO_warn.push(dataset.tables[0].rows[b[i]]["P4_warning"]);
+              TB_warn.push(dataset.tables[0].rows[b[i]]["P5_warning"]);
+            }
+            // console.log('>>>> : ', (arrSum(CD_warn)>0)?arrSum(CD_warn):'-')
+            var content =  "<b>" + day+' '+month+' '+year + "</b><br>" + 
+              "<b>-----------------------------------------------------------------------------</b><br>" + 
+                  `<table>
+                <thead>
+                    <tr>
+                        <th colspan="1">parameter       </th>
+                        <th colspan="1"></th>
+                        <th colspan="1">|  min   </th>
+                        <th colspan="1">|  avg   </th>
+                        <th colspan="1">|  max   </th>
+                        <th colspan="1">|  เกินเกณฑ์</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CD:ค่าความนำไฟฟ้า</td>
+                        <td>▸</td>
+                        <td>| `+ arrMin(CD) +`</td>
+                        <td>| `+ arrAvg(CD) +`</td>
+                        <td>| `+ arrMax(CD) +`</td>
+                        <td>| `+ ((arrSum(CD_warn)>0)?'<span style="color:#FF0000;">'+arrSum(CD_warn)+' ชม.</span>':'-') +`</td>
+                    </tr>
+                    <tr>
+                        <td>SL:ค่าความเค็ม</td>
+                        <td>▸</td>
+                        <td>| `+ arrMin(SL) +`</td>
+                        <td>| `+ arrAvg(SL) +`</td>
+                        <td>| `+ arrMax(SL) +`</td>
+                        <td>| `+ ((arrSum(SL_warn)>0)?'<span style="color:#FF0000;">'+arrSum(SL_warn)+' ชม.</span>':'-') +`</td>
+                    </tr>
+                    <tr>
+                        <td>FL:อัตราการไหล</td>
+                        <td>▸</td>
+                        <td>| `+ arrMin(FL) +`</td>
+                        <td>| `+ arrAvg(FL) +`</td>
+                        <td>| `+ arrMax(FL) +`</td>
+                        <td>| `+ ((arrSum(FL_warn)>0)?'<span style="color:#FF0000;">'+arrSum(FL_warn)+' ชม.</span>':'-') +`</td>
+                    </tr>
+                    <tr>
+                        <td>DO:ปริมาณออกซิเจน</td>
+                        <td>▸</td>
+                        <td>| `+ arrMin(DO) +`</td>
+                        <td>| `+ arrAvg(DO) +`</td>
+                        <td>| `+ arrMax(DO) +`</td>
+                        <td>| `+ ((arrSum(DO_warn)>0)?'<span style="color:#FF0000;">'+arrSum(DO_warn)+' ชม.</span>':'-') +`</td>
+                    </tr>
+                    <tr>
+                        <td>TB:ระดับความขุ่น</td>
+                        <td>▸</td>
+                        <td>| `+ arrMin(TB) +`</td>
+                        <td>| `+ arrAvg(TB) +`</td>
+                        <td>| `+ arrMax(TB) +`</td>
+                        <td>| `+ ((arrSum(TB_warn)>0)?'<span style="color:#FF0000;">'+arrSum(TB_warn)+' ชม.</span>':'-') +`</td>
+                    </tr>
+                </tbody>
+            </table>`;
+          }
+
+          return tooltip.style({
+                  "visibility": "visible",
+                  "text-align": "left",
+                  "top": (event.pageY - 10) + "px",
+                  "left": (event.pageX + 10) + "px"
+              })
+              .html(content);
+          }
+
+          function hideTooltips() {
+
+              // hide tooltip
+              return tooltip.style("visibility", "hidden");
+          }
+
+
+          </script>
           </body>
           </html>
         
