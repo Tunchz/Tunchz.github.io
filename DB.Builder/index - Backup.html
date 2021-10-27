@@ -75,43 +75,9 @@
 						<h1 id="board-logo" class="title bordered"><img class="logo-netpie" valign="middle"> DB Builder</h1>
 						<div id="board-actions">
 							<ul class="board-toolbar vertical">
-
-<!-- 
-	                            <li id="add-pane" data-bind="click: createPane">
-	                            	<i class="icon-plus icon-white"></i>
-	                            	<label>Add Pane</label>
-	                            </li> -->
-
-	                            <li id="setting-dashboard">
-	                            	<i class="icon-edit icon-white"></i>
-	                            	<label>Settings</label>
-	                            </li>
-
-	                            <li id="dev-console-toolbar">
-	                            	<i class="iconblackboard"></i>
-	                            	<label onclick="freeboard.showDeveloperConsole()">Developer Console</label>
-	                            </li>
-
-	                            <li id="load-dashboard" data-bind="click: loadDashboardFromLocalFile" style="float:left;">
-	                            	<i class="iconlogin"></i>
-	                            	<label>Import</label>
-	                            </li>
-
-	                            <li data-bind="click: clearFreeboard"  style="float:right;">
-									<i class="icon-folder-close icon-white"></i>
-									<label >Reset</label>
-								</li>
-	                            <li id="save-dashboard" data-bind="click: saveDashboard" data-pretty="true" style="float:right;">
-	                            	<i class="iconlogout"></i>
-	                            	<label>Export</label>
-	                            </li>
-
-								<li ></li>
-
-
-<!-- 								<li data-bind="click: loadDashboardFromLocalFile">
-									<i id="import-icon" class="icon-folder-open icon-white"></i>
-									<label id="import">Import</label>
+								<li data-bind="click: loadDashboardFromLocalFile">
+									<i id="full-screen-icon" class="icon-folder-open icon-white"></i>
+									<label id="full-screen">Import</label>
 								</li>
 								<li data-bind="click: saveDashboard" data-pretty="true">
 									<i class="icon-download-alt icon-white"></i>
@@ -120,13 +86,8 @@
 								<li data-bind="click: clearFreeboard">
 									<i class="icon-folder-close icon-white"></i>
 									<label >Reset</label>
-								</li> -->
-
-								<li id="add-pane" data-bind="click: createPane" style = "margin-top: 10px">
-									<i class="icon-plus icon-white"></i>
-									<label>Add Pane</label>
 								</li>
-
+								<li id="add-pane" data-bind="click: createPane"><i class="icon-plus icon-white"></i><label>Add Pane</label></li>
 							</ul>
 						</div>
 					</div>
@@ -159,7 +120,7 @@
 								</tbody>
 							</table>
 						</div>
-						<span class="text-button table-operation" data-bind="pluginEditor: {operation: 'add', type: 'datasource'}"><div class="icon-plus icon-white" style="margin-top:-1px"></div><span style="padding: 0 0 0 5px">ADD DataSource</span></span>
+						<span class="text-button table-operation" data-bind="pluginEditor: {operation: 'add', type: 'datasource'}">ADD</span>
 					</div>
 				</div>
 				<div class="theme-toggle" >
@@ -224,59 +185,5 @@
 				</section>
 			</li>
 		</script>
-
-
-
-<!-- 	<div id="pane-holding-pen">
-        <ul data-bind="template: { name: 'pane-template', foreach: panes}"></ul>
-    </div> -->
-    <div id="footer-bar">
-        <div id="footer-menu">
-        	<!-- <a href=""> -->
-                <h3 id="footer-logo" class="title bordered">DB.Builder</h3>
-            <!-- </a> -->
-            <div id="board-title"></div>
-            <ul id="footer-toolbar" class="board-toolbar">
-                <li id="full-screen-action" onclick="toggleFullScreen()"><i id="full-screen-icon" class="icon-resize-full icon-white"></i><label id="full-screen">Fullscreen</label></li>
-                <!-- <li id="share-action"><i class="icon-user icon-white"></i><label>Share</label></li>
-                <li id="clone-action"><i class="icon-adjust icon-white"></i><label>Clone</label></li> -->
-            </ul>
-        </div>
-    </div>
-
-    <div id="full-screen-action" onclick="toggleFullScreen()" style="position: absolute; right: 10px; bottom: 5px;">
-    	<i id="full-screen-icon" class="icon-resize-small icon-white"></i>
-    	<!-- <label id="full-screen">Fullscreen</label> -->
-    </div>
-
-    <script type="text/template" id="data-board">%7B%22allow_edit%22%3Atrue%2C%22canEdit%22%3Atrue%2C%22isPrivate%22%3Afalse%2C%22id%22%3A%22lWvIxK%22%2C%22name%22%3A%22FWTT-Test%22%7D</script>
-
-<!--     <script id="sharing-template" type="text/html">
-        <div id="shared-with-list" class="shared-with-list" data-bind="foreach: sharedWith">
-            <div class="shared-with-row">
-                <div class="shared-with-field shared-with-email" data-bind="text: email"></div>
-                <div class="shared-with-field shared-with-rights">
-                    <div class="styled-select"><select data-bind="value: allowEdit">
-                            <option value="0">READ-ONLY</option>
-                            <option value="1">EDIT</option>
-                        </select></div>
-                </div>
-                <div class="shared-with-field shared-with-toolbar">
-                    <ul class="board-toolbar">
-                        <li data-bind="click: $parent.removeShare"><i class="icon-trash icon-white"></i></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="shared-with-field"><input id="share-with-email" type="text" placeholder="Email Address"></div>
-        <div class="shared-with-field">
-            <ul class="board-toolbar">
-                <li data-bind="click: addShare"><i class="icon-plus icon-white"></i><label>Share</label></li>
-            </ul>
-        </div>
-    </script> -->
-
-	<script src="js/freeboard.footer.js"></script> <!-- for footer menu -->	
-
 	</body>
 </html>

@@ -15955,7 +15955,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	var defaults = {
 		namespace               : '',
 		widget_selector         : 'li',
-		widget_margins          : [5, 5],
+		widget_margins          : [10, 10],
 		widget_base_dimensions  : [400, 225],
 		extra_rows              : 0,
 		extra_cols              : 0,
@@ -18444,11 +18444,8 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 		opts.namespace || (opts.namespace = this.options.namespace);
 		opts.widget_base_dimensions || (opts.widget_base_dimensions = this.options.widget_base_dimensions);
 		opts.widget_margins || (opts.widget_margins = this.options.widget_margins);
-		// opts.widget_margins = [5,5]
 		opts.min_widget_width = (opts.widget_margins[0] * 2) + opts.widget_base_dimensions[0];
 		opts.min_widget_height = (opts.widget_margins[1] * 2) + opts.widget_base_dimensions[1];
-
-		
 
 		// don't duplicate stylesheets for the same configuration
 		var serialized_opts = $.param(opts);
@@ -18458,8 +18455,6 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 		}
 
 		Gridster.generated_stylesheets.push(serialized_opts);
-		// console.log("widget base dimension : ",opts.widget_base_dimensions)
-		// console.log("widget margins : ",opts.widget_margins)
 
 		/* generate CSS styles for cols */
 		for(i = opts.cols; i >= 0; i--)
@@ -18470,7 +18465,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 		/* generate CSS styles for rows */
 		for(i = opts.rows; i >= 0; i--)
 		{
-			styles += (opts.namespace + ' [data-row="' + (i + 1) + '"] { top:' + ((i * opts.widget_base_dimensions[1]) + (i * opts.widget_margins[1]) + ((i + 1) * opts.widget_margins[1])) + 'px;} ');
+			styles += (opts.namespace + ' [data-row="' + (i + 1) + '"] { top:' + ((i * opts.widget_base_dimensions[1]) + (i * opts.widget_margins[1]) + ((i + 1) * opts.widget_margins[1]) ) + 'px;} ');
 		}
 
 		for(var y = 1; y <= opts.rows; y++)
