@@ -1,3 +1,17 @@
+
+
+.logo-Mholan {
+    width: 40px;
+    height: 35px;
+    content: url(../img/Mholan_Logo.png);
+}
+
+.logo-Mholan-footer {
+    width: 20px;
+    height: 17px;
+    content: url(../img/Mholan_Logo.png);
+}
+
 .gridster header {
     height: 20px;
 }
