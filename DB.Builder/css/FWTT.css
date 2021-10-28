@@ -88,6 +88,20 @@ li:hover header ul.pane-tools {
 	height:14px;
 }
 
+.icon-resize-fullscreen {
+	background-image:url(../img/glyphicons-log-out.png);
+	width:14px;
+	height:14px;
+	background-size: contain;
+	/*background-color: #fff;*/
+}
+
+.icon-resize-full {
+    background-position: -216px 0
+}
+.icon-resize-small {
+    background-position: -216px 0
+}
 
 
 
