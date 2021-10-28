@@ -1915,8 +1915,8 @@ $.extend(freeboard, jQuery.eventEmitter),
         freeboard.loadWidgetPlugin({
             type_name: "gauge",
             display_name: "Gauge",
-            external_scripts: ["plugins/thirdparty/raphael.2.1.0.min.js", "plugins/thirdparty/justgage.1.0.1.js"],
-//            external_scripts: ["plugins/thirdparty/raphael.2.1.4.min.js", "plugins/thirdparty/justgage.1.2.2.js"],
+            external_scripts: ["plugins/thirdparty/raphael.2.1.4.min.js", "plugins/thirdparty/justgage.1.0.1.js"],
+            // external_scripts: ["plugins/thirdparty/raphael.2.1.4.min.js", "plugins/thirdparty/justgage.1.2.2.js"],
             settings: [{
                 name: "title",
                 display_name: "Title",
@@ -2006,7 +2006,7 @@ $.extend(freeboard, jQuery.eventEmitter),
                 i = $('<div class="widget-big-text"></div>'),
                 j = $("<div></div>");
             this.render = function(a) {
-                e = $(a).width(), f = $(a).height();
+                e = $(a).width(), f = /*$(a).height();*/  this.getHeight()*60;  // fixing inproper render of widget pointer
                 var h = Math.min(e, f) / 2 - 2 * g;
                 c = Raphael($(a).get()[0], e, f);
                 var k = c.circle(e / 2, f / 2, h);
@@ -2029,7 +2029,7 @@ $.extend(freeboard, jQuery.eventEmitter),
         freeboard.loadWidgetPlugin({
             type_name: "pointer",
             display_name: "Pointer",
-            external_scripts: ["plugins/thirdparty/raphael.2.1.0.min.js"],
+            external_scripts: ["plugins/thirdparty/raphael.2.1.4.min.js"],
             settings: [{
                 name: "direction",
                 display_name: "Direction",
@@ -2048,6 +2048,7 @@ $.extend(freeboard, jQuery.eventEmitter),
                 b(new k(a))
             }
         });
+
         var l = function(a) {
             function b() {
                 e && (clearInterval(e), e = null)
@@ -2066,7 +2067,8 @@ $.extend(freeboard, jQuery.eventEmitter),
                 $(a).css({
                     width: "100%",
                     height: "100%",
-                    "background-size": "cover",
+                    "background-repeat": "no-repeat",
+                    "background-size": "contain", //"cover",
                     "background-position": "center"
                 }), d = a
             }, this.onSettingsChanged = function(a) {
@@ -2097,7 +2099,8 @@ $.extend(freeboard, jQuery.eventEmitter),
             newInstance: function(a, b) {
                 b(new l(a))
             }
-        }), freeboard.addStyle(".indicator-light", "border-radius:50%;width:22px;height:22px;border:2px solid #3d3d3d;margin-top:5px;float:left;background-color:#222;margin-right:10px;"), freeboard.addStyle(".indicator-light.on", "background-color:#FFC773;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF;"), freeboard.addStyle(".indicator-text", "margin-top:10px;");
+        });
+        freeboard.addStyle(".indicator-light", "border-radius:50%;width:22px;height:22px;border:2px solid #3d3d3d;margin-top:5px;float:left;background-color:#222;margin-right:10px;"), freeboard.addStyle(".indicator-light.on", "background-color:#FFC773;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF;"), freeboard.addStyle(".indicator-text", "margin-top:10px;");
         var m = function(a) {
             function b() {
                 g.toggleClass("on", i), i ? f.text(_.isUndefined(c) ? _.isUndefined(h.on_text) ? "" : h.on_text : c) : f.text(_.isUndefined(d) ? _.isUndefined(h.off_text) ? "" : h.off_text : d)
@@ -2140,7 +2143,8 @@ $.extend(freeboard, jQuery.eventEmitter),
             newInstance: function(a, b) {
                 b(new m(a))
             }
-        }), freeboard.addStyle(".gm-style-cc a", "text-shadow:none;");
+        });
+        freeboard.addStyle(".gm-style-cc a", "text-shadow:none;");
         var n = function(a) {
             function b() {
                 if (c && d && f.lat && f.lon) {
@@ -2301,7 +2305,8 @@ $.extend(freeboard, jQuery.eventEmitter),
             newInstance: function(a, b) {
                 b(new n(a))
             }
-        }), freeboard.addStyle(".html-widget", "white-space:normal;width:100%;height:100%");
+        });
+        freeboard.addStyle(".html-widget", "white-space:normal;width:100%;height:100%");
         var o = function(a) {
             var b = $('<div class="html-widget"></div>'),
                 c = a;

@@ -12,14 +12,14 @@
     content: url(../img/Mholan_Logo.png);
 }
 
-.gridster header {
+/*.gridster header {
     height: 20px;
 }
 
 header h1 {
     line-height: 20px;
     font-size:10px;
-}
+}*/
 
 .board-toolbar li {
     color: #fff;
@@ -30,9 +30,39 @@ header h1 {
     font-weight: 400;
 }
 
+
+.gridster .gs_w {
+	overflow: visible;
+}
+.pane-tools {
+	height: 20px;
+	position: absolute;
+	top: -20px;
+    opacity: 0;
+    z-index: 300;
+}
+
 .pane-tools li {
     padding: 3px 8px;
 }
+
+/*.hide {
+  display: none;
+}*/
+
+.pane-tools:hover {
+  opacity: 1;
+}
+
+header:hover ul.pane-tools {
+  opacity: 1;
+}
+
+li:hover header ul.pane-tools {
+  opacity: 1;
+}
+
+
 
 #board-content {
 	padding-top: 0;

@@ -39,6 +39,8 @@ JustGage = function(config) {
     delete config.defaults;
   }
 
+  console.log("--- config : ", config);
+
   // configurable parameters
   obj.config = {
     // id : string
@@ -116,7 +118,7 @@ JustGage = function(config) {
 
     // gaugeWidthScale : float
     // width of the gauge element
-    gaugeWidthScale: kvLookup('gaugeWidthScale', config, dataset, 1.0),
+    gaugeWidthScale: kvLookup('gaugeWidthScale', config, dataset, 0.8),
 
     // gaugeColor : string
     // background color of gauge element
@@ -212,7 +214,7 @@ JustGage = function(config) {
 
     // relativeGaugeSize : bool
     // whether gauge size should follow changes in container element size
-    relativeGaugeSize: kvLookup('relativeGaugeSize', config, dataset, false),
+    relativeGaugeSize: kvLookup('relativeGaugeSize', config, dataset, true),  // original set to false
 
     // counter : bool
     // animate level number change
@@ -296,6 +298,7 @@ JustGage = function(config) {
     canvasH = getStyle(document.getElementById(obj.config.id), "height").slice(0, -2) * 1;
   }
 
+    console.log("---Canvas W&H : ", canvasW, canvasH);
   // widget dimensions
   if (obj.config.donut === true) {
 
@@ -356,7 +359,7 @@ JustGage = function(config) {
 
   } else {
     // HALF *******************************
-
+    console.log("---Half Donut");
     // width more than height
     if (canvasW > canvasH) {
       widgetH = canvasH;
@@ -390,6 +393,10 @@ JustGage = function(config) {
       // shift whole thing down
       dy -= (widgetH / 6.4);
     }
+
+
+    console.log("---Widget W&H : ", widgetW, widgetH);
+    dy -= 25;
 
     // title
     titleFontSize = ((widgetH / 8) > obj.config.titleMinFontSize) ? (widgetH / 10) : obj.config.titleMinFontSize;

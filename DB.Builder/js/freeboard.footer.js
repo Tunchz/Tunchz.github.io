@@ -66,10 +66,10 @@ function updateFullScreenStatus() {
         $("#footer-bar").hide();
         // $("#share-action").hide();
         // $("#clone-action").hide();
-        $("#full-screen").text("Shrink");
-        $("#full-screen").hide();
-        $("#full-screen-icon").removeClass("icon-resize-full").addClass("icon-resize-small")
-        $("#full-screen-icon").show();
+        // $("#full-screen").text("Shrink");
+        // $("#full-screen").hide();
+        // $("#full-screen-icon").removeClass("icon-resize-full").addClass("icon-resize-small")
+        // $("#full-screen-icon").show();
     } else {
         if (canEdit) {
             $("#main-header").show()
@@ -79,11 +79,11 @@ function updateFullScreenStatus() {
         }
 
         $("#footer-bar").show();
-        // $("#share-action").show();
+        $("#share-action").show();
         // $("#clone-action").show();
-        $("#full-screen").text("Fullscreen");
-        $("#full-screen").show();
-        $("#full-screen-icon").addClass("icon-resize-full").removeClass("icon-resize-small")
+        // $("#full-screen").text("Fullscreen");
+        // $("#full-screen").show();
+        // $("#full-screen-icon").addClass("icon-resize-full").removeClass("icon-resize-small")
     }
 }
 
@@ -151,106 +151,106 @@ window.onbeforeunload = function(e) {
     }
     return
 };
-// var sharingModel = function() {
-//     var self = this;
-//     self.sharedWith = ko.observableArray();
-//     self.addShare = function() {
-//         self.sharedWith.push({
-//             email: $("#share-with-email").val(),
-//             allowEdit: false
-//         });
-//         var sharedWithList = $("#shared-with-list");
-//         sharedWithList.scrollTop(sharedWithList[0].scrollHeight);
-//         $("#share-with-email").val("")
-//     };
-//     self.removeShare = function(item) {
-//         self.sharedWith.remove(item)
-//     }
-// };
+var sharingModel = function() {
+    var self = this;
+    self.sharedWith = ko.observableArray();
+    self.addShare = function() {
+        self.sharedWith.push({
+            email: $("#share-with-email").val(),
+            allowEdit: false
+        });
+        var sharedWithList = $("#shared-with-list");
+        sharedWithList.scrollTop(sharedWithList[0].scrollHeight);
+        $("#share-with-email").val("")
+    };
+    self.removeShare = function(item) {
+        self.sharedWith.remove(item)
+    }
+};
 
-// function share() {
-//     var shareDialogContent = $("<div></div>");
-//     var onOffSwitch = $('<div class="onoffswitch" id="publicPrivateSwitch"><input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="publicPrivateSwitchInput"><label class="onoffswitch-label" for="publicPrivateSwitchInput"><div class="onoffswitch-inner"><span class="on">PUBLIC</span><span class="off">PRIVATE</span></div><div class="onoffswitch-switch"></div></label></div>');
-//     var sharingSettings = $("<div></div>");
-//     var onOffCheckbox = onOffSwitch.find("input");
-//     var shared = new sharingModel;
+function share() {
+    var shareDialogContent = $("<div></div>");
+    var onOffSwitch = $('<div class="onoffswitch" id="publicPrivateSwitch"><input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="publicPrivateSwitchInput"><label class="onoffswitch-label" for="publicPrivateSwitchInput"><div class="onoffswitch-inner"><span class="on">PUBLIC</span><span class="off">PRIVATE</span></div><div class="onoffswitch-switch"></div></label></div>');
+    var sharingSettings = $("<div></div>");
+    var onOffCheckbox = onOffSwitch.find("input");
+    var shared = new sharingModel;
 
-//     function updateSharingSettings() {
-//         sharingSettings.empty();
-//         if (onOffCheckbox.prop("checked")) {
-//             $("span#dialog-ok").show();
-//             sharingSettings.append('<div style="margin-top:20px;">This freeboard is public and can be viewed by anyone at the url:</div>');
-//             $('<div class="share-link">' + location.href + "</div>").appendTo(sharingSettings).click(function() {
-//                 SelectText(this)
-//             });
-//             var twitterShareButton = $('<a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-lang="en">Tweet</a>').attr("data-text", "See my freeboard!").attr("data-url", location.href);
-//             sharingSettings.append($('<div style="margin-top:20px;"></div>').append(twitterShareButton));
-//             twttr.widgets.load()
-//         } else {
-//             $("span#dialog-ok").hide();
-//             freeboard.showLoadingIndicator(true);
-//             $.ajax({
-//                 url: "/board/sharedwith/" + boardID,
-//                 success: function(data) {
-//                     if (!isPrivate && data.allocatedPrivate + 1 > data.privateBoards) {
-//                         sharingSettings.append('<div style="margin-top:20px;">Your account does not allow any more private freeboards. <a href="/account/settings/#billing">Purchase or upgrade a plan</a> to make this freeboard private.</div>')
-//                     } else {
-//                         $("span#dialog-ok").show();
-//                         sharingSettings.append('<div style="margin-top:20px;">This freeboard is private and can be viewed by the following people:</div>');
-//                         if (_.isArray(data.sharedWith)) {
-//                             shared.sharedWith(data.sharedWith)
-//                         }
-//                         var shareListContainer = $('<div class="share-list-container" data-bind="template: { name: \'sharing-template\'}"></div>');
-//                         sharingSettings.append(shareListContainer);
-//                         ko.applyBindings(shared, shareListContainer.get()[0])
-//                     }
-//                 },
-//                 complete: function() {
-//                     freeboard.showLoadingIndicator(false)
-//                 }
-//             })
-//         }
-//     }
-//     if (!isPrivate) {
-//         onOffCheckbox.attr("checked", true)
-//     }
-//     onOffCheckbox.change(function() {
-//         updateSharingSettings()
-//     });
-//     updateSharingSettings();
-//     var saveButton;
-//     var cancelButton = "Close";
-//     if (canEdit) {
-//         shareDialogContent.append(onOffSwitch);
-//         saveButton = "Save";
-//         cancelButton = "Cancel"
-//     }
-//     shareDialogContent.append(sharingSettings);
-//     freeboard.showDialog(shareDialogContent, "Share With", saveButton, cancelButton, function() {
-//         freeboard.showLoadingIndicator(true);
-//         if (onOffCheckbox.prop("checked")) {
-//             $.post("/board/update/" + boardID, {
-//                 isPrivate: "false"
-//             }, function() {
-//                 isPrivate = false;
-//                 freeboard.showLoadingIndicator(false)
-//             })
-//         } else {
-//             var sharedWithArray = shared.sharedWith();
-//             _.each(sharedWithArray, function(share) {
-//                 share.allowEdit = share.allowEdit == true
-//             });
-//             $.post("/board/update/" + boardID, {
-//                 isPrivate: "true",
-//                 sharedWith: JSON.stringify(sharedWithArray)
-//             }, function() {
-//                 isPrivate = true;
-//                 freeboard.showLoadingIndicator(false)
-//             })
-//         }
-//     });
-//     twttr.widgets.load()
-// }
+    function updateSharingSettings() {
+        sharingSettings.empty();
+        if (onOffCheckbox.prop("checked")) {
+            $("span#dialog-ok").show();
+            sharingSettings.append('<div style="margin-top:20px;">This freeboard is public and can be viewed by anyone at the url:</div>');
+            $('<div class="share-link">' + location.href + "</div>").appendTo(sharingSettings).click(function() {
+                SelectText(this)
+            });
+            var twitterShareButton = $('<a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-lang="en">Tweet</a>').attr("data-text", "See my freeboard!").attr("data-url", location.href);
+            sharingSettings.append($('<div style="margin-top:20px;"></div>').append(twitterShareButton));
+            // twttr.widgets.load()
+        } else {
+            $("span#dialog-ok").hide();
+            freeboard.showLoadingIndicator(true);
+            // $.ajax({
+            //     url: "/board/sharedwith/" + boardID,
+            //     success: function(data) {
+            //         if (!isPrivate && data.allocatedPrivate + 1 > data.privateBoards) {
+            //             sharingSettings.append('<div style="margin-top:20px;">Your account does not allow any more private freeboards. <a href="/account/settings/#billing">Purchase or upgrade a plan</a> to make this freeboard private.</div>')
+            //         } else {
+                        $("span#dialog-ok").show();
+                        sharingSettings.append('<div style="margin-top:20px;">This freeboard is private and can be viewed by the following people:</div>');
+                        // if (_.isArray(data.sharedWith)) {
+                        //     shared.sharedWith(data.sharedWith)
+                        // }
+                        var shareListContainer = $('<div class="share-list-container" data-bind="template: { name: \'sharing-template\'}"></div>');
+                        sharingSettings.append(shareListContainer);
+                        // ko.applyBindings(shared, shareListContainer.get()[0])
+                //     }
+                // },
+                // complete: function() {
+                    freeboard.showLoadingIndicator(false)
+            //     }
+            // })
+        }
+    }
+    if (!isPrivate) {
+        onOffCheckbox.attr("checked", true)
+    }
+    onOffCheckbox.change(function() {
+        updateSharingSettings()
+    });
+    updateSharingSettings();
+    var saveButton;
+    var cancelButton = "Close";
+    if (canEdit) {
+        shareDialogContent.append(onOffSwitch);
+        saveButton = "Save";
+        cancelButton = "Cancel"
+    }
+    shareDialogContent.append(sharingSettings);
+    freeboard.showDialog(shareDialogContent, "Share With", saveButton, cancelButton, function() {
+        freeboard.showLoadingIndicator(true);
+        if (onOffCheckbox.prop("checked")) {
+            // $.post("/board/update/" + boardID, {
+            //     isPrivate: "false"
+            // }, function() {
+                isPrivate = false;
+                freeboard.showLoadingIndicator(false)
+            // })
+        } else {
+            var sharedWithArray = shared.sharedWith();
+            _.each(sharedWithArray, function(share) {
+                share.allowEdit = share.allowEdit == true
+            });
+            // $.post("/board/update/" + boardID, {
+            //     isPrivate: "true",
+            //     sharedWith: JSON.stringify(sharedWithArray)
+            // }, function() {
+                isPrivate = true;
+                freeboard.showLoadingIndicator(false)
+            // })
+        }
+    });
+    // twttr.widgets.load()
+}
 $(function() {
     if (!fullScreenApi.supportsFullScreen) {
         $("#full-screen-action").hide()
@@ -267,7 +267,7 @@ $(function() {
     // $("#clone-action").click(function() {
     //     location.href = "/board/clone/" + boardID
     // });
-    // $("#share-action").click(share);
+    $("#share-action").click(share);
     $("#edit-dashboard").click(function() {
         location.href = "/board/edit/" + boardID
     });
