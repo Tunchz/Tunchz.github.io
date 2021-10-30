@@ -1,4 +1,13 @@
 
+#toggle-header {
+    width: 25px;
+    height: 20px;
+}
+
+#toggle-header-icon {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
 
 .logo-Mholan {
     width: 40px;
@@ -12,17 +21,27 @@
     content: url(../img/Mholan_Logo.png);
 }
 
-/*.gridster header {
-    height: 20px;
+.gridster header {
+    height: 0px;
 }
 
 header h1 {
-    line-height: 20px;
+    line-height: 0px;
     font-size:10px;
-}*/
+}
 
 .board-toolbar li {
     color: #fff;
+    padding: 3px 3px;
+}
+
+div.calculated-setting-row ul.board-toolbar li,
+.board-toolbar.vertical li {
+    padding: 8px 8px;
+}
+
+li.column-tool {
+	margin-top: -3px;
 }
 
 .text-button {
@@ -39,12 +58,20 @@ header h1 {
 	position: absolute;
 	top: -20px;
     opacity: 0;
-    z-index: 300;
+    z-index: 100;
+}
+
+#main-header {
+	z-index: 50;
+}
+.modal {
+	z-index: 200;
 }
 
 .pane-tools li {
-    padding: 3px 8px;
+    padding: 3px 3px;
 }
+
 
 /*.hide {
   display: none;
@@ -65,7 +92,7 @@ li:hover header ul.pane-tools {
 
 
 #board-content {
-	padding-top: 0;
+	padding-top: 10px;
 	/*margin-top: -20px;*/
 	margin-top: -10px;
 }
@@ -103,8 +130,115 @@ li:hover header ul.pane-tools {
     background-position: -216px 0
 }
 
+.widget {
+	padding: 3px 0px;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	vertical-align: middle;
+	align-self: center;
+}
+
+/*.tw-display {
+	margin-left: 10px;
+}*/
+
+h2.section-title {
+	height:12px !important;
+	font-size: 12px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.tw-value-wrapper {
+	height:18px !important;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+/*.tw-value-subwrapper {
+	height: 100%;
+	width:100%;
+}*/
+
+.tw-value {
+	vertical-align: bottom;
+}
+.tw-unit {
+	padding:0 0 3px 3px !important;
+	font-size: 10px;
+}
+
+.tw-sparkline canvas {
+	height: 40px !important;
+	/*padding: 0 10px;*/
+}
 
 
+
+
+svg {
+	left: 50% !important; 
+	transform: translateX(-50%);
+} 
+
+.widget-big-text {
+	text-align: center;
+	justify-content: ;
+}
+
+
+.sub-section-height-1 {
+	height: 40px;
+}
+.sub-section-height-2 {
+	height: 86px;
+}
+.sub-section-height-3 {
+	height: 132px;
+}
+.sub-section-height-4 {
+	height: 178px;
+}
+.sub-section-height-5 {
+	height: 224px;
+}
+.sub-section-height-6 {
+	height: 270px;
+}
+.sub-section-height-7 {
+	height: 216px;
+}
+.sub-section-height-8 {
+	height: 362px;
+}
+.sub-section-height-9 {
+	height: 408px;
+}
+.sub-section-height-10 {
+	height: 456px;
+}
+/*.sub-section {
+    border-bottom: solid 1px #363636;
+}*/
+
+
+body {
+	/*background: url(https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png);*/
+	/*background: url(https://tunchz.github.io/PoC/MWA/static/diagonal-noise.png);*/
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 .clone-ribbon-wrapper {
     position: fixed;
@@ -153,7 +287,7 @@ li:hover header ul.pane-tools {
     border-color: rgba(255, 255, 255, 0.7);
     border-style: dotted;
     border-width: 1px 0
-}
+}*/
 
 #footer-bar {
     position: fixed;
@@ -161,7 +295,7 @@ li:hover header ul.pane-tools {
     left: 0;
     z-index: 50;
     width: 100%;
-    height: 30px;
+    height: 25px;
     background-color: #313131;
     -webkit-box-shadow: 0 0 5px #000;
     box-shadow: 0 0 5px #000
@@ -180,7 +314,8 @@ li:hover header ul.pane-tools {
 #footer-logo.title.bordered {
     float: left;
     padding: 3px 3px;
-    margin: 3px 0 0 0;
+    margin:0;
+    /*margin: 3px 0 0 0;*/
     font-size: 12px;
     line-height: 18px;
     border-width: 2px
@@ -198,7 +333,7 @@ li:hover header ul.pane-tools {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 12px;
     font-weight: 100;
-    line-height: 30px;
+    line-height: 23px;
     color: #d3d4d4;
     text-overflow: ellipsis;
     /*text-transform: uppercase;*/

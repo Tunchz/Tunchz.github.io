@@ -281,3 +281,8 @@ ul.value-dropdown li.selected {
 #footer-bar {
     background-color: #007FFF;
 }
+
+body {
+    background: url(https://tunchz.github.io/PoC/MWA/static/diagonal-noise.png);
+    /*background: url(https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png);*/
+}

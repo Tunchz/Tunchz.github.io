@@ -343,6 +343,7 @@ JustGage = function(config) {
     }
 
     // label
+    // labelFontSize = ((widgetH / 16) > 10) ? (widgetH / 16) : 10;
     labelFontSize = ((widgetH / 16) > 10) ? (widgetH / 16) : 10;
     labelX = dx + widgetW / 2;
     labelY = valueY + labelFontSize;
@@ -359,7 +360,7 @@ JustGage = function(config) {
 
   } else {
     // HALF *******************************
-    console.log("---Half Donut");
+    // console.log("---Half Donut");
     // width more than height
     if (canvasW > canvasH) {
       widgetH = canvasH;
@@ -395,7 +396,7 @@ JustGage = function(config) {
     }
 
 
-    console.log("---Widget W&H : ", widgetW, widgetH);
+    // console.log("---Widget W&H : ", widgetW, widgetH);
     dy -= 25;
 
     // title
@@ -404,22 +405,26 @@ JustGage = function(config) {
     titleY = dy + (obj.config.titlePosition === 'below' ? (widgetH * 1.07) : (widgetH / 6.4));
 
     // value
-    valueFontSize = ((widgetH / 6.5) > obj.config.valueMinFontSize) ? (widgetH / 6.5) : obj.config.valueMinFontSize;
+    // valueFontSize = ((widgetH / 6.5) > obj.config.valueMinFontSize) ? (widgetH / 6.5) : obj.config.valueMinFontSize;
+    valueFontSize = ((widgetH / 6.5) > obj.config.valueMinFontSize) ? (widgetH / 4.5) : obj.config.valueMinFontSize;
     valueX = dx + widgetW / 2;
     valueY = dy + widgetH / 1.275;
 
     // label
-    labelFontSize = ((widgetH / 16) > obj.config.labelMinFontSize) ? (widgetH / 16) : obj.config.labelMinFontSize;
+    labelFontSize = ((widgetH / 16) > obj.config.labelMinFontSize) ? (widgetH / 12) : obj.config.labelMinFontSize;
     labelX = dx + widgetW / 2;
-    labelY = valueY + valueFontSize / 2 + 5;
+    labelY = valueY + valueFontSize / 2.2 + 1;
+    console.log("*********", obj.config.labelMinFontSize , labelFontSize)
 
     // min
-    minFontSize = ((widgetH / 16) > obj.config.minLabelMinFontSize) ? (widgetH / 16) : obj.config.minLabelMinFontSize;
+    // minFontSize = ((widgetH / 16) > obj.config.minLabelMinFontSize) ? (widgetH / 16) : obj.config.minLabelMinFontSize;
+    minFontSize = ((widgetH / 16) > obj.config.minLabelMinFontSize) ? (widgetH / 12) : obj.config.minLabelMinFontSize;
     minX = dx + (widgetW / 10) + (widgetW / 6.666666666666667 * obj.config.gaugeWidthScale) / 2;
     minY = labelY;
 
     // max
-    maxFontSize = ((widgetH / 16) > obj.config.maxLabelMinFontSize) ? (widgetH / 16) : obj.config.maxLabelMinFontSize;
+    // maxFontSize = ((widgetH / 16) > obj.config.maxLabelMinFontSize) ? (widgetH / 16) : obj.config.maxLabelMinFontSize;
+    maxFontSize = ((widgetH / 16) > obj.config.maxLabelMinFontSize) ? (widgetH / 12) : obj.config.maxLabelMinFontSize;
     maxX = dx + widgetW - (widgetW / 10) - (widgetW / 6.666666666666667 * obj.config.gaugeWidthScale) / 2;
     maxY = labelY;
   }

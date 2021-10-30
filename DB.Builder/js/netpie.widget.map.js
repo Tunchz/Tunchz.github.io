@@ -7,7 +7,8 @@
     var longdoWidget = function (settings) {
         var self = this
         self.widgetID = randomString(16);
-        var mapElement = $("<div id=\"map_ld" + self.widgetID + "\"></div>");
+        var title = $('<div></div>')
+        var mapElement = $('<div style="margin-top:-3px" id="map_ld' + self.widgetID + '" ></div>');
         var currentSettings = settings
 
         // current Settings default
@@ -30,7 +31,7 @@
         }
 
         this.render = function (element) {
-            $(element).append(mapElement)
+            $(element).append(title).append(mapElement)
             setHeight()
             var maphtml = document.getElementById('map_ld' + self.widgetID)
             var defaultPosition = { lon: 0, lat: 0 }
@@ -57,11 +58,18 @@
             if (currentSettings.lon === "" || currentSettings.lon === undefined) currentPosition.lon = 0
             updatePosition(currentPosition)
 
+            // title
+            title.empty();
+            if (newSettings.title) title.append($('<div class="map-wrapper" style="margin-bottom:5px"><h2 class="section-title tw-title tw-td">'+newSettings.title+'</h2></div>'));
+            else title.empty();
+            console.log("**********",title.innerHtml)
+
             // Options
             mapOptions(currentSettings)
 
             // Height
             setHeight()
+
         }
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
@@ -80,7 +88,7 @@
 
         this.getHeight = function () {
             if (currentSettings.height_block === undefined) {
-                currentSettings.height_block = 4;
+                currentSettings.height_block = 2;
             }
             return Number(currentSettings.height_block);
         }
@@ -89,10 +97,10 @@
 
         function setHeight() {
             if (currentSettings.height_block === undefined) {
-                currentSettings.height_block = 4;
+                currentSettings.height_block = 2;
             }
             mapElement.css({
-                height: currentSettings.height_block * 60 + "px",
+                height: (currentSettings.height_block * 46 - ((currentSettings.title)?26:6)) + "px",
             });
         }
 
@@ -148,6 +156,11 @@
         "external_scripts": ["plugins/thirdparty/longdo.js"],
         "settings": [
             {
+                name: "title",
+                display_name: "Title",
+                type: "text"
+            }, 
+            {
                 "name": "lat",
                 "display_name": "Latitude",
                 "type": "calculated"
@@ -161,6 +174,7 @@
                 "name": "zoom",
                 "display_name": "Zoom",
                 "type": "option",
+                default_value: 13,
                 "options": [
                     {
                         "name": "1",
@@ -274,21 +288,53 @@
             {
                 "name": "height_block",
                 "display_name": "Height Blocks",
-                "type": "option",
-                "options": [
-                    {
-                        "name": "1",
-                        "value": "4"
-                    },
-                    {
-                        "name": "2",
-                        "value": "5"
-                    },
-                    {
-                        "name": "3",
-                        "value": "6"
-                    }
-                ]
+                type: "integer",
+                default_value: 1,
+                required: !0
+
+                // "type": "option",
+                // "options": [
+                //     {
+                //         "name": "1",
+                //         "value": "1"
+                //     },
+                //     {
+                //         "name": "2",
+                //         "value": "2"
+                //     },
+                //     {
+                //         "name": "3",
+                //         "value": "3"
+                //     },
+                //     {
+                //         "name": "4",
+                //         "value": "4"
+                //     },
+                //     {
+                //         "name": "5",
+                //         "value": "5"
+                //     },
+                //     {
+                //         "name": "6",
+                //         "value": "6"
+                //     },
+                //     {
+                //         "name": "7",
+                //         "value": "7"
+                //     },
+                //     {
+                //         "name": "8",
+                //         "value": "8"
+                //     },
+                //     {
+                //         "name": "9",
+                //         "value": "9"
+                //     },
+                //     {
+                //         "name": "10",
+                //         "value": "10"
+                //     }
+                // ]
             },
         ],
 

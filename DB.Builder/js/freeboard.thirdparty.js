@@ -15955,14 +15955,14 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	var defaults = {
 		namespace               : '',
 		widget_selector         : 'li',
-		widget_margins          : [10, 10],
-		widget_base_dimensions  : [400, 225],
+		widget_margins          : [5,5],		// [10, 10],
+		widget_base_dimensions  : [100,30],		// [400, 225],
 		extra_rows              : 0,
 		extra_cols              : 0,
 		min_cols                : 1,
-		max_cols                : null,
+		max_cols                : 15,			// null,
 		min_rows                : 15,
-		max_size_x              : 6,
+		max_size_x              : 15, 			// 6,
 		autogenerate_stylesheet : true,
 		avoid_overlapped_widgets: true,
 		serialize_params        : function($w, wgd)
@@ -16030,6 +16030,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 */
 	function Gridster(el, options)
 	{
+		// console.log("--- options : ", options, el);
 		this.options = $.extend(true, defaults, options);
 		this.$el = $(el);
 		this.$wrapper = this.$el.parent();
@@ -16153,7 +16154,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 * @return {HTMLElement} Returns $widget.
 	 */
 	fn.resize_widget = function($widget, size_x, size_y, callback)
-	{
+	{	
 		var wgd = $widget.coords().grid;
 		size_x || (size_x = wgd.size_x);
 		size_y || (size_y = wgd.size_y);
@@ -16659,7 +16660,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 			{
 				self.on_drag.call(self, event, ui);
 				self.$el.trigger('gridster:drag');
-			}, 60)
+			}, 30) //60)
 		});
 
 		this.drag_api = this.$el.drag(draggable_options).data('drag');
@@ -18415,7 +18416,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 */
 	fn.set_dom_grid_height = function()
 	{
-		var r = this.get_highest_occupied_cell().row + 1;
+		var r = this.get_highest_occupied_cell().row; + 1;
 		this.$el.css('height', r * this.min_widget_height);
 		return this;
 	};
@@ -18456,6 +18457,8 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 
 		Gridster.generated_stylesheets.push(serialized_opts);
 
+		// console.log("--------opts : ",opts)
+
 		/* generate CSS styles for cols */
 		for(i = opts.cols; i >= 0; i--)
 		{
@@ -18465,18 +18468,19 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 		/* generate CSS styles for rows */
 		for(i = opts.rows; i >= 0; i--)
 		{
-			styles += (opts.namespace + ' [data-row="' + (i + 1) + '"] { top:' + ((i * opts.widget_base_dimensions[1]) + (i * opts.widget_margins[1]) + ((i + 1) * opts.widget_margins[1]) ) + 'px;} ');
+			styles += (opts.namespace + ' [data-row="' + (i + 1) + '"] { top:' + ((i * opts.widget_base_dimensions[1]) + (i * opts.widget_margins[1]) + ((i + 1) * opts.widget_margins[1]) /*+ ((i===0)?-14:-50) */) + 'px;} ');
 		}
 
 		for(var y = 1; y <= opts.rows; y++)
 		{
-			styles += (opts.namespace + ' [data-sizey="' + y + '"] { height:' + (y * opts.widget_base_dimensions[1] + (y - 1) * (opts.widget_margins[1] * 2)) + 'px;}');
+			styles += (opts.namespace + ' [data-sizey="' + y + '"] { height:' + (y * opts.widget_base_dimensions[1] + (y - 1) * (opts.widget_margins[1] * 2)/* + ((y===1)?-14:-34) */) + 'px;}');
 		}
 
 		for(var x = 1; x <= max_size_x; x++)
 		{
 			styles += (opts.namespace + ' [data-sizex="' + x + '"] { width:' + (x * opts.widget_base_dimensions[0] + (x - 1) * (opts.widget_margins[0] * 2)) + 'px;}');
 		}
+		// console.log("----- styles : ", styles)
 
 		return this.add_style_tag(styles);
 	};
@@ -18699,7 +18703,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 		var aw = this.$wrapper.width();
 		var ah = this.$wrapper.height();
 		var max_cols = this.options.max_cols;
-
+		// console.log("--- aw ah max_cols : ", aw, ah, max_cols);
 		var cols = Math.floor(aw / this.min_widget_width) + this.options.extra_cols;
 
 		var actual_cols = this.$widgets.map(function()

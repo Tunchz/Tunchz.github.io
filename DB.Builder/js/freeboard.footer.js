@@ -109,6 +109,7 @@ function saveChanges() {
         //     currentDashboardState = newDashboardState
         // })
         console.log("--- CHANGES Found >>> processing save & update state")
+        window.localStorage.setItem("netpie.freeboard.dashboard", newDashboardState);
         // currentDashboardState = newDashboardState
     }
 }

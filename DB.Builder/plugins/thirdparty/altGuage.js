@@ -58,7 +58,7 @@ window.dyngaugeID = 0;
         }
 
         this.getHeight = function () {
-            return 3;
+            return currentSettings.height_block;
         }
 
         this.onSettingsChanged(settings);
@@ -66,7 +66,7 @@ window.dyngaugeID = 0;
 
     freeboard.loadWidgetPlugin({
         type_name: "dyngauge",
-        display_name: "DynamicGauge",
+        display_name: "Dynamic Gauge",
         "external_scripts" : [
             "plugins/thirdparty/raphael.2.1.4.min.js",
             "plugins/thirdparty/justgage.1.2.2.js"
@@ -85,7 +85,8 @@ window.dyngaugeID = 0;
             {
                 name: "units",
                 display_name: "Units",
-                type: "text"
+                type: "text",
+                // description: "°"
             },
             {
                 name: "min_value",
@@ -95,9 +96,16 @@ window.dyngaugeID = 0;
             },
             {
                 name: "max_value",
-                display_name: "Maximum",
+                display_name: "Maximum66",
                 type: "text",
                 default_value: 100
+            },
+            {
+                name: "height_block",
+                display_name: "Height Blocks",
+                type: "integer",
+                default_value: 2,
+                required: !0
             }
         ],
         newInstance: function (settings, newInstanceCallback) {

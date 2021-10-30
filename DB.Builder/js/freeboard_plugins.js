@@ -105,8 +105,15 @@ function FreeboardModel(a, b, c) {
             g()
         }) : g()
     }, this.clearFreeboard = function() {
-        window.localStorage.removeItem("netpie.freeboard.dashboard");
-        d.clearDashboard();
+
+        // window.localStorage.removeItem("netpie.freeboard.dashboard");
+        // d.clearDashboard();
+
+        var g = $("<p>Are you sure you want to reset dashboard ?</p>");
+        new DialogBox(g, "Confirm Reset", "Yes", "No", function() {
+            window.localStorage.removeItem("netpie.freeboard.dashboard");
+            d.clearDashboard();
+        })
     }, this.clearDashboard = function() {
         c.removeAllPanes(), _.each(d.datasources(), function(a) {
             a.dispose()
@@ -143,7 +150,7 @@ function FreeboardModel(a, b, c) {
         b ? $(event.currentTarget).siblings("label").fadeOut("slow") : $(event.currentTarget).siblings("label").fadeIn("slow"), a.data("siblings-shown", !b)
     }, this.saveDashboard = function(a, b) {
         var c = $(b.currentTarget).data("pretty"),
-            e = "application/octet-stream",
+            e = "-Tunchz/FWTT-",
             f = document.createElement("a");
         var g = new Blob([JSON.stringify(d.serialize())], {
             type: e
@@ -157,10 +164,10 @@ function FreeboardModel(a, b, c) {
                 type: e
             });
             f.href = window.URL.createObjectURL(g);
-            f.download = "dashboard.json", f.target = "_self", f.click();
+            f.download = "dashboard_dbBuilder.json", f.target = "_self", f.click();
         }
     }, this.saveLocalstorage = function() {
-        e = "application/octet-stream", f = document.createElement("a");
+        e = "-Tunchz/FWTT-", f = document.createElement("a");
         var g = new Blob([JSON.stringify(d.serialize())], {
             type: e
         });
@@ -389,8 +396,9 @@ function FreeboardUI() {
             col: d
         }
     }
-    var r, s = 10,
-        t = 300,
+    // options for gridster
+    var r, s = 3,//10,
+        t = 100,//300,
         u = 3,
         v = s + t + s,
         w = u,
@@ -399,12 +407,12 @@ function FreeboardUI() {
         init: function(b, c, d, e, f) {
             r = $(b).gridster({
                 widget_margins: [s, s],
-                widget_base_dimensions: [t, 10],
+                widget_base_dimensions: [t, 40], //10],
                 resize: {
-                    enabled: !1,
+                    enabled: !1,//!1,
                     axes: "x"
                 }
-            }).data("gridster"), a(!1), r.disable()
+            }).data("gridster"), a(1), r.disable()
         }
     }, {
         showLoadingIndicator: function(a) {
@@ -490,13 +498,23 @@ function PaneModel(a, b) {
                 a.processSizeChange()
             })
         }, 1e3)
+
+
+
     }, this.getCalculatedHeight = function() {
         var a = _.reduce(c.widgets(), function(a, b) {
             return a + b.height()
         }, 0);
-        a *= 6, a += 3, a *= 10;
-        var b = Math.ceil((a + 20) / 30);
-        return Math.max(4, b)
+        // a *= 6, a += 3, a *= 10;
+        // var b = Math.ceil((a + 20) / 30);
+        // return Math.max(2, b)  
+        /*a *= 2, a += 3,*/ a *= 20;
+        var b = Math.ceil((a/* + 20*/) / 20);
+        // console.log("********** b : ",b)
+        return Math.max(1, b)  //Math.max(4, b)
+
+
+
     }, this.serialize = function() {
         var a = [];
         return _.each(c.widgets(), function(b) {
@@ -1812,7 +1830,7 @@ $.extend(freeboard, jQuery.eventEmitter),
         var d = 100,
             e = ["#FF9900", "#FFFFFF", "#B3B4B4", "#6B6B6B", "#28DE28", "#13F7F9", "#E6EE18", "#C41204", "#CA3CB8", "#0B1CFB"],
             f = freeboard.getStyleString("values");
-        freeboard.addStyle(".widget-big-text", f + "font-size:75px;"), freeboard.addStyle(".tw-display", "width: 100%; height:100%; display:table; table-layout:fixed;"), freeboard.addStyle(".tw-tr", "display:table-row;"), freeboard.addStyle(".tw-tg", "display:table-row-group;"), freeboard.addStyle(".tw-tc", "display:table-caption;"), freeboard.addStyle(".tw-td", "display:table-cell;"), freeboard.addStyle(".tw-value", f + "overflow: hidden;display: inline-block;text-overflow: ellipsis;"), freeboard.addStyle(".tw-unit", "display: inline-block;padding-left: 10px;padding-bottom: 1.1em;vertical-align: bottom;"), freeboard.addStyle(".tw-value-wrapper", "position: relative;vertical-align: middle;height:100%;"), freeboard.addStyle(".tw-sparkline", "height:20px;");
+        freeboard.addStyle(".widget-big-text", f + "font-size:25px;")/*"font-size:75px;")*/, freeboard.addStyle(".tw-display", "width: 100%; height:100%; display:table; table-layout:fixed;"), freeboard.addStyle(".tw-tr", "display:table-row;"), freeboard.addStyle(".tw-tg", "display:table-row-group;"), freeboard.addStyle(".tw-tc", "display:table-caption;"), freeboard.addStyle(".tw-td", "display:table-cell;"), freeboard.addStyle(".tw-value", f + "overflow: hidden;display: inline-block;text-overflow: ellipsis;"), freeboard.addStyle(".tw-unit", "display: inline-block;padding-left: 10px;padding-bottom: 1.1em;vertical-align: bottom;"), freeboard.addStyle(".tw-value-wrapper", "position: relative;vertical-align: middle;height:100%;"), freeboard.addStyle(".tw-sparkline", "height:20px;");
         var g = function(b) {
             function d() {
                 _.isUndefined(e.units) || "" == e.units ? h.css("max-width", "100%") : h.css("max-width", f.innerWidth() - i.outerWidth(!0) + "px")
@@ -1820,48 +1838,63 @@ $.extend(freeboard, jQuery.eventEmitter),
             var e = b,
                 f = $('<div class="tw-display"></div>'),
                 g = $('<h2 class="section-title tw-title tw-td"></h2>'),
+                h_p = $('<div class="tw-value-subwrapper"></div>'),
                 h = $('<div class="tw-value"></div>'),
                 i = $('<div class="tw-unit"></div>'),
                 j = $('<div class="tw-sparkline tw-td"></div>');
             this.render = function(a) {
-                $(a).empty(), $(f).append($('<div class="tw-tr"></div>').append(g)).append($('<div class="tw-tr"></div>').append($('<div class="tw-value-wrapper tw-td"></div>').append(h).append(i))).append($('<div class="tw-tr"></div>').append(j)), $(a).append(f), d()
+                $(a).empty(), $(h_p).append($(h)).append($(i)), $(f).append($('<div class="tw-tr"></div>').append(g)).append($('<div class="tw-tr"></div>').append($('<div class="tw-value-wrapper tw-td"></div>').append(h_p)/*.append(h).append(i)*/)).append($('<div class="tw-tr"></div>').append(j)), $(a).append(f), d()
             }, this.onSettingsChanged = function(a) {
                 e = a;
                 var b = !_.isUndefined(a.title) && "" != a.title,
                     c = !_.isUndefined(a.units) && "" != a.units;
                 a.sparkline ? j.attr("style", null) : (delete j.data().values, j.empty(), j.hide()), b ? (g.html(_.isUndefined(a.title) ? "" : a.title), g.attr("style", null)) : (g.empty(), g.hide()), c ? (i.html(_.isUndefined(a.units) ? "" : a.units), i.attr("style", null)) : (i.empty(), i.hide());
-                var f = 30;
-                "big" == a.size && (f = 75, a.sparkline && (f = 60)), h.css({
-                    "font-size": f + "px"
-                }), d()
+                // var f = 15;//30;
+                // "big" == a.size && (f = 25/*75*/, a.sparkline && (f = 20/*60*/)), 
+                // h.css({
+                //     "font-size": f + "px"
+                // }), 
+
+                h_p.css({
+                    "text-align": (e.font_align)?e.font_align:"left",
+                }), 
+
+                h.css({
+                    "font-size": a.font_size + "px",
+                }), 
+
+
+                d()
             }, this.onSizeChanged = function() {
                 d()
             }, this.onCalculatedValueChanged = function(b, d) {
                 "value" == b && (e.animate ? a(d, h, 500) : h.text(d), e.sparkline && c(j, d))
             }, this.onDispose = function() {}, this.getHeight = function() {
-                return "big" == e.size || e.sparkline ? 2 : 1
+                // return "big" == e.size || e.sparkline ? 2 : 1  //2 : 1
+                return (parseInt((e.height_block)?e.height_block:1) + ((e.sparkline)?1:0))
             }, this.onSettingsChanged(b)
         };
         freeboard.loadWidgetPlugin({
             type_name: "text_widget",
             display_name: "Text",
             external_scripts: ["plugins/thirdparty/jquery.sparkline.min.js"],
+            // external_scripts: ["plugins/thirdparty/jquery.sparkline.js"],
             settings: [{
                 name: "title",
                 display_name: "Title",
                 type: "text"
             }, {
-                name: "size",
-                display_name: "Size",
-                type: "option",
-                options: [{
-                    name: "Regular",
-                    value: "regular"
-                }, {
-                    name: "Big",
-                    value: "big"
-                }]
-            }, {
+            //     name: "size",
+            //     display_name: "Size",
+            //     type: "option",
+            //     options: [{
+            //         name: "Regular",
+            //         value: "regular"
+            //     }, {
+            //         name: "Big",
+            //         value: "big"
+            //     }]
+            // }, {
                 name: "value",
                 display_name: "Value",
                 type: "calculated"
@@ -1878,6 +1911,41 @@ $.extend(freeboard, jQuery.eventEmitter),
                 name: "units",
                 display_name: "Units",
                 type: "text"
+            },
+            {
+                name: "font_size",
+                display_name: "Font Size",
+                type: "integer",
+                default_value: 10,
+                required: !0
+            },
+            {
+                "name": "font_align",
+                "display_name": "Font Align",
+                "type": "option",
+                default_value: "left",
+                options: [
+                    {
+                        "name": "Left",
+                        "value": "left"
+                    },
+                    {
+                        "name": "Center",
+                        "value": "center"
+                    },
+                    {
+                        "name": "Right",
+                        "value": "right"
+                    }
+                ],
+                required: !0
+            },
+            {
+                name: "height_block",
+                display_name: "Height Blocks",
+                type: "integer",
+                default_value: 1,
+                required: !0
             }],
             newInstance: function(a, b) {
                 b(new g(a))
@@ -1986,6 +2054,20 @@ $.extend(freeboard, jQuery.eventEmitter),
                 display_name: "Legend",
                 type: "text",
                 description: "Comma-separated for multiple sparklines"
+            // },
+            // {
+            //     name: "font_size",
+            //     display_name: "Font Size",
+            //     type: "integer",
+            //     default_value: 10,
+            //     required: !0
+            // },
+            // {
+            //     name: "height_block",
+            //     display_name: "Height Blocks",
+            //     type: "integer",
+            //     default_value: 1,
+            //     required: !0
             }],
             newInstance: function(a, b) {
                 b(new j(a))
@@ -2006,7 +2088,8 @@ $.extend(freeboard, jQuery.eventEmitter),
                 i = $('<div class="widget-big-text"></div>'),
                 j = $("<div></div>");
             this.render = function(a) {
-                e = $(a).width(), f = /*$(a).height();*/  this.getHeight()*60;  // fixing inproper render of widget pointer
+                // console.log("****** a : ",a)
+                e = $(a).width(), f = /*$(a).height();*/  this.getHeight()*40;  // fixing inproper render of widget pointer
                 var h = Math.min(e, f) / 2 - 2 * g;
                 c = Raphael($(a).get()[0], e, f);
                 var k = c.circle(e / 2, f / 2, h);
@@ -2078,7 +2161,7 @@ $.extend(freeboard, jQuery.eventEmitter),
             }, this.onDispose = function() {
                 b()
             }, this.getHeight = function() {
-                return 4
+                return 5
             }, this.onSettingsChanged(a)
         };
         freeboard.loadWidgetPlugin({
@@ -2280,13 +2363,14 @@ $.extend(freeboard, jQuery.eventEmitter),
                         map: c
                     }), b()
                 }
-                window.google && window.google.maps ? e() : (window.gmap_initialize = e, head.js("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=gmap_initialize"))
+                window.google && window.google.maps ? e() : (window.gmap_initialize = e, head.js("https://maps.googleapis.com/maps/api/js?key=AIzaSyCpLIS6vRLkkY5EYSfsfo8_OHkGJwYhcWE&v=3.exp&sensor=false&callback=gmap_initialize"))
             }, this.onSettingsChanged = function(a) {
                 e = a
             }, this.onCalculatedValueChanged = function(a, c) {
                 "lat" == a ? f.lat = c : "lon" == a && (f.lon = c), b()
             }, this.onDispose = function() {}, this.getHeight = function() {
-                return 4
+                console.log("-----------",e)
+                return (e.height_block) ? e.height_block:2
             }, this.onSettingsChanged(a)
         };
         freeboard.loadWidgetPlugin({
@@ -2301,6 +2385,13 @@ $.extend(freeboard, jQuery.eventEmitter),
                 name: "lon",
                 display_name: "Longitude",
                 type: "calculated"
+            },
+            {
+                name: "height_block",
+                display_name: "Height Blocks",
+                type: "integer",
+                default_value: 2,
+                required: !0
             }],
             newInstance: function(a, b) {
                 b(new n(a))
