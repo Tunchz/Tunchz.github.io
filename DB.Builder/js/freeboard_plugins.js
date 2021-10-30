@@ -322,8 +322,10 @@ function FreeboardUI() {
             e = d.col,
             f = d.row,
             g = Number(b.width()),
-            h = Number(b.getCalculatedHeight());
-        r.add_widget(a, g, h, e, f), c && n(!0), l(b, f, e), $(a).attrchange({
+            h = Number(b.getCalculatedHeight()),
+            tbg = b.transparent_bg();
+            // console.log("--------------- b : ",b)
+        r.add_widget(a, g, h, e, f, tbg), c && n(!0), l(b, f, e), $(a).attrchange({
             trackValues: !0,
             callback: function(a) {
                 "data-row" == a.attributeName ? l(b, Number(a.newValue), void 0) : "data-col" == a.attributeName && l(b, void 0, Number(a.newValue))
@@ -335,7 +337,7 @@ function FreeboardUI() {
         var c = b.getCalculatedHeight(),
             d = Number($(a).attr("data-sizey")),
             e = Number($(a).attr("data-sizex"));
-        (c != d || b.col_width() != e) && r.resize_widget($(a), b.col_width(), c, function() {
+        (c != d || b.col_width() != e) && r.resize_widget($(a), b.col_width(), c, b.transparent_bg(), function() {
             r.set_dom_grid_height()
         })
     }
@@ -352,7 +354,7 @@ function FreeboardUI() {
     function n(a, b) {
         _.isUndefined(b) && (b = !0);
         var c = b ? 250 : 0;
-        a ? ($(".pane-tools").fadeIn(c), $("#column-tools").fadeIn(c)) : ($(".pane-tools").fadeOut(c), $("#column-tools").fadeOut(c))
+        a ? ($(".pane-tools").fadeIn(c), $("#column-tools").fadeIn(c),$(".transparent_bg").removeClass("active")) : ($(".pane-tools").fadeOut(c), $("#column-tools").fadeOut(c),$(".transparent_bg").addClass("active"))
     }
 
     function o(a) {
@@ -470,8 +472,10 @@ function FreeboardUI() {
 }
 
 function PaneModel(a, b) {
+    // console.log("*********** Panmodel a freeboardModel : ",a);
+    // console.log("*********** Panmodel b widgetPlugins: ",b);
     var c = this;
-    this.title = ko.observable(), this.width = ko.observable(1), this.row = {}, this.col = {}, this.col_width = ko.observable(1), this.col_width.subscribe(function(a) {
+    this.title = ko.observable(),this.transparent_bg = ko.observable(), this.width = ko.observable(1), this.row = {}, this.col = {}, this.col_width = ko.observable(1), this.col_width.subscribe(function(a) {
         c.processSizeChange()
     }), this.widgets = ko.observableArray(), this.addWidget = function(a) {
         this.widgets.push(a)
@@ -493,8 +497,10 @@ function PaneModel(a, b) {
             c.widgets.splice(b, 2, d[b + 1], d[b])
         }
     }, this.processSizeChange = function() {
+        // console.log("********************** c ",c.transparent_bg(),c)
         setTimeout(function() {
             _.each(c.widgets(), function(a) {
+                // console.log("********************** a ",a)
                 a.processSizeChange()
             })
         }, 1e3)
@@ -505,6 +511,7 @@ function PaneModel(a, b) {
         var a = _.reduce(c.widgets(), function(a, b) {
             return a + b.height()
         }, 0);
+        // console.log('*********** c: ',c)
         // a *= 6, a += 3, a *= 10;
         // var b = Math.ceil((a + 20) / 30);
         // return Math.max(2, b)  
@@ -526,10 +533,11 @@ function PaneModel(a, b) {
             row: c.row,
             col: c.col,
             col_width: c.col_width(),
+            transparent_bg: c.transparent_bg(),
             widgets: a
         }
     }, this.deserialize = function(d) {
-        c.title(d.title), c.width(d.width), c.row = d.row, c.col = d.col, c.col_width(d.col_width || 1), _.each(d.widgets, function(d) {
+        c.title(d.title), c.width(d.width), c.row = d.row, c.col = d.col, c.col_width(d.col_width || 1), c.transparent_bg(d.transparent_bg || !1), _.each(d.widgets, function(d) {
             var e = new WidgetModel(a, b);
             e.deserialize(d), c.widgets.push(e)
         })
@@ -1233,7 +1241,7 @@ var freeboard = function() {
                         e.saveLocalstorage();
                     } else {
                         var j = void 0;
-                        "datasource" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings(), m.name = i.name()) : "widget" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings()) : "pane" == k.type && (m = {}, "edit" == k.operation && (m.title = i.title(), m.col_width = i.col_width()), l = {
+                        "datasource" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings(), m.name = i.name()) : "widget" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings()) : "pane" == k.type && (m = {}, "edit" == k.operation && (m.title = i.title(), m.col_width = i.col_width(), m.transparent_bg = i.transparent_bg()), l = {
                             settings: {
                                 settings: [{
                                     name: "title",
@@ -1245,6 +1253,11 @@ var freeboard = function() {
                                     type: "integer",
                                     default_value: 1,
                                     required: !0
+                                }, {
+                                    name: "transparent_bg",
+                                    display_name: "Transparent Background",
+                                    type: "boolean",
+                                    default_value: 1,
                                 }]
                             }
                         }), h.createPluginEditor(n, l, j, m, function(f) {
@@ -1257,7 +1270,7 @@ var freeboard = function() {
                                     g.settings(f.settings), g.type(f.type), i.widgets.push(g), d.attachWidgetEditIcons(a)
                                 }
                             } else {
-                                "edit" == k.operation && ("pane" == k.type ? (i.title(f.settings.title), i.col_width(parseInt(f.settings.col_width)), d.processResize(!1)) : ("datasource" == k.type && (i.name(f.settings.name), f.settings.name), i.type(f.type), i.settings(f.settings)))
+                                "edit" == k.operation && ("pane" == k.type ? (i.title(f.settings.title), i.transparent_bg(f.settings.transparent_bg), i.col_width(0), i.col_width(parseInt(f.settings.col_width)), d.processResize(!1)) : ("datasource" == k.type && (i.name(f.settings.name), f.settings.name), i.type(f.type), i.settings(f.settings)))
                             }
                             e.saveLocalstorage();
                         })
@@ -1285,8 +1298,8 @@ var freeboard = function() {
             init: function(a, b, c, f, g) {
                 e.isEditing() && d.attachWidgetEditIcons($(a).parent()) && e.saveLocalstorage()
             },
-            update: function(a, b, c, d, e) {
-                d.shouldRender() && ($(a).empty(), d.render(a)) && e.saveLocalstorage()
+            update: function(a, b, c, d, e, f) {
+                d.shouldRender() && ($(a).empty(), d.render(a)) && e.saveLocalstorage();
             }
         }, $(function() {
             function a() {
@@ -1952,67 +1965,68 @@ $.extend(freeboard, jQuery.eventEmitter),
                 b(new g(a))
             }
         });
-        var h = 0;
-        freeboard.addStyle(".gauge-widget-wrapper", "width: 100%;text-align: center;"), freeboard.addStyle(".gauge-widget", "width:200px;height:160px;display:inline-block;");
-        var i = function(a) {
-            function b() {
-                g && (f.empty(), c = new JustGage({
-                    id: d,
-                    value: _.isUndefined(i.min_value) ? 0 : i.min_value,
-                    min: _.isUndefined(i.min_value) ? 0 : i.min_value,
-                    max: _.isUndefined(i.max_value) ? 0 : i.max_value,
-                    label: i.units,
-                    showInnerShadow: !1,
-                    valueFontColor: "#fff"
-                }))
-            }
-            var c, d = "gauge-" + h++,
-                e = $('<h2 class="section-title"></h2>'),
-                f = $('<div class="gauge-widget" id="' + d + '"></div>'),
-                g = !1,
-                i = a;
-            this.render = function(a) {
-                g = !0, $(a).append(e).append($('<div class="gauge-widget-wrapper"></div>').append(f)), b()
-            }, this.onSettingsChanged = function(a) {
-                a.min_value != i.min_value || a.max_value != i.max_value || a.units != i.units ? (i = a, b()) : i = a, e.html(a.title)
-            }, this.onCalculatedValueChanged = function(a, b) {
-                _.isUndefined(c) || c.refresh(Number(b))
-            }, this.onDispose = function() {}, this.getHeight = function() {
-                return 3
-            }, this.onSettingsChanged(a)
-        };
-        freeboard.loadWidgetPlugin({
-            type_name: "gauge",
-            display_name: "Gauge",
-            external_scripts: ["plugins/thirdparty/raphael.2.1.4.min.js", "plugins/thirdparty/justgage.1.0.1.js"],
-            // external_scripts: ["plugins/thirdparty/raphael.2.1.4.min.js", "plugins/thirdparty/justgage.1.2.2.js"],
-            settings: [{
-                name: "title",
-                display_name: "Title",
-                type: "text"
-            }, {
-                name: "value",
-                display_name: "Value",
-                type: "calculated"
-            }, {
-                name: "units",
-                display_name: "Units",
-                type: "text"
-            }, {
-                name: "min_value",
-                display_name: "Minimum",
-                type: "text",
-                default_value: 0
-            }, {
-                name: "max_value",
-                display_name: "Maximum",
-                type: "text",
-                default_value: 100
-            }],
-            newInstance: function(a, b) {
-                b(new i(a))
-            }
-        }), freeboard.addStyle(".sparkline", "width:100%;height: 75px;");
+        // var h = 0;
+        // freeboard.addStyle(".gauge-widget-wrapper", "width: 100%;text-align: center;"), freeboard.addStyle(".gauge-widget", "width:200px;height:160px;display:inline-block;");
+        // var i = function(a) {
+        //     function b() {
+        //         g && (f.empty(), c = new JustGage({
+        //             id: d,
+        //             value: _.isUndefined(i.min_value) ? 0 : i.min_value,
+        //             min: _.isUndefined(i.min_value) ? 0 : i.min_value,
+        //             max: _.isUndefined(i.max_value) ? 0 : i.max_value,
+        //             label: i.units,
+        //             showInnerShadow: !1,
+        //             valueFontColor: "#fff"
+        //         }))
+        //     }
+        //     var c, d = "gauge-" + h++,
+        //         e = $('<h2 class="section-title"></h2>'),
+        //         f = $('<div class="gauge-widget" id="' + d + '"></div>'),
+        //         g = !1,
+        //         i = a;
+        //     this.render = function(a) {
+        //         g = !0, $(a).append(e).append($('<div class="gauge-widget-wrapper"></div>').append(f)), b()
+        //     }, this.onSettingsChanged = function(a) {
+        //         a.min_value != i.min_value || a.max_value != i.max_value || a.units != i.units ? (i = a, b()) : i = a, e.html(a.title)
+        //     }, this.onCalculatedValueChanged = function(a, b) {
+        //         _.isUndefined(c) || c.refresh(Number(b))
+        //     }, this.onDispose = function() {}, this.getHeight = function() {
+        //         return 3
+        //     }, this.onSettingsChanged(a)
+        // };
+        // freeboard.loadWidgetPlugin({
+        //     type_name: "gauge",
+        //     display_name: "Gauge",
+        //     external_scripts: ["plugins/thirdparty/raphael.2.1.4.min.js", "plugins/thirdparty/justgage.1.0.1.js"],
+        //     // external_scripts: ["plugins/thirdparty/raphael.2.1.4.min.js", "plugins/thirdparty/justgage.1.2.2.js"],
+        //     settings: [{
+        //         name: "title",
+        //         display_name: "Title",
+        //         type: "text"
+        //     }, {
+        //         name: "value",
+        //         display_name: "Value",
+        //         type: "calculated"
+        //     }, {
+        //         name: "units",
+        //         display_name: "Units",
+        //         type: "text"
+        //     }, {
+        //         name: "min_value",
+        //         display_name: "Minimum",
+        //         type: "text",
+        //         default_value: 0
+        //     }, {
+        //         name: "max_value",
+        //         display_name: "Maximum",
+        //         type: "text",
+        //         default_value: 100
+        //     }],
+        //     newInstance: function(a, b) {
+        //         b(new i(a))
+        //     }
+        // }), 
+        freeboard.addStyle(".sparkline", "width:100%;height: 75px;");
         var j = function(a) {
             var d = $('<h2 class="section-title"></h2>'),
                 e = $('<div class="sparkline"></div>'),
@@ -2073,7 +2087,8 @@ $.extend(freeboard, jQuery.eventEmitter),
             newInstance: function(a, b) {
                 b(new j(a))
             }
-        }), freeboard.addStyle("div.pointer-value", "position:absolute;height:95px;margin: auto;top: 0px;bottom: 0px;width: 100%;text-align:center;");
+        }), 
+        freeboard.addStyle("div.pointer-value", "position:absolute;height:100%;margin: auto;top: 0px;bottom: 0px;width: 100%;text-align:center;");
         var k = function(a) {
             function b(a) {
                 if (!a || a.length < 2)
@@ -2084,19 +2099,21 @@ $.extend(freeboard, jQuery.eventEmitter),
                     b.push(["l", a[c], a[c + 1]]);
                 return b.push(["z"]), b
             }
-            var c, d, e, f, g = 3,
+            var p=this,aa ,c, d, e, f, g = 3,
                 h = 0,
                 i = $('<div class="widget-big-text"></div>'),
                 j = $("<div></div>");
             this.render = function(a) {
-                // console.log("****** a : ",a)
-                e = $(a).width(), f = /*$(a).height();*/  this.getHeight()*40;  // fixing inproper render of widget pointer
+                aa= $(a);
+                e = $(a).width(), f = /*$(a).height();*/  this.getHeight()*46-9;  // fixing inproper render of widget pointer
                 var h = Math.min(e, f) / 2 - 2 * g;
                 c = Raphael($(a).get()[0], e, f);
                 var k = c.circle(e / 2, f / 2, h);
-                k.attr("stroke", "#FF9900"), k.attr("stroke-width", g), d = c.path(b([e / 2, f / 2 - h + g, 15, 20, -30, 0])), d.attr("stroke-width", 0), d.attr("fill", "#fff"), $(a).append($('<div class="pointer-value"></div>').append(i).append(j))
+                k.attr("stroke", "#FF9900"), k.attr("stroke-width", g), d = c.path(b([e / 2, f / 2 - h + g, 0.15*h, 0.2*h, -0.3*h, 0])), d.attr("stroke-width", 0), d.attr("fill", "#fff"), $(a).append($('<div class="pointer-value"></div>').append(i).append(j))
             }, this.onSettingsChanged = function(a) {
-                j.html(a.units)
+                j.html(a.units);
+                console.log("*********** this : ", p)
+                console.log("*********** aa : ", aa)
             }, this.onCalculatedValueChanged = function(a, b) {
                 if ("direction" == a) {
                     if (!_.isUndefined(d)) {
@@ -2106,8 +2123,9 @@ $.extend(freeboard, jQuery.eventEmitter),
                     }
                     h = b
                 } else "value_text" == a && i.html(b)
-            }, this.onDispose = function() {}, this.getHeight = function() {
-                return 4
+            }, this.onDispose = function() {}, 
+            this.getHeight = function() {
+                return parseInt((a.height_block)?a.height_block:2)
             }, this.onSettingsChanged(a)
         };
         freeboard.loadWidgetPlugin({
@@ -2127,6 +2145,13 @@ $.extend(freeboard, jQuery.eventEmitter),
                 name: "units",
                 display_name: "Units",
                 type: "text"
+            },
+            {
+                name: "height_block",
+                display_name: "Height Blocks",
+                type: "integer",
+                default_value: 2,
+                required: !0
             }],
             newInstance: function(a, b) {
                 b(new k(a))
@@ -2157,12 +2182,13 @@ $.extend(freeboard, jQuery.eventEmitter),
                 }), d = a
             }, this.onSettingsChanged = function(a) {
                 b(), a.refresh && a.refresh > 0 && (e = setInterval(c, 1e3 * Number(a.refresh)))
+                // l(a)
             }, this.onCalculatedValueChanged = function(a, b) {
                 "src" == a && (f = b), c()
             }, this.onDispose = function() {
                 b()
             }, this.getHeight = function() {
-                return 5
+                return parseInt((a.height_block)?a.height_block:2)
             }, this.onSettingsChanged(a)
         };
         freeboard.loadWidgetPlugin({
@@ -2172,13 +2198,22 @@ $.extend(freeboard, jQuery.eventEmitter),
             settings: [{
                 name: "src",
                 display_name: "Image URL",
-                type: "calculated"
+                type: "calculated",
+                default_value: "https://tunchz.github.io/Covid-19/img/icons/Mholan_Logo.png"
             }, {
                 type: "number",
                 display_name: "Refresh every",
                 name: "refresh",
                 suffix: "seconds",
-                description: "Leave blank if the image doesn't need to be refreshed"
+                description: "Leave blank if the image doesn't need to be refreshed",
+                default_value: 0
+            },
+            {
+                name: "height_block",
+                display_name: "Height Blocks",
+                type: "integer",
+                default_value: 2,
+                required: !0
             }],
             newInstance: function(a, b) {
                 b(new l(a))
@@ -2370,7 +2405,7 @@ $.extend(freeboard, jQuery.eventEmitter),
             }, this.onCalculatedValueChanged = function(a, c) {
                 "lat" == a ? f.lat = c : "lon" == a && (f.lon = c), b()
             }, this.onDispose = function() {}, this.getHeight = function() {
-                console.log("-----------",e)
+                // console.log("-----------",e)
                 return (e.height_block) ? e.height_block:2
             }, this.onSettingsChanged(a)
         };

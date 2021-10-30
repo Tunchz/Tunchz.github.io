@@ -16030,7 +16030,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 */
 	function Gridster(el, options)
 	{
-		// console.log("--- options : ", options, el);
+		// console.log("--- Gridster options : ", options, el);
 		this.options = $.extend(true, defaults, options);
 		this.$el = $(el);
 		this.$wrapper = this.$el.parent();
@@ -16102,7 +16102,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 * @return {HTMLElement} Returns the jQuery wrapped HTMLElement representing.
 	 *  the widget that was just created.
 	 */
-	fn.add_widget = function(html, size_x, size_y, col, row)
+	fn.add_widget = function(html, size_x, size_y, col, row, transparent_bg)
 	{
 		var pos;
 		size_x || (size_x = 1);
@@ -16129,6 +16129,8 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 			'data-sizey': size_y
 		}).addClass('gs_w').appendTo(this.$el).hide();
 
+		if (transparent_bg) $w.addClass('transparent_bg');
+
 		this.$widgets = this.$widgets.add($w);
 
 		this.register_widget($w);
@@ -16153,8 +16155,9 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 * @param {Function} callback Function executed when the widget is removed.
 	 * @return {HTMLElement} Returns $widget.
 	 */
-	fn.resize_widget = function($widget, size_x, size_y, callback)
+	fn.resize_widget = function($widget, size_x, size_y, transparent_bg, callback)
 	{	
+		if (transparent_bg) $widget.addClass('transparent_bg'); else $widget.removeClass('transparent_bg');
 		var wgd = $widget.coords().grid;
 		size_x || (size_x = wgd.size_x);
 		size_y || (size_y = wgd.size_y);
@@ -16383,7 +16386,6 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 		var cols_l = ga.length;
 		var valid_pos = [];
 		var rows_l;
-
 		for(var c = 1; c < cols_l; c++)
 		{
 			rows_l = ga[c].length;

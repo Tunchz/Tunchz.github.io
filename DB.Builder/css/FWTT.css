@@ -2,12 +2,17 @@
 #toggle-header {
     width: 25px;
     height: 20px;
+    background-color: #21212100;
 }
 
 #toggle-header-icon {
     margin-top: 1px;
     margin-bottom: 1px;
 }
+
+/*#toggle-header-icon.icon-wrench {
+    background-color: #21212100;
+}*/
 
 .logo-Mholan {
     width: 40px;
@@ -139,6 +144,14 @@ li:hover header ul.pane-tools {
 	align-self: center;
 }
 
+.gs_w.transparent_bg {
+	background-color: #2a2a2a66;
+}
+
+.transparent_bg.active {
+	background-color: #2a2a2a00;
+}
+
 /*.tw-display {
 	margin-left: 10px;
 }*/
@@ -182,9 +195,16 @@ svg {
 	transform: translateX(-50%);
 } 
 
+.pointer-value {
+/*	justify-content: center !important;
+	vertical-align: middle !important;
+	align-items: center !important;
+	align-content: center !important;*/
+}
+
 .widget-big-text {
-	text-align: center;
-	justify-content: ;
+	padding-top: calc(45% - 17px);
+	/*margin: auto;*/
 }
 
 
@@ -224,7 +244,7 @@ svg {
 
 
 body {
-	/*background: url(https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png);*/
+	background: url(https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png);
 	/*background: url(https://tunchz.github.io/PoC/MWA/static/diagonal-noise.png);*/
 }
 
