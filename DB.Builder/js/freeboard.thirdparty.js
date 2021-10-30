@@ -16682,6 +16682,18 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 
 		this.$player.addClass('player');
 		this.player_grid_data = this.$player.coords().grid;
+
+		// fix error some time value parse as string instead of integer causing error in grid alignment
+		// console.log("----------------" , this.player_grid_data )
+		this.player_grid_data = {
+			...this.player_grid_data,
+			col: parseInt(this.player_grid_data.col),
+			row: parseInt(this.player_grid_data.row),
+			size_x: parseInt(this.player_grid_data.size_x),
+			size_y: parseInt(this.player_grid_data.size_y)
+		}
+
+
 		this.placeholder_grid_data = $.extend({}, this.player_grid_data);
 
 		//set new grid height along the dragging period

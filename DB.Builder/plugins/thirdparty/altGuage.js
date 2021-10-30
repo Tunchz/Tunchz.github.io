@@ -10,7 +10,7 @@ window.dyngaugeID = 0;
         var rendered = false;
 
         var currentSettings = settings;
-
+// console.log("------- settings ",settings)
         function createGauge() {
             if (!rendered) {
                 return;
@@ -58,7 +58,7 @@ window.dyngaugeID = 0;
         }
 
         this.getHeight = function () {
-            return currentSettings.height_block;
+            return parseInt(currentSettings.height_block);
         }
 
         this.onSettingsChanged(settings);

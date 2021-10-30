@@ -517,6 +517,7 @@ function PaneModel(a, b) {
 
     }, this.serialize = function() {
         var a = [];
+
         return _.each(c.widgets(), function(b) {
             a.push(b.serialize())
         }), {
@@ -1256,7 +1257,7 @@ var freeboard = function() {
                                     g.settings(f.settings), g.type(f.type), i.widgets.push(g), d.attachWidgetEditIcons(a)
                                 }
                             } else {
-                                "edit" == k.operation && ("pane" == k.type ? (i.title(f.settings.title), i.col_width(f.settings.col_width), d.processResize(!1)) : ("datasource" == k.type && (i.name(f.settings.name), f.settings.name), i.type(f.type), i.settings(f.settings)))
+                                "edit" == k.operation && ("pane" == k.type ? (i.title(f.settings.title), i.col_width(parseInt(f.settings.col_width)), d.processResize(!1)) : ("datasource" == k.type && (i.name(f.settings.name), f.settings.name), i.type(f.type), i.settings(f.settings)))
                             }
                             e.saveLocalstorage();
                         })

@@ -39,7 +39,7 @@ JustGage = function(config) {
     delete config.defaults;
   }
 
-  console.log("--- config : ", config);
+  // console.log("--- config : ", config);
 
   // configurable parameters
   obj.config = {
@@ -298,7 +298,7 @@ JustGage = function(config) {
     canvasH = getStyle(document.getElementById(obj.config.id), "height").slice(0, -2) * 1;
   }
 
-    console.log("---Canvas W&H : ", canvasW, canvasH);
+    // console.log("---Canvas W&H : ", canvasW, canvasH);
   // widget dimensions
   if (obj.config.donut === true) {
 
@@ -414,7 +414,7 @@ JustGage = function(config) {
     labelFontSize = ((widgetH / 16) > obj.config.labelMinFontSize) ? (widgetH / 12) : obj.config.labelMinFontSize;
     labelX = dx + widgetW / 2;
     labelY = valueY + valueFontSize / 2.2 + 1;
-    console.log("*********", obj.config.labelMinFontSize , labelFontSize)
+    // console.log("*********", obj.config.labelMinFontSize , labelFontSize)
 
     // min
     // minFontSize = ((widgetH / 16) > obj.config.minLabelMinFontSize) ? (widgetH / 16) : obj.config.minLabelMinFontSize;

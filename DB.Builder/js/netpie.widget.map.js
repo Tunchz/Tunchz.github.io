@@ -62,7 +62,7 @@
             title.empty();
             if (newSettings.title) title.append($('<div class="map-wrapper" style="margin-bottom:5px"><h2 class="section-title tw-title tw-td">'+newSettings.title+'</h2></div>'));
             else title.empty();
-            console.log("**********",title.innerHtml)
+            // console.log("**********",title.innerHtml)
 
             // Options
             mapOptions(currentSettings)
