@@ -70,7 +70,11 @@ li.column-tool {
 }
 
 .pane-tools li {
-    padding: 3px 3px;
+	padding:1px;
+    margin: 2px;
+    background-color: #ffffff22;
+    /*border: 1px solid #ffffff33;*/
+
 }
 
 
