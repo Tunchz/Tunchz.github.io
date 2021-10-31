@@ -3,6 +3,7 @@
     width: 25px;
     height: 20px;
     background-color: #21212100;
+    margin-left: 0px;
 }
 
 #toggle-header-icon {
@@ -244,7 +245,7 @@ svg {
 
 
 body {
-	background: url(https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png);
+	/*background: url(https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png);*/
 	/*background: url(https://tunchz.github.io/PoC/MWA/static/diagonal-noise.png);*/
 }
 

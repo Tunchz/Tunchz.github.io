@@ -24,7 +24,9 @@ function FreeboardModel(a, b, c) {
         e = 1;
     this.version = 0, this.isEditing = ko.observable(!1), this.allow_edit = ko.observable(!1), this.allow_edit.subscribe(function(a) {
         a ? $("#main-header").show() : $("#main-header").hide()
-    }), this.header_image = ko.observable(), this.plugins = ko.observableArray(), this.datasources = ko.observableArray(), this.panes = ko.observableArray(), this.datasourceData = {}, this.processDatasourceUpdate = function(a, b) {
+    }), this.header_image = ko.observable(), this.background_image = ko.observable(), this.background_image.subscribe(function(a){document.body.style.backgroundImage = "url('"+a+"')"}),
+    this.background_color = ko.observable(), this.background_color.subscribe(function(a){document.body.style.backgroundColor = (a)?a:"#212121"}),
+    this.plugins = ko.observableArray(), this.datasources = ko.observableArray(), this.panes = ko.observableArray(), this.datasourceData = {}, this.processDatasourceUpdate = function(a, b) {
         var c = a.name();
         d.datasourceData[c] = b, _.each(d.panes(), function(a) {
             _.each(a.widgets(), function(a) {
@@ -78,6 +80,8 @@ function FreeboardModel(a, b, c) {
         }), {
             version: e,
             header_image: d.header_image(),
+            background_image: d.background_image(),
+            background_color: d.background_color(),
             allow_edit: d.allow_edit(),
             plugins: d.plugins(),
             panes: a,
@@ -87,7 +91,7 @@ function FreeboardModel(a, b, c) {
         }
     }, this.deserialize = function(e, f) {
         function g() {
-            c.setUserColumns(e.columns), _.isUndefined(e.allow_edit) ? d.allow_edit(!0) : d.allow_edit(e.allow_edit), d.version = e.version || 0, d.header_image(e.header_image), _.each(e.datasources, function(b) {
+            c.setUserColumns(e.columns), _.isUndefined(e.allow_edit) ? d.allow_edit(!0) : d.allow_edit(e.allow_edit), d.version = e.version || 0, d.header_image(e.header_image),d.background_image(e.background_image),d.background_color(e.background_color), _.each(e.datasources, function(b) {
                 var c = new DatasourceModel(d, a);
                 c.deserialize(b), d.addDatasource(c)
             });
@@ -2099,33 +2103,46 @@ $.extend(freeboard, jQuery.eventEmitter),
                     b.push(["l", a[c], a[c + 1]]);
                 return b.push(["z"]), b
             }
-            var p=this,aa ,c, d, e, f, g = 3,
+            var self=this,
+                currentSettings = a,
+                _element ,_svg, d, e, f, g = 3,
                 h = 0,
-                i = $('<div class="widget-big-text"></div>'),
-                j = $("<div></div>");
-            this.render = function(a) {
-                aa= $(a);
-                e = $(a).width(), f = /*$(a).height();*/  this.getHeight()*46-9;  // fixing inproper render of widget pointer
+                _value = $('<div class="widget-big-text"></div>'),
+                _unit = $("<div></div>");
+            this.render = function(element) {
+                _element= element;
+                e = $(_element).width(), f = /*$(a).height();*/  self.getHeight()*46-9;  // fixing inproper render of widget pointer
                 var h = Math.min(e, f) / 2 - 2 * g;
-                c = Raphael($(a).get()[0], e, f);
-                var k = c.circle(e / 2, f / 2, h);
-                k.attr("stroke", "#FF9900"), k.attr("stroke-width", g), d = c.path(b([e / 2, f / 2 - h + g, 0.15*h, 0.2*h, -0.3*h, 0])), d.attr("stroke-width", 0), d.attr("fill", "#fff"), $(a).append($('<div class="pointer-value"></div>').append(i).append(j))
+                _svg = Raphael($(_element).get()[0], e, f);
+                var _circle = _svg.circle(e / 2, f / 2, h);
+                _circle.attr("stroke", "#FF9900"), 
+                _circle.attr("stroke-width", g), 
+                _pointer = _svg.path(b([e / 2, f / 2 - h + g, 0.15*h, 0.2*h, -0.3*h, 0])), 
+                _pointer.attr("stroke-width", 0), 
+                _pointer.attr("fill", "#fff"), 
+                $(_element).append($('<div class="pointer-value"></div>').append(_value).append(_unit))
             }, this.onSettingsChanged = function(a) {
-                j.html(a.units);
-                console.log("*********** this : ", p)
-                console.log("*********** aa : ", aa)
+                currentSettings = a;
+                if (_element) {
+                console.log("*********** width|height : ",$(_element).width(), self.getHeight()*46-9)
+                $(_element).css({"width":$(_element).width()+"px", "height": self.getHeight()*46-9 +"px"})
+                $(_element).empty()
+                self.render(_element)
+                }
+                _unit.html(currentSettings.units);
+
             }, this.onCalculatedValueChanged = function(a, b) {
                 if ("direction" == a) {
-                    if (!_.isUndefined(d)) {
-                        d.animate({
+                    if (!_.isUndefined(_pointer)) {
+                        _pointer.animate({
                             transform: "r" + b + "," + e / 2 + "," + f / 2
                         }, 250, "bounce")
                     }
-                    h = b
-                } else "value_text" == a && i.html(b)
+                    // h = b
+                } else "value_text" == a && (_value.html(b),_value.css({"padding-top":(f/2-0.13*Math.min(e, f))+'px',"font-size": 0.25*Math.min(e, f)+'px'}))
             }, this.onDispose = function() {}, 
             this.getHeight = function() {
-                return parseInt((a.height_block)?a.height_block:2)
+                return parseInt((currentSettings.height_block)?currentSettings.height_block:2)
             }, this.onSettingsChanged(a)
         };
         freeboard.loadWidgetPlugin({
@@ -2159,36 +2176,42 @@ $.extend(freeboard, jQuery.eventEmitter),
         });
 
         var l = function(a) {
-            function b() {
-                e && (clearInterval(e), e = null)
+
+            var currentSettings = a,
+                _element, _refresh, _imgurl;
+
+            function onDispose() {
+                _refresh && (clearInterval(_refresh), _refresh = null)
             }
 
-            function c() {
-                if (d && f) {
-                    var a = f + (-1 == f.indexOf("?") ? "?" : "&") + Date.now();
-                    $(d).css({
-                        "background-image": "url(" + a + ")"
+            function refresh() {
+                if (_element && _imgurl) {
+                    var imgurl = _imgurl + (-1 == _imgurl.indexOf("?") ? "?" : "&") + Date.now();
+                    console.log("----------- imgurl ",_imgurl, imgurl)
+                    $(_element).css({
+                        "background-image": "url(" + imgurl + ")"
                     })
                 }
             }
-            var d, e, f;
-            this.render = function(a) {
-                $(a).css({
+            this.render = function(element) {
+                _element=element,
+                $(_element).css({
                     width: "100%",
                     height: "100%",
                     "background-repeat": "no-repeat",
                     "background-size": "contain", //"cover",
                     "background-position": "center"
-                }), d = a
+                })
             }, this.onSettingsChanged = function(a) {
-                b(), a.refresh && a.refresh > 0 && (e = setInterval(c, 1e3 * Number(a.refresh)))
+                currentSettings = a,
+                onDispose(), currentSettings.refresh && currentSettings.refresh > 0 && (_refresh = setInterval(refresh, 1e3 * Number(currentSettings.refresh)))
                 // l(a)
             }, this.onCalculatedValueChanged = function(a, b) {
-                "src" == a && (f = b), c()
+                "src" == a && (_imgurl = b), refresh()
             }, this.onDispose = function() {
-                b()
+                onDispose()
             }, this.getHeight = function() {
-                return parseInt((a.height_block)?a.height_block:2)
+                return parseInt((currentSettings?.height_block)?currentSettings.height_block:2)
             }, this.onSettingsChanged(a)
         };
         freeboard.loadWidgetPlugin({

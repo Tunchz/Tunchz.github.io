@@ -19,7 +19,7 @@
         if (currentSettings.traffic === undefined)
             currentSettings.traffic = false
         if (currentSettings.zoom === undefined)
-            currentSettings.zoom = 8
+            currentSettings.zoom = 12
 
         var map
         var currentPosition = {}
