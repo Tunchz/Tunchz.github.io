@@ -1934,7 +1934,7 @@ $.extend(freeboard, jQuery.eventEmitter),
                 name: "font_size",
                 display_name: "Font Size",
                 type: "integer",
-                default_value: 10,
+                default_value: 20,
                 required: !0
             },
             {

@@ -446,7 +446,8 @@ body {
     right: 79px
 }
 
-@media screen and (max-width:960px) {
+/*@media screen and (max-width:960px) {*/
+@media screen and (max-width:500px) {
     #dev-console {
         display: none
     }
