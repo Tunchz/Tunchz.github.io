@@ -191,6 +191,24 @@ h2.section-title {
 	/*padding: 0 10px;*/
 }
 
+/* Sparkline */
+.sparkline {
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+.sparkline-legend {
+	padding: 0 10px;
+}
+
+.sparkline-legend-value {
+	font-size: 12px;
+	width: 33% ;
+}
+
+.sparkline-legend-value span{
+	font-size: 14px;
+}
 
 
 /* Pointer Widget */

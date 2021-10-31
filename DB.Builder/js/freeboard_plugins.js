@@ -6,7 +6,7 @@ var _default = {
     background_image: null,
     background_color: "#212121",
     mark_color: "#ff9900",
-    maxmin_color: "#ffffff",
+    maxmin_color: "#00ff00",
     pointer_color: "#ffffff",
     font_color: "#ffffff",
     font_opacity: 0.6,
@@ -1852,17 +1852,19 @@ $.extend(freeboard, jQuery.eventEmitter),
                     $(b).text(a)
         }
 
-        function b(a, b) {
+        function b(_settings, a, b) {
             for (var c = $("<div class='sparkline-legend'></div>"), d = 0; d < b.length; d++) {
-                var f = e[d % e.length],
+                // var f = e[d % e.length],
+                var f = _settings._color[d],
                     g = b[d];
-                c.append("<div class='sparkline-legend-value'><span style='color:" + f + "'>&#9679;</span>" + g + "</div>")
+                c.append("<div class='sparkline-legend-value' style = 'width: "+(_settings.label_perrow?100/parseInt(_settings.label_perrow):100/3)+"%'><span style='color:" + f + "'>&#9679;</span>" + g + "</div>")
             }
             a.empty().append(c), freeboard.addStyle(".sparkline-legend", "margin:5px;"), freeboard.addStyle(".sparkline-legend-value", "color:white; font:10px arial,san serif; float:left; overflow:hidden; width:50%;"), freeboard.addStyle(".sparkline-legend-value span", "font-weight:bold; padding-right:5px;")
         }
 
         function c(_settings, a, b, c) {
-            // console.log("************** _setting : ", _settings)
+            var colors = _settings._color?_settings._color:_color;
+
             var f = $(a).data().values,
                 g = $(a).data().valueMin,
                 h = $(a).data().valueMax;
@@ -1880,14 +1882,14 @@ $.extend(freeboard, jQuery.eventEmitter),
                     height: "100%",
                     width: "100%",
                     fillColor: !1,
-                    lineColor: _settings.mark_color?_settings.mark_color:e[d % e.length],
+                    lineColor: colors[d],
                     lineWidth: 2,
                     spotRadius: 3,
                     spotColor: !1,
                     minSpotColor: _settings.maxmin_color?_settings.maxmin_color:_default.maxmin_color,  //"#78AB49",
                     maxSpotColor: _settings.maxmin_color?_settings.maxmin_color:_default.maxmin_color,  //"#78AB49",
-                    highlightSpotColor: _settings.mark_color?_settings.mark_color:_default.mark_color,  //"#9D3926",
-                    highlightLineColor: _settings.mark_color?_settings.mark_color:_default.mark_color,  //"#9D3926",
+                    highlightSpotColor: colors[d],  //_settings.mark_color?_settings.mark_color:_default.mark_color,  //"#9D3926",
+                    highlightLineColor: colors[d],  //_settings.mark_color?_settings.mark_color:_default.mark_color,  //"#9D3926",
                     chartRangeMin: g,
                     chartRangeMax: h,
                     tooltipFormat: c && c[d] ? j + " (" + c[d] + ")" : j
@@ -1895,7 +1897,7 @@ $.extend(freeboard, jQuery.eventEmitter),
             })
         }
         var d = 100,
-            e = ["#FF9900", "#FFFFFF", "#B3B4B4", "#6B6B6B", "#28DE28", "#13F7F9", "#E6EE18", "#C41204", "#CA3CB8", "#0B1CFB"],
+            _color = ["#FF9900", "#FFFFFF", "#B3B4B4", "#6B6B6B", "#28DE28", "#13F7F9", "#E6EE18", "#C41204", "#CA3CB8", "#0B1CFB"],
             f = freeboard.getStyleString("values");
         freeboard.addStyle(".widget-big-text", f + "font-size:25px;")/*"font-size:75px;")*/, freeboard.addStyle(".tw-display", "width: 100%; height:100%; display:table; table-layout:fixed;"), freeboard.addStyle(".tw-tr", "display:table-row;"), freeboard.addStyle(".tw-tg", "display:table-row-group;"), freeboard.addStyle(".tw-tc", "display:table-caption;"), freeboard.addStyle(".tw-td", "display:table-cell;"), freeboard.addStyle(".tw-value", f + "overflow: hidden;display: inline-block;text-overflow: ellipsis;"), freeboard.addStyle(".tw-unit", "display: inline-block;padding-left: 10px;padding-bottom: 1.1em;vertical-align: bottom;"), freeboard.addStyle(".tw-value-wrapper", "position: relative;vertical-align: middle;height:100%;"), freeboard.addStyle(".tw-sparkline", "height:20px;");
         var g = function(b) {
@@ -1918,6 +1920,7 @@ $.extend(freeboard, jQuery.eventEmitter),
             }, 
             this.onSettingsChanged = function(a) {
                 _settings = a;
+                if (!_.isUndefined(_settings?.mark_color) && _settings?.mark_color !== "") {_settings._color=[_settings.mark_color];} else {_settings._color=[_default.mark_color];}
                 var b = !_.isUndefined(a.title) && "" != a.title,
                     cc = !_.isUndefined(a.units) && "" != a.units;
                 a.sparkline ? j.attr("style", null) : (delete j.data().values, j.empty(), j.hide()), b ? (g.html(_.isUndefined(a.title) ? "" : a.title), g.attr("style", null)) : (g.empty(), g.hide()), cc ? (i.html(_.isUndefined(a.units) ? "" : a.units), i.attr("style", null)) : (i.empty(), i.hide());
@@ -2108,20 +2111,25 @@ $.extend(freeboard, jQuery.eventEmitter),
             var d = $('<h2 class="section-title"></h2>'),
                 e = $('<div class="sparkline"></div>'),
                 f = $("<div></div>"),
-                g = a;
+                _settings = a;
             this.render = function(a) {
                 $(a).append(d).append(e).append(f)
             }, this.onSettingsChanged = function(a) {
-                g = a, d.html(_.isUndefined(a.title) ? "" : a.title), a.include_legend && b(f, a.legend.split(","))
+                _settings = a;
+                if (!_.isUndefined(_settings?.mark_color) && _settings?.mark_color !== "") {var cl = _settings.mark_color.split(','); cl.concat(_color); _settings._color=cl;}
+                d.html(_.isUndefined(a.title) ? "" : a.title), a.include_legend && b(_settings, f, a.legend.split(","))
+                e.css({height: (_settings.include_legend?this.getHeight()-1:this.getHeight())*46-9-12-15})
             }, this.onCalculatedValueChanged = function(a, b) {
-                g.legend ? c(e, b, g.legend.split(",")) : c(e, b)
-            }, this.onDispose = function() {}, this.getHeight = function() {
-                var a = 0;
-                if (g.include_legend && g.legend) {
-                    var b = g.legend.split(",").length;
-                    b > 4 ? a = .5 * Math.floor((b - 1) / 4) : b && (a = .5)
-                }
-                return 2 + a
+                _settings.include_legend ? c(_settings, e, b, _settings.legend.split(",")) : c(_settings, e, b )
+            }, this.onDispose = function() {}, 
+            this.getHeight = function() {
+                // var a = 0;
+                // if (_settings.include_legend && _settings.legend) {
+                //     var b = _settings.legend.split(",").length;
+                //     b > 4 ? a = .5 * Math.floor((b - 1) / 4) : b && (a = .5)
+                // }
+                // return 2 + a
+                return (parseInt((_settings.height_block)?_settings.height_block:2) + ((_settings.include_legend)?1:0))
             }, this.onSettingsChanged(a)
         };
         freeboard.loadWidgetPlugin({
@@ -2146,20 +2154,52 @@ $.extend(freeboard, jQuery.eventEmitter),
                 display_name: "Legend",
                 type: "text",
                 description: "Comma-separated for multiple sparklines"
-            // },
+            }, 
+            {
+                name: "label_perrow",
+                display_name: "#Lebal Per Row",
+                type: "integer",
+                default_value: 3,
+                required: !0
+            },
             // {
-            //     name: "font_size",
-            //     display_name: "Font Size",
-            //     type: "integer",
-            //     default_value: 10,
+            //     name: "font_color",
+            //     display_name: "Text Color",
+            //     type: "text",
+            //     default_value: _default.font_color,
             //     required: !0
             // },
             // {
-            //     name: "height_block",
-            //     display_name: "Height Blocks",
-            //     type: "integer",
-            //     default_value: 1,
+            //     name: "sparkline",
+            //     display_name: "Include Sparkline",
+            //     type: "boolean"
+            // },
+            {
+                name: "mark_color",
+                display_name: "Sparkline Colors",
+                type: "text",
+                description: "Comma-separated for multiple sparklines, Leave blank for default colors"
+            },
+            {
+                name: "maxmin_color",
+                display_name: "Max-Min Color",
+                type: "text",
+                default_value: _default.maxmin_color,
+                required: !0
+            },
+            // {
+            //     name: "maxmin_color",
+            //     display_name: "Max-Min Color",
+            //     type: "text",
+            //     default_value: _default.maxmin_color,
             //     required: !0
+            // },
+            {
+                name: "height_block",
+                display_name: "Height Blocks",
+                type: "integer",
+                default_value: 2,
+                required: !0
             }],
             newInstance: function(a, b) {
                 b(new j(a))
