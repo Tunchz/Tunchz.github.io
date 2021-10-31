@@ -26,6 +26,7 @@ function FreeboardModel(a, b, c) {
         a ? $("#main-header").show() : $("#main-header").hide()
     }), this.header_image = ko.observable(), 
     this.dashboard_title = ko.observable(), this.dashboard_title.subscribe(function(a){$("#board-title").html(a)}),
+    this.avatar = ko.observable(), this.avatar.subscribe(function(a){var s=a;(!a)&&(s="https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png"); $("#avatar-footer").css({content: "url('"+s+"')"}), console.log("//////// ",a)}),
     this.background_image = ko.observable(), this.background_image.subscribe(function(a){document.body.style.backgroundImage = "url('"+a+"')"}),
     this.background_color = ko.observable(), this.background_color.subscribe(function(a){document.body.style.backgroundColor = (a)?a:"#212121"}),
     this.plugins = ko.observableArray(), this.datasources = ko.observableArray(), this.panes = ko.observableArray(), this.datasourceData = {}, this.processDatasourceUpdate = function(a, b) {
@@ -83,6 +84,7 @@ function FreeboardModel(a, b, c) {
             version: e,
             header_image: d.header_image(),
             dashboard_title: d.dashboard_title(),
+            avatar: d.avatar(),
             background_image: d.background_image(),
             background_color: d.background_color(),
             allow_edit: d.allow_edit(),
@@ -94,7 +96,7 @@ function FreeboardModel(a, b, c) {
         }
     }, this.deserialize = function(e, f) {
         function g() {
-            c.setUserColumns(e.columns), _.isUndefined(e.allow_edit) ? d.allow_edit(!0) : d.allow_edit(e.allow_edit), d.version = e.version || 0, d.header_image(e.header_image), d.dashboard_title(e.dashboard_title),d.background_image(e.background_image),d.background_color(e.background_color), _.each(e.datasources, function(b) {
+            c.setUserColumns(e.columns), _.isUndefined(e.allow_edit) ? d.allow_edit(!0) : d.allow_edit(e.allow_edit), d.version = e.version || 0, d.header_image(e.header_image), d.dashboard_title(e.dashboard_title), d.avatar(e.avatar),d.background_image(e.background_image),d.background_color(e.background_color), _.each(e.datasources, function(b) {
                 var c = new DatasourceModel(d, a);
                 c.deserialize(b), d.addDatasource(c)
             });
