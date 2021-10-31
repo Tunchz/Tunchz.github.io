@@ -16102,7 +16102,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 * @return {HTMLElement} Returns the jQuery wrapped HTMLElement representing.
 	 *  the widget that was just created.
 	 */
-	fn.add_widget = function(html, size_x, size_y, col, row, transparent_bg)
+	fn.add_widget = function(html, size_x, size_y, col, row, transparent_bg, widget_background_color)
 	{
 		var pos;
 		size_x || (size_x = 1);
@@ -16129,7 +16129,16 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 			'data-sizey': size_y
 		}).addClass('gs_w').appendTo(this.$el).hide();
 
-		if (transparent_bg) $w.addClass('transparent_bg');
+		// console.log("********************* add widget : ", transparent_bg, widget_background_color)
+		if (transparent_bg) {
+			var color = widget_background_color;
+			var rgbaColor = 'rgba(' + parseInt(color.slice(-6,-4),16)+ ',' + parseInt(color.slice(-4,-2),16)+ ',' + parseInt(color.slice(-2),16)+',0.4)';
+			$w.addClass('transparent_bg');
+			if (widget_background_color) $w.css({"background-color": rgbaColor});
+		} else {
+			if (widget_background_color) $w.css({"background-color": widget_background_color});
+		}
+		
 
 		this.$widgets = this.$widgets.add($w);
 
@@ -16155,9 +16164,18 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 * @param {Function} callback Function executed when the widget is removed.
 	 * @return {HTMLElement} Returns $widget.
 	 */
-	fn.resize_widget = function($widget, size_x, size_y, transparent_bg, callback)
+	fn.resize_widget = function($widget, size_x, size_y, transparent_bg, widget_background_color, callback)
 	{	
-		if (transparent_bg) $widget.addClass('transparent_bg'); else $widget.removeClass('transparent_bg');
+		// console.log("********************* resize : ",$widget, transparent_bg, widget_background_color)
+		if (transparent_bg) {
+			var color = widget_background_color;
+			var rgbaColor = 'rgba(' + parseInt(color.slice(-6,-4),16)+ ',' + parseInt(color.slice(-4,-2),16)+ ',' + parseInt(color.slice(-2),16)+',0.4)';
+			$widget.addClass('transparent_bg');
+			if (widget_background_color) $widget.css({"background-color": rgbaColor});
+		} else {
+			$widget.removeClass('transparent_bg');
+			if (widget_background_color) $widget.css({"background-color": widget_background_color});
+		}
 		var wgd = $widget.coords().grid;
 		size_x || (size_x = wgd.size_x);
 		size_y || (size_y = wgd.size_y);

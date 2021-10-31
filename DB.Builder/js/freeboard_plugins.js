@@ -5,7 +5,12 @@ var _default = {
     avatar: "https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png",
     background_image: null,
     background_color: "#212121",
-    mark_color: "#ff9900"
+    mark_color: "#ff9900",
+    maxmin_color: "#ffffff",
+    pointer_color: "#ffffff",
+    font_color: "#ffffff",
+    font_opacity: 0.6,
+    widget_background_color: "#383838",
 };
 
 function DialogBox(a, b, c, d, e) {
@@ -33,7 +38,7 @@ function FreeboardModel(a, b, c) {
         a ? $("#main-header").show() : $("#main-header").hide()
     }), this.header_image = ko.observable(), 
     this.dashboard_title = ko.observable(), this.dashboard_title.subscribe(function(a){$("#board-title").html(a?a:_default.dashboard_title)}),
-    this.avatar = ko.observable(), this.avatar.subscribe(function(a){var s=a;(!a)&&(s=_default.avatar); $("#avatar-footer").css({content: "url('"+s+"')"}), console.log("//////// ",a)}),
+    this.avatar = ko.observable(), this.avatar.subscribe(function(a){var s=a;(!a)&&(s=_default.avatar); $("#avatar-footer").css({content: "url('"+s+"')"})}),
     this.background_image = ko.observable(), this.background_image.subscribe(function(a){document.body.style.backgroundImage = "url('"+(a?a:_default.background_image)+"')"}),
     this.background_color = ko.observable(), this.background_color.subscribe(function(a){document.body.style.backgroundColor = (a)?a:_default.background_color}),
     this.plugins = ko.observableArray(), this.datasources = ko.observableArray(), this.panes = ko.observableArray(), this.datasourceData = {}, this.processDatasourceUpdate = function(a, b) {
@@ -351,8 +356,9 @@ function FreeboardUI() {
             g = Number(b.width()),
             h = Number(b.getCalculatedHeight()),
             tbg = b.transparent_bg();
+            bgc = b.widget_background_color();
             // console.log("--------------- b : ",b)
-        r.add_widget(a, g, h, e, f, tbg), c && n(!0), l(b, f, e), $(a).attrchange({
+        r.add_widget(a, g, h, e, f, tbg, bgc), c && n(!0), l(b, f, e), $(a).attrchange({
             trackValues: !0,
             callback: function(a) {
                 "data-row" == a.attributeName ? l(b, Number(a.newValue), void 0) : "data-col" == a.attributeName && l(b, void 0, Number(a.newValue))
@@ -364,7 +370,7 @@ function FreeboardUI() {
         var c = b.getCalculatedHeight(),
             d = Number($(a).attr("data-sizey")),
             e = Number($(a).attr("data-sizex"));
-        (c != d || b.col_width() != e) && r.resize_widget($(a), b.col_width(), c, b.transparent_bg(), function() {
+        (c != d || b.col_width() != e) && r.resize_widget($(a), b.col_width(), c, b.transparent_bg(), b.widget_background_color(), function() {
             r.set_dom_grid_height()
         })
     }
@@ -502,9 +508,18 @@ function PaneModel(a, b) {
     // console.log("*********** Panmodel a freeboardModel : ",a);
     // console.log("*********** Panmodel b widgetPlugins: ",b);
     var c = this;
-    this.title = ko.observable(),this.transparent_bg = ko.observable(), this.width = ko.observable(1), this.row = {}, this.col = {}, this.col_width = ko.observable(1), this.col_width.subscribe(function(a) {
+    this.title = ko.observable(),
+    this.transparent_bg = ko.observable(), this.transparent_bg.subscribe(function(a) {
         c.processSizeChange()
-    }), this.widgets = ko.observableArray(), this.addWidget = function(a) {
+    }), 
+    this.widget_background_color = ko.observable(), this.widget_background_color.subscribe(function(a) {
+        c.processSizeChange()
+    }), 
+    this.width = ko.observable(1), this.row = {}, this.col = {}, 
+    this.col_width = ko.observable(1), this.col_width.subscribe(function(a) {
+        c.processSizeChange()
+    }), 
+    this.widgets = ko.observableArray(), this.addWidget = function(a) {
         this.widgets.push(a)
     }, this.widgetCanMoveUp = function(a) {
         return c.widgets.indexOf(a) >= 1
@@ -561,10 +576,11 @@ function PaneModel(a, b) {
             col: c.col,
             col_width: c.col_width(),
             transparent_bg: c.transparent_bg(),
+            widget_background_color: c.widget_background_color(),
             widgets: a
         }
     }, this.deserialize = function(d) {
-        c.title(d.title), c.width(d.width), c.row = d.row, c.col = d.col, c.col_width(d.col_width || 1), c.transparent_bg(d.transparent_bg || !1), _.each(d.widgets, function(d) {
+        c.title(d.title), c.width(d.width), c.row = d.row, c.col = d.col, c.col_width(d.col_width || 1), c.transparent_bg(d.transparent_bg || !1), c.widget_background_color(d.widget_background_color || _default.widget_background_color), _.each(d.widgets, function(d) {
             var e = new WidgetModel(a, b);
             e.deserialize(d), c.widgets.push(e)
         })
@@ -1268,7 +1284,7 @@ var freeboard = function() {
                         e.saveLocalstorage();
                     } else {
                         var j = void 0;
-                        "datasource" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings(), m.name = i.name()) : "widget" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings()) : "pane" == k.type && (m = {}, "edit" == k.operation && (m.title = i.title(), m.col_width = i.col_width(), m.transparent_bg = i.transparent_bg()), l = {
+                        "datasource" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings(), m.name = i.name()) : "widget" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings()) : "pane" == k.type && (m = {}, "edit" == k.operation && (m.title = i.title(), m.col_width = i.col_width(), m.transparent_bg = i.transparent_bg(), m.widget_background_color = i.widget_background_color()), l = {
                             settings: {
                                 settings: [{
                                 //     name: "title",
@@ -1285,6 +1301,12 @@ var freeboard = function() {
                                     display_name: "Transparent Background",
                                     type: "boolean",
                                     default_value: 0,
+                                }, {
+                                    name: "widget_background_color",
+                                    display_name: "Background Color",
+                                    type: "Text",
+                                    default_value: _default.widget_background_color,
+                                    required: !0
                                 }]
                             }
                         }), h.createPluginEditor(n, l, j, m, function(f) {
@@ -1297,7 +1319,7 @@ var freeboard = function() {
                                     g.settings(f.settings), g.type(f.type), i.widgets.push(g), d.attachWidgetEditIcons(a)
                                 }
                             } else {
-                                "edit" == k.operation && ("pane" == k.type ? (i.title(f.settings.title), i.transparent_bg(f.settings.transparent_bg), i.col_width(0), i.col_width(parseInt(f.settings.col_width)), d.processResize(!1)) : ("datasource" == k.type && (i.name(f.settings.name), f.settings.name), i.type(f.type), i.settings(f.settings)))
+                                "edit" == k.operation && ("pane" == k.type ? (i.title(f.settings.title), i.transparent_bg(f.settings.transparent_bg), i.widget_background_color(f.settings.widget_background_color), i.col_width(0), i.col_width(parseInt(f.settings.col_width)), d.processResize(!1)) : ("datasource" == k.type && (i.name(f.settings.name), f.settings.name), i.type(f.type), i.settings(f.settings)))
                             }
                             e.saveLocalstorage();
                         })
@@ -1800,6 +1822,9 @@ $.extend(freeboard, jQuery.eventEmitter),
     }
     (),
     function() {
+        // function tint(color, percentage) {
+        //   return mix("#000000", color, percentage);
+        // }
         function a(a, b, c) {
             var d = $(b).text();
             if (d != a)
@@ -1836,7 +1861,8 @@ $.extend(freeboard, jQuery.eventEmitter),
             a.empty().append(c), freeboard.addStyle(".sparkline-legend", "margin:5px;"), freeboard.addStyle(".sparkline-legend-value", "color:white; font:10px arial,san serif; float:left; overflow:hidden; width:50%;"), freeboard.addStyle(".sparkline-legend-value span", "font-weight:bold; padding-right:5px;")
         }
 
-        function c(a, b, c) {
+        function c(_settings, a, b, c) {
+            // console.log("************** _setting : ", _settings)
             var f = $(a).data().values,
                 g = $(a).data().valueMin,
                 h = $(a).data().valueMax;
@@ -1854,14 +1880,14 @@ $.extend(freeboard, jQuery.eventEmitter),
                     height: "100%",
                     width: "100%",
                     fillColor: !1,
-                    lineColor: e[d % e.length],
+                    lineColor: _settings.mark_color?_settings.mark_color:e[d % e.length],
                     lineWidth: 2,
                     spotRadius: 3,
                     spotColor: !1,
-                    minSpotColor: "#78AB49",
-                    maxSpotColor: "#78AB49",
-                    highlightSpotColor: "#9D3926",
-                    highlightLineColor: "#9D3926",
+                    minSpotColor: _settings.maxmin_color?_settings.maxmin_color:_default.maxmin_color,  //"#78AB49",
+                    maxSpotColor: _settings.maxmin_color?_settings.maxmin_color:_default.maxmin_color,  //"#78AB49",
+                    highlightSpotColor: _settings.mark_color?_settings.mark_color:_default.mark_color,  //"#9D3926",
+                    highlightLineColor: _settings.mark_color?_settings.mark_color:_default.mark_color,  //"#9D3926",
                     chartRangeMin: g,
                     chartRangeMax: h,
                     tooltipFormat: c && c[d] ? j + " (" + c[d] + ")" : j
@@ -1874,9 +1900,10 @@ $.extend(freeboard, jQuery.eventEmitter),
         freeboard.addStyle(".widget-big-text", f + "font-size:25px;")/*"font-size:75px;")*/, freeboard.addStyle(".tw-display", "width: 100%; height:100%; display:table; table-layout:fixed;"), freeboard.addStyle(".tw-tr", "display:table-row;"), freeboard.addStyle(".tw-tg", "display:table-row-group;"), freeboard.addStyle(".tw-tc", "display:table-caption;"), freeboard.addStyle(".tw-td", "display:table-cell;"), freeboard.addStyle(".tw-value", f + "overflow: hidden;display: inline-block;text-overflow: ellipsis;"), freeboard.addStyle(".tw-unit", "display: inline-block;padding-left: 10px;padding-bottom: 1.1em;vertical-align: bottom;"), freeboard.addStyle(".tw-value-wrapper", "position: relative;vertical-align: middle;height:100%;"), freeboard.addStyle(".tw-sparkline", "height:20px;");
         var g = function(b) {
             function d() {
-                _.isUndefined(e.units) || "" == e.units ? h.css("max-width", "100%") : h.css("max-width", f.innerWidth() - i.outerWidth(!0) + "px")
+                _.isUndefined(_settings.units) || "" == _settings.units ? h.css("max-width", "100%") : h.css("max-width", f.innerWidth() - i.outerWidth(!0) + "px")
             }
             var _settings = b,
+                _data,
                 f = $('<div class="tw-display"></div>'),
                 g = $('<h2 class="section-title tw-title tw-td"></h2>'),
                 h_p = $('<div class="tw-value-subwrapper"></div>'),
@@ -1884,35 +1911,34 @@ $.extend(freeboard, jQuery.eventEmitter),
                 i = $('<div class="tw-unit"></div>'),
                 j = $('<div class="tw-sparkline tw-td"></div>');
             this.render = function(a) {
-                $(a).empty(), $(h_p).append($(h)).append($(i)), $(f).append($('<div class="tw-tr"></div>').append(g)).append($('<div class="tw-tr"></div>').append($('<div class="tw-value-wrapper tw-td"></div>').append(h_p)/*.append(h).append(i)*/)).append($('<div class="tw-tr"></div>').append(j)), $(a).append(f), d()
-            }, this.onSettingsChanged = function(a) {
+                // setTimeout(function() {
+                    $(a).empty(), $(h_p).append($(h)).append($(i)), $(f).append($('<div class="tw-tr"></div>').append(g)).append($('<div class="tw-tr"></div>').append($('<div class="tw-value-wrapper tw-td"></div>').append(h_p)/*.append(h).append(i)*/)).append($('<div class="tw-tr"></div>').append(j)), $(a).append(f), d()
+                // },0);
+                
+            }, 
+            this.onSettingsChanged = function(a) {
                 _settings = a;
                 var b = !_.isUndefined(a.title) && "" != a.title,
-                    c = !_.isUndefined(a.units) && "" != a.units;
-                a.sparkline ? j.attr("style", null) : (delete j.data().values, j.empty(), j.hide()), b ? (g.html(_.isUndefined(a.title) ? "" : a.title), g.attr("style", null)) : (g.empty(), g.hide()), c ? (i.html(_.isUndefined(a.units) ? "" : a.units), i.attr("style", null)) : (i.empty(), i.hide());
+                    cc = !_.isUndefined(a.units) && "" != a.units;
+                a.sparkline ? j.attr("style", null) : (delete j.data().values, j.empty(), j.hide()), b ? (g.html(_.isUndefined(a.title) ? "" : a.title), g.attr("style", null)) : (g.empty(), g.hide()), cc ? (i.html(_.isUndefined(a.units) ? "" : a.units), i.attr("style", null)) : (i.empty(), i.hide());
                 // var f = 15;//30;
                 // "big" == a.size && (f = 25/*75*/, a.sparkline && (f = 20/*60*/)), 
                 // h.css({
                 //     "font-size": f + "px"
                 // }), 
-
-                h_p.css({
-                    "text-align": (e.font_align)?e.font_align:"left",
-                }), 
-
-                h.css({
-                    "font-size": a.font_size + "px",
-                }), 
-
-
+                h_p.css({"text-align": (_settings.font_align)?_settings.font_align:"left"}), 
+                h.css({"font-size": a.font_size + "px", "color": _settings.font_color?_settings.font_color:_default.font_color}), 
+                i.css({"color": _settings.font_color?_settings.font_color:_default.font_color, "opacity":_default.font_opacity}),
                 d()
+                // _settings.sparkline && c(_settings, j, _data)
             }, this.onSizeChanged = function() {
                 d()
             }, this.onCalculatedValueChanged = function(b, d) {
-                "value" == b && (_settings.animate ? a(d, h, 500) : h.text(d), _settings.sparkline && c(j, d))
+                _data = d;
+                "value" == b && (_settings.animate ? a(d, h, 500) : h.text(d), _settings.sparkline && c(_settings, j, d))
             }, this.onDispose = function() {}, 
             this.getHeight = function() {
-                // return "big" == e.size || e.sparkline ? 2 : 1  //2 : 1
+                // return "big" == _settings.size || _settings.sparkline ? 2 : 1  //2 : 1
                 return (parseInt((_settings.height_block)?_settings.height_block:1) + ((_settings.sparkline)?1:0))
             }, this.onSettingsChanged(b)
         };
@@ -1940,17 +1966,6 @@ $.extend(freeboard, jQuery.eventEmitter),
                 name: "value",
                 display_name: "Value",
                 type: "calculated"
-            }, {
-                name: "sparkline",
-                display_name: "Include Sparkline",
-                type: "boolean"
-            },
-            {
-                name: "mark_color",
-                display_name: "Sparkline Color",
-                type: "text",
-                default_value: _default.mark_color,
-                required: !0
             },
             {
                 name: "animate",
@@ -1988,6 +2003,32 @@ $.extend(freeboard, jQuery.eventEmitter),
                         "value": "right"
                     }
                 ],
+                required: !0
+            }, 
+            {
+                name: "font_color",
+                display_name: "Text Color",
+                type: "text",
+                default_value: _default.font_color,
+                required: !0
+            },
+            {
+                name: "sparkline",
+                display_name: "Include Sparkline",
+                type: "boolean"
+            },
+            {
+                name: "mark_color",
+                display_name: "Sparkline Color",
+                type: "text",
+                default_value: _default.mark_color,
+                required: !0
+            },
+            {
+                name: "maxmin_color",
+                display_name: "Max-Min Color",
+                type: "text",
+                default_value: _default.maxmin_color,
                 required: !0
             },
             {
@@ -2137,12 +2178,14 @@ $.extend(freeboard, jQuery.eventEmitter),
             }
             var self=this,
                 _settings = a,
-                _element ,_svg, _svgContainer, d, e, f, g = 3,
+                _direction = 0,
+                _element ,_svg, _svgContainer, _circle, _pointer,
+                d, e, f, g = 3,
                 h = 0,
                 _svgContainer = $('<div class="svg-container" style="width:100%; height: 100%;padding:10px 0"></div>');
                 _value = $('<div class="widget-big-text"></div>');
                 _unit = $("<div></div>");
-            this.render = function(element) {
+            this.render = function(element,callback) {
                 _element= element;
                 // console.log("-------------- rener width : ", $(_element).width())
                 setTimeout(()=>{
@@ -2151,15 +2194,18 @@ $.extend(freeboard, jQuery.eventEmitter),
                     var h = Math.min(e, f) / 2 - 2 * g;
                     $(_element).append(_svgContainer);
                     // _svg = Raphael($(_element).get()[0], e, f);
-                    _svg = Raphael($(_svgContainer).get()[0], e, f);
-                    var _circle = _svg.circle(e / 2, f / 2, h);
-                    _circle.attr("stroke", _settings.mark_color?_settings.mark_color:"#FF9900"), 
+                    _svg = Raphael($(_svgContainer).get()[0], e, f),
+                    _circle = _svg.circle(e / 2, f / 2, h),
+                    _circle.attr("stroke", _settings.mark_color?_settings.mark_color:_default.mark_color), 
                     _circle.attr("stroke-width", g), 
                     _pointer = _svg.path(b([e / 2, f / 2 - h + g, 0.15*h, 0.2*h, -0.3*h, 0])), 
                     _pointer.attr("stroke-width", 0), 
-                    _pointer.attr("fill", "#fff"), 
-                    $(_element).append($('<div class="pointer-value"></div>').append(_value).append(_unit))
-                },0)
+                    _pointer.attr("fill", _settings.pointer_color?_settings.pointer_color:_default.pointer_color), 
+                    $(_element).append($('<div class="pointer-value"></div>').append(_value).append(_unit)),
+                    _value.css({"color": _settings.font_color?_settings.font_color:_default.font_color}),
+                    _unit.css({"color": _settings.font_color?_settings.font_color:_default.font_color, "opacity" : _default.font_opacity}),
+                    callback&&(callback("direction",_direction))
+                },100)
 
             }, this.onSettingsChanged = function(a) {
                 _settings = a;
@@ -2167,12 +2213,15 @@ $.extend(freeboard, jQuery.eventEmitter),
                     // console.log("*********** width|height : ",$(_element).width(), self.getHeight()*46-9)
                     $(_element).css({"width":$(_element).width()+"px", "height": self.getHeight()*46-19 +"px"})
                     $(_element).empty()
-                    self.render(_element)
+                    self.render(_element, (a,b)=>(self.onCalculatedValueChanged(a,b), console.log("9999999999999")))
+
+                                       
                 }
                 _unit.html(_settings.units);
 
             }, this.onCalculatedValueChanged = function(a, b) {
                 if ("direction" == a) {
+                    _direction = b;
                     if (!_.isUndefined(_pointer)) {
                         _pointer.animate({
                             transform: "r" + b + "," + e / 2 + "," + f / 2
@@ -2204,10 +2253,24 @@ $.extend(freeboard, jQuery.eventEmitter),
                 type: "text"
             },
             {
+                name: "font_color",
+                display_name: "Text Color",
+                type: "text",
+                default_value: _default.font_color,
+                required: !0
+            },
+            {
                 name: "mark_color",
-                display_name: "Marker Color",
+                display_name: "Circle Color",
                 type: "text",
                 default_value: _default.mark_color,
+                required: !0
+            },
+            {
+                name: "pointer_color",
+                display_name: "Pointer Color",
+                type: "text",
+                default_value: _default.pointer_color,
                 required: !0
             },
             {
@@ -2234,7 +2297,7 @@ $.extend(freeboard, jQuery.eventEmitter),
             function refresh() {
                 if (_element && _imgurl) {
                     var imgurl = _imgurl + (-1 == _imgurl.indexOf("?") ? "?" : "&") + Date.now();
-                    console.log("----------- imgurl ",_imgurl, imgurl)
+                    // console.log("----------- imgurl ",_imgurl, imgurl)
                     $(_element).css({
                         "background-image": "url(" + imgurl + ")"
                     })

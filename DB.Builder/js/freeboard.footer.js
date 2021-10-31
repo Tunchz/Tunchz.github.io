@@ -63,6 +63,7 @@ function updateFullScreenStatus() {
         wasEditing = freeboard.isEditing();
         freeboard.setEditing(false, false);
         $("#main-header").hide();
+        // $("#board-content").css({'margin-bottom': 50});
         $("#footer-bar").hide();
         // $("#share-action").hide();
         // $("#clone-action").hide();
@@ -77,9 +78,9 @@ function updateFullScreenStatus() {
         if (wasEditing) {
             freeboard.setEditing(true, true)
         }
-
+        // $("#board-content").css({'margin-bottom': 50});
         $("#footer-bar").show();
-        $("#share-action").show();
+        // $("#share-action").show();
         // $("#clone-action").show();
         // $("#full-screen").text("Fullscreen");
         // $("#full-screen").show();
@@ -260,7 +261,7 @@ $(function() {
         updateFullScreenStatus()
     });
     var boardData = JSON.parse(unescape($("#data-board").html()));
-    console.log("------- boardData ",boardData)
+    // console.log("------- boardData ",boardData)
     boardID = boardData.id;
     isPrivate = boardData.isPrivate;
     canEdit = boardData.canEdit;
