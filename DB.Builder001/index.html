@@ -89,9 +89,9 @@
 
 						$(function()
 						{ //DOM Ready
-							if (parameter?.file) {
-								$.get( parameter.file, function( json ) {
-								  	console.log("++++++++++++data : ",json)
+							if (parameter?.dashboard) {
+								$.get( parameter.dashboard, function( json ) {
+								  	// console.log("++++++++++++data : ",json)
 
 									if (json !== null) {
 										freeboard.initialize(true);
@@ -106,6 +106,7 @@
 								
 								}).fail(function() {
 									console.log( "Loading specified json error!!!" );
+									aleart("Loading "+ parameter.dashboard+ " failed, load default!")
 									loadingDefalult();
 								})
 							} else {

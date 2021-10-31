@@ -24,7 +24,9 @@ function FreeboardModel(a, b, c) {
         e = 1;
     this.version = 0, this.isEditing = ko.observable(!1), this.allow_edit = ko.observable(!1), this.allow_edit.subscribe(function(a) {
         a ? $("#main-header").show() : $("#main-header").hide()
-    }), this.header_image = ko.observable(), this.background_image = ko.observable(), this.background_image.subscribe(function(a){document.body.style.backgroundImage = "url('"+a+"')"}),
+    }), this.header_image = ko.observable(), 
+    this.dashboard_title = ko.observable(), this.dashboard_title.subscribe(function(a){$("#board-title").html(a)}),
+    this.background_image = ko.observable(), this.background_image.subscribe(function(a){document.body.style.backgroundImage = "url('"+a+"')"}),
     this.background_color = ko.observable(), this.background_color.subscribe(function(a){document.body.style.backgroundColor = (a)?a:"#212121"}),
     this.plugins = ko.observableArray(), this.datasources = ko.observableArray(), this.panes = ko.observableArray(), this.datasourceData = {}, this.processDatasourceUpdate = function(a, b) {
         var c = a.name();
@@ -80,6 +82,7 @@ function FreeboardModel(a, b, c) {
         }), {
             version: e,
             header_image: d.header_image(),
+            dashboard_title: d.dashboard_title(),
             background_image: d.background_image(),
             background_color: d.background_color(),
             allow_edit: d.allow_edit(),
@@ -91,7 +94,7 @@ function FreeboardModel(a, b, c) {
         }
     }, this.deserialize = function(e, f) {
         function g() {
-            c.setUserColumns(e.columns), _.isUndefined(e.allow_edit) ? d.allow_edit(!0) : d.allow_edit(e.allow_edit), d.version = e.version || 0, d.header_image(e.header_image),d.background_image(e.background_image),d.background_color(e.background_color), _.each(e.datasources, function(b) {
+            c.setUserColumns(e.columns), _.isUndefined(e.allow_edit) ? d.allow_edit(!0) : d.allow_edit(e.allow_edit), d.version = e.version || 0, d.header_image(e.header_image), d.dashboard_title(e.dashboard_title),d.background_image(e.background_image),d.background_color(e.background_color), _.each(e.datasources, function(b) {
                 var c = new DatasourceModel(d, a);
                 c.deserialize(b), d.addDatasource(c)
             });
@@ -140,8 +143,11 @@ function FreeboardModel(a, b, c) {
                         var b = a.target,
                             c = JSON.parse(b.result);
                         window.localStorage.setItem("netpie.freeboard.dashboard", JSON.stringify(c));
-
                         d.loadDashboard(c), d.setEditing(!1)
+
+                        // c_ = window.localStorage.getItem("netpie.freeboard.dashboard");
+                        // d.loadDashboard(JSON.parse(c_)), d.setEditing(!1)
+
                         freeboard.emit('load_theme');
                     }), e.readAsText(c)
                 }
@@ -1248,10 +1254,10 @@ var freeboard = function() {
                         "datasource" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings(), m.name = i.name()) : "widget" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings()) : "pane" == k.type && (m = {}, "edit" == k.operation && (m.title = i.title(), m.col_width = i.col_width(), m.transparent_bg = i.transparent_bg()), l = {
                             settings: {
                                 settings: [{
-                                    name: "title",
-                                    display_name: "Title",
-                                    type: "text"
-                                }, {
+                                //     name: "title",
+                                //     display_name: "Title",
+                                //     type: "text"
+                                // }, {
                                     name: "col_width",
                                     display_name: "Columns",
                                     type: "integer",
@@ -1261,7 +1267,7 @@ var freeboard = function() {
                                     name: "transparent_bg",
                                     display_name: "Transparent Background",
                                     type: "boolean",
-                                    default_value: 1,
+                                    default_value: 0,
                                 }]
                             }
                         }), h.createPluginEditor(n, l, j, m, function(f) {
@@ -2105,29 +2111,37 @@ $.extend(freeboard, jQuery.eventEmitter),
             }
             var self=this,
                 currentSettings = a,
-                _element ,_svg, d, e, f, g = 3,
+                _element ,_svg, _svgContainer, d, e, f, g = 3,
                 h = 0,
-                _value = $('<div class="widget-big-text"></div>'),
+                _svgContainer = $('<div class="svg-container" style="width:100%; height: 100%;padding:10px 0"></div>');
+                _value = $('<div class="widget-big-text"></div>');
                 _unit = $("<div></div>");
             this.render = function(element) {
                 _element= element;
-                e = $(_element).width(), f = /*$(a).height();*/  self.getHeight()*46-9;  // fixing inproper render of widget pointer
-                var h = Math.min(e, f) / 2 - 2 * g;
-                _svg = Raphael($(_element).get()[0], e, f);
-                var _circle = _svg.circle(e / 2, f / 2, h);
-                _circle.attr("stroke", "#FF9900"), 
-                _circle.attr("stroke-width", g), 
-                _pointer = _svg.path(b([e / 2, f / 2 - h + g, 0.15*h, 0.2*h, -0.3*h, 0])), 
-                _pointer.attr("stroke-width", 0), 
-                _pointer.attr("fill", "#fff"), 
-                $(_element).append($('<div class="pointer-value"></div>').append(_value).append(_unit))
+                // console.log("-------------- rener width : ", $(_element).width())
+                setTimeout(()=>{
+                    // console.log("-------------- rener width in 2000: ", $(_element).width())
+                    e = $(_element).width(), f = /*$(a).height();*/  self.getHeight()*46-29;  // fixing inproper render of widget pointer
+                    var h = Math.min(e, f) / 2 - 2 * g;
+                    $(_element).append(_svgContainer);
+                    // _svg = Raphael($(_element).get()[0], e, f);
+                    _svg = Raphael($(_svgContainer).get()[0], e, f);
+                    var _circle = _svg.circle(e / 2, f / 2, h);
+                    _circle.attr("stroke", "#FF9900"), 
+                    _circle.attr("stroke-width", g), 
+                    _pointer = _svg.path(b([e / 2, f / 2 - h + g, 0.15*h, 0.2*h, -0.3*h, 0])), 
+                    _pointer.attr("stroke-width", 0), 
+                    _pointer.attr("fill", "#fff"), 
+                    $(_element).append($('<div class="pointer-value"></div>').append(_value).append(_unit))
+                },1000)
+
             }, this.onSettingsChanged = function(a) {
                 currentSettings = a;
                 if (_element) {
-                console.log("*********** width|height : ",$(_element).width(), self.getHeight()*46-9)
-                $(_element).css({"width":$(_element).width()+"px", "height": self.getHeight()*46-9 +"px"})
-                $(_element).empty()
-                self.render(_element)
+                    // console.log("*********** width|height : ",$(_element).width(), self.getHeight()*46-9)
+                    $(_element).css({"width":$(_element).width()+"px", "height": self.getHeight()*46-19 +"px"})
+                    $(_element).empty()
+                    self.render(_element)
                 }
                 _unit.html(currentSettings.units);
 
@@ -2286,176 +2300,176 @@ $.extend(freeboard, jQuery.eventEmitter),
                 b(new m(a))
             }
         });
-        freeboard.addStyle(".gm-style-cc a", "text-shadow:none;");
-        var n = function(a) {
-            function b() {
-                if (c && d && f.lat && f.lon) {
-                    var a = new google.maps.LatLng(f.lat, f.lon);
-                    d.setPosition(a), c.panTo(a)
-                }
-            }
-            var c, d, e = a,
-                f = {};
-            this.render = function(a) {
-                function e() {
-                    var e = {
-                        zoom: 13,
-                        center: new google.maps.LatLng(37.235, -115.811111),
-                        disableDefaultUI: !0,
-                        draggable: !1,
-                        styles: [{
-                            featureType: "water",
-                            elementType: "geometry",
-                            stylers: [{
-                                color: "#2a2a2a"
-                            }]
-                        }, {
-                            featureType: "landscape",
-                            elementType: "geometry",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 20
-                            }]
-                        }, {
-                            featureType: "road.highway",
-                            elementType: "geometry.fill",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 17
-                            }]
-                        }, {
-                            featureType: "road.highway",
-                            elementType: "geometry.stroke",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 29
-                            }, {
-                                weight: .2
-                            }]
-                        }, {
-                            featureType: "road.arterial",
-                            elementType: "geometry",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 18
-                            }]
-                        }, {
-                            featureType: "road.local",
-                            elementType: "geometry",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 16
-                            }]
-                        }, {
-                            featureType: "poi",
-                            elementType: "geometry",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 21
-                            }]
-                        }, {
-                            elementType: "labels.text.stroke",
-                            stylers: [{
-                                visibility: "on"
-                            }, {
-                                color: "#000000"
-                            }, {
-                                lightness: 16
-                            }]
-                        }, {
-                            elementType: "labels.text.fill",
-                            stylers: [{
-                                saturation: 36
-                            }, {
-                                color: "#000000"
-                            }, {
-                                lightness: 40
-                            }]
-                        }, {
-                            elementType: "labels.icon",
-                            stylers: [{
-                                visibility: "off"
-                            }]
-                        }, {
-                            featureType: "transit",
-                            elementType: "geometry",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 19
-                            }]
-                        }, {
-                            featureType: "administrative",
-                            elementType: "geometry.fill",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 20
-                            }]
-                        }, {
-                            featureType: "administrative",
-                            elementType: "geometry.stroke",
-                            stylers: [{
-                                color: "#000000"
-                            }, {
-                                lightness: 17
-                            }, {
-                                weight: 1.2
-                            }]
-                        }]
-                    };
-                    c = new google.maps.Map(a, e), google.maps.event.addDomListener(a, "mouseenter", function(a) {
-                        a.cancelBubble = !0, c.hover || (c.hover = !0, c.setOptions({
-                            zoomControl: !0
-                        }))
-                    }), google.maps.event.addDomListener(a, "mouseleave", function(a) {
-                        c.hover && (c.setOptions({
-                            zoomControl: !1
-                        }), c.hover = !1)
-                    }), d = new google.maps.Marker({
-                        map: c
-                    }), b()
-                }
-                window.google && window.google.maps ? e() : (window.gmap_initialize = e, head.js("https://maps.googleapis.com/maps/api/js?key=AIzaSyCpLIS6vRLkkY5EYSfsfo8_OHkGJwYhcWE&v=3.exp&sensor=false&callback=gmap_initialize"))
-            }, this.onSettingsChanged = function(a) {
-                e = a
-            }, this.onCalculatedValueChanged = function(a, c) {
-                "lat" == a ? f.lat = c : "lon" == a && (f.lon = c), b()
-            }, this.onDispose = function() {}, this.getHeight = function() {
-                // console.log("-----------",e)
-                return (e.height_block) ? e.height_block:2
-            }, this.onSettingsChanged(a)
-        };
-        freeboard.loadWidgetPlugin({
-            type_name: "google_map",
-            display_name: "Google Map",
-            fill_size: !0,
-            settings: [{
-                name: "lat",
-                display_name: "Latitude",
-                type: "calculated"
-            }, {
-                name: "lon",
-                display_name: "Longitude",
-                type: "calculated"
-            },
-            {
-                name: "height_block",
-                display_name: "Height Blocks",
-                type: "integer",
-                default_value: 2,
-                required: !0
-            }],
-            newInstance: function(a, b) {
-                b(new n(a))
-            }
-        });
+        // freeboard.addStyle(".gm-style-cc a", "text-shadow:none;");
+        // var n = function(a) {
+        //     function b() {
+        //         if (c && d && f.lat && f.lon) {
+        //             var a = new google.maps.LatLng(f.lat, f.lon);
+        //             d.setPosition(a), c.panTo(a)
+        //         }
+        //     }
+        //     var c, d, e = a,
+        //         f = {};
+        //     this.render = function(a) {
+        //         function e() {
+        //             var e = {
+        //                 zoom: 13,
+        //                 center: new google.maps.LatLng(37.235, -115.811111),
+        //                 disableDefaultUI: !0,
+        //                 draggable: !1,
+        //                 styles: [{
+        //                     featureType: "water",
+        //                     elementType: "geometry",
+        //                     stylers: [{
+        //                         color: "#2a2a2a"
+        //                     }]
+        //                 }, {
+        //                     featureType: "landscape",
+        //                     elementType: "geometry",
+        //                     stylers: [{
+        //                         color: "#000000"
+        //                     }, {
+        //                         lightness: 20
+        //                     }]
+        //                 }, {
+        //                     featureType: "road.highway",
+        //                     elementType: "geometry.fill",
+        //                     stylers: [{
+        //                         color: "#000000"
+        //                     }, {
+        //                         lightness: 17
+        //                     }]
+        //                 }, {
+        //                     featureType: "road.highway",
+        //                     elementType: "geometry.stroke",
+        //                     stylers: [{
+        //                         color: "#000000"
+        //                     }, {
+        //                         lightness: 29
+        //                     }, {
+        //                         weight: .2
+        //                     }]
+        //                 }, {
+        //                     featureType: "road.arterial",
+        //                     elementType: "geometry",
+        //                     stylers: [{
+        //                         color: "#000000"
+        //                     }, {
+        //                         lightness: 18
+        //                     }]
+        //                 }, {
+        //                     featureType: "road.local",
+        //                     elementType: "geometry",
+        //                     stylers: [{
+        //                         color: "#000000"
+        //                     }, {
+        //                         lightness: 16
+        //                     }]
+        //                 }, {
+        //                     featureType: "poi",
+        //                     elementType: "geometry",
+        //                     stylers: [{
+        //                         color: "#000000"
+        //                     }, {
+        //                         lightness: 21
+        //                     }]
+        //                 }, {
+        //                     elementType: "labels.text.stroke",
+        //                     stylers: [{
+        //                         visibility: "on"
+        //                     }, {
+        //                         color: "#000000"
+        //                     }, {
+        //                         lightness: 16
+        //                     }]
+        //                 }, {
+        //                     elementType: "labels.text.fill",
+        //                     stylers: [{
+        //                         saturation: 36
+        //                     }, {
+        //                         color: "#000000"
+        //                     }, {
+        //                         lightness: 40
+        //                     }]
+        //                 }, {
+        //                     elementType: "labels.icon",
+        //                     stylers: [{
+        //                         visibility: "off"
+        //                     }]
+        //                 }, {
+        //                     featureType: "transit",
+        //                     elementType: "geometry",
+        //                     stylers: [{
+        //                         color: "#000000"
+        //                     }, {
+        //                         lightness: 19
+        //                     }]
+        //                 }, {
+        //                     featureType: "administrative",
+        //                     elementType: "geometry.fill",
+        //                     stylers: [{
+        //                         color: "#000000"
+        //                     }, {
+        //                         lightness: 20
+        //                     }]
+        //                 }, {
+        //                     featureType: "administrative",
+        //                     elementType: "geometry.stroke",
+        //                     stylers: [{
+        //                         color: "#000000"
+        //                     }, {
+        //                         lightness: 17
+        //                     }, {
+        //                         weight: 1.2
+        //                     }]
+        //                 }]
+        //             };
+        //             c = new google.maps.Map(a, e), google.maps.event.addDomListener(a, "mouseenter", function(a) {
+        //                 a.cancelBubble = !0, c.hover || (c.hover = !0, c.setOptions({
+        //                     zoomControl: !0
+        //                 }))
+        //             }), google.maps.event.addDomListener(a, "mouseleave", function(a) {
+        //                 c.hover && (c.setOptions({
+        //                     zoomControl: !1
+        //                 }), c.hover = !1)
+        //             }), d = new google.maps.Marker({
+        //                 map: c
+        //             }), b()
+        //         }
+        //         window.google && window.google.maps ? e() : (window.gmap_initialize = e, head.js("https://maps.googleapis.com/maps/api/js?key=AIzaSyCpLIS6vRLkkY5EYSfsfo8_OHkGJwYhcWE&v=3.exp&sensor=false&callback=gmap_initialize"))
+        //     }, this.onSettingsChanged = function(a) {
+        //         e = a
+        //     }, this.onCalculatedValueChanged = function(a, c) {
+        //         "lat" == a ? f.lat = c : "lon" == a && (f.lon = c), b()
+        //     }, this.onDispose = function() {}, this.getHeight = function() {
+        //         // console.log("-----------",e)
+        //         return (e.height_block) ? e.height_block:2
+        //     }, this.onSettingsChanged(a)
+        // };
+        // freeboard.loadWidgetPlugin({
+        //     type_name: "google_map",
+        //     display_name: "Google Map",
+        //     fill_size: !0,
+        //     settings: [{
+        //         name: "lat",
+        //         display_name: "Latitude",
+        //         type: "calculated"
+        //     }, {
+        //         name: "lon",
+        //         display_name: "Longitude",
+        //         type: "calculated"
+        //     },
+        //     {
+        //         name: "height_block",
+        //         display_name: "Height Blocks",
+        //         type: "integer",
+        //         default_value: 2,
+        //         required: !0
+        //     }],
+        //     newInstance: function(a, b) {
+        //         b(new n(a))
+        //     }
+        // });
         freeboard.addStyle(".html-widget", "white-space:normal;width:100%;height:100%");
         var o = function(a) {
             var b = $('<div class="html-widget"></div>'),

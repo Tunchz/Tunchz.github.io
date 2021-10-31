@@ -90,8 +90,8 @@
 
 						$(function()
 						{ //DOM Ready
-							if (parameter?.file) {
-								$.get( parameter.file, function( json ) {
+							if (parameter?.dashboard) {
+								$.get( parameter.dashboard, function( json ) {
 								  	// console.log("++++++++++++data : ",json)
 
 									if (json !== null) {
@@ -107,6 +107,7 @@
 								
 								}).fail(function() {
 									console.log( "Loading specified json error!!!" );
+									aleart("Loading "+ parameter.dashboard+ " failed, load default!")
 									loadingDefalult();
 								})
 							} else {
@@ -146,7 +147,8 @@
 
 	                            <li id="dev-console-toolbar">
 	                            	<i class="iconblackboard"></i>
-	                            	<label onclick="freeboard.showDeveloperConsole()">Developer Console</label>
+	                            	<!-- <label onclick="freeboard.showDeveloperConsole()">Developer Console</label> -->
+	                            	<label onclick="">Developer Console</label>
 	                            </li>
 
 	                            <li id="load-dashboard" data-bind="click: loadDashboardFromLocalFile" style="float:left;">
@@ -295,7 +297,7 @@
             <div id="board-title"></div>
             <ul id="footer-toolbar" class="board-toolbar">
                 <li id="full-screen-action" onclick="toggleFullScreen()"><i id="full-screen-icon" class="icon-resize-full icon-white"></i><label id="full-screen">Fullscreen</label></li>
-                <li id="share-action"><i class="icon-user icon-white"></i><label>Share</label></li>
+                <!-- <li id="share-action"><i class="icon-user icon-white"></i><label>Share</label></li> -->
                 <!-- <li id="clone-action"><i class="icon-adjust icon-white"></i><label>Clone</label></li> -->
             </ul>
         </div>
