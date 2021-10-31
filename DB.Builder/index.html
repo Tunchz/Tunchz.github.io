@@ -75,7 +75,7 @@
 						function loadingDefalult(){
 
 								freeboard.initialize(true);
-								var dashboardPattern = window.localStorage.getItem("netpie.freeboard.dashboard");
+								var dashboardPattern = window.localStorage.getItem("maholan.db.builder");
 								// console.log("dashboardPattern : ",dashboardPattern)
 								if (dashboardPattern !== null) {
 									dashboardPattern=JSON.parse(dashboardPattern);
@@ -240,7 +240,7 @@
 				</ul>
 			</div>
 			<div id="toggle-header" data-bind="click: toggleEditing">
-				<i id="toggle-header-icon" class="icon-wrench icon-white"></i></div>
+				<i id="toggle-header-icon" class="icon-chevron-down icon-white"></i></div>
 		</header>
 
 		<div style="display:hidden">

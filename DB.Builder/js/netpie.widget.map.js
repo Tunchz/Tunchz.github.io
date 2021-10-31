@@ -32,23 +32,26 @@
 
         this.render = function (element) {
             $(element).append(title).append(mapElement)
-            setHeight()
-            var maphtml = document.getElementById('map_ld' + self.widgetID)
-            var defaultPosition = { lon: 0, lat: 0 }
-            currentPosition = defaultPosition
-            function initializeMap() {
-                var options = {
-                    placeholder: maphtml,
-                    location: currentPosition,
-                    zoom: currentSettings.zoom,
-                    language: 'th',
-                    lastView: false
+            setTimeout(function() {
+                setHeight()
+                var maphtml = document.getElementById('map_ld' + self.widgetID)
+                var defaultPosition = { lon: 0, lat: 0 }
+                currentPosition = defaultPosition
+                function initializeMap() {
+                    var options = {
+                        placeholder: maphtml,
+                        location: currentPosition,
+                        zoom: currentSettings.zoom,
+                        language: 'th',
+                        lastView: false
+                    }
+                    map = new longdo.Map(options)
+                    updatePosition(currentPosition)
+                    mapOptions(currentSettings)
                 }
-                map = new longdo.Map(options)
-                updatePosition(currentPosition)
-                mapOptions(currentSettings)
-            }
-            initializeMap()
+                initializeMap()
+            }, 0);
+
         }
 
         this.onSettingsChanged = function (newSettings) {

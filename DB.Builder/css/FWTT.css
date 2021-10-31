@@ -159,6 +159,8 @@ h2.section-title {
 	padding-right: 10px;
 }
 
+
+/* Text Sparkline Widget */
 .tw-value-wrapper {
 	height:18px !important;
 	padding-left: 10px;
@@ -185,7 +187,7 @@ h2.section-title {
 
 
 
-
+/* Pointer Widget */
 svg {
 	left: 50% !important; 
 	transform: translateX(-50%);
@@ -202,6 +204,29 @@ svg {
 	padding-top: calc(45% - 17px);
 	/*margin: auto;*/
 }
+
+
+/* Longdo Map Widget */
+.ldmap_bottomright .ldmap_notice {
+	visibility: hidden !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .sub-section-height-1 {

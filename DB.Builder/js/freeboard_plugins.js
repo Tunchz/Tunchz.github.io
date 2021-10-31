@@ -1,5 +1,12 @@
 var allow = false;
 var np;
+var _default = {
+    dashboard_title: "untitled.dashboard",
+    avatar: "https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png",
+    background_image: null,
+    background_color: "#212121",
+    mark_color: "#ff9900"
+};
 
 function DialogBox(a, b, c, d, e) {
     function f() {
@@ -25,10 +32,10 @@ function FreeboardModel(a, b, c) {
     this.version = 0, this.isEditing = ko.observable(!1), this.allow_edit = ko.observable(!1), this.allow_edit.subscribe(function(a) {
         a ? $("#main-header").show() : $("#main-header").hide()
     }), this.header_image = ko.observable(), 
-    this.dashboard_title = ko.observable(), this.dashboard_title.subscribe(function(a){$("#board-title").html(a)}),
-    this.avatar = ko.observable(), this.avatar.subscribe(function(a){var s=a;(!a)&&(s="https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png"); $("#avatar-footer").css({content: "url('"+s+"')"}), console.log("//////// ",a)}),
-    this.background_image = ko.observable(), this.background_image.subscribe(function(a){document.body.style.backgroundImage = "url('"+a+"')"}),
-    this.background_color = ko.observable(), this.background_color.subscribe(function(a){document.body.style.backgroundColor = (a)?a:"#212121"}),
+    this.dashboard_title = ko.observable(), this.dashboard_title.subscribe(function(a){$("#board-title").html(a?a:_default.dashboard_title)}),
+    this.avatar = ko.observable(), this.avatar.subscribe(function(a){var s=a;(!a)&&(s=_default.avatar); $("#avatar-footer").css({content: "url('"+s+"')"}), console.log("//////// ",a)}),
+    this.background_image = ko.observable(), this.background_image.subscribe(function(a){document.body.style.backgroundImage = "url('"+(a?a:_default.background_image)+"')"}),
+    this.background_color = ko.observable(), this.background_color.subscribe(function(a){document.body.style.backgroundColor = (a)?a:_default.background_color}),
     this.plugins = ko.observableArray(), this.datasources = ko.observableArray(), this.panes = ko.observableArray(), this.datasourceData = {}, this.processDatasourceUpdate = function(a, b) {
         var c = a.name();
         d.datasourceData[c] = b, _.each(d.panes(), function(a) {
@@ -70,7 +77,7 @@ function FreeboardModel(a, b, c) {
             a.push(b.serialize())
         });
         var b = [];
-        var data = window.localStorage.getItem("netpie.freeboard.dashboard");
+        var data = window.localStorage.getItem("maholan.db.builder");
         var theme = "default"
         var datajson = JSON.parse(data);
         if(datajson!==null){
@@ -115,13 +122,20 @@ function FreeboardModel(a, b, c) {
         }) : g()
     }, this.clearFreeboard = function() {
 
-        // window.localStorage.removeItem("netpie.freeboard.dashboard");
+        // window.localStorage.removeItem("maholan.db.builder");
         // d.clearDashboard();
 
         var g = $("<p>Are you sure you want to reset dashboard ?</p>");
         new DialogBox(g, "Confirm Reset", "Yes", "No", function() {
-            window.localStorage.removeItem("netpie.freeboard.dashboard");
+            window.localStorage.removeItem("maholan.db.builder");
             d.clearDashboard();
+
+            // console.log("************** reset : ",d);
+            d.dashboard_title(_default.dashboard_title);
+            d.avatar(_default.avatar);
+            d.background_color(_default.background_color);
+            d.background_image(_default.background_image);
+
         })
     }, this.clearDashboard = function() {
         c.removeAllPanes(), _.each(d.datasources(), function(a) {
@@ -144,10 +158,10 @@ function FreeboardModel(a, b, c) {
                     e.addEventListener("load", function(a) {
                         var b = a.target,
                             c = JSON.parse(b.result);
-                        window.localStorage.setItem("netpie.freeboard.dashboard", JSON.stringify(c));
+                        window.localStorage.setItem("maholan.db.builder", JSON.stringify(c));
                         d.loadDashboard(c), d.setEditing(!1)
 
-                        // c_ = window.localStorage.getItem("netpie.freeboard.dashboard");
+                        // c_ = window.localStorage.getItem("maholan.db.builder");
                         // d.loadDashboard(JSON.parse(c_)), d.setEditing(!1)
 
                         freeboard.emit('load_theme');
@@ -169,14 +183,14 @@ function FreeboardModel(a, b, c) {
         });
         document.body.appendChild(f), f.href = window.URL.createObjectURL(g);
         $.get(f.href, function(data) {
-            window.localStorage.setItem("netpie.freeboard.dashboard", data);
+            window.localStorage.setItem("maholan.db.builder", data);
         });
         if (c) {
             var g = new Blob([JSON.stringify(d.serialize(), null, " ")], {
                 type: e
             });
             f.href = window.URL.createObjectURL(g);
-            f.download = "dashboard_dbBuilder.json", f.target = "_self", f.click();
+            f.download = d.dashboard_title()+".json", f.target = "_self", f.click();
         }
     }, this.saveLocalstorage = function() {
         e = "-Tunchz/FWTT-", f = document.createElement("a");
@@ -185,7 +199,7 @@ function FreeboardModel(a, b, c) {
         });
         document.body.appendChild(f), f.href = window.URL.createObjectURL(g);
         $.get(f.href, function(data) {
-            window.localStorage.setItem("netpie.freeboard.dashboard", data);
+            window.localStorage.setItem("maholan.db.builder", data);
         });
     }, this.addDatasource = function(a) {
         d.datasources.push(a)
@@ -215,13 +229,14 @@ function FreeboardModel(a, b, c) {
             d.isEditing(a), _.isUndefined(b) && (b = !0);
             var e = b ? 250 : 0,
                 f = $("#admin-bar").outerHeight();
-            a ? ($("#toggle-header-icon").addClass("icon-chevron-up").removeClass("icon-wrench"), $(".gridster .gs_w").css({
+            // a ? ($("#toggle-header-icon").addClass("icon-chevron-up").removeClass("icon-wrench"), $(".gridster .gs_w").css({
+            a ? ($("#toggle-header-icon").addClass("icon-chevron-up").removeClass("icon-chevron-down"), $(".gridster .gs_w").css({
                 cursor: "pointer"
             }), $("#main-header").animate({
                 top: "0px"
             }, e), $("#board-content").animate({
                 top: f + 20 + "px"
-            }, e), $("#main-header").data().shown = !0, c.attachWidgetEditIcons($(".sub-section")), c.enableGrid()) : ($("#toggle-header-icon").addClass("icon-wrench").removeClass("icon-chevron-up"), $(".gridster .gs_w").css({
+            }, e), $("#main-header").data().shown = !0, c.attachWidgetEditIcons($(".sub-section")), c.enableGrid()) : ($("#toggle-header-icon").addClass("icon-chevron-down").removeClass("icon-chevron-up"), $(".gridster .gs_w").css({
                 cursor: "default"
             }), $("#main-header").animate({
                 top: "-" + f + "px"
@@ -1861,7 +1876,7 @@ $.extend(freeboard, jQuery.eventEmitter),
             function d() {
                 _.isUndefined(e.units) || "" == e.units ? h.css("max-width", "100%") : h.css("max-width", f.innerWidth() - i.outerWidth(!0) + "px")
             }
-            var e = b,
+            var _settings = b,
                 f = $('<div class="tw-display"></div>'),
                 g = $('<h2 class="section-title tw-title tw-td"></h2>'),
                 h_p = $('<div class="tw-value-subwrapper"></div>'),
@@ -1871,7 +1886,7 @@ $.extend(freeboard, jQuery.eventEmitter),
             this.render = function(a) {
                 $(a).empty(), $(h_p).append($(h)).append($(i)), $(f).append($('<div class="tw-tr"></div>').append(g)).append($('<div class="tw-tr"></div>').append($('<div class="tw-value-wrapper tw-td"></div>').append(h_p)/*.append(h).append(i)*/)).append($('<div class="tw-tr"></div>').append(j)), $(a).append(f), d()
             }, this.onSettingsChanged = function(a) {
-                e = a;
+                _settings = a;
                 var b = !_.isUndefined(a.title) && "" != a.title,
                     c = !_.isUndefined(a.units) && "" != a.units;
                 a.sparkline ? j.attr("style", null) : (delete j.data().values, j.empty(), j.hide()), b ? (g.html(_.isUndefined(a.title) ? "" : a.title), g.attr("style", null)) : (g.empty(), g.hide()), c ? (i.html(_.isUndefined(a.units) ? "" : a.units), i.attr("style", null)) : (i.empty(), i.hide());
@@ -1894,10 +1909,11 @@ $.extend(freeboard, jQuery.eventEmitter),
             }, this.onSizeChanged = function() {
                 d()
             }, this.onCalculatedValueChanged = function(b, d) {
-                "value" == b && (e.animate ? a(d, h, 500) : h.text(d), e.sparkline && c(j, d))
-            }, this.onDispose = function() {}, this.getHeight = function() {
+                "value" == b && (_settings.animate ? a(d, h, 500) : h.text(d), _settings.sparkline && c(j, d))
+            }, this.onDispose = function() {}, 
+            this.getHeight = function() {
                 // return "big" == e.size || e.sparkline ? 2 : 1  //2 : 1
-                return (parseInt((e.height_block)?e.height_block:1) + ((e.sparkline)?1:0))
+                return (parseInt((_settings.height_block)?_settings.height_block:1) + ((_settings.sparkline)?1:0))
             }, this.onSettingsChanged(b)
         };
         freeboard.loadWidgetPlugin({
@@ -1928,7 +1944,15 @@ $.extend(freeboard, jQuery.eventEmitter),
                 name: "sparkline",
                 display_name: "Include Sparkline",
                 type: "boolean"
-            }, {
+            },
+            {
+                name: "mark_color",
+                display_name: "Sparkline Color",
+                type: "text",
+                default_value: _default.mark_color,
+                required: !0
+            },
+            {
                 name: "animate",
                 display_name: "Animate Value Changes",
                 type: "boolean",
@@ -2112,7 +2136,7 @@ $.extend(freeboard, jQuery.eventEmitter),
                 return b.push(["z"]), b
             }
             var self=this,
-                currentSettings = a,
+                _settings = a,
                 _element ,_svg, _svgContainer, d, e, f, g = 3,
                 h = 0,
                 _svgContainer = $('<div class="svg-container" style="width:100%; height: 100%;padding:10px 0"></div>');
@@ -2129,23 +2153,23 @@ $.extend(freeboard, jQuery.eventEmitter),
                     // _svg = Raphael($(_element).get()[0], e, f);
                     _svg = Raphael($(_svgContainer).get()[0], e, f);
                     var _circle = _svg.circle(e / 2, f / 2, h);
-                    _circle.attr("stroke", "#FF9900"), 
+                    _circle.attr("stroke", _settings.mark_color?_settings.mark_color:"#FF9900"), 
                     _circle.attr("stroke-width", g), 
                     _pointer = _svg.path(b([e / 2, f / 2 - h + g, 0.15*h, 0.2*h, -0.3*h, 0])), 
                     _pointer.attr("stroke-width", 0), 
                     _pointer.attr("fill", "#fff"), 
                     $(_element).append($('<div class="pointer-value"></div>').append(_value).append(_unit))
-                },1000)
+                },0)
 
             }, this.onSettingsChanged = function(a) {
-                currentSettings = a;
+                _settings = a;
                 if (_element) {
                     // console.log("*********** width|height : ",$(_element).width(), self.getHeight()*46-9)
                     $(_element).css({"width":$(_element).width()+"px", "height": self.getHeight()*46-19 +"px"})
                     $(_element).empty()
                     self.render(_element)
                 }
-                _unit.html(currentSettings.units);
+                _unit.html(_settings.units);
 
             }, this.onCalculatedValueChanged = function(a, b) {
                 if ("direction" == a) {
@@ -2158,7 +2182,7 @@ $.extend(freeboard, jQuery.eventEmitter),
                 } else "value_text" == a && (_value.html(b),_value.css({"padding-top":(f/2-0.13*Math.min(e, f))+'px',"font-size": 0.25*Math.min(e, f)+'px'}))
             }, this.onDispose = function() {}, 
             this.getHeight = function() {
-                return parseInt((currentSettings.height_block)?currentSettings.height_block:2)
+                return parseInt((_settings.height_block)?_settings.height_block:2)
             }, this.onSettingsChanged(a)
         };
         freeboard.loadWidgetPlugin({
@@ -2180,6 +2204,13 @@ $.extend(freeboard, jQuery.eventEmitter),
                 type: "text"
             },
             {
+                name: "mark_color",
+                display_name: "Marker Color",
+                type: "text",
+                default_value: _default.mark_color,
+                required: !0
+            },
+            {
                 name: "height_block",
                 display_name: "Height Blocks",
                 type: "integer",
@@ -2193,7 +2224,7 @@ $.extend(freeboard, jQuery.eventEmitter),
 
         var l = function(a) {
 
-            var currentSettings = a,
+            var _settings = a,
                 _element, _refresh, _imgurl;
 
             function onDispose() {
@@ -2219,15 +2250,15 @@ $.extend(freeboard, jQuery.eventEmitter),
                     "background-position": "center"
                 })
             }, this.onSettingsChanged = function(a) {
-                currentSettings = a,
-                onDispose(), currentSettings.refresh && currentSettings.refresh > 0 && (_refresh = setInterval(refresh, 1e3 * Number(currentSettings.refresh)))
+                _settings = a,
+                onDispose(), _settings.refresh && _settings.refresh > 0 && (_refresh = setInterval(refresh, 1e3 * Number(_settings.refresh)))
                 // l(a)
             }, this.onCalculatedValueChanged = function(a, b) {
                 "src" == a && (_imgurl = b), refresh()
             }, this.onDispose = function() {
                 onDispose()
             }, this.getHeight = function() {
-                return parseInt((currentSettings?.height_block)?currentSettings.height_block:2)
+                return parseInt((_settings?.height_block)?_settings.height_block:2)
             }, this.onSettingsChanged(a)
         };
         freeboard.loadWidgetPlugin({
