@@ -306,30 +306,50 @@ svg {
 }
 
 
-/* Range Slider*/
-.slider-container {
-	padding : 5px 10px;
+/* Slider*/
+.ui-slider-horizontal {
+    height: 10px !important;
 }
 
-/*.rangeSlider {
-    top : 20px;
+.myui-slider-handle {
+	width: 20px !important;
+	height: 20px !important;
 }
 
-.rangeSlider__handle {
-    width:20px;
-    height: 20px;
+.slider-label {
+	margin-top:3px;
 }
 
-.rangeSlider, 
-.rangeSlider__fill {
-	height: 10px;
-}*/
+.slider-value {
+    position: absolute;
+    color: #fff;
+    top:18px;
+    right: 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
 
+/* Toggle */
+.netpie-toggle {
+	/*height:30px;*/
+	margin:2px 5px;
+}
 
+.netpie-toggle-label {
+	height:30px !important;
+	width:98px;
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #999999;
+    border-radius: 20px ;
+}
 
-
-
-
+.netpie-toggle-text {
+    vertical-align: middle;
+    padding: 12px 0 0 10px;
+    float: left;
+}
 
 
 

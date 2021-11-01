@@ -15,10 +15,11 @@
     var LOADING_INDICATOR_DELAY = 1000;
     var SLIDER_ID = 0;
         
-    freeboard.addStyle ('.slider',"border: 2px solid #3d3d3d;background-color: #222;margin: 10px;");
-    freeboard.addStyle ('.slider-label','margin-left: 10px; margin-top: 10px; text-transform: capitalize;');
+    freeboard.addStyle ('.slider',"border: 2px solid #3d3d3d;background-color: #222;margin: 5px 40px 0 10px;");
+    // freeboard.addStyle ('.slider-label','margin-left: 0px; margin-top: 3px;');
     freeboard.addStyle ('.myui-slider-handle', "width: 1.5em !important; height: 1.5em !important; border-radius: 50%; top: -.4em !important; margin-left:-1.0em !important;");
     freeboard.addStyle ('.ui-slider-range', 'background: #F90;');
+    freeboard.addStyle ('.myui-slider-handle', 'width:19px !important; height:19px !important;');
 
 	// ## A Widget Plugin
 	//
@@ -45,6 +46,20 @@
 				"display_name": "Title",
 				"type"        : "text"
 			},
+            {
+                "name"        : "color",
+                "display_name": "Filled Color",
+                "type"        : "text",
+                "default_value" : "#FF9900",
+                "required"    : 1
+            },
+            {
+                "name"        : "bg_color",
+                "display_name": "Unfilled Color",
+                "type"        : "text",
+                "default_value" : "#222222",
+                "required"    : 1
+            },
                         {
 				"name"        : "min",
 				"display_name": "Min",
@@ -90,7 +105,7 @@
                 
                 
                 var titleElement = $('<h2 class="section-title slider-label"></h2>');
-                var valueElement = $('<div id="value-' + thisWidgetId + '" style="display:inline-block; padding-left: 10px; font-weight:bold; color: #d3d4d4" ></div>');
+                var valueElement = $('<div class="slider-value" id="value-' + thisWidgetId + '" style="display:inline-block; padding-left: 10px; font-weight:bold; color: #d3d4d4" ></div>');
                 var sliderElement = $('<div class="slider" id="' + thisWidgetId + '"></div>');
                 var theSlider = '#' + thisWidgetId;
                 
@@ -141,6 +156,10 @@
                             
                         })
                         .removeClass( "ui-widget-content");
+            if (currentSettings.bg_color) {
+                sliderElement.css({"background": currentSettings.bg_color})
+                sliderElement.find(">:first-child").css({"background": currentSettings.color})
+            }
 		}
 
 		// **getHeight()** (required) : A public function we must implement that will be called when freeboard wants to know how big we expect to be when we render, and returns a height. This function will be called any time a user updates their settings (including the first time they create the widget).
@@ -165,8 +184,12 @@
 		{
 			// Normally we'd update our text element with the value we defined in the user settings above (the_text), but there is a special case for settings that are of type **"calculated"** -- see below.
 			currentSettings = newSettings;
-                        titleElement.html( (_.isUndefined(newSettings.title) ? "": newSettings.title) );
-                        $(titleElement).append(valueElement);
+            titleElement.html( (_.isUndefined(newSettings.title) ? "": newSettings.title) );
+            $(titleElement).append(valueElement);
+            if (currentSettings.bg_color) {
+                sliderElement.css({"background": currentSettings.bg_color})
+                sliderElement.find(">:first-child").css({"background": currentSettings.color})
+            }
 		}
 
 		// **onCalculatedValueChanged(settingName, newValue)** (required) : A public function we must implement that will be called when a calculated value changes. Since calculated values can change at any time (like when a datasource is updated) we handle them in a special callback function here.

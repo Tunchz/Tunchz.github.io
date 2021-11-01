@@ -20,7 +20,7 @@ if (typeof sliderObject == "undefined") {
         "settings"  : [
             {
                 "name"        : "caption",
-                "display_name": "Slider Caption",
+                "display_name": "Title",
                 "type"        : "text"
             },
             // {
