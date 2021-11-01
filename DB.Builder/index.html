@@ -80,8 +80,7 @@
 								if (dashboardPattern !== null) {
 									dashboardPattern=JSON.parse(dashboardPattern);
 									freeboard.loadDashboard(dashboardPattern, function() {
-										freeboard.setEditing(false);
-										// console.log("background_image : ",freeboard.background_image())
+										// freeboard.setEditing(false);
 									});
 								}
 
@@ -98,7 +97,7 @@
 										freeboard.initialize(true);
 										// dashboardPattern=JSON.parse(json);
 										freeboard.loadDashboard(json, function() {
-											freeboard.setEditing(false);
+											// freeboard.setEditing(false);
 										});
 									} else {
 										loadingDefalult();

@@ -1877,10 +1877,12 @@ $.extend(freeboard, jQuery.eventEmitter),
                 k = !1;
             _.each(f, function(b, d) {
                 $(a).sparkline(b, {
+                    //There are 7 types of sparkline, selected by supplying a "type" option of 'line' (default),
+                    //'bar', 'tristate', 'bullet', 'discrete', 'pie' or 'box'
                     type: "line",
                     composite: k,
                     height: "100%",
-                    width: "100%",
+                    width: "96%",
                     fillColor: !1,
                     lineColor: colors[d],
                     lineWidth: 2,
@@ -2392,20 +2394,30 @@ $.extend(freeboard, jQuery.eventEmitter),
                 b(new l(a))
             }
         });
-        freeboard.addStyle(".indicator-light", "border-radius:50%;width:22px;height:22px;border:2px solid #3d3d3d;margin-top:5px;float:left;background-color:#222;margin-right:10px;"), freeboard.addStyle(".indicator-light.on", "background-color:#FFC773;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF;"), freeboard.addStyle(".indicator-text", "margin-top:10px;");
+        freeboard.addStyle(".indicator-light", "border-radius:50%;width:15px;height:15px;border:2px solid #3d3d3d;float:left;background-color:#222;"), 
+        freeboard.addStyle(".indicator-light.on", "background-color:#FFC773;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF;"), 
+        freeboard.addStyle(".indicator-text", "margin:0px; height: 100%");
         var m = function(a) {
             function b() {
                 g.toggleClass("on", i), i ? f.text(_.isUndefined(c) ? _.isUndefined(h.on_text) ? "" : h.on_text : c) : f.text(_.isUndefined(d) ? _.isUndefined(h.off_text) ? "" : h.off_text : d)
+                g.css({height: h.size, width: h.size})
+                // g.css({height: h.size, width: h.size, "background-color": "#FF9900", "box-shadow": "0px 0px 15px "+"#FFFFFF"})
+                f.css({"font-size": h.font_size+"px"})
             }
-            var c, d, e = $('<h2 class="section-title"></h2>'),
-                f = $('<div class="indicator-text"></div>'),
+            var c, d, 
+                // e = $('<h2 class="section-title"></h2>'),
+                container = $('<div class="indicator-light-container"></div>'),
+                f = $('<span class="indicator-text"></span>'),
                 g = $('<div class="indicator-light"></div>'),
                 h = a,
                 i = !1;
             this.render = function(a) {
-                $(a).append(e).append(g).append(f)
+                // $(a).append(e).append(g).append(f)
+                $(a).append(container), container.append(g).append(f)
             }, this.onSettingsChanged = function(a) {
-                h = a, e.html(_.isUndefined(a.title) ? "" : a.title), b()
+                h = a, 
+                // e.html(_.isUndefined(a.title) ? "" : a.title), 
+                b()
             }, this.onCalculatedValueChanged = function(a, e) {
                 "value" == a && (i = Boolean(e)), "on_text" == a && (c = e), "off_text" == a && (d = e), b()
             }, this.onDispose = function() {}, this.getHeight = function() {
@@ -2416,10 +2428,10 @@ $.extend(freeboard, jQuery.eventEmitter),
             type_name: "indicator",
             display_name: "Indicator Light",
             settings: [{
-                name: "title",
-                display_name: "Title",
-                type: "text"
-            }, {
+            //     name: "title",
+            //     display_name: "Title",
+            //     type: "text"
+            // }, {
                 name: "value",
                 display_name: "Value",
                 type: "calculated"
@@ -2427,10 +2439,25 @@ $.extend(freeboard, jQuery.eventEmitter),
                 name: "on_text",
                 display_name: "On Text",
                 type: "calculated"
-            }, {
+            }, 
+            {
                 name: "off_text",
                 display_name: "Off Text",
                 type: "calculated"
+            },
+            {
+                name: "size",
+                display_name: "Indicator Size",
+                type: "integer",
+                default_value: 15,
+                required: !0
+            },
+            {
+                name: "font_size",
+                display_name: "Font Size",
+                type: "integer",
+                default_value: 16,
+                required: !0
             }],
             newInstance: function(a, b) {
                 b(new m(a))
@@ -2634,7 +2661,7 @@ $.extend(freeboard, jQuery.eventEmitter),
                 display_name: "Height Blocks",
                 type: "number",
                 default_value: 4,
-                description: "A height block is around 60 pixels"
+                description: "A height block is around 40 pixels"
             }],
             newInstance: function(a, b) {
                 b(new o(a))

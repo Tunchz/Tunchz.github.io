@@ -23,38 +23,52 @@ if (typeof sliderObject == "undefined") {
                 "display_name": "Slider Caption",
                 "type"        : "text"
             },
+            // {
+            //     "name"        : "color",
+            //     "display_name": "Filled Color",
+            //     "type"        : "option",
+            //     "options"     : [
+            //         {
+            //             "name" : "Red",
+            //             "value": "red"
+            //         },
+            //         {
+            //             "name" : "Green",
+            //             "value": "green"
+            //         },
+            //         {
+            //             "name" : "Blue",
+            //             "value": "blue"
+            //         },
+            //         {
+            //             "name" : "Yellow",
+            //             "value": "yellow"
+            //         },
+            //         {
+            //             "name" : "White",
+            //             "value": "white"
+            //         },
+            //         {
+            //             "name" : "Grey",
+            //             "value": "grey"
+            //         }
+
+            //     ],
+            //     "default_value" : "grey"
+            // },
             {
                 "name"        : "color",
                 "display_name": "Filled Color",
-                "type"        : "option",
-                "options"     : [
-                    {
-                        "name" : "Red",
-                        "value": "red"
-                    },
-                    {
-                        "name" : "Green",
-                        "value": "green"
-                    },
-                    {
-                        "name" : "Blue",
-                        "value": "blue"
-                    },
-                    {
-                        "name" : "Yellow",
-                        "value": "yellow"
-                    },
-                    {
-                        "name" : "White",
-                        "value": "white"
-                    },
-                    {
-                        "name" : "Grey",
-                        "value": "grey"
-                    }
-
-                ],
-                "default_value" : "grey"
+                "type"        : "text",
+                "default_value" : "#FF9900",
+                "required"    : 1
+            },
+            {
+                "name"        : "bg_color",
+                "display_name": "Unfilled Color",
+                "type"        : "text",
+                "default_value" : "#222222",
+                "required"    : 1
             },
             {
                 "name"          : "showvalue",
@@ -116,7 +130,14 @@ if (typeof sliderObject == "undefined") {
                 "display_name"  : "onCreated Action",
                 "type"          : "text",
                 "description"   : "JS code to run after a button is created"
-            }
+            },
+            // {
+            //     "name"          : "height_block",
+            //     "display_name"  : "Height Blocks",
+            //     "type"          : "integer",
+            //     "default_value" : 2,
+            //     "required"      : !0
+            // }
 
         ],
         newInstance   : function(settings, newInstanceCallback) {
@@ -130,6 +151,8 @@ if (typeof sliderObject == "undefined") {
 
         self.widgetID = randomString(16);
 
+        var sliderContainer = $('<div class="slider-container"></div>');
+
         var sliderElement = $("<input id=\""+self.widgetID+"\" type=\"range\" min=\""+settings.min+"\" max=\""+settings.max+"\" step=\""+settings.step+"\" value=\""+(settings.initialvalue || 0)+"\" />");
         self.autoValue = 0;
 
@@ -137,8 +160,8 @@ if (typeof sliderObject == "undefined") {
         if (t > settings.max) t = settings.max;
         else if (t < settings.min) t = settings.min;
 
-        var textElement = $("<span style=\"float:left;\">"+(settings.caption?settings.caption:"")+"</span>");
-        var valueElement = $("<span style=\"float:right;\">"+t+"</span>");
+        var textElement = $("<span class='rangeSlider-title' style=\"float:left;\">"+(settings.caption?settings.caption:"")+"</span>");
+        var valueElement = $("<div class='rangeSlider-value' style=\"float:right;\">"+t+"</div>");
 
         if (settings.showvalue) valueElement.show();
         else valueElement.hide();
@@ -151,20 +174,18 @@ if (typeof sliderObject == "undefined") {
         globalStore[self.widgetID]['onStop'] = settings.onStop;
         globalStore[self.widgetID]['onSlide'] = settings.onSlide;
 
-        function updateSliderColor(color) {
-            if (bcolor[color]) {
+        function updateSliderColor(color,bg_color) {
+            if (color) {
                 if (document.getElementById(self.widgetID)) {
-                    sliderObject[self.widgetID].setFillColor(bcolor[color][1]);
-                    /*
-                    var c = hexToRgb(bcolor[color][1]);
-                    sliderObject[self.widgetID].setBackgroundColor('rgba('+c.r+','+c.g+','+c.b+',0.14)');
-                    */
+                    sliderObject[self.widgetID].setFillColor(color);
+                    sliderObject[self.widgetID].setBackgroundColor(bg_color);
+                    // valueElement.css({color: color})
                 }
             }
         }
 
         self.render = function(containerElement) {
-            $(containerElement).append(textElement).append(valueElement).append(sliderElement);
+            $(containerElement).append(sliderContainer);sliderContainer.append(textElement).append(valueElement).append(sliderElement);
 
             self.lastSlideCallback = 0;
             self.nextSlideCallbackTimer = 0;
@@ -229,16 +250,16 @@ if (typeof sliderObject == "undefined") {
                 });
             })();
 
-            updateSliderColor(settings.color);
+            updateSliderColor(settings.color, settings.bg_color);
         }
 
         self.getHeight = function() {
-            return 1;
+            return 1; //parseInt(currentSettings.height_block?currentSettings.height_block:2);
         }
 
         self.onSettingsChanged = function(newSettings) {
             currentSettings = newSettings;
-            updateSliderColor(newSettings.color);
+            updateSliderColor(newSettings.color,newSettings.bg_color);
             textElement.text(newSettings.caption?newSettings.caption:"");
 
             if (newSettings.showvalue) valueElement.show();

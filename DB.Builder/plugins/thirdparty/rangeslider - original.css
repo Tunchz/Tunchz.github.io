@@ -1,14 +1,8 @@
-/* Range Slider*/
-.slider-container {
-    padding : 0px 10px;
-    margin-right: 30px;
-}
-
 .rangeSlider,
 .rangeSlider__fill {
     background: #eeeeee;
     display: block;
-    height: 10px;
+    height: 14px;
     width: 100%;
     -webkit-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.3);
@@ -22,18 +16,7 @@
 
 .rangeSlider {
     position: relative;
-    top : 19px;
-}
-
-.rangeSlider-value {
-    position: absolute;
-    color: #fff;
-    top:18px;
-    right: 10px;
-}
-
-.rangeSlider-title {
-    font-size: 12px;
+    top : 23px;
 }
 
 .rangeSlider--disabled {
@@ -55,10 +38,10 @@
     border: 1px solid #ccc;
     cursor: pointer;
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 28px;
+    height: 28px;
     position: absolute;
-    top: -5px;
+    top: -7px;
     z-index: 3;
 
     -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);

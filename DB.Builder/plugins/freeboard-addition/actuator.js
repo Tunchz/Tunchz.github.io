@@ -20,11 +20,11 @@
         display_name: "Actuator",
         description: "Actuator which can send a value as well as receive one",
         settings: [
-            {
-                name: "title",
-                display_name: "Title",
-                type: "text"
-            },
+            // {
+            //     name: "title",
+            //     display_name: "Title",
+            //     type: "text"
+            // },
             {
                 name: "value",
                 display_name: "Value",
@@ -49,6 +49,20 @@
                 name: "off_text",
                 display_name: "Off Text",
                 type: "calculated"
+            },
+            {
+                name: "size",
+                display_name: "Indicator Size",
+                type: "integer",
+                default_value: 15,
+                required: !0
+            },
+            {
+                name: "font_size",
+                display_name: "Font Size",
+                type: "integer",
+                default_value: 16,
+                required: !0
             }
 
         ],
@@ -60,8 +74,9 @@
     freeboard.addStyle('.indicator-light.interactive:hover', "box-shadow: 0px 0px 15px #FF9900; cursor: pointer;");
     var actuator = function (settings) {
         var self = this;
-        var titleElement = $('<h2 class="section-title"></h2>');
-        var stateElement = $('<div class="indicator-text"></div>');
+        // var titleElement = $('<h2 class="section-title"></h2>');
+        var container = $('<div class="indicator-light-container"></div>');
+        var stateElement = $('<span class="indicator-text"></span>');
         var indicatorElement = $('<div class="indicator-light interactive"></div>');
         var currentSettings = settings;
         var isOn = false;
@@ -78,6 +93,9 @@
             else {
                 stateElement.text((_.isUndefined(offText) ? (_.isUndefined(currentSettings.off_text) ? "" : currentSettings.off_text) : offText));
             }
+            
+            indicatorElement.css({height: currentSettings.size, width: currentSettings.size})
+            stateElement.css({"font-size": currentSettings.font_size+"px"})
         }
 
 
@@ -97,13 +115,14 @@
 
 
         this.render = function (element) {
-            $(element).append(titleElement).append(indicatorElement).append(stateElement);
+            // $(element).append(titleElement).append(indicatorElement).append(stateElement);
+            $(element).append(container); container.append(indicatorElement).append(stateElement);
             $(indicatorElement).click(this.onClick.bind(this));
         }
 
         this.onSettingsChanged = function (newSettings) {
             currentSettings = newSettings;
-            titleElement.html((_.isUndefined(newSettings.title) ? "" : newSettings.title));
+            // titleElement.html((_.isUndefined(newSettings.title) ? "" : newSettings.title));
             updateState();
         }
 

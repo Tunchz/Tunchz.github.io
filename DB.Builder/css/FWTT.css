@@ -52,8 +52,10 @@ header h1 {
 }
 
 .board-toolbar li {
-    color: #fff;
-    padding: 3px 3px;
+	padding:2px 3px;
+    margin: 1px 2px;
+    /*background-color: #0003;*/
+    border-radius: 2px;
 }
 
 div.calculated-setting-row ul.board-toolbar li,
@@ -73,7 +75,15 @@ li.column-tool {
 
 .gridster .gs_w {
 	overflow: visible;
+	background-color: #383838
 }
+
+.gridster section, 
+.sub-section,
+.widget {
+	overflow: visible;
+}
+
 .pane-tools {
 	height: 20px;
 	position: absolute;
@@ -92,7 +102,7 @@ li.column-tool {
 .pane-tools li {
 	padding:2px 3px;
     margin: 1px 2px;
-    background-color: #ffffff22;
+    /*background-color: #0003;*/
     border-radius: 2px;
     /*border: 1px solid #ffffff33;*/
 
@@ -113,6 +123,11 @@ header:hover ul.pane-tools {
 
 li:hover header ul.pane-tools {
   opacity: 1;
+}
+
+.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
+    right: 0;
+    background-color: #F90;
 }
 
 .modal {
@@ -215,11 +230,16 @@ h2.section-title {
 	height: 40px !important;
 	/*padding: 0 10px;*/
 }
-
+.tw-sparkline {
+	padding-left: 2%;
+	padding-right: 2%;
+}
 /* Sparkline */
 .sparkline {
 	padding-top: 10px;
 	padding-bottom: 5px;
+	padding-left: 2%;
+	padding-right: 2%;
 }
 
 .sparkline-legend {
@@ -240,6 +260,7 @@ h2.section-title {
 svg {
 	left: 50% !important; 
 	transform: translateX(-50%);
+	position: relative;
 } 
 
 .pointer-value {
@@ -261,10 +282,48 @@ svg {
 }
 
 
+/* Indicator Light */
+.indicator-light-container {
+	margin-top:17px;
+	bottom: 0;
+	width: 100%;
+/*	text-align: center;
+	justify-content: center;*/
+	vertical-align: middle;
+}
+.indicator-light,
+.indicator-text {
+	margin: 0;
+	transform: translateY(-50%);
+}
+.indicator-light {
+	margin: 0 10px;
+	/*margin-left: 20px;*/
+}
+.indicator-text {
+	font-size: 16px;
+	display: inline-block;
+}
 
 
+/* Range Slider*/
+.slider-container {
+	padding : 5px 10px;
+}
 
+/*.rangeSlider {
+    top : 20px;
+}
 
+.rangeSlider__handle {
+    width:20px;
+    height: 20px;
+}
+
+.rangeSlider, 
+.rangeSlider__fill {
+	height: 10px;
+}*/
 
 
 
