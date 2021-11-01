@@ -1,3 +1,15 @@
+#admin-bar {
+	height:145px;
+}
+
+.title.bordered {
+	line-height: 25px;
+	margin-bottom: 5px;
+}
+
+h2.title {
+	padding: 10px 0 5px 0;
+}
 
 #toggle-header {
     width: 25px;
@@ -11,16 +23,24 @@
     margin-bottom: 1px;
 }
 
+.datasource-list-container {
+    max-height: 75px
+}
+
+
 /*#toggle-header-icon.icon-wrench {
     background-color: #21212100;
 }*/
 
 .logo-Mholan {
-    width: 40px;
-    height: 35px;
+    width: 35px;
+    height: 30px;
     content: url(../img/Mholan_Logo.png);
 }
 
+.add-pane {
+	margin-top: 5px;
+}
 
 .gridster header {
     height: 0px;
@@ -70,9 +90,10 @@ li.column-tool {
 }
 
 .pane-tools li {
-	padding:1px;
-    margin: 2px;
+	padding:2px 3px;
+    margin: 1px 2px;
     background-color: #ffffff22;
+    border-radius: 2px;
     /*border: 1px solid #ffffff33;*/
 
 }

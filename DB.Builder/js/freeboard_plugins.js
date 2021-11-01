@@ -2157,7 +2157,7 @@ $.extend(freeboard, jQuery.eventEmitter),
             }, 
             {
                 name: "label_perrow",
-                display_name: "#Lebal Per Row",
+                display_name: "#Label Per Row",
                 type: "integer",
                 default_value: 3,
                 required: !0
