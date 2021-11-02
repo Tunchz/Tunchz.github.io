@@ -930,7 +930,7 @@ DatasourceModel = function(a, b) {
 
                             } else if ("jsscript" == a.type) {
 
-                                console.log(">>>>>>>>>>> script string", a, h)
+                                // console.log(">>>>>>>>>>> script string", a, h)
                                 if (a.name in h) {
                                     var u = h[a.name];
                                     // if (a.multi_input && _.isArray(u))

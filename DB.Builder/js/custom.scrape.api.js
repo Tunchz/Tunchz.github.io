@@ -45,18 +45,23 @@
 
             $.get( g.url_string , ( response ) => {
 
-                    // console.log(response)
+                // Convert script string to function(response) { ...js script string...}
+                if (!_.isUndefined(g.script_text)) {
+                    _.isArray(g.script_text) && (g.script_text = "[" + g.script_text.join(",") + "]"), (g.script_text.match(/;/g) || []).length <= 1 && -1 == g.script_text.indexOf("return") && (g.script_text = "return " + g.script_text);
+                    var f;
+                    try {
+                        f = new Function("response", g.script_text)
+                    } catch (g) {
+                        var h = g.script_text.replace(/"/g, '\\"').replace(/[\r\n]/g, " \\\n");
+                        f = new Function("response", 'return "' + h + '";')
+                    }
 
-                    var c = {
-                        field1: "value1",
-                        field2: "value2",
-                        field3: "value3",
-                        };
-                    b(c)
-
+                    // console.log(">>>> return result : ", f(response));
+                }
+                b(f(response));
             });
 
-            console.log(">>>>>>> : ", g.script_text)
+
 
         }, this.onDispose = function() {
             clearInterval(f), f = null
