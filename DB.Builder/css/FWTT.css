@@ -92,11 +92,19 @@ li.column-tool {
     z-index: 100;
 }
 
+.pane-tools li,
+.pane-tools li i {
+	z-index: 100;
+}
+
 #main-header {
 	z-index: 50;
 }
 .modal {
 	z-index: 200;
+}
+#admin-menu * {
+	z-index: 380;
 }
 
 .pane-tools li {
@@ -352,7 +360,34 @@ svg {
 }
 
 
+/* Hichart */
+rect.highcharts-button-box {
+/*	width:20px !important;
+	height:20px !important;*/
+	fill: #0000 !important;
+}
+/*path.highcharts-button-symbol {
+	width:10px !important;
+	height:80px !important;
+}*/
 
+
+/* Horizontal Gauge */
+.horizontal-gauge-container div.rangeSlider div.rangeSlider__handle,
+.horizontal-gauge-container div.rangeSlider div.rangeSlider__handle:after {
+	background-color: #0000;
+	background: #0000;
+	border: 0px solid #0000;
+	box-shadow: none;
+}
+.horizontal-gauge-container div.rangeSlider div.rangeSlider__fill {
+	border-radius: 5px;
+
+}
+
+.horizontal-gauge-container * {
+	pointer-events: none !important;
+}
 
 
 

@@ -5,7 +5,8 @@
 
 (function() {
     var gaugeWidget = function (settings) {
-        var titleElement = $('<h2 class="section-title"></h2>');
+        var container = $('<div class="horizontal-gauge-container"></div>');
+        var titleElement = $('<h2 class="section-title" style="padding-left:0;"></h2>');
         var gaugeElement = $('<div></div>');
 
         var self = this;
@@ -44,13 +45,13 @@
         }
 
         self.render = function (element) {
-            $(element).append(titleElement.html(currentSettings.title)).append(gaugeElement);
+            $(element).append(container);container.append(titleElement.html(currentSettings.title)).append(gaugeElement);
 
             width = gaugeElement.width();
-            height = 160;
+            height = 40;
 
-            var gaugeWidth = 160;
-            var gaugeHeight = 30;
+            var gaugeWidth = $(element).width(); //160;
+            var gaugeHeight = 10;
 
             paper = Raphael(gaugeElement.get()[0], width, height);
             paper.clear();
@@ -145,7 +146,7 @@
         }
 
         self.getHeight = function () {
-            return 3;
+            return 1;
         }
 
     };

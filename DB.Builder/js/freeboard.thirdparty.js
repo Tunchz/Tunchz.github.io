@@ -15959,7 +15959,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 		widget_base_dimensions  : [100,30],		// [400, 225],
 		extra_rows              : 0,
 		extra_cols              : 0,
-		min_cols                : 1,
+		min_cols                : 5,			// 1,
 		max_cols                : 15,			// null,
 		min_rows                : 15,
 		max_size_x              : 15, 			// 6,

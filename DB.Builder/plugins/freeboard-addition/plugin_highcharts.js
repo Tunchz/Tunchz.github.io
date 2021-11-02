@@ -38,11 +38,6 @@
 		"description": "Specify the last number of seconds you want to see.",
 		"default_value": 60
 	}, {
-		"name": "blocks",
-		"display_name": "Height (No. Blocks)",
-		"type": "number",
-		"default_value": 4
-	}, {
 		"name": "chartType",
 		"display_name": "Chart Type",
 		"type": "option",
@@ -67,7 +62,24 @@
 		"display_name": "Y-Axis",
 		"type": "calculated",
 		"default_value": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}"
-	}];
+	},
+    {
+        name: "blocks",
+        display_name: "Height Blocks",
+        type: "integer",
+        default_value: 4,
+        required: !0
+    }, {
+        name: "include_legend",
+        display_name: "Include Legend",
+        type: "boolean",
+        default_value: 1,
+    }, {
+        name: "include_contextmenu",
+        display_name: "Include Context Menu",
+        type: "boolean",
+        default_value: 1,
+    }];
 
 	for (i = 1; i <= MAX_NUM_SERIES; i++) {
 		var dataSource = {
@@ -123,16 +135,18 @@
 				chart: {
 					backgroundColor: null,
 					style: {
-						fontFamily: "'Open Sans', sans-serif"
+						fontFamily: "'Open Sans', sans-serif",
 					},
-					plotBorderColor: '#606063'
+					plotBorderColor: '#606063',
+					// height: (46*self.getHeight()-6)+"px",
 				},
                                 plotShadow: false,
 				title: {
 					style: {
-						color: '#E0E0E3',
-						fontSize: '20px'
-					}
+						color: '#8b8b8b',
+						fontSize: '12px',
+					},
+					align: "left",
 				},
 				subtitle: {
 					style: {
@@ -144,7 +158,8 @@
 					gridLineColor: '#707073',
 					labels: {
 						style: {
-							color: '#E0E0E3'
+							color: '#E0E0E3',
+							fontSize: '8px',
 						}
 					},
 					lineColor: '#707073',
@@ -152,25 +167,29 @@
 					tickColor: '#707073',
 					title: {
 						style: {
-							color: '#A0A0A3'
-
+							color: '#A0A0A3',
+							fontSize: '10px',
 						}
 					}
 				},
 				yAxis: {
-					gridLineColor: '#707073',
+					gridLineColor: '#70707377',
+					// gridLineDashStyle: "dash",
 					labels: {
 						style: {
-							color: '#E0E0E3'
+							color: '#E0E0E3',
+							fontSize: '8px',
 						}
 					},
 					lineColor: '#707073',
-					minorGridLineColor: '#505053',
+					minorGridLineColor: '#505053aa',
+					minorGridLineDashStyle: "dot",
 					tickColor: '#707073',
-					tickWidth: 1,
+					tickWidth: 0,
 					title: {
 						style: {
-							color: '#A0A0A3'
+							color: '#A0A0A3',
+							fontSize: '10px',
 						}
 					}
 				},
@@ -200,6 +219,12 @@
 					}
 				},
 				legend: {
+					enabled: currentSettings.include_legend,
+					padding: 0,
+			        align: 'left',
+			        verticalAlign: 'top',
+			        borderWidth: 0,
+					// maxHeight: "5px",
 					itemStyle: {
 						color: '#E0E0E3'
 					},
@@ -211,7 +236,7 @@
 					}
 				},
 				credits: {
-                                        enabled: false,
+                    enabled: false,
 					style: {
 						color: '#666'
 					}
@@ -302,6 +327,20 @@
 					trackBorderColor: '#404043'
 				},
 
+				exporting: {
+					buttons : {
+						contextButton:{
+						enabled: currentSettings.include_contextmenu,
+						menuItems:["viewFullscreen", "printChart", "separator", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG"],
+						//position relative to align option
+						// menuClassName: "highcharts-custom-contextenu",
+						// x: -10,
+						// y:-5,
+				
+						}
+					}
+				},
+
 				// special colors for some of the
 				legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',
 				background2: '#505053',
@@ -326,7 +365,7 @@
 				if (datasource) {
 					var serieno = "series" + i + "label";
 					var label = currentSettings[serieno];
-					console.log('label: ', label);
+					// console.log('label: ', label);
 					var newSeries = {
 						id: 'series' + i,
 						name: label,
@@ -353,15 +392,14 @@
 			}
 
 			// Create widget
-			thisWidgetContainer
-				.css('height', 60 * self.getHeight() - 10 + 'px');
-			thisWidgetContainer.css('width', '100%');
+			thisWidgetContainer.css({'height': (46 * self.getHeight() - 6) + 'px','width': '100%'});
+			// thisWidgetContainer.css('width', '100%');
 
 			thisWidgetContainer.highcharts({
 				chart: {
 					type: thisWidgetChartType,
 					animation: Highcharts.svg,
-					marginRight: 20
+					marginRight: 10
 				},
 				title: {
 					text: thisWidgetTitle
@@ -386,31 +424,44 @@
 							}
 						},
 						threshold: null
-					}
+					},
+			        series: {
+			            // cursor: 'pointer',
+			            // className: 'popup-on-click',
+			            marker: {
+			                lineWidth: 1
+			            }
+			        }
 				},
 
 				tooltip: {
-					formatter: function() {
-						return '<b>' + this.series.name + '</b><br/>' + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',
-							this.x) + '<br/>' + Highcharts.numberFormat(this.y, 1);
-					}
+			        // shared: true,
+			        crosshairs: true,
+					// formatter: function() {
+					// 	return '<b>' + this.series.name + '</b><br/>' + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S',
+					// 		this.x) + '<br/>▸ ' + Highcharts.numberFormat(this.y, 1);
+					// }
 				},
 				series: thisWidgetSeries
 			});
 		}
 
 		self.render = function(containerElement) {
-			$(containerElement).append(thisWidgetContainer);
-			createWidget();
+			// setTimeout(function() {
+				$(containerElement).append(thisWidgetContainer);
+				createWidget();
+			// }, 1000);
 		}
 
 		self.getHeight = function() {
-			return currentSettings.blocks;
+			return parseInt(currentSettings.blocks)+1;
 		}
 
 		self.onSettingsChanged = function(newSettings) {
-			currentSettings = newSettings;
-			createWidget();
+			// setTimeout(function() {
+				currentSettings = newSettings;
+				createWidget();
+			// }, 1000);
 		}
 
 		self.onCalculatedValueChanged = function(settingName, newValue) {

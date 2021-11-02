@@ -11,6 +11,7 @@ var _default = {
     font_color: "#ffffff",
     font_opacity: 0.6,
     widget_background_color: "#383838",
+    timeframe: 100,
 };
 
 function DialogBox(a, b, c, d, e) {
@@ -108,7 +109,13 @@ function FreeboardModel(a, b, c) {
         }
     }, this.deserialize = function(e, f) {
         function g() {
-            c.setUserColumns(e.columns), _.isUndefined(e.allow_edit) ? d.allow_edit(!0) : d.allow_edit(e.allow_edit), d.version = e.version || 0, d.header_image(e.header_image), d.dashboard_title(e.dashboard_title), d.avatar(e.avatar),d.background_image(e.background_image),d.background_color(e.background_color), _.each(e.datasources, function(b) {
+            c.setUserColumns(e.columns), _.isUndefined(e.allow_edit) ? d.allow_edit(!0) : d.allow_edit(e.allow_edit), d.version = e.version || 0, 
+            _.isUndefined(e.header_image) ? d.header_image(_default.header_image) : d.header_image(e.header_image),
+            _.isUndefined(e.dashboard_title) ? d.dashboard_title(_default.dashboard_title) : d.dashboard_title(e.dashboard_title),
+            _.isUndefined(e.avatar) ? d.avatar(_default.avatar) : d.avatar(e.avatar),
+            d.background_image(e.background_image),
+            d.background_color(e.background_color),
+             _.each(e.datasources, function(b) {
                 var c = new DatasourceModel(d, a);
                 c.deserialize(b), d.addDatasource(c)
             });
@@ -432,8 +439,8 @@ function FreeboardUI() {
         }
     }
     // options for gridster
-    var r, s = 3,//10,
-        t = 100,//300,
+    var r, s = 3,//10,       // margin
+        t = 100,//300,       // width
         u = 3,
         v = s + t + s,
         w = u,
@@ -442,7 +449,7 @@ function FreeboardUI() {
         init: function(b, c, d, e, f) {
             r = $(b).gridster({
                 widget_margins: [s, s],
-                widget_base_dimensions: [t, 40], //10],
+                widget_base_dimensions: [t, 40], //10],   // [width, height]
                 resize: {
                     enabled: !1,//!1,
                     axes: "x"
@@ -753,13 +760,17 @@ DatasourceModel = function(a, b) {
             c = a
         }
 
-        function b(a, b) {
+        function b(a, b, jsscript) {
             var c = '// Example: Convert temp from C to F and truncate to 2 decimal places.\n// return (datasources["MyDatasource"].sensor.tempInF * 1.8 + 32).toFixed(2);';
+            var c_jsscript = '// Example: extractedResult = response.split(","); >>> js script to extract the result in json from response\n// return extractedResult;';
+            if (jsscript) c=c_jsscript;
             a || (a = c);
             var d = $('<div class="code-window"></div>'),
                 e = $('<div class="code-mirror-wrapper"></div>'),
                 f = $('<div class="code-window-footer"></div>'),
                 g = $('<div class="code-window-header cm-s-ambiance">This javascript will be re-evaluated any time a datasource referenced here is updated, and the value you <code><span class="cm-keyword">return</span></code> will be displayed in the widget. You can assume this javascript is wrapped in a function of the form <code><span class="cm-keyword">function</span>(<span class="cm-def">datasources</span>)</code> where datasources is a collection of javascript objects (keyed by their name) corresponding to the most current data in a datasource.</div>');
+                g_jsscript = $('<div class="code-window-header cm-s-ambiance">This javascript will be re-evaluated any time a this datasource is updated, and the value you <code><span class="cm-keyword">return</span></code> will be the output of this datasource. You can assume this javascript is wrapped in a function of the form <code><span class="cm-keyword">function</span>(<span class="cm-def">response</span>)</code> where response is the return result from CONNECTION API call.</div>');
+            if (jsscript) g=g_jsscript;
             d.append([g, e, f]), $("body").append(d);
             var h = CodeMirror(e.get(0), {
                     value: a,
@@ -780,8 +791,8 @@ DatasourceModel = function(a, b) {
         }
         var c = "";
         return {
-            displayJSEditor: function(a, c) {
-                b(a, c)
+            displayJSEditor: function(a, c, jsscript) {
+                b(a, c, jsscript)
             },
             setAssetRoot: function(b) {
                 a(b)
@@ -801,7 +812,7 @@ DatasourceModel = function(a, b) {
             return !isNaN(parseFloat(a)) && isFinite(a)
         }
 
-        function f(c, d, e, f, g) {
+        function f(c, d, e, f, g, jsscript) {
             var h = $("<textarea></textarea>");
             e.multi_input ? h.change(function() {
                 var a = [];
@@ -818,11 +829,11 @@ DatasourceModel = function(a, b) {
             var k = $('<li><i class="icon-plus icon-white"></i><label>DATASOURCE</label></li>').mousedown(function(a) {
                 a.preventDefault(), $(h).val("").focus().insertAtCaret('datasources["').trigger("freeboard-eval")
             });
-            i.append(k);
+            if (!jsscript) i.append(k);
             var l = $('<li><i class="icon-fullscreen icon-white"></i><label>.JS EDITOR</label></li>').mousedown(function(b) {
                 b.preventDefault(), a.displayJSEditor(h.val(), function(a) {
                     h.val(a), h.change()
-                })
+                }, 1)
             });
             if (i.append(l), g) {
                 var m = $('<li class="remove-setting-row"><i class="icon-minus icon-white"></i><label></label></li>').mousedown(function(a) {
@@ -916,6 +927,29 @@ DatasourceModel = function(a, b) {
                                     });
                                     $(i).siblings(".form-label").append(x)
                                 }
+
+                            } else if ("jsscript" == a.type) {
+
+                                console.log(">>>>>>>>>>> script string", a, h)
+                                if (a.name in h) {
+                                    var u = h[a.name];
+                                    // if (a.multi_input && _.isArray(u))
+                                    //     for (var v = !1, w = 0; w < u.length; w++)
+                                    //         f(i, m, a, u[w], v), v = !0;
+                                    // else
+                                        f(i, m, a, u, !1, 1)
+                                } else
+                                    f(i, m, a, null, !1, 1);
+
+                                // if (a.multi_input) {
+                                //     var x = $('<ul class="board-toolbar"><li class="add-setting-row"><i class="icon-plus icon-white"></i><label>ADD</label></li></ul>').mousedown(function(b) {
+                                //         b.preventDefault(), f(i, m, a, null, !0)
+                                //     });
+                                //     $(i).siblings(".form-label").append(x)
+                                // }
+
+
+
                             } else {
                                 var s = $('<input type="text">').appendTo(i).change(function() {
                                     "number" == a.type ? m.settings[a.name] = Number($(this).val()) : m.settings[a.name] = $(this).val()
@@ -1867,7 +1901,8 @@ $.extend(freeboard, jQuery.eventEmitter),
 
             var f = $(a).data().values,
                 g = $(a).data().valueMin,
-                h = $(a).data().valueMax;
+                h = $(a).data().valueMax,
+                d = parseInt(_settings.timeframe?_settings.timeframe:_default.timeframe);
             f || (f = [], g = void 0, h = void 0);
             var i = function(a, b) {
                 f[b] || (f[b] = []), f[b].length >= d && f[b].shift(), f[b].push(Number(a)), (void 0 === g || g > a) && (g = a), (void 0 === h || a > h) && (h = a)
@@ -1879,11 +1914,12 @@ $.extend(freeboard, jQuery.eventEmitter),
                 $(a).sparkline(b, {
                     //There are 7 types of sparkline, selected by supplying a "type" option of 'line' (default),
                     //'bar', 'tristate', 'bullet', 'discrete', 'pie' or 'box'
-                    type: "line",
+                    type: _settings.use_bar?"bar":"line",
                     composite: k,
                     height: "100%",
                     width: "96%",
                     fillColor: !1,
+                    barColor: colors[d],
                     lineColor: colors[d],
                     lineWidth: 2,
                     spotRadius: 3,
@@ -1894,7 +1930,7 @@ $.extend(freeboard, jQuery.eventEmitter),
                     highlightLineColor: colors[d],  //_settings.mark_color?_settings.mark_color:_default.mark_color,  //"#9D3926",
                     chartRangeMin: g,
                     chartRangeMax: h,
-                    tooltipFormat: c && c[d] ? j + " (" + c[d] + ")" : j
+                    tooltipFormat: _settings.units ? j + " " + _settings.units : j
                 }), k = !0
             })
         }
@@ -2008,40 +2044,49 @@ $.extend(freeboard, jQuery.eventEmitter),
                         "value": "right"
                     }
                 ],
-                required: !0
             }, 
             {
                 name: "font_color",
                 display_name: "Text Color",
                 type: "text",
                 default_value: _default.font_color,
-                required: !0
             },
             {
                 name: "sparkline",
                 display_name: "Include Sparkline",
                 type: "boolean"
             },
+            // {
+            //     name: "use_bar",
+            //     display_name: "Use Bar",
+            //     "description": "Use bar graph instead of line for sparkline.",
+            //     type: "boolean",
+            //     default: 0,
+            // },
+            {
+                "name": "timeframe",
+                "display_name": "Timeframe (s)",
+                "type": "number",
+                "description": "Specify the last number of seconds you want to see.",
+                "default_value": _default.timeframe,
+            },
             {
                 name: "mark_color",
                 display_name: "Sparkline Color",
                 type: "text",
                 default_value: _default.mark_color,
-                required: !0
             },
             {
                 name: "maxmin_color",
                 display_name: "Max-Min Color",
                 type: "text",
                 default_value: _default.maxmin_color,
-                required: !0
             },
             {
                 name: "height_block",
                 display_name: "Height Blocks",
                 type: "integer",
                 default_value: 1,
-                required: !0
             }],
             newInstance: function(a, b) {
                 b(new g(a))
@@ -2147,10 +2192,24 @@ $.extend(freeboard, jQuery.eventEmitter),
                 display_name: "Value",
                 type: "calculated",
                 multi_input: "true"
+            },{
+                "name": "timeframe",
+                "display_name": "Timeframe (s)",
+                "type": "number",
+                "description": "Specify the last number of seconds you want to see.",
+                "default_value": _default.timeframe,
+            // },
+            // {
+            //     name: "use_bar",
+            //     display_name: "Use Bar",
+            //     "description": "Use bar graph instead of line for sparkline.",
+            //     type: "boolean",
+            //     default: 0,
             }, {
                 name: "include_legend",
                 display_name: "Include Legend",
-                type: "boolean"
+                type: "boolean",
+                default_value: 1,
             }, {
                 name: "legend",
                 display_name: "Legend",
@@ -2159,9 +2218,10 @@ $.extend(freeboard, jQuery.eventEmitter),
             }, 
             {
                 name: "label_perrow",
-                display_name: "#Label Per Row",
+                display_name: "#Item Per Row",
                 type: "integer",
                 default_value: 3,
+                description: "number of legend items to display in each row.",
                 required: !0
             },
             // {
@@ -2180,7 +2240,7 @@ $.extend(freeboard, jQuery.eventEmitter),
                 name: "mark_color",
                 display_name: "Sparkline Colors",
                 type: "text",
-                description: "Comma-separated for multiple sparklines, Leave blank for default colors"
+                description: "Comma-separated for multiple sparklines, Leave blank for default colors",
             },
             {
                 name: "maxmin_color",

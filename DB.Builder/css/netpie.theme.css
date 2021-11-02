@@ -35,12 +35,15 @@ body {
 }
 
 .board-toolbar li {
-    color: #FED33C;
+    /*color: #FED33C;*/
+
+    color: #fff;
     /*background-color: #007FFF;*/
 }
 
 .text-button {
-    color: #FED33C;
+    /*color: #FED33C;*/
+    color: #fff;
 }
 
 a:hover.text-button, a:focus.text-button {
