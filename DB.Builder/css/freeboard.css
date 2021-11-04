@@ -1285,7 +1285,8 @@ header h1 {
 #admin-menu {
     left: 0;
     right: 0;
-    width: 950px;
+    /*width: 950px;*/
+    width:100%;
     /*top: 20px;*/
     top: 10px;
     margin: 0 auto;
@@ -1415,7 +1416,7 @@ ol {
     padding: 0;
     margin: 0;
     overflow: hidden;
-    z-index: auto;
+    z-index: 50;
     -webkit-touch-callout: text;
     -webkit-user-select: text;
     -khtml-user-select: text;
@@ -2330,7 +2331,7 @@ h2.title {
     display: none
 }
 
-@media screen and (max-width:870px) {
+@media screen and (max-width:750px) {
     #admin-bar {
         height: 270px
     }
@@ -2587,7 +2588,7 @@ textarea:-moz-placeholder {
     height: 0;
     width: 4px;
     background: transparent;
-    padding-right: 10
+    padding-right: 10px;
 }
 
 ::-webkit-scrollbar-thumb {

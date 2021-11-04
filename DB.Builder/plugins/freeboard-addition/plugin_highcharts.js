@@ -33,7 +33,7 @@
 	//
 	var highchartsLineWidgetSettings = [{
 		"name": "timeframe",
-		"display_name": "Timeframe (s)",
+		"display_name": "Timeframe in SECONDS",
 		"type": "number",
 		"description": "Specify the last number of seconds you want to see.",
 		"default_value": 60

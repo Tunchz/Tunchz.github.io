@@ -71,6 +71,8 @@ function updateFullScreenStatus() {
         // $("#full-screen").hide();
         // $("#full-screen-icon").removeClass("icon-resize-full").addClass("icon-resize-small")
         // $("#full-screen-icon").show();
+        // $("#header").addClass("full-screen");
+        $("#board-content-bottom").addClass("full-screen");
     } else {
         if (canEdit) {
             $("#main-header").show()
@@ -85,6 +87,8 @@ function updateFullScreenStatus() {
         // $("#full-screen").text("Fullscreen");
         // $("#full-screen").show();
         // $("#full-screen-icon").addClass("icon-resize-full").removeClass("icon-resize-small")
+        // $("#header").removeClass("full-screen");
+        $("#board-content-bottom").removeClass("full-screen");
     }
 }
 

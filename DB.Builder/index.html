@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>	
+<html lang="en">	
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
@@ -39,8 +39,8 @@
 					"js/freeboard_plugins.js",
 					"js/custom.scrape.api.js",
 					"js/netpie.global.js",
-					"js/netpie.plugin.microgear.js",
-					"js/netpie.plugin.feed.js",
+					// "js/netpie.plugin.microgear.js",
+					// "js/netpie.plugin.feed.js",
 					"js/netpie.widget.button.js",
 					"js/netpie.widget.feedview.js",
 					"js/netpie.widget.toggle.js",
@@ -124,6 +124,7 @@
 				<ul data-bind="grid: true">
 				</ul>
 			</div>
+			<div id="board-content-bottom"></div>
 		</div>
 		<header id="main-header" data-bind="if:allow_edit">
 			<div id="admin-bar">
@@ -134,7 +135,7 @@
 							<ul class="board-toolbar vertical">
 
 
-	                            <li id="setting-dashboard">
+	                            <li id="setting-dashboard" data-bind="click: freeboard.setDashboardOptions">
 	                            	<i class="icon-edit icon-white"></i>
 	                            	<label>Settings</label>
 	                            </li>
@@ -142,7 +143,6 @@
 <!-- 	                            <li id="dev-console-toolbar">
 	                            	<i class="iconblackboard"></i>
 	                            	<label onclick="freeboard.showDeveloperConsole()">Developer Console</label>
-	                            	<label onclick="">Developer Console</label>
 	                            </li> -->
 
 	                            <li id="load-dashboard" data-bind="click: loadDashboardFromLocalFile" style="float:left;">

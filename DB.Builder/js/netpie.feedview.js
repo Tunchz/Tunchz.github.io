@@ -12,73 +12,84 @@ function n(n){
     return n > 9 ? "" + n: "0" + n;
 }
 
-function getdata(datajson,arr,arrnext,index){
+function getdata(datajson,arr,arrnext,index,settings){
     var timelist ={seconds:1000,minutes:1000*60,hours:1000*60*60,days:1000*60*60*24,months:1000*60*60*24*30,years:1000*60*60*24*30*12}
     if(arrnext!==undefined){
-        var timesplit = timelist[datajson.granularity[1]]*datajson.granularity[0]*1.5;
+    	// console.log("111111111111")
+     //    // var timesplit = timelist[datajson.granularity[1]]*datajson.granularity[0]*1.5;
+        var timesplit = timelist[settings.granularity_unit]*Number(settings.granularity_size)*1.5;
         if(index==0){
-            if(datajson.since == undefined){
-                var timebegin = datajson.from;
-                if(arr[0]-timebegin>timesplit){
-                    return [[ timebegin, null ]];
-                }
+    	// console.log("22222222222")
+     //        // if(datajson.since == undefined){
+     //        if(settings.window_size == undefined){
+     //            var timebegin = datajson.from;
+     //            if(arr[0]-timebegin>timesplit){
+     //                return [[ timebegin, null ]];
+     //            }
                 
-            }
-            else{
-                var timebegin = timelist[datajson.since[1]]*datajson.since[0];
-                var datenow = new Date().getTime();
-                if(arr[0]-(datenow-timebegin)>timesplit){
-                    return [[ datenow-timebegin, null ]];
-                }
-            }
+    	// console.log("22222222222----111")
+     //        }
+     //        else{
+    	// console.log("22222222222-----222")
+     //            // var timebegin = timelist[datajson.since[1]]*datajson.since[0];
+     //            var timebegin = timelist[settings.window_unit]*Number(settings.window_size);
+     //            var datenow = new Date().getTime();
+     //            if(arr[0]-(datenow-timebegin)>timesplit){
+     //                return [[ datenow-timebegin, null ]];
+     //            }
+     //        }
+     		return [[ null, null ]];
         }
         else{
-            if(arrnext[0]-arr[0]>timesplit){
-            	if(datajson.since == undefined){
-            		return [[ arr[0], arr[1] ],[ datajson.to, null]];
-            	}
-            	else{
-            		return [[ arr[0], arr[1] ],[ arrnext[0], null]];
-            	}
-            }
+            // if(arrnext[0]-arr[0]>timesplit){
+            // 	if(settings.window_size == undefined){
+            // 		return [[ arr[0], arr[1] ],[ datajson.to, null]];
+            // 	}
+            // 	else{
+            // 		return [[ arr[0], arr[1] ],[ arrnext[0], null]];
+            // 	}
+            // }
             return [[ arr[0], arr[1] ]];
         }
     }
     else{
-        var timesplit = timelist[datajson.granularity[1]]*datajson.granularity[0]*1.5;
+        // var timesplit = timelist[datajson.granularity[1]]*datajson.granularity[0]*1.5;
+        // var timesplit = timelist[settings.granularity_unit]*Number(settings.granularity_size)*1.5;;
         var datenow = new Date().getTime();
-        if(datenow-arr[0]>timesplit){
-            if(datajson.since == undefined){
-                return [[ arr[0], arr[1] ],[datajson.to, null]];
-            }
-            else{
-                return [[ arr[0], arr[1] ],[datenow, null]];
-            }
+        // if(datenow-arr[0]>timesplit){
+        //     if(settings.window_size == undefined){
+        //         return [[ arr[0], arr[1] ],[datajson.to, null]];
+        //     }
+        //     else{
+        //         return [[ arr[0], arr[1] ],[datenow, null]];
+        //     }
             
-        }
-        else{
-            return [[ arr[0], arr[1] ]]
-        }
-        return null;
+        // }
+        // else{
+        //     return [[ arr[0], arr[1] ]]
+        // }
+        // return null;
+        return [[ arr[0], arr[1] ],[datenow, null]];
     }
 }
 
-function updateChart(chartDIV,datajson,option) {
+function updateChart(chartDIV,dataArray,option,settings) {
+	var datajson = {data:Object.values(dataArray)}
 	var oldgraph = null;
-	const DEFAULTCOLOR = ['#d40000','#1569ea','#ffcc00']
+	const DEFAULTCOLOR = ['#d40000','#1569ea','#ffcc00','#ffffff']
 	var defaultGraph = {lines:{show:true,steps:false},points:{show:true,radius:2}};
 	var optionGraph = {};
-	var heightGraph = 95;
-	var topLegend = 95;
 	var yaxes = []
 	var maxY = [];
 	var minY = [];
 	var color;
-	var width = {"1":"300","2":"620","3":"940"}
+	// var width = {"1":"300","2":"620","3":"940"}
 	var curWidth = $("#"+chartDIV).parent().parent().parent().parent().attr('data-sizex');
 	var curHeight = $("#"+chartDIV).parent().parent().parent().parent().attr('data-sizey');
-	var widthGraph = width[curWidth]*0.95+"px";
-	var widthDiv = width[curWidth]+"px";
+	var heightGraph = 46*curHeight-6 - 20;//95;
+	var topLegend = heightGraph+25;
+	var widthGraph = (106*curWidth-6)-20+"px";//width[curWidth]*0.95+"px";
+	var widthDiv =  (106*curWidth-6)+"px";//width[curWidth]+"px";
 	var unit =[];
 	if ($("#"+chartDIV).find("#"+chartDIV+"_graph").length > 0){
 		oldgraph = document.getElementById(chartDIV).innerHTML;
@@ -89,8 +100,9 @@ function updateChart(chartDIV,datajson,option) {
 		 	optionGraph = defaultGraph;
 		}else{
 			if(option.title){
-				heightGraph = heightGraph - 10;
-				$('<div class="header_graph" id="'+chartDIV+'_header">'+option.title.toUpperCase()+'</div>').css({
+				heightGraph -= 24;
+				topLegend -= 24;
+				$('<div class="header_graph" id="'+chartDIV+'_header">'+option.title+'</div>').css({
 					"padding-top": "2%",
 					display: "-webkit-flexbox",
 				    display: "-ms-flexbox",
@@ -105,9 +117,9 @@ function updateChart(chartDIV,datajson,option) {
 					height:"7%",
 					margin:"auto",
 					// textAlign : "center",
-					font: '14px/0.9em "proxima-nova", Helvetica, Arial, sans-serif',
+					// font: '14px/0.9em "proxima-nova", Helvetica, Arial, sans-serif',
 					color:"black",
-					"font-weight": "bold"
+					// "font-weight": "bold"
 				}).appendTo("#"+chartDIV);
 				if(curWidth==3){
 					$('#'+chartDIV+'_header').css({
@@ -116,8 +128,7 @@ function updateChart(chartDIV,datajson,option) {
 				}
 			}
 			if(option.xaxis !== undefined && option.xaxis.trim() != ""){
-				heightGraph = heightGraph - 5;
-				topLegend = topLegend - 5;
+				heightGraph -= 13;
 			}
 			if(option.type !== undefined){
 				if(option.type=="bar"){
@@ -173,8 +184,9 @@ function updateChart(chartDIV,datajson,option) {
 		$('<div id="'+chartDIV+'_graph" ></div>').css({
 			// top:"5px",
 			width: widthGraph,
-			height:heightGraph+"%",
-			margin: "auto",
+			height:heightGraph+"px",
+			"margin-left": "20px",
+			"margin-right": "0px",
 			// 'background-color' : "",
 		}).appendTo("#"+chartDIV);
 		var filter = [];
@@ -207,7 +219,8 @@ function updateChart(chartDIV,datajson,option) {
 							for (var j=0; j<arr.length; j++) {
 								var datai = null;
 								if (option && option.autogap){
-									datai = getdata(datajson,arr[j],arr[j+1],j)
+									datai = getdata(datajson,arr[j],arr[j+1],j,settings)
+									// console.log("1----datai : ", datai)
 								}
 								else{
 									datai = [[ arr[j][0], arr[j][1] ]];
@@ -256,7 +269,8 @@ function updateChart(chartDIV,datajson,option) {
 						for (var j=0; j<arr.length; j++) {
 							var datai = null;
 							if (option && option.autogap){
-								datai = getdata(datajson,arr[j],arr[j+1],j)
+								datai = getdata(datajson,arr[j],arr[j+1],j,settings)
+									// console.log("2----datai : ", datai)
 							}
 							else{
 								datai = [[ arr[j][0], arr[j][1] ]];
@@ -336,20 +350,22 @@ function updateChart(chartDIV,datajson,option) {
 			}
 		}
 
-		if(curHeight-16<0){
-			topLegend =topLegend+(curHeight-16)/2
-		}
-		if(curWidth==3){
-			topLegend = topLegend+1;
-		}
+		// if(curHeight-16<0){
+		// 	topLegend =topLegend+(curHeight-16)/2
+		// }
+		// if(curWidth==3){
+		// 	topLegend = topLegend+1;
+		// }
+
 		$('<div id="'+chartDIV+'_legend"></div>').css({
 			padding: "",
-			top : topLegend+"%",
-			height:"5%",
+			top : topLegend+"px",
+			height:"10%",
 			width : "100%",
 			margin:"auto",
 			textAlign : "center",
 			position : "absolute",
+			font: '0.85em "proxima-nova", Helvetica, Arial, sans-serif !important',
 			textAlign : "center",
 		}).appendTo("#"+chartDIV);
 		var plot = $.plot("#"+chartDIV+"_graph", chartdata, {
@@ -366,7 +382,7 @@ function updateChart(chartDIV,datajson,option) {
                             }
                         }
                     }
-                    return '&nbsp;' + label.toUpperCase() +uniti.toUpperCase();
+                    return '&nbsp;' + label +uniti +'&nbsp;&nbsp;';
 				}
 			},
 			series: optionGraph,
@@ -380,16 +396,16 @@ function updateChart(chartDIV,datajson,option) {
 				mode : "time",
 				timezone : "browser",
 				font : {
-			      	size : 11,
+			      	size : 9,//11,
 			      	style : "",
-			      	weight : "bold",
-			      	family : "sans-serif",
+			      	// weight : "bold",
+			      	family : "sans-serif ",
 			      	variant : "small-caps",
 			      	color : "black"
 			   }
 			}
 		});
-		$("<div id='tooltip'></div>").css({
+		$("<div id='tooltip' class='tooltip'></div>").css({
 			position: "absolute",
 			display: "none",
 			border: "1px solid #ccc",
@@ -437,24 +453,24 @@ function updateChart(chartDIV,datajson,option) {
 
 		if(option !== undefined) {
 			if(option.xaxis !== undefined && option.xaxis.trim()!=""){
-				var topX = topLegend+5;
-				$('<div class="x_graph" id="'+chartDIV+'_x">'+option.xaxis.toUpperCase()+'</div>').css({
+				var topX = topLegend-13;
+				$('<div class="x_graph" id="'+chartDIV+'_x">'+option.xaxis+'</div>').css({
 					width : "100%",
 					margin: "auto",
 					textAlign : "center",
 					position : "absolute",
 					// height:"5%",
-					top: topX+"%",
+					top: topX+"px",
 					font: '0.85em "proxima-nova", Helvetica, Arial, sans-serif',
 					color:"black",
-					"font-weight": "bold"
+					// "font-weight": "bold"
 				}).insertAfter("#"+chartDIV+"_legend");
 			}
 			if(option.yaxis !== undefined){
 				// $("#"+chartDIV+"_graph").css({
 				// 	top:"10%"
 				// });
-				$('<div class="y_graph" id="'+chartDIV+'_y">'+option.yaxis.toUpperCase()+'</div>').css({
+				$('<div class="y_graph" id="'+chartDIV+'_y">'+option.yaxis+'</div>').css({
 					textAlign : "center",
 					'-webkit-transform' : 'rotate(270deg)',
 	             	'-moz-transform' : 'rotate(270deg)',
@@ -463,7 +479,7 @@ function updateChart(chartDIV,datajson,option) {
 	             	position : "absolute",
 	             	font: '0.85em "proxima-nova", Helvetica, Arial, sans-serif',
 	             	color:"black",
-					"font-weight": "bold"
+					// "font-weight": "bold"
 				}).insertBefore("#"+chartDIV+"_graph");
 				var ydivheight = ($("#"+chartDIV).height()/2-$('#'+chartDIV+'_y').height()/2)-1;
 				if($("#"+chartDIV).width()<=300){

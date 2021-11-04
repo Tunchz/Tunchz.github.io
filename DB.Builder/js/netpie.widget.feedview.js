@@ -35,6 +35,13 @@ if (typeof feedview === "undefined") {
                 "description" : "Data fields separated with comma e.g. temp,humid,light. Blank means display all fields."
             },
             {
+                "name": "timeframe",
+                "display_name": "Time Steps",
+                "type": "number",
+                "description": "Specify the number of data points you want to see.",
+                "default_value": _default.timeframe,
+            },
+            {
                 name: "type",
                 display_name: "Type of Chart",
                 type: "option",
@@ -92,38 +99,85 @@ if (typeof feedview === "undefined") {
             {
                 name: "height_block",
                 display_name: "Height Blocks",
-                type: "option",
-                options:[
-                    {
-                        name: "4",
-                        value: "240"
-                    },
-                     {
-                        name: "5",
-                        value: "300"
-                    },
-                    {
-                        name: "6",
-                        value: "360"
-                    },
-                    {
-                        name: "7",
-                        value: "420"
-                    },
-                    {
-                        name: "8",
-                        value: "480"
-                    },
-                    {
-                        name: "9",
-                        value: "540"
-                    },
-                    {
-                        name: "10",
-                        value: "600"
-                    }
-                ]
+                type: "integer",
+                default_value: 4,
             },
+            // {
+            //     name: "window_size",
+            //     display_name: "Window Size",
+            //     type: "integer",
+            //     default_value: 1,
+            // },
+            // {
+            //     name: "window_unit",
+            //     display_name: "Window Unit",
+            //     type: "option",
+            //     default_value: "hours",
+            //     options:[
+            //         {
+            //             name: "seconds",
+            //             value: "seconds"
+            //         },
+            //          {
+            //             name: "minutes",
+            //             value: "minutes"
+            //         },
+            //         {
+            //             name: "hours",
+            //             value: "hours"
+            //         },
+            //         {
+            //             name: "days",
+            //             value: "days"
+            //         },
+            //         {
+            //             name: "months",
+            //             value: "months"
+            //         },
+            //         {
+            //             name: "years",
+            //             value: "years"
+            //         },
+            //     ],
+            // },
+            // {
+            //     name: "granularity_size",
+            //     display_name: "Granularity Size",
+            //     type: "integer",
+            //     default_value: 1,
+            // },
+            // {
+            //     name: "granularity_unit",
+            //     display_name: "Granularity Unit",
+            //     type: "option",
+            //     default_value: "minutes",
+            //     options:[
+            //         {
+            //             name: "seconds",
+            //             value: "seconds"
+            //         },
+            //          {
+            //             name: "minutes",
+            //             value: "minutes"
+            //         },
+            //         {
+            //             name: "hours",
+            //             value: "hours"
+            //         },
+            //         {
+            //             name: "days",
+            //             value: "days"
+            //         },
+            //         {
+            //             name: "months",
+            //             value: "months"
+            //         },
+            //         {
+            //             name: "years",
+            //             value: "years"
+            //         },
+            //     ]
+            // },
 
         ],
         newInstance   : function(settings, newInstanceCallback) {
@@ -133,32 +187,49 @@ if (typeof feedview === "undefined") {
 
     var feedviewWidgetPlugin = function(settings) {
         var self = this;
-        var sizeWidth = {"240":"4","300":"5","360":"6","420":"7","480":"8","540":"9","600":"10"};
+        self.dataArray = {};
+        // var sizeWidth = {"240":"4","300":"5","360":"6","420":"7","480":"8","540":"9","600":"10"};
         self.widgetID = randomString(16);
         var currentSettings = settings;
         var feedviewElement = $("<div id=\"chart"+self.widgetID+"\"></div>");
         self.render = function(containerElement) {
-            currentSettings.height = sizeWidth[currentSettings.height_block];
+            // currentSettings.height = sizeWidth[currentSettings.height_block];
             $(containerElement).append(feedviewElement);
             feedviewElement.css({
-                height:currentSettings.height_block+"px",
+                height:(46*currentSettings.height_block - 6) +"px",
+                // width: 100%
             });
         }
 
         this.getHeight = function () {
-            if(currentSettings.height===undefined){
-                currentSettings.height = 4;
-            }
-            return Number(currentSettings.height);
+            // if(currentSettings.height===undefined){
+            //     currentSettings.height = 4;
+            // }
+            return Number(currentSettings.height_block?currentSettings.height_block:4);
         }
 
         self.onSettingsChanged = function(newSettings) {
             currentSettings = newSettings;
+
+            // currentSettings.height = sizeWidth[currentSettings.height_block];
+            $("#"+'chart'+self.widgetID).css({
+                height:(46*currentSettings.height_block - 6) +"px",
+                // width: 100%
+            });
+
             insertFeedView();
         }
 
         self.onCalculatedValueChanged = function(settingName, newValue) {
-            self.valuejson = newValue;
+            // self.dataArray = newValue;
+            newValue.map((item,i)=>{
+                if (self.dataArray[item.attr]) {
+                    self.dataArray[item.attr].values = self.dataArray[item.attr].values.concat(item.values)
+                    if (self.dataArray[item.attr].values.length > (Number(currentSettings.timeframe)+1)) self.dataArray[item.attr].values.shift()
+                } else {
+                    self.dataArray[item.attr] = item;
+                }
+            })
             insertFeedView();
         }
 
@@ -177,15 +248,11 @@ if (typeof feedview === "undefined") {
         //this.onSettingsChanged(settings);
 
         freeboard.on('theme_changed',function() {
-            updateChart('chart'+self.widgetID,self.valuejson,self.option);
+            updateChart('chart'+self.widgetID,self.dataArray,self.option,currentSettings);
         });
 
         var insertFeedView =function() {
-            currentSettings.height = sizeWidth[currentSettings.height_block];
-            $("#"+'chart'+self.widgetID).css({
-                height:currentSettings.height_block+"px",
-            });
-            if(self.valuejson!==undefined){
+            if(self.dataArray!==undefined){
                 self.option = {
                     title : currentSettings.title,
                     xaxis : currentSettings.xaxis,
@@ -199,7 +266,7 @@ if (typeof feedview === "undefined") {
                     autogap : currentSettings.autogap
                 }
                 // jQuery(window).ready(function() {
-                updateChart('chart'+self.widgetID,self.valuejson,self.option);
+                updateChart('chart'+self.widgetID,self.dataArray,self.option,currentSettings);
                 // });
             }
         }        

@@ -15977,8 +15977,14 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 		collision               : {},
 		draggable               : {
 			distance: 4
-		}
+		},
 	};
+
+
+
+
+
+
 
 	/**
 	 * @class Gridster
