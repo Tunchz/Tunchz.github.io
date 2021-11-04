@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>freeboard</title>
+    <link rel="shortcut icon" href="./favicon.ico?v=2">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width = device-width, initial-scale = 1, user-scalable = no">
+    <link href="./freeboard-ui/css/freeboard.min.css" rel="stylesheet">
+    <link href="./views/board/index.min.css" rel="stylesheet">
+    <script src="./freeboard-ui/js/freeboard.thirdparty.min.js"></script>
+    <script type="text/javascript">
+        head.js(
+            "./freeboard-ui/js/freeboard.min.js",
+            "./views/board/index.min.js"
+            // ,"./plugins/all.js"
+            );
+    </script>
+</head>
+
+<body data-bind="style: {backgroundColor: bg_color}">
+    <div id="board-content">
+        <div class="gridster responsive-column-width"><img id="dash-logo" data-bind="attr:{src: header_image}, visible:header_image()">
+            <ul data-bind="grid: true"></ul>
+        </div>
+    </div>
+    <header id="main-header" data-bind="if:allow_edit">
+        <div id="admin-bar">
+            <div id="admin-menu">
+                <div id="board-tools"><a href="/account">
+                        <h1 id="board-logo" class="title bordered">freeboard</h1>
+                    </a>
+                    <div id="board-actions">
+                        <ul class="board-toolbar vertical">
+                            <li id="add-pane" data-bind="click: createPane"><i class="icon-plus icon-white"></i><label>Add Pane</label></li>
+                            <li id="dev-console-toolbar"><i style="background-image:url(./freeboard-ui/img/glyphicons-blackboard.png);width:14px;height:14px"></i><label onclick="freeboard.showDeveloperConsole()">Developer Console</label></li>
+                            <li id="load-dashboard" data-bind="click: loadDashboardFromLocalFile" style="float:left;"><i style="background-image:url(./freeboard-ui/img/glyphicons-log-in.png);width:14px;height:14px"></i><label>Import</label></li>
+                            <li id="edit-dashboard" style="float:right;"><i style="width:14px;height:14px;" class="icon-edit icon-white"></i><label>Settings</label></li>
+                            <li id="save-dashboard" data-bind="click: saveDashboard" data-pretty="false" style="float:right;"><i style="background-image:url(./freeboard-ui/img/glyphicons-log-out.png);width:14px;height:14px"></i><label>Export</label></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="datasources">
+                    <h2 class="title">DATASOURCES</h2>
+                    <div class="datasource-list-container">
+                        <table id="datasources-list" data-bind="if: datasources().length" class="table table-condensed sub-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Last Updated</th>
+                                    <th> </th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: datasources">
+                                <tr>
+                                    <td><span data-bind="text: name, pluginEditor: {operation: 'edit', type: 'datasource'}" class="text-button datasource-name"></span></td>
+                                    <td data-bind="text: last_updated" class="datasource-update-time"></td>
+                                    <td>
+                                        <ul class="board-toolbar">
+                                            <li data-bind="click: updateNow"><i class="icon-refresh icon-white"></i></li>
+                                            <li data-bind="pluginEditor: {operation: 'delete', type: 'datasource'}"><i class="icon-trash icon-white"></i></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><span id="add-datasource" data-bind="pluginEditor: {operation: 'add', type: 'datasource'}" class="text-button table-operation">ADD</span>
+                </div>
+            </div>
+        </div>
+        <div id="column-tools" class="responsive-column-width">
+            <ul class="board-toolbar left-columns">
+                <li data-bind="click: addGridColumnLeft" class="column-tool add"><span class="column-icon right"></span><i class="icon-arrow-left icon-white"></i></li>
+                <li data-bind="click: subGridColumnLeft" class="column-tool sub"><span class="column-icon left"></span><i class="icon-arrow-right icon-white"></i></li>
+            </ul>
+            <ul class="board-toolbar right-columns">
+                <li data-bind="click: subGridColumnRight" class="column-tool sub"><span class="column-icon right"></span><i class="icon-arrow-left icon-white"></i></li>
+                <li data-bind="click: addGridColumnRight" class="column-tool add"><span class="column-icon left"></span><i class="icon-arrow-right icon-white"></i></li>
+            </ul>
+        </div>
+        <div id="toggle-header" data-bind="click: toggleEditing"><i id="toggle-header-icon" class="icon-wrench icon-white"></i></div>
+    </header>
+    <div id="pane-holding-pen">
+        <ul data-bind="template: { name: 'pane-template', foreach: panes}"></ul>
+    </div>
+    <div id="footer-bar">
+        <div id="footer-menu"><a href="/account">
+                <h3 id="footer-logo" class="title bordered">freeboard</h3>
+            </a>
+            <div id="board-title"></div>
+            <ul id="footer-toolbar" class="board-toolbar">
+                <li id="full-screen-action" onclick="toggleFullScreen()"><i id="full-screen-icon" class="icon-resize-full icon-white"></i><label id="full-screen">Fullscreen</label></li>
+                <li id="share-action"><i class="icon-user icon-white"></i><label>Share</label></li>
+                <li id="clone-action"><i class="icon-adjust icon-white"></i><label>Clone</label></li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/template" id="data-board">%7B%22allow_edit%22%3Atrue%2C%22canEdit%22%3Atrue%2C%22isPrivate%22%3Afalse%2C%22id%22%3A%22lWvIxK%22%2C%22name%22%3A%22FWTT-Test%22%7D</script>
+    <script id="pane-template" type="text/html">
+        <li data-bind="pane: true, style: {background: pane_bg_color}" class="pane">
+            <header data-bind="style: {backgroundColor: pane_header_bg_color, color:pane_header_txt_color}">
+                <h1 data-bind="text: title"></h1>
+                <ul class="board-toolbar pane-tools">
+                    <li class="add-widget-action" data-bind="pluginEditor: {operation: 'add', type: 'widget'}">
+                        <i class="icon-plus icon-white"></i>
+                    </li>
+                    <li class="edit-pane-action" data-bind="pluginEditor: {operation: 'edit', type: 'pane'}">
+                        <i class="icon-wrench icon-white"></i>
+                    </li>
+                    <li class="delete-pane-action" data-bind="pluginEditor: {operation: 'delete', type: 'pane'}">
+                        <i class="icon-trash icon-white"></i>
+                    </li>
+                </ul>
+            </header>
+            <section data-bind="foreach: widgets, style: {backgroundColor: pane_bg_color, color:pane_txt_color}">
+                <div class="sub-section" data-bind="css: 'sub-section-height-' + height()">
+                    <div class="widget" data-bind="widget: true, css:{fillsize:fillSize}"></div>
+                    <div class="sub-section-tools">
+                        <ul class="board-toolbar">
+                            <!-- ko if:$parent.widgetCanMoveUp($data) -->
+                            <li data-bind="click:$parent.moveWidgetUp"><i class="icon-chevron-up icon-white"></i></li>
+                            <!-- /ko -->
+                            <!-- ko if:$parent.widgetCanMoveDown($data) -->
+                            <li data-bind="click:$parent.moveWidgetDown"><i class="icon-chevron-down icon-white"></i></li>
+                            <!-- /ko -->
+                            <li data-bind="pluginEditor: {operation: 'edit', type: 'widget'}"><i class="icon-wrench icon-white"></i></li>
+                            <li data-bind="pluginEditor: {operation: 'delete', type: 'widget'}"><i class="icon-trash icon-white"></i></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </li>
+    </script>
+    <script id="sharing-template" type="text/html">
+        <div id="shared-with-list" class="shared-with-list" data-bind="foreach: sharedWith">
+            <div class="shared-with-row">
+                <div class="shared-with-field shared-with-email" data-bind="text: email"></div>
+                <div class="shared-with-field shared-with-rights">
+                    <div class="styled-select"><select data-bind="value: allowEdit">
+                            <option value="0">READ-ONLY</option>
+                            <option value="1">EDIT</option>
+                        </select></div>
+                </div>
+                <div class="shared-with-field shared-with-toolbar">
+                    <ul class="board-toolbar">
+                        <li data-bind="click: $parent.removeShare"><i class="icon-trash icon-white"></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="shared-with-field"><input id="share-with-email" type="text" placeholder="Email Address"></div>
+        <div class="shared-with-field">
+            <ul class="board-toolbar">
+                <li data-bind="click: addShare"><i class="icon-plus icon-white"></i><label>Share</label></li>
+            </ul>
+        </div>
+    </script>
+<!--     <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-47218006-2', 'freeboard.io');
+        ga('send', 'pageview');
+
+        ! function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (!d.getElementById(id)) {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "https://platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }
+        }(document, "script", "twitter-wjs");
+    </script> -->
+</body>
+
+</html>

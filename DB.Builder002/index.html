@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">	
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title>DB Builder</title>
+    		<meta name="description" content="the question isn't can you; it's WILL YOU. -FWTT-">
+    		<link rel="icon" type="image/x-icon" href="img/Mholan_Logo.png"/>
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<link href="css/netpie.plugins.css" rel="stylesheet" />
+		<link href="css/freeboard.css" rel="stylesheet" />
+		<link href="css/FWTT.css" rel="stylesheet" />
+		<script src="js/freeboard.thirdparty.js"></script>
+		<script type="text/javascript">
+			function QueryStringToJSON(queryString) {            
+			    var pairs = queryString.slice(1).split('&');
+			    
+			    var result = {};
+			    pairs.forEach(function(pair) {
+			        pair = pair.split('=');
+			        result[pair[0]] = decodeURIComponent(pair[1] || '');
+			    });
+
+			    return JSON.parse(JSON.stringify(result));
+			}
+			const parameter = QueryStringToJSON(window.location.search);
+			// console.log(parameter);
+
+			// if (parameter?.file) {
+			// 	$.get( parameter.file, function( data ) {
+			// 	  console.log("----data : ",data)
+				
+			// 	});
+			// }
+
+			head.js(
+					"js/freeboard_plugins.js",
+					"js/custom.scrape.api.js",
+					"js/netpie.global.js",
+					// "js/netpie.plugin.microgear.js",
+					// "js/netpie.plugin.feed.js",
+					"js/netpie.widget.button.js",
+					"js/netpie.widget.feedview.js",
+					"js/netpie.widget.toggle.js",
+					"js/netpie.widget.rangeslider.js",
+					"js/netpie.widget.map.js",
+					// *** Load more plugins here ***
+
+
+			        "plugins/thirdparty/altGuage.js",
+					"plugins/freeboard-addition/actuator.js",
+					"plugins/freeboard-addition/horizontal_gauge.widgets.js",
+					// "plugins/freeboard-addition/horizontal_linear_gauge.widgets.js",  // replaced by horizontal_gauge
+					"plugins/freeboard-addition/plugin_highcharts.js",
+					"plugins/freeboard-addition/slider-plugin.js",
+					"plugins/freeboard-addition/switch.js",
+					"plugins/flotplot/flot_extended.plugin.js",
+					"plugins/jqplot/jqplot-freeboard.js",
+					"plugins/colorblocks/colorthreshold.js",
+					"plugins/colorblocks/colorvalue.js",
+			        "plugins/external/widget-button.js",
+
+			        // "css/freeboard.homeassistant.css",
+			        // "js/freeboard.homeassistant.js",
+			        // "plugins/thirdparty/freeboard-handlebars.plugin.js",
+
+			        // "plugins/thirdparty/button-widget.plugin.js",
+			        // "plugins/signinapp-v2.js",
+			        
+
+
+					function(){
+						function loadingDefalult(){
+
+								freeboard.initialize(true);
+								var dashboardPattern = window.localStorage.getItem("maholan.db.builder");
+								// console.log("dashboardPattern : ",dashboardPattern)
+								if (dashboardPattern !== null) {
+									dashboardPattern=JSON.parse(dashboardPattern);
+									freeboard.loadDashboard(dashboardPattern, function() {
+										// freeboard.setEditing(false);
+									});
+								}
+
+						}
+
+
+						$(function()
+						{ //DOM Ready
+							if (parameter?.dashboard) {
+								$.get( parameter.dashboard, function( json ) {
+								  	// console.log("++++++++++++data : ",json)
+
+									if (json !== null) {
+										freeboard.initialize(true);
+										// dashboardPattern=JSON.parse(json);
+										freeboard.loadDashboard(json, function() {
+											// freeboard.setEditing(false);
+										});
+									} else {
+										loadingDefalult();
+									}
+
+								
+								}).fail(function() {
+									console.log( "Loading specified json error!!!" );
+									aleart("Loading "+ parameter.dashboard+ " failed, load default!")
+									loadingDefalult();
+								})
+							} else {
+								loadingDefalult();
+							}
+
+						});
+					});
+		</script>
+	</head>
+	<body ng-app="starter">
+		<div id="board-content">
+			<img id="dash-logo" data-bind="attr:{src: header_image}, visible:header_image()">
+			<div class="gridster responsive-column-width">
+				<ul data-bind="grid: true">
+				</ul>
+			</div>
+			<div id="board-content-bottom"></div>
+		</div>
+		<header id="main-header" data-bind="if:allow_edit">
+			<div id="admin-bar">
+				<div id="admin-menu">
+					<div id="board-tools">
+						<h1 id="board-logo" class="title bordered"><img class="logo-Mholan" valign="middle"> DB Builder</h1>
+						<div id="board-actions">
+							<ul class="board-toolbar vertical">
+
+
+	                            <li id="setting-dashboard" data-bind="click: freeboard.setDashboardOptions">
+	                            	<i class="icon-edit icon-white"></i>
+	                            	<label>Settings</label>
+	                            </li>
+
+<!-- 	                            <li id="dev-console-toolbar">
+	                            	<i class="iconblackboard"></i>
+	                            	<label onclick="freeboard.showDeveloperConsole()">Developer Console</label>
+	                            </li> -->
+
+	                            <li id="load-dashboard" data-bind="click: loadDashboardFromLocalFile" style="float:left;">
+	                            	<i class="iconlogin"></i>
+	                            	<label>Import</label>
+	                            </li>
+
+	                            <li data-bind="click: clearFreeboard"  style="float:right;">
+									<i class="icon-folder-close icon-white"></i>
+									<label >Reset</label>
+								</li>
+	                            <li id="save-dashboard" data-bind="click: saveDashboard" data-pretty="true" style="float:right;">
+	                            	<i class="iconlogout"></i>
+	                            	<label>Export</label>
+	                            </li>
+
+								<li ></li>
+
+
+<!-- 								<li data-bind="click: loadDashboardFromLocalFile">
+									<i id="import-icon" class="icon-folder-open icon-white"></i>
+									<label id="import">Import</label>
+								</li>
+								<li data-bind="click: saveDashboard" data-pretty="true">
+									<i class="icon-download-alt icon-white"></i>
+									<label >Export</label>
+								</li>
+								<li data-bind="click: clearFreeboard">
+									<i class="icon-folder-close icon-white"></i>
+									<label >Reset</label>
+								</li> -->
+
+								<li id="add-pane" data-bind="click: createPane">
+									<i class="icon-plus icon-white"></i>
+									<label>Add Pane</label>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+					<div id="datasources">
+						<h2 class="title">DATASOURCES</h2>
+
+						<div class="datasource-list-container">
+							<table class="table table-condensed sub-table" id="datasources-list" data-bind="if: datasources().length">
+								<thead>
+								<tr>
+									<th>&nbsp;&nbsp;&nbsp;Name</th>
+									<th>Last Updated</th>
+									<th>&nbsp;</th>
+								</tr>
+								</thead>
+								<tbody data-bind="foreach: datasources">
+								<tr>
+									<td>
+										<span class="text-button datasource-name" data-bind="text: name, pluginEditor: {operation: 'edit', type: 'datasource'}"></span>
+									</td>
+									<td data-bind="text: last_updated"></td>
+									<td>
+										<ul class="board-toolbar">
+											<li data-bind="click: updateNow"><i class="icon-refresh icon-white"></i></li>
+											<li data-bind="pluginEditor: {operation: 'delete', type: 'datasource'}">
+												<i class="icon-trash icon-white"></i></li>
+										</ul>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+						<span class="text-button table-operation" data-bind="pluginEditor: {operation: 'add', type: 'datasource'}"><div class="icon-plus icon-white" style="margin-top:-1px"></div><span style="padding: 0 0 0 5px">ADD DataSource</span></span>
+					</div>
+				</div>
+				<div class="theme-toggle" >
+					<input type="checkbox" name="toggle" class="theme-toggle-checkbox" id="theme-toggle" onclick="toggletheme()">
+						<label class="theme-toggle-label" for="theme-toggle">
+						<span class="theme-toggle-inner" ontext="" offtext="" id="theme-toggle_inner"></span>
+						<span class="theme-toggle-switch"></span>
+					</label>
+				</div>
+			</div>
+			<div id="column-tools" class="responsive-column-width">
+				<ul class="board-toolbar left-columns">
+					<li class="column-tool add" data-bind="click: addGridColumnLeft"><span class="column-icon right"></span><i class="icon-arrow-left icon-white"></i></li>
+					<li class="column-tool sub" data-bind="click: subGridColumnLeft"><span class="column-icon left"></span><i class="icon-arrow-right icon-white"></i></li>
+				</ul>
+				<ul class="board-toolbar right-columns">
+					<li class="column-tool sub" data-bind="click: subGridColumnRight"><span class="column-icon right"></span><i class="icon-arrow-left icon-white"></i></li>
+					<li class="column-tool add" data-bind="click: addGridColumnRight"><span class="column-icon left"></span><i class="icon-arrow-right icon-white"></i></li>
+				</ul>
+			</div>
+			<div id="toggle-header" data-bind="click: toggleEditing">
+				<i id="toggle-header-icon" class="icon-chevron-down icon-white"></i></div>
+		</header>
+
+		<div style="display:hidden">
+			<ul data-bind="template: { name: 'pane-template', foreach: panes}">
+			</ul>
+		</div>
+
+		<script type="text/html" id="pane-template">
+			<li data-bind="pane: true">
+				<header>
+					<h1 data-bind="text: title"></h1>
+					<ul class="board-toolbar pane-tools">
+						<li data-bind="pluginEditor: {operation: 'add', type: 'widget'}">
+							<i class="icon-plus icon-white"></i>
+						</li>
+						<li data-bind="pluginEditor: {operation: 'edit', type: 'pane'}">
+							<i class="icon-wrench icon-white"></i>
+						</li>
+						<li data-bind="pluginEditor: {operation: 'delete', type: 'pane'}">
+							<i class="icon-trash icon-white"></i>
+						</li>
+					</ul>
+				</header>
+				<section data-bind="foreach: widgets">
+					<div class="sub-section" data-bind="css: 'sub-section-height-' + height()">
+						<div class="widget" data-bind="widget: true, css:{fillsize:fillSize}"></div>
+						<div class="sub-section-tools">
+							<ul class="board-toolbar">
+								<!-- ko if:$parent.widgetCanMoveUp($data) -->
+								<li data-bind="click:$parent.moveWidgetUp"><i class="icon-chevron-up icon-white icon-grey" ></i></li>
+								<!-- /ko -->
+								<!-- ko if:$parent.widgetCanMoveDown($data) -->
+								<li data-bind="click:$parent.moveWidgetDown"><i class="icon-chevron-down icon-white icon-grey" ></i></li>
+								<!-- /ko -->
+								<li data-bind="pluginEditor: {operation: 'edit', type: 'widget'}"><i class="icon-wrench icon-white icon-grey" ></i></li>
+								<li data-bind="pluginEditor: {operation: 'delete', type: 'widget'}"><i class="icon-trash icon-white icon-grey" ></i></li>
+							</ul>
+						</div>
+					</div>
+				</section>
+			</li>
+		</script>
+
+
+
+<!-- 	<div id="pane-holding-pen">
+        <ul data-bind="template: { name: 'pane-template', foreach: panes}"></ul>
+    </div> -->
+    <div id="footer-bar">
+        <div id="footer-menu">
+        	<!-- <a href=""> -->
+                <h3 id="footer-logo" class="title bordered"><img class="logo-Mholan-footer" valign="middle">&nbsp;&nbsp;DB.Builder</h3>
+            <!-- </a> -->
+
+            <img id="avatar-footer" style="content: url(https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png);" valign="middle">
+            <div id="board-title"></div>
+
+            <ul id="footer-toolbar" class="board-toolbar">
+                <li id="full-screen-action" onclick="toggleFullScreen()"><i id="full-screen-icon" class="icon-resize-full icon-white"></i><label id="full-screen">Fullscreen</label></li>
+                <!-- <li id="share-action"><i class="icon-user icon-white"></i><label>Share</label></li> -->
+                <!-- <li id="clone-action"><i class="icon-adjust icon-white"></i><label>Clone</label></li> -->
+            </ul>
+        </div>
+    </div>
+
+    <div id="full-screen-action" onclick="toggleFullScreen()" style="position: absolute; right: 10px; bottom: 5px;">
+    	<i id="full-screen-icon" class="icon-resize-small icon-white"></i>
+    	<!-- <label id="full-screen">Fullscreen</label> -->
+    </div>
+
+    <script type="text/template" id="data-board">%7B%22allow_edit%22%3Atrue%2C%22canEdit%22%3Atrue%2C%22isPrivate%22%3Afalse%2C%22id%22%3A%22lWvIxK%22%2C%22name%22%3A%22FWTT-Test%22%7D</script>
+
+<!--     <script id="sharing-template" type="text/html">
+        <div id="shared-with-list" class="shared-with-list" data-bind="foreach: sharedWith">
+            <div class="shared-with-row">
+                <div class="shared-with-field shared-with-email" data-bind="text: email"></div>
+                <div class="shared-with-field shared-with-rights">
+                    <div class="styled-select"><select data-bind="value: allowEdit">
+                            <option value="0">READ-ONLY</option>
+                            <option value="1">EDIT</option>
+                        </select></div>
+                </div>
+                <div class="shared-with-field shared-with-toolbar">
+                    <ul class="board-toolbar">
+                        <li data-bind="click: $parent.removeShare"><i class="icon-trash icon-white"></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="shared-with-field"><input id="share-with-email" type="text" placeholder="Email Address"></div>
+        <div class="shared-with-field">
+            <ul class="board-toolbar">
+                <li data-bind="click: addShare"><i class="icon-plus icon-white"></i><label>Share</label></li>
+            </ul>
+        </div>
+    </script> -->
+
+	<script src="js/freeboard.footer.js"></script> <!-- for footer menu -->	
+
+	</body>
+</html>
