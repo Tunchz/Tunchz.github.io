@@ -146,7 +146,7 @@
                                 $( "#value-" + thisWidgetId ).html( ui.value );
                             },
                             stop:  function( event, ui ) {
-                                console.log("stop: ", ui.value);
+                                // console.log("stop: ", ui.value);
                                     
                                 if ( _.isUndefined(currentSettings.url) )
                                     freeboard.showDialog($("<div align='center'>url undefined</div>"),"Error!","OK",null,function(){});
@@ -195,7 +195,7 @@
 		// **onCalculatedValueChanged(settingName, newValue)** (required) : A public function we must implement that will be called when a calculated value changes. Since calculated values can change at any time (like when a datasource is updated) we handle them in a special callback function here.
 		self.onCalculatedValueChanged = function(settingName, newValue)
 		{
-                        console.log( "valueChanged:", settingName, newValue);
+                        // console.log( "valueChanged:", settingName, newValue);
                                 
 			// Remember we defined "the_text" up above in our settings.
 			if(settingName == "value")
@@ -228,7 +228,7 @@
                 var request;
 
                 self.sendValue = function (url, options) {
-                    console.log(url, options);
+                    // console.log(url, options);
                     request = new XMLHttpRequest();
                     if (!request) {
                         console.log('Giving up :( Cannot create an XMLHTTP instance');

@@ -103,7 +103,7 @@
                 currentSettings.height_block = 2;
             }
             mapElement.css({
-                height: (currentSettings.height_block * 46 - ((currentSettings.title)?26:6)) + "px",
+                height: (currentSettings.height_block *_h-_r*2 - ((currentSettings.title)?20:0)) + "px",
             });
         }
 

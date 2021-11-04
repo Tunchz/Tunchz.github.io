@@ -86,10 +86,10 @@ function updateChart(chartDIV,dataArray,option,settings) {
 	// var width = {"1":"300","2":"620","3":"940"}
 	var curWidth = $("#"+chartDIV).parent().parent().parent().parent().attr('data-sizex');
 	var curHeight = $("#"+chartDIV).parent().parent().parent().parent().attr('data-sizey');
-	var heightGraph = 46*curHeight-6 - 20;//95;
+	var heightGraph = curHeight*_h-_r*2 - 20;//95;
 	var topLegend = heightGraph+25;
-	var widthGraph = (106*curWidth-6)-20+"px";//width[curWidth]*0.95+"px";
-	var widthDiv =  (106*curWidth-6)+"px";//width[curWidth]+"px";
+	var widthGraph = (curWidth*_w-_g*2)-20+"px";//width[curWidth]*0.95+"px";
+	var widthDiv =  (curWidth*_w-_g*2)+"px";//width[curWidth]+"px";
 	var unit =[];
 	if ($("#"+chartDIV).find("#"+chartDIV+"_graph").length > 0){
 		oldgraph = document.getElementById(chartDIV).innerHTML;

@@ -397,7 +397,7 @@ JustGage = function(config) {
 
 
     // console.log("---Widget W&H : ", widgetW, widgetH);
-    dy -= 25;
+    dy -= 37;
 
     // title
     titleFontSize = ((widgetH / 8) > obj.config.titleMinFontSize) ? (widgetH / 10) : obj.config.titleMinFontSize;

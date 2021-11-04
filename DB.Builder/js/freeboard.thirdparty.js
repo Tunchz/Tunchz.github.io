@@ -15960,9 +15960,9 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 		extra_rows              : 0,
 		extra_cols              : 0,
 		min_cols                : 5,			// 1,
-		max_cols                : 15,			// null,
+		max_cols                : null,			// null,
 		min_rows                : 15,
-		max_size_x              : 15, 			// 6,
+		max_size_x              : 20, 			// 6,
 		autogenerate_stylesheet : true,
 		avoid_overlapped_widgets: true,
 		serialize_params        : function($w, wgd)
@@ -18530,6 +18530,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 		for(var y = 1; y <= opts.rows; y++)
 		{
 			styles += (opts.namespace + ' [data-sizey="' + y + '"] { height:' + (y * opts.widget_base_dimensions[1] + (y - 1) * (opts.widget_margins[1] * 2)/* + ((y===1)?-14:-34) */) + 'px;}');
+			styles += (opts.namespace + ' .sub-section-height-' + y + ' { height:' + (y * opts.widget_base_dimensions[1] + (y - 1) * (opts.widget_margins[1] * 2)/* + ((y===1)?-14:-34) */) + 'px;}');
 		}
 
 		for(var x = 1; x <= max_size_x; x++)

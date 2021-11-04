@@ -36,7 +36,7 @@
 		"display_name": "Timeframe in SECONDS",
 		"type": "number",
 		"description": "Specify the last number of seconds you want to see.",
-		"default_value": 60
+		"default_value": _default.timeframe
 	}, {
 		"name": "chartType",
 		"display_name": "Chart Type",
@@ -392,14 +392,16 @@
 			}
 
 			// Create widget
-			thisWidgetContainer.css({'height': (46 * self.getHeight() - 6) + 'px','width': '100%'});
+			thisWidgetContainer.css({'height': (self.getHeight()*_h-_r*2) + 'px','width': '100%'});
 			// thisWidgetContainer.css('width', '100%');
 
 			thisWidgetContainer.highcharts({
 				chart: {
 					type: thisWidgetChartType,
 					animation: Highcharts.svg,
-					marginRight: 10
+					marginRight: 10,
+					marginBottom: 40,
+					// marginTop: 10,
 				},
 				title: {
 					text: thisWidgetTitle

@@ -120,13 +120,13 @@
         self.onDispose = function() {
         }
 
-        if (settings.onCreatedAction) {
-            var timer = setInterval(function() {
-                if (Object.getOwnPropertyNames(microgear).length > 0) {
-                    clearInterval(timer);
-                    eval(settings.onCreatedAction);
-                }
-            },200);
-        }
+        // if (settings.onCreatedAction) {
+        //     var timer = setInterval(function() {
+        //         if (Object.getOwnPropertyNames(microgear).length > 0) {
+        //             clearInterval(timer);
+        //             eval(settings.onCreatedAction);
+        //         }
+        //     },200);
+        // }
     }
 }());

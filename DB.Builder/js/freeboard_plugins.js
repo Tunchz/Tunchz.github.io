@@ -1,7 +1,9 @@
 var allow = false;
 var np;
 var _default = {
-    widget_margin:3,
+    widget_margins:[0,0],
+    widget_base_dimensions:[80,40],
+    min_cols:4,
     dashboard_title: "untitled.dashboard",
     avatar: "https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png",
     background_image: null,
@@ -17,6 +19,11 @@ var _default = {
     min_width: "none",
     allow_edit: true,
 };
+
+var _r = _default.widget_margins[1],
+    _g = _default.widget_margins[0],
+    _h = _default.widget_base_dimensions[1]+2*_default.widget_margins[1],
+    _w = _default.widget_base_dimensions[0]+2*_default.widget_margins[0];
 
 function DialogBox(a, b, c, d, e) {
     function f() {
@@ -478,17 +485,18 @@ function FreeboardUI() {
         }
     }
     // options for gridster
-    var r, s = 1,//10,       // margin
-        t = 100,//300,       // width
-        u = 4,              // minimum columns
+    var r = _default.widget_margins[1], //10,       // margin
+        s = _default.widget_margins[0],
+        t = _default.widget_base_dimensions[0],//300,       // width
+        u = _default.min_cols,              // minimum columns
         v = s + t + s,
         w = u,
         x = $('<div class="wrapperloading"><div class="loading up" ></div><div class="loading down"></div></div>');
     return ko.bindingHandlers.grid = {
         init: function(b, c, d, e, f) {
             r = $(b).gridster({
-                widget_margins: [s, s],
-                widget_base_dimensions: [t, 40], //10],   // [width, height]
+                widget_margins: _default.widget_margins,                    //[s, s],
+                widget_base_dimensions: _default.widget_base_dimensions,    //[t, 40], //10],   // [width, height]
                 // resize: {
                 //     enabled: !1,//!1,
                 //     axes: "x"
@@ -2124,6 +2132,7 @@ $.extend(freeboard, jQuery.eventEmitter),
                 j = $('<div class="tw-sparkline tw-td"></div>');
             this.render = function(a) {
                 // setTimeout(function() {
+                    $(a).parent().css({"margin-bottom": _r*2+"px"})
                     $(a).empty(), $(h_p).append($(h)).append($(i)), $(f).append($('<div class="tw-tr"></div>').append(g)).append($('<div class="tw-tr"></div>').append($('<div class="tw-value-wrapper tw-td"></div>').append(h_p)/*.append(h).append(i)*/)).append($('<div class="tw-tr"></div>').append(j)), $(a).append(f), d()
                 // },0);
                 
@@ -2337,7 +2346,7 @@ $.extend(freeboard, jQuery.eventEmitter),
                 _settings = a;
                 if (!_.isUndefined(_settings?.mark_color) && _settings?.mark_color !== "") {var cl = _settings.mark_color.split(','); cl.concat(_color); _settings._color=cl;}
                 d.html(_.isUndefined(a.title) ? "" : a.title), a.include_legend && b(_settings, f, a.legend.split(","))
-                e.css({height: (_settings.include_legend?this.getHeight()-1:this.getHeight())*46-9-12-15})
+                e.css({height: (_settings.include_legend?this.getHeight()-1:this.getHeight())*_h-_r*3-12-15})
             }, this.onCalculatedValueChanged = function(a, b) {
                 _settings.include_legend ? c(_settings, e, b, _settings.legend.split(",")) : c(_settings, e, b )
             }, this.onDispose = function() {}, 
@@ -2456,16 +2465,17 @@ $.extend(freeboard, jQuery.eventEmitter),
                 _element ,_svg, _svgContainer, _circle, _pointer,
                 d, e, f, g = 3,
                 h = 0,
-                _svgContainer = $('<div class="svg-container" style="width:100%; height: 100%;padding:10px 0"></div>');
+                _svgContainer = $('<div class="svg-container" style="width:100%; height: 100%;padding:10px 0; overflow:hidden"></div>');
                 _value = $('<div class="widget-big-text"></div>');
                 _unit = $("<div></div>");
             this.render = function(element,callback) {
                 _element= element;
                 // console.log("-------------- rener width : ", $(_element).width())
-                setTimeout(()=>{
+
                     // console.log("-------------- rener width in 2000: ", $(_element).width())
-                    e = $(_element).width(), f = /*$(a).height();*/  self.getHeight()*46-29;  // fixing inproper render of widget pointer
+                    e = $(_element).width(), f = /*$(a).height();*/  self.getHeight()*_h-_r*3-20;  // fixing inproper render of widget pointer
                     var h = Math.min(e, f) / 2 - 2 * g;
+                    $(_element).empty()
                     $(_element).append(_svgContainer);
                     // _svg = Raphael($(_element).get()[0], e, f);
                     _svg = Raphael($(_svgContainer).get()[0], e, f),
@@ -2479,16 +2489,16 @@ $.extend(freeboard, jQuery.eventEmitter),
                     _value.css({"color": _settings.font_color?_settings.font_color:_default.font_color}),
                     _unit.css({"color": _settings.font_color?_settings.font_color:_default.font_color, "opacity" : _default.font_opacity}),
                     callback&&(callback("direction",_direction))
-                },100)
+
 
             }, this.onSettingsChanged = function(a) {
                 _settings = a;
                 if (_element) {
-                    // console.log("*********** width|height : ",$(_element).width(), self.getHeight()*46-9)
-                    $(_element).css({"width":$(_element).width()+"px", "height": self.getHeight()*46-19 +"px"})
-                    $(_element).empty()
-                    self.render(_element, (a,b)=>(self.onCalculatedValueChanged(a,b), console.log("9999999999999")))
-
+                    // console.log("*********** width|height : ",$(_element).width(), self.getHeight()*_h-_r*3)
+                    $(_element).css({"width":$(_element).width()+"px", "height": self.getHeight()*_h-_r*3-10 +"px"})
+                    setTimeout(()=>{
+                        self.render(_element, (a,b)=>(self.onCalculatedValueChanged(a,b)))
+                    },1000)     
                                        
                 }
                 _unit.html(_settings.units);

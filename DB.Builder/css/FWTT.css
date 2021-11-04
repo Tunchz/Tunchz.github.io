@@ -27,6 +27,10 @@ h2.title {
 	padding: 10px 0 5px 0;
 }
 
+#board-logo {
+    margin-bottom: 2px;
+}
+
 #toggle-header {
     width: 25px;
     height: 20px;
@@ -113,7 +117,6 @@ li.column-tool {
     z-index: 100 !important;
 }
 
-.player-revert,
 .pane-tools li,
 .pane-tools li i {
 	z-index: 100 !important;
@@ -139,12 +142,12 @@ li.column-tool {
 }
 
 .tooltip {
-    z-index: 400;
+    z-index: 350;
 }
 
-/*.hide {
-  display: none;
-}*/
+li.gs_w.player-revert {
+    z-index: 100 !important;
+}
 
 .pane-tools:hover {
   opacity: 1;
@@ -167,9 +170,30 @@ li:hover header ul.pane-tools {
 	top: 50px;
 }
 
-/*#header.full-screen {
-    height: 0px !important;
-}*/
+.wrapperloading {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+
+}
+
+.wrapperloading .loading.up {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    border-radius: 75px;
+}
+
+.wrapperloading .loading.down {
+    height: 50px;
+    width: 50px;
+    margin-top: -25px;
+    margin-bottom: 25px;
+    margin-left: -25px;
+    margin-right: 25px;
+}
 
 #board-content {
     padding:0 !important;
@@ -241,6 +265,10 @@ li:hover header ul.pane-tools {
 	background-color: #2a2a2a00 !important;
 	opacity: 1;
 	/*opacity: 0;*/
+}
+
+.sub-section {
+    border-width: 0 !important;
 }
 
 /*.tw-display {
@@ -445,7 +473,7 @@ rect.highcharts-button-box {
 
 
 
-.sub-section-height-1 {
+/*.sub-section-height-1 {
 	height: 40px;
 }
 .sub-section-height-2 {
@@ -475,6 +503,8 @@ rect.highcharts-button-box {
 .sub-section-height-10 {
 	height: 456px;
 }
+*/
+
 /*.sub-section {
     border-bottom: solid 1px #363636;
 }*/

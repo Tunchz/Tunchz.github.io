@@ -196,7 +196,7 @@ if (typeof feedview === "undefined") {
             // currentSettings.height = sizeWidth[currentSettings.height_block];
             $(containerElement).append(feedviewElement);
             feedviewElement.css({
-                height:(46*currentSettings.height_block - 6) +"px",
+                height:(currentSettings.height_block*_h-_r*2) +"px",
                 // width: 100%
             });
         }
@@ -213,7 +213,7 @@ if (typeof feedview === "undefined") {
 
             // currentSettings.height = sizeWidth[currentSettings.height_block];
             $("#"+'chart'+self.widgetID).css({
-                height:(46*currentSettings.height_block - 6) +"px",
+                height:(currentSettings.height_block*_h-_r*2) +"px",
                 // width: 100%
             });
 
