@@ -374,7 +374,7 @@ svg {
 	transform: translateY(-50%);
 }
 .indicator-light {
-	margin: 0 10px;
+	margin: 0 5px;
 	/*margin-left: 20px;*/
 }
 .indicator-text {

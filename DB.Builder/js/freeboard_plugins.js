@@ -1,7 +1,7 @@
 var allow = false;
 var np;
 var _default = {
-    widget_margins:[0,0],
+    widget_margins:[2,2],
     widget_base_dimensions:[80,40],
     min_cols:4,
     dashboard_title: "untitled.dashboard",
