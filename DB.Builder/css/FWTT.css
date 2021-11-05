@@ -13,11 +13,14 @@
     }
 }
 
-/*.board-toolbar li {
-    color: #fff;
-    font-weight: bold;
+#admin-bar.full-screen {
+    height:0px !important;
 }
-*/
+#admin-menu {
+    width:85%;
+}
+
+
 .title.bordered {
 	line-height: 25px;
 	margin-bottom: 5px;
@@ -319,9 +322,6 @@ li.column-tool {
 }
 .modal {
 	z-index: 200;
-}
-#admin-menu * {
-	z-index: 300;
 }
 
 .pane-tools li {

@@ -74,6 +74,7 @@ function updateFullScreenStatus() {
         // $("#full-screen-icon").removeClass("icon-resize-full").addClass("icon-resize-small")
         // $("#full-screen-icon").show();
         // $("#header").addClass("full-screen");
+        // $("#admin-bar").addClass("full-screen");
         $("#board-content-bottom").addClass("full-screen");
     } else {
         if (canEdit) {
@@ -82,7 +83,7 @@ function updateFullScreenStatus() {
         if (wasEditing) {
             freeboard.setEditing(true, true)
         }
-        freeboard.setHeaderOpen(wasHeaderOpen)
+        if (wasEditing && !wasHeaderOpen) freeboard.setHeaderOpen(wasHeaderOpen)
         // $("#board-content").css({'margin-bottom': 50});
         $("#footer-bar").show();
         // $("#share-action").show();
@@ -91,6 +92,7 @@ function updateFullScreenStatus() {
         // $("#full-screen").show();
         // $("#full-screen-icon").addClass("icon-resize-full").removeClass("icon-resize-small")
         // $("#header").removeClass("full-screen");
+        // $("#admin-bar").removeClass("full-screen");
         $("#board-content-bottom").removeClass("full-screen");
     }
 }
