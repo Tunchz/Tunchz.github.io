@@ -86,9 +86,9 @@ function updateChart(chartDIV,dataArray,option,settings) {
 	// var width = {"1":"300","2":"620","3":"940"}
 	var curWidth = $("#"+chartDIV).parent().parent().parent().parent().attr('data-sizex');
 	var curHeight = $("#"+chartDIV).parent().parent().parent().parent().attr('data-sizey');
-	var heightGraph = curHeight*_h-_r*2 - 20;//95;
+	var heightGraph = curHeight*_h-_r*2 - 25;//95;
 	var topLegend = heightGraph+25;
-	var widthGraph = (curWidth*_w-_g*2)-20+"px";//width[curWidth]*0.95+"px";
+	var widthGraph = (curWidth*_w-_g*2)-25+"px";//width[curWidth]*0.95+"px";
 	var widthDiv =  (curWidth*_w-_g*2)+"px";//width[curWidth]+"px";
 	var unit =[];
 	if ($("#"+chartDIV).find("#"+chartDIV+"_graph").length > 0){
@@ -103,7 +103,7 @@ function updateChart(chartDIV,dataArray,option,settings) {
 				heightGraph -= 24;
 				topLegend -= 24;
 				$('<div class="header_graph" id="'+chartDIV+'_header">'+option.title+'</div>').css({
-					"padding-top": "2%",
+					"padding-top": "8px",
 					display: "-webkit-flexbox",
 				    display: "-ms-flexbox",
 				    display: "-webkit-flex",
@@ -114,18 +114,18 @@ function updateChart(chartDIV,dataArray,option,settings) {
 				    "align-items": "center",
 				    "justify-content": "center",
 					width : "100%",
-					height:"7%",
+					height:"18px",
 					margin:"auto",
 					// textAlign : "center",
 					// font: '14px/0.9em "proxima-nova", Helvetica, Arial, sans-serif',
 					color:"black",
 					// "font-weight": "bold"
 				}).appendTo("#"+chartDIV);
-				if(curWidth==3){
-					$('#'+chartDIV+'_header').css({
-						"padding-top": "1%"
-					})
-				}
+				// if(curWidth==3){
+				// 	$('#'+chartDIV+'_header').css({
+				// 		"padding-top": "1%"
+				// 	})
+				// }
 			}
 			if(option.xaxis !== undefined && option.xaxis.trim() != ""){
 				heightGraph -= 13;
@@ -485,13 +485,13 @@ function updateChart(chartDIV,dataArray,option,settings) {
 				if($("#"+chartDIV).width()<=300){
 					$('#'+chartDIV+'_y').css({
 						top : ydivheight+"px",
-						left : '-7.5px'
+						left : '-5px'
 					})
 				}
 				else if($("#"+chartDIV).width()<=620){
 					$('#'+chartDIV+'_y').css({
 						top : ydivheight+"px",
-						left : '-5px'
+						left : '0px'
 					})
 				}
 				else{
