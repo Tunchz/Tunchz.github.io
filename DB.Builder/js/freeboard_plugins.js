@@ -20,6 +20,8 @@ var _default = {
     allow_edit: true,
 };
 
+var datasourceOptions = {};
+
 var _r = _default.widget_margins[1],
     _g = _default.widget_margins[0],
     _h = _default.widget_base_dimensions[1]+2*_default.widget_margins[1],
@@ -218,7 +220,7 @@ function FreeboardModel(a, b, c) {
                 type: e
             });
             f.href = window.URL.createObjectURL(g);
-            f.download = d.dashboard_title()+".json", f.target = "_self", f.click();
+            f.download = d.dashboard_title()+".mhl", f.target = "_self", f.click();
         }
     }, this.saveLocalstorage = function() {
         e = "-Tunchz/FWTT-", f = document.createElement("a");
@@ -959,6 +961,7 @@ PluginEditor = function(a, b) {
         }), f && h.val(f), b.createValueEditor(h);
         var i = $('<ul class="board-toolbar datasource-input-suffix"></ul>'),
             j = $('<div class="calculated-setting-row"></div>');
+        h.addClass(e.type);
         j.append(h).append(i);
         var k = $('<li><i class="icon-plus icon-white"></i><label>DATASOURCE</label></li>').mousedown(function(a) {
             a.preventDefault(), $(h).val("").focus().insertAtCaret('datasources["').trigger("freeboard-eval")
@@ -1085,7 +1088,7 @@ PluginEditor = function(a, b) {
 
 
                         } else {
-                            var s = $('<input type="text">').appendTo(i).change(function() {
+                            var s = $('<input class="text" type="text">').appendTo(i).change(function() {
                                 "number" == a.type ? m.settings[a.name] = Number($(this).val()) : m.settings[a.name] = $(this).val()
                             });
                             if (a.name in h && s.val(h[a.name]), b && a.typeahead_data_field && s.addClass("typeahead_data_field-" + a.typeahead_data_field), b && a.typeahead_field) {
