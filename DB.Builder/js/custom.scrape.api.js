@@ -8,9 +8,13 @@
 
     var z = function(a, b) {
         function c(a) {
-            f && clearInterval(f), f = setInterval(function() {
-                e.updateNow()
-            }, a)
+            if (a && a > 0) {
+                f && clearInterval(f), f = setInterval(function() {
+                    e.updateNow()
+                }, a)
+            } else {
+                f && clearInterval(f), f=null;
+            }
         }
 
         function d(a) {
@@ -100,7 +104,8 @@
             display_name: "Refresh Every",
             type: "number",
             suffix: "seconds",
-            default_value: 10
+            default_value: 10,
+            description: "put 0 for no refresh",
         }],
         newInstance: function(a, c, d) {
             c(new z(a, d))
