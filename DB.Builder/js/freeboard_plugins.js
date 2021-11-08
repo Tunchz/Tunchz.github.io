@@ -264,12 +264,15 @@ function FreeboardModel(a, b, c) {
                 // $("#toggle-header-icon").addClass("icon-chevron-up").removeClass("icon-chevron-down"), 
                 $(".gridster .gs_w").css({cursor: "pointer"}), 
                 // $("#main-header").animate({top: "0px"}, e), 
-                $("#board-content").animate({top: f + 30 + "px"}, e),
+                // $("#board-content").animate({top: f + 30 + "px"}, e),
+                $("#board-content").animate({top: (d.isHeaderOpen()?f:0) + 30 + "px"}, e),
                 $("#board-content-bottom").addClass("edited"),
                 $("#main-header").data().shown = !0, c.attachWidgetEditIcons($(".sub-section")), c.enableGrid(),
                 $("#toggle-header").addClass("edited"),
+                $("#toggle-view-mode").removeClass("icon-eye-open").addClass("icon-edit"),
                 // document.getElementById('edit-toggle').checked = true,
-                this.setHeaderOpen(!0)
+                // this.setHeaderOpen(!0)
+                $("#footer-bar").removeClass("presented")
             )
 
             : 
@@ -277,12 +280,15 @@ function FreeboardModel(a, b, c) {
                 // $("#toggle-header-icon").addClass("icon-chevron-down").removeClass("icon-chevron-up"), 
                 $(".gridster .gs_w").css({cursor: "default"}), 
                 // $("#main-header").animate({top: "-" + f + "px"}, e), 
-                $("#board-content").animate({top: f  + "px"}, e),
+                // $("#board-content").animate({top: f  + "px"}, e),
+                $("#board-content").animate({top: (d.isHeaderOpen()?f:0) + 0 + "px"}, e),
                 $("#board-content-bottom").removeClass("edited"),
                 $("#main-header").data().shown = !1, $(".sub-section").unbind(), c.disableGrid(),
                 $("#toggle-header").removeClass("edited"),
+                $("#toggle-view-mode").removeClass("icon-edit").addClass("icon-eye-open"),
                 // document.getElementById('edit-toggle').checked = false,
-                this.setHeaderOpen(!1)
+                // this.setHeaderOpen(!1)
+                $("#footer-bar").addClass("presented")
             ), 
             c.showPaneEditIcons(a, b)
 
@@ -308,10 +314,11 @@ function FreeboardModel(a, b, c) {
                 $("#toggle-header-icon").addClass("icon-chevron-up").removeClass("icon-chevron-down"), 
                 // $(".gridster .gs_w").css({ cursor: "pointer"}), 
                 $("#main-header").animate({top: "0px"}, e), 
-                $("#board-content").animate({top: f + (d.isEditing()?30:0) + "px"}, e),
+                $("#board-content").animate({top: f + (d.isEditing()?30:0) + "px"}, e)
                 // $("#board-content-bottom").addClass("edited"),
-                // $("#main-header").data().shown = !0, c.attachWidgetEditIcons($(".sub-section")), c.enableGrid()
-                $("#footer-bar").removeClass("presented")
+                // $("#main-header").data().shown = !0, 
+                // c.attachWidgetEditIcons($(".sub-section")), c.enableGrid(),
+                // $("#footer-bar").removeClass("presented")
             )
 
             : 
@@ -319,16 +326,18 @@ function FreeboardModel(a, b, c) {
                 $("#toggle-header-icon").addClass("icon-chevron-down").removeClass("icon-chevron-up"), 
                 // $(".gridster .gs_w").css({cursor: "default"}), 
                 $("#main-header").animate({top: "-" + f + "px"}, e), 
-                $("#board-content").animate({top: (d.isEditing()?30:0) + "px"}, e),
+                $("#board-content").animate({top: (d.isEditing()?30:0) + "px"}, e)
                 // $("#board-content-bottom").removeClass("edited"),
-                // $("#main-header").data().shown = !1, $(".sub-section").unbind(), c.disableGrid()
-                $("#footer-bar").addClass("presented")
+                // $("#main-header").data().shown = !1, 
+                // $(".sub-section").unbind(), c.disableGrid(),
+                // $("#footer-bar").addClass("presented")
             ); 
             // c.showPaneEditIcons(a, b)
 
     }, this.toggleHeader = function() {
         var a = !d.isHeaderOpen();
-        a?d.setEditing(a):d.setHeaderOpen(a);
+        // a?d.setEditing(a):d.setHeaderOpen(a);
+        d.setHeaderOpen(a);
     }, this.getDashboardOptions = function() {
 
         return {

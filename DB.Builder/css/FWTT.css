@@ -208,6 +208,13 @@ div#full-screen-action:hover,
     visibility:visible !important;
 }
 
+#toggle-header li i {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    color: #fff;
+}
+
 #footer-bar.presented {
     background-color: #31313100; 
     -webkit-box-shadow: none;
