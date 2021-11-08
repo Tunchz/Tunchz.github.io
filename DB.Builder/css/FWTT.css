@@ -173,6 +173,7 @@ h2.title {
     background-color: #21212100;
     margin-left: 0px;
     margin-right: 0px;
+    cursor: default;
 }
 
 li {
