@@ -93,9 +93,10 @@
 
 						$(function()
 						{ //DOM Ready
-							if (parameter?.dashboard) {
+							if (parameter.dashboard) {
 								$.get( parameter.dashboard, function( json ) {
-								  	console.log("++++++++++++data : ",json)
+									json = JSON.parse(json)
+								  	// console.log("++++++++++++data : ",json)
 
 									if (json !== null) {
 										freeboard.initialize(true);
