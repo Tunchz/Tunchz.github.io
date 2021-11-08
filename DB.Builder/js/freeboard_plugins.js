@@ -893,18 +893,18 @@ JSEditor = function() {
         c = a
     }
 
-    function b(a, b, jsscript) {
-        // console.log(">>>>>>>>>>>>>>>>>----- ",jsscript);
+    function b(a, b, type) {
+        // console.log(">>>>>>>>>>>>>>>>>----- ",type);
         var c = '// Example: Convert temp from C to F and truncate to 2 decimal places.\n// return (datasources["MyDatasource"].sensor.tempInF * 1.8 + 32).toFixed(2);';
         var c_jsscript = '// Example: extractedResult = response.split(","); // js script to extract the result in json from response\n// return extractedResult;';
-        if (jsscript) c=c_jsscript;
+        if (type==='jsscript') c=c_jsscript;
         a || (a = c);
         var d = $('<div class="code-window"></div>'),
             e = $('<div class="code-mirror-wrapper"></div>'),
             f = $('<div class="code-window-footer"></div>'),
             g = $('<div class="code-window-header cm-s-ambiance">This javascript will be re-evaluated any time a datasource referenced here is updated, and the value you <code><span class="cm-keyword">return</span></code> will be displayed in the widget. You can assume this javascript is wrapped in a function of the form <code><span class="cm-keyword">function</span>(<span class="cm-def">datasources</span>)</code> where datasources is a collection of javascript objects (keyed by their name) corresponding to the most current data in a datasource.</div>');
             g_jsscript = $('<div class="code-window-header cm-s-ambiance">This javascript will be re-evaluated any time a this datasource is updated, and the value you <code><span class="cm-keyword">return</span></code> will be the output of this datasource. You can assume this javascript is wrapped in a function of the form <code><span class="cm-keyword">function</span>(<span class="cm-def">response</span>)</code> where response is the return result from CONNECTION API call. >>> function(response) {  .... your code go here .... }</div>');
-        if (jsscript) g=g_jsscript;
+        if (type==='jsscript') g=g_jsscript;
         d.append([g, e, f]), $("body").append(d);
         var h = CodeMirror(e.get(0), {
                 value: a,
@@ -925,8 +925,8 @@ JSEditor = function() {
     }
     var c = "";
     return {
-        displayJSEditor: function(a, c, jsscript) {
-            b(a, c, jsscript)
+        displayJSEditor: function(a, c, type) {
+            b(a, c, type)
         },
         setAssetRoot: function(b) {
             a(b)
@@ -934,7 +934,7 @@ JSEditor = function() {
     }
 }, 
 
-PluginEditor = function(a, b) {
+PluginEditor = function(a, b, gg) {
     function c(a, b) {
         var c = $('<div class="validation-error"></div>').html(b);
         $("#setting-value-container-" + a).append(c)
@@ -948,36 +948,52 @@ PluginEditor = function(a, b) {
         return !isNaN(parseFloat(a)) && isFinite(a)
     }
 
-    function f(c, d, e, f, g, jsscript) {
+    function f(c, d, e, f, g, type) {
         var h = $("<textarea></textarea>");
-        e.multi_input ? h.change(function() {
-            var a = [];
-            $(c).find("textarea").each(function() {
-                var b = $(this).val();
-                b && (a = a.concat(b))
-            }), d.settings[e.name] = a
-        }) : h.change(function() {
+        h.change(function() {
             d.settings[e.name] = $(this).val()
-        }), f && h.val(f), b.createValueEditor(h);
-        var i = $('<ul class="board-toolbar datasource-input-suffix"></ul>'),
+        }), 
+        f && h.val(f), gg.createUrlOptionEditor(h,(a)=>{d.settings[e.name] = a});
+        // var i = $('<ul class="board-toolbar datasource-input-suffix"></ul>'),
             j = $('<div class="calculated-setting-row"></div>');
-        h.addClass(e.type);
-        j.append(h).append(i);
-        var k = $('<li><i class="icon-plus icon-white"></i><label>DATASOURCE</label></li>').mousedown(function(a) {
-            a.preventDefault(), $(h).val("").focus().insertAtCaret('datasources["').trigger("freeboard-eval")
-        });
-        if (!jsscript) i.append(k);
-        var l = $('<li><i class="icon-fullscreen icon-white"></i><label>.JS EDITOR</label></li>').mousedown(function(b) {
-            b.preventDefault(), a.displayJSEditor(h.val(), function(a) {
-                h.val(a), h.change()
-            }, jsscript)
-        });
-        if (i.append(l), g) {
-            var m = $('<li class="remove-setting-row"><i class="icon-minus icon-white"></i><label></label></li>').mousedown(function(a) {
-                a.preventDefault(), j.remove(), $(c).find("textarea:first").change()
-            });
-            i.prepend(m)
-        }
+        // h.addClass(e.type);
+        j.append(h)//.append(i);
+        // if (type==='calculated') {
+        //     var k = $('<li><i class="icon-plus icon-white"></i><label>DATASOURCE</label></li>').mousedown(function(a) {
+        //         a.preventDefault(), $(h).val("").focus().insertAtCaret('datasources["').trigger("freeboard-eval")
+        //     });
+        //     i.append(k);
+        //     var l = $('<li><i class="icon-fullscreen icon-white"></i><label>.JS EDITOR</label></li>').mousedown(function(b) {
+        //         b.preventDefault(), a.displayJSEditor(h.val(), function(a) {
+        //             h.val(a), h.change()
+        //         }, type)
+        //     });
+        //     i.append(l)
+        // } else if (type==='urlOptionCalculated') {
+        //     console.log("-----urlOptionCalculated")
+        //     // var k = $('<li><i class="icon-plus icon-white"></i><label>DATASOURCE</label></li>').mousedown(function(a) {
+        //     //     a.preventDefault(), $(h).val("").focus().insertAtCaret('datasources["').trigger("freeboard-eval")
+
+
+
+        //     // });
+        //     // i.append(k);
+        // } else if (type==='jsscript') {
+        //     var l = $('<li><i class="icon-fullscreen icon-white"></i><label>.JS EDITOR</label></li>').mousedown(function(b) {
+        //         b.preventDefault(), a.displayJSEditor(h.val(), function(a) {
+        //             h.val(a), h.change()
+        //         }, type)
+        //     });
+        //     i.append(l)
+        // }
+        // // if (i.append(l), g) {
+        // if (g) {
+        //     h.addClass("removable");
+        //     var m = $('<li class="remove-setting-row"><i class="icon-minus icon-white"></i><label></label></li>').mousedown(function(a) {
+        //         a.preventDefault(), j.remove(), $(c).find("textarea:first").change()
+        //     });
+        //     i.prepend(m)
+        // }
         $(c).append(j)
     }
 
@@ -1047,46 +1063,50 @@ PluginEditor = function(a, b) {
                             _.isObject(a) ? (b = a.name, c = a.value) : b = a, _.isUndefined(c) && (c = b), _.isUndefined(t) && (t = c), $("<option></option>").text(b).attr("value", c).appendTo(s)
                         }), m.settings[a.name] = t, a.name in h && s.val(h[a.name]);
                         break;
+                    case "urlOption":
+                        var t = h[a.name],
+                            s = $("<select></select>").appendTo($('<div class="styled-select"></div>').appendTo(i)).change(function() {
+                                m.settings[a.name] = $(this).val()
+                                console.log("------>>> URL Option Changes to : ",m.settings[a.name])
+                            }).mousedown(function() {/*console.log(">>>>> generate options"),*/ Object.keys(datasourceOptions).map((item,i)=>{ s.empty(),$("<option></option>").text(item).attr("value", i).click(function() {console.log("------>>> URL Option Changes to : ",m.settings[a.name]),m.settings[a.name] = $(this).val()}).appendTo(s)  }) });
+                        _.each(a.options, function(a) {
+                            var b, c;
+                            _.isObject(a) ? (b = a.name, c = a.value) : b = a, _.isUndefined(c) && (c = b), _.isUndefined(t) && (t = c)/*, $("<option></option>").text(b).attr("value", c).appendTo(s)*/
+                        }), m.settings[a.name] = t, a.name in h && s.val(h[a.name]);
+                        break;
                     default:
                         if (m.settings[a.name] = h[a.name], "calculated" == a.type) {
                             if (a.name in h) {
                                 var u = h[a.name];
                                 if (a.multi_input && _.isArray(u))
                                     for (var v = !1, w = 0; w < u.length; w++)
-                                        f(i, m, a, u[w], v), v = !0;
+                                        f(i, m, a, u[w], v, a.type), v = !0;
                                 else
-                                    f(i, m, a, u, !1)
+                                    f(i, m, a, u, !1, a.type)
                             } else
-                                f(i, m, a, null, !1);
+                                f(i, m, a, null, !1, a.type);
                             if (a.multi_input) {
                                 var x = $('<ul class="board-toolbar"><li class="add-setting-row"><i class="icon-plus icon-white"></i><label>ADD</label></li></ul>').mousedown(function(b) {
-                                    b.preventDefault(), f(i, m, a, null, !0)
+                                    b.preventDefault(), f(i, m, a, null, !0, a.type)
                                 });
                                 $(i).siblings(".form-label").append(x)
                             }
 
                         } else if ("jsscript" == a.type) {
-
-                            // console.log(">>>>>>>>>>> script string", a, h)
                             if (a.name in h) {
                                 var u = h[a.name];
-                                // if (a.multi_input && _.isArray(u))
-                                //     for (var v = !1, w = 0; w < u.length; w++)
-                                //         f(i, m, a, u[w], v), v = !0;
-                                // else
-                                    f(i, m, a, u, !1, !0);
+                                f(i, m, a, u, !1, a.type);
                             } else
-                                f(i, m, a, null, !1, !0);
-
-                            // if (a.multi_input) {
-                            //     var x = $('<ul class="board-toolbar"><li class="add-setting-row"><i class="icon-plus icon-white"></i><label>ADD</label></li></ul>').mousedown(function(b) {
-                            //         b.preventDefault(), f(i, m, a, null, !0)
-                            //     });
-                            //     $(i).siblings(".form-label").append(x)
-                            // }
-
-
-
+                                f(i, m, a, null, !1, a.type);
+                        } else if ("urlOptionCalculated" == a.type) {
+                            if (a.name in h) {
+                                // console.log(">>>>>>>>>>>>>>>> 1 : ", a.name, h)
+                                var u = h[a.name];
+                                f(i, m, a, u, !1, a.type);
+                            } else {
+                                // console.log(">>>>>>>>>>>>>>>> 2 : ", a.name, h)
+                                f(i, m, a, null, !1, a.type);
+                            }
                         } else {
                             var s = $('<input class="text" type="text">').appendTo(i).change(function() {
                                 "number" == a.type ? m.settings[a.name] = Number($(this).val()) : m.settings[a.name] = $(this).val()
@@ -1348,6 +1368,152 @@ ValueEditor = function(a) {
     }
 },
 
+UrlOptionEditor = function(a) {
+    function b(a, b) {
+        return _.isArray(a) || _.isObject(a) ? !0 : c(a, b)
+    }
+
+    // function c(a, b) {
+    //     switch (b) {
+    //         case o.ANY:
+    //             return !0;
+    //         case o.ARRAY:
+    //             return _.isArray(a);
+    //         case o.OBJECT:
+    //             return _.isObject(a);
+    //         case o.STRING:
+    //             return _.isString(a);
+    //         case o.NUMBER:
+    //             return _.isNumber(a);
+    //         case o.BOOLEAN:
+    //             return _.isBoolean(a)
+    //     }
+    // }
+
+    function d(a) {
+        $(a).parent().find(".validation-error").remove(), $(a).parent().append("<div class='validation-error'>This field expects an expression that evaluates to type " + b + ".</div>")
+    }
+
+    // function e(a) {
+    //     var b = ($(a).val().match(/\n/g) || []).length,
+    //         c = Math.min(200, 20 * (b + 1));
+    //     $(a).css({
+    //         height: c + "px"
+    //     })
+    // }
+
+    // function f(a, c, d) {
+    //      Object.keys(datasourceOptions).map((item)=>{
+
+    //         f.push({
+    //             value: item,
+    //             entity: void 0,
+    //             precede_char: "",
+    //             follow_char: ''
+    //         })  
+    //     })
+
+    //     m = f
+    // }
+
+    function g(b, callback) {
+        var e = "" //$(b).val().substring(0, $(b).getCaretPosition());
+        // if (e = e.replace(String.fromCharCode(160), " "), f(e, a.datasources(), c), m.length > 0) {
+        if (m.length > 0) {
+            k || (k = $('<ul id="value-selector" class="value-dropdown"></ul>').insertAfter(b).width($(b).outerWidth() - 2).css("left", $(b).position().left).css("top", $(b).position().top + $(b).outerHeight() - 1)), k.empty(), k.scrollTop(0);
+            var g = !0;
+            l = 0, _.each(m, function(a) {
+                var d = h(b, e, a, callback);
+                g && ($(d).addClass("selected"), g = !1)
+            })
+        } else
+            d(b), $(b).next("ul#value-selector").remove(), k = null, l = -1
+    }
+
+    function h(a, b, c, callback) {
+        var e = c.value;
+        c.preview && (e = e + "<span class='preview'>" + c.preview + "</span>");
+        var f = $("<li>" + e + "</li>").appendTo(k).mouseenter(function() {
+            $(this).trigger("freeboard-select")
+        }).mousedown(function(e) {
+            $(a).val(c.value)
+            callback(c.value)
+            e.preventDefault()
+            $(a).css({
+                height: "",
+                "z-index": 3e3
+            }), $(a).next("ul#value-selector").remove(), k = null, l = -1
+        })
+        .bind("freeboard-select", function() {
+            $(this).parent().find("li.selected").removeClass("selected"), $(this).addClass("selected"), l = $(this).data("freeboard-optionIndex")
+        });
+        return f
+    }
+
+    function i(a,callback) {
+        $(a).addClass("calculated-value-input").bind("keyup mouseup freeboard-eval", function(c) {
+            return !k || "keyup" != c.type || 38 != c.keyCode && 40 != c.keyCode && 13 != c.keyCode ? void g(a,callback) : void c.preventDefault()
+        })
+        // .focus(function() {
+        //     $(a).css({
+        //         "z-index": 3001
+        //     }); 
+        //     // e(a)
+        //     var b = ($(a).val().match(/\n/g) || []).length,
+        //         c = Math.min(200, 20 * (b + 1));
+        //     $(a).css({
+        //         height: c + "px"
+        //     })
+        // })
+        .focusout(function() {
+            // d(a, b), 
+            $(a).css({
+                height: "",
+                "z-index": 3e3
+            }), $(a).next("ul#value-selector").remove(), k = null, l = -1
+        })
+        // .bind("keydown", function(a) {
+        //     if (k)
+        //         if (38 == a.keyCode || 40 == a.keyCode) {
+        //             a.preventDefault();
+        //             var b = $(k).find("li");
+        //             38 == a.keyCode ? l-- : 40 == a.keyCode && l++, 0 > l ? l = b.size() - 1 : l >= b.size() && (l = 0);
+        //             var c = $(b).eq(l);
+        //             c.trigger("freeboard-select"), $(k).scrollTop($(c).position().top)
+        //         } else
+        //             13 == a.keyCode && (a.preventDefault(), -1 != l && $(k).find("li").eq(l).trigger("freeboard-insertValue"))
+        // })
+    }
+    var k = null,
+        m = [];
+    // ,j = new RegExp('.*datasources\\["([^"]*)("\\])?(.*)$'),
+    //     k = null,
+    //     l = 0,
+        
+    //     n = null,
+    //     o = {
+    //         ANY: "any",
+    //         ARRAY: "array",
+    //         OBJECT: "object",
+    //         STRING: "string",
+    //         NUMBER: "number",
+    //         BOOLEAN: "boolean"
+    //     };
+    return {
+        createUrlOptionEditor: function(a,callback) {
+            m = Object.keys(datasourceOptions).map((item)=>{
+                return {
+                    value: item,
+                    entity: void 0,
+                    precede_char: "",
+                    follow_char: ''
+                } 
+            });
+            i(a,callback)
+        }
+    }
+},
+
 function(a) {
     function b() {
         var a = document.createElement("p"),
@@ -1445,7 +1611,8 @@ var freeboard = function() {
         e = new FreeboardModel(b, c, d),
         f = new JSEditor,
         g = new ValueEditor(e),
-        h = new PluginEditor(f, g),
+        gg = new UrlOptionEditor(e),
+        h = new PluginEditor(f, g, gg),
         i = new DeveloperConsole(e),
         j = {
             values: {
@@ -2406,7 +2573,7 @@ $.extend(freeboard, jQuery.eventEmitter),
             }, this.onSettingsChanged = function(a) {
                 _settings = a;
                 if (!_.isUndefined(_settings?.mark_color) && _settings?.mark_color !== "") {var cl = _settings.mark_color.split(','); cl.concat(_color); _settings._color=cl;}
-                d.html(_.isUndefined(a.title) ? "" : a.title), a.include_legend && b(_settings, f, a.legend.split(","))
+                d.html(_.isUndefined(a.title) ? "" : a.title), a.include_legend && b(_settings, f, a.legend?a.legend.split(","):[])
                 e.css({height: (_settings.include_legend?this.getHeight()-1:this.getHeight())*_h-_r*3-12-15})
             }, this.onCalculatedValueChanged = function(a, b) {
                 _settings.include_legend ? c(_settings, e, b, _settings.legend.split(",")) : c(_settings, e, b )
@@ -2464,7 +2631,6 @@ $.extend(freeboard, jQuery.eventEmitter),
                 type: "integer",
                 default_value: 3,
                 description: "number of legend items to display in each row.",
-                required: !0
             },
             // {
             //     name: "font_color",
@@ -2489,7 +2655,6 @@ $.extend(freeboard, jQuery.eventEmitter),
                 display_name: "Max-Min Color",
                 type: "text",
                 default_value: _default.maxmin_color,
-                required: !0
             },
             // {
             //     name: "maxmin_color",
@@ -2503,7 +2668,6 @@ $.extend(freeboard, jQuery.eventEmitter),
                 display_name: "Height Blocks",
                 type: "integer",
                 default_value: 2,
-                required: !0
             }],
             newInstance: function(a, b) {
                 b(new j(a))

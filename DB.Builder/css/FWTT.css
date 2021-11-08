@@ -523,6 +523,10 @@ textarea.calculated {
     width: calc(100% - 225px) !important;
 }
 
+textarea.calculated.removable {
+    width: calc(100% - 254px) !important;
+}
+
 /*#setting-value-container-datasource {
     width: calc(100% - 175px);
 }*/
@@ -535,6 +539,19 @@ ul.datasource-input-suffix {
 
 ul.datasource-input-suffix li {
     padding: 7px 3px !important;
+}
+
+/* Url Option Widget */
+.url-option-container {
+    padding: 0 5px;
+}
+.url-option-container .styled-select select {
+    width: 100%;
+    height: 25px;
+    background-color: #383838;
+/*    -webkit-appearance: none;
+    border: 1px solid #3d3d3d;
+    background: url(../img/dropdown-arrow.png) no-repeat right #272727;*/
 }
 
 /*.tw-display {
