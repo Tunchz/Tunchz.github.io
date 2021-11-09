@@ -64,6 +64,7 @@ function updateFullScreenStatus() {
         wasEditing = freeboard.isEditing();
         wasHeaderOpen = freeboard.isHeaderOpen();
         freeboard.setEditing(false, false);
+        freeboard.setHeaderOpen(false);
         $("#main-header").hide();
         // $("#board-content").css({'margin-bottom': 50});
         $("#footer-bar").hide();
@@ -77,13 +78,9 @@ function updateFullScreenStatus() {
         // $("#admin-bar").addClass("full-screen");
         $("#board-content-bottom").addClass("full-screen");
     } else {
-        if (canEdit) {
-            $("#main-header").show()
-        }
-        if (wasEditing) {
-            freeboard.setEditing(true, true)
-        }
-        if (wasEditing && !wasHeaderOpen) freeboard.setHeaderOpen(wasHeaderOpen)
+        if (canEdit) $("#main-header").show()
+        if (wasEditing) freeboard.setEditing(true, true)
+        if (wasHeaderOpen) freeboard.setHeaderOpen(wasHeaderOpen)
         // $("#board-content").css({'margin-bottom': 50});
         $("#footer-bar").show();
         // $("#share-action").show();
