@@ -14,6 +14,7 @@ var _default = {
     font_color: "#ffffff",
     font_opacity: 0.6,
     line_color: "#ffffff",
+    line_thickness: 1,
     widget_background_color: "#383838",
     margin_left:5,
     margin_right:5,
@@ -875,7 +876,7 @@ DeveloperConsole = function(a) {
         }
         var c = [],
             d = $("<div></div>"),
-            e = $('<div class="table-operation text-button">ADD</div>'),
+            e = $('<div class="table-operation text-button">+ADD</div>'),
             f = $('<table class="table table-condensed sub-table"></table>');
         f.append($('<thead style=""><tr><th>Plugin Script URL</th></tr></thead>'));
         var g = $("<tbody></tbody>");
@@ -966,46 +967,46 @@ PluginEditor = function(a, b, gg) {
             d.settings[e.name] = $(this).val()
         }), 
         f && h.val(f), gg.createUrlOptionEditor(h,(a)=>{d.settings[e.name] = a});
-        // var i = $('<ul class="board-toolbar datasource-input-suffix"></ul>'),
+        var i = $('<ul class="board-toolbar datasource-input-suffix"></ul>'),
             j = $('<div class="calculated-setting-row"></div>');
-        // h.addClass(e.type);
-        j.append(h)//.append(i);
-        // if (type==='calculated') {
-        //     var k = $('<li><i class="icon-plus icon-white"></i><label>DATASOURCE</label></li>').mousedown(function(a) {
-        //         a.preventDefault(), $(h).val("").focus().insertAtCaret('datasources["').trigger("freeboard-eval")
-        //     });
-        //     i.append(k);
-        //     var l = $('<li><i class="icon-fullscreen icon-white"></i><label>.JS EDITOR</label></li>').mousedown(function(b) {
-        //         b.preventDefault(), a.displayJSEditor(h.val(), function(a) {
-        //             h.val(a), h.change()
-        //         }, type)
-        //     });
-        //     i.append(l)
-        // } else if (type==='urlOptionCalculated') {
-        //     console.log("-----urlOptionCalculated")
-        //     // var k = $('<li><i class="icon-plus icon-white"></i><label>DATASOURCE</label></li>').mousedown(function(a) {
-        //     //     a.preventDefault(), $(h).val("").focus().insertAtCaret('datasources["').trigger("freeboard-eval")
+        h.addClass(e.type);
+        j.append(h).append(i);
+        if (type==='calculated') {
+            var k = $('<li><i class="icon-plus icon-white"></i><label>DATASOURCE</label></li>').mousedown(function(a) {
+                a.preventDefault(), $(h).val("").focus().insertAtCaret('datasources["').trigger("freeboard-eval")
+            });
+            i.append(k);
+            var l = $('<li><i class="icon-fullscreen icon-white"></i><label>.JS EDITOR</label></li>').mousedown(function(b) {
+                b.preventDefault(), a.displayJSEditor(h.val(), function(a) {
+                    h.val(a), h.change()
+                }, type)
+            });
+            i.append(l)
+        } else if (type==='urlOptionCalculated') {
+            console.log("-----urlOptionCalculated")
+            // var k = $('<li><i class="icon-plus icon-white"></i><label>DATASOURCE</label></li>').mousedown(function(a) {
+            //     a.preventDefault(), $(h).val("").focus().insertAtCaret('datasources["').trigger("freeboard-eval")
 
 
 
-        //     // });
-        //     // i.append(k);
-        // } else if (type==='jsscript') {
-        //     var l = $('<li><i class="icon-fullscreen icon-white"></i><label>.JS EDITOR</label></li>').mousedown(function(b) {
-        //         b.preventDefault(), a.displayJSEditor(h.val(), function(a) {
-        //             h.val(a), h.change()
-        //         }, type)
-        //     });
-        //     i.append(l)
-        // }
-        // // if (i.append(l), g) {
-        // if (g) {
-        //     h.addClass("removable");
-        //     var m = $('<li class="remove-setting-row"><i class="icon-minus icon-white"></i><label></label></li>').mousedown(function(a) {
-        //         a.preventDefault(), j.remove(), $(c).find("textarea:first").change()
-        //     });
-        //     i.prepend(m)
-        // }
+            // });
+            // i.append(k);
+        } else if (type==='jsscript') {
+            var l = $('<li><i class="icon-fullscreen icon-white"></i><label>.JS EDITOR</label></li>').mousedown(function(b) {
+                b.preventDefault(), a.displayJSEditor(h.val(), function(a) {
+                    h.val(a), h.change()
+                }, type)
+            });
+            i.append(l)
+        }
+        // if (i.append(l), g) {
+        if (g) {
+            h.addClass("removable");
+            var m = $('<li class="remove-setting-row"><i class="icon-minus icon-white"></i><label></label></li>').mousedown(function(a) {
+                a.preventDefault(), j.remove(), $(c).find("textarea:first").change()
+            });
+            i.prepend(m)
+        }
         $(c).append(j)
     }
 
@@ -1048,7 +1049,7 @@ PluginEditor = function(a, b, gg) {
                         _.each(a.settings, function(a) {
                             var b = a.name;
                             _.isUndefined(a.display_name) || (b = a.display_name), $("<th>" + b + "</th>").appendTo(o)
-                        }), a.name in h && (q = h[a.name]), $('<div class="table-operation text-button">ADD</div>').appendTo(i).click(function() {
+                        }), a.name in h && (q = h[a.name]), $('<div class="table-operation text-button">+ ADD</div>').appendTo(i).click(function() {
                             var b = {};
                             _.each(a.settings, function(a) {
                                 b[a.name] = ""
@@ -1075,17 +1076,17 @@ PluginEditor = function(a, b, gg) {
                             _.isObject(a) ? (b = a.name, c = a.value) : b = a, _.isUndefined(c) && (c = b), _.isUndefined(t) && (t = c), $("<option></option>").text(b).attr("value", c).appendTo(s)
                         }), m.settings[a.name] = t, a.name in h && s.val(h[a.name]);
                         break;
-                    case "urlOption":
-                        var t = h[a.name],
-                            s = $("<select></select>").appendTo($('<div class="styled-select"></div>').appendTo(i)).change(function() {
-                                m.settings[a.name] = $(this).val()
-                                console.log("------>>> URL Option Changes to : ",m.settings[a.name])
-                            }).mousedown(function() {/*console.log(">>>>> generate options"),*/ Object.keys(datasourceOptions).map((item,i)=>{ s.empty(),$("<option></option>").text(item).attr("value", i).click(function() {console.log("------>>> URL Option Changes to : ",m.settings[a.name]),m.settings[a.name] = $(this).val()}).appendTo(s)  }) });
-                        _.each(a.options, function(a) {
-                            var b, c;
-                            _.isObject(a) ? (b = a.name, c = a.value) : b = a, _.isUndefined(c) && (c = b), _.isUndefined(t) && (t = c)/*, $("<option></option>").text(b).attr("value", c).appendTo(s)*/
-                        }), m.settings[a.name] = t, a.name in h && s.val(h[a.name]);
-                        break;
+                    // case "urlOption":
+                    //     var t = h[a.name],
+                    //         s = $("<select></select>").appendTo($('<div class="styled-select"></div>').appendTo(i)).change(function() {
+                    //             m.settings[a.name] = $(this).val()
+                    //             console.log("------>>> URL Option Changes to : ",m.settings[a.name])
+                    //         }).mousedown(function() {/*console.log(">>>>> generate options"),*/ Object.keys(datasourceOptions).map((item,i)=>{ s.empty(),$("<option></option>").text(item).attr("value", i).click(function() {console.log("------>>> URL Option Changes to : ",m.settings[a.name]),m.settings[a.name] = $(this).val()}).appendTo(s)  }) });
+                    //     _.each(a.options, function(a) {
+                    //         var b, c;
+                    //         _.isObject(a) ? (b = a.name, c = a.value) : b = a, _.isUndefined(c) && (c = b), _.isUndefined(t) && (t = c)/*, $("<option></option>").text(b).attr("value", c).appendTo(s)*/
+                    //     }), m.settings[a.name] = t, a.name in h && s.val(h[a.name]);
+                    //     break;
                     default:
                         if (m.settings[a.name] = h[a.name], "calculated" == a.type) {
                             if (a.name in h) {

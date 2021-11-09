@@ -131,6 +131,7 @@
                    console.log("selected option : ",$(this).val())
                    datasourceOptions[_settings.datasource_name].selectedOption = $(this).val()
                    datasourceOptions[_settings.datasource_name].datasourceInstance.updateNow()
+                   $(this).blur()
                 });
 
 
@@ -138,7 +139,7 @@
             _self = a
             $(a).append(container)
             g.html(_settings.title)
-            s.empty().css({color:_settings.font_color, "border-color":_settings.line_color, "background-color":_settings.background_color, "font-size":_settings.font_size+"px", "text-align": _settings.font_align, "padding-top":(26-_settings.font_size)*0.4+"px", 'margin-left':_settings.left_margin+'px', 'margin-right':_settings.right_margin+'px'})
+            s.empty().css({color:_settings.font_color, "border-color":_settings.line_color, "background-color":_settings.background_color, "font-size":_settings.font_size+"px", "text-align": _settings.font_align, "padding-top":(26-_settings.font_size)*0.4+"px", 'margin-left':_settings.left_margin+'px', 'margin-right':_settings.right_margin+'px', 'border-bottom': _settings.line_thickness+'px solid '+_settings.line_color})
 
             datasourceOptions[_settings.datasource_name].optionNameArray.map((item,i)=>{
                $("<option></option>").text(item).attr("value", i).appendTo(s) 
@@ -227,6 +228,13 @@
             type: "text",
             default_value: _default.line_color,
         }, 
+        {
+            name: "line_thickness",
+            display_name: "Line Thickness",
+            type: "integer",
+            default_value: _default.line_thickness,
+            description: "Number of pixels for line thickness."
+        },
         {
             name: "background_color",
             display_name: "background Color",
