@@ -818,6 +818,18 @@ rect.highcharts-button-box {
 }
 
 
+/* Custom Highchart */
+.highcharts-container,
+.highcharts-container svg.highcharts-root {
+    overflow: visible !important;
+}
+svg.highcharts-root path {
+    z-index: 10;
+}
+
+
+
+
 /* Code Editor */
 /*.code-window-header {
     padding: 10px 20px;

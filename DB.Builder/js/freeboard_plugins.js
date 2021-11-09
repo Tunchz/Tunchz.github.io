@@ -966,7 +966,8 @@ PluginEditor = function(a, b, gg) {
         h.change(function() {
             d.settings[e.name] = $(this).val()
         }), 
-        f && h.val(f), gg.createUrlOptionEditor(h,(a)=>{d.settings[e.name] = a});
+        f && h.val(f), 
+        (type==='urlOptionCalculated')?gg.createUrlOptionEditor(h,(a)=>{d.settings[e.name] = a}):b.createValueEditor(h);
         var i = $('<ul class="board-toolbar datasource-input-suffix"></ul>'),
             j = $('<div class="calculated-setting-row"></div>');
         h.addClass(e.type);
