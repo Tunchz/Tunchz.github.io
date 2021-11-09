@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>DB Builder</title>
+            <meta name="description" content="the question isn't can you; it's WILL YOU. -FWTT-">
+            <link rel="icon" type="image/x-icon" href="img/Mholan_Logo.png"/>
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+        <script src="https://code.highcharts.com/modules/data.js"></script>
+<!--         <script src="https://code.highcharts.com/modules/series-label.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script> -->
+
+
+            <div id="container"></div>
+
+
+ 
+    </head>
+    <body>
+
+    <script>
+
+// Highcharts.addEvent(Highcharts.Point, 'click', function () {
+//     if (this.series.options.className.indexOf('popup-on-click') !== -1) {
+//         const chart = this.series.chart;
+//         const date = Highcharts.dateFormat('%A, %b %e, %Y', this.x);
+//         const text = `<b>${date}</b><br/>${this.y} ${this.series.name}`;
+
+//         const anchorX = this.plotX + this.series.xAxis.pos;
+//         const anchorY = this.plotY + this.series.yAxis.pos;
+//         const align = anchorX < chart.chartWidth - 200 ? 'left' : 'right';
+//         const x = align === 'left' ? anchorX + 10 : anchorX - 10;
+//         const y = anchorY - 30;
+//         if (!chart.sticky) {
+//             chart.sticky = chart.renderer
+//                 .label(text, x, y, 'callout',  anchorX, anchorY)
+//                 .attr({
+//                     align,
+//                     fill: 'rgba(0, 0, 0, 0.75)',
+//                     padding: 10,
+//                     zIndex: 7 // Above series, below tooltip
+//                 })
+//                 .css({
+//                     color: 'white'
+//                 })
+//                 .on('click', function () {
+//                     chart.sticky = chart.sticky.destroy();
+//                 })
+//                 .add();
+//         } else {
+//             chart.sticky
+//                 .attr({ align, text })
+//                 .animate({ anchorX, anchorY, x, y }, { duration: 250 });
+//         }
+//     }
+// });
+
+
+
+Highcharts.getJSON('https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/world-population-density.json', function (data) {
+
+    // Prevent logarithmic errors in color calulcation
+    data.forEach(function (p) {
+        p.value = (p.value < 1 ? 1 : p.value);
+    });
+
+    // Initialize the chart
+    Highcharts.mapChart('container', {
+        chart: {
+            map: 'custom/world'
+        },
+
+        title: {
+            text: 'Zoom in on country by double click'
+        },
+
+        mapNavigation: {
+            enabled: true,
+            enableDoubleClickZoomTo: true
+        },
+
+        colorAxis: {
+            min: 1,
+            max: 1000,
+            type: 'logarithmic'
+        },
+
+        series: [{
+            data: data,
+            joinBy: ['iso-a3', 'code3'],
+            name: 'Population density',
+            states: {
+                hover: {
+                    color: '#a4edba'
+                }
+            },
+            tooltip: {
+                valueSuffix: '/km²'
+            }
+        }]
+    });
+});
+</script>
+
+
+    </body>
+</html>

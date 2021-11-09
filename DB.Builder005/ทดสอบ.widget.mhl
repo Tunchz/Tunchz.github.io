@@ -1,0 +1,1158 @@
+{
+ "version": "-Tunchz/FWTT-",
+ "dashboard_title": "ทดสอบ.widget",
+ "avatar": "https://tunchz.github.io/DB.Builder/img/razor_small.jpg",
+ "min_cols": 8,
+ "background_image": "https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png",
+ "background_color": "#212121",
+ "allow_edit": true,
+ "plugins": [],
+ "panes": [
+  {
+   "width": 1,
+   "row": {
+    "3": 3,
+    "4": 3,
+    "5": 3,
+    "6": 3,
+    "7": 1,
+    "8": 1,
+    "9": 3,
+    "10": 3,
+    "11": 3,
+    "12": 3,
+    "13": 3,
+    "15": 3,
+    "17": 3,
+    "20": 3,
+    "23": 3
+   },
+   "col": {
+    "3": 1,
+    "4": 1,
+    "5": 1,
+    "6": 2,
+    "7": 1,
+    "8": 7,
+    "9": 1,
+    "10": 1,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "15": 1,
+    "17": 1,
+    "20": 1,
+    "23": 1
+   },
+   "col_width": 1,
+   "transparent_bg": true,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "picture",
+     "settings": {
+      "src": "https://tunchz.github.io/Covid-19/img/icons/Mholan_Logo.png",
+      "refresh": 0,
+      "height_block": "2"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 3,
+    "8": 1,
+    "13": 9,
+    "14": 9,
+    "19": 9,
+    "22": 9,
+    "27": 9,
+    "31": 9,
+    "34": 9,
+    "36": 9,
+    "39": 9,
+    "41": 9,
+    "45": 9
+   },
+   "col": {
+    "6": 3,
+    "8": 8,
+    "13": 1,
+    "14": 1,
+    "19": 1,
+    "22": 1,
+    "27": 1,
+    "31": 1,
+    "34": 1,
+    "36": 1,
+    "39": 1,
+    "41": 1,
+    "45": 1
+   },
+   "col_width": 1,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "indicator",
+     "settings": {
+      "value": "0",
+      "on_text": "เปิด",
+      "off_text": "ปิด",
+      "size": "15",
+      "font_size": "16"
+     }
+    },
+    {
+     "type": "indicator",
+     "settings": {
+      "value": "1",
+      "on_text": "เปิด",
+      "off_text": "ปิด",
+      "size": "20",
+      "font_size": 16
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 5,
+    "8": 1,
+    "13": 22,
+    "14": 22,
+    "17": 22,
+    "24": 22,
+    "47": 22
+   },
+   "col": {
+    "6": 1,
+    "8": 1,
+    "13": 5,
+    "14": 5,
+    "17": 5,
+    "24": 5,
+    "47": 5
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "Slider",
+     "settings": {
+      "caption": "kkdlsk",
+      "color": "#FF9900",
+      "bg_color": "#222222",
+      "showvalue": 1,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "initialvalue": "0",
+      "autovaluesource": "29"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 6,
+    "8": 1,
+    "10": 11,
+    "15": 11,
+    "37": 11,
+    "38": 11,
+    "40": 11,
+    "41": 11,
+    "42": 11,
+    "45": 11
+   },
+   "col": {
+    "6": 1,
+    "8": 4,
+    "10": 3,
+    "15": 3,
+    "37": 3,
+    "38": 3,
+    "40": 3,
+    "41": 3,
+    "42": 3,
+    "45": 3
+   },
+   "col_width": 1,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "Button",
+     "settings": {
+      "caption": "click",
+      "text": "label",
+      "color": "blue",
+      "onClick": "console.log(\"click\")",
+      "onCreatedAction": "console.log(\"created\")"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "3": 2,
+    "4": 2,
+    "5": 2,
+    "6": 12,
+    "7": 2,
+    "8": 1,
+    "10": 2,
+    "11": 2,
+    "13": 2,
+    "14": 2,
+    "16": 2,
+    "17": 2,
+    "19": 2,
+    "21": 2,
+    "22": 2
+   },
+   "col": {
+    "3": 1,
+    "4": 1,
+    "5": 1,
+    "6": 5,
+    "7": 3,
+    "8": 5,
+    "10": 1,
+    "11": 1,
+    "13": 1,
+    "14": 1,
+    "16": 1,
+    "17": 1,
+    "19": 1,
+    "21": 1,
+    "22": 1
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "pointer",
+     "settings": {
+      "direction": "datasources[\"Weather_Bangkok\"][\"wind\"][\"deg\"]",
+      "value_text": "datasources[\"Weather_Bangkok\"][\"wind\"][\"deg\"]",
+      "units": "ทิศทางลม",
+      "height_block": "4"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "3": 1,
+    "5": 1,
+    "6": 1,
+    "7": 5,
+    "8": 2,
+    "10": 1,
+    "11": 1,
+    "14": 1,
+    "16": 1,
+    "19": 1
+   },
+   "col": {
+    "3": 1,
+    "5": 1,
+    "6": 1,
+    "7": 1,
+    "8": 2,
+    "10": 2,
+    "11": 2,
+    "14": 2,
+    "16": 2,
+    "19": 2
+   },
+   "col_width": 3,
+   "transparent_bg": true,
+   "widget_background_color": "#383838",
+   "widgets": []
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 6,
+    "8": 2,
+    "10": 11,
+    "13": 11,
+    "15": 11,
+    "37": 11,
+    "38": 11,
+    "40": 11,
+    "41": 11,
+    "42": 11,
+    "45": 11
+   },
+   "col": {
+    "6": 2,
+    "8": 1,
+    "10": 1,
+    "13": 1,
+    "15": 1,
+    "37": 1,
+    "38": 1,
+    "40": 1,
+    "41": 1,
+    "42": 1,
+    "45": 1
+   },
+   "col_width": 1,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "actuator",
+     "settings": {
+      "title": "title",
+      "value": "0",
+      "urlOn": "",
+      "urlOff": "",
+      "on_text": "เปิด",
+      "off_text": "ปิด",
+      "size": 15,
+      "font_size": 16
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "3": 1,
+    "4": 1,
+    "5": 1,
+    "6": 1,
+    "7": 5,
+    "8": 3,
+    "10": 2,
+    "11": 2,
+    "12": 2,
+    "13": 2,
+    "19": 2,
+    "20": 2,
+    "21": 2
+   },
+   "col": {
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 4,
+    "7": 5,
+    "8": 1,
+    "10": 6,
+    "11": 6,
+    "12": 6,
+    "13": 6,
+    "19": 6,
+    "20": 6,
+    "21": 6
+   },
+   "col_width": 3,
+   "transparent_bg": true,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<div style=\"text-align:right;\">อุณหภูมิ</div>",
+      "value": "datasources[\"Weather_Bangkok\"][\"main\"][\"temp\"]",
+      "animate": true,
+      "units": "&deg;C",
+      "font_size": "20",
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "sparkline": true,
+      "mark_color": "#ff99ff",
+      "maxmin_color": "#00ff00",
+      "height_block": "1",
+      "_color": [
+       "#ff99ff"
+      ]
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<div style=\"text-align:right;\">ความกดอากาศ</div>",
+      "value": "datasources[\"Weather_Bangkok\"][\"main\"][\"pressure\"]",
+      "animate": true,
+      "units": "kPa",
+      "font_size": 20,
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "sparkline": true,
+      "mark_color": "#559900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#559900"
+      ]
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<div style=\"text-align:right;\">ความชื้น</div>",
+      "value": "datasources[\"Weather_Bangkok\"][\"main\"][\"humidity\"]",
+      "animate": true,
+      "units": "k",
+      "font_size": 20,
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "sparkline": true,
+      "mark_color": "#ff4400",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff4400"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 2,
+    "8": 3,
+    "11": 22,
+    "12": 22,
+    "13": 22,
+    "15": 22,
+    "18": 22,
+    "44": 22
+   },
+   "col": {
+    "6": 2,
+    "8": 7,
+    "11": 7,
+    "12": 7,
+    "13": 7,
+    "15": 7,
+    "18": 7,
+    "44": 7
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "html",
+     "settings": {
+      "html": "\nvar timeDisplay = $('<div id=\"time-display\" style=\"text-align:center;padding: 10px;\"></div>')\n\ntimeDisplay.html(datasources[\"นาฬิกา\"][\"full_string_value\"])\n//console.log(datasources[\"นาฬิกา\"][\"full_string_value\"])\n//return datasources[\"นาฬิกา\"][\"full_string_value\"]\nreturn timeDisplay",
+      "height": 1
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "8": 3,
+    "13": 3,
+    "16": 3,
+    "19": 3
+   },
+   "col": {
+    "8": 4,
+    "13": 4,
+    "16": 4,
+    "19": 4
+   },
+   "col_width": 1,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": []
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 7,
+    "7": 7,
+    "8": 5,
+    "14": 7,
+    "15": 7,
+    "16": 7,
+    "17": 7,
+    "23": 7
+   },
+   "col": {
+    "6": 1,
+    "7": 4,
+    "8": 4,
+    "14": 4,
+    "15": 4,
+    "16": 4,
+    "17": 4,
+    "23": 4
+   },
+   "col_width": 5,
+   "transparent_bg": false,
+   "widget_background_color": "#383838cc",
+   "widgets": [
+    {
+     "type": "sparkline",
+     "settings": {
+      "title": "สภาพอากาศ",
+      "value": [
+       "datasources[\"Weather_Bangkok\"][\"main\"][\"feels_like\"]",
+       "datasources[\"Weather_Bangkok\"][\"main\"][\"pressure\"]",
+       "datasources[\"Weather_Bangkok\"][\"main\"][\"humidity\"]"
+      ],
+      "include_legend": true,
+      "legend": "อุณหภูมิ,ความดัน,ความชื้น",
+      "mark_color": "#456821,#ff0000,#ffffff",
+      "height_block": "4",
+      "_color": [
+       "#456821",
+       "#ff0000",
+       "#ffffff"
+      ],
+      "label_perrow": 3,
+      "maxmin_color": "#00ff00"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 16,
+    "8": 9,
+    "11": 22,
+    "12": 22,
+    "15": 22,
+    "20": 22,
+    "22": 22,
+    "23": 22,
+    "45": 22
+   },
+   "col": {
+    "6": 4,
+    "8": 1,
+    "11": 4,
+    "12": 4,
+    "15": 4,
+    "20": 4,
+    "22": 4,
+    "23": 4,
+    "45": 4
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "slider_plugin",
+     "settings": {
+      "title": "title",
+      "color": "#FF99ee",
+      "bg_color": "#333333",
+      "min": "0",
+      "max": "100",
+      "value": "66"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "3": 1,
+    "6": 2,
+    "7": 1,
+    "8": 10,
+    "11": 4,
+    "12": 4,
+    "14": 4,
+    "22": 4
+   },
+   "col": {
+    "3": 3,
+    "6": 1,
+    "7": 7,
+    "8": 5,
+    "11": 8,
+    "12": 8,
+    "14": 8,
+    "22": 8
+   },
+   "col_width": 1,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "horizontal-linear-gauge",
+     "settings": {
+      "title": "title",
+      "value": "datasources[\"Weather_Bangkok\"][\"main\"][\"feels_like\"]",
+      "units": "&deg;C",
+      "min_value": 273,
+      "max_value": 373
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 12,
+    "8": 10,
+    "12": 25,
+    "16": 25,
+    "19": 25,
+    "22": 25,
+    "49": 25
+   },
+   "col": {
+    "6": 1,
+    "8": 1,
+    "12": 5,
+    "16": 5,
+    "19": 5,
+    "22": 5,
+    "49": 5
+   },
+   "col_width": 4,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "highcharts-timeseries",
+     "settings": {
+      "timeframe": 60,
+      "chartType": "spline",
+      "title": "Title",
+      "xaxis": "{\"title\":{\"text\" : \"เวลา\"}, \"type\": \"datetime\", \"floor\":0}",
+      "yaxis": "{\"title\":{\"text\" : \"ค่า\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+      "blocks": 5,
+      "include_legend": true,
+      "include_contextmenu": false,
+      "series1": "datasources[\"Weather_Bangkok\"][\"wind\"][\"speed\"]",
+      "series1label": "ความเร็วลม",
+      "series2": "datasources[\"Weather_Bangkok\"][\"main\"][\"temp\"]",
+      "series2label": "อุณหภูมิ",
+      "series3": "datasources[\"Weather_Bangkok\"][\"main\"][\"pressure\"]",
+      "series3label": "ความกดอากาศ"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "3": 7,
+    "4": 4,
+    "5": 4,
+    "6": 17,
+    "7": 1,
+    "8": 16,
+    "9": 1,
+    "10": 1,
+    "13": 1,
+    "14": 1,
+    "15": 1,
+    "16": 1,
+    "17": 1,
+    "19": 1,
+    "20": 1,
+    "23": 1,
+    "25": 1,
+    "26": 1,
+    "28": 1
+   },
+   "col": {
+    "3": 1,
+    "4": 1,
+    "5": 1,
+    "6": 3,
+    "7": 4,
+    "8": 4,
+    "9": 5,
+    "10": 5,
+    "13": 5,
+    "14": 5,
+    "15": 5,
+    "16": 5,
+    "17": 5,
+    "19": 5,
+    "20": 5,
+    "23": 5,
+    "25": 5,
+    "26": 5,
+    "28": 5
+   },
+   "col_width": 4,
+   "transparent_bg": true,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "",
+      "value": "datasources[\"นาฬิกา\"][\"full_string_value\"]",
+      "animate": true,
+      "font_size": "24",
+      "font_align": "right",
+      "height_block": "1",
+      "_color": [
+       "#ff9900"
+      ],
+      "font_color": "#ffffff",
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "3": 3,
+    "4": 5,
+    "5": 5,
+    "6": 16,
+    "7": 2,
+    "8": 17,
+    "9": 5,
+    "11": 5,
+    "12": 5,
+    "13": 5,
+    "14": 5,
+    "15": 5,
+    "17": 5,
+    "18": 5,
+    "20": 5,
+    "21": 5,
+    "22": 5,
+    "24": 5,
+    "25": 5,
+    "28": 5,
+    "29": 5
+   },
+   "col": {
+    "3": 2,
+    "4": 1,
+    "5": 1,
+    "6": 1,
+    "7": 5,
+    "8": 5,
+    "9": 1,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "14": 1,
+    "15": 1,
+    "17": 1,
+    "18": 1,
+    "20": 1,
+    "21": 1,
+    "22": 1,
+    "24": 1,
+    "25": 1,
+    "28": 1,
+    "29": 1
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "dyngauge",
+     "settings": {
+      "title": "อุณหภูมิ",
+      "value": "datasources[\"Weather_Bangkok\"][\"main\"][\"temp\"]",
+      "units": "°C",
+      "min_value": "273",
+      "max_value": "373",
+      "height_block": "3"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 26,
+    "8": 18,
+    "9": 9,
+    "29": 9,
+    "30": 9,
+    "33": 9,
+    "35": 9,
+    "36": 9,
+    "38": 9,
+    "40": 9,
+    "43": 9,
+    "44": 9
+   },
+   "col": {
+    "6": 1,
+    "8": 7,
+    "9": 2,
+    "29": 2,
+    "30": 2,
+    "33": 2,
+    "35": 2,
+    "36": 2,
+    "38": 2,
+    "40": 2,
+    "43": 2,
+    "44": 2
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "Toggle",
+     "settings": {
+      "caption": "toggle",
+      "state": "0",
+      "ontext": "ON",
+      "offtext": "OFF",
+      "onaction": "console.log('on')",
+      "offaction": "console.log('off')",
+      "onCreatedAction": "console.log('created')"
+     }
+    },
+    {
+     "type": "Toggle",
+     "settings": {
+      "caption": "toggle",
+      "state": "1",
+      "ontext": "ON",
+      "offtext": "OFF",
+      "onaction": "console.log('on')",
+      "offaction": "console.log('off')",
+      "onCreatedAction": "console.log('created')"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 19,
+    "7": 1,
+    "8": 20,
+    "9": 5,
+    "13": 5,
+    "16": 5,
+    "18": 5,
+    "21": 5,
+    "22": 5,
+    "23": 5,
+    "27": 5,
+    "28": 5,
+    "29": 5,
+    "30": 5
+   },
+   "col": {
+    "6": 1,
+    "7": 3,
+    "8": 1,
+    "9": 1,
+    "13": 1,
+    "16": 1,
+    "18": 1,
+    "21": 1,
+    "22": 1,
+    "23": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "30": 1
+   },
+   "col_width": 8,
+   "transparent_bg": true,
+   "widget_background_color": "#383838",
+   "widgets": []
+  },
+  {
+   "width": 1,
+   "row": {
+    "3": 8,
+    "4": 6,
+    "5": 6,
+    "6": 20,
+    "7": 8,
+    "8": 21,
+    "10": 6,
+    "11": 6,
+    "12": 6,
+    "13": 6,
+    "14": 6,
+    "15": 6,
+    "18": 6,
+    "19": 6,
+    "23": 6,
+    "25": 6,
+    "26": 6,
+    "28": 6,
+    "29": 6,
+    "30": 6,
+    "31": 6,
+    "33": 6,
+    "34": 6,
+    "35": 6,
+    "36": 6,
+    "37": 6
+   },
+   "col": {
+    "3": 1,
+    "4": -11,
+    "5": -11,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "10": -11,
+    "11": -11,
+    "12": -11,
+    "13": -11,
+    "14": -11,
+    "15": -11,
+    "18": -11,
+    "19": -11,
+    "23": -11,
+    "25": -11,
+    "26": -11,
+    "28": -11,
+    "29": -11,
+    "30": -11,
+    "31": -11,
+    "33": -11,
+    "34": -11,
+    "35": -11,
+    "36": -11,
+    "37": -11
+   },
+   "col_width": 8,
+   "transparent_bg": true,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "longdo map",
+     "settings": {
+      "title": "",
+      "lat": "datasources[\"Weather_Bangkok\"][\"coord\"][\"lat\"]",
+      "lon": "datasources[\"Weather_Bangkok\"][\"coord\"][\"lon\"]",
+      "zoom": "14",
+      "style": "map",
+      "traffic": 0,
+      "toolbar": 0,
+      "height_block": "6"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 28,
+    "7": 7,
+    "8": 27,
+    "16": 9,
+    "18": 9,
+    "22": 9,
+    "26": 9,
+    "27": 9,
+    "30": 9,
+    "31": 9,
+    "34": 9,
+    "36": 9,
+    "38": 9,
+    "39": 9,
+    "44": 9
+   },
+   "col": {
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "16": 1,
+    "18": 1,
+    "22": 1,
+    "26": 1,
+    "27": 1,
+    "30": 1,
+    "31": 1,
+    "34": 1,
+    "36": 1,
+    "38": 1,
+    "39": 1,
+    "44": 1
+   },
+   "col_width": 7,
+   "transparent_bg": 1,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "",
+      "value": "\"สถานภาพอาการในกรุงเทพมหานคร\"",
+      "animate": true,
+      "font_size": "34",
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "mark_color": "#ff9900",
+      "maxmin_color": "#ffffff",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 29,
+    "8": 28,
+    "37": 11,
+    "40": 11,
+    "41": 11,
+    "42": 11,
+    "45": 11,
+    "50": 11
+   },
+   "col": {
+    "6": 1,
+    "8": 3,
+    "37": 1,
+    "40": 1,
+    "41": 1,
+    "42": 1,
+    "45": 1,
+    "50": 1
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "Slider",
+     "settings": {
+      "caption": "Range Slider 1",
+      "color": "#FF9900",
+      "bg_color": "#222222",
+      "showvalue": 1,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "initialvalue": "0",
+      "autovaluesource": "77",
+      "onStart": "console.log(\"onstart\")",
+      "onSlide": "console.log(\"slide\")",
+      "onStop": "console.log(\"onstop\")",
+      "onCreatedAction": "console.log(\"created\")"
+     }
+    },
+    {
+     "type": "Slider",
+     "settings": {
+      "caption": "Range Slider 2",
+      "color": "#FF9900",
+      "bg_color": "#222222",
+      "showvalue": 1,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "initialvalue": "0",
+      "autovaluesource": "56"
+     }
+    },
+    {
+     "type": "slider_plugin",
+     "settings": {
+      "title": "Slider",
+      "color": "#FF9900",
+      "bg_color": "#222222",
+      "min": "0",
+      "max": "100",
+      "value": "45"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 29,
+    "8": 28,
+    "32": 15,
+    "36": 15,
+    "37": 15,
+    "38": 15,
+    "41": 15,
+    "42": 15,
+    "43": 15,
+    "44": 15,
+    "47": 15,
+    "52": 15
+   },
+   "col": {
+    "6": 4,
+    "8": 1,
+    "32": 1,
+    "36": 1,
+    "37": 1,
+    "38": 1,
+    "41": 1,
+    "42": 1,
+    "43": 1,
+    "44": 1,
+    "47": 1,
+    "52": 1
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "html",
+     "settings": {
+      "html": "\n<div id=\"polar-clock-container\" style=\"height: 100%\"></div>\n<script src=\"https://d3js.org/d3.v3.min.js\"></script>\n<script>\n\nsetTimeout(function() {\n    \nvar width = $(\"#polar-clock-container\").width(),\n    height = $(\"#polar-clock-container\").height(),\n    radius = Math.min(width, height) / 1.9,\n    spacing = .09;\n\nvar formatSecond = d3.time.format(\"%-S seconds\"),\n    formatMinute = d3.time.format(\"%-M minutes\"),\n    formatHour = d3.time.format(\"%-H hours\"),\n    formatDay = d3.time.format(\"%A\"),\n    formatDate = function(d) { d = d.getDate(); switch (10 <= d && d <= 19 ? 10 : d % 10) { case 1: d += \"st\"; break; case 2: d += \"nd\"; break; case 3: d += \"rd\"; break; default: d += \"th\"; break; } return d; },\n    formatMonth = d3.time.format(\"%B\");\n\nvar color = d3.scale.linear()\n    .range([\"hsl(-180,60%,50%)\", \"hsl(180,60%,50%)\"])\n    .interpolate(function(a, b) { var i = d3.interpolateString(a, b); return function(t) { return d3.hsl(i(t)); }; });\n\nvar arcBody = d3.svg.arc()\n    .startAngle(0)\n    .endAngle(function(d) { return d.value * 2 * Math.PI; })\n    .innerRadius(function(d) { return d.index * radius; })\n    .outerRadius(function(d) { return (d.index + spacing) * radius; })\n    .cornerRadius(6);\n\nvar arcCenter = d3.svg.arc()\n    .startAngle(0)\n    .endAngle(function(d) { return d.value * 2 * Math.PI; })\n    .innerRadius(function(d) { return (d.index + spacing / 2) * radius; })\n    .outerRadius(function(d) { return (d.index + spacing / 2) * radius; });\n$(\"#polar-clock-container\").empty();\nvar svg = d3.select(\"#polar-clock-container\").append(\"svg\")\n    .attr(\"id\",\"polar-clock\")\n    .attr(\"width\", width)\n    .attr(\"height\", height)\n  .append(\"g\")\n    .attr(\"transform\", \"translate(\" + width / 2 + \",\" + height / 2 + \")\");\n\nvar field = svg.selectAll(\"g\")\n    .data(fields)\n  .enter().append(\"g\");\n\nfield.append(\"path\")\n    .attr(\"class\", \"arc-body\");\n\nfield.append(\"path\")\n    .attr(\"id\", function(d, i) { return \"arc-center-\" + i; })\n    .attr(\"class\", \"arc-center\");\n\nfield.append(\"text\")\n    .attr(\"dy\", \".35em\")\n    .attr(\"dx\", \".75em\")\n    .style(\"text-anchor\", \"start\")\n  .append(\"textPath\")\n    .attr(\"startOffset\", \"50%\")\n    .attr(\"class\", \"arc-text\")\n    .attr(\"xlink:href\", function(d, i) { return \"#arc-center-\" + i; });\n\ntick();\n\nd3.select(self.frameElement).style(\"height\", height + \"px\");\n\nfunction tick() {\n  if (!document.hidden) field\n      .each(function(d) { this._value = d.value; })\n      .data(fields)\n      .each(function(d) { d.previousValue = this._value; })\n    .transition()\n      .ease(\"elastic\")\n      .duration(500)\n      .each(fieldTransition);\n\n  setTimeout(tick, 1000 - Date.now() % 1000);\n}\n\nfunction fieldTransition() {\n  var field = d3.select(this).transition();\n\n  field.select(\".arc-body\")\n      .attrTween(\"d\", arcTween(arcBody))\n      .style(\"fill\", function(d) { return color(d.value); });\n\n  field.select(\".arc-center\")\n      .attrTween(\"d\", arcTween(arcCenter));\n\n  field.select(\".arc-text\")\n      .text(function(d) { return d.text; });\n}\n\nfunction arcTween(arc) {\n  return function(d) {\n    var i = d3.interpolateNumber(d.previousValue, d.value);\n    return function(t) {\n      d.value = i(t);\n      return arc(d);\n    };\n  };\n}\n\nfunction fields() {\n  var now = new Date;\n  return [\n    {index: .7, text: formatSecond(now), value: now.getSeconds() / 60},\n    {index: .6, text: formatMinute(now), value: now.getMinutes() / 60},\n    {index: .5, text: formatHour(now),   value: now.getHours() / 24},\n    {index: .3, text: formatDay(now),    value: now.getDay() / 7},\n    {index: .2, text: formatDate(now),   value: (now.getDate() - 1) / (32 - new Date(now.getYear(), now.getMonth(), 32).getDate())},\n    {index: .1, text: formatMonth(now),  value: now.getMonth() / 12}\n  ];\n}\n    \n}, 5000);\n\n</script>",
+      "height": 4
+     }
+    }
+   ]
+  }
+ ],
+ "datasources": [
+  {
+   "name": "นาฬิกา",
+   "type": "clock",
+   "settings": {
+    "name": "นาฬิกา",
+    "refresh": 1
+   }
+  },
+  {
+   "name": "Weather_Bangkok",
+   "type": "JSON",
+   "settings": {
+    "name": "Weather_Bangkok",
+    "url": "https://api.openweathermap.org/data/2.5/weather?q=Bangkok&appid=11c0c23a7ff5628491401fffb23ef63b",
+    "use_thingproxy": false,
+    "refresh": 10,
+    "method": "GET"
+   }
+  }
+ ],
+ "columns": 8,
+ "theme": "default"
+}
