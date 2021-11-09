@@ -14,7 +14,7 @@ if (typeof feedview === "undefined") {
         "description" : "",
         "fill_size" : true,
         "external_scripts" : [
-            "js/netpie.feedview.js"
+            "plugins/thirdparty/netpie.feedview.js"
         ],
         "settings"  : [
             {
@@ -272,3 +272,5 @@ if (typeof feedview === "undefined") {
         }        
     }
 }());
+
+
