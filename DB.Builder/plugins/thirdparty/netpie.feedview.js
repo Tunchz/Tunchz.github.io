@@ -405,7 +405,8 @@ function updateChart(chartDIV,dataArray,option,settings) {
 			   }
 			}
 		});
-		$("<div id='tooltip' class='tooltip'></div>").css({
+		// console.log(":::",document.getElementById('tooltip'));
+		if (!document.getElementById('tooltip')) $("<div id='tooltip' class='tooltip'></div>").css({
 			position: "absolute",
 			display: "none",
 			border: "1px solid #ccc",

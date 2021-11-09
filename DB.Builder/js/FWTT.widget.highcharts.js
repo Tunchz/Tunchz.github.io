@@ -104,8 +104,13 @@
 			"display_name": "Time series (Highcharts)",
 			"description": "Time series line chart.",
 			"external_scripts": [
-				"https://code.highcharts.com/8.0.0/highcharts.js",
-				"https://code.highcharts.com/8.0.0/modules/exporting.js"
+				// "https://code.highcharts.com/8.0.0/highcharts.js",
+				// "https://code.highcharts.com/8.0.0/modules/exporting.js",
+	            "https://code.highcharts.com/highcharts.js",
+	            "https://code.highcharts.com/highcharts-more.js",
+	            "https://code.highcharts.com/modules/exporting.js",
+	            "https://code.highcharts.com/modules/export-data.js",
+	            "https://code.highcharts.com/modules/accessibility.js",
 			],
 			"fill_size": true,
 			"settings": highchartsLineWidgetSettings,
@@ -331,7 +336,7 @@
 					buttons : {
 						contextButton:{
 						enabled: currentSettings.include_contextmenu,
-						menuItems:["viewFullscreen", "printChart", "separator", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG"],
+						menuItems:["viewFullscreen", "printChart", "separator", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG", "separator", "downloadCSV", "downloadXLS"],
 						//position relative to align option
 						// menuClassName: "highcharts-custom-contextenu",
 						// x: -10,

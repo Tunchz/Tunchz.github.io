@@ -1,0 +1,1095 @@
+{
+ "version": "-Tunchz/FWTT-",
+ "header_image": "",
+ "dashboard_title": "Test.dashboard",
+ "avatar": "https://tunchz.github.io/CIA/MWALogo.png",
+ "min_cols": 7,
+ "background_image": null,
+ "background_color": "#212121",
+ "allow_edit": true,
+ "plugins": [],
+ "panes": [
+  {
+   "width": 1,
+   "row": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1,
+    "6": 1,
+    "7": 3,
+    "8": 1
+   },
+   "col": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "16": 4
+   },
+   "col_width": 6,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "value": "datasources[\"clock\"][\"full_string_value\"]",
+      "animate": true,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "5": 2,
+    "6": 4,
+    "7": 4,
+    "8": 2,
+    "9": 4,
+    "11": 4,
+    "13": 4,
+    "14": 4,
+    "15": 4,
+    "16": 4,
+    "17": 4
+   },
+   "col": {
+    "5": 1,
+    "6": 4,
+    "7": 1,
+    "8": 1,
+    "9": 5,
+    "11": 5,
+    "13": 5,
+    "14": 5,
+    "15": 5,
+    "16": 5,
+    "17": 5
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "horizontal_gauge",
+     "settings": {
+      "caption": "title",
+      "autovaluesource": "44",
+      "color": "#FF9900",
+      "bg_color": "#222222",
+      "showvalue": 1,
+      "min": 0,
+      "max": 100
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "5": 3,
+    "6": 4,
+    "7": 14,
+    "8": 2,
+    "9": 5,
+    "10": 5,
+    "11": 5,
+    "13": 5,
+    "15": 5,
+    "16": 5,
+    "17": 5,
+    "18": 5,
+    "19": 5
+   },
+   "col": {
+    "5": 1,
+    "6": 1,
+    "7": 1,
+    "8": 4,
+    "9": 6,
+    "10": 6,
+    "11": 6,
+    "13": 6,
+    "15": 6,
+    "16": 6,
+    "17": 6,
+    "18": 6,
+    "19": 6
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.2\"][\"val\"]",
+      "animate": true,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 100,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 3,
+    "7": 8,
+    "11": 2,
+    "13": 2,
+    "14": 2,
+    "15": 2,
+    "17": 2
+   },
+   "col": {
+    "6": 4,
+    "7": 4,
+    "11": 5,
+    "13": 5,
+    "14": 5,
+    "15": 5,
+    "17": 5
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "url_option_selector_widget",
+     "settings": {
+      "title": "<div style=\"font-size:14px;margin-top: 17px;\">สถานี<div>",
+      "datasource_name": "MWA Option Url",
+      "default_option": "2",
+      "font_size": "16",
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "line_color": "#ff990055",
+      "line_thickness": "1",
+      "background_color": "#383838",
+      "left_margin": "60",
+      "right_margin": "5",
+      "height_block": "1"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "5": 4,
+    "6": 2,
+    "7": 6,
+    "8": 3,
+    "10": 6,
+    "11": 6,
+    "12": 6,
+    "13": 6,
+    "15": 6,
+    "18": 6,
+    "19": 6,
+    "20": 6,
+    "21": 6
+   },
+   "col": {
+    "5": 1,
+    "6": 1,
+    "7": 4,
+    "8": 1,
+    "10": 5,
+    "11": 5,
+    "12": 5,
+    "13": 5,
+    "15": 5,
+    "18": 5,
+    "19": 5,
+    "20": 5,
+    "21": 5
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "Inlet Flow",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"INLET.FLOW\"][\"val\"]",
+      "animate": true,
+      "units": "m3/s",
+      "font_size": 20,
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "sparkline": true,
+      "timeframe": 100,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "5": 6,
+    "6": 5,
+    "7": 9,
+    "8": 5,
+    "10": 3,
+    "12": 3,
+    "13": 3,
+    "14": 3,
+    "15": 3,
+    "17": 3,
+    "18": 3,
+    "20": 3,
+    "21": 3,
+    "23": 3
+   },
+   "col": {
+    "5": 1,
+    "6": 2,
+    "7": 1,
+    "8": 1,
+    "10": 1,
+    "12": 1,
+    "13": 1,
+    "14": 1,
+    "15": 1,
+    "17": 1,
+    "18": 1,
+    "20": 1,
+    "21": 1,
+    "23": 1
+   },
+   "col_width": 4,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "highcharts-timeseries",
+     "settings": {
+      "timeframe": 120,
+      "chartType": "spline",
+      "title": "title",
+      "xaxis": "{\"title\":{\"text\" : \"เวลา\"}, \"type\": \"datetime\", \"floor\":0}",
+      "yaxis": "{\"title\":{\"text\" : \"ค่า\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+      "blocks": "4",
+      "include_legend": true,
+      "include_contextmenu": false,
+      "series1": "datasources[\"Weather\"][\"current_temp\"]",
+      "series1label": "อุณหภูมิ",
+      "series2": "datasources[\"Weather\"][\"pressure\"]",
+      "series2label": "ความกดอากาศ",
+      "series3": "datasources[\"Weather\"][\"humidity\"]",
+      "series3label": "ความชื้น"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "1": 5,
+    "2": 5,
+    "3": 5,
+    "4": 5,
+    "5": 11,
+    "6": 2,
+    "7": 15,
+    "8": 10,
+    "9": 5,
+    "10": 2,
+    "11": 2,
+    "12": 5,
+    "13": 2,
+    "15": 2,
+    "16": 2,
+    "17": 2,
+    "18": 2,
+    "19": 2,
+    "20": 2,
+    "21": 2,
+    "24": 2
+   },
+   "col": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1,
+    "6": 4,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 4,
+    "11": 4,
+    "12": 1,
+    "13": 4,
+    "15": 4,
+    "16": 4,
+    "17": 4,
+    "18": 4,
+    "19": 4,
+    "20": 4,
+    "21": 4,
+    "24": 4
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "value": "datasources[\"MWA Option Url\"][\"option name\"]",
+      "animate": true,
+      "font_size": "20",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "5": 1,
+    "6": 8,
+    "7": 14,
+    "8": 1,
+    "9": 8,
+    "11": 8,
+    "13": 8,
+    "15": 8,
+    "18": 8,
+    "19": 8,
+    "20": 8,
+    "21": 8,
+    "22": 8,
+    "23": 8,
+    "24": 8
+   },
+   "col": {
+    "5": 5,
+    "6": 1,
+    "7": 4,
+    "8": 5,
+    "9": 1,
+    "11": 1,
+    "13": 1,
+    "15": 1,
+    "18": 1,
+    "19": 1,
+    "20": 1,
+    "21": 1,
+    "22": 1,
+    "23": 1,
+    "24": 1
+   },
+   "col_width": 1,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "indicator",
+     "settings": {
+      "value": "return datasources[\"MWA\"][\"RES.LVL.1\"][\"alarmStatus\"][0]===\"#FFFFFF\"",
+      "on_text": "ปรกติ",
+      "off_text": "datasources[\"MWA\"][\"RES.LVL.1\"][\"alarmStatus\"][0]",
+      "size": "10",
+      "font_size": "12"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "5": 12,
+    "6": 10,
+    "7": 16,
+    "8": 11,
+    "18": 8,
+    "19": 8,
+    "20": 8,
+    "21": 8,
+    "22": 8,
+    "23": 8,
+    "24": 8,
+    "26": 8
+   },
+   "col": {
+    "5": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "18": 2,
+    "19": 2,
+    "20": 2,
+    "21": 2,
+    "22": 2,
+    "23": 2,
+    "24": 2,
+    "26": 2
+   },
+   "col_width": 6,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "FeedView",
+     "settings": {
+      "title": "feed view title",
+      "datasource": "//console.log(\"=====> \", datasources[\"Weather\"][\"current_temp\"]);\nvar unixTimestamp = Date.now();\n//console.log(\"--------------- : \",unixTimestamp);\nvar result = [\n        {\n            \"attr\": \"humid\",\n            \"unit\": \"%\",\n            \"values\": [\n                [\n                    unixTimestamp,\n                    datasources[\"Weather\"][\"humidity\"] //62.5\n                ]\n            ]\n        },\n        {\n            \"attr\": \"temp\",\n            \"unit\": \"C\",\n            \"values\": [\n                [\n                    unixTimestamp,\n                    datasources[\"Weather\"][\"current_temp\"] //25.2\n                ]\n            ]\n        },\n        {\n            \"attr\": \"pressure\",\n            \"unit\": \"kPa\",\n            \"values\": [\n                [\n                    unixTimestamp,\n                    datasources[\"Weather\"][\"pressure\"] //25.2\n                ]\n            ]\n        },\n        {\n            \"attr\": \"wind speed\",\n            \"unit\": \"km/h\",\n            \"values\": [\n                [\n                    unixTimestamp,\n                    datasources[\"Weather\"][\"wind_speed\"] //25.2\n                ]\n            ]\n        }\n    ];\n\n\n//console.log(result);\nreturn result;",
+      "filter": "",
+      "timeframe": 60,
+      "type": "line",
+      "xaxis": "x title",
+      "yaxis": "y title",
+      "yzero": true,
+      "color": "",
+      "marker": true,
+      "multipleaxis": true,
+      "autogap": true,
+      "height_block": "5"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 15,
+    "7": 21,
+    "8": 16,
+    "24": 13,
+    "25": 13,
+    "26": 13,
+    "27": 13,
+    "28": 13,
+    "29": 13,
+    "30": 13,
+    "31": 13
+   },
+   "col": {
+    "6": 3,
+    "7": 1,
+    "8": 1,
+    "24": 3,
+    "25": 3,
+    "26": 3,
+    "27": 3,
+    "28": 3,
+    "29": 3,
+    "30": 3,
+    "31": 3
+   },
+   "col_width": 4,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "html_highchart",
+     "settings": {
+      "html": "var a =$('<div id=\"container1\" style=\"height:100%; padding:0px;\"></div>')\n\n//<script>\nsetTimeout(() => {\n\n           \nHighcharts.chart('container1', {\n\n    title: {\n        text: 'Solar Employment Growth by Sector, 2010-2016'\n    },\n\n    subtitle: {\n        text: 'Source: thesolarfoundation.com'\n    },\n\n    yAxis: {\n        title: {\n            text: 'Number of Employees'\n        }\n    },\n\n    xAxis: {\n        accessibility: {\n            rangeDescription: 'Range: 2010 to 2017'\n        }\n    },\n\n    legend: {\n        enabled: false,\n        layout: 'horizontal',\n        align: 'left',\n        verticalAlign: 'top'\n    },\n\n    plotOptions: {\n        series: {\n            label: {\n                connectorAllowed: false\n            },\n            pointStart: 2010\n        }\n    },\n\n    series: [{\n        name: 'Installation',\n        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]\n    }, {\n        name: 'Manufacturing',\n        data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]\n    }, {\n        name: 'Sales & Distribution',\n        data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]\n    }, {\n        name: 'Project Development',\n        data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]\n    }, {\n        name: 'Other',\n        data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]\n    }],\n\n    responsive: {\n        rules: [{\n            condition: {\n                maxWidth: 500\n            },\n            chartOptions: {\n                legend: {\n                    layout: 'horizontal',\n                    align: 'center',\n                    verticalAlign: 'bottom'\n                }\n            }\n        }]\n    }\n\n});\n           \n}, 1000);\n\n//</script>\nreturn a;",
+      "height": 6
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 15,
+    "30": 16,
+    "34": 16
+   },
+   "col": {
+    "6": 1,
+    "30": 1,
+    "34": 1
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "html_highchart",
+     "settings": {
+      "html": "var a =$('<div id=\"container3\" style=\"height:100%; padding:0px;\"></div>')\n\n//<script>\nsetTimeout(() => {\na.empty();\nvar inverted=0;\n           \n(function (H) {\n    H.seriesType('lineargauge', 'column', null, {\n        setVisible: function () {\n            H.seriesTypes.column.prototype.setVisible.apply(this, arguments);\n            if (this.markLine) {\n                this.markLine[this.visible ? 'show' : 'hide']();\n            }\n        },\n        drawPoints: function () {\n            // Draw the Column like alwaysa\n            H.seriesTypes.column.prototype.drawPoints.apply(this, arguments);\n\n            // Add a Marker\n            var series = this,\n                chart = this.chart,\n                inverted = chart.inverted,\n                xAxis = this.xAxis,\n                yAxis = this.yAxis,\n                point = this.points[0], // we know there is only 1 point\n                markLine = this.markLine,\n                ani = markLine ? 'animate' : 'attr',\n                width = chart.width,\n                xOffset=inverted?0:xAxis.len,\n            \tyOffset=0;\n\n            // Hide column\n            point.graphic.hide();\n\n            if (!markLine) {\n                var path = inverted ? ['M', xOffset, yOffset, 'L', xOffset-5, yOffset-5, 'L', xOffset+5, yOffset-5, 'L', xOffset, yOffset, 'L', 0, 0 + xAxis.len] \n                \t\t\t\t\t: ['M', xOffset, yOffset, 'L', xOffset+8, yOffset+5, 'L', xOffset+8, yOffset-5, 'L', xOffset, yOffset, 'L', 0, 0];\n                markLine = this.markLine = chart.renderer.path(path)\n                    .attr({\n                        fill: series.color,\n                        stroke: series.color,\n                        'stroke-width': 1\n                    }).add();\n            }\n            markLine[ani]({\n                translateX: inverted ? xAxis.left + yAxis.translate(point.y) : xAxis.left,\n                translateY: inverted ? xAxis.top : yAxis.top + yAxis.len -  yAxis.translate(point.y)\n            });\n        }\n    });\n}(Highcharts));\n\nHighcharts.chart('container3', {\n    chart: {\n        type: 'lineargauge',\n        inverted: inverted,\n        width: !inverted?100:null,\n        height: inverted?100:null,\n        paddingRight: 10,\n    },\n    title: {\n        text: ''//Title'\n    },\n    xAxis: {\n        lineColor: '#C0C0C0',\n        labels: {\n            enabled: false,\n        },\n        tickLength: 0\n    },\n    yAxis: {\n        min: 0,\n        max: 100,\n        tickInterval: 50,\n        tickLength: 3,\n        tickWidth: 1,\n        tickColor: '#C0C0C0',\n        gridLineColor: '#C0C0C0',\n        gridLineWidth: 0,\n        minorTickInterval: 10,\n        minorTickWidth: 1,\n        minorTickLength: 3,\n        minorGridLineWidth: 0,\n        title: null,\n        //width: 20,\n        marginLeft:-10,\n        labels: {\n            format: '{value}%',\n            style: {\n                fontSize:10,\n            }\n        },\n        plotBands: [{\n            from: 0,\n            to: 40,\n            color: 'rgba(255,0,0,1)'\n        }, {\n            from: 40,\n            to: 80,\n            color: 'rgba(255,255,0,1)'\n        }, {\n            from: 80,\n            to: 100,\n            color: 'rgba(0,255,0,1)'\n        }]\n    },\n    legend: {\n        enabled: false\n    },\n    tooltips: {\n        enabled: false\n    },\n\n    series: [{\n        data: [92],\n        color: '#fff',\n        dataLabels: {\n            enabled: true,\n            color: \"#fff\",\n            align: 'left',\n            verticalAlign: 'middle',\n            format: '{point.y}%',\n            x:52,\n            y:10,\n        }\n    }]\n\n}, // Add some life\nfunction (chart) {\n    setInterval(function () {\n        Highcharts.each(chart.series, function (serie) {\n            var point = serie.points[0],\n                newVal,\n                inc = (Math.random() - 0.5) * 20;\n\n            newVal = point.y + inc;\n            if (newVal < 0 || newVal > 100) {\n                newVal = point.y - inc;\n            }\n\n            point.update(Math.floor(newVal));\n        });\n    }, 2000);\n\n});\n           \n}, 1000);\n\n//</script>\nreturn a;",
+      "height": 6
+     }
+    }
+   ]
+  },
+  {
+   "title": "Temperature",
+   "width": 1,
+   "row": {
+    "1": 49,
+    "2": 29,
+    "3": 21,
+    "4": 21,
+    "5": 21,
+    "6": 5,
+    "7": 9,
+    "8": 3,
+    "10": 1,
+    "11": 11,
+    "12": 1,
+    "13": 11,
+    "14": 1,
+    "15": 1,
+    "16": 1,
+    "18": 1,
+    "19": 1,
+    "20": 1,
+    "21": 1,
+    "22": 1,
+    "23": 1,
+    "24": 1,
+    "25": 1,
+    "28": 1,
+    "30": 1,
+    "31": 1,
+    "32": 1,
+    "33": 1,
+    "34": 1
+   },
+   "col": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1,
+    "6": 1,
+    "7": 5,
+    "8": 5,
+    "10": 1,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "14": 1,
+    "15": 1,
+    "16": 1,
+    "18": 1,
+    "19": 1,
+    "20": 1,
+    "21": 1,
+    "22": 1,
+    "23": 1,
+    "24": 1,
+    "25": 1,
+    "28": 1,
+    "30": 1,
+    "31": 1,
+    "32": 1,
+    "33": 1,
+    "34": 1
+   },
+   "col_width": 1,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "High",
+      "value": "datasources.Weather.high_temp",
+      "animate": true,
+      "units": "&deg;F",
+      "font_size": 20,
+      "font_align": "left",
+      "font_color": "#ffffff",
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "Low",
+      "value": "datasources.Weather.low_temp",
+      "animate": true,
+      "units": "&deg;F",
+      "font_size": 20,
+      "font_align": "left",
+      "font_color": "#ffffff",
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "Current",
+      "value": "datasources.Weather.current_temp",
+      "animate": true,
+      "units": "&deg;F",
+      "font_size": 20,
+      "font_align": "left",
+      "font_color": "#ffffff",
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 21,
+    "31": 24
+   },
+   "col": {
+    "6": 1,
+    "31": 1
+   },
+   "col_width": 6,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "html_highchart",
+     "settings": {
+      "html": "var a =$('<div id=\"container4\" style=\"height:100%; padding:0px;\"></div>')\n\n//<script>\nsetTimeout(() => {\na.empty();\n\nHighcharts.chart('container4', {\n\n    chart: {\n        type: 'bubble',\n        plotBorderWidth: 1,\n        zoomType: 'xy'\n    },\n\n    legend: {\n        enabled: false\n    },\n\n    title: {\n        text: 'Sugar and fat intake per country'\n    },\n\n    subtitle: {\n        text: 'Source: <a href=\"http://www.euromonitor.com/\">Euromonitor</a> and <a href=\"https://data.oecd.org/\">OECD</a>'\n    },\n\n    accessibility: {\n        point: {\n            valueDescriptionFormat: '{index}. {point.name}, fat: {point.x}g, sugar: {point.y}g, obesity: {point.z}%.'\n        }\n    },\n\n    xAxis: {\n        gridLineWidth: 1,\n        title: {\n            text: 'Daily fat intake'\n        },\n        labels: {\n            format: '{value} gr'\n        },\n        plotLines: [{\n            color: 'black',\n            dashStyle: 'dot',\n            width: 2,\n            value: 65,\n            label: {\n                rotation: 0,\n                y: 15,\n                style: {\n                    fontStyle: 'italic'\n                },\n                text: 'Safe fat intake 65g/day'\n            },\n            zIndex: 3\n        }],\n        accessibility: {\n            rangeDescription: 'Range: 60 to 100 grams.'\n        }\n    },\n\n    yAxis: {\n        startOnTick: false,\n        endOnTick: false,\n        title: {\n            text: 'Daily sugar intake'\n        },\n        labels: {\n            format: '{value} gr'\n        },\n        maxPadding: 0.2,\n        plotLines: [{\n            color: 'black',\n            dashStyle: 'dot',\n            width: 2,\n            value: 50,\n            label: {\n                align: 'right',\n                style: {\n                    fontStyle: 'italic'\n                },\n                text: 'Safe sugar intake 50g/day',\n                x: -10\n            },\n            zIndex: 3\n        }],\n        accessibility: {\n            rangeDescription: 'Range: 0 to 160 grams.'\n        }\n    },\n\n    tooltip: {\n        useHTML: true,\n        headerFormat: '<table>',\n        pointFormat: '<tr><th colspan=\"2\"><h3>{point.country}</h3></th></tr>' +\n            '<tr><th>Fat intake:</th><td>{point.x}g</td></tr>' +\n            '<tr><th>Sugar intake:</th><td>{point.y}g</td></tr>' +\n            '<tr><th>Obesity (adults):</th><td>{point.z}%</td></tr>',\n        footerFormat: '</table>',\n        followPointer: true\n    },\n\n    plotOptions: {\n        series: {\n            dataLabels: {\n                enabled: true,\n                format: '{point.name}'\n            }\n        }\n    },\n\n\n    \n    series: [{\n        data: [\n            { x: 95, y: 95, z: 13.8, name: 'BE', country: 'Belgium' },\n            { x: 86.5, y: 102.9, z: 14.7, name: 'DE', country: 'Germany' },\n            { x: 80.8, y: 91.5, z: 15.8, name: 'FI', country: 'Finland' },\n            { x: 80.4, y: 102.5, z: 12, name: 'NL', country: 'Netherlands' },\n            { x: 80.3, y: 86.1, z: 11.8, name: 'SE', country: 'Sweden' },\n            { x: 78.4, y: 70.1, z: 16.6, name: 'ES', country: 'Spain' },\n            { x: 74.2, y: 68.5, z: 14.5, name: 'FR', country: 'France' },\n            { x: 73.5, y: 83.1, z: 10, name: 'NO', country: 'Norway' },\n            { x: 71, y: 93.2, z: 24.7, name: 'UK', country: 'United Kingdom' },\n            { x: 69.2, y: 57.6, z: 10.4, name: 'IT', country: 'Italy' },\n            { x: 68.6, y: 20, z: 16, name: 'RU', country: 'Russia' },\n            { x: 65.5, y: 126.4, z: 35.3, name: 'US', country: 'United States' },\n            { x: 65.4, y: 50.8, z: 28.5, name: 'HU', country: 'Hungary' },\n            { x: 63.4, y: 51.8, z: 15.4, name: 'PT', country: 'Portugal' },\n            { x: 64, y: 82.9, z: 31.3, name: 'NZ', country: 'New Zealand' }\n        ]\n    }]\n\n});\n},1000)\n//</script>\nreturn a;",
+      "height": 6
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 27,
+    "36": 25
+   },
+   "col": {
+    "6": 1,
+    "36": 1
+   },
+   "col_width": 6,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "html_highchart",
+     "settings": {
+      "html": "var a =$('<div id=\"container5\" style=\"height:100%; padding:0px;\"></div>')\n\n//<script>\nsetTimeout(() => {\na.empty();\n\nvar colors = Highcharts.getOptions().colors;\n\nHighcharts.chart('container5', {\n    chart: {\n        type: 'spline'\n    },\n\n    legend: {\n        symbolWidth: 40\n    },\n\n    title: {\n        text: 'Most common desktop screen readers'\n    },\n\n    subtitle: {\n        text: 'Source: WebAIM. Click on points to visit official screen reader website'\n    },\n\n    yAxis: {\n        title: {\n            text: 'Percentage usage'\n        },\n        accessibility: {\n            description: 'Percentage usage'\n        }\n    },\n\n    xAxis: {\n        title: {\n            text: 'Time'\n        },\n        accessibility: {\n            description: 'Time from December 2010 to September 2019'\n        },\n        categories: ['December 2010', 'May 2012', 'January 2014', 'July 2015', 'October 2017', 'September 2019']\n    },\n\n    tooltip: {\n        valueSuffix: '%'\n    },\n\n    plotOptions: {\n        series: {\n            point: {\n                events: {\n                    click: function () {\n                        window.location.href = this.series.options.website;\n                    }\n                }\n            },\n            cursor: 'pointer'\n        }\n    },\n\n    series: [\n        {\n            name: 'NVDA',\n            data: [34.8, 43.0, 51.2, 41.4, 64.9, 72.4],\n            website: 'https://www.nvaccess.org',\n            color: colors[2],\n            accessibility: {\n                description: 'This is the most used screen reader in 2019'\n            }\n        }, {\n            name: 'JAWS',\n            data: [69.6, 63.7, 63.9, 43.7, 66.0, 61.7],\n            website: 'https://www.freedomscientific.com/Products/Blindness/JAWS',\n            dashStyle: 'ShortDashDot',\n            color: colors[0]\n        }, {\n            name: 'VoiceOver',\n            data: [20.2, 30.7, 36.8, 30.9, 39.6, 47.1],\n            website: 'http://www.apple.com/accessibility/osx/voiceover',\n            dashStyle: 'ShortDot',\n            color: colors[1]\n        }, {\n            name: 'Narrator',\n            data: [null, null, null, null, 21.4, 30.3],\n            website: 'https://support.microsoft.com/en-us/help/22798/windows-10-complete-guide-to-narrator',\n            dashStyle: 'Dash',\n            color: colors[9]\n        }, {\n            name: 'ZoomText/Fusion',\n            data: [6.1, 6.8, 5.3, 27.5, 6.0, 5.5],\n            website: 'http://www.zoomtext.com/products/zoomtext-magnifierreader',\n            dashStyle: 'ShortDot',\n            color: colors[5]\n        }, {\n            name: 'Other',\n            data: [42.6, 51.5, 54.2, 45.8, 20.2, 15.4],\n            website: 'http://www.disabled-world.com/assistivedevices/computer/screen-readers.php',\n            dashStyle: 'ShortDash',\n            color: colors[3]\n        }\n    ],\n\n    responsive: {\n        rules: [{\n            condition: {\n                maxWidth: 550\n            },\n            chartOptions: {\n                chart: {\n                    spacingLeft: 3,\n                    spacingRight: 3\n                },\n                legend: {\n                    itemWidth: 150\n                },\n                xAxis: {\n                    categories: ['Dec. 2010', 'May 2012', 'Jan. 2014', 'July 2015', 'Oct. 2017', 'Sep. 2019'],\n                    title: ''\n                },\n                yAxis: {\n                    visible: false\n                }\n            }\n        }]\n    }\n});\n},1000)\n//</script>\nreturn a;",
+      "height": 6
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "3": 29,
+    "4": 29,
+    "5": 29,
+    "6": 7,
+    "7": 4,
+    "8": 3,
+    "10": 1,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "14": 1,
+    "15": 1,
+    "16": 1,
+    "18": 1,
+    "19": 1,
+    "20": 1,
+    "21": 1,
+    "22": 1,
+    "23": 1,
+    "24": 1,
+    "25": 1,
+    "30": 1,
+    "31": 1,
+    "32": 1,
+    "33": 1,
+    "34": 1,
+    "36": 1,
+    "41": 1
+   },
+   "col": {
+    "3": 2,
+    "4": 2,
+    "5": 2,
+    "6": 6,
+    "7": 5,
+    "8": 4,
+    "10": 3,
+    "11": 3,
+    "12": 3,
+    "13": 3,
+    "14": 3,
+    "15": 3,
+    "16": 3,
+    "18": 3,
+    "19": 3,
+    "20": 3,
+    "21": 3,
+    "22": 3,
+    "23": 3,
+    "24": 3,
+    "25": 3,
+    "30": 3,
+    "31": 3,
+    "32": 3,
+    "33": 3,
+    "34": 3,
+    "36": 3,
+    "41": 3
+   },
+   "col_width": 1,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "value": "datasources.Weather.wind_speed",
+      "animate": true,
+      "units": "MPH",
+      "font_size": 20,
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "sparkline": true,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ],
+      "timeframe": 60
+     }
+    }
+   ]
+  },
+  {
+   "title": "Pressure",
+   "width": 1,
+   "row": {
+    "1": 57,
+    "2": 35,
+    "3": 29,
+    "4": 29,
+    "5": 29,
+    "6": 5,
+    "7": 1,
+    "8": 3,
+    "10": 1,
+    "11": 19,
+    "12": 19,
+    "13": 19,
+    "14": 1,
+    "15": 1,
+    "16": 1,
+    "18": 1,
+    "19": 1,
+    "20": 1,
+    "21": 1,
+    "22": 1,
+    "23": 1,
+    "24": 1,
+    "25": 1,
+    "26": 1,
+    "28": 1,
+    "30": 1,
+    "31": 1,
+    "32": 1,
+    "33": 1,
+    "34": 1,
+    "36": 1,
+    "41": 1
+   },
+   "col": {
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 3,
+    "5": 3,
+    "6": 6,
+    "7": 6,
+    "8": 6,
+    "10": 2,
+    "11": 2,
+    "12": 2,
+    "13": 2,
+    "14": 2,
+    "15": 2,
+    "16": 2,
+    "18": 2,
+    "19": 2,
+    "20": 2,
+    "21": 2,
+    "22": 2,
+    "23": 2,
+    "24": 2,
+    "25": 2,
+    "26": 2,
+    "28": 2,
+    "30": 2,
+    "31": 2,
+    "32": 2,
+    "33": 2,
+    "34": 2,
+    "36": 2,
+    "41": 2
+   },
+   "col_width": "1",
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "value": "datasources.Weather.pressure",
+      "animate": true,
+      "units": "mb",
+      "font_size": 20,
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "sparkline": true,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ],
+      "timeframe": 100
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 33,
+    "41": 31
+   },
+   "col": {
+    "6": 1,
+    "41": 1
+   },
+   "col_width": 6,
+   "transparent_bg": false,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "html_highchart",
+     "settings": {
+      "html": "var a =$('<div style=\"height:100%; padding:0px;\"></div>')\na.html(`<div id=\"container6\" style=\"height:calc(100% - 30px);\"></div>\n<div id=\"controls\" style=\"margin: 0 auto;text-align: center;\">\n    <button id=\"play\">Play</button>\n    <button id=\"pause\">Pause</button>\n    <button id=\"rewind\">Rewind</button>\n    <input type=\"range\" id=\"speed\" name=\"Speed\" \n         min=\"0.5\" max=\"2\" value=\"1\" step=\"0.05\">\n    <label for=\"speed\">Speed</label>\n</div>`)\nvar csv_data=`2018-01-07,61,9,61,15.85714286\n2018-01-14,66,20,61,33.85714286\n2018-01-21,56,41,60,31.85714286\n2018-01-28,61,46,58,39.28571429\n2018-02-04,63,35,65,32.14285714\n2018-02-11,61,47,61,35.85714286\n2018-02-18,61,37,62,40.42857143\n2018-02-25,55,44,54,45\n2018-03-04,57,41,56,43.42857143\n2018-03-11,62,38,61,36.57142857\n2018-03-18,57,36,60,36.57142857\n2018-03-25,59,40,61,38.14285714\n2018-04-01,60,48,60,43.28571429\n2018-04-08,64,38,62,41.14285714\n2018-04-15,68,43,66,45.85714286\n2018-04-22,64,51,61,46\n2018-04-29,62,54,62,53.28571429\n2018-05-06,67,60,62,62.57142857\n2018-05-13,63,53,62,58.42857143\n2018-05-20,62,67,63,60.14285714\n2018-05-27,63,65,63,67.71428571\n2018-06-03,67,63,65,65.14285714\n2018-06-10,68,68,66,64\n2018-06-17,65,74,67,68.57142857\n2018-06-24,65,69,66,71.42857143\n2018-07-01,66,82,67,75.14285714\n2018-07-08,78,69,72,76.57142857\n2018-07-15,74,75,74,75.14285714\n2018-07-22,76,73,73,74.85714286\n2018-07-29,76,77,75,76.57142857\n2018-08-05,76,81,77,77.42857143\n2018-08-12,80,76,81,79\n2018-08-19,76,71,76,77\n2018-08-26,74,73,75,73\n2018-09-02,71,72,74,78.28571429\n2018-09-09,70,61,72,75\n2018-09-16,74,72,72,69.71428571\n2018-09-23,71,63,71,70.42857143\n2018-09-30,71,63,69,65.71428571\n2018-10-07,68,71,71,68.14285714\n2018-10-14,68,53,68,64`\n\n//<script>\nsetTimeout(() => {\n//a.empty();\n\n// Sonification options\nvar sdInstruments = [{\n        instrument: 'sineMajor',\n        instrumentMapping: {\n            duration: 200,\n            frequency: 'y',\n            volume: 0.7,\n            pan: -1\n        },\n        instrumentOptions: {\n            minFrequency: 220,\n            maxFrequency: 1900\n        }\n    }],\n    nyInstruments = [{\n        instrument: 'triangleMajor',\n        instrumentMapping: {\n            duration: 200,\n            frequency: 'y',\n            volume: 0.6,\n            pan: 1\n        },\n        instrumentOptions: {\n            minFrequency: 220,\n            maxFrequency: 1900\n        }\n    }];\n\n// Point of interest options\nvar poiTime = Date.UTC(2018, 4, 6),\n    poiEarcon = {\n        // Define the earcon we want to play for the point of interest\n        earcon: new Highcharts.sonification.Earcon({\n            instruments: [{\n                instrument: 'squareMajor',\n                playOptions: {\n                    // Play a quick rising frequency\n                    frequency: function (time) {\n                        return time * 1760 + 440;\n                    },\n                    volume: 0.1,\n                    duration: 200\n                }\n            }]\n        }),\n        // Play this earcon if we hit the point of interest\n        condition: function (point) {\n            return point.x === poiTime;\n        }\n    };\n\n// Create the chart\nvar chart = Highcharts.chart('container6', {\n    chart: {\n        type: 'spline'\n    },\n    title: {\n        text: 'Play chart as sound'\n    },\n    subtitle: {\n        text: 'Weekly temperature averages'\n    },\n    yAxis: {\n        title: {\n            text: 'Temperature (°F)'\n        }\n    },\n    xAxis: {\n        type: 'datetime',\n        plotLines: [{\n            value: poiTime,\n            dashStyle: 'dash',\n            width: 1,\n            color: '#d33'\n        }]\n    },\n    tooltip: {\n        split: true,\n        valueDecimals: 0,\n        valueSuffix: '°F'\n    },\n    plotOptions: {\n        series: {\n            marker: {\n                enabled: false\n            },\n            cursor: 'pointer',\n            // Sonify points on click\n            point: {\n                events: {\n                    click: function () {\n                        // Sonify all points at this x value\n                        var targetX = this.x,\n                            chart = this.series.chart;\n                        chart.series.forEach(function (series) {\n                            // Map instruments to the options for this series\n                            var instruments = series.options.id === 'sd' ?\n                                sdInstruments : nyInstruments;\n                            // See if we have a point with the targetX\n                            series.points.some(function (point) {\n                                if (point.x === targetX) {\n                                    point.sonify({\n                                        instruments: instruments\n                                    });\n                                    return true;\n                                }\n                                return false;\n                            });\n                        });\n                    }\n                }\n            }\n        }\n    },\n    // Data source: https://www.ncdc.noaa.gov\n    data: {\n        csv: csv_data,\n        firstRowAsNames: false,\n        parsed: function (columns) {\n            columns.splice(1, 2); // Remove the non-average columns\n        }\n    },\n    series: [{\n        name: 'San Diego',\n        id: 'sd',\n        color: '#f4b042'\n    }, {\n        name: 'New York',\n        id: 'ny',\n        color: '#41aff4'\n    }]\n});\n\n\n// Utility function that highlights a point\nfunction highlightPoint(event, point) {\n    var chart = point.series.chart,\n        hasVisibleSeries = chart.series.some(function (series) {\n            return series.visible;\n        });\n    if (!point.isNull && hasVisibleSeries) {\n        point.onMouseOver(); // Show the hover marker and tooltip\n    } else {\n        if (chart.tooltip) {\n            chart.tooltip.hide(0);\n        }\n    }\n}\n\n// On speed change we reset the sonification\ndocument.getElementById('speed').onchange = function () {\n    chart.cancelSonify();\n};\n\n\n// Add sonification button handlers\ndocument.getElementById('play').onclick = function () {\n    if (!chart.sonification.timeline || chart.sonification.timeline.atStart()) {\n        chart.sonify({\n            duration: 5000 / document.getElementById('speed').value,\n            order: 'simultaneous',\n            pointPlayTime: 'x',\n            seriesOptions: [{\n                id: 'sd',\n                instruments: sdInstruments,\n                onPointStart: highlightPoint,\n                // Play earcon at point of interest\n                earcons: [poiEarcon]\n            }, {\n                id: 'ny',\n                instruments: nyInstruments,\n                onPointStart: highlightPoint\n            }],\n            // Delete timeline on end\n            onEnd: function () {\n                if (chart.sonification.timeline) {\n                    delete chart.sonification.timeline;\n                }\n            }\n        });\n    } else {\n        chart.resumeSonify();\n    }\n};\ndocument.getElementById('pause').onclick = function () {\n    chart.pauseSonify();\n};\ndocument.getElementById('rewind').onclick = function () {\n    chart.rewindSonify();\n};\n  \n         \n}, 1000);\n\n//</script>\nreturn a;",
+      "height": 6
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 39
+   },
+   "col": {
+    "6": 1
+   },
+   "col_width": 6,
+   "transparent_bg": 0,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "html_highchart",
+     "settings": {
+      "html": "var a =$('<div style=\"height:100%; padding:0px;\"></div>')\na.html(`<div id=\"container7\" style=\"height:calc(100% - 30px);\"></div>\n<div id=\"controls\" style=\"margin: 0 auto;text-align: center;\">\n    <button id=\"plain\">Plain</button>\n    <button id=\"inverted\">Inverted</button>\n    <button id=\"polar\">Polar</button>\n</div>`)\n\n\n//<script>\nsetTimeout(() => {\n//a.empty();\n\n           \nconst chart = Highcharts.chart('container7', {\n    title: {\n        text: 'Chart.update'\n    },\n    subtitle: {\n        text: 'Plain'\n    },\n    xAxis: {\n        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']\n    },\n    series: [{\n        type: 'column',\n        colorByPoint: true,\n        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],\n        showInLegend: false\n    }]\n});\n\ndocument.getElementById('plain').addEventListener('click', () => {\n    chart.update({\n        chart: {\n            inverted: false,\n            polar: false\n        },\n        subtitle: {\n            text: 'Plain'\n        }\n    });\n});\n\ndocument.getElementById('inverted').addEventListener('click', () => {\n    chart.update({\n        chart: {\n            inverted: true,\n            polar: false\n        },\n        subtitle: {\n            text: 'Inverted'\n        }\n    });\n});\n\ndocument.getElementById('polar').addEventListener('click', () => {\n    chart.update({\n        chart: {\n            inverted: false,\n            polar: true\n        },\n        subtitle: {\n            text: 'Polar'\n        }\n    });\n});\n  \n         \n}, 1000);\n\n//</script>\nreturn a;",
+      "height": 6
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "6": 45
+   },
+   "col": {
+    "6": 1
+   },
+   "col_width": 6,
+   "transparent_bg": 0,
+   "widget_background_color": "#383838",
+   "widgets": [
+    {
+     "type": "html_highchart",
+     "settings": {
+      "html": "var a =$('<div id=\"container8\" style=\"height:100%; padding:0px;\"></div>');\nvar b =$('<link rel=\"stylesheet\" href=\"https://github.com/downloads/lafeber/world-flags-sprite/flags16.css\" />').appendTo($('body'));\n\n//<script>\nsetTimeout(() => {\na.empty();\n\nvar colors = Highcharts.getOptions().colors;\n\nHighcharts.chart('container8', {\n    colors: ['#FFD700', '#C0C0C0', '#CD7F32'],\n    chart: {\n        type: 'column',\n        inverted: true,\n        polar: true\n    },\n    title: {\n        text: 'Winter Olympic medals per existing country (TOP 5)'\n    },\n    tooltip: {\n        outside: true\n    },\n    pane: {\n        size: '85%',\n        innerSize: '20%',\n        endAngle: 270\n    },\n    xAxis: {\n        tickInterval: 1,\n        labels: {\n            align: 'right',\n            useHTML: true,\n            allowOverlap: true,\n            step: 1,\n            y: 3,\n            style: {\n                fontSize: '13px'\n            }\n        },\n        lineWidth: 0,\n        categories: [\n            'Norway <span class=\"f16\"><span id=\"flag\" class=\"flag no\">' +\n            '</span></span>',\n            'United States <span class=\"f16\"><span id=\"flag\" class=\"flag us\">' +\n            '</span></span>',\n            'Germany <span class=\"f16\"><span id=\"flag\" class=\"flag de\">' +\n            '</span></span>',\n            'Canada <span class=\"f16\"><span id=\"flag\" class=\"flag ca\">' +\n            '</span></span>',\n            'Austria <span class=\"f16\"><span id=\"flag\" class=\"flag at\">' +\n            '</span></span>'\n        ]\n    },\n    yAxis: {\n        crosshair: {\n            enabled: true,\n            color: '#333'\n        },\n        lineWidth: 0,\n        tickInterval: 25,\n        reversedStacks: false,\n        endOnTick: true,\n        showLastLabel: true\n    },\n    plotOptions: {\n        column: {\n            stacking: 'normal',\n            borderWidth: 0,\n            pointPadding: 0,\n            groupPadding: 0.15\n        }\n    },\n    series: [{\n        name: 'Gold medals',\n        data: [132, 105, 92, 73, 64]\n    }, {\n        name: 'Silver medals',\n        data: [125, 110, 86, 64, 81]\n    }, {\n        name: 'Bronze medals',\n        data: [111, 90, 60, 62, 87]\n    }]\n});\n},1000)\n//</script>\nreturn a;",
+      "height": 8
+     }
+    }
+   ]
+  }
+ ],
+ "datasources": [
+  {
+   "name": "Weather",
+   "type": "openweathermap",
+   "settings": {
+    "name": "Weather",
+    "api_key": "11c0c23a7ff5628491401fffb23ef63b",
+    "location": "Bangkok",
+    "units": "metric",
+    "refresh": 5
+   }
+  },
+  {
+   "name": "clock",
+   "type": "clock",
+   "settings": {
+    "name": "clock",
+    "refresh": 5
+   }
+  },
+  {
+   "name": "WT",
+   "type": "JSON",
+   "settings": {
+    "name": "WT",
+    "url": "https://api.openweathermap.org/data/2.5/weather?q=Bangkok&appid=11c0c23a7ff5628491401fffb23ef63b",
+    "use_thingproxy": true,
+    "refresh": 60,
+    "method": "GET"
+   }
+  },
+  {
+   "name": "MWA",
+   "type": "custom_scrape_api",
+   "settings": {
+    "name": "MWA",
+    "url_string": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_BANGPLEE-WPS.html",
+    "script_text": "\n\nvar data = response;\n\n    t1 = 'Units</font></td></tr><tr>\\n</tr>\\n<tr><td><table width=\"330\" cellspacing=\"1\" cellpadding=\"1\" border=\"0\"><tbody><tr><td width=\"10\" bgcolor=\"'\n    t2 = '</font></td>\\n</tr>\\n</tbody></table>'\n    t3 = '</font></td>\\n</tr>\\n<tr><td><table width=\"330\" cellspacing=\"1\" cellpadding=\"1\" border=\"0\"><tbody><tr><td width=\"10\" bgcolor=\"'\n    arr = data.split(t1)[1].split(t2)[0].split(t3)\n    jsonArray = arr.map((item,i)=>{ \n        let json={},temp\n        // extract the 1st column\n        json.color = item.substring(0,7)\n        // extract the 2nd column\n        temp = item.split('320\"><b>')[1].split('</b></td></tr></tbody></table></td>')\n        json.parameter = temp[0].trim()\n        // extract the 3rd column\n        temp = temp[1].split('<font size=\"+1\"><b>')\n        json.alarmStatus = temp[0].split('</b></font></td>').map((item)=>{\n            let _temp = item.split('<b>')\n            if (['H','L'].includes(_temp[1])) {\n                return _temp[0].split('bgcolor=\"')[1].substring(0,7)\n            } else {\n                return _temp[1]\n            }\n\n        })\n        json.alarmStatus.splice(4)\n        // extract the 4th column\n        temp = temp[1].split('</b></font></td>\\n    <td align=\"center\"><font>')\n        json.val = temp[0].trim()\n        // extract the 5th column\n        json.unit = temp[1].split('</font></td>')[0].trim()\n        return json\n    })\n    //console.log(jsonArray); \n    \n    var resultJson = {};\n    jsonArray.map((item,i)=>{\n        var key = item.parameter;\n        resultJson[key] = item;\n    })\n    \n\nreturn resultJson;",
+    "refresh": 20
+   }
+  },
+  {
+   "name": "MWA Option Url",
+   "type": "custom_scrape_api_multiple_options",
+   "settings": {
+    "name": "MWA Option Url",
+    "url_array": [
+     {
+      "Option Name": "บางพลี",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_BANGPLEE-WPS.html"
+     },
+     {
+      "Option Name": "คลองเตย",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_KLONGTOEY-WPS.html"
+     },
+     {
+      "Option Name": "ลาดกระบัง",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_LARDKRABANG-WPS.html"
+     },
+     {
+      "Option Name": "ลาดพร้าว",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_LARDPRAO-WPS.html"
+     },
+     {
+      "Option Name": "ลุมพินี",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_LUMPINI-WPS.html"
+     },
+     {
+      "Option Name": "มีนบุรี",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_MEENBURI-WPS.html"
+     },
+     {
+      "Option Name": "เพชรเกษม",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_PHETCHKASEM-WPS.html"
+     },
+     {
+      "Option Name": "ราชบูรณะ",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_RAJBURANA-WPS.html"
+     },
+     {
+      "Option Name": "สำโรง",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_SAMRONG-WPS.html"
+     },
+     {
+      "Option Name": "ท่าพระ",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_THAPRA-WPS.html"
+     }
+    ],
+    "script_text": "var data = response;\n\n    t1 = 'Units</font></td></tr><tr>\\n</tr>\\n<tr><td><table width=\"330\" cellspacing=\"1\" cellpadding=\"1\" border=\"0\"><tbody><tr><td width=\"10\" bgcolor=\"'\n    t2 = '</font></td>\\n</tr>\\n</tbody></table>'\n    t3 = '</font></td>\\n</tr>\\n<tr><td><table width=\"330\" cellspacing=\"1\" cellpadding=\"1\" border=\"0\"><tbody><tr><td width=\"10\" bgcolor=\"'\n    arr = data.split(t1)[1].split(t2)[0].split(t3)\n    jsonArray = arr.map((item,i)=>{ \n        let json={},temp\n        // extract the 1st column\n        json.color = item.substring(0,7)\n        // extract the 2nd column\n        temp = item.split('320\"><b>')[1].split('</b></td></tr></tbody></table></td>')\n        json.parameter = temp[0].trim()\n        // extract the 3rd column\n        temp = temp[1].split('<font size=\"+1\"><b>')\n        json.alarmStatus = temp[0].split('</b></font></td>').map((item)=>{\n            let _temp = item.split('<b>')\n            if (['H','L'].includes(_temp[1])) {\n                return _temp[0].split('bgcolor=\"')[1].substring(0,7)\n            } else {\n                return _temp[1]\n            }\n\n        })\n        json.alarmStatus.splice(4)\n        // extract the 4th column\n        temp = temp[1].split('</b></font></td>\\n    <td align=\"center\"><font>')\n        json.val = temp[0].trim()\n        // extract the 5th column\n        json.unit = temp[1].split('</font></td>')[0].trim()\n        return json\n    })\n    //console.log(jsonArray); \n    \n    var resultJson = {};\n    jsonArray.map((item,i)=>{\n        var key = item.parameter;\n        resultJson[key] = item;\n    })\n    \n\nreturn resultJson;",
+    "refresh": 5
+   }
+  },
+  {
+   "name": "test",
+   "type": "custom_scrape_api_multiple_options",
+   "settings": {
+    "name": "test",
+    "url_array": [
+     {
+      "Option Name": "aaaa",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_LARDPRAO-WPS.html"
+     },
+     {
+      "Option Name": "bbbbb",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_LARDPRAO-WPS.html"
+     }
+    ],
+    "refresh": 99999999
+   }
+  }
+ ],
+ "columns": 6,
+ "theme": "default"
+}

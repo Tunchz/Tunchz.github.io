@@ -91,8 +91,15 @@
         type_name: "html_highchart",
         display_name: "HTML Highchart",
         "external_scripts": [
-            "https://code.highcharts.com/8.0.0/highcharts.js",
-            "https://code.highcharts.com/8.0.0/modules/exporting.js"
+            // "https://code.highcharts.com/8.0.0/highcharts.js",
+            // "https://code.highcharts.com/8.0.0/modules/exporting.js",
+            "https://code.highcharts.com/highcharts.js",
+            "https://code.highcharts.com/highcharts-more.js",
+            "https://code.highcharts.com/modules/exporting.js",
+            "https://code.highcharts.com/modules/export-data.js",
+            "https://code.highcharts.com/modules/accessibility.js",
+            "https://code.highcharts.com/modules/sonification.js",
+            "https://code.highcharts.com/modules/data.js",
         ],
         fill_size: !0,
         settings: [{
