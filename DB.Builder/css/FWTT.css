@@ -646,8 +646,8 @@ ul.datasource-input-suffix li {
 h2.section-title {
 	height:12px !important;
 	font-size: 12px;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
     padding-top: 3px;
 }
 
@@ -655,8 +655,8 @@ h2.section-title {
 /* Text Sparkline Widget */
 .tw-value-wrapper {
 	height:18px !important;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 8px;
+	padding-right: 8px;
 }
 
 /*.tw-value-subwrapper {

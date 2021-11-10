@@ -222,9 +222,6 @@
                 g1.css(attr),g2.css(attr)
             }, this.onCalculatedValueChanged = function(settingName, newValue) {
                 var newAttr = {"background-color": newValue, "box-shadow": "0px 0px 15px " + newValue,"border-color":"#FDF1DF"};
-                // console.log("---------->",_settings.value1,Boolean(_settings.value1))
-                // console.log("---------->",_settings.value2,Boolean(_settings.value2))
-                console.log("---------->",settingName,newValue,Boolean(newValue))
                 settingName=='color1'&&isOn[0] && (g1.css(newAttr)), 
                 settingName=='color2'&&isOn[1] && (g2.css(newAttr)),
                 settingName=='value1'&&(Boolean(newValue)? isOn[0] = !0:(isOn[0] = !1,g1.css(offAttr))), 
