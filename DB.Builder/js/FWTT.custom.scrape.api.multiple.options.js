@@ -128,7 +128,7 @@
             container = $('<div class="url-option-container"></div>'),
             g = $('<h2 class="section-title tw-title tw-td" style="position:absolute; top:0; left:0; right: 0px;pointer-events: none;"></h2>').appendTo(container),
             s = $("<select class='minimal'></select>").appendTo($('<div class="styled-select"></div>').appendTo(container)).change(function() {
-                   console.log("selected option : ",$(this).val())
+                   // console.log("selected option : ",$(this).val())
                    datasourceOptions[_settings.datasource_name].selectedOption = $(this).val()
                    datasourceOptions[_settings.datasource_name].datasourceInstance.updateNow()
                    $(this).blur()

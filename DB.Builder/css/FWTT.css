@@ -353,7 +353,7 @@ li.column-tool {
 
 .pane-tools li,
 .pane-tools li i {
-	z-index: 100 !important;
+	z-index: 1100 !important;
 }
 
 #main-header {
@@ -385,11 +385,13 @@ li.gs_w.player-revert {
 }
 
 header:hover ul.pane-tools {
-  opacity: 1;
+    opacity: 1;
+    /*z-index: 1150 !important;*/
 }
 
 li:hover header ul.pane-tools {
-  opacity: 1;
+    opacity: 1;
+    /*z-index: 1150 !important;*/
 }
 
 .onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
@@ -482,12 +484,20 @@ li:hover header ul.pane-tools {
 }
 
 .widget {
-	padding: 3px 0px;
-	align-items: center;
-	align-content: center;
-	justify-content: center;
-	vertical-align: middle;
-	align-self: center;
+    padding: 0px 0px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    vertical-align: middle;
+    align-self: center;
+}
+
+.center {
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    vertical-align: middle;
+    align-self: center;
 }
 
 .gs_w.transparent_bg {
@@ -638,6 +648,7 @@ h2.section-title {
 	font-size: 12px;
 	padding-left: 10px;
 	padding-right: 10px;
+    padding-top: 3px;
 }
 
 
@@ -719,25 +730,25 @@ svg {
 
 /* Indicator Light */
 .indicator-light-container {
-	margin-top:17px;
+	/*margin-top:17px;*/
 	bottom: 0;
 	width: 100%;
 /*	text-align: center;
 	justify-content: center;*/
 	vertical-align: middle;
 }
-.indicator-light,
+/*.indicator-light,
 .indicator-text {
 	margin: 0;
 	transform: translateY(-50%);
-}
+}*/
 .indicator-light {
 	margin: 0 5px;
 	/*margin-left: 20px;*/
 }
 .indicator-text {
 	font-size: 16px;
-	display: inline-block;
+	display: block;
 }
 
 

@@ -9,14 +9,14 @@ if (typeof sliderObject == "undefined") {
 (function() {
     var bcolor = {red:["#FFF","#e74c3c"],green:["#FFF","#2ecc71"],blue:["#FFF","#3498db"],yellow:["#FFF","#f1c40f"],white:["#454545","#ecf0f1"],grey:["#FFF","#bdc3c7"]};
 
-    $('head').append('<link href="plugins/thirdparty/rangeslider.css" rel="stylesheet" />');
+    // $('head').append('<link href="plugins/thirdparty/rangeslider.css" rel="stylesheet" />');
 
     freeboard.loadWidgetPlugin({
         "type_name"   : "horizontal_gauge",
         "display_name": "Horizontal Linear Gauge",
         // "description" : "A slider widget that can perform Javascript action.",
         "fill_size" : false,
-        "external_scripts" : ["plugins/thirdparty/rangeslider.js"],
+        "external_scripts" : ["plugins/thirdparty/rangeslider.js","plugins/thirdparty/rangeslider.css"],
         "settings"  : [
             {
                 "name"        : "caption",
