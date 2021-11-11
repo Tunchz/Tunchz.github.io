@@ -199,7 +199,6 @@
             var container = $('<div class="indicator-2x1-container" style="width:100%;height:100%; margin:0;"></div>'),
                 c1 = $('<div calss="center" style="display: flex; width:100%; height: 50%;"></div>'),
                 c2 = $('<div calss="center" style="display: flex; width:100%; height: 50%;"></div>'),
-                text = $('<span class="indicator-text"></span>'),
                 g1 = $('<div class="i2x1"></div>'),
                 g2 = $('<div class="i2x1"></div>'),
                 t1 = $('<div class="t2x1"></div>'),
@@ -317,6 +316,173 @@
             }
         });        
 
+        //---------- 4x1---------------------------------------------------------------------------
+        // freeboard.addStyle(".i2x1", "display:block;border-radius:3px;width:30%;height:60%;margin: auto 5px;border:2px solid #3d3d3d;float:left;background-color:#222;");
+        // freeboard.addStyle(".t2x1", "width:50%;text-align:left;position:relative;top:50%;transform:translateY(-50%);font-size:12px; height:12px;padding:0 5px");
+        var indicator4x1Plugin = function(settings) {
+            var container = $('<div class="indicator-2x1-container" style="width:100%;height:100%; margin:0;"></div>'),
+                c1 = $('<div calss="center" style="display: flex; width:100%; height: 25%;"></div>'),
+                c2 = $('<div calss="center" style="display: flex; width:100%; height: 25%;"></div>'),
+                c3 = $('<div calss="center" style="display: flex; width:100%; height: 25%;"></div>'),
+                c4 = $('<div calss="center" style="display: flex; width:100%; height: 25%;"></div>'),
+                g1 = $('<div class="i2x1"></div>'),
+                g2 = $('<div class="i2x1"></div>'),
+                g3 = $('<div class="i2x1"></div>'),
+                g4 = $('<div class="i2x1"></div>'),
+                t1 = $('<div class="t2x1"></div>'),
+                t2 = $('<div class="t2x1"></div>'),
+                t3 = $('<div class="t2x1"></div>'),
+                t4 = $('<div class="t2x1"></div>'),
+                isOn = [!1,!1,!1,!1],
+                offAttr = {"background-color": "#222", "box-shadow": "0px 0px 15px #222","border-color":"#3d3d3d"};
+
+                container.append(c1.append(g1).append(t1)).append(c2.append(g2).append(t2)).append(c3.append(g3).append(t3)).append(c4.append(g4).append(t4))
+                _settings = settings;
+
+            this.render = function(containerElement) {
+                _self = containerElement
+                $(_self).append(container)
+            }, this.onSettingsChanged = function(newSettings) {
+                _settings = newSettings
+                var attr = {'text-align':_settings.font_align,'font-size':_settings.font_size+'px', height:_settings.font_size+'px'}
+                t1.html(_settings.label1).css(attr),
+                t2.html(_settings.label2).css(attr),
+                t3.html(_settings.label3).css(attr),
+                t4.html(_settings.label4).css(attr),
+                _settings.size=='large'?attr = {height:'60%'}:_settings.size=='small'?attr = {height:'30%'}:attr = {height:'45%'},
+                g1.css(attr),g2.css(attr),g3.css(attr),g4.css(attr)
+            }, this.onCalculatedValueChanged = function(settingName, newValue) {
+                var newAttr = {"background-color": newValue, "box-shadow": "0px 0px 15px " + newValue,"border-color":"#FDF1DF"};
+                settingName=='color1'&&isOn[0] && (g1.css(newAttr)), 
+                settingName=='color2'&&isOn[1] && (g2.css(newAttr)),
+                settingName=='color3'&&isOn[2] && (g3.css(newAttr)), 
+                settingName=='color4'&&isOn[3] && (g4.css(newAttr)),
+                settingName=='value1'&&(Boolean(newValue)? isOn[0] = !0:(isOn[0] = !1,g1.css(offAttr))), 
+                settingName=='value2'&&(Boolean(newValue)? isOn[1] = !0:(isOn[1] = !1,g2.css(offAttr))),
+                settingName=='value3'&&(Boolean(newValue)? isOn[2] = !0:(isOn[2] = !1,g3.css(offAttr))), 
+                settingName=='value4'&&(Boolean(newValue)? isOn[3] = !0:(isOn[3] = !1,g4.css(offAttr)))
+            }, this.onDispose = function() {}, this.getHeight = function() {
+                return 2
+            }, this.onSettingsChanged(settings)
+        };
+        freeboard.loadWidgetPlugin({
+            type_name: "indicator_4x1",
+            display_name: "Indicator Light 4x1",
+            settings: [
+            {
+                name: "label1",
+                display_name: "Label #1",
+                type: "text"
+            }, 
+            {
+                name: "value1",
+                display_name: "Indicator #1 On",
+                type: "calculated"
+            }, 
+            {
+                name: "color1",
+                display_name: "Indicator #1 Color",
+                type: "calculated",
+                default_value: _default.mark_color,
+            }, 
+            {
+                name: "label2",
+                display_name: "Label #2",
+                type: "text"
+            }, 
+            {
+                name: "value2",
+                display_name: "Indicator #2 On",
+                type: "calculated"
+            }, 
+            {
+                name: "color2",
+                display_name: "Indicator #2 Color",
+                type: "calculated",
+                default_value: _default.mark_color,
+            }, 
+            {
+                name: "label3",
+                display_name: "Label #2",
+                type: "text"
+            }, 
+            {
+                name: "value3",
+                display_name: "Indicator #2 On",
+                type: "calculated"
+            }, 
+            {
+                name: "color3",
+                display_name: "Indicator #2 Color",
+                type: "calculated",
+                default_value: _default.mark_color,
+            }, 
+            {
+                name: "label4",
+                display_name: "Label #2",
+                type: "text"
+            }, 
+            {
+                name: "value4",
+                display_name: "Indicator #2 On",
+                type: "calculated"
+            }, 
+            {
+                name: "color4",
+                display_name: "Indicator #2 Color",
+                type: "calculated",
+                default_value: _default.mark_color,
+            }, 
+            {
+                name: "size",
+                display_name: "Indicator Size",
+                "type": "option",
+                default_value: "medium",
+                options: [
+                    {
+                        "name": "Small",
+                        "value": "small"
+                    },
+                    {
+                        "name": "Medium",
+                        "value": "medium"
+                    },
+                    {
+                        "name": "Large",
+                        "value": "large"
+                    }
+                ],
+            },
+            {
+                "name": "font_align",
+                "display_name": "Font Align",
+                "type": "option",
+                default_value: "left",
+                options: [
+                    {
+                        "name": "Left",
+                        "value": "left"
+                    },
+                    {
+                        "name": "Center",
+                        "value": "center"
+                    },
+                    {
+                        "name": "Right",
+                        "value": "right"
+                    }
+                ],
+            }, 
+            {
+                name: "font_size",
+                display_name: "Font Size",
+                type: "integer",
+                default_value: 12,
+            }],
+            newInstance : function(settings, newInstanceCallback) {
+                newInstanceCallback(new indicator4x1Plugin(settings));
+            }
+        });        
 
 
 }());

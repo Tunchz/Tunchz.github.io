@@ -117,7 +117,7 @@
                 d()
             }, this.onCalculatedValueChanged = function(b, d) {
                 _data = d;
-                "value" == b && (_settings.animate ? a(d, h, 500) : h.text(d), _settings.sparkline && c(_settings, j, d))
+                "value" == b && (_settings.animate ? a(d, h, 500) : h.html(d), _settings.sparkline && c(_settings, j, d))
             }, this.onDispose = function() {}, 
             this.getHeight = function() {
                 // return "big" == _settings.size || _settings.sparkline ? 2 : 1  //2 : 1

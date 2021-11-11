@@ -100,6 +100,7 @@
             "https://code.highcharts.com/modules/accessibility.js",
             "https://code.highcharts.com/modules/sonification.js",
             "https://code.highcharts.com/modules/data.js",
+            "https://code.highcharts.com/modules/solid-gauge.js",
         ],
         fill_size: !0,
         settings: [{
