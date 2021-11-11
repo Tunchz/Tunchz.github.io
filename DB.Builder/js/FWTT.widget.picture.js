@@ -3,30 +3,45 @@
         var l = function(a) {
 
             var _settings = a,
-                _element, _refresh, _imgurl;
-
-            function onDispose() {
-                _refresh && (clearInterval(_refresh), _refresh = null)
-            }
-
-            function refresh() {
-                if (_element && _imgurl) {
-                    var imgurl = _imgurl + (-1 == _imgurl.indexOf("?") ? "?" : "&") + Date.now();
-                    // console.log("----------- imgurl ",_imgurl, imgurl)
-                    $(_element).css({
-                        "background-image": "url(" + imgurl + ")"
-                    })
-                }
-            }
-            this.render = function(element) {
-                _element=element,
-                $(_element).css({
+                _element, _refresh, _imgurl
+                p = $('<div id="image-container"></div>');
+                p.css({
                     width: "100%",
                     height: "100%",
                     "background-repeat": "no-repeat",
                     "background-size": "contain", //"cover",
                     "background-position": "center"
                 })
+
+            function onDispose() {
+                _refresh && (clearInterval(_refresh), _refresh = null)
+            }
+
+            function refresh() {
+                if (_imgurl) {
+                    var imgurl = _imgurl + (-1 == _imgurl.indexOf("?") ? "?" : "&") + Date.now();
+                    // console.log("----------- imgurl ",_imgurl, imgurl)
+                    $(_element).css({
+                        // "background-image": "url(" + imgurl + ")",
+                        // width: "calc( 100% - "+_settings.margin*2+"px",
+                        // height: "calc( 100% - "+_settings.margin*2+"px",
+                        padding: _settings.margin+"px",
+                    })
+                    $(p).css({
+                        "background-image": "url(" + imgurl + ")",
+                    })
+                }
+            }
+            this.render = function(element) {
+                _element=element,
+                $(_element).append(p)
+                // $(_element).css({
+                //     width: "100%",
+                //     height: "100%",
+                //     "background-repeat": "no-repeat",
+                //     "background-size": "contain", //"cover",
+                //     "background-position": "center"
+                // })
             }, this.onSettingsChanged = function(a) {
                 _settings = a,
                 onDispose(), _settings.refresh && _settings.refresh > 0 && (_refresh = setInterval(refresh, 1e3 * Number(_settings.refresh)))
@@ -48,6 +63,12 @@
                 display_name: "Image URL",
                 type: "calculated",
                 default_value: "https://tunchz.github.io/Covid-19/img/icons/Mholan_Logo.png"
+            }, {
+                type: "number",
+                display_name: "Margin",
+                name: "margin",
+                description: "margin or blank space around image, units is in pixel",
+                default_value: 0
             }, {
                 type: "number",
                 display_name: "Refresh every",

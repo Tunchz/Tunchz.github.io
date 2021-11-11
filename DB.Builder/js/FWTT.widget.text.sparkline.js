@@ -118,7 +118,6 @@
                 d()
             }, this.onCalculatedValueChanged = function(b, d) {
                 _data = d;
-                console.log("--------> ",d)
                 "value" == b && (_settings.animate ? a(d, h, 500) : h.html(d), _settings.sparkline && c(_settings, j, d))
             }, this.onDispose = function() {}, 
             this.getHeight = function() {

@@ -229,10 +229,12 @@ div#full-screen-action:hover,
     text-align: left;
     margin-top: -20px;
     opacity: 0;
+    visibility: hidden;
 }
 
 #toggle-header li:hover label {
     opacity: 1;
+    visibility: visible;
     transition: opacity 0.4s ease-in-out;
 }
 
