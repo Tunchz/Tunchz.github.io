@@ -16108,7 +16108,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 * @return {HTMLElement} Returns the jQuery wrapped HTMLElement representing.
 	 *  the widget that was just created.
 	 */
-	fn.add_widget = function(html, size_x, size_y, col, row, transparent_bg, widget_background_color)
+	fn.add_widget = function(html, size_x, size_y, col, row, transparent_bg, widget_background_color, border_radius)
 	{
 		var pos;
 		size_x || (size_x = 1);
@@ -16133,7 +16133,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 			'data-row'  : pos.row,
 			'data-sizex': size_x,
 			'data-sizey': size_y
-		}).addClass('gs_w').appendTo(this.$el).hide();
+		}).addClass('gs_w').css({"border-radius": border_radius+"px"}).appendTo(this.$el).hide();
 
 		if (transparent_bg) {
 			var color = widget_background_color;
@@ -16178,9 +16178,10 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 * @param {Function} callback Function executed when the widget is removed.
 	 * @return {HTMLElement} Returns $widget.
 	 */
-	fn.resize_widget = function($widget, size_x, size_y, transparent_bg, widget_background_color, callback)
+	fn.resize_widget = function($widget, size_x, size_y, transparent_bg, widget_background_color, border_radius, callback)
 	{	
-		// console.log("********************* resize : ",$widget, transparent_bg, widget_background_color)
+		// console.log("************* resize : ", transparent_bg, widget_background_color, border_radius);
+		$widget.css({"border-radius": border_radius+"px"})
 		if (transparent_bg) {
 			var color = widget_background_color;
 			var rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';

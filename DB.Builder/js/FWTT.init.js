@@ -16,6 +16,7 @@ var _default = {
     line_color: "#ffffff",
     line_thickness: 1,
     widget_background_color: "#383838",
+    widget_border_radius:0,
     margin_left:5,
     margin_right:5,
     timeframe: 60,
@@ -472,10 +473,11 @@ function FreeboardUI() {
             f = d.row,
             g = Number(b.width()),
             h = Number(b.getCalculatedHeight()),
-            tbg = b.transparent_bg();
-            bgc = b.widget_background_color();
+            tbg = b.transparent_bg(),
+            bgc = b.widget_background_color(),
+            bdr = b.border_radius();
             // console.log("--------------- b : ",b)
-        r.add_widget(a, g, h, e, f, tbg, bgc), c && n(!0), l(b, f, e), $(a).attrchange({
+        r.add_widget(a, g, h, e, f, tbg, bgc, bdr), c && n(!0), l(b, f, e), $(a).attrchange({
             trackValues: !0,
             callback: function(a) {
                 "data-row" == a.attributeName ? l(b, Number(a.newValue), void 0) : "data-col" == a.attributeName && l(b, void 0, Number(a.newValue))
@@ -487,7 +489,7 @@ function FreeboardUI() {
         var c = b.getCalculatedHeight(),
             d = Number($(a).attr("data-sizey")),
             e = Number($(a).attr("data-sizex"));
-        (c != d || b.col_width() != e) && r.resize_widget($(a), b.col_width(), c, b.transparent_bg(), b.widget_background_color(), function() {
+        (c != d || b.col_width() != e) && r.resize_widget($(a), b.col_width(), c, b.transparent_bg(), b.widget_background_color(), b.border_radius(), function() {
             r.set_dom_grid_height()
         })
     }
@@ -665,6 +667,9 @@ function PaneModel(a, b) {
     this.width = ko.observable(1), this.row = {}, this.col = {}, 
     this.col_width = ko.observable(1), this.col_width.subscribe(function(a) {
         c.processSizeChange()
+    }),  
+    this.border_radius = ko.observable(1), this.border_radius.subscribe(function(a) {
+        c.processSizeChange()
     }), 
     this.widgets = ko.observableArray(), this.addWidget = function(a) {
         this.widgets.push(a)
@@ -724,10 +729,11 @@ function PaneModel(a, b) {
             col_width: c.col_width(),
             transparent_bg: c.transparent_bg(),
             widget_background_color: c.widget_background_color(),
+            border_radius: c.border_radius(),
             widgets: a
         }
     }, this.deserialize = function(d) {
-        c.title(d.title), c.width(d.width), c.row = d.row, c.col = d.col, c.col_width(d.col_width || 1), c.transparent_bg(d.transparent_bg || !1), c.widget_background_color(d.widget_background_color || _default.widget_background_color), _.each(d.widgets, function(d) {
+        c.title(d.title), c.width(d.width), c.row = d.row, c.col = d.col, c.col_width(d.col_width || 1), c.transparent_bg(d.transparent_bg || !1), c.widget_background_color(d.widget_background_color || _default.widget_background_color), c.border_radius(d.border_radius || _default.widget_border_radius), _.each(d.widgets, function(d) {
             var e = new WidgetModel(a, b);
             e.deserialize(d), c.widgets.push(e)
         })
@@ -1650,7 +1656,7 @@ var freeboard = function() {
                     e.saveLocalstorage();
                 } else {
                     var j = void 0;
-                    "datasource" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings(), m.name = i.name()) : "widget" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings()) : "pane" == k.type && (m = {}, "edit" == k.operation && (m.title = i.title(), m.col_width = i.col_width(), m.transparent_bg = i.transparent_bg(), m.widget_background_color = i.widget_background_color()), l = {
+                    "datasource" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings(), m.name = i.name()) : "widget" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings()) : "pane" == k.type && (m = {}, "edit" == k.operation && (m.title = i.title(), m.col_width = i.col_width(), m.transparent_bg = i.transparent_bg(), m.widget_background_color = i.widget_background_color()), m.border_radius = i.border_radius(), l = {
                         settings: {
                             settings: [{
                             //     name: "title",
@@ -1672,7 +1678,11 @@ var freeboard = function() {
                                 display_name: "Background Color",
                                 type: "Text",
                                 default_value: _default.widget_background_color,
-                                required: !0
+                            }, {
+                                name: "border_radius",
+                                display_name: "Border Radius",
+                                type: "integer",
+                                default_value: _default.widget_border_radius,
                             }]
                         }
                     }), h.createPluginEditor(n, l, j, m, function(f) {
@@ -1685,7 +1695,7 @@ var freeboard = function() {
                                 g.settings(f.settings), g.type(f.type), i.widgets.push(g), d.attachWidgetEditIcons(a)
                             }
                         } else {
-                            "edit" == k.operation && ("pane" == k.type ? (i.title(f.settings.title), i.transparent_bg(f.settings.transparent_bg), i.widget_background_color(f.settings.widget_background_color), i.col_width(0), i.col_width(parseInt(f.settings.col_width)), d.processResize(!1)) : ("datasource" == k.type && (i.name(f.settings.name), f.settings.name), i.type(f.type), i.settings(f.settings)))
+                            "edit" == k.operation && ("pane" == k.type ? (i.title(f.settings.title), i.transparent_bg(f.settings.transparent_bg), i.widget_background_color(f.settings.widget_background_color), i.border_radius(parseInt(f.settings.border_radius)), i.col_width(0), i.col_width(parseInt(f.settings.col_width)), d.processResize(!1)) : ("datasource" == k.type && (i.name(f.settings.name), f.settings.name), i.type(f.type), i.settings(f.settings)))
                         }
                         e.saveLocalstorage();
                     })
@@ -2089,7 +2099,7 @@ $.extend(freeboard, jQuery.eventEmitter),
                 c(new b(a, d))
             }
         });
-        
+
         var e = function(a, b) {
             function c() {
                 e && (clearTimeout(e), e = null)
