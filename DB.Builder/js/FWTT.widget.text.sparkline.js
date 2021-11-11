@@ -16,14 +16,14 @@
                     }, {
                         duration: c,
                         step: function() {
-                            $(b).text(this.transitionValue.toFixed(this.precisionValue))
+                            $(b).html(this.transitionValue.toFixed(this.precisionValue))
                         },
                         done: function() {
-                            $(b).text(a)
+                            $(b).html(a)
                         }
                     })
                 } else
-                    $(b).text(a)
+                    $(b).html(a)
         }
 
         function b(_settings, a, b) {
@@ -84,6 +84,7 @@
             }
             var _settings = b,
                 _data,
+                dom = document.createElement('div'),
                 f = $('<div class="tw-display"></div>'),
                 g = $('<h2 class="section-title tw-title tw-td"></h2>'),
                 h_p = $('<div class="tw-value-subwrapper"></div>'),
@@ -117,6 +118,7 @@
                 d()
             }, this.onCalculatedValueChanged = function(b, d) {
                 _data = d;
+                console.log("--------> ",d)
                 "value" == b && (_settings.animate ? a(d, h, 500) : h.html(d), _settings.sparkline && c(_settings, j, d))
             }, this.onDispose = function() {}, 
             this.getHeight = function() {
@@ -153,7 +155,7 @@
                 name: "animate",
                 display_name: "Animate Value Changes",
                 type: "boolean",
-                default_value: !0
+                default_value: !0,
             }, {
                 name: "units",
                 display_name: "Units",
