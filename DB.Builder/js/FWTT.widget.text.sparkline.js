@@ -103,7 +103,8 @@
                 if (!_.isUndefined(_settings?.mark_color) && _settings?.mark_color !== "") {_settings._color=[_settings.mark_color];} else {_settings._color=[_default.mark_color];}
                 var b = !_.isUndefined(a.title) && "" != a.title,
                     cc = !_.isUndefined(a.units) && "" != a.units;
-                a.sparkline ? j.attr("style", null) : (delete j.data().values, j.empty(), j.hide()), b ? (g.html(_.isUndefined(a.title) ? "" : a.title), g.attr("style", null)) : (g.empty(), g.hide()), cc ? (i.html(_.isUndefined(a.units) ? "" : a.units), i.attr("style", null)) : (i.empty(), i.hide());
+                a.sparkline ? j.attr("style", null) : (delete j.data().values, j.empty(), j.hide()); 
+                b ? (g.html(_.isUndefined(a.title) ? "" : a.title), g.attr("style", null)) : (g.empty(), g.hide()), cc ? (i.html(_.isUndefined(a.units) ? "" : a.units), i.attr("style", null)) : (i.empty(), i.hide());
                 // var f = 15;//30;
                 // "big" == a.size && (f = 25/*75*/, a.sparkline && (f = 20/*60*/)), 
                 // h.css({
@@ -142,15 +143,16 @@
                 type: "calculated"
             },
             {
-                name: "animate",
-                display_name: "Animate Value Changes",
-                type: "boolean",
-                default_value: !0,
-            }, {
                 name: "units",
                 display_name: "Units",
                 type: "text"
             },
+            {
+                name: "animate",
+                display_name: "Animate Value Changes",
+                type: "boolean",
+                default_value: !0,
+            }, 
             {
                 name: "font_size",
                 display_name: "Font Size",
@@ -288,15 +290,16 @@
                 type: "calculated"
             },
             {
-                name: "animate",
-                display_name: "Animate Value Changes",
-                type: "boolean",
-                default_value: !0,
-            }, {
                 name: "units",
                 display_name: "Units",
                 type: "calculated"
             },
+            {
+                name: "animate",
+                display_name: "Animate Value Changes",
+                type: "boolean",
+                default_value: !0,
+            }, 
             {
                 name: "font_size",
                 display_name: "Font Size",

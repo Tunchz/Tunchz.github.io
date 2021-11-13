@@ -2081,7 +2081,7 @@ input.table-row-value {
 }
 
 ul.value-dropdown {
-    height: 75px;
+    height: 150px;
     position: absolute;
     padding: 0;
     margin: 0;
