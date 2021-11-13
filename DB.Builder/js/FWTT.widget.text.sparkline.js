@@ -166,6 +166,7 @@
                 display_name: "Comma-Separated Number",
                 type: "boolean",
                 default_value: !1,
+                description: "Alternatively, function numberWithCommas(number) can be used inside JSEditor to convert number to Comma-separated number."
             }, 
             {
                 name: "font_size",
@@ -319,6 +320,7 @@
                 display_name: "Comma-Separated Number",
                 type: "boolean",
                 default_value: !1,
+                description: "Alternatively, function numberWithCommas(number) can be used inside JSEditor to convert number to Comma-separated number."
             },
             {
                 name: "font_size",
