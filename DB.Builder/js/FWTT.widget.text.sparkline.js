@@ -127,7 +127,7 @@
                 d()
             }, this.onCalculatedValueChanged = function(b, d) {
                 _data = d;
-                "value" == b && (!d?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):_settings.with_comma&&(d=numberWithCommas(d)),(_settings.animate ? a(d, h, 500) : h.html(d)), _settings.sparkline && c(_settings, j, d))
+                "value" == b && (!d?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):(_settings.with_comma&&(d=numberWithCommas(d)),_settings.animate ? a(d, h, 500) : h.html(d)), _settings.sparkline && c(_settings, j, d))
             }, this.onDispose = function() {}, 
             this.getHeight = function() {
                 // return "big" == _settings.size || _settings.sparkline ? 2 : 1  //2 : 1
@@ -281,7 +281,7 @@
                 d()
             }, this.onCalculatedValueChanged = function(b, d) {
                 // _data = d;
-                "value" == b && (!d?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):_settings.with_comma&&(d=numberWithCommas(d)),(_settings.animate ? a(d, h, 500) : h.html(d)), _settings.sparkline && c(_settings, j, d)),
+                "value" == b && (!d?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):(_settings.with_comma&&(d=numberWithCommas(d)),_settings.animate ? a(d, h, 500) : h.html(d)), _settings.sparkline && c(_settings, j, d)),
                 "title" == b && g.html(d),
                 "units" == b && i.html(d)
             }, this.onDispose = function() {}, 
