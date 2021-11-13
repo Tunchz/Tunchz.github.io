@@ -130,22 +130,13 @@
             display_name: "Text",
             external_scripts: ["plugins/thirdparty/jquery.sparkline.min.js"],
             // external_scripts: ["plugins/thirdparty/jquery.sparkline.js"],
-            settings: [{
+            settings: [
+            {
                 name: "title",
                 display_name: "Title",
                 type: "text"
-            }, {
-            //     name: "size",
-            //     display_name: "Size",
-            //     type: "option",
-            //     options: [{
-            //         name: "Regular",
-            //         value: "regular"
-            //     }, {
-            //         name: "Big",
-            //         value: "big"
-            //     }]
-            // }, {
+            }, 
+            {
                 name: "value",
                 display_name: "Value",
                 type: "calculated"
@@ -198,13 +189,6 @@
                 display_name: "Include Sparkline",
                 type: "boolean"
             },
-            // {
-            //     name: "use_bar",
-            //     display_name: "Use Bar",
-            //     "description": "Use bar graph instead of line for sparkline.",
-            //     type: "boolean",
-            //     default: 0,
-            // },
             {
                 "name": "timeframe",
                 "display_name": "Timeframe (s)",
