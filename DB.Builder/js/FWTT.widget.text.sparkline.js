@@ -234,67 +234,155 @@
                 b(new g(a))
             }
         });
-        // var h = 0;
-        // freeboard.addStyle(".gauge-widget-wrapper", "width: 100%;text-align: center;"), freeboard.addStyle(".gauge-widget", "width:200px;height:160px;display:inline-block;");
-        // var i = function(a) {
-        //     function b() {
-        //         g && (f.empty(), c = new JustGage({
-        //             id: d,
-        //             value: _.isUndefined(i.min_value) ? 0 : i.min_value,
-        //             min: _.isUndefined(i.min_value) ? 0 : i.min_value,
-        //             max: _.isUndefined(i.max_value) ? 0 : i.max_value,
-        //             label: i.units,
-        //             showInnerShadow: !1,
-        //             valueFontColor: "#fff"
-        //         }))
-        //     }
-        //     var c, d = "gauge-" + h++,
-        //         e = $('<h2 class="section-title"></h2>'),
-        //         f = $('<div class="gauge-widget" id="' + d + '"></div>'),
-        //         g = !1,
-        //         i = a;
-        //     this.render = function(a) {
-        //         g = !0, $(a).append(e).append($('<div class="gauge-widget-wrapper"></div>').append(f)), b()
-        //     }, this.onSettingsChanged = function(a) {
-        //         a.min_value != i.min_value || a.max_value != i.max_value || a.units != i.units ? (i = a, b()) : i = a, e.html(a.title)
-        //     }, this.onCalculatedValueChanged = function(a, b) {
-        //         _.isUndefined(c) || c.refresh(Number(b))
-        //     }, this.onDispose = function() {}, this.getHeight = function() {
-        //         return 3
-        //     }, this.onSettingsChanged(a)
-        // };
-        // freeboard.loadWidgetPlugin({
-        //     type_name: "gauge",
-        //     display_name: "Gauge",
-        //     external_scripts: ["plugins/thirdparty/raphael.2.1.4.min.js", "plugins/thirdparty/justgage.1.0.1.js"],
-        //     // external_scripts: ["plugins/thirdparty/raphael.2.1.4.min.js", "plugins/thirdparty/justgage.1.2.2.js"],
-        //     settings: [{
-        //         name: "title",
-        //         display_name: "Title",
-        //         type: "text"
-        //     }, {
-        //         name: "value",
-        //         display_name: "Value",
-        //         type: "calculated"
-        //     }, {
-        //         name: "units",
-        //         display_name: "Units",
-        //         type: "text"
-        //     }, {
-        //         name: "min_value",
-        //         display_name: "Minimum",
-        //         type: "text",
-        //         default_value: 0
-        //     }, {
-        //         name: "max_value",
-        //         display_name: "Maximum",
-        //         type: "text",
-        //         default_value: 100
-        //     }],
-        //     newInstance: function(a, b) {
-        //         b(new i(a))
-        //     }
-        // }), 
+
+
+
+        //------- Text Alternative ----------
+        var g_ = function(b) {
+            function d() {
+                _.isUndefined(_settings.units) || "" == _settings.units ? h.css("max-width", "100%") : h.css("max-width", f.innerWidth() - i.outerWidth(!0) + "px")
+            }
+            var _settings = b,
+                _data,
+                dom = document.createElement('div'),
+                f = $('<div class="tw-display"></div>'),
+                g = $('<h2 class="section-title tw-title tw-td"></h2>'),
+                h_p = $('<div class="tw-value-subwrapper"></div>'),
+                h = $('<div class="tw-value"></div>'),
+                i = $('<div class="tw-unit"></div>'),
+                j = $('<div class="tw-sparkline tw-td"></div>');
+            this.render = function(a) {
+                // setTimeout(function() {
+                    $(a).parent().css({"margin-bottom": _r*2+"px"})
+                    $(a).empty(), $(h_p).append($(h)).append($(i)), $(f).append($('<div class="tw-tr"></div>').append(g)).append($('<div class="tw-tr"></div>').append($('<div class="tw-value-wrapper tw-td"></div>').append(h_p)/*.append(h).append(i)*/)).append($('<div class="tw-tr"></div>').append(j)), $(a).append(f), d()
+                // },0);
+                
+            }, 
+            this.onSettingsChanged = function(a) {
+                _settings = a;
+                if (!_.isUndefined(_settings?.mark_color) && _settings?.mark_color !== "") {_settings._color=[_settings.mark_color];} else {_settings._color=[_default.mark_color];}
+                a.sparkline ? j.attr("style", null) : (delete j.data().values, j.empty(), j.hide());
+                var b = !_.isUndefined(a.title) && "" != a.title,
+                    cc = !_.isUndefined(a.units) && "" != a.units;
+                a.title ? (g.html(_.isUndefined(a.title) ? "" : a.title), g.attr("style", null)) : (g.empty(), g.hide()), 
+                a.units ? (i.html(_.isUndefined(a.units) ? "" : a.units), i.attr("style", null)) : (i.empty(), i.hide());
+                // var f = 15;//30;
+                // "big" == a.size && (f = 25/*75*/, a.sparkline && (f = 20/*60*/)), 
+                // h.css({
+                //     "font-size": f + "px"
+                // }), 
+                h_p.css({"text-align": (_settings.font_align)?_settings.font_align:"left"}), 
+                h.css({"font-size": a.font_size + "px", "color": _settings.font_color?_settings.font_color:_default.font_color}), 
+                i.css({"color": _settings.font_color?_settings.font_color:_default.font_color, "opacity":_default.font_opacity}),
+                d()
+                // _settings.sparkline && c(_settings, j, _data)
+            }, this.onSizeChanged = function() {
+                d()
+            }, this.onCalculatedValueChanged = function(b, d) {
+                // _data = d;
+                "value" == b && (_settings.animate ? a(d, h, 500) : h.html(d), _settings.sparkline && c(_settings, j, d)),
+                "title" == b && g.html(d),
+                "units" == b && i.html(d)
+            }, this.onDispose = function() {}, 
+            this.getHeight = function() {
+                // return "big" == _settings.size || _settings.sparkline ? 2 : 1  //2 : 1
+                return (parseInt((_settings.height_block)?_settings.height_block:1) + ((_settings.sparkline)?1:0))
+            }, this.onSettingsChanged(b)
+        };
+        freeboard.loadWidgetPlugin({
+            type_name: "text_alternative_widget",
+            display_name: "Text Alternative",
+            external_scripts: ["plugins/thirdparty/jquery.sparkline.min.js"],
+            // external_scripts: ["plugins/thirdparty/jquery.sparkline.js"],
+            settings: [{
+                name: "title",
+                display_name: "Title",
+                type: "calculated"
+            }, {
+                name: "value",
+                display_name: "Value",
+                type: "calculated"
+            },
+            {
+                name: "animate",
+                display_name: "Animate Value Changes",
+                type: "boolean",
+                default_value: !0,
+            }, {
+                name: "units",
+                display_name: "Units",
+                type: "calculated"
+            },
+            {
+                name: "font_size",
+                display_name: "Font Size",
+                type: "integer",
+                default_value: 20,
+                required: !0
+            },
+            {
+                "name": "font_align",
+                "display_name": "Font Align",
+                "type": "option",
+                default_value: "left",
+                options: [
+                    {
+                        "name": "Left",
+                        "value": "left"
+                    },
+                    {
+                        "name": "Center",
+                        "value": "center"
+                    },
+                    {
+                        "name": "Right",
+                        "value": "right"
+                    }
+                ],
+            }, 
+            {
+                name: "font_color",
+                display_name: "Text Color",
+                type: "text",
+                default_value: _default.font_color,
+            },
+            {
+                name: "sparkline",
+                display_name: "Include Sparkline",
+                type: "boolean"
+            },
+            {
+                "name": "timeframe",
+                "display_name": "Timeframe (s)",
+                "type": "number",
+                "description": "Specify the last number of seconds you want to see.",
+                "default_value": _default.timeframe,
+            },
+            {
+                name: "mark_color",
+                display_name: "Sparkline Color",
+                type: "text",
+                default_value: _default.mark_color,
+            },
+            {
+                name: "maxmin_color",
+                display_name: "Max-Min Color",
+                type: "text",
+                default_value: _default.maxmin_color,
+            },
+            {
+                name: "height_block",
+                display_name: "Height Blocks",
+                type: "integer",
+                default_value: 1,
+            }],
+            newInstance: function(a, b) {
+                b(new g_(a))
+            }
+        });
+
+        //---------- Sparkline ----------------
+
         freeboard.addStyle(".sparkline", "width:100%;height: 75px;");
         var j = function(a) {
             var d = $('<h2 class="section-title"></h2>'),
@@ -405,6 +493,7 @@
             newInstance: function(a, b) {
                 b(new j(a))
             }
-        })
+        });
+
 
 }());
