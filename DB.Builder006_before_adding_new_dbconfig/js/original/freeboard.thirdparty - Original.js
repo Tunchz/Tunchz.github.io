@@ -5,7 +5,7 @@
 /*! head.load - v1.0.3 */
 (function(n,t){"use strict";function w(){}function u(n,t){if(n){typeof n=="object"&&(n=[].slice.call(n));for(var i=0,r=n.length;i<r;i++)t.call(n,n[i],i)}}function it(n,i){var r=Object.prototype.toString.call(i).slice(8,-1);return i!==t&&i!==null&&r===n}function s(n){return it("Function",n)}function a(n){return it("Array",n)}function et(n){var i=n.split("/"),t=i[i.length-1],r=t.indexOf("?");return r!==-1?t.substring(0,r):t}function f(n){(n=n||w,n._done)||(n(),n._done=1)}function ot(n,t,r,u){var f=typeof n=="object"?n:{test:n,success:!t?!1:a(t)?t:[t],failure:!r?!1:a(r)?r:[r],callback:u||w},e=!!f.test;return e&&!!f.success?(f.success.push(f.callback),i.load.apply(null,f.success)):e||!f.failure?u():(f.failure.push(f.callback),i.load.apply(null,f.failure)),i}function v(n){var t={},i,r;if(typeof n=="object")for(i in n)!n[i]||(t={name:i,url:n[i]});else t={name:et(n),url:n};return(r=c[t.name],r&&r.url===t.url)?r:(c[t.name]=t,t)}function y(n){n=n||c;for(var t in n)if(n.hasOwnProperty(t)&&n[t].state!==l)return!1;return!0}function st(n){n.state=ft;u(n.onpreload,function(n){n.call()})}function ht(n){n.state===t&&(n.state=nt,n.onpreload=[],rt({url:n.url,type:"cache"},function(){st(n)}))}function ct(){var n=arguments,t=n[n.length-1],r=[].slice.call(n,1),f=r[0];return(s(t)||(t=null),a(n[0]))?(n[0].push(t),i.load.apply(null,n[0]),i):(f?(u(r,function(n){s(n)||!n||ht(v(n))}),b(v(n[0]),s(f)?f:function(){i.load.apply(null,r)})):b(v(n[0])),i)}function lt(){var n=arguments,t=n[n.length-1],r={};return(s(t)||(t=null),a(n[0]))?(n[0].push(t),i.load.apply(null,n[0]),i):(u(n,function(n){n!==t&&(n=v(n),r[n.name]=n)}),u(n,function(n){n!==t&&(n=v(n),b(n,function(){y(r)&&f(t)}))}),i)}function b(n,t){if(t=t||w,n.state===l){t();return}if(n.state===tt){i.ready(n.name,t);return}if(n.state===nt){n.onpreload.push(function(){b(n,t)});return}n.state=tt;rt(n,function(){n.state=l;t();u(h[n.name],function(n){f(n)});o&&y()&&u(h.ALL,function(n){f(n)})})}function at(n){n=n||"";var t=n.split("?")[0].split(".");return t[t.length-1].toLowerCase()}function rt(t,i){function e(t){t=t||n.event;u.onload=u.onreadystatechange=u.onerror=null;i()}function o(f){f=f||n.event;(f.type==="load"||/loaded|complete/.test(u.readyState)&&(!r.documentMode||r.documentMode<9))&&(n.clearTimeout(t.errorTimeout),n.clearTimeout(t.cssTimeout),u.onload=u.onreadystatechange=u.onerror=null,i())}function s(){if(t.state!==l&&t.cssRetries<=20){for(var i=0,f=r.styleSheets.length;i<f;i++)if(r.styleSheets[i].href===u.href){o({type:"load"});return}t.cssRetries++;t.cssTimeout=n.setTimeout(s,250)}}var u,h,f;i=i||w;h=at(t.url);h==="css"?(u=r.createElement("link"),u.type="text/"+(t.type||"css"),u.rel="stylesheet",u.href=t.url,t.cssRetries=0,t.cssTimeout=n.setTimeout(s,500)):(u=r.createElement("script"),u.type="text/"+(t.type||"javascript"),u.src=t.url);u.onload=u.onreadystatechange=o;u.onerror=e;u.async=!1;u.defer=!1;t.errorTimeout=n.setTimeout(function(){e({type:"timeout"})},7e3);f=r.head||r.getElementsByTagName("head")[0];f.insertBefore(u,f.lastChild)}function vt(){for(var t,u=r.getElementsByTagName("script"),n=0,f=u.length;n<f;n++)if(t=u[n].getAttribute("data-headjs-load"),!!t){i.load(t);return}}function yt(n,t){var v,p,e;return n===r?(o?f(t):d.push(t),i):(s(n)&&(t=n,n="ALL"),a(n))?(v={},u(n,function(n){v[n]=c[n];i.ready(n,function(){y(v)&&f(t)})}),i):typeof n!="string"||!s(t)?i:(p=c[n],p&&p.state===l||n==="ALL"&&y()&&o)?(f(t),i):(e=h[n],e?e.push(t):e=h[n]=[t],i)}function e(){if(!r.body){n.clearTimeout(i.readyTimeout);i.readyTimeout=n.setTimeout(e,50);return}o||(o=!0,vt(),u(d,function(n){f(n)}))}function k(){r.addEventListener?(r.removeEventListener("DOMContentLoaded",k,!1),e()):r.readyState==="complete"&&(r.detachEvent("onreadystatechange",k),e())}var r=n.document,d=[],h={},c={},ut="async"in r.createElement("script")||"MozAppearance"in r.documentElement.style||n.opera,o,g=n.head_conf&&n.head_conf.head||"head",i=n[g]=n[g]||function(){i.ready.apply(null,arguments)},nt=1,ft=2,tt=3,l=4,p;if(r.readyState==="complete")e();else if(r.addEventListener)r.addEventListener("DOMContentLoaded",k,!1),n.addEventListener("load",e,!1);else{r.attachEvent("onreadystatechange",k);n.attachEvent("onload",e);p=!1;try{p=!n.frameElement&&r.documentElement}catch(wt){}p&&p.doScroll&&function pt(){if(!o){try{p.doScroll("left")}catch(t){n.clearTimeout(i.readyTimeout);i.readyTimeout=n.setTimeout(pt,50);return}e()}}()}i.load=i.js=ut?lt:ct;i.test=ot;i.ready=yt;i.ready(r,function(){y()&&u(h.ALL,function(n){f(n)});i.feature&&i.feature("domloaded",!0)})})(window);
 /*
-
+//# sourceMappingURL=head.min.js.map
 */
 /*! jQuery v2.0.3 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
 //@ sourceMappingURL=jquery-2.0.3.min.map
@@ -15955,14 +15955,14 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	var defaults = {
 		namespace               : '',
 		widget_selector         : 'li',
-		widget_margins          : [5,5],		// [10, 10],
-		widget_base_dimensions  : [100,30],		// [400, 225],
+		widget_margins          : [10, 10],
+		widget_base_dimensions  : [400, 225],
 		extra_rows              : 0,
 		extra_cols              : 0,
-		min_cols                : 5,			// 1,
-		max_cols                : null,			// null,
+		min_cols                : 1,
+		max_cols                : null,
 		min_rows                : 15,
-		max_size_x              : 20, 			// 6,
+		max_size_x              : 6,
 		autogenerate_stylesheet : true,
 		avoid_overlapped_widgets: true,
 		serialize_params        : function($w, wgd)
@@ -15977,14 +15977,8 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 		collision               : {},
 		draggable               : {
 			distance: 4
-		},
+		}
 	};
-
-
-
-
-
-
 
 	/**
 	 * @class Gridster
@@ -16036,7 +16030,6 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 */
 	function Gridster(el, options)
 	{
-		// console.log("--- Gridster options : ", options, el);
 		this.options = $.extend(true, defaults, options);
 		this.$el = $(el);
 		this.$wrapper = this.$el.parent();
@@ -16108,9 +16101,8 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 * @return {HTMLElement} Returns the jQuery wrapped HTMLElement representing.
 	 *  the widget that was just created.
 	 */
-	fn.add_widget = function(html, size_x, size_y, col, row, transparent_bg, widget_background_color, border_radius)
+	fn.add_widget = function(html, size_x, size_y, col, row)
 	{
-		// console.log("************* add : ", transparent_bg, widget_background_color, border_radius);
 		var pos;
 		size_x || (size_x = 1);
 		size_y || (size_y = 1);
@@ -16136,30 +16128,6 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 			'data-sizey': size_y
 		}).addClass('gs_w').appendTo(this.$el).hide();
 
-		if (transparent_bg) {
-			// var color = widget_background_color;
-			// var rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';
-			// $w.css({"background-color": rgbaColor})
-			$w.addClass('transparent_bg');
-			// (widget_background_color)?$w.css("cssText","background-color: #38383800 !important;border:1px solid "+widget_background_color):$w.css("cssText","background-color: #38383800 !important;border:1px solid "+_default.widget_background_color);
-			$w.css("cssText","background-color: #38383800 !important;");
-		} else {
-			if (widget_background_color) {
-				var rgbaColor = widget_background_color
-				if (widget_background_color.length>7) {
-					var color=widget_background_color
-					rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+ ',' + parseInt(color.slice(-2),16)/256 +')';
-				}
-
-				// $w.css({"background-color": rgbaColor + " !important"});
-				$w.css("cssText","background-color: " + rgbaColor + " !important");
-			} else {
-				$w.css({"background-color": "inherit"});
-			}
-		}
-		border_radius?$w.css({"border-radius": border_radius+"px !important"}):$w.css({"border-radius": 0})
-		
-
 		this.$widgets = this.$widgets.add($w);
 
 		this.register_widget($w);
@@ -16184,35 +16152,8 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 * @param {Function} callback Function executed when the widget is removed.
 	 * @return {HTMLElement} Returns $widget.
 	 */
-	fn.resize_widget = function($widget, size_x, size_y, transparent_bg, widget_background_color, border_radius, callback)
-	{	
-		// console.log("************* resize : ", transparent_bg, widget_background_color, border_radius);
-		if (transparent_bg) {
-			// var color = widget_background_color;
-			// var rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';
-			// $widget.css({"background-color": rgbaColor})
-			$widget.addClass('transparent_bg');
-			// (widget_background_color)?$widget.css("cssText","background-color: #38383800 !important;border:1px solid "+widget_background_color):$widget.css("cssText","background-color: #38383800 !important;border:1px solid "+_default.widget_background_color);
-			$widget.css("cssText","background-color: #38383800 !important;");
-		} else {
-			$widget.removeClass('transparent_bg');
-			
-			if (widget_background_color) {
-				var rgbaColor = widget_background_color
-				if (widget_background_color.length>7) {
-					var color=widget_background_color
-					rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+ ',' + parseInt(color.slice(-2),16)/256 +')';
-				}
-
-				// $widget.css({"background-color": rgbaColor + " !important"});
-				$widget.css("cssText","background-color: " + rgbaColor + " !important");
-			} else {
-				$widget.css({"background-color": "inherit"});
-			}
-
-		}
-		border_radius?$widget.css({"border-radius": border_radius+"px !important"}):$widget.css({"border-radius": 0})
-
+	fn.resize_widget = function($widget, size_x, size_y, callback)
+	{
 		var wgd = $widget.coords().grid;
 		size_x || (size_x = wgd.size_x);
 		size_y || (size_y = wgd.size_y);
@@ -16441,6 +16382,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 		var cols_l = ga.length;
 		var valid_pos = [];
 		var rows_l;
+
 		for(var c = 1; c < cols_l; c++)
 		{
 			rows_l = ga[c].length;
@@ -16717,7 +16659,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 			{
 				self.on_drag.call(self, event, ui);
 				self.$el.trigger('gridster:drag');
-			}, 30) //60)
+			}, 60)
 		});
 
 		this.drag_api = this.$el.drag(draggable_options).data('drag');
@@ -16739,18 +16681,6 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 
 		this.$player.addClass('player');
 		this.player_grid_data = this.$player.coords().grid;
-
-		// fix error some time value parse as string instead of integer causing error in grid alignment
-		// console.log("----------------" , this.player_grid_data )
-		this.player_grid_data = {
-			...this.player_grid_data,
-			col: parseInt(this.player_grid_data.col),
-			row: parseInt(this.player_grid_data.row),
-			size_x: parseInt(this.player_grid_data.size_x),
-			size_y: parseInt(this.player_grid_data.size_y)
-		}
-
-
 		this.placeholder_grid_data = $.extend({}, this.player_grid_data);
 
 		//set new grid height along the dragging period
@@ -18485,7 +18415,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 */
 	fn.set_dom_grid_height = function()
 	{
-		var r = this.get_highest_occupied_cell().row; + 1;
+		var r = this.get_highest_occupied_cell().row + 1;
 		this.$el.css('height', r * this.min_widget_height);
 		return this;
 	};
@@ -18501,61 +18431,54 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 */
 	fn.generate_stylesheet = function(opts)
 	{
-		if (this.options.autogenerate_stylesheet||this.cols>this.options.max_cols||this.rows>this.options.max_rows) {
-			var styles = '';
-			var max_size_x = this.options.max_size_x;
-			var max_rows = 0;
-			var max_cols = 0;
-			var i;
-			var rules;
+		var styles = '';
+		var max_size_x = this.options.max_size_x;
+		var max_rows = 0;
+		var max_cols = 0;
+		var i;
+		var rules;
 
-			opts || (opts = {});
-			opts.cols || (opts.cols = Math.max(this.cols,this.options.max_cols));
-			opts.rows || (opts.rows = Math.max(this.rows,this.options.max_rows));
-			opts.namespace || (opts.namespace = this.options.namespace);
-			opts.widget_base_dimensions || (opts.widget_base_dimensions = this.options.widget_base_dimensions);
-			opts.widget_margins || (opts.widget_margins = this.options.widget_margins);
-			opts.min_widget_width = (opts.widget_margins[0] * 2) + opts.widget_base_dimensions[0];
-			opts.min_widget_height = (opts.widget_margins[1] * 2) + opts.widget_base_dimensions[1];
+		opts || (opts = {});
+		opts.cols || (opts.cols = this.cols);
+		opts.rows || (opts.rows = this.rows);
+		opts.namespace || (opts.namespace = this.options.namespace);
+		opts.widget_base_dimensions || (opts.widget_base_dimensions = this.options.widget_base_dimensions);
+		opts.widget_margins || (opts.widget_margins = this.options.widget_margins);
+		opts.min_widget_width = (opts.widget_margins[0] * 2) + opts.widget_base_dimensions[0];
+		opts.min_widget_height = (opts.widget_margins[1] * 2) + opts.widget_base_dimensions[1];
 
-			// // don't duplicate stylesheets for the same configuration
-			// var serialized_opts = $.param(opts);
-			// if($.inArray(serialized_opts, Gridster.generated_stylesheets) >= 0)
-			// {
-			// 	return false;
-			// }
-
-			// Gridster.generated_stylesheets.push(serialized_opts);
-
-
-			/* generate CSS styles for cols */
-			for(i = opts.cols; i >= 0; i--)
-			{
-				styles += (opts.namespace + ' [data-col="' + (i + 1) + '"] { left:' + ((i * opts.widget_base_dimensions[0]) + (i * opts.widget_margins[0]) + ((i + 1) * opts.widget_margins[0])) + 'px;} ');
-			}
-
-			/* generate CSS styles for rows */
-			for(i = opts.rows; i >= 0; i--)
-			{
-				styles += (opts.namespace + ' [data-row="' + (i + 1) + '"] { top:' + ((i * opts.widget_base_dimensions[1]) + (i * opts.widget_margins[1]) + ((i + 1) * opts.widget_margins[1]) /*+ ((i===0)?-14:-50) */) + 'px;} ');
-			}
-
-			for(var y = 1; y <= opts.rows; y++)
-			{
-				styles += (opts.namespace + ' [data-sizey="' + y + '"] { height:' + (y * opts.widget_base_dimensions[1] + (y - 1) * (opts.widget_margins[1] * 2)/* + ((y===1)?-14:-34) */) + 'px;}');
-				styles += (opts.namespace + ' .sub-section-height-' + y + ' { height:' + (y * opts.widget_base_dimensions[1] + (y - 1) * (opts.widget_margins[1] * 2)/* + ((y===1)?-14:-34) */) + 'px;}');
-			}
-
-			for(var x = 1; x <= max_size_x; x++)
-			{
-				styles += (opts.namespace + ' [data-sizex="' + x + '"] { width:' + (x * opts.widget_base_dimensions[0] + (x - 1) * (opts.widget_margins[0] * 2)) + 'px;}');
-			}
-			console.log("--- generate styles ---: ",this.options.max_cols,this.options.max_rows)
-			this.options.autogenerate_stylesheet = false
-
-			return this.add_style_tag(styles);
+		// don't duplicate stylesheets for the same configuration
+		var serialized_opts = $.param(opts);
+		if($.inArray(serialized_opts, Gridster.generated_stylesheets) >= 0)
+		{
+			return false;
 		}
-	
+
+		Gridster.generated_stylesheets.push(serialized_opts);
+
+		/* generate CSS styles for cols */
+		for(i = opts.cols; i >= 0; i--)
+		{
+			styles += (opts.namespace + ' [data-col="' + (i + 1) + '"] { left:' + ((i * opts.widget_base_dimensions[0]) + (i * opts.widget_margins[0]) + ((i + 1) * opts.widget_margins[0])) + 'px;} ');
+		}
+
+		/* generate CSS styles for rows */
+		for(i = opts.rows; i >= 0; i--)
+		{
+			styles += (opts.namespace + ' [data-row="' + (i + 1) + '"] { top:' + ((i * opts.widget_base_dimensions[1]) + (i * opts.widget_margins[1]) + ((i + 1) * opts.widget_margins[1]) ) + 'px;} ');
+		}
+
+		for(var y = 1; y <= opts.rows; y++)
+		{
+			styles += (opts.namespace + ' [data-sizey="' + y + '"] { height:' + (y * opts.widget_base_dimensions[1] + (y - 1) * (opts.widget_margins[1] * 2)) + 'px;}');
+		}
+
+		for(var x = 1; x <= max_size_x; x++)
+		{
+			styles += (opts.namespace + ' [data-sizex="' + x + '"] { width:' + (x * opts.widget_base_dimensions[0] + (x - 1) * (opts.widget_margins[0] * 2)) + 'px;}');
+		}
+
+		return this.add_style_tag(styles);
 	};
 
 
@@ -18776,7 +18699,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 		var aw = this.$wrapper.width();
 		var ah = this.$wrapper.height();
 		var max_cols = this.options.max_cols;
-		// console.log("--- aw ah max_cols : ", aw, ah, max_cols);
+
 		var cols = Math.floor(aw / this.min_widget_width) + this.options.extra_cols;
 
 		var actual_cols = this.$widgets.map(function()

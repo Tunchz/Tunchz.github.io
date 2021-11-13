@@ -513,10 +513,10 @@
             }, this.onSettingsChanged = function(newSettings) {
                 _settings = newSettings
                 var attr = {'text-align':_settings.font_align,'font-size':_settings.font_size+'px', height:_settings.font_size+'px'}
-                t1.css(attr),
-                t2.css(attr),
-                t3.css(attr),
-                t4.css(attr),
+                t1.html(_settings.label1).css(attr),
+                t2.html(_settings.label2).css(attr),
+                t3.html(_settings.label3).css(attr),
+                t4.html(_settings.label4).css(attr),
                 _settings.size=='large'?attr = {height:'60%'}:_settings.size=='small'?attr = {height:'30%'}:attr = {height:'45%'},
                 g1.css(attr),g2.css(attr),g3.css(attr),g4.css(attr)
             }, this.onCalculatedValueChanged = function(settingName, newValue) {

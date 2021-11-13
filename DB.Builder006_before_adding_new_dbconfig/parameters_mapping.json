@@ -1,0 +1,6 @@
+{
+	"name" : "Parameter Mapping",
+	"mapping" : {
+		"D.ALL" : ["D.ALL(F123)","D.ALL(F1234)","","D.ALL(F12)","D.ALL(F12)","D.ALL(F123)","","D.ALL(F12)","D.ALL(F12)","D.ALL(F123)"],
+	}
+}

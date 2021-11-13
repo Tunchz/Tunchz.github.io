@@ -16110,7 +16110,6 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 */
 	fn.add_widget = function(html, size_x, size_y, col, row, transparent_bg, widget_background_color, border_radius)
 	{
-		// console.log("************* add : ", transparent_bg, widget_background_color, border_radius);
 		var pos;
 		size_x || (size_x = 1);
 		size_y || (size_y = 1);
@@ -16134,15 +16133,14 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 			'data-row'  : pos.row,
 			'data-sizex': size_x,
 			'data-sizey': size_y
-		}).addClass('gs_w').appendTo(this.$el).hide();
+		}).addClass('gs_w').css({"border-radius": border_radius+"px"}).appendTo(this.$el).hide();
 
 		if (transparent_bg) {
-			// var color = widget_background_color;
-			// var rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';
-			// $w.css({"background-color": rgbaColor})
+			var color = widget_background_color;
+			var rgbaColor='rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';
+		
 			$w.addClass('transparent_bg');
-			// (widget_background_color)?$w.css("cssText","background-color: #38383800 !important;border:1px solid "+widget_background_color):$w.css("cssText","background-color: #38383800 !important;border:1px solid "+_default.widget_background_color);
-			$w.css("cssText","background-color: #38383800 !important;");
+			if (widget_background_color) $w.css({"background-color": rgbaColor});
 		} else {
 			if (widget_background_color) {
 				var rgbaColor = widget_background_color
@@ -16151,13 +16149,9 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 					rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+ ',' + parseInt(color.slice(-2),16)/256 +')';
 				}
 
-				// $w.css({"background-color": rgbaColor + " !important"});
-				$w.css("cssText","background-color: " + rgbaColor + " !important");
-			} else {
-				$w.css({"background-color": "inherit"});
+				$w.css({"background-color": rgbaColor});
 			}
 		}
-		border_radius?$w.css({"border-radius": border_radius+"px !important"}):$w.css({"border-radius": 0})
 		
 
 		this.$widgets = this.$widgets.add($w);
@@ -16187,13 +16181,12 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	fn.resize_widget = function($widget, size_x, size_y, transparent_bg, widget_background_color, border_radius, callback)
 	{	
 		// console.log("************* resize : ", transparent_bg, widget_background_color, border_radius);
+		$widget.css({"border-radius": border_radius+"px"})
 		if (transparent_bg) {
-			// var color = widget_background_color;
-			// var rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';
-			// $widget.css({"background-color": rgbaColor})
+			var color = widget_background_color;
+			var rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';
 			$widget.addClass('transparent_bg');
-			// (widget_background_color)?$widget.css("cssText","background-color: #38383800 !important;border:1px solid "+widget_background_color):$widget.css("cssText","background-color: #38383800 !important;border:1px solid "+_default.widget_background_color);
-			$widget.css("cssText","background-color: #38383800 !important;");
+			if (widget_background_color) $widget.css({"background-color": rgbaColor});
 		} else {
 			$widget.removeClass('transparent_bg');
 			
@@ -16204,15 +16197,10 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 					rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+ ',' + parseInt(color.slice(-2),16)/256 +')';
 				}
 
-				// $widget.css({"background-color": rgbaColor + " !important"});
-				$widget.css("cssText","background-color: " + rgbaColor + " !important");
-			} else {
-				$widget.css({"background-color": "inherit"});
+				$widget.css({"background-color": rgbaColor});
 			}
 
 		}
-		border_radius?$widget.css({"border-radius": border_radius+"px !important"}):$widget.css({"border-radius": 0})
-
 		var wgd = $widget.coords().grid;
 		size_x || (size_x = wgd.size_x);
 		size_y || (size_y = wgd.size_y);
@@ -18501,61 +18489,58 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 */
 	fn.generate_stylesheet = function(opts)
 	{
-		if (this.options.autogenerate_stylesheet||this.cols>this.options.max_cols||this.rows>this.options.max_rows) {
-			var styles = '';
-			var max_size_x = this.options.max_size_x;
-			var max_rows = 0;
-			var max_cols = 0;
-			var i;
-			var rules;
+		var styles = '';
+		var max_size_x = this.options.max_size_x;
+		var max_rows = 0;
+		var max_cols = 0;
+		var i;
+		var rules;
 
-			opts || (opts = {});
-			opts.cols || (opts.cols = Math.max(this.cols,this.options.max_cols));
-			opts.rows || (opts.rows = Math.max(this.rows,this.options.max_rows));
-			opts.namespace || (opts.namespace = this.options.namespace);
-			opts.widget_base_dimensions || (opts.widget_base_dimensions = this.options.widget_base_dimensions);
-			opts.widget_margins || (opts.widget_margins = this.options.widget_margins);
-			opts.min_widget_width = (opts.widget_margins[0] * 2) + opts.widget_base_dimensions[0];
-			opts.min_widget_height = (opts.widget_margins[1] * 2) + opts.widget_base_dimensions[1];
+		opts || (opts = {});
+		opts.cols || (opts.cols = this.cols);
+		opts.rows || (opts.rows = this.rows);
+		opts.namespace || (opts.namespace = this.options.namespace);
+		opts.widget_base_dimensions || (opts.widget_base_dimensions = this.options.widget_base_dimensions);
+		opts.widget_margins || (opts.widget_margins = this.options.widget_margins);
+		opts.min_widget_width = (opts.widget_margins[0] * 2) + opts.widget_base_dimensions[0];
+		opts.min_widget_height = (opts.widget_margins[1] * 2) + opts.widget_base_dimensions[1];
 
-			// // don't duplicate stylesheets for the same configuration
-			// var serialized_opts = $.param(opts);
-			// if($.inArray(serialized_opts, Gridster.generated_stylesheets) >= 0)
-			// {
-			// 	return false;
-			// }
-
-			// Gridster.generated_stylesheets.push(serialized_opts);
-
-
-			/* generate CSS styles for cols */
-			for(i = opts.cols; i >= 0; i--)
-			{
-				styles += (opts.namespace + ' [data-col="' + (i + 1) + '"] { left:' + ((i * opts.widget_base_dimensions[0]) + (i * opts.widget_margins[0]) + ((i + 1) * opts.widget_margins[0])) + 'px;} ');
-			}
-
-			/* generate CSS styles for rows */
-			for(i = opts.rows; i >= 0; i--)
-			{
-				styles += (opts.namespace + ' [data-row="' + (i + 1) + '"] { top:' + ((i * opts.widget_base_dimensions[1]) + (i * opts.widget_margins[1]) + ((i + 1) * opts.widget_margins[1]) /*+ ((i===0)?-14:-50) */) + 'px;} ');
-			}
-
-			for(var y = 1; y <= opts.rows; y++)
-			{
-				styles += (opts.namespace + ' [data-sizey="' + y + '"] { height:' + (y * opts.widget_base_dimensions[1] + (y - 1) * (opts.widget_margins[1] * 2)/* + ((y===1)?-14:-34) */) + 'px;}');
-				styles += (opts.namespace + ' .sub-section-height-' + y + ' { height:' + (y * opts.widget_base_dimensions[1] + (y - 1) * (opts.widget_margins[1] * 2)/* + ((y===1)?-14:-34) */) + 'px;}');
-			}
-
-			for(var x = 1; x <= max_size_x; x++)
-			{
-				styles += (opts.namespace + ' [data-sizex="' + x + '"] { width:' + (x * opts.widget_base_dimensions[0] + (x - 1) * (opts.widget_margins[0] * 2)) + 'px;}');
-			}
-			console.log("--- generate styles ---: ",this.options.max_cols,this.options.max_rows)
-			this.options.autogenerate_stylesheet = false
-
-			return this.add_style_tag(styles);
+		// don't duplicate stylesheets for the same configuration
+		var serialized_opts = $.param(opts);
+		if($.inArray(serialized_opts, Gridster.generated_stylesheets) >= 0)
+		{
+			return false;
 		}
-	
+
+		Gridster.generated_stylesheets.push(serialized_opts);
+
+		// console.log("--------opts : ",opts)
+
+		/* generate CSS styles for cols */
+		for(i = opts.cols; i >= 0; i--)
+		{
+			styles += (opts.namespace + ' [data-col="' + (i + 1) + '"] { left:' + ((i * opts.widget_base_dimensions[0]) + (i * opts.widget_margins[0]) + ((i + 1) * opts.widget_margins[0])) + 'px;} ');
+		}
+
+		/* generate CSS styles for rows */
+		for(i = opts.rows; i >= 0; i--)
+		{
+			styles += (opts.namespace + ' [data-row="' + (i + 1) + '"] { top:' + ((i * opts.widget_base_dimensions[1]) + (i * opts.widget_margins[1]) + ((i + 1) * opts.widget_margins[1]) /*+ ((i===0)?-14:-50) */) + 'px;} ');
+		}
+
+		for(var y = 1; y <= opts.rows; y++)
+		{
+			styles += (opts.namespace + ' [data-sizey="' + y + '"] { height:' + (y * opts.widget_base_dimensions[1] + (y - 1) * (opts.widget_margins[1] * 2)/* + ((y===1)?-14:-34) */) + 'px;}');
+			styles += (opts.namespace + ' .sub-section-height-' + y + ' { height:' + (y * opts.widget_base_dimensions[1] + (y - 1) * (opts.widget_margins[1] * 2)/* + ((y===1)?-14:-34) */) + 'px;}');
+		}
+
+		for(var x = 1; x <= max_size_x; x++)
+		{
+			styles += (opts.namespace + ' [data-sizex="' + x + '"] { width:' + (x * opts.widget_base_dimensions[0] + (x - 1) * (opts.widget_margins[0] * 2)) + 'px;}');
+		}
+		// console.log("----- styles : ", styles)
+
+		return this.add_style_tag(styles);
 	};
 
 

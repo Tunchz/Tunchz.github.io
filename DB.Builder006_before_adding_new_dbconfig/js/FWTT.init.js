@@ -11,12 +11,11 @@ var _default = {
     background_image: null,
     background_color: "#212121",
     widget_background_color: "#383838",
+    widget_border_radius: 0,
     widget_border_color: "#383838",
     widget_border_width: 0,
-    widget_border_radius: 0,
     widget_background_image: null,
     //widget setting
-    widget_background_transparent:!1,
     mark_color: "#ff9900",
     maxmin_color: "#00ff00",
     pointer_color: "#ffffff",
@@ -69,16 +68,6 @@ function FreeboardModel(a, b, c) {
     this.min_cols = ko.observable(), this.min_cols.subscribe(function(a){document.body.style.minWidth = !_.isUndefined(a)?(parseInt(a)*_w-_g*2+20+'px'):_default.min_width}),
     this.background_image = ko.observable(), this.background_image.subscribe(function(a){document.body.style.backgroundImage = "url('"+(a?a:_default.background_image)+"')"}),
     this.background_color = ko.observable(), this.background_color.subscribe(function(a){document.body.style.backgroundColor = (a)?a:_default.background_color;}),
-    this.widget_background_color = ko.observable(), 
-    this.widget_background_color.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_background_color = a; freeboard.addDBConfigStyle("li.gs_w","background-color:"+a+" !important;");console.log("_default.widget_background_color : ",_default.widget_background_color)}),
-    this.widget_border_color = ko.observable(), 
-    this.widget_border_color.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_border_color = a;console.log("_default.widget_border_color : ",_default.widget_border_color)}),
-    this.widget_border_width = ko.observable(), 
-    this.widget_border_width.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_border_width = a;console.log("_default.widget_border_width : ",_default.widget_border_width)}),
-    this.widget_border_radius = ko.observable(), 
-    this.widget_border_radius.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_border_radius = a;console.log("_default.widget_border_radius : ",_default.widget_border_radius)}),
-    this.widget_background_image = ko.observable(), 
-    this.widget_background_image.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_background_image = a;console.log("_default.widget_background_image : ",_default.widget_background_image)}),
     this.plugins = ko.observableArray(), this.datasources = ko.observableArray(), this.panes = ko.observableArray(), this.datasourceData = {}, this.processDatasourceUpdate = function(a, b) {
         var c = a.name();
         d.datasourceData[c] = b, _.each(d.panes(), function(a) {
@@ -138,11 +127,6 @@ function FreeboardModel(a, b, c) {
             min_cols: d.min_cols(),
             background_image: d.background_image(),
             background_color: d.background_color(),
-            widget_background_color: d.widget_background_color(),
-            widget_border_color: d.widget_border_color(),
-            widget_border_width: d.widget_border_width(),
-            widget_border_radius: d.widget_border_radius(),
-            widget_background_image: d.widget_background_image(),
             allow_edit: d.allow_edit(),
             plugins: d.plugins(),
             panes: a,
@@ -157,20 +141,8 @@ function FreeboardModel(a, b, c) {
             _.isUndefined(e.dashboard_title) ? d.dashboard_title(_default.dashboard_title) : d.dashboard_title(e.dashboard_title),
             _.isUndefined(e.avatar) ? d.avatar(_default.avatar) : d.avatar(e.avatar),
             _.isUndefined(e.min_cols) ? d.min_cols(_default.min_cols) : d.min_cols(e.min_cols),
-            // _.isUndefined(e.background_image) ? d.background_image(_default.background_image) : 
             d.background_image(e.background_image),
-            // _.isUndefined(e.background_color) ? d.background_color(_default.background_color) : 
             d.background_color(e.background_color),
-            // _.isUndefined(e.widget_background_color) ? d.widget_background_color(_default.widget_background_color) : 
-            d.widget_background_color(e.widget_background_color),
-            // _.isUndefined(e.widget_border_color) ? d.widget_border_color(_default.widget_border_color) : 
-            d.widget_border_color(e.widget_border_color),
-            // _.isUndefined(e.widget_border_width) ? d.widget_border_width(_default.widget_border_width) : 
-            d.widget_border_width(e.widget_border_width),
-            // _.isUndefined(e.widget_border_radius) ? d.widget_border_radius(_default.widget_border_radius) : 
-            d.widget_border_radius(e.widget_border_radius),
-            // _.isUndefined(e.widget_background_image) ? d.widget_background_image(_default.widget_background_image) : 
-            d.widget_background_image(e.widget_background_image),
              _.each(e.datasources, function(b) {
                 var c = new DatasourceModel(d, a);
                 c.deserialize(b), d.addDatasource(c)
@@ -204,11 +176,6 @@ function FreeboardModel(a, b, c) {
             d.min_cols(_default.min_cols);
             d.background_color(_default.background_color);
             d.background_image(_default.background_image);
-            d.widget_background_color("#383838");
-            d.widget_border_color("#383838");
-            d.widget_border_width(0);
-            d.widget_border_radius(0);
-            d.widget_background_image(null);
 
         })
     }, this.clearDashboard = function() {
@@ -306,7 +273,7 @@ function FreeboardModel(a, b, c) {
             // a ? ($("#toggle-header-icon").addClass("icon-chevron-up").removeClass("icon-wrench"), $(".gridster .gs_w").css({
             a ? (
                 // $("#toggle-header-icon").addClass("icon-chevron-up").removeClass("icon-chevron-down"), 
-                $(".gridster .gs_w").addClass("move") /*.css({cursor: "move"})*/, 
+                $(".gridster .gs_w").css({cursor: "move"}), 
                 // $("#main-header").animate({top: "0px"}, e), 
                 // $("#board-content").animate({top: f + 30 + "px"}, e),
                 $("#board-content").animate({top: (d.isHeaderOpen()?f:0) + 30 + "px"}, e),
@@ -322,7 +289,7 @@ function FreeboardModel(a, b, c) {
             : 
             (
                 // $("#toggle-header-icon").addClass("icon-chevron-down").removeClass("icon-chevron-up"), 
-                $(".gridster .gs_w").removeClass("move") /*.css({cursor: "default"})*/, 
+                $(".gridster .gs_w").css({cursor: "default"}), 
                 // $("#main-header").animate({top: "-" + f + "px"}, e), 
                 // $("#board-content").animate({top: f  + "px"}, e),
                 $("#board-content").animate({top: (d.isHeaderOpen()?f:0) + 0 + "px"}, e),
@@ -392,11 +359,6 @@ function FreeboardModel(a, b, c) {
             min_cols: d.min_cols(),
             background_image: d.background_image(),
             background_color: d.background_color(),
-            widget_background_color: d.widget_background_color(),
-            widget_border_color: d.widget_border_color(),
-            widget_border_width: d.widget_border_width(),
-            widget_border_radius: d.widget_border_radius(),
-            widget_background_image: d.widget_background_image(),
             // allow_edit: d.allow_edit(),
             // plugins: d.plugins(),
             // theme:theme
@@ -412,11 +374,6 @@ function FreeboardModel(a, b, c) {
         d.min_cols(options.min_cols)
         d.background_image(options.background_image)
         d.background_color(options.background_color)
-        d.widget_background_color(options.widget_background_color)
-        d.widget_border_color(options.widget_border_color)
-        d.widget_border_width(options.widget_border_width)
-        d.widget_border_radius(options.widget_border_radius)
-        d.widget_background_image(options.widget_background_image)
         // d.allow_edit(options.allow_edit)
 
     }
@@ -612,14 +569,11 @@ function FreeboardUI() {
             r = $(b).gridster({
                 widget_margins: _default.widget_margins,                    //[s, s],
                 widget_base_dimensions: _default.widget_base_dimensions,    //[t, 40], //10],   // [width, height]
-                max_cols:24,
-                max_rows:60,
-
                 // resize: {
                 //     enabled: !1,//!1,
                 //     axes: "x"
                 // },
- 
+
 
                 // widget_selector         : 'li',
                 // widget_margins          : [5,5],       
@@ -785,7 +739,7 @@ function PaneModel(a, b) {
             widgets: a
         }
     }, this.deserialize = function(d) {
-        c.title(d.title), c.width(d.width), c.row = d.row, c.col = d.col, c.col_width(d.col_width || 1), c.transparent_bg(d.transparent_bg || !1), c.widget_background_color(d.widget_background_color/* || _default.widget_background_color*/), c.border_radius(d.border_radius/* || _default.widget_border_radius*/), _.each(d.widgets, function(d) {
+        c.title(d.title), c.width(d.width), c.row = d.row, c.col = d.col, c.col_width(d.col_width || 1), c.transparent_bg(d.transparent_bg || !1), c.widget_background_color(d.widget_background_color || _default.widget_background_color), c.border_radius(d.border_radius || _default.widget_border_radius), _.each(d.widgets, function(d) {
             var e = new WidgetModel(a, b);
             e.deserialize(d), c.widgets.push(e)
         })
@@ -1724,17 +1678,17 @@ var freeboard = function() {
                                 name: "transparent_bg",
                                 display_name: "Transparent Background",
                                 type: "boolean",
-                                default_value: _default.widget_background_transparent,
+                                default_value: 0,
                             }, {
                                 name: "widget_background_color",
                                 display_name: "Background Color",
                                 type: "Text",
-                                description: "leave blank for default widget background color. View option by select <span style='color:#fff'>Dashboard Configuration</span> in Setting Pane",
+                                default_value: _default.widget_background_color,
                             }, {
                                 name: "border_radius",
                                 display_name: "Border Radius",
                                 type: "integer",
-                                description: "leave blank for default widget border radius. View option by select <span style='color:#fff'>Dashboard Configuration</span> in Setting Pane",
+                                default_value: _default.widget_border_radius,
                             }]
                         }
                     }), h.createPluginEditor(n, l, j, m, function(f) {
@@ -1747,7 +1701,7 @@ var freeboard = function() {
                                 g.settings(f.settings), g.type(f.type), i.widgets.push(g), d.attachWidgetEditIcons(a)
                             }
                         } else {
-                            "edit" == k.operation && ("pane" == k.type ? (i.title(f.settings.title), i.transparent_bg(f.settings.transparent_bg), i.widget_background_color(f.settings.widget_background_color), i.border_radius(f.settings.border_radius?parseInt(f.settings.border_radius):null), i.col_width(0), i.col_width(parseInt(f.settings.col_width)), d.processResize(!1)) : ("datasource" == k.type && (i.name(f.settings.name), f.settings.name), i.type(f.type), i.settings(f.settings)))
+                            "edit" == k.operation && ("pane" == k.type ? (i.title(f.settings.title), i.transparent_bg(f.settings.transparent_bg), i.widget_background_color(f.settings.widget_background_color), i.border_radius(parseInt(f.settings.border_radius)), i.col_width(0), i.col_width(parseInt(f.settings.col_width)), d.processResize(!1)) : ("datasource" == k.type && (i.name(f.settings.name), f.settings.name), i.type(f.type), i.settings(f.settings)))
                         }
                         e.saveLocalstorage();
                     })
@@ -1762,7 +1716,9 @@ var freeboard = function() {
         }
     }, ko.bindingHandlers.pane = {
         init: function(a, b, c, f, g) {
-            e.isEditing() && $(a).addClass("move")/*.css({cursor: "move"})*/, d.addPane(a, f, g.$root.isEditing());
+            e.isEditing() && $(a).css({
+                cursor: "move"
+            }), d.addPane(a, f, g.$root.isEditing());
             e.saveLocalstorage();
         },
         update: function(a, b, c, f, g) {
@@ -1832,11 +1788,6 @@ var freeboard = function() {
         },
         setAssetRoot: function(a) {
             f.setAssetRoot(a)
-        },
-        addDBConfigStyle: function(a, b) {
-            var c = a + "{" + b + "}",
-                d = $("style#DB-Config");
-            0 == d.length && (d = $('<style id="DB-Config" type="text/css"></style>'), $("head").append(d)), d[0].styleSheet ? d[0].styleSheet.cssText += c : d.text(d.text() + c)
         },
         addStyle: function(a, b) {
             var c = a + "{" + b + "}",
@@ -1939,43 +1890,8 @@ var freeboard = function() {
                         name: "background_color",
                         display_name: "Dashboard Color",
                         type: "text",
-                        description: 'Background color, for example #212121',
+                        description: 'Background color, for example #383838',
                         default_value: _default.background_color,
-                    },
-                    {
-                        name: "widget_background_color",
-                        display_name: "Widget Background Color",
-                        type: "text",
-                        description: 'Widget background color, for example #383838',
-                        default_value: _default.widget_background_color,
-                    },
-                    {
-                        name: "widget_border_color",
-                        display_name: "Widget Border Color",
-                        type: "text",
-                        description: 'Widget border color, for example #383838',
-                        default_value: _default.widget_border_color,
-                    },
-                    {
-                        name: "widget_border_width",
-                        display_name: "Widget Border Width",
-                        type: "integer",
-                        description: 'Widget border width in pixel, for example 0',
-                        default_value: _default.widget_border_width,
-                    },
-                    {
-                        name: "widget_border_radius",
-                        display_name: "Widget Border Radius",
-                        type: "integer",
-                        description: 'Widget border radius in pixel, for example 0',
-                        default_value: _default.widget_border_radius,
-                    },
-                    {
-                        name: "widget_background_image",
-                        display_name: "Widget Background Image Tile",
-                        type: "text",
-                        description: 'Image url for to use as widget background tile',
-                        default_value: _default.widget_background_image,
                     },
                     // {
                     //     name: "allow_edit",
