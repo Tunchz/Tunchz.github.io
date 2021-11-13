@@ -111,7 +111,7 @@
                 //     "font-size": f + "px"
                 // }), 
                 h_p.css({"text-align": (_settings.font_align)?_settings.font_align:"left"}), 
-                h.css({"font-size": a.font_size + "px", "color": _settings.font_color?_settings.font_color:_default.font_color}), 
+                h.html(a.value).css({"font-size": a.font_size + "px", "color": _settings.font_color?_settings.font_color:_default.font_color}), 
                 i.css({"color": _settings.font_color?_settings.font_color:_default.font_color, "opacity":_default.font_opacity}),
                 d()
                 // _settings.sparkline && c(_settings, j, _data)
@@ -258,7 +258,7 @@
                 //     "font-size": f + "px"
                 // }), 
                 h_p.css({"text-align": (_settings.font_align)?_settings.font_align:"left"}), 
-                h.css({"font-size": a.font_size + "px", "color": _settings.font_color?_settings.font_color:_default.font_color}), 
+                h.html(a.value).css({"font-size": a.font_size + "px", "color": _settings.font_color?_settings.font_color:_default.font_color}), 
                 i.css({"color": _settings.font_color?_settings.font_color:_default.font_color, "opacity":_default.font_opacity}),
                 d()
                 // _settings.sparkline && c(_settings, j, _data)
