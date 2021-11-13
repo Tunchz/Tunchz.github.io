@@ -2089,18 +2089,18 @@ ul.value-dropdown {
     border: 1px solid rgba(255, 153, 0, .8);
     overflow-x: hidden;
     overflow-y: auto;
-    z-index: 3001
+    z-index: 3001;
 }
 
 ul.value-dropdown li {
     padding: 5px;
-    cursor: pointer
+    cursor: pointer;
 }
 
 ul.value-dropdown li.selected {
     background-color: rgba(255, 153, 0, .8);
     color: #000;
-    text-shadow: none
+    text-shadow: none;
 }
 
 ul.value-dropdown li .preview {
@@ -2283,6 +2283,12 @@ ul.datasource-input-suffix {
     -webkit-appearance: none;
     border: 1px solid #3d3d3d;
     background: url(../img/dropdown-arrow.png) no-repeat right #272727
+}
+
+.styled-select option{
+    border: 1px solid #fff;
+    background-color: #383838;
+    color: #fff;
 }
 
 .title {
