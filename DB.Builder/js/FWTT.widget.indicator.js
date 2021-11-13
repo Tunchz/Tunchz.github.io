@@ -89,7 +89,7 @@
                 g3 = $('<div class="i1x4"></div>'),
                 g4 = $('<div class="i1x4"></div>'),
                 isOn = [!1,!1,!1,!1],
-                offAttr = {"background-color": "#222", "box-shadow": "0px 0px 15px #222","border-color":"#3d3d3d"};
+                offAttr = {"background-color": "#222", "box-shadow": "none","border-color":"#3d3d3d"};
                 container.append(g1).append(g2).append(g3).append(g4)
                 _settings = settings;
             container.css({"padding-top":(_h-_r*2)/2})
@@ -204,7 +204,7 @@
                 t1 = $('<div class="t2x1"></div>'),
                 t2 = $('<div class="t2x1"></div>')
                 isOn = [!1,!1]
-                offAttr = {"background-color": "#222", "box-shadow": "0px 0px 15px #222","border-color":"#3d3d3d"};
+                offAttr = {"background-color": "#222", "box-shadow": "none","border-color":"#3d3d3d"};
 
                 container.append(c1.append(g1).append(t1)).append(c2.append(g2).append(t2))
                 _settings = settings;
@@ -334,7 +334,7 @@
         //         t3 = $('<div class="t2x1"></div>'),
         //         t4 = $('<div class="t2x1"></div>'),
         //         isOn = [!1,!1,!1,!1],
-        //         offAttr = {"background-color": "#222", "box-shadow": "0px 0px 15px #222","border-color":"#3d3d3d"};
+        //         offAttr = {"background-color": "#222", "box-shadow": "none","border-color":"#3d3d3d"};
 
         //         container.append(c1.append(g1).append(t1)).append(c2.append(g2).append(t2)).append(c3.append(g3).append(t3)).append(c4.append(g4).append(t4))
         //         _settings = settings;
@@ -502,7 +502,7 @@
                 t3 = $('<div class="t2x1"></div>'),
                 t4 = $('<div class="t2x1"></div>'),
                 isOn = [!1,!1,!1,!1],
-                offAttr = {"background-color": "#222", "box-shadow": "0px 0px 15px #222","border-color":"#3d3d3d"};
+                offAttr = {"background-color": "#222", "box-shadow": "none","border-color":"#3d3d3d"};
 
                 container.append(c1.append(g1).append(t1)).append(c2.append(g2).append(t2)).append(c3.append(g3).append(t3)).append(c4.append(g4).append(t4))
                 _settings = settings;

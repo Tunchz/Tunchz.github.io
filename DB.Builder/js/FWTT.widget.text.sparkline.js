@@ -111,7 +111,7 @@
                 //     "font-size": f + "px"
                 // }), 
                 h_p.css({"text-align": (_settings.font_align)?_settings.font_align:"left"}), 
-                h.html(a.value).css({"font-size": a.font_size + "px", "color": _settings.font_color?_settings.font_color:_default.font_color}), 
+                h.html("&nbsp;&nbsp;-&nbsp;&nbsp;").css({"font-size": a.font_size + "px", "color": _settings.font_color?_settings.font_color:_default.font_color}), 
                 i.css({"color": _settings.font_color?_settings.font_color:_default.font_color, "opacity":_default.font_opacity}),
                 d()
                 // _settings.sparkline && c(_settings, j, _data)
@@ -119,7 +119,7 @@
                 d()
             }, this.onCalculatedValueChanged = function(b, d) {
                 _data = d;
-                "value" == b && (_settings.animate ? a(d, h, 500) : h.html(d), _settings.sparkline && c(_settings, j, d))
+                "value" == b && (!d?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):_settings.animate ? a(d, h, 500) : h.html(d), _settings.sparkline && c(_settings, j, d))
             }, this.onDispose = function() {}, 
             this.getHeight = function() {
                 // return "big" == _settings.size || _settings.sparkline ? 2 : 1  //2 : 1
@@ -258,7 +258,7 @@
                 //     "font-size": f + "px"
                 // }), 
                 h_p.css({"text-align": (_settings.font_align)?_settings.font_align:"left"}), 
-                h.html(a.value).css({"font-size": a.font_size + "px", "color": _settings.font_color?_settings.font_color:_default.font_color}), 
+                h.html("&nbsp;&nbsp;-&nbsp;&nbsp;").css({"font-size": a.font_size + "px", "color": _settings.font_color?_settings.font_color:_default.font_color}), 
                 i.css({"color": _settings.font_color?_settings.font_color:_default.font_color, "opacity":_default.font_opacity}),
                 d()
                 // _settings.sparkline && c(_settings, j, _data)
@@ -266,7 +266,7 @@
                 d()
             }, this.onCalculatedValueChanged = function(b, d) {
                 // _data = d;
-                "value" == b && (_settings.animate ? a(d, h, 500) : h.html(d), _settings.sparkline && c(_settings, j, d)),
+                "value" == b && (!d?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):_settings.animate ? a(d, h, 500) : h.html(d), _settings.sparkline && c(_settings, j, d)),
                 "title" == b && g.html(d),
                 "units" == b && i.html(d)
             }, this.onDispose = function() {}, 
