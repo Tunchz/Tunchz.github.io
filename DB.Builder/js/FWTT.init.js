@@ -718,6 +718,7 @@ function PaneModel(a, b) {
     }), 
     this.width = ko.observable(1), this.row = {}, this.col = {}, 
     this.col_width = ko.observable(1), this.col_width.subscribe(function(a) {
+        c.width(a)
         c.processSizeChange()
     }),  
     this.border_radius = ko.observable(1), this.border_radius.subscribe(function(a) {
