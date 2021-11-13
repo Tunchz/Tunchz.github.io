@@ -1,4 +1,12 @@
 (function(){
+        function numberWithCommas(x) {
+            x = x.toString();
+            var pattern = /(-?\d+)(\d{3})/;
+            while (pattern.test(x))
+                x = x.replace(pattern, "$1,$2");
+            return x;
+        }
+
         function a(a, b, c) {
             var d = $(b).text();
             if (d != a)
@@ -119,7 +127,7 @@
                 d()
             }, this.onCalculatedValueChanged = function(b, d) {
                 _data = d;
-                "value" == b && (!d?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):_settings.animate ? a(d, h, 500) : h.html(d), _settings.sparkline && c(_settings, j, d))
+                "value" == b && (!d?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):_settings.with_comma&&(d=numberWithCommas(d)),(_settings.animate ? a(d, h, 500) : h.html(d)), _settings.sparkline && c(_settings, j, d))
             }, this.onDispose = function() {}, 
             this.getHeight = function() {
                 // return "big" == _settings.size || _settings.sparkline ? 2 : 1  //2 : 1
@@ -152,6 +160,12 @@
                 display_name: "Animate Value Changes",
                 type: "boolean",
                 default_value: !0,
+            }, 
+            {
+                name: "with_comma",
+                display_name: "Comma-Separated Number",
+                type: "boolean",
+                default_value: !1,
             }, 
             {
                 name: "font_size",
@@ -266,7 +280,7 @@
                 d()
             }, this.onCalculatedValueChanged = function(b, d) {
                 // _data = d;
-                "value" == b && (!d?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):_settings.animate ? a(d, h, 500) : h.html(d), _settings.sparkline && c(_settings, j, d)),
+                "value" == b && (!d?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):_settings.with_comma&&(d=numberWithCommas(d)),(_settings.animate ? a(d, h, 500) : h.html(d)), _settings.sparkline && c(_settings, j, d)),
                 "title" == b && g.html(d),
                 "units" == b && i.html(d)
             }, this.onDispose = function() {}, 
@@ -300,6 +314,12 @@
                 type: "boolean",
                 default_value: !0,
             }, 
+            {
+                name: "with_comma",
+                display_name: "Comma-Separated Number",
+                type: "boolean",
+                default_value: !1,
+            },
             {
                 name: "font_size",
                 display_name: "Font Size",
