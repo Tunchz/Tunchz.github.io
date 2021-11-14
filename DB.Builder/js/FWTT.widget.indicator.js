@@ -115,10 +115,10 @@
                 settingName=='color2'&&isOn[1] && (g2.css(newAttr)),
                 settingName=='color3'&&isOn[2] && (g3.css(newAttr)), 
                 settingName=='color4'&&isOn[3] && (g4.css(newAttr)),
-                settingName=='value1'&&(Boolean(newValue)? isOn[0] = !0:(isOn[0] = !1,g1.css(offAttr))), 
-                settingName=='value2'&&(Boolean(newValue)? isOn[1] = !0:(isOn[1] = !1,g2.css(offAttr))),
-                settingName=='value3'&&(Boolean(newValue)? isOn[2] = !0:(isOn[2] = !1,g3.css(offAttr))), 
-                settingName=='value4'&&(Boolean(newValue)? isOn[3] = !0:(isOn[3] = !1,g4.css(offAttr)))
+                settingName=='value1'&&(Boolean(newValue)&&_settings.color1? isOn[0] = !0:(isOn[0] = !1,g1.css(offAttr))), 
+                settingName=='value2'&&(Boolean(newValue)&&_settings.color2? isOn[1] = !0:(isOn[1] = !1,g2.css(offAttr))),
+                settingName=='value3'&&(Boolean(newValue)&&_settings.color3? isOn[2] = !0:(isOn[2] = !1,g3.css(offAttr))), 
+                settingName=='value4'&&(Boolean(newValue)&&_settings.color4? isOn[3] = !0:(isOn[3] = !1,g4.css(offAttr)))
             }, this.onDispose = function() {}, this.getHeight = function() {
                 return 1
             }, this.onSettingsChanged(settings)
