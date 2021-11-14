@@ -8,7 +8,7 @@
         var self = this
         self.widgetID = randomString(16);
         var title = $('<div></div>')
-        var mapElement = $('<div style="margin-top:-3px" id="map_ld' + self.widgetID + '" ></div>');
+        var mapElement = $('<div style="margin-top:0px" id="map_ld' + self.widgetID + '" ></div>');
         var currentSettings = settings
 
         // current Settings default
@@ -155,7 +155,7 @@
 
     freeboard.loadWidgetPlugin({
         "type_name": "longdo map",
-        "display_name": "Longdo Map",
+        "display_name": "Map",
         "external_scripts": ["plugins/thirdparty/longdo.js"],
         "settings": [
             {
