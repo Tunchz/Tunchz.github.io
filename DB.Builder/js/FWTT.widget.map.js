@@ -56,6 +56,8 @@
 
         this.onSettingsChanged = function (newSettings) {
             currentSettings = newSettings
+            // Map Opacity
+            mapElement.css({opacity:currentSettings.opacity})
             // Map & Marker
             if (currentSettings.lat === "" || currentSettings.lat === undefined) currentPosition.lat = 0
             if (currentSettings.lon === "" || currentSettings.lon === undefined) currentPosition.lon = 0
@@ -118,8 +120,12 @@
         function mapOptions(currentSettings) {
             if (map) {
                 // style
-                if (currentSettings.style === "map") map.Layers.setBase(longdo.Layers.POI_EN)
-                else if (currentSettings.style === "hybrid") map.Layers.setBase(longdo.Layers.GOOGLE_HYBRID)
+                if (currentSettings.style === "poi_en") map.Layers.setBase(longdo.Layers.POI_EN)
+                else if (currentSettings.style === "google_hybrid") map.Layers.setBase(longdo.Layers.GOOGLE_HYBRID)
+                else if (currentSettings.style === "gray") map.Layers.setBase(longdo.Layers.GRAY);
+                // else if (currentSettings.style === "thaichote") map.Layers.add(longdo.Layers.THAICHOTE);
+                else if (currentSettings.style === "poi") map.Layers.setBase(longdo.Layers.POI);
+                else map.Layers.setBase(longdo.Layers.NORMAL);
 
                 // Toolbars
                 toolbars(currentSettings.toolbar)
@@ -265,15 +271,32 @@
                 "name": "style",
                 "display_name": "Styles",
                 "type": "option",
+                "default": "poi_en",
                 "options": [
                     {
-                        "name": "Map",
-                        "value": "map"
+                        "name": "Normal",
+                        "value": "normal"
                     },
                     {
-                        "name": "Satellite",
-                        "value": "hybrid"
-                    }
+                        "name": "Google Hybrid",
+                        "value": "google_hybrid"
+                    },
+                    {
+                        "name": "POI",
+                        "value": "poi"
+                    },
+                    {
+                        "name": "POI_EN",
+                        "value": "poi_en"
+                    },
+                    {
+                        "name": "GRAY",
+                        "value": "gray"
+                    },
+                    // {
+                    //     "name": "THAICHOTE",
+                    //     "value": "thaichote"
+                    // },
                 ]
             },
             {
@@ -287,6 +310,13 @@
                 "display_name": "Toolbar",
                 "type": "boolean",
                 "default_value": 0
+            },
+            {
+                "name": "opacity",
+                "display_name": "Map Opacity",
+                "type": "text",
+                "default_value": "1",
+                "description": "put number between 0 and 1, when 0 is totally transparent and 1 is totally opaque."
             },
             {
                 "name": "height_block",
