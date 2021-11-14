@@ -683,8 +683,9 @@ h2.section-title {
 	/*padding: 0 10px;*/
 }
 .tw-sparkline {
-	padding-left: 2%;
-	padding-right: 2%;
+	/*padding-left: 2%;
+	padding-right: 2%;*/
+    padding:3px;
 }
 /* Sparkline */
 .sparkline {
