@@ -183,7 +183,7 @@
                 "name": "zoom",
                 "display_name": "Zoom",
                 "type": "option",
-                default_value: 13,
+                "default_value": 13,
                 "options": [
                     {
                         "name": "1",

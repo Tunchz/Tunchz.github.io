@@ -733,7 +733,10 @@ svg {
 .ldmap_bottomright .ldmap_notice {
 	visibility: hidden !important;
 }
-
+.ldmap_placeholder {
+    min-width: 0px !important;
+    min-height: 0px !important;
+}
 
 /* Indicator Light */
 .indicator-light-container {
