@@ -75,10 +75,7 @@
 
     freeboard.addStyle(".html-widget", "white-space:normal;width:100%;height:100%");
     var o = function(a) {
-        var b = $('<div class="html-widget"></div>'),
-            c = a;
-        this.render = function(a) {
-            $(a).append(b);
+        function initTheme() {
             Highcharts.theme = {
                 global: {
                     useUTC: false
@@ -87,12 +84,11 @@
                     "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"
                 ],
                 chart: {
-                    backgroundColor: null,
+                    backgroundColor: "#fff0",
                     style: {
                         fontFamily: "'Open Sans', sans-serif",
                     },
                     plotBorderColor: '#606063',
-                    backgroundColor:"#ffffff00",
                     // height: (46*self.getHeight()-6)+"px",
                 },
                 plotShadow: false,
@@ -304,8 +300,15 @@
                 contrastTextColor: '#F0F0F3',
                 maskColor: 'rgba(255,255,255,0.3)'
             };
+        }
+        var b = $('<div class="html-widget"></div>'),
+            c = a;
+        this.render = function(a) {
+            $(a).append(b);
+            initTheme();
         }, this.onSettingsChanged = function(a) {
             c = a
+            // initTheme();
         }, this.onCalculatedValueChanged = function(a, c) {
             "html" == a && b.html(c)
         }, this.onDispose = function() {}, this.getHeight = function() {
