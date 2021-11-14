@@ -82,7 +82,7 @@
             //     // g.css({height: h.size, width: h.size, "background-color": "#FF9900", "box-shadow": "0px 0px 15px "+"#FFFFFF"})
             //     f.css({"font-size": h.font_size+"px"})
             // }
-            var _self, maxWidth, margin,
+            var _self, maxWidth, size = 1, margin,
                 container = $('<div class="indicator-light-container" style="height:50%;"></div>'),
                 g1 = $('<div class="i1x4"></div>'),
                 g2 = $('<div class="i1x4"></div>'),
@@ -102,9 +102,11 @@
                 (maxWidth)?maxWidth-=4:maxWidth = (_w-_g*2)/4-4;
                 // console.log("------> ",maxWidth);
                 if (_settings.size<1) (_settings.size = 1);
-                if (_settings.size>maxWidth) (_settings.size = maxWidth);
-                margin = (maxWidth-_settings.size)/2;
-                var attr = {height: _settings.size, width: _settings.size, margin: "0 "+margin+"px"};
+                // if (_settings.size>maxWidth) (_settings.size = maxWidth);
+                (_settings.size>maxWidth)?size = maxWidth:size=_settings.size;
+
+                margin = (maxWidth-size)/2;
+                var attr = {height:size, width: size, margin: "0 "+margin+"px"};
                 g1.css(attr),
                 g2.css(attr),
                 g3.css(attr),
