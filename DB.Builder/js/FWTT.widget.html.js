@@ -92,6 +92,7 @@
                         fontFamily: "'Open Sans', sans-serif",
                     },
                     plotBorderColor: '#606063',
+                    backgroundColor:"#ffffff00",
                     // height: (46*self.getHeight()-6)+"px",
                 },
                 plotShadow: false,
