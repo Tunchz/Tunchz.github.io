@@ -171,6 +171,22 @@
             "name": "datasource_name",
             "display_name": "Datasource",
             "type": "urlOptionCalculated",
+
+        // }, 
+        // {
+        //     name: "value",
+        //     display_name: "Value",
+        //     type: "calculated"
+        // },
+        // {
+        //     name: "animate",
+        //     display_name: "Animate Value Changes",
+        //     type: "boolean",
+        //     default_value: !0
+        // }, {
+        //     name: "units",
+        //     display_name: "Units",
+        //     type: "text"
         },
         {
             name: "default_option",

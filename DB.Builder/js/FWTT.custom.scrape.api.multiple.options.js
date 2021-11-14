@@ -46,17 +46,17 @@
                     _.isArray(g.script_text) && (g.script_text = "[" + g.script_text.join(",") + "]"), (g.script_text.match(/;/g) || []).length <= 1 && -1 == g.script_text.indexOf("return") && (g.script_text = "return " + g.script_text);
                     var f;
                     try {
-                        f = new Function("response", g.script_text)
+                        f = new Function(["response","option"], g.script_text)
                     } catch (g) {
                         var h = g.script_text.replace(/"/g, '\\"').replace(/[\r\n]/g, " \\\n");
-                        f = new Function("response", 'return "' + h + '";')
+                        f = new Function(["response","option"], 'return "' + h + '";')
                     }
 
                     // console.log(">>>> return result : ", f(response));
                 }
                 b({
                     "option name":datasourceOptions[g.name]["optionNameArray"][datasourceOptions[g.name]["selectedOption"]],
-                    result: f?f(response):response
+                    result: f?f(response,option=datasourceOptions[g.name]["selectedOption"]):response
                 });
             });
 
