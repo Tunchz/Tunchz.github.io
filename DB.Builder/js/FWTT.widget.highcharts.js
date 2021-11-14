@@ -145,7 +145,7 @@
 					plotBorderColor: '#606063',
 					// height: (46*self.getHeight()-6)+"px",
 				},
-                                plotShadow: false,
+                plotShadow: false,
 				title: {
 					style: {
 						color: '#8b8b8b',
