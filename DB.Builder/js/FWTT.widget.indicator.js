@@ -74,7 +74,7 @@
         });
 
         //---------- 1x4---------------------------------------------------------------------------
-        freeboard.addStyle(".i1x4", "margin:auto;border-radius:50%;width:12px;height:12px;border:2px solid #3d3d3d;float:left;background-color:#222;transform: translateY(-50%);"); 
+        freeboard.addStyle(".i1x4", "margin:auto;border-radius:50%;width:12px;height:12px;border:2px solid #3d3d3d;float:left;background-color:#222;transform: translateY(-50%);margin-bottom:-7px"); 
         var indicator1x4Plugin = function(settings) {
             function update() {
                 maxWidth = ($(_self).width()/4);
@@ -87,10 +87,13 @@
                 g1.css(attr),
                 g2.css(attr),
                 g3.css(attr),
-                g4.css(attr)
+                g4.css(attr),
+                title.html(_settings.title),
+                (_settings.title)?container.css({"padding-top":(_h-_r*2)/2+7+"px", "margin-bottom": "-7px"}):container.css({"padding-top":(_h-_r*2)/2+"px", "margin-bottom": "0px"})
             }
             var _self, maxWidth, size = 1, margin,
                 container = $('<div class="indicator-light-container" style="height:50%;"></div>'),
+                title = $('<h2 class="section-title tw-title tw-td" style="position:absolute;left:0;top:0;overflow:visible;"></h2>'),
                 g1 = $('<div class="i1x4"></div>'),
                 g2 = $('<div class="i1x4"></div>'),
                 g3 = $('<div class="i1x4"></div>'),
@@ -102,7 +105,8 @@
             container.css({"padding-top":(_h-_r*2)/2})
             this.render = function(containerElement) {
                 _self = containerElement
-                $(_self).append(container)
+                $(_self).append(title).append(container)
+                update()
             }, this.onSettingsChanged = function(newSettings) {
                 _settings = newSettings
                 update()
@@ -129,6 +133,11 @@
             //     display_name: "Title",
             //     type: "text"
             // }, {
+                name: "title",
+                display_name: "Title",
+                type: "text",
+            }, 
+            {
                 name: "value1",
                 display_name: "Indicator #1 On",
                 type: "calculated"

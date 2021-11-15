@@ -16142,7 +16142,10 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 			// $w.css({"background-color": rgbaColor})
 			$w.addClass('transparent_bg');
 			// (widget_background_color)?$w.css("cssText","background-color: #38383800 !important;border:1px solid "+widget_background_color):$w.css("cssText","background-color: #38383800 !important;border:1px solid "+_default.widget_background_color);
-			$w.css("cssText","background-color: #38383800 !important;");
+			// $w.css("cssText","background-color: #38383800 !important;");
+			var c = widget_background_color?widget_background_color.slice(0,7):_default.widget_background_color.slice(0,7);
+			// $w.find('#transparent_overlay').remove();
+			$w.prepend($('<div id="transparent_overlay" style="position:absolute; width:100%; height:100%; top:0; left:0; background-color:'+c+'77;">'));
 		} else {
 			if (widget_background_color) {
 				var rgbaColor = widget_background_color
@@ -16157,7 +16160,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 				$w.css({"background-color": "inherit"});
 			}
 		}
-		border_radius?$w.css({"border-radius": border_radius+"px !important"}):$w.css({"border-radius": 0})
+		border_radius?$w.css({"border-radius": border_radius+"px"}):$w.css({"border-radius": _default.widget_border_radius+"px"})
 		
 
 		this.$widgets = this.$widgets.add($w);
@@ -16193,10 +16196,14 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 			// $widget.css({"background-color": rgbaColor})
 			$widget.addClass('transparent_bg');
 			// (widget_background_color)?$widget.css("cssText","background-color: #38383800 !important;border:1px solid "+widget_background_color):$widget.css("cssText","background-color: #38383800 !important;border:1px solid "+_default.widget_background_color);
-			$widget.css("cssText","background-color: #38383800 !important;");
+			// $widget.css("cssText","background-color: #38383800 !important;");
+			var c = widget_background_color?widget_background_color.slice(0,7):_default.widget_background_color.slice(0,7);
+			console.log("---> bg color : ", c)
+			$widget.find('#transparent_overlay').remove();
+			$widget.prepend($('<div id="transparent_overlay" style="position:absolute; width:100%; height:100%; top:0; left:0; background-color:'+c+'77;">'));
 		} else {
 			$widget.removeClass('transparent_bg');
-			
+			$widget.find('#transparent_overlay').remove();
 			if (widget_background_color) {
 				var rgbaColor = widget_background_color
 				if (widget_background_color.length>7) {
@@ -16211,7 +16218,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 			}
 
 		}
-		border_radius?$widget.css({"border-radius": border_radius+"px !important"}):$widget.css({"border-radius": 0})
+		border_radius||border_radius===0?$widget.css({"border-radius": border_radius+"px"}):$widget.css({"border-radius": _default.widget_border_radius+"px"})
 
 		var wgd = $widget.coords().grid;
 		size_x || (size_x = wgd.size_x);

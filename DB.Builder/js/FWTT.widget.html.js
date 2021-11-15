@@ -300,14 +300,23 @@
                 contrastTextColor: '#F0F0F3',
                 maskColor: 'rgba(255,255,255,0.3)'
             };
+            console.log("--- Highchart theme initialize")
         }
         var b = $('<div class="html-widget"></div>'),
-            c = a;
+            c = a,
+            _self;
         this.render = function(a) {
-            $(a).append(b);
-            initTheme();
+            _self=a;
+            $(_self).append(b);
+            // setTimeout(()=>{b.html(c.html)},100);
+            // b.html(c.html);
+            setTimeout(()=>{b.empty()},1000);
         }, this.onSettingsChanged = function(a) {
             c = a
+            // setTimeout(()=>{
+                b.empty();
+                // b.html(c.html);
+            // },2000);
             // initTheme();
         }, this.onCalculatedValueChanged = function(a, c) {
             "html" == a && b.html(c)

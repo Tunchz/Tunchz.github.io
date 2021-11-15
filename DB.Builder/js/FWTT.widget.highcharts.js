@@ -14,7 +14,7 @@
 	//
 	var HIGHCHARTS_ID = 0;
 	var ONE_SECOND_IN_MILIS = 1000;
-	var MAX_NUM_SERIES = 3;
+	var MAX_NUM_SERIES = 4;
 
 	//
 	// HELPERS
@@ -454,10 +454,10 @@
 		}
 
 		self.render = function(containerElement) {
-			// setTimeout(function() {
-				$(containerElement).append(thisWidgetContainer);
+			$(containerElement).append(thisWidgetContainer);
+			setTimeout(function() {
 				createWidget();
-			// }, 1000);
+			}, 1000);
 		}
 
 		self.getHeight = function() {

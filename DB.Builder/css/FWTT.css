@@ -507,15 +507,15 @@ li:hover header ul.pane-tools {
 }
 
 .gs_w.transparent_bg {
-	/*background-color: #2a2a2a66;*/
-	/*opacity: 0.5*/
-}
-
-.transparent_bg.active {
 	background-color: #2a2a2a00 !important;
 	opacity: 1 !important;
     border-width: 0 !important;
 }
+
+.transparent_bg.active #transparent_overlay {
+    background-color: #2a2a2a00 !important;
+}
+
 
 .sub-section {
     border-width: 0 !important;
@@ -742,6 +742,7 @@ svg {
 }
 
 li.gs_w section div div.widget div div.ldmap_placeholder_fullscreen {
+    /*position:static !important;*/
     z-index: 1000 !important;
 }
 
@@ -855,6 +856,35 @@ rect.highcharts-button-box {
 svg.highcharts-root path {
     z-index: 10;
 }
+
+
+/* Circular Progress */
+.pie_progress {
+  text-align: center;
+  position: relative;
+  transform-style: preserve-3d;
+}
+.pie_progress svg {
+  margin: 0 auto;
+}
+.pie_progress__content,
+.pie_progress__number,
+.pie_progress__label,
+.pie_progress__icon {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+.pie_progress__number {
+  /*font-size: 42px;*/
+}
+.pie_progress__label {
+  /*margin-top: 32px;*/
+  font-size: 12px;
+}
+
 
 
 

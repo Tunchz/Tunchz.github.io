@@ -2,7 +2,7 @@ var allow = false;
 var np;
 var _default = {
     //gridter settings
-    widget_margins:[2,2],
+    widget_margins:[3,3],
     widget_base_dimensions:[80,40],
     //dashboard configuration
     avatar: "https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png",
@@ -176,7 +176,7 @@ function FreeboardModel(a, b, c) {
                 c.deserialize(b), d.addDatasource(c)
             });
             var g = _.sortBy(e.panes, function(a) {
-                // comment out fixing mis rearrange widget position after refresh
+                // comment out fixing miss rearrange widget position after refresh
                 // return c.getPositionForScreenSize(a).row
             });
             _.each(g, function(a) {
