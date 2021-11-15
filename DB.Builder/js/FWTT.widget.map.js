@@ -139,12 +139,12 @@
         }
 
         function toolbars(bool) {
-            // map.Ui.Zoombar.visible(bool);
-            // map.Ui.Toolbar.visible(bool);
+            map.Ui.Zoombar.visible(false);
+            map.Ui.Toolbar.visible(false);
             map.Ui.Fullscreen.visible(bool);
-            // map.Ui.Crosshair.visible(bool);
-            // map.Ui.DPad.visible(bool);
-            // map.Ui.LayerSelector.visible(bool);
+            map.Ui.Crosshair.visible(false);
+            map.Ui.DPad.visible(false);
+            map.Ui.LayerSelector.visible(false);
         }
 
         function mapTraffic(traffic) {
