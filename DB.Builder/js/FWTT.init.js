@@ -18,6 +18,7 @@ var _default = {
     //widget setting
     widget_background_transparent:!1,
     mark_color: "#ff9900",
+    track_color: "#494949",
     maxmin_color: "#00ff00",
     pointer_color: "#ffffff",
     font_color: "#ffffff",
