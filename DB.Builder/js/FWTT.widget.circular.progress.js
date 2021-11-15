@@ -74,9 +74,9 @@
                 innerContainer = $('<div style="width:100%;height:100%;margin:0px;"></div>'),
                 // container = $('<div class="pie_progress" style="width:100%; height:100%;" role="progressbar" size="40" data-goal="0" data-barcolor="#FF9900" data-barsize="5" aria-valuemin="0" aria-valuemax="100"></div>'),
                 container = $('<div class="pie_progress" style="width:100%; height:100%;"></div>'),
-                label_top = $('<div class="pie_progress__label" style="top:25%;left:50%;transform:translateX(-50%) translateY(-50%);"></div>'),
-                label= $('<div class="pie_progress__label" style="left:50%;transform:translateX(-50%) translateY(-50%);"></div>'),
-                label_bottom = $('<div class="pie_progress__label" style="top:75%;left:50%;transform:translateX(-50%) translateY(-50%);"></div>'),
+                label_top = $('<div class="pie_progress__label" style="top:30%;left:50%;transform:translateX(-50%) translateY(-50%);"></div>'),
+                label= $('<div class="pie_progress__label" style="top:50%;left:50%;transform:translateX(-50%) translateY(-50%);"></div>'),
+                label_bottom = $('<div class="pie_progress__label" style="top:70%;left:50%;transform:translateX(-50%) translateY(-50%);"></div>'),
                 _settings = settings,
                 _self=this,
                 _containerElement,
@@ -93,8 +93,7 @@
             }, this.onSettingsChanged = function(newSettings) {
                 _settings = newSettings;
                 setTimeout(()=>{
-                    // container.empty()
-                    // container.append(label_top).append(label).append(label_bottom)
+
                 var circle_size = Math.min($(_containerElement).width(),$(_containerElement).height())-(2*parseInt(_settings.progress_margin?_settings.progress_margin:2)),
                     margin = ($(_containerElement).height()-circle_size)/2;
                 innerContainer.css({height: "calc(100% - "+margin*2+"px)", padding: margin+"px 0px"})
@@ -102,7 +101,7 @@
                 container.empty();
 
 
-                _bar = new ProgressBar.Circle("#"+_id/*container.attr('id')*/, {
+                _bar = new ProgressBar.Circle("#"+_id, {
                   strokeWidth: _settings.bar_size,
                   color: _settings.color_bar,
                   trailColor: _settings.color_track,
@@ -148,7 +147,7 @@
                 // settingName=='value_max'&&(container.attr("aria-valuemax", newValue)),
                 // settingName=='value_min'&&(container.attr("aria-valuemin", newValue)),
                 settingName=='label_top'&&(label_top.html(newValue)),
-                settingName=='label'&&(label.html(newValue)),
+                settingName=='label'&&(label.html(newValue),!_settings.label_top&&_settings.label_bottom?label.css({top:"45%"}):!_settings.label_bottom&&_settings.label_top?label.css({top:"55%"}):label.css({top:"50%"})),
                 settingName=='label_bottom'&&(label_bottom.html(newValue))
             }, this.onDispose = function() {
 
@@ -306,7 +305,7 @@
                     // container.append(label_top).append(label).append(label_bottom)
                 var circle_size = Math.min($(_containerElement).width()/2,$(_containerElement).height()-15)-(2*parseInt(_settings.progress_margin?_settings.progress_margin:2)),
                     margin = ($(_containerElement).height()-circle_size)/2;
-                console.log("---> circle_size : ",circle_size);
+                // console.log("---> circle_size : ",circle_size);
                 innerContainer.css({height: "calc(100% - "+margin*2+"px)", padding:  margin+"px 0px"})
                 progressContainer.css({width:2*circle_size+"px", height:(circle_size+15)+"px"})
                 container.empty();
