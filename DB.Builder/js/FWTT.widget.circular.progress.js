@@ -65,7 +65,7 @@
                 innerContainer.css({height: "calc(100% - "+margin*2+"px)", padding: margin+"px 0px"})
                 progressContainer.css({width:circle_size+"px", height:circle_size+"px"})
             }, this.getHeight = function() {
-                return (parseInt((_settings.height_block)?_settings.height_block:1))
+                return (parseInt((_settings.height_block)?_settings.height_block:2))
             }, this.onSettingsChanged(settings)
         };
         freeboard.loadWidgetPlugin({
@@ -170,9 +170,6 @@
 
         
         var semiCircularProgressPlugin = function(settings) {
-            function updateValue(){
-
-            }
 
             var progressContainer = $('<div style="width:100%;height:100%;margin:auto;overflow:visible;"></div>'),
                 innerContainer = $('<div style="width:100%;height:100%;margin:0px;overflow:visible;"></div>'),
@@ -192,7 +189,7 @@
 
                 $(_containerElement).append(innerContainer.append(progressContainer.append(container).append(label_top).append(label).append(label_bottom)))
                     var range = _settings.value_max - _settings.value_min
-                    _bar.animate(0.75);
+
             }, this.onSettingsChanged = function(newSettings) {
                 _settings = newSettings;
                 // container.asPieProgress('destroy');
@@ -239,7 +236,7 @@
 
                 _bar.animate(_settings.value);
 
-                },0)
+                },100)
 
                 label_top.css({"font-size":_settings.font_size_sublabel+'px', "color": _settings.color_sublabel}).html(_settings.label_top)
                 label.css({"font-size":_settings.font_size_label+'px', "color": _settings.color_label}).html(_settings.label)
@@ -261,7 +258,7 @@
                 innerContainer.css({height: "calc(100% - "+margin*2+"px)", padding:  margin+"px 0px"})
                 progressContainer.css({width:2*circle_size+"px", height:(circle_size+15)+"px"})
             }, this.getHeight = function() {
-                return (parseInt((_settings.height_block)?_settings.height_block:1))
+                return (parseInt((_settings.height_block)?_settings.height_block:2))
             }, this.onSettingsChanged(settings)
         };
         freeboard.loadWidgetPlugin({
