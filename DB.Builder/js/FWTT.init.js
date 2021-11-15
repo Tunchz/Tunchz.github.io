@@ -176,12 +176,13 @@ function FreeboardModel(a, b, c) {
                 c.deserialize(b), d.addDatasource(c)
             });
             var g = _.sortBy(e.panes, function(a) {
-                return c.getPositionForScreenSize(a).row
+                // comment out fixing mis rearrange widget position after refresh
+                // return c.getPositionForScreenSize(a).row
             });
             _.each(g, function(a) {
                 var c = new PaneModel(d, b);
                 c.deserialize(a), d.panes.push(c)
-            }), d.allow_edit() && 0 == d.panes().length && d.setEditing(!0), _.isFunction(f) && f(), c.processResize(!0)
+            }), d.allow_edit() && 0 == d.panes().length && d.setEditing(!1), _.isFunction(f) && f(), c.processResize(!0)
         }
         d.clearDashboard(), _.each(e.plugins, function(a) {
             d.addPluginSource(a)
