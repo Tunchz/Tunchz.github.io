@@ -2,7 +2,7 @@
 
         //---------- Circular Progress---------------------------------------------------------------------------
         // freeboard.addStyle(".pie_progress", "text-align: center;position: relative;transform-style: preserve-3d;");
-        freeboard.addStyle(".pie_progress svg", "stroke-linecap: round;");
+        // freeboard.addStyle(".pie_progress svg", "stroke-linecap: round;");
         // var circularProgressPlugin = function(settings) {
         //     var progressContainer = $('<div style="width:100%;height:100%;margin:0px auto;"></div>'),
         //         innerContainer = $('<div style="width:100%;height:100%;margin:0px;"></div>'),
@@ -142,6 +142,7 @@
                 label_bottom.css({"font-size":_settings.font_size_sublabel+'px', "color": _settings.color_sublabel}).html(_settings.label_bottom)
                 container.attr("data-barcolor", _settings.color_bar)
                 container.attr("data-barsize", _settings.bar_size)
+                _settings.round_bar?freeboard.addStyle("#"+_id+" svg", "stroke-linecap: round;"):freeboard.addStyle("#"+_id+" svg", "stroke-linecap: square;");
             }, this.onCalculatedValueChanged = function(settingName, newValue) {
                 settingName=='value'&&(_bar.animate(newValue)),
                 // settingName=='value_max'&&(container.attr("aria-valuemax", newValue)),
@@ -233,6 +234,12 @@
                 default_value: 5,
             }, 
             {
+                name: "round_bar",
+                display_name: "Round Bar",
+                type: "boolean",
+                default_value: !1,
+            }, 
+            {
                 name: "font_size_label",
                 display_name: "Main Label Font Size",
                 type: "integer",
@@ -265,7 +272,7 @@
 
 
         //---------- Semi Circular Progress---------------------------------------------------------------------------
-        freeboard.addStyle(".semiCicleContainer svg", "stroke-linecap: round;overflow:visible;");
+        // freeboard.addStyle(".semiCicleContainer svg", "stroke-linecap: round;overflow:visible;");
 
         
         var semiCircularProgressPlugin = function(settings) {
@@ -273,7 +280,7 @@
             var progressContainer = $('<div style="width:100%;height:100%;margin:auto;overflow:visible;"></div>'),
                 innerContainer = $('<div style="width:100%;height:100%;margin:0px;overflow:visible;"></div>'),
                 // container = $('<div class="pie_progress" style="width:100%; height:100%;" role="progressbar" size="40" data-goal="0" data-barcolor="#FF9900" data-barsize="5" aria-valuemin="0" aria-valuemax="100"></div>'),
-                container = $('<div class="semiCicleContainer" class="semicicle_progress" style="width:100%; height:100%;overflow:visible;text-align:center;"></div>'),
+                container = $('<div class="semiCicleContainer" class="semicicle_progress" style="overflow:visible;width:100%; height:100%;overflow:visible;text-align:center;"></div>'),
                 label_top = $('<div class="semicicle_progress__label pie_progress__label" style="display:absolute;top:25%;top:50%; left:50%;transform:translateY(-50%) translateX(-50%);"></div>'),
                 label= $('<div class="semicicle_progress__label pie_progress__label" style="display:absolute;top:100%; left:50%;transform:translateY(-100%) translateX(-50%);"></div>'),
                 label_bottom = $('<div class="semicicle_progress__label" style="top:75%;"></div>'),
@@ -344,6 +351,7 @@
                 // label_bottom.css({"font-size":_settings.font_size_sublabel+'px', "color": _settings.color_sublabel}).html(_settings.label_bottom)
                 // container.attr("data-barcolor", _settings.color_bar)
                 // container.attr("data-barsize", _settings.bar_size)
+                _settings.round_bar?freeboard.addStyle("#"+_id+" svg", "stroke-linecap: round;overflow:visible;"):freeboard.addStyle("#"+_id+" svg", "stroke-linecap: square;overflow:visible;");
             }, this.onCalculatedValueChanged = function(settingName, newValue) {
                 settingName=='value'&&(_bar.animate(newValue)),
                 // settingName=='value_max'&&(container.attr("aria-valuemax", newValue)),
@@ -432,6 +440,12 @@
                 display_name: "Track Size",
                 type: "integer",
                 default_value: 5,
+            }, 
+            {
+                name: "round_bar",
+                display_name: "Round Bar",
+                type: "boolean",
+                default_value: !1,
             }, 
             {
                 name: "font_size_label",
