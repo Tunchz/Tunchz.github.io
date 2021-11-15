@@ -737,6 +737,14 @@ svg {
     min-width: 0px !important;
     min-height: 0px !important;
 }
+.ldmap_placeholder_fullscreen {
+    z-index: 1000 !important;
+}
+
+li.gs_w section div div.widget div div.ldmap_placeholder_fullscreen {
+    z-index: 1000 !important;
+}
+
 
 /* Indicator Light */
 .indicator-light-container {
