@@ -3,8 +3,11 @@
     min-width: 756px;
 }*/
 
+#main-header {
+    top:0;
+}
 #admin-bar {
-	height:145px;
+    height:145px;
 }
 
 @media screen and (max-width: 750px) {

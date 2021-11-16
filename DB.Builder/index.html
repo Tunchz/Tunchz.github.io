@@ -42,10 +42,10 @@
 					"js/FWTT.custom.scrape.api.multiple.options.js",
 					"js/FWTT.widget.html.js",
 			        "js/FWTT.widget.text.sparkline.js",
+					"js/FWTT.widget.circular.progress.js",
 			        "js/FWTT.widget.pointer.js",
 			        "js/FWTT.widget.picture.js",
 			        "js/FWTT.widget.indicator.js",
-					"js/FWTT.widget.circular.progress.js",
 			        "js/FWTT.widget.altGuage.js",
 					"js/FWTT.widget.button.js",
 					"js/FWTT.widget.feedview.js",
@@ -130,6 +130,7 @@
 	<body ng-app="starter">
 		<div id="board-content">
 			<img id="dash-logo" data-bind="attr:{src: header_image}, visible:header_image()">
+			<div id="board-content-top"></div>
 			<div class="gridster responsive-column-width">
 				<ul data-bind="grid: true">
 				</ul>

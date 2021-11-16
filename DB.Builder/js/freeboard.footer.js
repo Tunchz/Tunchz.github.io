@@ -77,6 +77,15 @@ function updateFullScreenStatus() {
         // $("#header").addClass("full-screen");
         // $("#admin-bar").addClass("full-screen");
         $("#board-content-bottom").addClass("full-screen");
+
+        // Compensate top margin
+        setTimeout(()=>{
+            var topMargin = ($("body").height() - $("#board-content").height()-6)/2;
+            (topMargin<=0)&&(topMargin=0); 
+            console.log("------> view height : ",$("body").height());
+            console.log("------> content height : ",$("#board-content").height())
+            $("#board-content-top").css({'height': topMargin+"px"});
+        },500)
     } else {
         if (canEdit) $("#main-header").show()
         if (wasEditing) freeboard.setEditing(true, true)
@@ -91,6 +100,9 @@ function updateFullScreenStatus() {
         // $("#header").removeClass("full-screen");
         // $("#admin-bar").removeClass("full-screen");
         $("#board-content-bottom").removeClass("full-screen");
+
+
+        $("#board-content-top").css({'height': "0px"});
     }
 }
 

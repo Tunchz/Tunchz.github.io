@@ -2,7 +2,7 @@ var allow = false;
 var np;
 var _default = {
     //gridter settings
-    widget_margins:[2,2],
+    widget_margins:[3,3],
     widget_base_dimensions:[80,40],
     //dashboard configuration
     avatar: "https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png",
