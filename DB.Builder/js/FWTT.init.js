@@ -13,7 +13,7 @@ var _default = {
     widget_background_color: "#383838",
     widget_border_color: "#383838",
     widget_border_width: 0,
-    widget_border_radius: 0,
+    widget_border_radius: -9,
     widget_background_image: null,
     //widget setting
     widget_background_transparent:!1,
@@ -723,7 +723,7 @@ function PaneModel(a, b) {
         c.width(a)
         c.processSizeChange()
     }),  
-    this.border_radius = ko.observable(1), this.border_radius.subscribe(function(a) {
+    this.border_radius = ko.observable(), this.border_radius.subscribe(function(a) {
         c.processSizeChange()
     }), 
     this.widgets = ko.observableArray(), this.addWidget = function(a) {
@@ -788,7 +788,7 @@ function PaneModel(a, b) {
             widgets: a
         }
     }, this.deserialize = function(d) {
-        c.title(d.title), c.width(d.width), c.row = d.row, c.col = d.col, c.col_width(d.col_width || 1), c.transparent_bg(d.transparent_bg || !1), c.widget_background_color(d.widget_background_color/* || _default.widget_background_color*/), c.border_radius(d.border_radius/* || _default.widget_border_radius*/), _.each(d.widgets, function(d) {
+        c.title(d.title), c.width(d.width), c.row = d.row, c.col = d.col, c.col_width(d.col_width || 1), c.transparent_bg(d.transparent_bg || !1), c.widget_background_color(d.widget_background_color/* || _default.widget_background_color*/), c.border_radius(d.border_radius || _default.widget_border_radius), _.each(d.widgets, function(d) {
             var e = new WidgetModel(a, b);
             e.deserialize(d), c.widgets.push(e)
         })
