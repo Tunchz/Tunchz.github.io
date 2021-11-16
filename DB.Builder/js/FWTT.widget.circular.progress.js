@@ -146,9 +146,9 @@
                 settingName=='value'&&(_bar.animate(newValue)),
                 // settingName=='value_max'&&(container.attr("aria-valuemax", newValue)),
                 // settingName=='value_min'&&(container.attr("aria-valuemin", newValue)),
-                settingName=='label_top'&&(label_top.html(newValue)),
-                settingName=='label'&&(label.html(newValue),!_settings.label_top&&_settings.label_bottom?label.css({top:"45%"}):!_settings.label_bottom&&_settings.label_top?label.css({top:"55%"}):label.css({top:"50%"})),
-                settingName=='label_bottom'&&(label_bottom.html(newValue))
+                settingName=='label_top'&&(label_top.html(newValue?newValue:"-")),
+                settingName=='label'&&(label.html(newValue?newValue:"-"),!_settings.label_top&&_settings.label_bottom?label.css({top:"45%"}):!_settings.label_bottom&&_settings.label_top?label.css({top:"55%"}):label.css({top:"50%"})),
+                settingName=='label_bottom'&&(label_bottom.html(newValue?newValue:"-"))
             }, this.onDispose = function() {
 
             }, this.onSizeChanged = function() { 
@@ -355,8 +355,8 @@
                 settingName=='value'&&(_bar.animate(newValue)),
                 // settingName=='value_max'&&(container.attr("aria-valuemax", newValue)),
                 // settingName=='value_min'&&(container.attr("aria-valuemin", newValue)),
-                settingName=='label_top'&&(label_top.html(newValue)),
-                settingName=='label'&&(label.html(newValue))
+                settingName=='label_top'&&(label_top.html(newValue?newValue:"-")),
+                settingName=='label'&&(label.html(newValue?newValue:"-"))
                 // settingName=='label_bottom'&&(label_bottom.html(newValue))
             }, this.onDispose = function() {
                 

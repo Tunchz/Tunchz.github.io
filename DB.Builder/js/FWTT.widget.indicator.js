@@ -88,8 +88,8 @@
                 g2.css(attr),
                 g3.css(attr),
                 g4.css(attr),
-                title.html(_settings.title),
-                (_settings.title)?container.css({"padding-top":(_h-_r*2)/2+7+"px", "margin-bottom": "-7px"}):container.css({"padding-top":(_h-_r*2)/2+"px", "margin-bottom": "0px"})
+                // title.html(_settings.title),
+                (_settings.title)?container.css({"padding-top":(_h-_r*2)/2+5+"px", "margin-bottom": "-5px"}):container.css({"padding-top":(_h-_r*2)/2+"px", "margin-bottom": "0px"})
             }
             var _self, maxWidth, size = 1, margin,
                 container = $('<div class="indicator-light-container" style="height:50%;"></div>'),
@@ -120,6 +120,7 @@
                 settingName=='value2'&&(Boolean(newValue)&&_settings.color2? isOn[1] = !0:(isOn[1] = !1,g2.css(offAttr))),
                 settingName=='value3'&&(Boolean(newValue)&&_settings.color3? isOn[2] = !0:(isOn[2] = !1,g3.css(offAttr))), 
                 settingName=='value4'&&(Boolean(newValue)&&_settings.color4? isOn[3] = !0:(isOn[3] = !1,g4.css(offAttr))),
+                settingName=='title'&&(title.html(newValue)),
                 update()
             }, this.onDispose = function() {}, this.getHeight = function() {
                 return 1
@@ -135,7 +136,7 @@
             // }, {
                 name: "title",
                 display_name: "Title",
-                type: "text",
+                type: "calculated",
             }, 
             {
                 name: "value1",
