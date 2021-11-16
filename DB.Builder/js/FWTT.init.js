@@ -309,6 +309,10 @@ function FreeboardModel(a, b, c) {
         c.subGridColumnRight()
     }, this.addPane = function(a) {
         d.panes.push(a)
+    }, this.duplicatePane = function(a) {
+        var n = new PaneModel(d, b);
+        n.deserialize(a)
+        d.addPane(n)
     }, this.deletePane = function(a) {
         a.dispose(), d.panes.remove(a)
     }, this.deleteWidget = function(a) {
@@ -1566,7 +1570,12 @@ var freeboard = function() {
                 l = {},
                 m = void 0,
                 n = "";
-            "datasource" == k.type ? (l = b, n = "Datasource") : "widget" == k.type ? (l = c, n = "Widget") : "pane" == k.type && (n = "Pane"), $(a).click(function(f) {
+            "datasource" == k.type ? (l = b, n = "Datasource") : "widget" == k.type ? (l = c, n = "Widget") : "pane" == k.type && (n = "Pane"), 
+            $(a).contextmenu((f)=>{
+                f.preventDefault();
+                k.type=="widget"&&k.operation=="add"&&e.duplicatePane(i.serialize())
+            }),
+            $(a).click(function(f) {
                 if ("delete" == k.operation) {
                     var g = $("<p>Are you sure you want to delete this " + n + "?</p>");
                     new DialogBox(g, "Confirm Delete", "Yes", "No", function() {
@@ -1575,7 +1584,8 @@ var freeboard = function() {
                     e.saveLocalstorage();
                 } else {
                     var j = void 0;
-                    "datasource" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings(), m.name = i.name()) : "widget" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings()) : "pane" == k.type && (m = {}, "edit" == k.operation && (m.title = i.title(), m.col_width = i.col_width(), m.transparent_bg = i.transparent_bg(), m.widget_background_color = i.widget_background_color()), m.border_radius = i.border_radius(), m.border_width = i.border_width(), m.border_color = i.border_color(), l = {
+                    "datasource" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings(), m.name = i.name()) : "widget" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings()) : "pane" == k.type && (m = {}, "edit" == k.operation && (m.title = i.title(), m.col_width = i.col_width(), m.transparent_bg = i.transparent_bg(), m.widget_background_color = i.widget_background_color()), m.border_radius = i.border_radius(), m.border_width = i.border_width(), m.border_color = i.border_color(),
+                        l = {
                         settings: {
                             settings: [{
                             //     name: "title",
