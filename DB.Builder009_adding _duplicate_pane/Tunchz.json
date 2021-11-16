@@ -1,0 +1,381 @@
+{
+ "version": "application/octet-stream",
+ "header_image": "",
+ "allow_edit": true,
+ "plugins": [],
+ "panes": [
+  {
+   "width": 1,
+   "row": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1
+   },
+   "col": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1
+   },
+   "col_width": "5",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "size": "regular",
+      "value": "datasources[\"clock\"][\"full_string_value\"]",
+      "animate": true
+     }
+    }
+   ]
+  },
+  {
+   "title": "Map",
+   "width": 1,
+   "row": {
+    "3": 5,
+    "4": 5,
+    "5": 5,
+    "6": 5
+   },
+   "col": {
+    "3": 1,
+    "4": 1,
+    "5": 1,
+    "6": 1
+   },
+   "col_width": "5",
+   "widgets": [
+    {
+     "type": "google_map",
+     "settings": {
+      "lat": "datasources.WT.coord.lat",
+      "lon": "datasources.WT.coord.lon"
+     }
+    }
+   ]
+  },
+  {
+   "title": "Wind",
+   "width": 1,
+   "row": {
+    "1": 5,
+    "2": 5,
+    "3": 15,
+    "4": 15,
+    "5": 15,
+    "7": 5,
+    "8": 5
+   },
+   "col": {
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 3,
+    "5": 5,
+    "7": 2,
+    "8": 2
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "pointer",
+     "settings": {
+      "direction": "datasources[\"Weather\"][\"wind_direction\"]",
+      "value_text": "var dir = datasources.Weather.wind_direction;\n\nif(dir <= 22.5)\nreturn \"N\";\nelse if(dir <= 67.5)\nreturn \"NE\";\nelse if(dir <= 112.5)\nreturn \"E\";\nelse if(dir <= 157.5)\nreturn \"SE\";\nelse if(dir <= 202.5)\nreturn \"S\";\nelse if(dir <= 247.5)\nreturn \"SW\";\nelse if(dir <= 292.5)\nreturn \"W\";\nelse if(dir <= 337.5)\nreturn \"NW\";\nelse if(dir <= 360)\nreturn \"N\";"
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "size": "regular",
+      "value": "datasources.Weather.wind_speed",
+      "sparkline": true,
+      "animate": true,
+      "units": "MPH"
+     }
+    }
+   ]
+  },
+  {
+   "title": "Info",
+   "width": 1,
+   "row": {
+    "1": 19,
+    "2": 5,
+    "3": 15,
+    "4": 15,
+    "5": 15,
+    "7": 5,
+    "8": 5
+   },
+   "col": {
+    "1": 1,
+    "2": 1,
+    "3": 2,
+    "4": 2,
+    "5": 2,
+    "7": 1,
+    "8": 1
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "City",
+      "size": "regular",
+      "value": "datasources.Weather.place_name",
+      "animate": true
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "Conditions",
+      "size": "regular",
+      "value": "datasources.Weather.conditions",
+      "animate": true
+     }
+    }
+   ]
+  },
+  {
+   "title": "Daytime",
+   "width": 1,
+   "row": {
+    "1": 43,
+    "2": 19,
+    "3": 15,
+    "4": 15,
+    "5": 15,
+    "7": 13,
+    "8": 13
+   },
+   "col": {
+    "1": 1,
+    "2": 2,
+    "3": 1,
+    "4": 1,
+    "5": 1,
+    "7": 3,
+    "8": 3
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "Sunrise",
+      "size": "regular",
+      "value": "datasources.Weather.sunrise",
+      "animate": true
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "Sunset",
+      "size": "regular",
+      "value": "datasources.Weather.sunset",
+      "animate": true
+     }
+    }
+   ]
+  },
+  {
+   "title": "Humidity",
+   "width": 1,
+   "row": {
+    "1": 25,
+    "2": 11,
+    "3": 21,
+    "4": 21,
+    "5": 15,
+    "7": 5,
+    "8": 5
+   },
+   "col": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 3,
+    "7": 3,
+    "8": 3
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "gauge",
+     "settings": {
+      "value": "datasources.Weather.humidity",
+      "units": "%",
+      "min_value": 0,
+      "max_value": 100
+     }
+    }
+   ]
+  },
+  {
+   "title": "Temperature",
+   "width": 1,
+   "row": {
+    "1": 33,
+    "2": 19,
+    "3": 21,
+    "4": 21,
+    "5": 15,
+    "7": 11,
+    "8": 11
+   },
+   "col": {
+    "1": 1,
+    "2": 1,
+    "3": 2,
+    "4": 2,
+    "5": 4,
+    "7": 1,
+    "8": 1
+   },
+   "col_width": 1,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "Current",
+      "size": "regular",
+      "value": "datasources.Weather.current_temp",
+      "animate": true,
+      "units": "&deg;F"
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "High",
+      "size": "regular",
+      "value": "datasources.Weather.high_temp",
+      "animate": true,
+      "units": "&deg;F"
+     }
+    },
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "Low",
+      "size": "regular",
+      "value": "datasources.Weather.low_temp",
+      "animate": true,
+      "units": "&deg;F"
+     }
+    }
+   ]
+  },
+  {
+   "title": "Pressure",
+   "width": 1,
+   "row": {
+    "1": 49,
+    "2": 25,
+    "3": 29,
+    "4": 29,
+    "5": 21,
+    "7": 19,
+    "8": 19
+   },
+   "col": {
+    "1": 1,
+    "2": 2,
+    "3": 1,
+    "4": 1,
+    "5": 1,
+    "7": 2,
+    "8": 2
+   },
+   "col_width": "2",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "size": "regular",
+      "value": "datasources.Weather.pressure",
+      "sparkline": true,
+      "animate": true,
+      "units": "mb"
+     }
+    }
+   ]
+  },
+  {
+   "title": "Sparkline",
+   "width": 1,
+   "row": {
+    "3": 29,
+    "4": 29,
+    "5": 23,
+    "7": 33,
+    "8": 33
+   },
+   "col": {
+    "3": 2,
+    "4": 2,
+    "5": 3,
+    "7": 2,
+    "8": 2
+   },
+   "col_width": "2",
+   "widgets": [
+    {
+     "type": "sparkline",
+     "settings": {
+      "title": "",
+      "value": [
+       "datasources[\"Weather\"][\"current_temp\"]",
+       "datasources[\"Weather\"][\"pressure\"]",
+       "datasources[\"Weather\"][\"humidity\"]"
+      ],
+      "include_legend": true,
+      "legend": "อุณหภูมิ,ความดัน,ความชื้น"
+     }
+    }
+   ]
+  }
+ ],
+ "datasources": [
+  {
+   "name": "Weather",
+   "type": "openweathermap",
+   "settings": {
+    "name": "Weather",
+    "api_key": "11c0c23a7ff5628491401fffb23ef63b",
+    "location": "Bangkok",
+    "units": "metric",
+    "refresh": 10
+   }
+  },
+  {
+   "name": "clock",
+   "type": "clock",
+   "settings": {
+    "refresh": 1
+   }
+  },
+  {
+   "name": "WT",
+   "type": "JSON",
+   "settings": {
+    "name": "WT",
+    "url": "https://api.openweathermap.org/data/2.5/weather?q=Bangkok&appid=11c0c23a7ff5628491401fffb23ef63b",
+    "use_thingproxy": true,
+    "refresh": 10,
+    "method": "GET"
+   }
+  }
+ ],
+ "columns": 5,
+ "theme": "default"
+}

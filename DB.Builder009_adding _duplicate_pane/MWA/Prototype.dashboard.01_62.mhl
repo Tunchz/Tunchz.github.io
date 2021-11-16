@@ -1,0 +1,2142 @@
+{
+ "version": "-Tunchz/FWTT-",
+ "header_image": "",
+ "dashboard_title": "Prototype.dashboard.01",
+ "avatar": "https://tunchz.github.io/CIA/MWALogo.png",
+ "min_cols": 12,
+ "background_image": "https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png",
+ "background_color": "#212121",
+ "widget_background_color": "#383838cc",
+ "widget_border_color": "#FFFFFF",
+ "widget_border_width": 0,
+ "widget_border_radius": "5",
+ "widget_background_image": "",
+ "fullscreen_auto_topmargin": true,
+ "fullscreen_topmargin": "0",
+ "allow_edit": true,
+ "plugins": [],
+ "panes": [
+  {
+   "width": 11,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "14": 1
+   },
+   "col": {
+    "4": 2,
+    "7": 4,
+    "11": 2,
+    "12": 2,
+    "13": 3,
+    "14": 4
+   },
+   "col_width": 11,
+   "transparent_bg": false,
+   "widget_background_color": "",
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "",
+      "value": "var s = datasources[\"MWA Option Url\"][\"option name\"];\nreturn 'สถานภาพสถานีสูบส่ง <span style=\"font-size:32px;\">'+s+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';",
+      "animate": false,
+      "with_comma": false,
+      "font_size": "24",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 1,
+    "13": 1,
+    "14": 1,
+    "22": 1
+   },
+   "col": {
+    "4": 1,
+    "7": 1,
+    "12": 1,
+    "13": 2,
+    "14": 3,
+    "22": 1
+   },
+   "col_width": 1,
+   "transparent_bg": true,
+   "widget_background_color": "",
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "picture",
+     "settings": {
+      "src": "https://tunchz.github.io/CIA/MWALogo.png",
+      "margin": 2,
+      "refresh": 0,
+      "height_block": 2
+     }
+    }
+   ]
+  },
+  {
+   "width": 3,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "10": 2,
+    "12": 2,
+    "13": 2,
+    "14": 2,
+    "22": 2
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "10": 10,
+    "12": 10,
+    "13": 11,
+    "14": 12,
+    "22": 10
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "widget_background_color": "",
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "url_option_selector_widget",
+     "settings": {
+      "title": "<div style=\"font-size:14px;margin-top: 17px;\">เลือกสถานี<div>",
+      "datasource_name": "MWA Option Url",
+      "default_option": "2",
+      "font_size": "20",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "line_color": "#f90",
+      "line_thickness": 1,
+      "background_color": "",
+      "left_margin": "70",
+      "right_margin": "5",
+      "height_block": 1
+     }
+    }
+   ]
+  },
+  {
+   "width": 8,
+   "row": {
+    "4": 2,
+    "7": 2,
+    "12": 2,
+    "13": 2,
+    "14": 2,
+    "16": 2,
+    "17": 2,
+    "18": 2,
+    "19": 2,
+    "22": 2,
+    "24": 2
+   },
+   "col": {
+    "4": 2,
+    "7": 2,
+    "12": 2,
+    "13": 3,
+    "14": 4,
+    "16": 2,
+    "17": 2,
+    "18": 2,
+    "19": 2,
+    "22": 2,
+    "24": 2
+   },
+   "col_width": 8,
+   "transparent_bg": false,
+   "widget_background_color": "",
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "value": "datasources[\"นาฬิกา\"][\"full_string_value\"]",
+      "animate": true,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 3,
+    "13": 3,
+    "14": 3
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 11,
+    "13": 12,
+    "14": 13
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "border_radius": null,
+   "border_width": "1",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/water_distribution.png' style='width:30px; height:30px; position:absolute; top:5px; left:10px;'></img>",
+      "value": "<div style='margin-top:-6px'>Total Dist&nbsp;&nbsp;&nbsp;</div>",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "20",
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 3,
+    "12": 3,
+    "13": 3,
+    "14": 3
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 5,
+    "13": 6,
+    "14": 7
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "border_radius": null,
+   "border_width": "1",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/pump_flow.png' style='width:30px; height:30px; position:absolute; top:5px; left:10px;'></img>",
+      "value": "<div style='margin-top:-6px'>Pump Flow</div>",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "20",
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 3,
+    "13": 3,
+    "14": 3
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 9,
+    "13": 10,
+    "14": 11
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "border_radius": null,
+   "border_width": "1",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/flow_pressure.png' style='width:30px; height:30px; position:absolute; top:5px; left:10px;'></img>",
+      "value": "<div style='margin-top:-6px'>Dist F & P&nbsp;&nbsp;</div>",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "20",
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 3,
+    "13": 3,
+    "14": 3
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 7,
+    "13": 8,
+    "14": 9
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "border_radius": null,
+   "border_width": "1",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/suct_disch.png' style='width:30px; height:30px; position:absolute; top:5px; left:10px;'></img>",
+      "value": "<div style='margin-top:-6px'>Suct | Disch</div>",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 3,
+    "7": 3,
+    "12": 3,
+    "13": 3,
+    "14": 3
+   },
+   "col": {
+    "4": 1,
+    "7": 3,
+    "12": 1,
+    "13": 2,
+    "14": 3
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "border_radius": null,
+   "border_width": "1",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/reserve.png' style='width:30px; height:30px; position:absolute; top:5px; left:10px;'></img>",
+      "value": "<div style='margin-top:-6px'>Reserve &nbsp;&nbsp;&nbsp;</div>",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "20",
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 3,
+    "7": 3,
+    "12": 3,
+    "13": 3,
+    "14": 3
+   },
+   "col": {
+    "4": 4,
+    "7": 5,
+    "12": 3,
+    "13": 4,
+    "14": 5
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "border_radius": null,
+   "border_width": "1",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/inlet_flow2.png' style='width:40px; height:40px; position:absolute; top:0px; left:5px;'></img>",
+      "value": "<div style='margin-top:-6px'>Inlet Flow&nbsp;&nbsp;&nbsp;</div>",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "20",
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 6,
+    "13": 4,
+    "14": 4,
+    "16": 6,
+    "17": 6,
+    "31": 6
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 3,
+    "13": 4,
+    "14": 5,
+    "16": 11,
+    "17": 11,
+    "31": 11
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"per  Day | per Hour   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.INLET/Day\"][\"unit\"]+\"</span>\"",
+      "value": "return datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.INLET/Day\"][\"val\"]+\" | \"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.INLET/Hr\"][\"val\"];\n",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "16",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 6,
+    "13": 4,
+    "14": 4,
+    "16": 3,
+    "17": 3,
+    "33": 3
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 11,
+    "13": 12,
+    "14": 13,
+    "16": 12,
+    "17": 12,
+    "33": 12
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"per  Day | per Hour  <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.D.ALL/Day\"][\"unit\"]+\"</span>\"",
+      "value": "return (datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.D.ALL/Day\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.D.ALL/Day\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\n    \" | \"+(datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.D.ALL/Hr\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.D.ALL/Hr\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\");",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "16",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 4,
+    "12": 6,
+    "13": 4,
+    "14": 4
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 5,
+    "13": 6,
+    "14": 7
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"<span style='float:left;font-size:12px;'># Operational</span><span style='color:#FF000077;float:right;font-size:12px;'># Error</span>\"",
+      "value": "return ((datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.1\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.2\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.3\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.4\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.5\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.6\"][\"val\"]!=null?1:0)) +\n    \"<span style='font-size:10px'> readings</span> | <span style='color:red;'>\" +\n(([\"-Over\",\"+Over\",\"0\"].includes(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.1\"][\"val\"])?1:0) +\n([\"-Over\",\"+Over\",\"0\"].includes(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.2\"][\"val\"])?1:0) +\n([\"-Over\",\"+Over\",\"0\"].includes(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.3\"][\"val\"])?1:0) +\n([\"-Over\",\"+Over\",\"0\"].includes(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.4\"][\"val\"])?1:0) +\n([\"-Over\",\"+Over\",\"0\"].includes(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.5\"][\"val\"])?1:0) +\n([\"-Over\",\"+Over\",\"0\"].includes(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.6\"][\"val\"])?1:0)) +  \"</span><span style='color:red;font-size:10px'> readings</span>\"",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "16",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 6,
+    "13": 4,
+    "14": 4
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 9,
+    "13": 10,
+    "14": 11
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"<span style='float:left;font-size:12px;'># Flow</span><span style='float:right;font-size:12px;'># Pressure</span>\"",
+      "value": "((datasources[\"MWA Option Url\"][\"result\"][\"DF1\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"DF2\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"DF3\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"DF4\"][\"val\"]!=null?1:0)) +\n\"<span style='font-size:10px'> readings</span> | \"+\n((datasources[\"MWA Option Url\"][\"result\"][\"DP1\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"DP2\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"DP3\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"DP4\"][\"val\"]!=null?1:0)) + \"<span style='font-size:10px'> readings</span>\"",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "16",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 6,
+    "13": 4,
+    "14": 4
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 7,
+    "13": 8,
+    "14": 9
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"<span style='float:left;font-size:12px;'># SUCT</span><span style='float:right;font-size:12px;'># DISCH</span>\"",
+      "value": "((datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP1\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP2\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP3\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP4\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP5\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP6\"][\"val\"]!=null?1:0)) +\n\"<span style='font-size:10px'> readings</span> | \"+\n((datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP1\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP2\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP3\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP4\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP5\"][\"val\"]!=null?1:0) +\n(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP6\"][\"val\"]!=null?1:0)) + \"<span style='font-size:10px'> readings</span>\"",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "16",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 3,
+    "7": 3,
+    "12": 6,
+    "13": 4,
+    "14": 4,
+    "23": 3,
+    "24": 3,
+    "25": 3,
+    "26": 3,
+    "29": 3,
+    "32": 3
+   },
+   "col": {
+    "4": 1,
+    "7": 1,
+    "12": 1,
+    "13": 2,
+    "14": 3,
+    "23": 1,
+    "24": 1,
+    "25": 1,
+    "26": 1,
+    "29": 1,
+    "32": 1
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "widget_background_color": "",
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"parameter\"]",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"val\"]",
+      "units": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"unit\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "24",
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "sparkline": true,
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "indicator_1x4",
+     "settings": {
+      "title": "return '<div style=\"margin-top:-8px;text-align:center;\">'+\n\"&nbsp;&nbsp;&nbsp;\"+ datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"alarmLabel\"][0]+\n\"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"+\ndatasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"alarmLabel\"][1]+\n\"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"+\ndatasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"alarmLabel\"][2]+\n\"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"+\ndatasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"alarmLabel\"][3]+\n\"&nbsp;\"+\n'</div>'",
+      "value1": "1",
+      "color1": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"alarmStatus\"][0]",
+      "value2": "1",
+      "color2": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"alarmStatus\"][1]",
+      "value3": "1",
+      "color3": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"alarmStatus\"][2]",
+      "value4": "1",
+      "color4": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"alarmStatus\"][3]",
+      "size": 16
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 7,
+    "13": 6,
+    "14": 6,
+    "18": 7,
+    "35": 7
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 11,
+    "13": 12,
+    "14": 13,
+    "18": 11,
+    "35": 11
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF1\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF1\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF1\"][\"val\"]",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "24",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"per  Day | per Hour  <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF1/Day\"][\"unit\"]+\"</span>\"",
+      "value": "return (datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF1/Day\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF1/Day\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\n    \" | \"+(datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF1/Hr\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF1/Hr\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\");",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "16",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 7,
+    "13": 6,
+    "14": 6
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 9,
+    "13": 10,
+    "14": 11
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"DF1\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"DF1\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"DF1\"][\"val\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"DP1\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"DP1\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"DP1\"][\"val\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 7,
+    "13": 6,
+    "14": 6
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 7,
+    "13": 8,
+    "14": 9
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"<span style='float:left;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP1\"][\"parameter\"]+\" | \"+datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP1\"][\"parameter\"]+\n    \"</span><span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP1\"][\"unit\"]+\"</span>\"\n",
+      "value": "return (datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP1\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP1\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\n    \" | \"+(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP1\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP1\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\");",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"<span style='float:left;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP2\"][\"parameter\"]+\" | \"+datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP2\"][\"parameter\"]+\n    \"</span><span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP2\"][\"unit\"]+\"</span>\"",
+      "value": "return (datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP2\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP2\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\n    \" | \"+(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP2\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP2\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\");",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"<span style='float:left;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP3\"][\"parameter\"]+\" | \"+datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP3\"][\"parameter\"]+\n    \"</span><span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP3\"][\"unit\"]+\"</span>\"",
+      "value": "return (datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP3\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP3\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\n    \" | \"+(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP3\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP3\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\");",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"<span style='float:left;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP4\"][\"parameter\"]+\" | \"+datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP4\"][\"parameter\"]+\n    \"</span><span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP4\"][\"unit\"]+\"</span>\"",
+      "value": "return (datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP4\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP4\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\n    \" | \"+(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP4\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP4\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\");",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"<span style='float:left;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP5\"][\"parameter\"]+\" | \"+datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP5\"][\"parameter\"]+\n    \"</span><span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP5\"][\"unit\"]+\"</span>\"",
+      "value": "return (datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP5\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP5\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\n    \" | \"+(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP5\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP5\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\");",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"<span style='float:left;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP6\"][\"parameter\"]+\" | \"+datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP6\"][\"parameter\"]+\n    \"</span><span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP6\"][\"unit\"]+\"</span>\"",
+      "value": "return (datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP6\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP6\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\n    \" | \"+(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP6\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP6\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\");",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 3,
+    "7": 3,
+    "12": 7,
+    "13": 6,
+    "14": 6,
+    "30": 3
+   },
+   "col": {
+    "4": 4,
+    "7": 4,
+    "12": 3,
+    "13": 4,
+    "14": 5,
+    "30": 4
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "datasources[\"MWA Option Url\"][\"result\"][\"INLET.FLOW\"][\"parameter\"]",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"INLET.FLOW\"][\"val\"]",
+      "units": "datasources[\"MWA Option Url\"][\"result\"][\"INLET.FLOW\"][\"unit\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "24",
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "sparkline": true,
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "datasources[\"MWA Option Url\"][\"result\"][\"INLET.PT.3500\"][\"parameter\"]",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"INLET.PT.3500\"][\"val\"]",
+      "units": "datasources[\"MWA Option Url\"][\"result\"][\"INLET.PT.3500\"][\"unit\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "sparkline": true,
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "datasources[\"MWA Option Url\"][\"result\"][\"INLET.DIST\"][\"parameter\"]",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"INLET.DIST\"][\"val\"]",
+      "units": "datasources[\"MWA Option Url\"][\"result\"][\"INLET.DIST\"][\"unit\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "sparkline": false,
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 3,
+    "7": 6,
+    "12": 7,
+    "13": 6,
+    "14": 6
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 5,
+    "13": 6,
+    "14": 7
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.1\"][\"parameter\"]\nreturn datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.1\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.1\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.1\"][\"val\"]",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "return [\"-Over\",\"+Over\",\"0\"].includes(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.1\"][\"val\"])?\"#FF0000\":\"#FFFFFF\";",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.2\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.2\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.2\"][\"val\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "return [\"-Over\",\"+Over\",\"0\"].includes(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.2\"][\"val\"])?\"#FF0000\":\"#FFFFFF\";",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.3\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.3\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.3\"][\"val\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "return [\"-Over\",\"+Over\",\"0\"].includes(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.3\"][\"val\"])?\"#FF0000\":\"#FFFFFF\";",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.4\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.4\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.4\"][\"val\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "return [\"-Over\",\"+Over\",\"0\"].includes(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.4\"][\"val\"])?\"#FF0000\":\"#FFFFFF\";",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.5\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.5\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.5\"][\"val\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "return [\"-Over\",\"+Over\",\"0\"].includes(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.5\"][\"val\"])?\"#FF0000\":\"#FFFFFF\";",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.6\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.6\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.6\"][\"val\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "return [\"-Over\",\"+Over\",\"0\"].includes(datasources[\"MWA Option Url\"][\"result\"][\"FLOW.PUMP.6\"][\"val\"])?\"#FF0000\":\"#FFFFFF\";",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 9,
+    "13": 8,
+    "14": 8,
+    "18": 7,
+    "19": 7,
+    "36": 7
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 11,
+    "13": 12,
+    "14": 13,
+    "18": 11,
+    "19": 11,
+    "36": 11
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF2\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF2\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF2\"][\"val\"]",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "24",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"per  Day | per Hour  <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF2/Day\"][\"unit\"]+\"</span>\"",
+      "value": "return (datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF2/Day\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF2/Day\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\n    \" | \"+(datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF2/Hr\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF2/Hr\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\");",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "16",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 9,
+    "13": 8,
+    "14": 8
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 9,
+    "13": 10,
+    "14": 11
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"DF2\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"DF2\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"DF2\"][\"val\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"DP2\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"DP2\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"DP2\"][\"val\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 5,
+    "7": 5,
+    "12": 9,
+    "13": 8,
+    "14": 8,
+    "24": 5,
+    "25": 5,
+    "26": 5,
+    "27": 5,
+    "30": 5,
+    "31": 5,
+    "34": 5
+   },
+   "col": {
+    "4": 1,
+    "7": 1,
+    "12": 1,
+    "13": 2,
+    "14": 3,
+    "24": 1,
+    "25": 1,
+    "26": 1,
+    "27": 1,
+    "30": 1,
+    "31": 1,
+    "34": 1
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.2\"][\"parameter\"]",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.2\"][\"val\"]",
+      "units": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.2\"][\"unit\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "24",
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "sparkline": true,
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "indicator_1x4",
+     "settings": {
+      "title": "return '<div style=\"margin-top:-8px;text-align:center;\">'+\n\"&nbsp;&nbsp;&nbsp;\"+ datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.2\"][\"alarmLabel\"][0]+\n\"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"+\ndatasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.2\"][\"alarmLabel\"][1]+\n\"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"+\ndatasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.2\"][\"alarmLabel\"][2]+\n\"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"+\ndatasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.2\"][\"alarmLabel\"][3]+\n\"&nbsp;\"+\n'</div>'",
+      "value1": "1",
+      "color1": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.2\"][\"alarmStatus\"][0]",
+      "value2": "1",
+      "color2": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.2\"][\"alarmStatus\"][1]",
+      "value3": "1",
+      "color3": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.2\"][\"alarmStatus\"][2]",
+      "value4": "1",
+      "color4": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.2\"][\"alarmStatus\"][3]",
+      "size": 16
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 11,
+    "13": 10,
+    "14": 10
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 9,
+    "13": 10,
+    "14": 11
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"DF3\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"DF3\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"DF3\"][\"val\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"DP3\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"DP3\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"DP3\"][\"val\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 11,
+    "13": 10,
+    "14": 10,
+    "18": 7,
+    "20": 7,
+    "37": 7
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 11,
+    "13": 12,
+    "14": 13,
+    "18": 11,
+    "20": 11,
+    "37": 11
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF3\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF3\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF3\"][\"val\"]",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "24",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"per  Day | per Hour  <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF3/Day\"][\"unit\"]+\"</span>\"",
+      "value": "return (datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF3/Day\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF3/Day\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\n    \" | \"+(datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF3/Hr\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF3/Hr\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\");",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "16",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 13,
+    "13": 12,
+    "14": 12,
+    "18": 7,
+    "21": 7,
+    "38": 7
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 11,
+    "13": 12,
+    "14": 13,
+    "18": 11,
+    "21": 11,
+    "38": 11
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4\"][\"val\"]",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "24",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"per  Day | per Hour  <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Day\"][\"unit\"]+\"</span>\"",
+      "value": "return (datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Day\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Day\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\n    \" | \"+(datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Hr\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Hr\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\");",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "16",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 13,
+    "13": 12,
+    "14": 12
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 9,
+    "13": 10,
+    "14": 11
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"DF4\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"DF4\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"DF4\"][\"val\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"DP4\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"DP4\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"DP4\"][\"val\"]",
+      "animate": true,
+      "with_comma": false,
+      "font_size": 20,
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 4,
+   "row": {
+    "4": 1,
+    "7": 12,
+    "12": 12
+   },
+   "col": {
+    "4": 4,
+    "7": 1,
+    "12": 1
+   },
+   "col_width": 4,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "longdo map",
+     "settings": {
+      "lat": "datasources[\"MWA Option Url\"][\"result\"][\"coor\"][\"lat\"]",
+      "lon": "datasources[\"MWA Option Url\"][\"result\"][\"coor\"][\"lon\"]",
+      "zoom": 13,
+      "style": "normal",
+      "traffic": 0,
+      "toolbar": true,
+      "opacity": "1",
+      "height_block": "6"
+     }
+    }
+   ]
+  },
+  {
+   "width": 4,
+   "row": {
+    "4": 1,
+    "7": 13,
+    "12": 13
+   },
+   "col": {
+    "4": 4,
+    "7": 5,
+    "12": 5
+   },
+   "col_width": 4,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "html_highchart",
+     "settings": {
+      "html": "var container =$(\"#container4\")\n\nvar totalSuct=0, totalDisch=0, numSuct=0, numDisch=0;\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP1\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP1\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP2\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP2\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP3\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP3\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP4\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP4\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP5\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP5\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP6\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP6\"][\"val\"]),numSuct+=1);\n\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP1\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP1\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP2\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP2\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP3\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP3\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP4\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP4\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP5\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP5\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP6\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP6\"][\"val\"]),numDisch+=1);\n\n\n// data for scatter plot x:suct, y:disch\nvar data=[\n    { x: Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP1\"][\"val\"]), y: Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP1\"][\"val\"]), z: datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP1\"][\"val\"]?Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP1\"][\"val\"]):0, name: '#1', desc: 'PUMP#1' },\n    { x: Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP2\"][\"val\"]), y: Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP2\"][\"val\"]), z: datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP2\"][\"val\"]?Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP2\"][\"val\"]):0, name: '#2', desc: 'PUMP#2' },\n    { x: Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP3\"][\"val\"]), y: Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP3\"][\"val\"]), z: datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP3\"][\"val\"]?Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP3\"][\"val\"]):0, name: '#3', desc: 'PUMP#3' },\n    { x: Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP4\"][\"val\"]), y: Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP4\"][\"val\"]), z: datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP4\"][\"val\"]?Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP4\"][\"val\"]):0, name: '#4', desc: 'PUMP#4' },\n    { x: Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP5\"][\"val\"]), y: Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP5\"][\"val\"]), z: datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP5\"][\"val\"]?Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP5\"][\"val\"]):0, name: '#5', desc: 'PUMP#5' },\n    { x: Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP6\"][\"val\"]), y: Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP6\"][\"val\"]), z: datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP6\"][\"val\"]?Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP6\"][\"val\"]):0, name: '#6', desc: 'PUMP#6' }\n];\n    \n//console.log(\"---> : \",container.highcharts())\nif (!container.highcharts()) {\n    // ------------ create chart\ncontainer =$('<div id=\"container4\" style=\"height:100%; padding:0px;\"></div>')\n    \nsetTimeout(()=>{\n    \n\nvar option = {\n\n    chart: {\n        type: 'bubble',\n        //plotBorderWidth: 1,\n        zoomType: 'xy',\n        backgroundColor: \"#fff0\",\n    },\n\n    legend: {\n        enabled: false\n    },\n\n    title: {\n        text: 'SUCT.PUMP vs. DISCH.PUMP in mH2O',\n        style: {\n        \tfontSize:10,\n    \t}\n    },\n\n    //subtitle: {\n    //    text: 'Source: <a href=\"http://www.euromonitor.com/\">Euromonitor</a> and <a href=\"https://data.oecd.org/\">OECD</a>'\n    //},\n\n    accessibility: {\n        point: {\n            valueDescriptionFormat: '{index}. {point.name}, SUCT: {point.x} mH2O, DISCH: {point.y} mH2O.'\n        }\n    },\n\n    xAxis: {\n    \t//visible: false,\n    lineColor:\"#fff0\",\n    \ttickInterval: 1,\n        gridLineWidth: 1,\n\t\tgridLineDashStyle: \"dot\",\n        tickWidth: 0,\n        title: {\n            text: 'SUCT (mH20)'\n        },\n        labels: {\n            format: '{value}'\n        },\n        plotLines: [{\n            color: '#fffc',\n            dashStyle: 'dash',\n            width: 1,\n            //value: (totalSuct/numSuct).toFixed(2),\n            label: {\n                rotation: -90,\n                align: 'right',\n                x: -3,\n                style: {\n                    //fontStyle: 'italic',\n                    color: \"#fffc\",\n                    fontSize: 10,\n                },\n                text: 'avg. SUCT.PUMP'\n            },\n            //zIndex: 3\n        }],\n        accessibility: {\n            rangeDescription: 'Range: 0 to 5 mH2O.'\n        }\n    },\n\n    yAxis: {\n    \t//visible: false,\n    \ttickInterval: 5,\n        gridLineWidth: 1,\n\t\tgridLineDashStyle: \"dot\",\n        tickWidth: 0,\n        startOnTick: false,\n        endOnTick: false,\n        title: {\n            text: 'DISCH (mH20)'\n        },\n        labels: {\n            format: '{value}'\n        },\n        maxPadding: 0.2,\n        plotLines: [{\n            color: '#fffc',\n            dashStyle: 'dash',\n            width: 1,\n            //value: (totalDisch/numDisch).toFixed(2),\n            label: {\n                align: 'left',\n                style: {\n                    //fontStyle: 'italic',\n                    color: \"#fffc\",\n                    fontSize: 10,\n                },\n                text: 'avg. DISCH.PUMP',\n                x: 10\n            },\n            //zIndex: 3\n        }],\n        accessibility: {\n            rangeDescription: 'Range: 0 to 40 mH2O.'\n        }\n    },\n\n    tooltip: {\n        useHTML: true,\n        headerFormat: '<table>',\n        pointFormat: '<tr><th colspan=\"2\"><h2>▸{point.desc}</h2></th></tr>' +\n            '<tr><th>SUCT.PUMP:</th><td>{point.x} mH2O</td></tr>' +\n            '<tr><th>DISCH.PUMP:</th><td>{point.y} mH2O</td></tr>' +\n            '<tr><th></td></tr>',\n        footerFormat: '</table>',\n        followPointer: true\n    },\n\n    plotOptions: {\n        series: {\n            color: \"#F90\",\n            dataLabels: {\n                enabled: true,\n                format: '{point.name}',\n           \t\tstyle: {\n           \t\t\tfontSize: 10,\n           \t\t}\n            }\n        }\n    },\n\t\n\n    \n    series: [{\n        data: data\n    }]\n\n};\n\n                var theme = {\n                global: {\n                    useUTC: false\n                },\n                colors: [\"#2b908f\", \"#90ee7e\", \"#f45b5b\", \"#7798BF\", \"#aaeeee\",\n                    \"#ff0066\", \"#eeaaee\", \"#55BF3B\", \"#DF5353\", \"#7798BF\", \"#aaeeee\"\n                ],\n                chart: {\n                    backgroundColor: \"#fff0\",\n                    style: {\n                        fontFamily: \"'Open Sans', sans-serif\",\n                    },\n                    plotBorderColor: '#606063',\n                    // height: (46*self.getHeight()-6)+\"px\",\n                },\n                plotShadow: false,\n                title: {\n                    style: {\n                        color: '#8b8b8b',\n                        fontSize: '12px',\n                    },\n                    align: \"left\",\n                },\n                subtitle: {\n                    style: {\n                        color: '#E0E0E3',\n                        textTransform: 'uppercase'\n                    }\n                },\n                xAxis: {\n                    gridLineColor: '#70707399',\n                    labels: {\n                        style: {\n                            color: '#E0E0E3',\n                            fontSize: '8px',\n                        }\n                    },\n                    lineColor: '#707073',\n                    minorGridLineColor: '#50505377',\n                    tickColor: '#707073',\n                    title: {\n                        style: {\n                            color: '#A0A0A3',\n                            fontSize: '10px',\n                        }\n                    }\n                },\n                yAxis: {\n                    gridLineColor: '#70707399',\n                    // gridLineDashStyle: \"dash\",\n                    labels: {\n                        style: {\n                            color: '#E0E0E3',\n                            fontSize: '8px',\n                        }\n                    },\n                    lineColor: '#707073',\n                    minorGridLineColor: '#50505377',\n                    minorGridLineDashStyle: \"dot\",\n                    tickColor: '#707073',\n                    tickWidth: 0,\n                    title: {\n                        style: {\n                            color: '#A0A0A3',\n                            fontSize: '10px',\n                        }\n                    }\n                },\n                tooltip: {\n                    backgroundColor: 'rgba(0, 0, 0, 0.85)',\n                    style: {\n                        color: '#F0F0F0'\n                    }\n                },\n                plotOptions: {\n                    series: {\n                        dataLabels: {\n                            color: '#B0B0B3'\n                        },\n                        marker: {\n                            lineColor: '#333'\n                        }\n                    },\n                    boxplot: {\n                        fillColor: '#505053'\n                    },\n                    candlestick: {\n                        lineColor: 'white'\n                    },\n                    errorbar: {\n                        color: 'white'\n                    }\n                },\n                legend: {\n                    enabled: true,\n                    padding: 0,\n                    align: 'left',\n                    verticalAlign: 'top',\n                    borderWidth: 0,\n                    // maxHeight: \"5px\",\n                    itemStyle: {\n                        color: '#E0E0E3'\n                    },\n                    itemHoverStyle: {\n                        color: '#FFF'\n                    },\n                    itemHiddenStyle: {\n                        color: '#606063'\n                    }\n                },\n                credits: {\n                    enabled: false,\n                    style: {\n                        color: '#666'\n                    }\n                },\n                labels: {\n                    style: {\n                        color: '#707073'\n                    }\n                },\n\n                drilldown: {\n                    activeAxisLabelStyle: {\n                        color: '#F0F0F3'\n                    },\n                    activeDataLabelStyle: {\n                        color: '#F0F0F3'\n                    }\n                },\n\n                navigation: {\n                    buttonOptions: {\n                        symbolStroke: '#DDDDDD',\n                        theme: {\n                            fill: '#505053'\n                        }\n                    }\n                },\n\n                // scroll charts\n                rangeSelector: {\n                    buttonTheme: {\n                        fill: '#505053',\n                        stroke: '#000000',\n                        style: {\n                            color: '#CCC'\n                        },\n                        states: {\n                            hover: {\n                                fill: '#707073',\n                                stroke: '#000000',\n                                style: {\n                                    color: 'white'\n                                }\n                            },\n                            select: {\n                                fill: '#000003',\n                                stroke: '#000000',\n                                style: {\n                                    color: 'white'\n                                }\n                            }\n                        }\n                    },\n                    inputBoxBorderColor: '#505053',\n                    inputStyle: {\n                        backgroundColor: '#333',\n                        color: 'silver'\n                    },\n                    labelStyle: {\n                        color: 'silver'\n                    }\n                },\n\n                navigator: {\n                    handles: {\n                        backgroundColor: '#666',\n                        borderColor: '#AAA'\n                    },\n                    outlineColor: '#CCC',\n                    maskFill: 'rgba(255,255,255,0.1)',\n                    series: {\n                        color: '#7798BF',\n                        lineColor: '#A6C7ED'\n                    },\n                    xAxis: {\n                        gridLineColor: '#505053'\n                    }\n                },\n\n                scrollbar: {\n                    barBackgroundColor: '#808083',\n                    barBorderColor: '#808083',\n                    buttonArrowColor: '#CCC',\n                    buttonBackgroundColor: '#606063',\n                    buttonBorderColor: '#606063',\n                    rifleColor: '#FFF',\n                    trackBackgroundColor: '#404043',\n                    trackBorderColor: '#404043'\n                },\n\n                exporting: {\n                    buttons : {\n                        contextButton:{\n                        enabled: true,\n                        menuItems:[\"viewFullscreen\", \"printChart\", \"separator\", \"downloadPNG\", \"downloadJPEG\", \"downloadPDF\", \"downloadSVG\", \"separator\", \"downloadCSV\", \"downloadXLS\"],\n                        //position relative to align option\n                        // menuClassName: \"highcharts-custom-contextenu\",\n                        // x: -10,\n                        // y:-5,\n                \n                        }\n                    }\n                },\n\n                // special colors for some of the\n                legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',\n                background2: '#505053',\n                dataLabelsColor: '#B0B0B3',\n                textColor: '#C0C0C0',\n                contrastTextColor: '#F0F0F3',\n                maskColor: 'rgba(255,255,255,0.3)'\n            };\n     \n Highcharts.setOptions(theme);\n Highcharts.chart(container.attr('id'), option);     \n           \n},100);\n\nreturn container;\n} else {\n\n   \n    \n// ------------ update data\nvar chart = container.highcharts();\nchart.series[0].setData(data);\n//console.log(\"-----> Chart : \",chart)\nchart.xAxis[0].options.plotLines[0].value = (totalSuct/numSuct).toFixed(2);\nchart.xAxis[0].update();\nchart.yAxis[0].options.plotLines[0].value = (totalDisch/numDisch).toFixed(2);\nchart.yAxis[0].update();\nchart.redraw();\n}\n//return a;",
+      "height": 5
+     }
+    }
+   ]
+  },
+  {
+   "width": 4,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 15
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 9
+   },
+   "col_width": 4,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "highcharts-timeseries",
+     "settings": {
+      "title": "Distribution Flows",
+      "timeframe": 60,
+      "chartType": "spline",
+      "dashStyle": "ShortDash",
+      "xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+      "yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+      "include_legend": true,
+      "include_contextmenu": true,
+      "blocks": "2",
+      "series1": "datasources[\"MWA Option Url\"][\"result\"][\"DF1\"][\"val\"]",
+      "series1label": "DF1",
+      "series2": "datasources[\"MWA Option Url\"][\"result\"][\"DF2\"][\"val\"]",
+      "series2label": "DF2",
+      "series3": "datasources[\"MWA Option Url\"][\"result\"][\"DF3\"][\"val\"]",
+      "series3label": "DF3",
+      "series4": "datasources[\"MWA Option Url\"][\"result\"][\"DF4\"][\"val\"]",
+      "series4label": "DF4"
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "4": 1,
+    "7": 4,
+    "12": 4
+   },
+   "col": {
+    "4": 4,
+    "7": 1,
+    "12": 1
+   },
+   "col_width": 1,
+   "transparent_bg": true,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "circular_progress",
+     "settings": {
+      "label_top": "RES.LVL.1",
+      "label": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"val\"]",
+      "label_bottom": "m",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"val\"]/5",
+      "color_bar": "#ff9900",
+      "color_track": "#7777",
+      "color_label": "#ff9900",
+      "color_sublabel": "#ffffff",
+      "bar_size": "6",
+      "track_size": "3",
+      "round_bar": false,
+      "font_size_label": "22",
+      "font_size_sublabel": "9",
+      "progress_margin": "4",
+      "height_block": 2
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "4": 4,
+    "7": 4,
+    "12": 4
+   },
+   "col": {
+    "4": 2,
+    "7": 2,
+    "12": 2
+   },
+   "col_width": 1,
+   "transparent_bg": true,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "circular_progress",
+     "settings": {
+      "label_top": "RES.LVL.2",
+      "label": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"val\"]",
+      "label_bottom": "m",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"val\"]/5",
+      "color_bar": "#ff9900",
+      "color_track": "#7777",
+      "color_label": "#ff9900",
+      "color_sublabel": "#ffffff",
+      "bar_size": "6",
+      "track_size": "3",
+      "round_bar": false,
+      "font_size_label": "22",
+      "font_size_sublabel": "9",
+      "progress_margin": 2,
+      "height_block": 2
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 4,
+    "7": 4,
+    "12": 4
+   },
+   "col": {
+    "4": 3,
+    "7": 3,
+    "12": 3
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "semi_circular_progress",
+     "settings": {
+      "label_top": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.INLET\"][\"parameter\"]",
+      "label_bottom": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.INLET\"][\"unit\"]",
+      "label": "numberWithCommas(datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.INLET\"][\"val\"])",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.INLET\"][\"val\"]/100000000",
+      "color_bar": "#ff9900",
+      "color_track": "#7777",
+      "color_label": "#ff9900",
+      "color_sublabel": "#ffffff",
+      "bar_size": "4",
+      "track_size": "2",
+      "round_bar": false,
+      "font_size_label": "22",
+      "font_size_sublabel": "9",
+      "progress_margin": 2,
+      "height_block": 2
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 4,
+    "12": 4
+   },
+   "col": {
+    "4": 4,
+    "7": 5,
+    "12": 5
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "border_radius": 1,
+   "widgets": [
+    {
+     "type": "semi_circular_progress",
+     "settings": {
+      "label_top": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.PUMP\"][\"parameter\"]",
+      "label_bottom": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.PUMP\"][\"unit\"]",
+      "label": "numberWithCommas(datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.PUMP\"][\"val\"])",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.PUMP\"][\"val\"]/100000000",
+      "color_bar": "#ff9900",
+      "color_track": "#7777",
+      "color_label": "#ff9900",
+      "color_sublabel": "#ffffff",
+      "bar_size": "4",
+      "track_size": "2",
+      "round_bar": false,
+      "font_size_label": "22",
+      "font_size_sublabel": "9",
+      "progress_margin": 2,
+      "height_block": 2
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 4
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 9
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "semi_circular_progress",
+     "settings": {
+      "label_top": "datasources[\"MWA Option Url\"][\"result\"][\"D.ALL\"][\"parameter\"]",
+      "label_bottom": "datasources[\"MWA Option Url\"][\"result\"][\"D.ALL\"][\"unit\"]",
+      "label": "numberWithCommas(datasources[\"MWA Option Url\"][\"result\"][\"D.ALL\"][\"val\"])",
+      "value": "0.5",
+      "color_bar": "#ff9900",
+      "color_track": "#7777",
+      "color_label": "#ff9900",
+      "color_sublabel": "#ffffff",
+      "bar_size": "4",
+      "track_size": "2",
+      "round_bar": false,
+      "font_size_label": "22",
+      "font_size_sublabel": "9",
+      "progress_margin": 2,
+      "height_block": 2
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 4
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 11
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "semi_circular_progress",
+     "settings": {
+      "label_top": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.D.ALL\"][\"parameter\"]",
+      "label_bottom": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.D.ALL\"][\"unit\"]",
+      "label": "numberWithCommas(datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.D.ALL\"][\"val\"])",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.D.ALL\"][\"val\"]/100000000",
+      "color_bar": "#ff9900",
+      "color_track": "#7777",
+      "color_label": "#ff9900",
+      "color_sublabel": "#ffffff",
+      "bar_size": "4",
+      "track_size": "2",
+      "round_bar": false,
+      "font_size_label": "22",
+      "font_size_sublabel": "9",
+      "progress_margin": "2",
+      "height_block": 2
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "4": 1,
+    "7": 4,
+    "12": 4
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 7
+   },
+   "col_width": 1,
+   "transparent_bg": true,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "circular_progress",
+     "settings": {
+      "label_top": "Avg. Suct",
+      "label": "var totalSuct=0, totalDisch=0, numSuct=0, numDisch=0;\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP1\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP1\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP2\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP2\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP3\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP3\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP4\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP4\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP5\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP5\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP6\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP6\"][\"val\"]),numSuct+=1);\n\n\nreturn (totalSuct/numSuct).toFixed(2)",
+      "label_bottom": "mH2O",
+      "value": "var totalSuct=0, totalDisch=0, numSuct=0, numDisch=0;\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP1\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP1\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP2\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP2\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP3\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP3\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP4\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP4\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP5\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP5\"][\"val\"]),numSuct+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP6\"][\"val\"]&&(totalSuct+=Number(datasources[\"MWA Option Url\"][\"result\"][\"SUCT.PUMP6\"][\"val\"]),numSuct+=1);\n\n\nreturn (totalSuct/numSuct/5).toFixed(2)",
+      "color_bar": "#ff9900",
+      "color_track": "#7777",
+      "color_label": "#ff9900",
+      "color_sublabel": "#ffffff",
+      "bar_size": 5,
+      "track_size": 5,
+      "round_bar": false,
+      "font_size_label": "22",
+      "font_size_sublabel": "9",
+      "progress_margin": 2,
+      "height_block": 2
+     }
+    }
+   ]
+  },
+  {
+   "width": 1,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 4
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 8
+   },
+   "col_width": 1,
+   "transparent_bg": true,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "circular_progress",
+     "settings": {
+      "label_top": "Avg. Disch",
+      "label": "var totalSuct=0, totalDisch=0, numSuct=0, numDisch=0;\n\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP1\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP1\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP2\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP2\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP3\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP3\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP4\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP4\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP5\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP5\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP6\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP6\"][\"val\"]),numDisch+=1);\n\nreturn (totalDisch/numDisch).toFixed(2);",
+      "label_bottom": "mH2O",
+      "value": "var totalSuct=0, totalDisch=0, numSuct=0, numDisch=0;\n\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP1\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP1\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP2\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP2\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP3\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP3\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP4\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP4\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP5\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP5\"][\"val\"]),numDisch+=1);\ndatasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP6\"][\"val\"]&&(totalDisch+=Number(datasources[\"MWA Option Url\"][\"result\"][\"DISCH.PUMP6\"][\"val\"]),numDisch+=1);\n\nreturn (totalDisch/numDisch/10).toFixed(2);",
+      "color_bar": "#ff9900",
+      "color_track": "#7777",
+      "color_label": "#ff9900",
+      "color_sublabel": "#ffffff",
+      "bar_size": "6",
+      "track_size": "3",
+      "round_bar": false,
+      "font_size_label": "22",
+      "font_size_sublabel": "9",
+      "progress_margin": 2,
+      "height_block": 2
+     }
+    }
+   ]
+  }
+ ],
+ "datasources": [
+  {
+   "name": "นาฬิกา",
+   "type": "clock",
+   "settings": {
+    "name": "นาฬิกา",
+    "refresh": 1
+   }
+  },
+  {
+   "name": "MWA Option Url",
+   "type": "custom_scrape_api_multiple_options",
+   "settings": {
+    "name": "MWA Option Url",
+    "url_array": [
+     {
+      "Option Name": "บางพลี",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_BANGPLEE-WPS.html"
+     },
+     {
+      "Option Name": "คลองเตย",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_KLONGTOEY-WPS.html"
+     },
+     {
+      "Option Name": "ลาดกระบัง",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_LARDKRABANG-WPS.html"
+     },
+     {
+      "Option Name": "ลาดพร้าว",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_LARDPRAO-WPS.html"
+     },
+     {
+      "Option Name": "ลุมพินี",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_LUMPINI-WPS.html"
+     },
+     {
+      "Option Name": "มีนบุรี",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_MEENBURI-WPS.html"
+     },
+     {
+      "Option Name": "เพชรเกษม",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_PHETCHKASEM-WPS.html"
+     },
+     {
+      "Option Name": "ราชบูรณะ",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_RAJBURANA-WPS.html"
+     },
+     {
+      "Option Name": "สำโรง",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_SAMRONG-WPS.html"
+     },
+     {
+      "Option Name": "ท่าพระ",
+      "Url": "https://tunchz.github.io/CIA/WPS/ALL%20CHANNELS_THAPRA-WPS.html"
+     }
+    ],
+    "script_text": "var data = response;\nvar selectedOption = option;\n\t//console.log(\"######### Option \",option)\n    t1 = 'Units</font></td></tr><tr>\\n</tr>\\n<tr><td><table width=\"330\" cellspacing=\"1\" cellpadding=\"1\" border=\"0\"><tbody><tr><td width=\"10\" bgcolor=\"'\n    t2 = '</font></td>\\n</tr>\\n</tbody></table>'\n    t3 = '</font></td>\\n</tr>\\n<tr><td><table width=\"330\" cellspacing=\"1\" cellpadding=\"1\" border=\"0\"><tbody><tr><td width=\"10\" bgcolor=\"'\n\t       \n\tvar coors = [\n        {lat:13.027,lon:100.533},\n        {lat:14.027,lon:100.533},\n        {lat:14.527,lon:101.533},\n        {lat:14.027,lon:102.533},\n        {lat:14.627,lon:100.533},\n        {lat:14.027,lon:101.533},\n        {lat:14.727,lon:100.533},\n        {lat:14.027,lon:100.533},\n        {lat:14.027,lon:100.533},\n        {lat:14.027,lon:100.533}\n    ]       \n\n    arr = data.split(t1)[1].split(t2)[0].split(t3)\n    var mapJson = {\"mapping\":{\"0\":{\"D.ALL(F123)\":\"D.ALL\",\"D.ALL*(F123)\":\"D.ALL*\",\"DF1.KINGKA.1800\":\"DF1\",\"DF1.KINGKA.1800*\":\"DF1*\",\"DF2.EPEC.1800\":\"DF2\",\"DF2.EPEC.1800*\":\"DF2*\",\"DF3.KINGKA.1800\":\"DF3\",\"DF3.KINGKA.1800*\":\"DF3*\",\"DISCH.PUMP2\":\"DISCH.PUMP1\",\"DISCH.PUMP3\":\"DISCH.PUMP2\",\"DISCH.PUMP4\":\"DISCH.PUMP3\",\"DISCH.PUMP5\":\"DISCH.PUMP4\",\"DISCH.PUMP6\":\"DISCH.PUMP5\",\"DISCH.PUMP7\":\"DISCH.PUMP6\",\"DIST1.IN_PORT\":\"DIST1.IN_PORT\",\"DIST1.IN_PORT.TT\":\"DIST1.IN_PORT.TT\",\"DIST2\":\"DIST2\",\"DIST2.PORT\":\"DIST2.PORT\",\"DIST3\":\"DIST3\",\"DIST3.PORT\":\"DIST3.PORT\",\"DP1.KINGKA.3700\":\"DP1\",\"DP1.KINGKA.3700*\":\"DP1*\",\"DP2.EPEC.3700\":\"DP2\",\"DP2.EPEC.3700*\":\"DP2*\",\"DP3.KINGKA.3700\":\"DP3\",\"DP3.KINGKA.3700*\":\"DP3*\",\"FLOW.PUMP2*\":\"FLOW.PUMP.1\",\"FLOW.PUMP3*\":\"FLOW.PUMP.2\",\"FLOW.PUMP4*\":\"FLOW.PUMP.3\",\"FLOW.PUMP5*\":\"FLOW.PUMP.4\",\"FLOW.PUMP7*\":\"FLOW.PUMP.6\",\"INLET.DIST1\":\"INLET.DIST\",\"INLET.FLOW\":\"INLET.FLOW\",\"INLET.FLOW*\":\"INLET.FLOW*\",\"INLET.PT.3500\":\"INLET.PT.3500\",\"INLET.PT.3500*\":\"INLET.PT.3500*\",\"PUMP.ALL(F23457)\":\"PUMP.ALL\",\"RES.LVL.1\":\"RES.LVL.1\",\"RES.LVL.2\":\"RES.LVL.2\",\"SUCT.LVL.PUMP2\":\"SUCT.LVL.PUMP2\",\"SUCT.LVL.PUMP3\":\"SUCT.LVL.PUMP3\",\"SUCT.LVL.PUMP4\":\"SUCT.LVL.PUMP4\",\"SUCT.LVL.PUMP5\":\"SUCT.LVL.PUMP5\",\"SUCT.LVL.PUMP6\":\"SUCT.LVL.PUMP6\",\"SUCT.PUMP2\":\"SUCT.PUMP1\",\"SUCT.PUMP3\":\"SUCT.PUMP2\",\"SUCT.PUMP4\":\"SUCT.PUMP3\",\"SUCT.PUMP5\":\"SUCT.PUMP4\",\"SUCT.PUMP6\":\"SUCT.PUMP5\",\"SUCT.PUMP7\":\"SUCT.PUMP6\",\"TOTAL.D.ALL(F123)\":\"TOTAL.D.ALL\",\"TOTAL.D.ALL*/Day\":\"TOTAL.D.ALL/Day\",\"TOTAL.D.ALL*/Hr\":\"TOTAL.D.ALL/Hr\",\"TOTAL.DF1*\":\"TOTAL.DF1\",\"TOTAL.DF1*/Day\":\"TOTAL.DF1/Day\",\"TOTAL.DF1*/Hr\":\"TOTAL.DF1/Hr\",\"TOTAL.DF2*\":\"TOTAL.DF2\",\"TOTAL.DF2*/Day\":\"TOTAL.DF2/Day\",\"TOTAL.DF2*/Hr\":\"TOTAL.DF2/Hr\",\"TOTAL.DF3*\":\"TOTAL.DF3\",\"TOTAL.DF3*/Day\":\"TOTAL.DF3/Day\",\"TOTAL.DF3*/Hr\":\"TOTAL.DF3/Hr\",\"TOTAL.INLET*\":\"TOTAL.INLET\",\"TOTAL.INLET*/Day\":\"TOTAL.INLET/Day\",\"TOTAL.INLET*/Hr\":\"TOTAL.INLET/Hr\",\"TOTAL.PUMP.(F23457)\":\"TOTAL.PUMP\",\"TT.PORT@D2\":\"TT.PORT@D2\",\"TT.PORT@D3\":\"TT.PORT@D3\"},\"1\":{\"D.ALL(F1234)\":\"D.ALL\",\"D.ALL*(F1234)\":\"D.ALL*\",\"DF1.SUKHUM.1500\":\"DF1\",\"DF1.SUKHUM.1500*\":\"DF1*\",\"DF2.PRAKA.1500\":\"DF2\",\"DF2.PRAKA.1500*\":\"DF2*\",\"DF3.RAM4.1500\":\"DF3\",\"DF3.RAM4.1500*\":\"DF3*\",\"DF4.RAM4.1000\":\"DF4\",\"DF4.RAM4.1000*\":\"DF4*\",\"DISCH.PUMP1\":\"DISCH.PUMP1\",\"DISCH.PUMP2\":\"DISCH.PUMP2\",\"DISCH.PUMP3\":\"DISCH.PUMP3\",\"DISCH.PUMP4\":\"DISCH.PUMP4\",\"DISCH.PUMP5\":\"DISCH.PUMP5\",\"DP1.SUKHUM.3700\":\"DP1\",\"DP1.SUKHUM.3700*\":\"DP1*\",\"DP2.PRAKA.3700\":\"DP2\",\"DP2.PRAKA.3700*\":\"DP2*\",\"DP3.R1500.3700\":\"DP3\",\"DP3.R1500.3700*\":\"DP3*\",\"DP4.R1000.3700\":\"DP4\",\"DP4.R1000.3700*\":\"DP4*\",\"FLOW.PUMP.1\":\"FLOW.PUMP.1\",\"FLOW.PUMP.2\":\"FLOW.PUMP.2\",\"FLOW.PUMP.3\":\"FLOW.PUMP.3\",\"FLOW.PUMP.4\":\"FLOW.PUMP.4\",\"FLOW.PUMP.5\":\"FLOW.PUMP.5\",\"FLOW.PUMP1*\":\"FLOW.PUMP1*\",\"FLOW.PUMP2*\":\"FLOW.PUMP2*\",\"FLOW.PUMP3*\":\"FLOW.PUMP3*\",\"FLOW.PUMP4*\":\"FLOW.PUMP4*\",\"FLOW.PUMP5*\":\"FLOW.PUMP5*\",\"IN-DIST\":\"INLET.DIST\",\"INLET.FLOW\":\"INLET.FLOW\",\"INLET.FLOW*\":\"INLET.FLOW*\",\"INLET.PT.3500\":\"INLET.PT.3500\",\"INLET.PT.3500*\":\"INLET.PT.3500*\",\"PUMP.ALL(F12345)\":\"PUMP.ALL\",\"RES.LVL.1\":\"RES.LVL.1\",\"RES.LVL.2\":\"RES.LVL.2\",\"SUCT.PUMP1\":\"SUCT.PUMP1\",\"SUCT.PUMP2\":\"SUCT.PUMP2\",\"SUCT.PUMP3\":\"SUCT.PUMP3\",\"SUCT.PUMP4\":\"SUCT.PUMP4\",\"SUCT.PUMP5\":\"SUCT.PUMP5\",\"TOTAL.D.ALL(F1234)\":\"TOTAL.D.ALL\",\"TOTAL.D.ALL*/Day\":\"TOTAL.D.ALL/Day\",\"TOTAL.D.ALL*/Hr\":\"TOTAL.D.ALL/Hr\",\"TOTAL.DF1*\":\"TOTAL.DF1\",\"TOTAL.DF1*/Day\":\"TOTAL.DF1/Day\",\"TOTAL.DF1*/Hr\":\"TOTAL.DF1/Hr\",\"TOTAL.DF2*\":\"TOTAL.DF2\",\"TOTAL.DF2*/Day\":\"TOTAL.DF2/Day\",\"TOTAL.DF2*/Hr\":\"TOTAL.DF2/Hr\",\"TOTAL.DF3*\":\"TOTAL.DF3\",\"TOTAL.DF3*/Day\":\"TOTAL.DF3/Day\",\"TOTAL.DF3*/Hr\":\"TOTAL.DF3/Hr\",\"TOTAL.DF4*\":\"TOTAL.DF4\",\"TOTAL.DF4*/Day\":\"TOTAL.DF4/Day\",\"TOTAL.DF4*/Hr\":\"TOTAL.DF4/Hr\",\"TOTAL.INLET*\":\"TOTAL.INLET\",\"TOTAL.INLET*/Day\":\"TOTAL.INLET/Day\",\"TOTAL.INLET*/Hr\":\"TOTAL.INLET/Hr\",\"TOTAL.PUMP.(F12345)\":\"TOTAL.PUMP\",\"TT_Portable1\":\"TT_Portable1\",\"TOTAL.PORT2\":\"TOTAL.PORT2\",\"TT_Portable@Inlet\":\"TT_Portable@Inlet\",\"FLOW PORT1\":\"FLOW PORT1\",\"FLOW PORT2\":\"FLOW PORT2\",\"MANIFOLD.PT\":\"MANIFOLD.PT\",\"Portable@1\":\"Portable@1\",\"Portable@2\":\"Portable@2\",\"Portable@Inlet\":\"Portable@Inlet\"},\"2\":{\"7\":\"7\",\"10\":\"10\",\"19\":\"19\",\"20\":\"20\",\"25\":\"25\",\"26\":\"26\",\"28\":\"28\",\"DF.ALL.1500*\":\"D.ALL\",\"DF1.1800.MEEN*\":\"DF1\",\"DF1.ALL.1500\":\"DF1*\",\"DF2.1800.LARDKA*\":\"DF2\",\"DF2.1800.MEEN\":\"DF2*\",\"DISCH.PUMP1\":\"DISCH.PUMP1\",\"DISCH.PUMP2\":\"DISCH.PUMP2\",\"DISCH.PUMP3\":\"DISCH.PUMP3\",\"DISCH.PUMP4\":\"DISCH.PUMP4\",\"DP1.ALL.37\":\"DP1\",\"DP1.ALL.37*\":\"DP1*\",\"FLOW.PUMP1\":\"FLOW.PUMP.1\",\"FLOW.PUMP2\":\"FLOW.PUMP.2\",\"FLOW.PUMP3\":\"FLOW.PUMP.3\",\"FLOW.PUMP4\":\"FLOW.PUMP.4\",\"FLOW.PUMP1*\":\"FLOW.PUMP1*\",\"FLOW.PUMP2*\":\"FLOW.PUMP2*\",\"FLOW.PUMP3*\":\"FLOW.PUMP3*\",\"FLOW.PUMP4*\":\"FLOW.PUMP4*\",\"IN-DIST\":\"INLET.DIST\",\"INLET.FLOW\":\"INLET.FLOW\",\"INLET.FLOW*\":\"INLET.FLOW*\",\"INLET.PT.35\":\"INLET.PT.3500\",\"INLET.PT.35*\":\"INLET.PT.3500*\",\"PUMP.ALL(F1234)\":\"PUMP.ALL\",\"RES.LVL.1\":\"RES.LVL.1\",\"RES.LVL.2\":\"RES.LVL.2\",\"SUCT.PUMP1\":\"SUCT.PUMP1\",\"SUCT.PUMP2\":\"SUCT.PUMP2\",\"SUCT.PUMP3\":\"SUCT.PUMP3\",\"SUCT.PUMP4\":\"SUCT.PUMP4\",\"TOTAL.DF.ALL*\":\"TOTAL.D.ALL\",\"TOTAL.D.ALL*/Day\":\"TOTAL.D.ALL/Day\",\"TOTAL.D.ALL*/Hr\":\"TOTAL.D.ALL/Hr\",\"TOTAL.DF1*\":\"TOTAL.DF1\",\"TOTAL.DF1*/Day\":\"TOTAL.DF1/Day\",\"TOTAL.DF1*/Hr\":\"TOTAL.DF1/Hr\",\"TOTAL.DF2*\":\"TOTAL.DF2\",\"TOTAL.DF2*/Day\":\"TOTAL.DF2/Day\",\"TOTAL.DF2*/Hr\":\"TOTAL.DF2/Hr\",\"TOTAL.INLET*\":\"TOTAL.INLET\",\"TOTAL.INLET*/Day\":\"TOTAL.INLET/Day\",\"TOTAL.INLET*/Hr\":\"TOTAL.INLET/Hr\",\"TOTAL.PUMP.(F1234)\":\"TOTAL.PUMP\",\"Port.BYPASS.FW\":\"Port.BYPASS.FW\",\"Port.BYPASS.RV\":\"Port.BYPASS.RV\",\"Portable@1.BYPASS\":\"Portable@1.BYPASS\",\"Portable@1.DIST\":\"Portable@1.DIST\",\"PORTABLE@1.DIST\":\"PORTABLE@1.DIST\",\"PORTABLE@1.IN\":\"PORTABLE@1.IN\",\"Portable@1.INLET\":\"Portable@1.INLET\",\"TT.BYPASS.FOR*/Day\":\"TT.BYPASS.FOR*/Day\",\"TT.BYPASS.REV*/Day\":\"TT.BYPASS.REV*/Day\",\"TT.Port.BYPASS.FW\":\"TT.Port.BYPASS.FW\",\"TT.Port.BYPASS.RV\":\"TT.Port.BYPASS.RV\",\"TT.PORT@1.DIST\":\"TT.PORT@1.DIST\",\"TT.PORT@1.IN\":\"TT.PORT@1.IN\",\"@DEFAULT.11\":\"@DEFAULT.11\",\"@DEFAULT.2\":\"@DEFAULT.2\",\"@DEFAULT.T11\":\"@DEFAULT.T11\",\"@DEFAULT.T2\":\"@DEFAULT.T2\",\"BYPASS.900\":\"BYPASS.900\",\"BYPASS.900.FOR\":\"BYPASS.900.FOR\",\"BYPASS.900.REV\":\"BYPASS.900.REV\"},\"3\":{\"19\":\"19\",\"20\":\"20\",\"25\":\"25\",\"26\":\"26\",\"D.ALL(F12)\":\"D.ALL\",\"D.ALL*(F12)\":\"D.ALL*\",\"DF1.LA.1500\":\"DF1\",\"DF1.LA.1500*\":\"DF1*\",\"DF2.1200\":\"DF2\",\"DF2.1200*\":\"DF2*\",\"DISCH.PUMP1\":\"DISCH.PUMP1\",\"DISCH.PUMP2\":\"DISCH.PUMP2\",\"DISCH.PUMP3\":\"DISCH.PUMP3\",\"DISCH.PUMP4\":\"DISCH.PUMP4\",\"DP1.1500.37\":\"DP1\",\"DP1.1500.37*\":\"DP1*\",\"DP2.1200.37\":\"DP2\",\"DP2.1200.37*\":\"DP2*\",\"FLOW.PUMP1\":\"FLOW.PUMP.1\",\"FLOW.PUMP2\":\"FLOW.PUMP.2\",\"FLOW.PUMP3\":\"FLOW.PUMP.3\",\"FLOW.PUMP4\":\"FLOW.PUMP.4\",\"FLOW.PUMP1*\":\"FLOW.PUMP1*\",\"FLOW.PUMP2*\":\"FLOW.PUMP2*\",\"FLOW.PUMP3*\":\"FLOW.PUMP3*\",\"FLOW.PUMP4*\":\"FLOW.PUMP4*\",\"IN-DIST\":\"INLET.DIST\",\"INLET.FLOW\":\"INLET.FLOW\",\"INLET.FLOW*\":\"INLET.FLOW*\",\"INLET.PT.35\":\"INLET.PT.3500\",\"INLET.PT.35*\":\"INLET.PT.3500*\",\"PUMP.ALL(F1234)\":\"PUMP.ALL\",\"RES.LVL.1\":\"RES.LVL.1\",\"RES.LVL.2\":\"RES.LVL.2\",\"SUCT.PUMP1\":\"SUCT.PUMP1\",\"SUCT.PUMP2\":\"SUCT.PUMP2\",\"SUCT.PUMP3\":\"SUCT.PUMP3\",\"SUCT.PUMP4\":\"SUCT.PUMP4\",\"TOTAL.D.ALL(F12)\":\"TOTAL.D.ALL\",\"TOTAL.D.ALL*/Day\":\"TOTAL.D.ALL/Day\",\"TOTAL.D.ALL*/Hr\":\"TOTAL.D.ALL/Hr\",\"TOTAL.DF1*\":\"TOTAL.DF1\",\"TOTAL.DF1*/Day\":\"TOTAL.DF1/Day\",\"TOTAL.DF1*/Hr\":\"TOTAL.DF1/Hr\",\"TOTAL.DF2*\":\"TOTAL.DF2\",\"TOTAL.DF2*/Day\":\"TOTAL.DF2/Day\",\"TOTAL.DF2*/Hr\":\"TOTAL.DF2/Hr\",\"TOTAL.INLET*\":\"TOTAL.INLET\",\"TOTAL.INLET*/Day\":\"TOTAL.INLET/Day\",\"TOTAL.INLET*/Hr\":\"TOTAL.INLET/Hr\",\"TOTAL.PUMP.(F1234)\":\"TOTAL.PUMP\",\"MANIFOLD.PT\":\"MANIFOLD.PT\",\"Port.TT.1500\":\"Port.TT.1500\",\"Port.TT.BYPASS.R\":\"Port.TT.BYPASS.R\",\"Portable@1.1500\":\"Portable@1.1500\",\"Portable@1.BYPASS\":\"Portable@1.BYPASS\",\"Portable@1.BYPASS.R\":\"Portable@1.BYPASS.R\",\"Portable@1.DIST\":\"Portable@1.DIST\",\"Portable@1.INLET\":\"Portable@1.INLET\",\"TT.PORT.DIST\":\"TT.PORT.DIST\",\"TT.PORT.INLET\":\"TT.PORT.INLET\",\"TOTAL.INLET(BP)/Day\":\"TOTAL.INLET(BP)/Day\",\"TOTAL.INLET(BP)/HR\":\"TOTAL.INLET(BP)/HR\",\"INLET.FLOW(BP)\":\"INLET.FLOW(BP)\",\"TOTAL.BYPASS.F*/Day\":\"TOTAL.BYPASS.F*/Day\",\"TOTAL.BYPASS.F*/Hour\":\"TOTAL.BYPASS.F*/Hour\",\"TOTAL.BYPASS.R*/Day\":\"TOTAL.BYPASS.R*/Day\",\"TOTAL.BYPASS.R*/Hour\":\"TOTAL.BYPASS.R*/Hour\",\"TOTAL.D.ALL(BP)/Day\":\"TOTAL.D.ALL(BP)/Day\",\"TOTAL.D.ALL(BP)/HR\":\"TOTAL.D.ALL(BP)/HR\",\"D.ALL(BP)\":\"D.ALL(BP)\",\"DF.BYPASS\":\"DF.BYPASS\",\"DF.BYPASS*F\":\"DF.BYPASS*F\",\"DF.BYPASS*R\":\"DF.BYPASS*R\"},\"4\":{\"D.ALL(F12)\":\"D.ALL\",\"D.ALL*(F12)\":\"D.ALL*\",\"DF1.SARASIN.1500\":\"DF1\",\"DF1.SARASIN.1500*\":\"DF1*\",\"DF2.SATHON.1500\":\"DF2\",\"DF2.SATHON.1500*\":\"DF2*\",\"DISCH.PUMP1\":\"DISCH.PUMP1\",\"DISCH.PUMP2\":\"DISCH.PUMP2\",\"DISCH.PUMP3\":\"DISCH.PUMP3\",\"DISCH.PUMP4\":\"DISCH.PUMP4\",\"DP1.SARASIN.37\":\"DP1\",\"DP1.SARASIN.37*\":\"DP1*\",\"DP2.SATHON.37\":\"DP2\",\"DP2.SATHON.37*\":\"DP2*\",\"FLOW.PUMP1\":\"FLOW.PUMP.1\",\"FLOW.PUMP2\":\"FLOW.PUMP.2\",\"FLOW.PUMP3\":\"FLOW.PUMP.3\",\"FLOW.PUMP4\":\"FLOW.PUMP.4\",\"FLOW.PUMP1*\":\"FLOW.PUMP1*\",\"FLOW.PUMP2*\":\"FLOW.PUMP2*\",\"FLOW.PUMP3*\":\"FLOW.PUMP3*\",\"FLOW.PUMP4*\":\"FLOW.PUMP4*\",\"IN-DIST\":\"INLET.DIST\",\"INLET.FLOW*\":\"INLET.FLOW\",\"INLET.PT.35\":\"INLET.PT.3500\",\"INLET.PT.3500*\":\"INLET.PT.3500*\",\"PUMP.ALL(F1234)\":\"PUMP.ALL\",\"RES.LVL.1\":\"RES.LVL.1\",\"RES.LVL.2\":\"RES.LVL.2\",\"SUCT.PUMP1\":\"SUCT.PUMP1\",\"SUCT.PUMP2\":\"SUCT.PUMP2\",\"SUCT.PUMP3\":\"SUCT.PUMP3\",\"SUCT.PUMP4\":\"SUCT.PUMP4\",\"TOTAL.D.ALL(F12)\":\"TOTAL.D.ALL\",\"TOTAL.D.ALL*/Day\":\"TOTAL.D.ALL/Day\",\"TOTAL.D.ALL*/Hr\":\"TOTAL.D.ALL/Hr\",\"TOTAL.DF1*\":\"TOTAL.DF1\",\"TOTAL.DF1*/Day\":\"TOTAL.DF1/Day\",\"TOTAL.DF1*/Hr\":\"TOTAL.DF1/Hr\",\"TOTAL.DF2*\":\"TOTAL.DF2\",\"TOTAL.DF2*/Day\":\"TOTAL.DF2/Day\",\"TOTAL.DF2*/Hr\":\"TOTAL.DF2/Hr\",\"TOTAL.INLET*\":\"TOTAL.INLET\",\"TOTAL.INLET*/Day\":\"TOTAL.INLET/Day\",\"TOTAL.INLET*/Hr\":\"TOTAL.INLET/Hr\",\"TOTAL.PUMP.(F1234)\":\"TOTAL.PUMP\",\"INLET.WEIR.FLOW#1\":\"INLET.WEIR.FLOW#1\",\"INLET.WEIR.FLOW#2\":\"INLET.WEIR.FLOW#2\",\"INLET.WEIR.FLOW#3\":\"INLET.WEIR.FLOW#3\",\"INLET.WEIR.FLOW#4\":\"INLET.WEIR.FLOW#4\",\"INLET.WEIR.LVL#1\":\"INLET.WEIR.LVL#1\",\"INLET.WEIR.LVL#1.GT\":\"INLET.WEIR.LVL#1.GT\",\"INLET.WEIR.LVL#2\":\"INLET.WEIR.LVL#2\",\"INLET.WEIR.LVL#2.GT\":\"INLET.WEIR.LVL#2.GT\",\"INLET.WEIR.LVL#3\":\"INLET.WEIR.LVL#3\",\"INLET.WEIR.LVL#3.GT\":\"INLET.WEIR.LVL#3.GT\",\"INLET.WEIR.LVL#4\":\"INLET.WEIR.LVL#4\",\"INLET.WEIR.LVL#4.GT\":\"INLET.WEIR.LVL#4.GT\",\"NEW LVL\":\"NEW LVL\",\"SDV#1.OPEN\":\"SDV#1.OPEN\",\"SDV#2.OPEN\":\"SDV#2.OPEN\",\"SDV#3.OPEN\":\"SDV#3.OPEN\",\"SDV#4.OPEN\":\"SDV#4.OPEN\",\"SUCT.LVL.1\":\"SUCT.LVL.1\",\"SUCT.LVL.2\":\"SUCT.LVL.2\"},\"5\":{\"10\":\"10\",\"D.ALL(F123)\":\"D.ALL\",\"D.ALL*(F1234)\":\"D.ALL*\",\"DF1.NIMIT.1500\":\"DF1\",\"DF1.NIMIT.1500*\":\"DF1*\",\"DF2.RAM.1500\":\"DF2\",\"DF2.RAM.1500*\":\"DF2*\",\"DF3.SUWIN.1800\":\"DF3\",\"DF3.SUWIN.1800*\":\"DF3*\",\"DISCH.PUMP2\":\"DISCH.PUMP1\",\"DISCH.PUMP3\":\"DISCH.PUMP2\",\"DISCH.PUMP4\":\"DISCH.PUMP3\",\"DISCH.PUMP5\":\"DISCH.PUMP4\",\"DISCH.PUMP6\":\"DISCH.PUMP5\",\"DP1.NIMIT.37\":\"DP1\",\"DP1.NIMIT.37*\":\"DP1*\",\"DP2.RAM.37\":\"DP2\",\"DP2.RAM.37*\":\"DP2*\",\"DP3.SUWIN.37\":\"DP3\",\"DP3.SUWIN.37*\":\"DP3*\",\"FLOW.PUMP2*\":\"FLOW.PUMP.1\",\"FLOW.PUMP3*\":\"FLOW.PUMP.2\",\"FLOW.PUMP4*\":\"FLOW.PUMP.3\",\"FLOW.PUMP5*\":\"FLOW.PUMP.4\",\"FLOW.PUMP6*\":\"FLOW.PUMP.5\",\"FLOW.PUMP4\":\"FLOW.PUMP3*\",\"IN-DIST\":\"INLET.DIST\",\"INLET.FLOW\":\"INLET.FLOW\",\"INLET.FLOW*\":\"INLET.FLOW*\",\"INLET.PT.35\":\"INLET.PT.3500\",\"INLET.PT.35*\":\"INLET.PT.3500*\",\"PUMP.ALL(F23456)\":\"PUMP.ALL\",\"RES.LVL.1\":\"RES.LVL.1\",\"RES.LVL.2\":\"RES.LVL.2\",\"SUCT.LVL.PUMP2\":\"SUCT.LVL.PUMP2\",\"SUCT.LVL.PUMP3\":\"SUCT.LVL.PUMP3\",\"SUCT.LVL.PUMP5\":\"SUCT.LVL.PUMP5\",\"SUCT.PUMP2\":\"SUCT.PUMP1\",\"SUCT.PUMP3\":\"SUCT.PUMP2\",\"SUCT.PUMP4\":\"SUCT.PUMP3\",\"SUCT.PUMP5\":\"SUCT.PUMP4\",\"SUCT.PUMP6\":\"SUCT.PUMP5\",\"TOTAL.D.ALL(F123)\":\"TOTAL.D.ALL\",\"TOTAL.D.ALL*/Day\":\"TOTAL.D.ALL/Day\",\"TOTAL.D.ALL*/Hr\":\"TOTAL.D.ALL/Hr\",\"TOTAL.DF1*\":\"TOTAL.DF1\",\"TOTAL.DF1*/Day\":\"TOTAL.DF1/Day\",\"TOTAL.DF1*/Hr\":\"TOTAL.DF1/Hr\",\"TOTAL.DF2*\":\"TOTAL.DF2\",\"TOTAL.DF2*/Day\":\"TOTAL.DF2/Day\",\"TOTAL.DF2*/Hr\":\"TOTAL.DF2/Hr\",\"TOTAL.DF3*\":\"TOTAL.DF3\",\"TOTAL.DF3*/Day\":\"TOTAL.DF3/Day\",\"TOTAL.DF3*/Hr\":\"TOTAL.DF3/Hr\",\"TOTAL.INLET*\":\"TOTAL.INLET\",\"TOTAL.INLET*/Day\":\"TOTAL.INLET/Day\",\"TOTAL.INLET*/Hr\":\"TOTAL.INLET/Hr\",\"TOTAL.PUMP.(F23456)\":\"TOTAL.PUMP\",\"TT.PORT@1.DIST1\":\"TT.PORT@1.DIST1\",\"TT.PORT@1.DIST2\":\"TT.PORT@1.DIST2\",\"TT.PORT@1.DIST3\":\"TT.PORT@1.DIST3\",\"TT.PORT@1.INLET\":\"TT.PORT@1.INLET\",\"PORT_FOR_BYPASS\":\"PORT_FOR_BYPASS\",\"PORT_REV_BYPASS\":\"PORT_REV_BYPASS\",\"PORT_REV_BYPASS_TT\":\"PORT_REV_BYPASS_TT\",\"Portable@1.DIST1\":\"Portable@1.DIST1\",\"Portable@1.DIST2\":\"Portable@1.DIST2\",\"Portable@1.DIST3\":\"Portable@1.DIST3\",\"Portable@1.INLET\":\"Portable@1.INLET\",\"DF.BYPASS\":\"DF.BYPASS\"},\"6\":{\"5\":\"5\",\"8\":\"8\",\"DIST.F1.PHETCHKASEM\":\"DF1\",\"DF1.1800*\":\"DF1*\",\"DISCH.PT.PUMP1\":\"DISCH.PUMP1\",\"DISCH.PT.PUMP2\":\"DISCH.PUMP2\",\"DISCH.PT.PUMP3\":\"DISCH.PUMP3\",\"DISCH.PT.PUMP4\":\"DISCH.PUMP4\",\"DISCH.PT.PUMP5\":\"DISCH.PUMP5\",\"DIST.P1.PHETCHKASEM.EL.37.00\":\"DP1\",\"DP1.1800.37*\":\"DP1*\",\"IN-DIST\":\"INLET.DIST\",\"INLET.FLOW\":\"INLET.FLOW\",\"INLET.FLOW*\":\"INLET.FLOW*\",\"INLET.PPRESSURE.EL.35.00\":\"INLET.PT.3500\",\"INLET.PT.3500*\":\"INLET.PT.3500*\",\"RES.LVL1\":\"RES.LVL.1\",\"RES.LVL.2\":\"RES.LVL.2\",\"SUCT.PT.PUMP1\":\"SUCT.PUMP1\",\"SUCT.PT.PUMP2\":\"SUCT.PUMP2\",\"SUCT.PT.PUMP3\":\"SUCT.PUMP3\",\"SUCT.PT.PUMP4\":\"SUCT.PUMP4\",\"SUCT.PT.PUMP5\":\"SUCT.PUMP5\",\"TOTAL.DF1*\":\"TOTAL.DF1\",\"TOTAL.DF1*/Day\":\"TOTAL.DF1/Day\",\"TOTAL.DF1*/Hr\":\"TOTAL.DF1/Hr\",\"TOTAL.INLET*\":\"TOTAL.INLET\",\"TOTAL.INLET*/Day\":\"TOTAL.INLET/Day\",\"TOTAL.INLET*/Hr\":\"TOTAL.INLET/Hr\",\"NEW LVL\":\"NEW LVL\",\"PORT_DIST\":\"PORT_DIST\",\"PORT_IN\":\"PORT_IN\",\"PORT_ZM1home\":\"PORT_ZM1home\",\"PORT_ZM2.711\":\"PORT_ZM2.711\",\"Portable@DIST\":\"Portable@DIST\",\"TOTAL_ZM1105/DAY\":\"TOTAL_ZM1105/DAY\",\"TOTAL_ZM1105/HOUR\":\"TOTAL_ZM1105/HOUR\",\"TOTAL_ZM1105-1(HOME)\":\"TOTAL_ZM1105-1(HOME)\",\"TOTAL_ZM1105-1(HOME)/D\":\"TOTAL_ZM1105-1(HOME)/D\",\"TOTAL_ZM1105-1(HOME)/H\":\"TOTAL_ZM1105-1(HOME)/H\",\"TOTAL_ZM1105-1+2\":\"TOTAL_ZM1105-1+2\",\"TOTAL_ZM1105-2(7.11)\":\"TOTAL_ZM1105-2(7.11)\",\"TOTAL_ZM1105-2(7.11)/D\":\"TOTAL_ZM1105-2(7.11)/D\",\"TOTAL_ZM1105-2(7.11)/H\":\"TOTAL_ZM1105-2(7.11)/H\",\"TT_PORT_DIST\":\"TT_PORT_DIST\",\"TT_PORT_IN\":\"TT_PORT_IN\",\"TT_PORT_ZM1home\":\"TT_PORT_ZM1home\",\"TT_PORT_ZM2.711\":\"TT_PORT_ZM2.711\",\"ZM1\":\"ZM1\",\"ZM1105.1.HOME.abest\":\"ZM1105.1.HOME.abest\",\"ZM1105.2.7-11.UF811\":\"ZM1105.2.7-11.UF811\",\"ZM1105-1(HOME)\":\"ZM1105-1(HOME)\",\"ZM1105-1+2\":\"ZM1105-1+2\",\"ZM1105-2(7.11)\":\"ZM1105-2(7.11)\",\"ZM2 7-11\":\"ZM2 7-11\"},\"7\":{\"21\":\"21\",\"D.ALL(F12)\":\"D.ALL\",\"D.ALL*(F12)\":\"D.ALL*\",\"DF1.RAM2.1500\":\"DF1\",\"DF1.RAM2.1500*\":\"DF1*\",\"DF2.YAIROM.1500\":\"DF2\",\"DF2.YAIROM.1500*\":\"DF2*\",\"DISCH.PUMP1\":\"DISCH.PUMP1\",\"DISCH.PUMP2\":\"DISCH.PUMP2\",\"DISCH.PUMP3\":\"DISCH.PUMP3\",\"DISCH.PUMP4\":\"DISCH.PUMP4\",\"DISCH.PUMP5\":\"DISCH.PUMP5\",\"DP1.RAM2.37\":\"DP1\",\"DP1.RAM2.37*\":\"DP1*\",\"DP2.YAIROM.37\":\"DP2\",\"DP2.YAIROM.37*\":\"DP2*\",\"FLOW.PUMP1\":\"FLOW.PUMP.1\",\"FLOW.PUMP2\":\"FLOW.PUMP.2\",\"FLOW.PUMP3\":\"FLOW.PUMP.3\",\"FLOW.PUMP4\":\"FLOW.PUMP.4\",\"FLOW.PUMP5\":\"FLOW.PUMP.5\",\"IN-DIST\":\"INLET.DIST\",\"INLET.FLOW\":\"INLET.FLOW\",\"INLET.FLOW*\":\"INLET.FLOW*\",\"INLET.PT.35\":\"INLET.PT.3500\",\"INLET.PT.35*\":\"INLET.PT.3500*\",\"RES.LVL.1\":\"RES.LVL.1\",\"RES.LVL.2\":\"RES.LVL.2\",\"SUCT.PUMP1\":\"SUCT.PUMP1\",\"SUCT.PUMP2\":\"SUCT.PUMP2\",\"SUCT.PUMP3\":\"SUCT.PUMP3\",\"SUCT.PUMP4\":\"SUCT.PUMP4\",\"SUCT.PUMP5\":\"SUCT.PUMP5\",\"TOTAL.D.ALL(F12)\":\"TOTAL.D.ALL\",\"TOTAL.D.ALL*/Day\":\"TOTAL.D.ALL/Day\",\"TOTAL.D.ALL*/Hr\":\"TOTAL.D.ALL/Hr\",\"TOTAL.DF1*\":\"TOTAL.DF1\",\"TOTAL.DF1*/Day\":\"TOTAL.DF1/Day\",\"TOTAL.DF1*/Hr\":\"TOTAL.DF1/Hr\",\"TOTAL.DF2*\":\"TOTAL.DF2\",\"TOTAL.DF2*/Day\":\"TOTAL.DF2/Day\",\"TOTAL.DF2*/Hr\":\"TOTAL.DF2/Hr\",\"TOTAL.INLET*\":\"TOTAL.INLET\",\"TOTAL.INLET*/Day\":\"TOTAL.INLET/Day\",\"TOTAL.INLET*/Hr\":\"TOTAL.INLET/Hr\",\"TT.PORT@INLET\":\"TT.PORT@INLET\",\"TT.PORT@RAM2\":\"TT.PORT@RAM2\",\"TT.PORT@YAI\":\"TT.PORT@YAI\",\"NEW RES.LEL\":\"NEW RES.LEL\",\"Port@INLET\":\"Port@INLET\",\"Port@RAM\":\"Port@RAM\",\"Port@YAIROM\":\"Port@YAIROM\",\"PORTABLE@INLET\":\"PORTABLE@INLET\",\"PORTABLE@RAM2\":\"PORTABLE@RAM2\",\"PORTABLE@YAI\":\"PORTABLE@YAI\",\"PT.BYPASS\":\"PT.BYPASS\",\"PT.BYPASS*\":\"PT.BYPASS*\",\"PT.MH\":\"PT.MH\",\"PT.MH*\":\"PT.MH*\"},\"8\":{\"30\":\"30\",\"D.ALL(F12)\":\"D.ALL\",\"D.ALL*(F12)\":\"D.ALL*\",\"DF1.SAMING.1800\":\"DF1\",\"DF1.SAMING.1800*\":\"DF1*\",\"DF2.KROM.1000\":\"DF2\",\"DF2.KROM.1000*\":\"DF2*\",\"DISCH.PUMP1\":\"DISCH.PUMP1\",\"DISCH.PUMP2\":\"DISCH.PUMP2\",\"DISCH.PUMP3\":\"DISCH.PUMP3\",\"DISCH.PUMP4\":\"DISCH.PUMP4\",\"DISCH.PUMP5\":\"DISCH.PUMP5\",\"DP1.SAMING.3700\":\"DP1\",\"DP1.SAMING.3700*\":\"DP1*\",\"DP2.KROM.3700*\":\"DP2\",\"FLOW.PUMP.1\":\"FLOW.PUMP.1\",\"FLOW.PUMP.2\":\"FLOW.PUMP.2\",\"FLOW.PUMP.3\":\"FLOW.PUMP.3\",\"FLOW.PUMP.4\":\"FLOW.PUMP.4\",\"FLOW.PUMP.5\":\"FLOW.PUMP.5\",\"FLOW.PUMP1*\":\"FLOW.PUMP1*\",\"FLOW.PUMP2*\":\"FLOW.PUMP2*\",\"FLOW.PUMP3*\":\"FLOW.PUMP3*\",\"FLOW.PUMP4*\":\"FLOW.PUMP4*\",\"FLOW.PUMP5*\":\"FLOW.PUMP5*\",\"INLET.FLOW\":\"INLET.FLOW\",\"INLET.FLOW*\":\"INLET.FLOW*\",\"INLET.PT.3500\":\"INLET.PT.3500\",\"INLET.PT.3500*\":\"INLET.PT.3500*\",\"PUMP.ALL(F12345)\":\"PUMP.ALL\",\"RES.LVL1\":\"RES.LVL.1\",\"RES.LVL2\":\"RES.LVL.2\",\"SUCT.LVL\":\"SUCT.LVL\",\"SUCT.PUMP1\":\"SUCT.PUMP1\",\"SUCT.PUMP2\":\"SUCT.PUMP2\",\"SUCT.PUMP3\":\"SUCT.PUMP3\",\"SUCT.PUMP4\":\"SUCT.PUMP4\",\"SUCT.PUMP5\":\"SUCT.PUMP5\",\"TOTAL.D.ALL(F12)\":\"TOTAL.D.ALL\",\"TOTAL.D.ALL*/Day\":\"TOTAL.D.ALL/Day\",\"TOTAL.D.ALL*/Hr\":\"TOTAL.D.ALL/Hr\",\"TOTAL.DF1*\":\"TOTAL.DF1\",\"TOTAL.DF1*/Day\":\"TOTAL.DF1/Day\",\"TOTAL.DF1*/Hr\":\"TOTAL.DF1/Hr\",\"TOTAL.DF2*\":\"TOTAL.DF2\",\"TOTAL.DF2*/Day\":\"TOTAL.DF2/Day\",\"TOTAL.DF2*/Hr\":\"TOTAL.DF2/Hr\",\"TOTAL.INLET*\":\"TOTAL.INLET\",\"TOTAL.INLET*/Day\":\"TOTAL.INLET/Day\",\"TOTAL.INLET*/Hr\":\"TOTAL.INLET/Hr\",\"TOTAL.PUMP.(F12345)\":\"TOTAL.PUMP\",\"MANIFOLD.PT\":\"MANIFOLD.PT\",\"MANIFOLD.PT*\":\"MANIFOLD.PT*\",\"PORTABLE.1000\":\"PORTABLE.1000\",\"PORTABLE.1800\":\"PORTABLE.1800\",\"PORTABLE.2000\":\"PORTABLE.2000\",\"PORTABLE1000@1\":\"PORTABLE1000@1\",\"PORTABLE2000@1\":\"PORTABLE2000@1\",\"PORTABLE2PATH\":\"PORTABLE2PATH\",\"TT.BYPASS.FOR*/Day\":\"TT.BYPASS.FOR*/Day\",\"TT.BYPASS.REV*/Day\":\"TT.BYPASS.REV*/Day\",\"TT.PORT1000@1\":\"TT.PORT1000@1\",\"TT.PORT2PATH\":\"TT.PORT2PATH\",\"TT.PORTABLE2000@1\":\"TT.PORTABLE2000@1\",\"BYPASS.900\":\"BYPASS.900\",\"BYPASS.900.FOR\":\"BYPASS.900.FOR\",\"BYPASS.900.REV\":\"BYPASS.900.REV\"},\"9\":{\"D.ALL(F123)\":\"D.ALL\",\"D.ALL*(F123)\":\"D.ALL*\",\"DF1.WONG.1500\":\"DF1*\",\"DF2.PETKA.1000\":\"DF2*\",\"DF3.RD-TP.1200\":\"DF3*\",\"DISCH.PUMP1\":\"DISCH.PUMP1\",\"DISCH.PUMP2\":\"DISCH.PUMP2\",\"DISCH.PUMP3\":\"DISCH.PUMP3\",\"DISCH.PUMP4\":\"DISCH.PUMP4\",\"DISCH.PUMP5\":\"DISCH.PUMP5\",\"DP1.WONG.37\":\"DP1*\",\"DP2.PETKA.37\":\"DP2*\",\"DP3.RD-TP.37\":\"DP3*\",\"DP4.RD2.37\":\"DP4\",\"DP4.RD2.37 DELTAP\":\"DP4*\",\"FLOW.PUMP1\":\"FLOW.PUMP.1\",\"FLOW.PUMP2\":\"FLOW.PUMP.2\",\"FLOW.PUMP3\":\"FLOW.PUMP.3\",\"FLOW.PUMP4\":\"FLOW.PUMP.4\",\"FLOW.PUMP5\":\"FLOW.PUMP.5\",\"FLOW.PUMP1*\":\"FLOW.PUMP1*\",\"FLOW.PUMP2*\":\"FLOW.PUMP2*\",\"FLOW.PUMP3*\":\"FLOW.PUMP3*\",\"FLOW.PUMP4*\":\"FLOW.PUMP4*\",\"FLOW.PUMP5*\":\"FLOW.PUMP5*\",\"IN-DIST\":\"INLET.DIST\",\"INLET.FLOW\":\"INLET.FLOW\",\"INLET.FLOW*\":\"INLET.FLOW*\",\"INLET.PT.35\":\"INLET.PT.3500\",\"INLET.PT.35*\":\"INLET.PT.3500*\",\"PUMP.ALL(F12345)\":\"PUMP.ALL\",\"RES.LVL.1\":\"RES.LVL.1\",\"RES.LVL.2\":\"RES.LVL.2\",\"SUCT.PUMP1\":\"SUCT.PUMP1\",\"SUCT.PUMP2\":\"SUCT.PUMP2\",\"SUCT.PUMP3\":\"SUCT.PUMP3\",\"SUCT.PUMP4\":\"SUCT.PUMP4\",\"SUCT.PUMP5\":\"SUCT.PUMP5\",\"TOTAL.D.ALL(F123)\":\"TOTAL.D.ALL\",\"TOTAL.D.ALL*/Day\":\"TOTAL.D.ALL/Day\",\"TOTAL.D.ALL*/Hr\":\"TOTAL.D.ALL/Hr\",\"TOTAL.DF1*\":\"TOTAL.DF1\",\"TOTAL.DF1*/Day\":\"TOTAL.DF1/Day\",\"TOTAL.DF1*/Hr\":\"TOTAL.DF1/Hr\",\"TOTAL.DF2*\":\"TOTAL.DF2\",\"TOTAL.DF2*/Day\":\"TOTAL.DF2/Day\",\"TOTAL.DF2*/Hr\":\"TOTAL.DF2/Hr\",\"TOTAL.DF3*\":\"TOTAL.DF3\",\"TOTAL.DF3*/Day\":\"TOTAL.DF3/Day\",\"TOTAL.DF3*/Hr\":\"TOTAL.DF3/Hr\",\"TOTAL.INLET*\":\"TOTAL.INLET\",\"TOTAL.INLET*/Day\":\"TOTAL.INLET/Day\",\"TOTAL.INLET*/Hr\":\"TOTAL.INLET/Hr\",\"TOTAL.PUMP.(F12345)\":\"TOTAL.PUMP\",\"FUJI FLOW71.692\":\"FUJI FLOW71.692\",\"FUJI FLOW79.8\":\"FUJI FLOW79.8\",\"K CONSTANT\":\"K CONSTANT\",\"MANIFOLD TEMP\":\"MANIFOLD TEMP\",\"MANIFOLD.PT\":\"MANIFOLD.PT\",\"PORT.DIST\":\"PORT.DIST\",\"PORT.INLET\":\"PORT.INLET\",\"SQR D P\":\"SQR D P\",\"TT.DIST\":\"TT.DIST\",\"TT.INLET\":\"TT.INLET\"}},\"mainParameter\":[\"D.ALL\",\"D.ALL*\",\"DF1\",\"DF1*\",\"DF2\",\"DF2*\",\"DF3\",\"DF3*\",\"DF4\",\"DF4*\",\"DISCH.PUMP1\",\"DISCH.PUMP2\",\"DISCH.PUMP3\",\"DISCH.PUMP4\",\"DISCH.PUMP5\",\"DISCH.PUMP6\",\"DP1\",\"DP1*\",\"DP2\",\"DP2*\",\"DP3\",\"DP3*\",\"DP4\",\"DP4*\",\"FLOW.PUMP.1\",\"FLOW.PUMP.2\",\"FLOW.PUMP.3\",\"FLOW.PUMP.4\",\"FLOW.PUMP.5\",\"FLOW.PUMP.6\",\"FLOW.PUMP1*\",\"FLOW.PUMP2*\",\"FLOW.PUMP3*\",\"FLOW.PUMP4*\",\"FLOW.PUMP5*\",\"INLET.DIST\",\"INLET.FLOW\",\"INLET.FLOW*\",\"INLET.PT.3500\",\"INLET.PT.3500*\",\"PUMP.ALL\",\"RES.LVL.1\",\"RES.LVL.2\",\"SUCT.PUMP1\",\"SUCT.PUMP2\",\"SUCT.PUMP3\",\"SUCT.PUMP4\",\"SUCT.PUMP5\",\"SUCT.PUMP6\",\"TOTAL.D.ALL\",\"TOTAL.D.ALL/Day\",\"TOTAL.D.ALL/Hr\",\"TOTAL.DF1\",\"TOTAL.DF1/Day\",\"TOTAL.DF1/Hr\",\"TOTAL.DF2\",\"TOTAL.DF2/Day\",\"TOTAL.DF2/Hr\",\"TOTAL.DF3\",\"TOTAL.DF3/Day\",\"TOTAL.DF3/Hr\",\"TOTAL.DF4\",\"TOTAL.DF4/Day\",\"TOTAL.DF4/Hr\",\"TOTAL.INLET\",\"TOTAL.INLET/Day\",\"TOTAL.INLET/Hr\",\"TOTAL.PUMP\"]}\n    jsonArray = arr.map((item,i)=>{ \n        let json={},temp\n        // extract the 1st column\n        json.color = item.substring(0,7)\n        // extract the 2nd column\n        temp = item.split('320\"><b>')[1].split('</b></td></tr></tbody></table></td>')\n        json.parameter = temp[0].trim()\n        // extract the 3rd column\n        temp = temp[1].split('<font size=\"+1\"><b>')\n        //json.alarmStatus = temp[0].split('</b></font></td>').map((item)=>{\n        //    let _temp = item.split('<b>')\n        //    if (['H','L'].includes(_temp[1])) {\n        //        return _temp[0].split('bgcolor=\"')[1].substring(0,7)\n        //    } else {\n        //        return _temp[1]\n        //    }\n        //}) \n        temp_alarm = temp[0].split('</b></font></td>').splice(0,4).map((item)=>{\n            let _temp = item.split('<b>')\n            return {color:_temp[1]&&_temp[1]!=\"\"&&_temp[0].split('bgcolor=\"')[1]?_temp[0].split('bgcolor=\"')[1].substring(0,7):\"\", label:_temp[1]}\n        })\n        json.alarmStatus = temp_alarm.map((item)=>item.color)\n        json.alarmLabel = temp_alarm.map((item)=>item.label)\n        //console.log(\"temp_alarm >> \",json.alarmStatus,json.alarmLabel)\n        //json.alarmStatus.splice(4)\n        // extract the 4th column\n        temp = temp[1].split('</b></font></td>\\n    <td align=\"center\"><font>')\n        json.val = temp[0].trim()\n                   //if (json.parameter.substring(0,4)=='FLOW') console.log(\"+++++> \"+json.parameter+\" : \"+json.val)\n        // extract the 5th column\n        json.unit = temp[1].split('</font></td>')[0].trim()\n        return json\n    })\n    //console.log(jsonArray); \n    \n    var resultJson = {};\n    jsonArray.map((item,i)=>{\n        var key = mapJson.mapping[selectedOption][item.parameter];\n        if (!resultJson[key]) resultJson[key] = item;\n                   //if (item.parameter.substring(0,4)=='FLOW') console.log(\"----> \"+key+\" : \"+JSON.stringify(item))\n    })\n    \n    mapJson.mainParameter.map((p)=>{\n        if (typeof(resultJson[p])==\"undefined\") resultJson[p]={parameter:p,val:null,unit:\"undefined\"}\n    })\n    \n    resultJson.coor = coors[option]\n\nreturn resultJson;",
+    "refresh": 5
+   }
+  }
+ ],
+ "columns": 12,
+ "theme": "default"
+}
