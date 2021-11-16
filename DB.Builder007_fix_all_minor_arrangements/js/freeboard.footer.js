@@ -80,10 +80,10 @@ function updateFullScreenStatus() {
 
         // Compensate top margin
         setTimeout(()=>{
-            var topMargin = ($("body").height() - $("#board-content").height()-6)/2;
-            (topMargin<=0)&&(topMargin=0); 
+            var topMargin;
+            freeboard.getFullscreenAutoTopMargin()?(topMargin = ($("body").height() - $("#board-content").height()-6)/2,(topMargin<=0)&&(topMargin=0)):(topMargin = freeboard.getFullscreenTopMargin());
             console.log("------> view height : ",$("body").height());
-            console.log("------> content height : ",$("#board-content").height())
+            console.log("------> content height : ",$("#board-content").height());
             $("#board-content-top").css({'height': topMargin+"px"});
         },500)
     } else {

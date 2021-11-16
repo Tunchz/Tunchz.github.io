@@ -10,13 +10,16 @@ var _default = {
     minimum_columns:4,
     background_image: null,
     background_color: "#212121",
+    //widget setting
     widget_background_color: "#383838",
     widget_border_color: "#383838",
     widget_border_width: 0,
-    widget_border_radius: -9,
+    widget_border_radius: 0,
     widget_background_image: null,
-    //widget setting
     widget_background_transparent:!1,
+    //fullscreen
+    fullscreen_auto_topmargin:!0,
+    fullscreen_topmargin:0,
     mark_color: "#ff9900",
     track_color: "#494949",
     maxmin_color: "#00ff00",
@@ -65,21 +68,23 @@ function FreeboardModel(a, b, c) {
         a ? $("#main-header").show() : $("#main-header").hide()
     }), this.header_image = ko.observable(), 
     this.isHeaderOpen = ko.observable(!1),
-    this.dashboard_title = ko.observable(), this.dashboard_title.subscribe(function(a){$("#board-title").html(a?a:_default.dashboard_title)}),
-    this.avatar = ko.observable(), this.avatar.subscribe(function(a){var s=a;(!a)&&(s=_default.avatar); $("#avatar-footer").css({content: "url('"+s+"')"})}),
-    this.min_cols = ko.observable(), this.min_cols.subscribe(function(a){document.body.style.minWidth = !_.isUndefined(a)?(parseInt(a)*_w-_g*2+20+'px'):_default.min_width}),
-    this.background_image = ko.observable(), this.background_image.subscribe(function(a){document.body.style.backgroundImage = "url('"+(a?a:_default.background_image)+"')"}),
-    this.background_color = ko.observable(), this.background_color.subscribe(function(a){document.body.style.backgroundColor = (a)?a:_default.background_color;}),
-    this.widget_background_color = ko.observable(), 
-    this.widget_background_color.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_background_color = a; freeboard.addDBConfigStyle("li.gs_w","background-color:"+a+" !important;");console.log("_default.widget_background_color : ",_default.widget_background_color)}),
-    this.widget_border_color = ko.observable(), 
-    this.widget_border_color.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_border_color = a;console.log("_default.widget_border_color : ",_default.widget_border_color)}),
-    this.widget_border_width = ko.observable(), 
-    this.widget_border_width.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_border_width = a;console.log("_default.widget_border_width : ",_default.widget_border_width)}),
-    this.widget_border_radius = ko.observable(), 
-    this.widget_border_radius.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_border_radius = a;console.log("_default.widget_border_radius : ",_default.widget_border_radius)}),
-    this.widget_background_image = ko.observable(), 
-    this.widget_background_image.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_background_image = a;console.log("_default.widget_background_image : ",_default.widget_background_image)}),
+    this.dashboard_title = ko.observable(_default.dashboard_title), this.dashboard_title.subscribe(function(a){$("#board-title").html(a?a:_default.dashboard_title)}),
+    this.avatar = ko.observable(_default.avatar), this.avatar.subscribe(function(a){var s=a;(!a)&&(s=_default.avatar); $("#avatar-footer").css({content: "url('"+s+"')"})}),
+    this.min_cols = ko.observable(_default.min_width), this.min_cols.subscribe(function(a){document.body.style.minWidth = !_.isUndefined(a)?(parseInt(a)*_w-_g*2+20+'px'):_default.min_width}),
+    this.background_image = ko.observable(_default.background_image), this.background_image.subscribe(function(a){document.body.style.backgroundImage = "url('"+(a?a:_default.background_image)+"')"}),
+    this.background_color = ko.observable(_default.background_color), this.background_color.subscribe(function(a){document.body.style.backgroundColor = (a)?a:_default.background_color;}),
+    this.widget_background_color = ko.observable(_default.widget_background_color), 
+    this.widget_background_color.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_background_color = a; freeboard.addDBConfigStyle("li.gs_w","background-color:"+a+" !important;")}),
+    this.widget_border_color = ko.observable(_default.widget_border_color), 
+    this.widget_border_color.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_border_color = a}),
+    this.widget_border_width = ko.observable(_default.widget_border_width), 
+    this.widget_border_width.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_border_width = a}),
+    this.widget_border_radius = ko.observable(_default.widget_border_radius), 
+    this.widget_border_radius.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_border_radius = a}),
+    this.widget_background_image = ko.observable(_default.widget_background_image), 
+    this.widget_background_image.subscribe(function(a){if(!_.isUndefined(a)&&a!="") _default.widget_background_image = a}),
+    this.fullscreen_auto_topmargin = ko.observable(_default.fullscreen_auto_topmargin),
+    this.fullscreen_topmargin = ko.observable(_default.functions),
     this.plugins = ko.observableArray(), this.datasources = ko.observableArray(), this.panes = ko.observableArray(), this.datasourceData = {}, this.processDatasourceUpdate = function(a, b) {
         var c = a.name();
         d.datasourceData[c] = b, _.each(d.panes(), function(a) {
@@ -144,6 +149,8 @@ function FreeboardModel(a, b, c) {
             widget_border_width: d.widget_border_width(),
             widget_border_radius: d.widget_border_radius(),
             widget_background_image: d.widget_background_image(),
+            fullscreen_auto_topmargin: d.fullscreen_auto_topmargin(),
+            fullscreen_topmargin: d.fullscreen_topmargin(),
             allow_edit: d.allow_edit(),
             plugins: d.plugins(),
             panes: a,
@@ -172,6 +179,8 @@ function FreeboardModel(a, b, c) {
             d.widget_border_radius(e.widget_border_radius),
             // _.isUndefined(e.widget_background_image) ? d.widget_background_image(_default.widget_background_image) : 
             d.widget_background_image(e.widget_background_image),
+            d.fullscreen_auto_topmargin(e.fullscreen_auto_topmargin),
+            d.fullscreen_topmargin(e.fullscreen_topmargin),
              _.each(e.datasources, function(b) {
                 var c = new DatasourceModel(d, a);
                 c.deserialize(b), d.addDatasource(c)
@@ -206,12 +215,13 @@ function FreeboardModel(a, b, c) {
             d.min_cols(_default.min_cols);
             d.background_color(_default.background_color);
             d.background_image(_default.background_image);
-            d.widget_background_color("#383838");
-            d.widget_border_color("#383838");
-            d.widget_border_width(0);
-            d.widget_border_radius(0);
-            d.widget_background_image(null);
-
+            d.widget_background_color(_default.widget_background_color);
+            d.widget_border_color(_default.widget_border_color);
+            d.widget_border_width(_default.widget_border_width);
+            d.widget_border_radius(_default.widget_border_radius);
+            d.widget_background_image(_default.widget_background_image);
+            d.fullscreen_auto_topmargin(_default.fullscreen_auto_topmargin);
+            d.fullscreen_topmargin(_default.fullscreen_topmargin);
         })
     }, this.clearDashboard = function() {
         c.removeAllPanes(), _.each(d.datasources(), function(a) {
@@ -399,6 +409,8 @@ function FreeboardModel(a, b, c) {
             widget_border_width: d.widget_border_width(),
             widget_border_radius: d.widget_border_radius(),
             widget_background_image: d.widget_background_image(),
+            fullscreen_auto_topmargin: d.fullscreen_auto_topmargin(),
+            fullscreen_topmargin: d.fullscreen_topmargin(),
             // allow_edit: d.allow_edit(),
             // plugins: d.plugins(),
             // theme:theme
@@ -419,6 +431,8 @@ function FreeboardModel(a, b, c) {
         d.widget_border_width(options.widget_border_width)
         d.widget_border_radius(options.widget_border_radius)
         d.widget_background_image(options.widget_background_image)
+        d.fullscreen_auto_topmargin(options.fullscreen_auto_topmargin)
+        d.fullscreen_topmargin(options.fullscreen_topmargin)
         // d.allow_edit(options.allow_edit)
 
     }
@@ -788,7 +802,7 @@ function PaneModel(a, b) {
             widgets: a
         }
     }, this.deserialize = function(d) {
-        c.title(d.title), c.width(d.width), c.row = d.row, c.col = d.col, c.col_width(d.col_width || 1), c.transparent_bg(d.transparent_bg || !1), c.widget_background_color(d.widget_background_color/* || _default.widget_background_color*/), c.border_radius(d.border_radius || _default.widget_border_radius), _.each(d.widgets, function(d) {
+        c.title(d.title), c.width(d.width), c.row = d.row, c.col = d.col, c.col_width(d.col_width || 1), c.transparent_bg(d.transparent_bg || !1), c.widget_background_color(d.widget_background_color/* || _default.widget_background_color*/), c.border_radius(d.border_radius/* || _default.widget_border_radius*/), _.each(d.widgets, function(d) {
             var e = new WidgetModel(a, b);
             e.deserialize(d), c.widgets.push(e)
         })
@@ -1890,6 +1904,12 @@ var freeboard = function() {
         setHeaderOpen: function(a) {
             e.setHeaderOpen(a)
         },
+        getFullscreenAutoTopMargin: function() {
+            return e.fullscreen_auto_topmargin()
+        },
+        getFullscreenTopMargin: function() {
+            return e.fullscreen_topmargin()
+        },
         setDashboardOptions: function(formSettings) {
             var currentOptions = e.getDashboardOptions();
             var getNewOptions = function(returnOptions) {
@@ -1979,6 +1999,20 @@ var freeboard = function() {
                         type: "text",
                         description: 'Image url for to use as widget background tile',
                         default_value: _default.widget_background_image,
+                    },
+                    {
+                        name: "fullscreen_auto_topmargin",
+                        display_name: "Auto Top Margin Fullscreen",
+                        type: "boolean",
+                        description: 'auto add top margin in full screen to auto arrange widget contents to be in middle of screen.',
+                        default_value: _default.fullscreen_auto_topmargin,
+                    },
+                    {
+                        name: "fullscreen_topmargin",
+                        display_name: "Top Margin Fullscreen",
+                        type: "integer",
+                        description: 'top margin added in fullscreen, dicard this option when Auto Top Margin Fullscreen is enabled.',
+                        default_value: _default.fullscreen_topmargin,
                     },
                     // {
                     //     name: "allow_edit",
