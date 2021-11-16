@@ -1720,9 +1720,9 @@
      "type": "circular_progress",
      "settings": {
       "label_top": "RES.LVL.2",
-      "label": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"val\"]",
+      "label": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.2\"][\"val\"]",
       "label_bottom": "m",
-      "value": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.1\"][\"val\"]/5",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"RES.LVL.2\"][\"val\"]/5",
       "color_bar": "#ff9900",
       "color_track": "#7777",
       "color_label": "#ff9900",
