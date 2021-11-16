@@ -330,7 +330,7 @@ function FreeboardModel(a, b, c) {
                 $("#board-content-bottom").addClass("edited"),
                 $("#main-header").data().shown = !0, c.attachWidgetEditIcons($(".sub-section")), c.enableGrid(),
                 $("#toggle-header").addClass("edited"),
-                $("#toggle-view-mode").removeClass("icon-eye-open").addClass("icon-edit"),
+                $("#toggle-view-mode").removeClass("icon-edit").addClass("icon-eye-open"),
                 // document.getElementById('edit-toggle').checked = true,
                 // this.setHeaderOpen(!0)
                 $("#footer-bar").removeClass("presented")
@@ -346,7 +346,7 @@ function FreeboardModel(a, b, c) {
                 $("#board-content-bottom").removeClass("edited"),
                 $("#main-header").data().shown = !1, $(".sub-section").unbind(), c.disableGrid(),
                 $("#toggle-header").removeClass("edited"),
-                $("#toggle-view-mode").removeClass("icon-edit").addClass("icon-eye-open"),
+                $("#toggle-view-mode").removeClass("icon-eye-open").addClass("icon-edit"),
                 // document.getElementById('edit-toggle').checked = false,
                 // this.setHeaderOpen(!1)
                 $("#footer-bar").addClass("presented")
