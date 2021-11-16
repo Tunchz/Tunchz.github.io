@@ -119,6 +119,12 @@
 									alert("Loading "+ parameter.dashboard+ " failed, load default!")
 									loadingDefalult();
 								})
+							} else if (parameter.reset) {
+								json = {"version": "-Tunchz/FWTT-","header_image": "","dashboard_title": "untitled.dashboard","avatar": "https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png","min_cols": 4,"background_image": null,"background_color": "#212121","widget_background_color": "#383838","widget_border_color": "#FFFFFF","widget_border_width": 0,"widget_border_radius": "0","widget_background_image": null,"fullscreen_auto_topmargin": true,"fullscreen_topmargin": 0,"allow_edit": true,"plugins": [],"panes": [],"datasources": [],"columns": 12,"theme": "default"};
+								freeboard.initialize(true);
+								freeboard.loadDashboard(json, function() {
+									freeboard.setEditing(false);
+								});
 							} else {
 								loadingDefalult();
 							}

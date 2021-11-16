@@ -215,7 +215,7 @@
      "type": "text_widget",
      "settings": {
       "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/water_distribution.png' style='width:30px; height:30px; position:absolute; top:5px; left:10px;'></img>",
-      "value": "<div style='margin-top:-6px'>Total Dist</div>",
+      "value": "<div style='margin-top:-6px'>Total Dist&nbsp;&nbsp;&nbsp;</div>",
       "animate": true,
       "with_comma": false,
       "font_size": "20",
@@ -299,7 +299,7 @@
      "type": "text_widget",
      "settings": {
       "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/flow_pressure.png' style='width:30px; height:30px; position:absolute; top:5px; left:10px;'></img>",
-      "value": "<div style='margin-top:-6px'>Dist F & P</div>",
+      "value": "<div style='margin-top:-6px'>Dist F & P&nbsp;&nbsp;</div>",
       "animate": true,
       "with_comma": false,
       "font_size": "20",
@@ -383,7 +383,7 @@
      "type": "text_widget",
      "settings": {
       "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/reserve.png' style='width:30px; height:30px; position:absolute; top:5px; left:10px;'></img>",
-      "value": "<div style='margin-top:-6px'>Reserve </div>",
+      "value": "<div style='margin-top:-6px'>Reserve &nbsp;&nbsp;&nbsp;</div>",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -426,7 +426,7 @@
      "type": "text_widget",
      "settings": {
       "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/inlet_flow2.png' style='width:40px; height:40px; position:absolute; top:0px; left:5px;'></img>",
-      "value": "<div style='margin-top:-6px'>Inlet Flow</div>",
+      "value": "<div style='margin-top:-6px'>Inlet Flow&nbsp;&nbsp;&nbsp;</div>",
       "animate": true,
       "with_comma": false,
       "font_size": "20",
@@ -1750,14 +1750,15 @@
     {
      "type": "highcharts-timeseries",
      "settings": {
+      "title": "Distribution Flows",
       "timeframe": 60,
       "chartType": "spline",
-      "title": "Distribution Flows",
+      "dashStyle": "ShortDash",
       "xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
       "yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
-      "blocks": "2",
-      "include_legend": 1,
+      "include_legend": true,
       "include_contextmenu": true,
+      "blocks": "2",
       "series1": "datasources[\"MWA Option Url\"][\"result\"][\"DF1\"][\"val\"]",
       "series1label": "DF1",
       "series2": "datasources[\"MWA Option Url\"][\"result\"][\"DF2\"][\"val\"]",

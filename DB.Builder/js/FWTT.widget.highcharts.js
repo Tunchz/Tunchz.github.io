@@ -31,7 +31,12 @@
 	//
 	// TIME SERIES CHARTS
 	//
-	var highchartsLineWidgetSettings = [{
+	var highchartsLineWidgetSettings = [
+	{
+		"name": "title",
+		"display_name": "Title",
+		"type": "text"
+	}, {
 		"name": "timeframe",
 		"display_name": "Timeframe in SECONDS",
 		"type": "number",
@@ -49,9 +54,32 @@
 			"value": "spline"
 		}]
 	}, {
-		"name": "title",
-		"display_name": "Title",
-		"type": "text"
+		"name": "dashStyle",
+		"display_name": "Dash Style",
+		"type": "option",
+		"default_value": "Solid",
+		"options": [{
+			"name": "Solid",
+			"value": "Solid"
+		}, {
+			"name": "Dot",
+			"value": "Dot"
+		}, {
+			"name": "Dash",
+			"value": "Dash"
+		}, {
+			"name": "Short Dot",
+			"value": "ShortDot"
+		}, {
+			"name": "Short Dash",
+			"value": "ShortDash"
+		}, {
+			"name": "Short Dash Dot",
+			"value": "ShortDashDot"
+		}, {
+			"name": "Dash Dot",
+			"value": "DashDot"
+		}]
 	}, {
 		"name": "xaxis",
 		"display_name": "X-Axis",
@@ -62,13 +90,6 @@
 		"display_name": "Y-Axis",
 		"type": "calculated",
 		"default_value": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}"
-	},
-    {
-        name: "blocks",
-        display_name: "Height Blocks",
-        type: "integer",
-        default_value: 4,
-        required: !0
     }, {
         name: "include_legend",
         display_name: "Include Legend",
@@ -79,6 +100,12 @@
         display_name: "Include Context Menu",
         type: "boolean",
         default_value: 1,
+	}, {
+        name: "blocks",
+        display_name: "Height Blocks",
+        type: "integer",
+        default_value: 4,
+        required: !0
     }];
 
 	for (i = 1; i <= MAX_NUM_SERIES; i++) {
@@ -389,7 +416,8 @@
 						},
 
 						data: [],
-						connectNulls: true
+						connectNulls: true,
+            			dashStyle: currentSettings.dashStyle?currentSettings.dashStyle:"Solid", //Short, Dash, Dot, ShortDash, ShortDot, ShortDashDot, DashDot
 					};
 					
 					thisWidgetSeries.push(newSeries);
@@ -436,8 +464,19 @@
 			            // cursor: 'pointer',
 			            // className: 'popup-on-click',
 			            marker: {
-			                lineWidth: 1
-			            }
+			                lineWidth: 1,
+							radius: 3,
+							lineStyle: 'dot',
+			            },
+			            line: {
+			            	dashStyle: "dot",
+			            },
+						lineWidth: 1,
+						states: {
+							hover: {
+								lineWidth: 2
+							}
+						},
 			        }
 				},
 

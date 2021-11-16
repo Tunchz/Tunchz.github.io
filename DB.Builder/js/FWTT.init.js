@@ -17,6 +17,11 @@ var _default = {
     widget_border_radius: 0,
     widget_background_image: null,
     widget_background_transparent:!1,
+    widget_background_color_reset: "#383838",
+    widget_border_color_reset: "#383838",
+    widget_border_width_reset: 0,
+    widget_border_radius_reset: 0,
+    widget_background_image_reset: null,
     //fullscreen
     fullscreen_auto_topmargin:!0,
     fullscreen_topmargin:0,
@@ -215,11 +220,11 @@ function FreeboardModel(a, b, c) {
             d.min_cols(_default.minimum_columns);
             d.background_color(_default.background_color);
             d.background_image(_default.background_image);
-            d.widget_background_color(_default.widget_background_color);
-            d.widget_border_color(_default.widget_border_color);
-            d.widget_border_width(_default.widget_border_width);
-            d.widget_border_radius(_default.widget_border_radius);
-            d.widget_background_image(_default.widget_background_image);
+            d.widget_background_color(_default.widget_background_color_reset);
+            d.widget_border_color(_default.widget_border_color_reset);
+            d.widget_border_width(_default.widget_border_width_reset);
+            d.widget_border_radius(_default.widget_border_radius_reset);
+            d.widget_background_image(_default.widget_background_image_reset);
             d.fullscreen_auto_topmargin(_default.fullscreen_auto_topmargin);
             d.fullscreen_topmargin(_default.fullscreen_topmargin);
         })
