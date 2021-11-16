@@ -83,12 +83,13 @@
 					function(){
 						function loadingDefalult(){
 
-								freeboard.initialize(true);
+								freeboard.initialize(false);
 								var dashboardPattern = window.localStorage.getItem("maholan.db.builder");
 								// console.log("dashboardPattern : ",dashboardPattern)
 								if (dashboardPattern !== null) {
 									dashboardPattern=JSON.parse(dashboardPattern);
 									freeboard.loadDashboard(dashboardPattern, function() {
+										// freeboard.setHeaderOpen(false)
 										// freeboard.setEditing(false);
 									});
 								}
@@ -104,10 +105,11 @@
 								  	// console.log("++++++++++++data : ",json)
 
 									if (json !== null) {
-										freeboard.initialize(true);
+										freeboard.initialize(false);
 										// dashboardPattern=JSON.parse(json);
 										freeboard.loadDashboard(json, function() {
-											freeboard.setEditing(false);
+											// freeboard.setHeaderOpen(false)
+											// freeboard.setEditing(false);
 										});
 									} else {
 										loadingDefalult();
@@ -121,9 +123,10 @@
 								})
 							} else if (parameter.reset) {
 								json = {"version": "-Tunchz/FWTT-","header_image": "","dashboard_title": "untitled.dashboard","avatar": "https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png","min_cols": 4,"background_image": null,"background_color": "#212121","widget_background_color": "#383838","widget_border_color": "#FFFFFF","widget_border_width": 0,"widget_border_radius": "0","widget_background_image": null,"fullscreen_auto_topmargin": true,"fullscreen_topmargin": 0,"allow_edit": true,"plugins": [],"panes": [],"datasources": [],"columns": 12,"theme": "default"};
-								freeboard.initialize(true);
+								freeboard.initialize(false);
 								freeboard.loadDashboard(json, function() {
-									freeboard.setEditing(false);
+									// freeboard.setHeaderOpen(false)
+									// freeboard.setEditing(false);
 								});
 							} else {
 								loadingDefalult();

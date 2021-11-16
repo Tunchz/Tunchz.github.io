@@ -14,8 +14,10 @@ html *,
   /*font-family: DB Heavent,mitr extralight, helvetica neue,sans-serif;*/
 }
 
+
 #main-header {
-    top:0;
+    height: 145px;
+    top:-145px;
 }
 #admin-bar {
     height:145px;
@@ -177,9 +179,6 @@ h2.title {
 
 
 
-#main-header {
-    height: 145px;
-}
 
 #toggle-header {
     width: 25px;
@@ -453,6 +452,7 @@ li:hover header ul.pane-tools {
     margin:0;
     bottom:0 !important;
 	margin-top: 3px;
+    top:0px;
 	/*margin-top: -20px;*/
 	/*margin-top: -10px;*/
 	/*margin-bottom: 50px;*/
