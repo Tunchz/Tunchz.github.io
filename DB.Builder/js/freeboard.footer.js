@@ -66,42 +66,27 @@ function updateFullScreenStatus() {
         freeboard.setEditing(false, false);
         freeboard.setHeaderOpen(false);
         $("#main-header").hide();
-        // $("#board-content").css({'margin-bottom': 50});
         $("#footer-bar").hide();
-        // $("#share-action").hide();
-        // $("#clone-action").hide();
-        // $("#full-screen").text("Shrink");
-        // $("#full-screen").hide();
-        // $("#full-screen-icon").removeClass("icon-resize-full").addClass("icon-resize-small")
-        // $("#full-screen-icon").show();
-        // $("#header").addClass("full-screen");
-        // $("#admin-bar").addClass("full-screen");
         $("#board-content-bottom").addClass("full-screen");
 
         // Compensate top margin
         setTimeout(()=>{
             var topMargin;
-            freeboard.getFullscreenAutoTopMargin()?(topMargin = ($("body").height() - $("#board-content").height()-6)/2,(topMargin<=0)&&(topMargin=0)):(topMargin = freeboard.getFullscreenTopMargin());
+            freeboard.getFullscreenAutoTopMargin()?(
+                topMargin = ($("body").height() - $("#board-content").height())/2,
+                (topMargin<=0)?(topMargin=0):$("body").css({height:"auto"}), topMargin -= 3
+                ):(topMargin = freeboard.getFullscreenTopMargin());
             console.log("------> view height : ",$("body").height());
-            console.log("------> content height : ",$("#board-content").height());
+            console.log("------> topMargin : ",topMargin);
             $("#board-content-top").css({'height': topMargin+"px"});
         },500)
     } else {
         if (canEdit) $("#main-header").show()
         if (wasEditing) freeboard.setEditing(true, true)
         if (wasHeaderOpen) freeboard.setHeaderOpen(wasHeaderOpen)
-        // $("#board-content").css({'margin-bottom': 50});
         $("#footer-bar").show();
-        // $("#share-action").show();
-        // $("#clone-action").show();
-        // $("#full-screen").text("Fullscreen");
-        // $("#full-screen").show();
-        // $("#full-screen-icon").addClass("icon-resize-full").removeClass("icon-resize-small")
-        // $("#header").removeClass("full-screen");
-        // $("#admin-bar").removeClass("full-screen");
         $("#board-content-bottom").removeClass("full-screen");
-
-
+        $("body").css({height:"100%"})
         $("#board-content-top").css({'height': "0px"});
     }
 }

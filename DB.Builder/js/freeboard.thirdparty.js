@@ -16144,11 +16144,6 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 			var rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';
 			overlay.css({"background-color": rgbaColor})
 			$w.addClass('transparent_bg');
-			// (widget_background_color)?$w.css("cssText","background-color: #38383800 !important;border:1px solid "+widget_background_color):$w.css("cssText","background-color: #38383800 !important;border:1px solid "+_default.widget_background_color);
-			// $w.css("cssText","background-color: #38383800 !important;");
-			// var c = widget_background_color?widget_background_color.slice(0,7):_default.widget_background_color.slice(0,7);
-			// $w.find('#transparent_overlay').remove();
-			// $w.prepend($('<div id="transparent_overlay" style="position:absolute; width:100%; height:100%; top:0; left:0; background-color:'+c+'77;">'));
 		} else {
 			if (widget_background_color) {
 				var rgbaColor = widget_background_color
@@ -16156,8 +16151,6 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 					var color=widget_background_color
 					rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+ ',' + parseInt(color.slice(-2),16)/256 +')';
 				}
-
-				// $w.css({"background-color": rgbaColor + " !important"});
 				$w.css("cssText","background-color: " + rgbaColor + " !important");
 			} else {
 				$w.css({"background-color": "inherit"});
@@ -16204,9 +16197,6 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 			var rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';
 			overlay.css({"background-color": rgbaColor})
 			$widget.addClass('transparent_bg');
-			// (widget_background_color)?$widget.css("cssText","background-color: #38383800 !important;border:1px solid "+widget_background_color):$widget.css("cssText","background-color: #38383800 !important;border:1px solid "+_default.widget_background_color);
-			// $widget.css("cssText","background-color: #38383800 !important;");
-
 		} else {
 			$widget.removeClass('transparent_bg');
 			overlay.css({"background-color": "rgba(56, 56, 56, 0)"})
@@ -16216,8 +16206,6 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 					var color=widget_background_color
 					rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+ ',' + parseInt(color.slice(-2),16)/256 +')';
 				}
-
-				// $widget.css({"background-color": rgbaColor + " !important"});
 				$widget.css("cssText","background-color: " + rgbaColor + " !important");
 			} else {
 				$widget.css({"background-color": "inherit"});

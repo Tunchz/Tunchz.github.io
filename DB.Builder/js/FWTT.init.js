@@ -320,48 +320,27 @@ function FreeboardModel(a, b, c) {
             d.isEditing(a), _.isUndefined(b) && (b = !0);
             var e = b ? 250 : 0,
                 f = $("#admin-bar").outerHeight();
-            // a ? ($("#toggle-header-icon").addClass("icon-chevron-up").removeClass("icon-wrench"), $(".gridster .gs_w").css({
             a ? (
-                // $("#toggle-header-icon").addClass("icon-chevron-up").removeClass("icon-chevron-down"), 
-                $(".gridster .gs_w").addClass("move") /*.css({cursor: "move"})*/, 
-                // $("#main-header").animate({top: "0px"}, e), 
-                // $("#board-content").animate({top: f + 30 + "px"}, e),
+                $(".gridster .gs_w").addClass("move"), 
                 $("#board-content").animate({top: (d.isHeaderOpen()?f:0) + 30 + "px"}, e),
                 $("#board-content-bottom").addClass("edited"),
                 $("#main-header").data().shown = !0, c.attachWidgetEditIcons($(".sub-section")), c.enableGrid(),
                 $("#toggle-header").addClass("edited"),
                 $("#toggle-view-mode").removeClass("icon-edit").addClass("icon-eye-open"),
-                // document.getElementById('edit-toggle').checked = true,
-                // this.setHeaderOpen(!0)
                 $("#footer-bar").removeClass("presented")
             )
 
             : 
             (
-                // $("#toggle-header-icon").addClass("icon-chevron-down").removeClass("icon-chevron-up"), 
-                $(".gridster .gs_w").removeClass("move") /*.css({cursor: "default"})*/, 
-                // $("#main-header").animate({top: "-" + f + "px"}, e), 
-                // $("#board-content").animate({top: f  + "px"}, e),
+                $(".gridster .gs_w").removeClass("move"), 
                 $("#board-content").animate({top: (d.isHeaderOpen()?f:0) + 0 + "px"}, e),
                 $("#board-content-bottom").removeClass("edited"),
                 $("#main-header").data().shown = !1, $(".sub-section").unbind(), c.disableGrid(),
                 $("#toggle-header").removeClass("edited"),
                 $("#toggle-view-mode").removeClass("icon-eye-open").addClass("icon-edit"),
-                // document.getElementById('edit-toggle').checked = false,
-                // this.setHeaderOpen(!1)
                 $("#footer-bar").addClass("presented")
             ), 
             c.showPaneEditIcons(a, b)
-
-            // var editStatus = document.getElementById('edit-toggle').checked;
-            // console.log("-------------------- toggle edit", editStatus)
-            // if (a) {
-            //     document.getElementById('edit-toggle').checked = true;
-            //     $("#add-pane-header-icon").css({visibility: "visible"})
-            // } else {
-            //     document.getElementById('edit-toggle').checked = false;
-            //     $("#add-pane-header-icon").css({visibility: "hidden"})
-            // }
         }
     }, this.toggleEditing = function() {
         var a = !d.isEditing();
@@ -370,28 +349,14 @@ function FreeboardModel(a, b, c) {
             d.isHeaderOpen(a);
             var e = b ? 250 : 0,
                 f = $("#admin-bar").outerHeight();
-            // a ? ($("#toggle-header-icon").addClass("icon-chevron-up").removeClass("icon-wrench"), $(".gridster .gs_w").css({
             a ? (
                 $("#toggle-header-icon").addClass("icon-chevron-up").removeClass("icon-chevron-down"), 
-                // $(".gridster .gs_w").css({ cursor: "pointer"}), 
                 $("#main-header").animate({top: "0px"}, e), 
                 $("#board-content").animate({top: f + (d.isEditing()?30:0) + "px"}, e)
-                // $("#board-content-bottom").addClass("edited"),
-                // $("#main-header").data().shown = !0, 
-                // c.attachWidgetEditIcons($(".sub-section")), c.enableGrid(),
-                // $("#footer-bar").removeClass("presented")
-            )
-
-            : 
-            (
+            ):(
                 $("#toggle-header-icon").addClass("icon-chevron-down").removeClass("icon-chevron-up"), 
-                // $(".gridster .gs_w").css({cursor: "default"}), 
                 $("#main-header").animate({top: "-" + f + "px"}, e), 
                 $("#board-content").animate({top: (d.isEditing()?30:0) + "px"}, e)
-                // $("#board-content-bottom").removeClass("edited"),
-                // $("#main-header").data().shown = !1, 
-                // $(".sub-section").unbind(), c.disableGrid(),
-                // $("#footer-bar").addClass("presented")
             ); 
             // c.showPaneEditIcons(a, b)
 
@@ -637,39 +602,6 @@ function FreeboardUI() {
                 widget_base_dimensions: _default.widget_base_dimensions,    //[t, 40], //10],   // [width, height]
                 max_cols:24,
                 max_rows:60,
-
-                // resize: {
-                //     enabled: !1,//!1,
-                //     axes: "x"
-                // },
- 
-
-                // widget_selector         : 'li',
-                // widget_margins          : [5,5],       
-                // widget_base_dimensions  : [100,30],    
-                // extra_rows              : 0,
-                // extra_cols              : 0,
-                // min_cols                : 5,
-                // max_cols                : 15,           
-                // min_rows                : 15,
-                // max_size_x              : 15,           
-                // autogenerate_stylesheet : true,
-                // avoid_overlapped_widgets: true,
-                // serialize_params        : function($w, wgd)
-                // {
-                //     return {
-                //         col   : wgd.col,
-                //         row   : wgd.row,
-                //         size_x: wgd.size_x,
-                //         size_y: wgd.size_y
-                //     };
-                // },
-                // collision               : {},
-                // draggable               : {
-                //     distance: 4
-                // },
-
-
 
             }).data("gridster"), a(1), r.disable()
         }
@@ -970,7 +902,7 @@ DeveloperConsole = function(a) {
             f = $('<table class="table table-condensed sub-table"></table>');
         f.append($('<thead style=""><tr><th>Plugin Script URL</th></tr></thead>'));
         var g = $("<tbody></tbody>");
-        f.append(g), d.append($("<p>Here you can add references to other scripts to load datasource or widget plugins.</p>")).append(f).append(e).append('<p>To learn how to build plugins for freeboard, please visit <a target="_blank" href="http://freeboard.github.io/freeboard/docs/plugin_example.html">http://freeboard.github.io/freeboard/docs/plugin_example.html</a></p>'), _.each(a.plugins(), function(a) {
+        f.append(g), d.append($("<p>Here you can add references to other scripts to load datasource or widget plugins.</p>")).append(f).append(e)/*.append('<p>To learn how to build plugins for freeboard, please visit <a target="_blank" href="http://freeboard.github.io/freeboard/docs/plugin_example.html">http://freeboard.github.io/freeboard/docs/plugin_example.html</a></p>')*/, _.each(a.plugins(), function(a) {
             b(a)
         }), e.click(function(a) {
             b()
@@ -1167,17 +1099,6 @@ PluginEditor = function(a, b, gg) {
                             _.isObject(a) ? (b = a.name, c = a.value) : b = a, _.isUndefined(c) && (c = b), _.isUndefined(t) && (t = c), $("<option></option>").text(b).attr("value", c).appendTo(s)
                         }), m.settings[a.name] = t, a.name in h && s.val(h[a.name]);
                         break;
-                    // case "urlOption":
-                    //     var t = h[a.name],
-                    //         s = $("<select></select>").appendTo($('<div class="styled-select"></div>').appendTo(i)).change(function() {
-                    //             m.settings[a.name] = $(this).val()
-                    //             console.log("------>>> URL Option Changes to : ",m.settings[a.name])
-                    //         }).mousedown(function() {/*console.log(">>>>> generate options"),*/ Object.keys(datasourceOptions).map((item,i)=>{ s.empty(),$("<option></option>").text(item).attr("value", i).click(function() {console.log("------>>> URL Option Changes to : ",m.settings[a.name]),m.settings[a.name] = $(this).val()}).appendTo(s)  }) });
-                    //     _.each(a.options, function(a) {
-                    //         var b, c;
-                    //         _.isObject(a) ? (b = a.name, c = a.value) : b = a, _.isUndefined(c) && (c = b), _.isUndefined(t) && (t = c)/*, $("<option></option>").text(b).attr("value", c).appendTo(s)*/
-                    //     }), m.settings[a.name] = t, a.name in h && s.val(h[a.name]);
-                    //     break;
                     default:
                         if (m.settings[a.name] = h[a.name], "calculated" == a.type) {
                             if (a.name in h) {
@@ -1204,11 +1125,9 @@ PluginEditor = function(a, b, gg) {
                                 f(i, m, a, null, !1, a.type);
                         } else if ("urlOptionCalculated" == a.type) {
                             if (a.name in h) {
-                                // console.log(">>>>>>>>>>>>>>>> 1 : ", a.name, h)
                                 var u = h[a.name];
                                 f(i, m, a, u, !1, a.type);
                             } else {
-                                // console.log(">>>>>>>>>>>>>>>> 2 : ", a.name, h)
                                 f(i, m, a, null, !1, a.type);
                             }
                         } else {
@@ -1269,7 +1188,6 @@ PluginEditor = function(a, b, gg) {
                 if ("number" == b.type && !e(m.settings[b.name]))
                     return c(b.name, "Must be a number."), !0
             }
-            // console.log("-------- m : ", m, _.isFunction(i))
             _.isFunction(i) && i(m)
         });
         var p, q = _.keys(b);
@@ -1287,14 +1205,6 @@ PluginEditor = function(a, b, gg) {
 
     return {
         createPluginEditor: function(a, b, c, d, e, f) {
-
-            // console.log("------ type : ",a);
-            // console.log("------ form settings {settings:{settings:[]}} : ",b);
-            // console.log("------ key for form settings ",c);
-            // console.log("------ current settings {} : ",d);
-            // console.log("------ function () : ",e);
-            // console.log("------ function (results){do somthing with results} : ",f);
-
             g(a, b, c, d, e, f)
         }
     }
@@ -1477,52 +1387,12 @@ UrlOptionEditor = function(a) {
         return _.isArray(a) || _.isObject(a) ? !0 : c(a, b)
     }
 
-    // function c(a, b) {
-    //     switch (b) {
-    //         case o.ANY:
-    //             return !0;
-    //         case o.ARRAY:
-    //             return _.isArray(a);
-    //         case o.OBJECT:
-    //             return _.isObject(a);
-    //         case o.STRING:
-    //             return _.isString(a);
-    //         case o.NUMBER:
-    //             return _.isNumber(a);
-    //         case o.BOOLEAN:
-    //             return _.isBoolean(a)
-    //     }
-    // }
-
     function d(a) {
         $(a).parent().find(".validation-error").remove(), $(a).parent().append("<div class='validation-error'>This field expects an expression that evaluates to type " + b + ".</div>")
     }
 
-    // function e(a) {
-    //     var b = ($(a).val().match(/\n/g) || []).length,
-    //         c = Math.min(200, 20 * (b + 1));
-    //     $(a).css({
-    //         height: c + "px"
-    //     })
-    // }
-
-    // function f(a, c, d) {
-    //      Object.keys(datasourceOptions).map((item)=>{
-
-    //         f.push({
-    //             value: item,
-    //             entity: void 0,
-    //             precede_char: "",
-    //             follow_char: ''
-    //         })  
-    //     })
-
-    //     m = f
-    // }
-
     function g(b, callback) {
-        var e = "" //$(b).val().substring(0, $(b).getCaretPosition());
-        // if (e = e.replace(String.fromCharCode(160), " "), f(e, a.datasources(), c), m.length > 0) {
+        var e = "" 
         if (m.length > 0) {
             k || (k = $('<ul id="value-selector" class="value-dropdown"></ul>').insertAfter(b).width($(b).outerWidth() - 2).css("left", $(b).position().left).css("top", $(b).position().top + $(b).outerHeight() - 1)), k.empty(), k.scrollTop(0);
             var g = !0;
@@ -1558,17 +1428,6 @@ UrlOptionEditor = function(a) {
         $(a).addClass("calculated-value-input").bind("keyup mouseup freeboard-eval", function(c) {
             return !k || "keyup" != c.type || 38 != c.keyCode && 40 != c.keyCode && 13 != c.keyCode ? void g(a,callback) : void c.preventDefault()
         })
-        // .focus(function() {
-        //     $(a).css({
-        //         "z-index": 3001
-        //     }); 
-        //     // e(a)
-        //     var b = ($(a).val().match(/\n/g) || []).length,
-        //         c = Math.min(200, 20 * (b + 1));
-        //     $(a).css({
-        //         height: c + "px"
-        //     })
-        // })
         .focusout(function() {
             // d(a, b), 
             $(a).css({
@@ -1576,33 +1435,9 @@ UrlOptionEditor = function(a) {
                 "z-index": 3e3
             }), $(a).next("ul#value-selector").remove(), k = null, l = -1
         })
-        // .bind("keydown", function(a) {
-        //     if (k)
-        //         if (38 == a.keyCode || 40 == a.keyCode) {
-        //             a.preventDefault();
-        //             var b = $(k).find("li");
-        //             38 == a.keyCode ? l-- : 40 == a.keyCode && l++, 0 > l ? l = b.size() - 1 : l >= b.size() && (l = 0);
-        //             var c = $(b).eq(l);
-        //             c.trigger("freeboard-select"), $(k).scrollTop($(c).position().top)
-        //         } else
-        //             13 == a.keyCode && (a.preventDefault(), -1 != l && $(k).find("li").eq(l).trigger("freeboard-insertValue"))
-        // })
     }
     var k = null,
         m = [];
-    // ,j = new RegExp('.*datasources\\["([^"]*)("\\])?(.*)$'),
-    //     k = null,
-    //     l = 0,
-        
-    //     n = null,
-    //     o = {
-    //         ANY: "any",
-    //         ARRAY: "array",
-    //         OBJECT: "object",
-    //         STRING: "string",
-    //         NUMBER: "number",
-    //         BOOLEAN: "boolean"
-    //     };
     return {
         createUrlOptionEditor: function(a,callback) {
             m = Object.keys(datasourceOptions).map((item)=>{
@@ -2299,7 +2134,6 @@ $.extend(freeboard, jQuery.eventEmitter),
     function() {
     
     // Code for widget plugin here
-
 
     }
     ();
