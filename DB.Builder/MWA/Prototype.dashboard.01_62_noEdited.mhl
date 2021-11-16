@@ -174,7 +174,7 @@
     {
      "type": "text_widget",
      "settings": {
-      "value": "return toThaiDateString(datasources[\"นาฬิกา\"][\"date_object\"])",
+      "value": "toThaiDateString(datasources[\"นาฬิกา\"][\"date_object\"])",
       "animate": true,
       "with_comma": false,
       "font_size": 20,
@@ -386,6 +386,48 @@
       "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/reserve.png' style='width:30px; height:30px; position:absolute; top:5px; left:10px;'></img>",
       "value": "<div style='margin-top:-6px'>Reserve &nbsp;&nbsp;&nbsp;</div>",
       "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "20",
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 3,
+    "7": 3,
+    "12": 3,
+    "13": 3,
+    "14": 3
+   },
+   "col": {
+    "4": 4,
+    "7": 5,
+    "12": 3,
+    "13": 4,
+    "14": 5
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "border_radius": null,
+   "border_width": "1",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/inlet_flow2.png' style='width:40px; height:40px; position:absolute; top:0px; left:5px;'></img>",
+      "value": "<div style='margin-top:-6px'>Inlet Flow&nbsp;&nbsp;&nbsp;</div>",
       "animate": true,
       "with_comma": false,
       "font_size": "20",
@@ -1513,6 +1555,74 @@
     "7": 1,
     "12": 13,
     "13": 12,
+    "14": 12,
+    "18": 7,
+    "21": 7,
+    "38": 7
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 11,
+    "13": 12,
+    "14": 13,
+    "18": 11,
+    "21": 11,
+    "38": 11
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4\"][\"unit\"]+\"</span>\"",
+      "value": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4\"][\"val\"]",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "24",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"per  Day | per Hour  <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Day\"][\"unit\"]+\"</span>\"",
+      "value": "return (datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Day\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Day\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\n    \" | \"+(datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Hr\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Hr\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\");",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "16",
+      "font_align": "center",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 1,
+    "12": 13,
+    "13": 12,
     "14": 12
    },
    "col": {
@@ -1962,116 +2072,6 @@
       "font_size_sublabel": "9",
       "progress_margin": 2,
       "height_block": 2
-     }
-    }
-   ]
-  },
-  {
-   "width": 2,
-   "row": {
-    "4": 3,
-    "7": 3,
-    "12": 3,
-    "13": 3,
-    "14": 3
-   },
-   "col": {
-    "4": 4,
-    "7": 5,
-    "12": 3,
-    "13": 4,
-    "14": 5
-   },
-   "col_width": 2,
-   "transparent_bg": true,
-   "border_radius": null,
-   "border_width": "1",
-   "widgets": [
-    {
-     "type": "text_widget",
-     "settings": {
-      "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/inlet_flow2.png' style='width:40px; height:40px; position:absolute; top:0px; left:5px;'></img>",
-      "value": "<div style='margin-top:-6px'>Inlet Flow&nbsp;&nbsp;&nbsp;</div>",
-      "animate": true,
-      "with_comma": false,
-      "font_size": "20",
-      "font_align": "right",
-      "font_color": "#ffffff",
-      "timeframe": 60,
-      "mark_color": "#ff9900",
-      "maxmin_color": "#00ff00",
-      "height_block": 1,
-      "_color": [
-       "#ff9900"
-      ]
-     }
-    }
-   ]
-  },
-  {
-   "width": 2,
-   "row": {
-    "4": 1,
-    "7": 1,
-    "12": 13,
-    "13": 12,
-    "14": 12,
-    "18": 7,
-    "21": 7,
-    "38": 7
-   },
-   "col": {
-    "4": 4,
-    "7": 7,
-    "12": 11,
-    "13": 12,
-    "14": 13,
-    "18": 11,
-    "21": 11,
-    "38": 11
-   },
-   "col_width": 2,
-   "transparent_bg": false,
-   "border_radius": null,
-   "widgets": [
-    {
-     "type": "text_alternative_widget",
-     "settings": {
-      "title": "return datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4\"][\"parameter\"] + \"   <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4\"][\"unit\"]+\"</span>\"",
-      "value": "datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4\"][\"val\"]",
-      "units": "",
-      "animate": true,
-      "with_comma": false,
-      "font_size": "24",
-      "font_align": "center",
-      "font_color": "#ffffff",
-      "timeframe": 60,
-      "mark_color": "#ff9900",
-      "maxmin_color": "#00ff00",
-      "height_block": 1,
-      "_color": [
-       "#ff9900"
-      ]
-     }
-    },
-    {
-     "type": "text_alternative_widget",
-     "settings": {
-      "title": "return \"per  Day | per Hour  <span style='float:right;font-size:8px;'>\"+datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Day\"][\"unit\"]+\"</span>\"",
-      "value": "return (datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Day\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Day\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\n    \" | \"+(datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Hr\"][\"val\"]?datasources[\"MWA Option Url\"][\"result\"][\"TOTAL.DF4/Hr\"][\"val\"]:\"&nbsp;&nbsp;-&nbsp;&nbsp;\");",
-      "units": "",
-      "animate": true,
-      "with_comma": false,
-      "font_size": "16",
-      "font_align": "center",
-      "font_color": "#ffffff",
-      "timeframe": 60,
-      "mark_color": "#ff9900",
-      "maxmin_color": "#00ff00",
-      "height_block": 1,
-      "_color": [
-       "#ff9900"
-      ]
      }
     }
    ]

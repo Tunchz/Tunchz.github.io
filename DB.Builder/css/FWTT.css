@@ -532,6 +532,9 @@ li:hover header ul.pane-tools {
 .transparent_bg.active #transparent_overlay {
     background-color: #2a2a2a00 !important;
 }
+#board-content.active .transparent_bg #transparent_overlay {
+    background-color: #2a2a2a00 !important;
+}
 
 
 .sub-section {

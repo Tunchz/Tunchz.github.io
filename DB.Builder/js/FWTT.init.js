@@ -331,6 +331,7 @@ function FreeboardModel(a, b, c) {
                 $("#main-header").data().shown = !0, c.attachWidgetEditIcons($(".sub-section")), c.enableGrid(),
                 $("#toggle-header").addClass("edited"),
                 $("#toggle-view-mode").removeClass("icon-edit").addClass("icon-eye-open"),
+                $("#board-content").removeClass("active"),
                 $("#footer-bar").removeClass("presented")
             )
 
@@ -342,6 +343,7 @@ function FreeboardModel(a, b, c) {
                 $("#main-header").data().shown = !1, $(".sub-section").unbind(), c.disableGrid(),
                 $("#toggle-header").removeClass("edited"),
                 $("#toggle-view-mode").removeClass("icon-eye-open").addClass("icon-edit"),
+                $("#board-content").addClass("active"),
                 $("#footer-bar").addClass("presented")
             ), 
             c.showPaneEditIcons(a, b)
@@ -547,7 +549,7 @@ function FreeboardUI() {
     function n(a, b) {
         _.isUndefined(b) && (b = !0);
         var c = b ? 250 : 0;
-        a ? ($(".pane-tools").fadeIn(c), $("#column-tools").fadeIn(c),$(".transparent_bg").removeClass("active")) : ($(".pane-tools").fadeOut(c), $("#column-tools").fadeOut(c),$(".transparent_bg").addClass("active"))
+        a ? ($(".pane-tools").fadeIn(c), $("#column-tools").fadeIn(c)) : ($(".pane-tools").fadeOut(c), $("#column-tools").fadeOut(c))
     }
 
     function o(a) {
