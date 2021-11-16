@@ -20,13 +20,13 @@ var _default = {
     //fullscreen
     fullscreen_auto_topmargin:!0,
     fullscreen_topmargin:0,
-    mark_color: "#ff9900",
+    mark_color: "#FF9900",
     track_color: "#494949",
-    maxmin_color: "#00ff00",
-    pointer_color: "#ffffff",
-    font_color: "#ffffff",
+    maxmin_color: "#00FF00",
+    pointer_color: "#FFFFFF",
+    font_color: "#FFFFFF",
     font_opacity: 0.6,
-    line_color: "#ffffff",
+    line_color: "#FFFFFF",
     line_thickness: 1,
     margin_left:5,
     margin_right:5,
@@ -70,7 +70,7 @@ function FreeboardModel(a, b, c) {
     this.isHeaderOpen = ko.observable(!1),
     this.dashboard_title = ko.observable(_default.dashboard_title), this.dashboard_title.subscribe(function(a){$("#board-title").html(a?a:_default.dashboard_title)}),
     this.avatar = ko.observable(_default.avatar), this.avatar.subscribe(function(a){var s=a;(!a)&&(s=_default.avatar); $("#avatar-footer").css({content: "url('"+s+"')"})}),
-    this.min_cols = ko.observable(_default.min_width), this.min_cols.subscribe(function(a){document.body.style.minWidth = !_.isUndefined(a)?(parseInt(a)*_w-_g*2+20+'px'):_default.min_width}),
+    this.min_cols = ko.observable(_default.minimum_columns), this.min_cols.subscribe(function(a){document.body.style.minWidth = !_.isUndefined(a)?(parseInt(a)*_w-_g*2+20+'px'):_default.min_width}),
     this.background_image = ko.observable(_default.background_image), this.background_image.subscribe(function(a){document.body.style.backgroundImage = "url('"+(a?a:_default.background_image)+"')"}),
     this.background_color = ko.observable(_default.background_color), this.background_color.subscribe(function(a){document.body.style.backgroundColor = (a)?a:_default.background_color;}),
     this.widget_background_color = ko.observable(_default.widget_background_color), 
@@ -164,7 +164,7 @@ function FreeboardModel(a, b, c) {
             _.isUndefined(e.header_image) ? d.header_image(_default.header_image) : d.header_image(e.header_image),
             _.isUndefined(e.dashboard_title) ? d.dashboard_title(_default.dashboard_title) : d.dashboard_title(e.dashboard_title),
             _.isUndefined(e.avatar) ? d.avatar(_default.avatar) : d.avatar(e.avatar),
-            _.isUndefined(e.min_cols) ? d.min_cols(_default.min_cols) : d.min_cols(e.min_cols),
+            _.isUndefined(e.min_cols) ? d.min_cols(_default.minimum_columns) : d.min_cols(e.min_cols),
             // _.isUndefined(e.background_image) ? d.background_image(_default.background_image) : 
             d.background_image(e.background_image),
             // _.isUndefined(e.background_color) ? d.background_color(_default.background_color) : 
@@ -212,7 +212,7 @@ function FreeboardModel(a, b, c) {
             // console.log("************** reset : ",d);
             d.dashboard_title(_default.dashboard_title);
             d.avatar(_default.avatar);
-            d.min_cols(_default.min_cols);
+            d.min_cols(_default.minimum_columns);
             d.background_color(_default.background_color);
             d.background_image(_default.background_image);
             d.widget_background_color(_default.widget_background_color);
@@ -540,9 +540,11 @@ function FreeboardUI() {
             h = Number(b.getCalculatedHeight()),
             tbg = b.transparent_bg(),
             bgc = b.widget_background_color(),
-            bdr = b.border_radius();
+            bdr = b.border_radius(),
+            bw = b.border_width(),
+            bc = b.border_color();
             // console.log("--------------- b : ",b)
-        r.add_widget(a, g, h, e, f, tbg, bgc, bdr), c && n(!0), l(b, f, e), $(a).attrchange({
+        r.add_widget(a, g, h, e, f, tbg, bgc, bdr, bw, bc), c && n(!0), l(b, f, e), $(a).attrchange({
             trackValues: !0,
             callback: function(a) {
                 "data-row" == a.attributeName ? l(b, Number(a.newValue), void 0) : "data-col" == a.attributeName && l(b, void 0, Number(a.newValue))
@@ -554,7 +556,7 @@ function FreeboardUI() {
         var c = b.getCalculatedHeight(),
             d = Number($(a).attr("data-sizey")),
             e = Number($(a).attr("data-sizex"));
-        (c != d || b.col_width() != e) && r.resize_widget($(a), b.col_width(), c, b.transparent_bg(), b.widget_background_color(), b.border_radius(), function() {
+        (c != d || b.col_width() != e) && r.resize_widget($(a), b.col_width(), c, b.transparent_bg(), b.widget_background_color(), b.border_radius(), b.border_width(), b.border_color(), function() {
             r.set_dom_grid_height()
         })
     }
@@ -737,7 +739,13 @@ function PaneModel(a, b) {
         c.width(a)
         c.processSizeChange()
     }),  
-    this.border_radius = ko.observable(), this.border_radius.subscribe(function(a) {
+    this.border_radius = ko.observable(null), this.border_radius.subscribe(function(a) {
+        c.processSizeChange()
+    }),   
+    this.border_width = ko.observable(null), this.border_width.subscribe(function(a) {
+        c.processSizeChange()
+    }),   
+    this.border_color = ko.observable(), this.border_color.subscribe(function(a) {
         c.processSizeChange()
     }), 
     this.widgets = ko.observableArray(), this.addWidget = function(a) {
@@ -799,10 +807,12 @@ function PaneModel(a, b) {
             transparent_bg: c.transparent_bg(),
             widget_background_color: c.widget_background_color(),
             border_radius: c.border_radius(),
+            border_width: c.border_width(),
+            border_color: c.border_color(),
             widgets: a
         }
     }, this.deserialize = function(d) {
-        c.title(d.title), c.width(d.width), c.row = d.row, c.col = d.col, c.col_width(d.col_width || 1), c.transparent_bg(d.transparent_bg || !1), c.widget_background_color(d.widget_background_color/* || _default.widget_background_color*/), c.border_radius(d.border_radius/* || _default.widget_border_radius*/), _.each(d.widgets, function(d) {
+        c.title(d.title), c.width(d.width), c.row = d.row, c.col = d.col, c.col_width(d.col_width || 1), c.transparent_bg(d.transparent_bg || !1), c.widget_background_color(d.widget_background_color/* || _default.widget_background_color*/), c.border_radius(d.border_radius/* || _default.widget_border_radius*/), c.border_width(d.border_width), c.border_color(d.border_color), _.each(d.widgets, function(d) {
             var e = new WidgetModel(a, b);
             e.deserialize(d), c.widgets.push(e)
         })
@@ -1725,7 +1735,7 @@ var freeboard = function() {
                     e.saveLocalstorage();
                 } else {
                     var j = void 0;
-                    "datasource" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings(), m.name = i.name()) : "widget" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings()) : "pane" == k.type && (m = {}, "edit" == k.operation && (m.title = i.title(), m.col_width = i.col_width(), m.transparent_bg = i.transparent_bg(), m.widget_background_color = i.widget_background_color()), m.border_radius = i.border_radius(), l = {
+                    "datasource" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings(), m.name = i.name()) : "widget" == k.type ? "add" == k.operation ? m = {} : (j = i.type(), m = i.settings()) : "pane" == k.type && (m = {}, "edit" == k.operation && (m.title = i.title(), m.col_width = i.col_width(), m.transparent_bg = i.transparent_bg(), m.widget_background_color = i.widget_background_color()), m.border_radius = i.border_radius(), m.border_width = i.border_width(), m.border_color = i.border_color(), l = {
                         settings: {
                             settings: [{
                             //     name: "title",
@@ -1745,8 +1755,18 @@ var freeboard = function() {
                             }, {
                                 name: "widget_background_color",
                                 display_name: "Background Color",
-                                type: "Text",
+                                type: "text",
                                 description: "leave blank for default widget background color. View option by select <span style='color:#fff'>Dashboard Configuration</span> in Setting Pane",
+                            }, {
+                                name: "border_color",
+                                display_name: "Border Color",
+                                type: "text",
+                                description: "leave blank for default widget border color. View option by select <span style='color:#fff'>Dashboard Configuration</span> in Setting Pane",
+                            }, {
+                                name: "border_width",
+                                display_name: "Border Width",
+                                type: "integer",
+                                description: "leave blank for default widget border width. View option by select <span style='color:#fff'>Dashboard Configuration</span> in Setting Pane",
                             }, {
                                 name: "border_radius",
                                 display_name: "Border Radius",
@@ -1764,7 +1784,7 @@ var freeboard = function() {
                                 g.settings(f.settings), g.type(f.type), i.widgets.push(g), d.attachWidgetEditIcons(a)
                             }
                         } else {
-                            "edit" == k.operation && ("pane" == k.type ? (i.title(f.settings.title), i.transparent_bg(f.settings.transparent_bg), i.widget_background_color(f.settings.widget_background_color), i.border_radius(f.settings.border_radius?parseInt(f.settings.border_radius):null), i.col_width(0), i.col_width(parseInt(f.settings.col_width)), d.processResize(!1)) : ("datasource" == k.type && (i.name(f.settings.name), f.settings.name), i.type(f.type), i.settings(f.settings)))
+                            "edit" == k.operation && ("pane" == k.type ? (i.title(f.settings.title), i.transparent_bg(f.settings.transparent_bg), i.widget_background_color(f.settings.widget_background_color), i.border_radius(f.settings.border_radius/*?parseInt(f.settings.border_radius):null*/), i.border_width(f.settings.border_width), i.border_color(f.settings.border_color), i.col_width(0), i.col_width(parseInt(f.settings.col_width)), d.processResize(!1)) : ("datasource" == k.type && (i.name(f.settings.name), f.settings.name), i.type(f.type), i.settings(f.settings)))
                         }
                         e.saveLocalstorage();
                     })
@@ -1949,7 +1969,7 @@ var freeboard = function() {
                         display_name: "Minimum Responsive Columns",
                         type: "number",
                         description: 'Minimum number of columns allowed to be responsive',
-                        default_value: _default.min_cols,
+                        default_value: _default.minimum_columns,
                     }, 
                     {
                         name: "background_image",
@@ -2282,9 +2302,14 @@ $.extend(freeboard, jQuery.eventEmitter),
 
 // Utility functions
 function numberWithCommas(x) {
-    x = x.toString();
-    var pattern = /(-?\d+)(\d{3})/;
-    while (pattern.test(x))
-        x = x.replace(pattern, "$1,$2");
-    return x;
+    if (x) {
+        x = x.toString();
+        var pattern = /(-?\d+)(\d{3})/;
+        while (pattern.test(x))
+            x = x.replace(pattern, "$1,$2");
+        return x;        
+    } else {
+        return "-"
+    }
+
 }

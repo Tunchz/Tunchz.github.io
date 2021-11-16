@@ -75,7 +75,7 @@
                 // container = $('<div class="pie_progress" style="width:100%; height:100%;" role="progressbar" size="40" data-goal="0" data-barcolor="#FF9900" data-barsize="5" aria-valuemin="0" aria-valuemax="100"></div>'),
                 container = $('<div class="pie_progress" style="width:100%; height:100%;"></div>'),
                 label_top = $('<div class="pie_progress__label" style="top:30%;left:50%;transform:translateX(-50%) translateY(-50%);"></div>'),
-                label= $('<div class="pie_progress__label" style="top:50%;left:50%;transform:translateX(-50%) translateY(-50%);"></div>'),
+                label= $('<div class="pie_progress__label" style="top:55%;left:50%;transform:translateX(-50%) translateY(-50%);"></div>'),
                 label_bottom = $('<div class="pie_progress__label" style="top:70%;left:50%;transform:translateX(-50%) translateY(-50%);"></div>'),
                 _settings = settings,
                 _self=this,
@@ -164,7 +164,7 @@
         freeboard.loadWidgetPlugin({
             type_name: "circular_progress",
             display_name: "Circle Progress Bar",
-            external_scripts: ["plugins/thirdparty/progressbar.min.js"], //["plugins/thirdparty/jquery-asPieProgress.js"],
+            external_scripts:  ["https://tunchz.github.io/DB.Builder/plugins/thirdparty/progressbar.js"], //["plugins/thirdparty/progressbar.js"], //["plugins/thirdparty/jquery-asPieProgress.js"],
             settings: [
             {
                 name: "label_top",
@@ -280,9 +280,9 @@
                 innerContainer = $('<div style="width:100%;height:100%;margin:0px;overflow:visible;"></div>'),
                 // container = $('<div class="pie_progress" style="width:100%; height:100%;" role="progressbar" size="40" data-goal="0" data-barcolor="#FF9900" data-barsize="5" aria-valuemin="0" aria-valuemax="100"></div>'),
                 container = $('<div class="semiCicleContainer" class="semicicle_progress" style="overflow:visible;width:100%; height:100%;overflow:visible;text-align:center;"></div>'),
-                label_top = $('<div class="semicicle_progress__label pie_progress__label" style="display:absolute;top:25%;top:50%; left:50%;transform:translateY(-50%) translateX(-50%);"></div>'),
+                label_top = $('<div class="semicicle_progress__label pie_progress__label" style="display:absolute;top:50%; left:50%;transform:translateY(-50%) translateX(-50%);"></div>'),
                 label= $('<div class="semicicle_progress__label pie_progress__label" style="display:absolute;top:100%; left:50%;transform:translateY(-100%) translateX(-50%);"></div>'),
-                label_bottom = $('<div class="semicicle_progress__label" style="top:75%;"></div>'),
+                label_bottom = $('<div class="semicicle_progress__label pie_progress__label" style="display:absolute;top:62%; left:50%;transform:translateY(-50%) translateX(-50%);"></div>'),
                 _settings = settings,
                 _self=this,
                 _containerElement,
@@ -346,6 +346,7 @@
                 },100)
 
                 label_top.css({"font-size":_settings.font_size_sublabel+'px', "color": _settings.color_sublabel}).html(_settings.label_top)
+                label_bottom.css({"font-size":(_settings.font_size_sublabel-2)+'px', "color": _settings.color_sublabel,/* opacity:0.7*/}).html(_settings.label_bottom)
                 label.css({"font-size":_settings.font_size_label+'px', "color": _settings.color_label}).html(_settings.label)
                 // label_bottom.css({"font-size":_settings.font_size_sublabel+'px', "color": _settings.color_sublabel}).html(_settings.label_bottom)
                 // container.attr("data-barcolor", _settings.color_bar)
@@ -357,7 +358,7 @@
                 // settingName=='value_min'&&(container.attr("aria-valuemin", newValue)),
                 settingName=='label_top'&&(label_top.html(newValue?newValue:"-")),
                 settingName=='label'&&(label.html(newValue?newValue:"-"))
-                // settingName=='label_bottom'&&(label_bottom.html(newValue))
+                settingName=='label_bottom'&&(label_bottom.html(newValue?newValue:"-"))
             }, this.onDispose = function() {
                 
             }, this.onSizeChanged = function() { 
@@ -372,7 +373,7 @@
         freeboard.loadWidgetPlugin({
             type_name: "semi_circular_progress",
             display_name: "Semi Circle Progress Bar",
-            external_scripts: ["plugins/thirdparty/progressbar.min.js"],
+            external_scripts: ["https://tunchz.github.io/DB.Builder/plugins/thirdparty/progressbar.js"], //["plugins/thirdparty/progressbar.js"],
             settings: [
             {
                 name: "label_top",
@@ -380,15 +381,15 @@
                 type: "calculated"
             }, 
             {
+                name: "label_bottom",
+                display_name: "Middle Sub Label",
+                type: "calculated"
+            }, 
+            {
                 name: "label",
                 display_name: "Main Label",
                 type: "calculated"
             }, 
-            // {
-            //     name: "label_bottom",
-            //     display_name: "Bottom Sub Label",
-            //     type: "calculated"
-            // }, 
             {
                 name: "value",
                 display_name: "Value",

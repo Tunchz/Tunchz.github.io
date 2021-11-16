@@ -16108,7 +16108,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 * @return {HTMLElement} Returns the jQuery wrapped HTMLElement representing.
 	 *  the widget that was just created.
 	 */
-	fn.add_widget = function(html, size_x, size_y, col, row, transparent_bg, widget_background_color, border_radius)
+	fn.add_widget = function(html, size_x, size_y, col, row, transparent_bg, widget_background_color, border_radius, border_width, border_color)
 	{
 		// console.log("************* add : ", transparent_bg, widget_background_color, border_radius);
 		var pos;
@@ -16136,16 +16136,19 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 			'data-sizey': size_y
 		}).addClass('gs_w').appendTo(this.$el).hide();
 
+		var overlay = $('<div id="transparent_overlay" style="position:absolute; width:100%; height:100%; top:0; left:0; background-color:#38383800;">');
+		$w.prepend(overlay);
+
 		if (transparent_bg) {
-			// var color = widget_background_color;
-			// var rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';
-			// $w.css({"background-color": rgbaColor})
+			var color = widget_background_color?widget_background_color:_default.widget_background_color;
+			var rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';
+			overlay.css({"background-color": rgbaColor})
 			$w.addClass('transparent_bg');
 			// (widget_background_color)?$w.css("cssText","background-color: #38383800 !important;border:1px solid "+widget_background_color):$w.css("cssText","background-color: #38383800 !important;border:1px solid "+_default.widget_background_color);
 			// $w.css("cssText","background-color: #38383800 !important;");
-			var c = widget_background_color?widget_background_color.slice(0,7):_default.widget_background_color.slice(0,7);
+			// var c = widget_background_color?widget_background_color.slice(0,7):_default.widget_background_color.slice(0,7);
 			// $w.find('#transparent_overlay').remove();
-			$w.prepend($('<div id="transparent_overlay" style="position:absolute; width:100%; height:100%; top:0; left:0; background-color:'+c+'77;">'));
+			// $w.prepend($('<div id="transparent_overlay" style="position:absolute; width:100%; height:100%; top:0; left:0; background-color:'+c+'77;">'));
 		} else {
 			if (widget_background_color) {
 				var rgbaColor = widget_background_color
@@ -16160,7 +16163,12 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 				$w.css({"background-color": "inherit"});
 			}
 		}
-		border_radius?$w.css({"border-radius": border_radius+"px"}):$w.css({"border-radius": _default.widget_border_radius+"px"})
+		var br = border_radius?border_radius:_default.widget_border_radius,
+			bw = border_width?border_width:_default.widget_border_width,
+			bc = border_color?border_color:_default.widget_border_color;
+
+		$w.css({"border-radius":br+"px"}),
+		overlay.css({width: "calc(100% - "+2*bw+"px)",height: "calc(100% - "+2*bw+"px)","border-radius": br+"px", border: bw+'px solid '+bc})
 		
 
 		this.$widgets = this.$widgets.add($w);
@@ -16187,23 +16195,21 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	 * @param {Function} callback Function executed when the widget is removed.
 	 * @return {HTMLElement} Returns $widget.
 	 */
-	fn.resize_widget = function($widget, size_x, size_y, transparent_bg, widget_background_color, border_radius, callback)
+	fn.resize_widget = function($widget, size_x, size_y, transparent_bg, widget_background_color, border_radius, border_width, border_color, callback)
 	{	
 		// console.log("************* resize : ", transparent_bg, widget_background_color, border_radius);
+		var overlay = $widget.find('#transparent_overlay');
 		if (transparent_bg) {
-			// var color = widget_background_color;
-			// var rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';
-			// $widget.css({"background-color": rgbaColor})
+			var color = widget_background_color?widget_background_color:_default.widget_background_color;
+			var rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';
+			overlay.css({"background-color": rgbaColor})
 			$widget.addClass('transparent_bg');
 			// (widget_background_color)?$widget.css("cssText","background-color: #38383800 !important;border:1px solid "+widget_background_color):$widget.css("cssText","background-color: #38383800 !important;border:1px solid "+_default.widget_background_color);
 			// $widget.css("cssText","background-color: #38383800 !important;");
-			var c = widget_background_color?widget_background_color.slice(0,7):_default.widget_background_color.slice(0,7);
-			console.log("---> bg color : ", c)
-			$widget.find('#transparent_overlay').remove();
-			$widget.prepend($('<div id="transparent_overlay" style="position:absolute; width:100%; height:100%; top:0; left:0; background-color:'+c+'77;">'));
+
 		} else {
 			$widget.removeClass('transparent_bg');
-			$widget.find('#transparent_overlay').remove();
+			overlay.css({"background-color": "rgba(56, 56, 56, 0)"})
 			if (widget_background_color) {
 				var rgbaColor = widget_background_color
 				if (widget_background_color.length>7) {
@@ -16218,7 +16224,12 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 			}
 
 		}
-		border_radius||border_radius===0?$widget.css({"border-radius": border_radius+"px"}):$widget.css({"border-radius": _default.widget_border_radius+"px"})
+		var br = border_radius?border_radius:_default.widget_border_radius,
+			bw = border_width?border_width:_default.widget_border_width,
+			bc = border_color?border_color:_default.widget_border_color;
+
+		$widget.css({"border-radius":br+"px"}),
+		overlay.css({width: "calc(100% - "+2*bw+"px)",height: "calc(100% - "+2*bw+"px)","border-radius": br+"px", border: bw+'px solid '+bc})
 
 		var wgd = $widget.coords().grid;
 		size_x || (size_x = wgd.size_x);

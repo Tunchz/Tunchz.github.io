@@ -266,8 +266,8 @@
                 //     "font-size": f + "px"
                 // }), 
                 h_p.css({"text-align": (_settings.font_align)?_settings.font_align:"left"}), 
-                h.html("&nbsp;&nbsp;-&nbsp;&nbsp;").css({"font-size": a.font_size + "px", "color": _settings.font_color?_settings.font_color:_default.font_color}), 
-                i.css({"color": _settings.font_color?_settings.font_color:_default.font_color, "opacity":_default.font_opacity}),
+                h.html("&nbsp;&nbsp;-&nbsp;&nbsp;").css({"font-size": a.font_size + "px",/* "color": _settings.font_color?_settings.font_color:_default.font_color*/}), 
+                //i.css({/*"color": _settings.font_color?_settings.font_color:_default.font_color, */"opacity":_default.font_opacity}),
                 d()
                 // _settings.sparkline && c(_settings, j, _data)
             }, this.onSizeChanged = function() {
@@ -276,7 +276,8 @@
                 // _data = d;
                 "value" == b && (!d?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):(_settings.with_comma&&(d=numberWithCommas(d)),_settings.animate ? a(d, h, 500) : h.html(d)), _settings.sparkline && c(_settings, j, d)),
                 "title" == b && g.html(d),
-                "units" == b && i.html(d)
+                "units" == b && i.html(d),
+                "font_color" == b && (h.css({"color": (d?d:_default.font_color)}),i.css({"color": (d?d:_default.font_color)}),console.log("----- font_color : ",d))
             }, this.onDispose = function() {}, 
             this.getHeight = function() {
                 // return "big" == _settings.size || _settings.sparkline ? 2 : 1  //2 : 1
@@ -345,7 +346,7 @@
             {
                 name: "font_color",
                 display_name: "Text Color",
-                type: "text",
+                type: "calculated",
                 default_value: _default.font_color,
             },
             {

@@ -308,16 +308,17 @@
         this.render = function(a) {
             _self=a;
             $(_self).append(b);
+            // initTheme();
             // setTimeout(()=>{b.html(c.html)},100);
             // b.html(c.html);
-            setTimeout(()=>{b.empty()},1000);
+            //setTimeout(()=>{b.empty(),b.html(c.html);},1000);
         }, this.onSettingsChanged = function(a) {
             c = a
-            // setTimeout(()=>{
-                b.empty();
-                // b.html(c.html);
-            // },2000);
             // initTheme();
+            // setTimeout(()=>{
+            //     b.empty();
+            //     b.html(c.html);
+            // },1000);
         }, this.onCalculatedValueChanged = function(a, c) {
             "html" == a && b.html(c)
         }, this.onDispose = function() {}, this.getHeight = function() {
@@ -334,9 +335,9 @@
             "plugins/thirdparty/highcharts/highcharts-more.js",
             "plugins/thirdparty/highcharts/exporting.js",
             "plugins/thirdparty/highcharts/export-data.js",
-            "plugins/thirdparty/highcharts/accessibility.js",
+            // "plugins/thirdparty/highcharts/accessibility.js",
             "plugins/thirdparty/highcharts/sonification.js",
-            "plugins/thirdparty/highcharts/data.js",
+            // "plugins/thirdparty/highcharts/data.js",
             "plugins/thirdparty/highcharts/solid-gauge.js",
         ],
         fill_size: !0,
