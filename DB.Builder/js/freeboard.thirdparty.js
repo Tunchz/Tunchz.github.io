@@ -16139,8 +16139,8 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 		var overlay = $('<div id="transparent_overlay" style="position:absolute; width:100%; height:100%; top:0; left:0; background-color:#38383800;">');
 		$w.prepend(overlay);
 
+		var color = widget_background_color?widget_background_color:_default.widget_background_color;
 		if (transparent_bg) {
-			var color = widget_background_color?widget_background_color:_default.widget_background_color;
 			var rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';
 			overlay.css({"background-color": rgbaColor})
 			$w.addClass('transparent_bg');
@@ -16153,7 +16153,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 				}
 				$w.css("cssText","background-color: " + rgbaColor + " !important");
 			} else {
-				$w.css({"background-color": "inherit"});
+				$w.css({"background-color": color});
 			}
 		}
 		var br = border_radius?border_radius:_default.widget_border_radius,
@@ -16192,8 +16192,8 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 	{	
 		// console.log("************* resize : ", transparent_bg, widget_background_color, border_radius);
 		var overlay = $widget.find('#transparent_overlay');
+		var color = widget_background_color?widget_background_color:_default.widget_background_color;
 		if (transparent_bg) {
-			var color = widget_background_color?widget_background_color:_default.widget_background_color;
 			var rgbaColor = 'rgba(' + parseInt(color.slice(1,3),16)+ ',' + parseInt(color.slice(3,5),16)+ ',' + parseInt(color.slice(5,7),16)+',0.4)';
 			overlay.css({"background-color": rgbaColor})
 			$widget.addClass('transparent_bg');
@@ -16208,7 +16208,7 @@ new a.w;var b=new a.Ba;0<b.Rb&&a.La(b);a.b("jqueryTmplTemplateEngine",a.Ba)})()}
 				}
 				$widget.css("cssText","background-color: " + rgbaColor + " !important");
 			} else {
-				$widget.css({"background-color": "inherit"});
+				$widget.css({"background-color": color});
 			}
 
 		}

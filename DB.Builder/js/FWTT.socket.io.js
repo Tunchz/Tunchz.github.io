@@ -19,12 +19,14 @@
 			newMessageCallback;
 
 		function onNewMessageHandler(message) {
-			var objdata = JSON.parse(message);
-			if (typeof objdata == "object") {
-				updateCallback(objdata);
-			} else {
-				updateCallback(data);
-			}
+			// var objdata = JSON.parse(message);
+			// if (typeof objdata == "object") {
+			// 	updateCallback(objdata);
+			// } else {
+			// 	updateCallback(message);
+			// }
+
+			updateCallback(message);
 		}
 
 		function joinRoom(roomName, roomEvent) {
@@ -44,11 +46,13 @@
 		function connectToServer(url, rooms) {
 			// Establish connection with server
 			self.url = url;
+			// io('http://10.10.10.18:4567',{query:{url:'rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov'}});
 			self.socket = io.connect(self.url,{'forceNew':true});
 
 			// Join the rooms
 			self.socket.on('connect', function() {
 				console.info("Connecting to Node.js at: %s", self.url);
+				// console.info("+++++++++++++++++++++++ connected");
 			});
 			
 			// Join the rooms
@@ -74,25 +78,46 @@
 				console.error("Re-connection to Node.js failed at: %s", self.url);
 				discardSocket();
 			});
-			
 		}
 
+		function initializeScript() {
+		    // Convert script string to function(response) { ...js script string...}
+            if (!_.isUndefined(currentSettings.initial_script)) {
+                _.isArray(currentSettings.initial_script) && (currentSettings.initial_script = "[" + currentSettings.initial_script.join(",") + "]"), (currentSettings.initial_script.match(/;/g) || []).length <= 1 && -1 == currentSettings.initial_script.indexOf("return") && (currentSettings.initial_script = "return " + currentSettings.initial_script);
+                var f;
+                try {
+                    f = new Function([/*"response","option"*/], currentSettings.initial_script)
+                } catch (g) {
+                    var h = currentSettings.initial_script.replace(/"/g, '\\"').replace(/[\r\n]/g, " \\\n");
+                    f = new Function([/*"response","option"*/], 'return "' + h + '";')
+                }
+
+                // console.log(">>>> return result : ", f(response));
+            }
+           	// execute function of initialize script
+            (f)&&(f());
+		}
 
 		function initializeDataSource() {
 			// Reset connection to server
 			discardSocket();
-			connectToServer(currentSettings.url, currentSettings.rooms);
+			if (!currentSettings.disabled) {
 
-			// Subscribe to the events
-			var newEventName = currentSettings.eventName;
-			self.newMessageCallback = onNewMessageHandler;
-			_.each(currentSettings.events, function(eventConfig) {
-				var event = eventConfig.eventName;
-				console.info("Subscribing to event: %s", event);
-				self.socket.on(event, function(message) {
-					self.newMessageCallback(message);
+				initializeScript();
+				connectToServer(currentSettings.url, currentSettings.rooms);
+
+				// Subscribe to the events
+				var newEventName = currentSettings.eventName;
+				self.newMessageCallback = onNewMessageHandler;
+				_.each(currentSettings.events, function(eventConfig) {
+					var event = eventConfig.eventName;
+					console.info("Subscribing to event: %s", event);
+					self.socket.on(event, function(message) {
+						// console.info("------message : ",message);
+						self.newMessageCallback(message);
+					});
 				});
-			});
+			}
 		}
 
 		this.updateNow = function() {
@@ -121,8 +146,23 @@
 				type_name : "socket.io",
 				display_name : "Socket.IO",
 				description : "A real-time stream datasource from node.js servers using socket.io.",
-				external_scripts : ["https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"], //[ "plugins/thirdparty/socket.io-1.0.6.js" ],//[ "https://cdn.socket.io/socket.io-1.0.6.js" ],
+				// external_scripts : ["https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"], 
+				external_scripts : [ "plugins/thirdparty/socket.io.v420.js" ],
+				// external_scripts : [ "plugins/thirdparty/socket.io-1.0.6.js" ],//[ "https://cdn.socket.io/socket.io-1.0.6.js" ],
 				settings : [
+						{
+							name : "disabled",
+							display_name : "Disabled Connection",
+							description : "diable socket.io connection",
+							type : "boolean",
+							default_value: !1,
+						},
+			         	{
+				            name: "initial_script",
+				            display_name: "(Optional) Initial Script",
+				            type: "jsscript",
+				            description: "initial script to execute before actual socket connection to <<Server URL>>."
+			            },
 						{
 							name : "url",
 							display_name : "Server URL",
@@ -134,11 +174,11 @@
 							display_name : "Events",
 							description : "The name of the events you want this datasource to subscribe to.",
 							type : "array",
-							settings : [ {
+							settings : [{
 								name : "eventName",
 								display_name : "Event",
 								type : "text"
-							} ]
+							}]
 						},
 						{
 							name : "rooms",
@@ -154,7 +194,7 @@
 								display_name : "Name of the event to join the room",
 								type : "text"
 							} ]
-						} ],
+						}],
 				newInstance : function(settings, newInstanceCallback,
 						updateCallback) {
 					newInstanceCallback(new socketIODatasource(settings,
