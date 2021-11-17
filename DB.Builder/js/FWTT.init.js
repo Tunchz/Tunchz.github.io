@@ -1900,7 +1900,13 @@ var freeboard = function() {
 
            
         },
-
+        setDatasourceDefaultOptions: function(datasourceDefaultOptions) {
+            (datasourceDefaultOptions?.length>0)&&datasourceDefaultOptions.map((option)=>{
+                (!datasourceOptions[option.datasourceName])&&(datasourceOptions[option.datasourceName]={});
+                datasourceOptions[option.datasourceName]["defaultOption"]=option.selectedOption;
+            })
+            // console.log("----------------",datasourceOptions)
+        },
 
     }
 }

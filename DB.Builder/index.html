@@ -99,6 +99,19 @@
 
 						$(function()
 						{ //DOM Ready
+							freeboard.on("dashboard_loaded",()=>{
+								if (parameter.defaultoption) {
+									// console.log("parameter.option : ",parameter.defaultoption)
+									var options = parameter.defaultoption.split("|"),
+										defaultOptions = [];
+									(options.length>0)&&options.map((item)=>{
+										var option = item.split('-')
+										// console.log("option : ",option[0]+" | "+option[1])
+										defaultOptions.push({datasourceName:option[0],selectedOption:option[1]})
+									})
+									freeboard.setDatasourceDefaultOptions(defaultOptions);
+								}
+							})
 							if (parameter.dashboard) {
 								$.get( parameter.dashboard, function( json ) {
 									json = JSON.parse(json)

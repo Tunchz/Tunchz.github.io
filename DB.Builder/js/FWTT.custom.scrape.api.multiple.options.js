@@ -26,7 +26,7 @@
             f = null,
             g = a;
 
-        datasourceOptions[g.name]={};
+        (!datasourceOptions[g.name])&&(datasourceOptions[g.name]={}),
         datasourceOptions[g.name]["optionNameArray"]=g.url_array.map((item)=>item["Option Name"]),
         datasourceOptions[g.name]["selectedOption"]=0,
         datasourceOptions[g.name]["datasourceInstance"]=this,
@@ -143,7 +143,7 @@
             datasourceOptions[_settings.datasource_name].optionNameArray.map((item,i)=>{
                $("<option></option>").text(item).attr("value", i).appendTo(s) 
             })
-            s.val(_settings.default_option?parseInt(_settings.default_option-1):0).change()
+            s.val(datasourceOptions[_settings.datasource_name].defaultOption?datasourceOptions[_settings.datasource_name].defaultOption:_settings.default_option?parseInt(_settings.default_option-1):0).change()
         }, 
         this.onSettingsChanged = function(a) {
             _settings = a;
@@ -193,7 +193,7 @@
             display_name: "Default Option",
             type: "integer",
             default_value: 1,
-            description: "Order of option to be default when refresh."
+            description: "Order of option to be default when refresh. This will be overwritten by default option passing through url parameter."
         },
         {
             name: "font_size",
