@@ -2133,7 +2133,8 @@ $.extend(freeboard, jQuery.eventEmitter),
                 display_name: "Refresh Every",
                 type: "number",
                 suffix: "seconds",
-                default_value: 1
+                default_value: 1,
+                description: 'สามารถใช้ ฟังก์ชัน toThaiDateString(datasources["ชื่อข้อมูล"]["date_object"]) เพื่อเปลี่ยนเป็นวันภาษาไทย.',
             }],
             newInstance: function(a, b, c) {
                 b(new e(a, c))
@@ -2165,13 +2166,14 @@ function numberWithCommas(x) {
 
 }
 
-function toThaiDateString(date) {
+function toThaiDateString(d,type) {
     let monthNames = [
         "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
         "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม.",
         "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
     ];
-
+    var date;
+    (d)?date=d:date=new Date();
     let year = date.getFullYear() + 543;
     let month = monthNames[date.getMonth()];
     let numOfDay = date.getDate();
@@ -2180,5 +2182,8 @@ function toThaiDateString(date) {
     let minutes = date.getMinutes().toString().padStart(2, "0");
     let second = date.getSeconds().toString().padStart(2, "0");
     
-    return `${numOfDay} ${month} ${year} ` + `${hour}:${minutes}:${second} น.`;
+    return  type=="date"?`${numOfDay} ${month} ${year}`:
+            type=="time"?`${hour}:${minutes}:${second}`:
+            `${numOfDay} ${month} ${year} ${hour}:${minutes}:${second}`;
+
 }

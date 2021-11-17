@@ -172,13 +172,15 @@
    "border_radius": null,
    "widgets": [
     {
-     "type": "text_widget",
+     "type": "text_alternative_widget",
      "settings": {
-      "value": "toThaiDateString(datasources[\"นาฬิกา\"][\"date_object\"])",
+      "title": "",
+      "value": "return toThaiDateString(datasources[\"นาฬิกา\"][\"date_object\"],\"date\")+\" <span style='font-size:30px;'>\"+toThaiDateString(datasources[\"นาฬิกา\"][\"date_object\"],\"time\")+\"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp\";",
+      "units": "var d = datasources[\"MWA Option Url\"][\"option name\"];\nvar n = new Date();\n\nreturn \"<div style='float:right;'>\"+\"อัปเดทข้อมูลล่าสุด \"+toThaiDateString(null,\"time\")+\"</div>\"",
       "animate": true,
       "with_comma": false,
       "font_size": 20,
-      "font_align": "center",
+      "font_align": "right",
       "font_color": "#ffffff",
       "timeframe": 60,
       "mark_color": "#ff9900",
@@ -217,48 +219,6 @@
      "settings": {
       "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/water_distribution.png' style='width:30px; height:30px; position:absolute; top:5px; left:10px;'></img>",
       "value": "<div style='margin-top:-6px'>Total Dist&nbsp;&nbsp;&nbsp;</div>",
-      "animate": true,
-      "with_comma": false,
-      "font_size": "20",
-      "font_align": "right",
-      "font_color": "#ffffff",
-      "timeframe": 60,
-      "mark_color": "#ff9900",
-      "maxmin_color": "#00ff00",
-      "height_block": 1,
-      "_color": [
-       "#ff9900"
-      ]
-     }
-    }
-   ]
-  },
-  {
-   "width": 2,
-   "row": {
-    "4": 1,
-    "7": 3,
-    "12": 3,
-    "13": 3,
-    "14": 3
-   },
-   "col": {
-    "4": 4,
-    "7": 7,
-    "12": 5,
-    "13": 6,
-    "14": 7
-   },
-   "col_width": 2,
-   "transparent_bg": true,
-   "border_radius": null,
-   "border_width": "1",
-   "widgets": [
-    {
-     "type": "text_widget",
-     "settings": {
-      "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/pump_flow.png' style='width:30px; height:30px; position:absolute; top:5px; left:10px;'></img>",
-      "value": "<div style='margin-top:-6px'>Pump Flow</div>",
       "animate": true,
       "with_comma": false,
       "font_size": "20",
@@ -2072,6 +2032,48 @@
       "font_size_sublabel": "9",
       "progress_margin": 2,
       "height_block": 2
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "7": 3,
+    "12": 3,
+    "13": 3,
+    "14": 3
+   },
+   "col": {
+    "4": 4,
+    "7": 7,
+    "12": 5,
+    "13": 6,
+    "14": 7
+   },
+   "col_width": 2,
+   "transparent_bg": true,
+   "border_radius": null,
+   "border_width": "1",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<img src='https://tunchz.github.io/DB.Builder/MWA/pump_flow.png' style='width:30px; height:30px; position:absolute; top:5px; left:10px;'></img>",
+      "value": "<div style='margin-top:-6px'>Pump Flow</div>",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "20",
+      "font_align": "right",
+      "font_color": "#ffffff",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
      }
     }
    ]
