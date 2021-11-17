@@ -160,7 +160,7 @@
     freeboard.loadWidgetPlugin({
         type_name: "url_option_selector_widget",
         display_name: "URL Options Selector",
-        external_scripts: ["plugins/thirdparty/jquery.sparkline.min.js"],
+        // external_scripts: ["plugins/thirdparty/jquery.sparkline.min.js"],
         // external_scripts: ["plugins/thirdparty/jquery.sparkline.js"],
         settings: [{
             name: "title",
