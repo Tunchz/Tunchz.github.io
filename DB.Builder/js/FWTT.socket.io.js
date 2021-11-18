@@ -1,13 +1,3 @@
-// ┌────────────────────────────────────────────────────────────────────┐ \\
-// │ freeboard.io-node.js                                               │ \\
-// ├────────────────────────────────────────────────────────────────────┤ \\
-// │ Copyright © 2014 Hugo Sequeira (https://github.com/hugocore)       │ \\
-// ├────────────────────────────────────────────────────────────────────┤ \\
-// │ Licensed under the MIT license.                                    │ \\
-// ├────────────────────────────────────────────────────────────────────┤ \\
-// │ Freeboard datasource plugin for node.js and socket.io.             │ \\
-// └────────────────────────────────────────────────────────────────────┘ \\
-
 (function() {
 	
 	var socketIODatasource = function(settings, updateCallback) {
@@ -16,7 +6,9 @@
 			currentSettings = settings,
 			url,
 			socket,
-			newMessageCallback;
+			newMessageCallback,
+			initialScript,
+			prepScript;
 
 		function onNewMessageHandler(message) {
 			// var objdata = JSON.parse(message);
@@ -25,8 +17,13 @@
 			// } else {
 			// 	updateCallback(message);
 			// }
-
-			updateCallback(message);
+			if (self.prepScript) {
+				// console.log("----- Prep Script");
+				updateCallback(self.prepScript(message));
+			} else {
+				// console.log("----- No Prep Script");
+				updateCallback(message);
+			}			
 		}
 
 		function joinRoom(roomName, roomEvent) {
@@ -51,7 +48,7 @@
 
 			// Join the rooms
 			self.socket.on('connect', function() {
-				console.info("Connecting to Node.js at: %s", self.url);
+				console.info("Connecting to socket at: %s", self.url);
 				// console.info("+++++++++++++++++++++++ connected");
 			});
 			
@@ -67,35 +64,48 @@
 			});
 			
 			self.socket.on('connect_error', function(object) {
-				console.error("It was not possible to connect to Node.js at: %s", self.url);
+				console.error("It was not possible to connect to socket at: %s", self.url);
 			});
 			
 			self.socket.on('reconnect_error', function(object) {
-				console.error("Still was not possible to re-connect to Node.js at: %s", self.url);
+				console.error("Still was not possible to re-connect to socket at: %s", self.url);
 			});
 			
 			self.socket.on('reconnect_failed', function(object) {
-				console.error("Re-connection to Node.js failed at: %s", self.url);
+				console.error("Re-connection to socket failed at: %s", self.url);
 				discardSocket();
 			});
 		}
 
-		function initializeScript() {
+		function compileInitializeScript() {
 		    // Convert script string to function(response) { ...js script string...}
             if (!_.isUndefined(currentSettings.initial_script)) {
                 _.isArray(currentSettings.initial_script) && (currentSettings.initial_script = "[" + currentSettings.initial_script.join(",") + "]"), (currentSettings.initial_script.match(/;/g) || []).length <= 1 && -1 == currentSettings.initial_script.indexOf("return") && (currentSettings.initial_script = "return " + currentSettings.initial_script);
-                var f;
                 try {
-                    f = new Function([/*"response","option"*/], currentSettings.initial_script)
+                   	initializeScript = new Function([/*"response","option"*/], currentSettings.initial_script)
                 } catch (g) {
                     var h = currentSettings.initial_script.replace(/"/g, '\\"').replace(/[\r\n]/g, " \\\n");
-                    f = new Function([/*"response","option"*/], 'return "' + h + '";')
+                    initializeScript = new Function([/*"response","option"*/], 'return "' + h + '";')
                 }
 
                 // console.log(">>>> return result : ", f(response));
             }
            	// execute function of initialize script
-            (f)&&(f());
+            (initializeScript)&&(initializeScript());
+		}
+
+		function compilePrepScript() {
+		    // Convert script string to function(response) { ...js script string...}
+            if (!_.isUndefined(currentSettings.prep_script)) {
+            	_.isArray(currentSettings.prep_script) && (currentSettings.prep_script = "[" + currentSettings.prep_script.join(",") + "]"), (currentSettings.prep_script.match(/;/g) || []).length <= 1 && -1 == currentSettings.prep_script.indexOf("return") && (currentSettings.prep_script = "return " + currentSettings.prep_script);
+                try {
+                   	self.prepScript = new Function(["response"], currentSettings.prep_script)
+                } catch (g) {
+                    var h = currentSettings.prep_script.replace(/"/g, '\\"').replace(/[\r\n]/g, " \\\n");
+                    self.prepScript = new Function(["response"], 'return "' + h + '";')
+                }
+                // console.log(">>>> return result : ", f(response));
+            }
 		}
 
 		function initializeDataSource() {
@@ -103,7 +113,8 @@
 			discardSocket();
 			if (!currentSettings.disabled) {
 
-				initializeScript();
+				(currentSettings.initial_script)&&compileInitializeScript();
+				(currentSettings.prep_script)&&compilePrepScript();
 				connectToServer(currentSettings.url, currentSettings.rooms);
 
 				// Subscribe to the events
@@ -194,11 +205,16 @@
 								display_name : "Name of the event to join the room",
 								type : "text"
 							} ]
-						}],
-				newInstance : function(settings, newInstanceCallback,
-						updateCallback) {
-					newInstanceCallback(new socketIODatasource(settings,
-							updateCallback));
+						},
+			         	{
+				            name: "prep_script",
+				            display_name: "(Optional) Prep Script",
+				            type: "jsscript",
+				            description: "prep script to execute after recieve data from socket.",
+				            default_value: null,
+			            }],
+				newInstance : function(settings, newInstanceCallback,updateCallback) {
+					newInstanceCallback(new socketIODatasource(settings,updateCallback));
 				}
 			});
 }());

@@ -22,16 +22,36 @@
                 return a.charAt(0).toUpperCase() + a.substr(1).toLowerCase()
             })
         }
+
+        function compileScriptText() {
+                            // Convert script string to function(response) { ...js script string...}
+            if (!_.isUndefined(g.script_text)) {
+                _.isArray(g.script_text) && (g.script_text = "[" + g.script_text.join(",") + "]"), (g.script_text.match(/;/g) || []).length <= 1 && -1 == g.script_text.indexOf("return") && (g.script_text = "return " + g.script_text);
+                
+                try {
+                    e.scriptText = new Function(["response","option"], g.script_text)
+                } catch (g) {
+                    var h = g.script_text.replace(/"/g, '\\"').replace(/[\r\n]/g, " \\\n");
+                    e.scriptText = new Function(["response","option"], 'return "' + h + '";')
+                }
+
+                // console.log(">>>> return result : ", f(response));
+            }
+        }
+
         var e = this,
             f = null,
-            g = a;
+            g = a,
+            scriptText;
 
         (!datasourceOptions[g.name])&&(datasourceOptions[g.name]={}),
         datasourceOptions[g.name]["optionNameArray"]=g.url_array.map((item)=>item["Option Name"]),
         datasourceOptions[g.name]["selectedOption"]=0,
         datasourceOptions[g.name]["datasourceInstance"]=this,
 
-        c(1e3 * g.refresh), this.updateNow = function() {
+        c(1e3 * g.refresh), 
+        (g.script_text)&&compileScriptText(),
+        this.updateNow = function() {
 
             // console.log("-------Name : ", g.name);
             // console.log("-------datasourceOptions : ", datasourceOptions);
@@ -41,22 +61,10 @@
 
             $.get( g.url_array[datasourceOptions[g.name]["selectedOption"]]["Url"] , ( response ) => {
 
-                // Convert script string to function(response) { ...js script string...}
-                if (!_.isUndefined(g.script_text)) {
-                    _.isArray(g.script_text) && (g.script_text = "[" + g.script_text.join(",") + "]"), (g.script_text.match(/;/g) || []).length <= 1 && -1 == g.script_text.indexOf("return") && (g.script_text = "return " + g.script_text);
-                    var f;
-                    try {
-                        f = new Function(["response","option"], g.script_text)
-                    } catch (g) {
-                        var h = g.script_text.replace(/"/g, '\\"').replace(/[\r\n]/g, " \\\n");
-                        f = new Function(["response","option"], 'return "' + h + '";')
-                    }
 
-                    // console.log(">>>> return result : ", f(response));
-                }
                 b({
                     "option name":datasourceOptions[g.name]["optionNameArray"][datasourceOptions[g.name]["selectedOption"]],
-                    result: f?f(response,option=datasourceOptions[g.name]["selectedOption"]):response
+                    result: e.scriptText?e.scriptText(response,option=datasourceOptions[g.name]["selectedOption"]):response
                 });
             });
 
@@ -68,6 +76,8 @@
             g = a, 
             datasourceOptions[g.name]["optionNameArray"]=g.url_array.map((item)=>item["Option Name"]),
             datasourceOptions[g.name]["datasourceInstance"]=e,
+            e.scriptText=null,
+            (g.script_text)&&compileScriptText(),
             e.updateNow(), 
             c(1e3 * g.refresh)
         }
@@ -90,7 +100,7 @@
             // multi_input: "true",
         }, {
             name: "script_text",
-            display_name: "Script Text",
+            display_name: "(Option) Script Text",
             type: "jsscript",
             description: "script to extract the needed result."
         // }, {

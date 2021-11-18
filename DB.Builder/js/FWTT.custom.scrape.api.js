@@ -22,10 +22,31 @@
                 return a.charAt(0).toUpperCase() + a.substr(1).toLowerCase()
             })
         }
+
+        function compileScriptText() {
+                            // Convert script string to function(response) { ...js script string...}
+            if (!_.isUndefined(g.script_text)) {
+                _.isArray(g.script_text) && (g.script_text = "[" + g.script_text.join(",") + "]"), (g.script_text.match(/;/g) || []).length <= 1 && -1 == g.script_text.indexOf("return") && (g.script_text = "return " + g.script_text);
+                
+                try {
+                    e.scriptText = new Function("response", g.script_text)
+                } catch (g) {
+                    var h = g.script_text.replace(/"/g, '\\"').replace(/[\r\n]/g, " \\\n");
+                    e.scriptText = new Function("response", 'return "' + h + '";')
+                }
+
+                // console.log(">>>> return result : ", f(response));
+            }
+        }
+
         var e = this,
             f = null,
-            g = a;
-        c(1e3 * g.refresh), this.updateNow = function() {
+            g = a,
+            scriptText;
+
+        c(1e3 * g.refresh),
+        (g.script_text)&&compileScriptText(),
+        this.updateNow = function() {
 
 
             // $.ajax({
@@ -48,21 +69,7 @@
             // })
 
             $.get( g.url_string , ( response ) => {
-
-                // Convert script string to function(response) { ...js script string...}
-                if (!_.isUndefined(g.script_text)) {
-                    _.isArray(g.script_text) && (g.script_text = "[" + g.script_text.join(",") + "]"), (g.script_text.match(/;/g) || []).length <= 1 && -1 == g.script_text.indexOf("return") && (g.script_text = "return " + g.script_text);
-                    var f;
-                    try {
-                        f = new Function("response", g.script_text)
-                    } catch (g) {
-                        var h = g.script_text.replace(/"/g, '\\"').replace(/[\r\n]/g, " \\\n");
-                        f = new Function("response", 'return "' + h + '";')
-                    }
-
-                    // console.log(">>>> return result : ", f(response));
-                }
-                b(f(response));
+                b(e.scriptText?e.scriptText(response):response);
             });
 
 
@@ -70,7 +77,11 @@
         }, this.onDispose = function() {
             clearInterval(f), f = null
         }, this.onSettingsChanged = function(a) {
-            g = a, e.updateNow(), c(1e3 * g.refresh)
+            g = a,
+            e.scriptText=null,
+            (g.script_text)&&compileScriptText(),
+            e.updateNow(), 
+            c(1e3 * g.refresh)
         }
     };
     freeboard.loadDatasourcePlugin({
