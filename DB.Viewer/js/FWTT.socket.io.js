@@ -8,10 +8,9 @@
 			socket,
 			newMessageCallback,
 			initialScript,
-			prepScript,
-			header;
+			prepScript;
 
-		function onNewMessageHandler(message,event) {
+		function onNewMessageHandler(message) {
 			// var objdata = JSON.parse(message);
 			// if (typeof objdata == "object") {
 			// 	updateCallback(objdata);
@@ -20,7 +19,7 @@
 			// }
 			if (self.prepScript) {
 				// console.log("----- Prep Script");
-				updateCallback(self.prepScript(message,event));
+				updateCallback(self.prepScript(message));
 			} else {
 				// console.log("----- No Prep Script");
 				updateCallback(message);
@@ -44,13 +43,12 @@
 		function connectToServer(url, rooms) {
 			// Establish connection with server
 			self.url = url;
-			(!currentSettings.header_object||currentSettings.header_object=="")?self.header={}:self.header=JSON.parse(currentSettings.header_object);
-			console.log("---- header : ",self.header)
-			self.socket = io.connect(self.url,{'forceNew':true,...self.header});
+			// io('http://10.10.10.18:4567',{query:{url:'rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov'}});
+			self.socket = io.connect(self.url,{'forceNew':true});
 
 			// Join the rooms
 			self.socket.on('connect', function() {
-				console.info("Socket is connected at: %s", self.url);
+				console.info("Connecting to socket at: %s", self.url);
 				// console.info("+++++++++++++++++++++++ connected");
 			});
 			
@@ -101,10 +99,10 @@
             if (!_.isUndefined(currentSettings.prep_script)) {
             	_.isArray(currentSettings.prep_script) && (currentSettings.prep_script = "[" + currentSettings.prep_script.join(",") + "]"), (currentSettings.prep_script.match(/;/g) || []).length <= 1 && -1 == currentSettings.prep_script.indexOf("return") && (currentSettings.prep_script = "return " + currentSettings.prep_script);
                 try {
-                   	self.prepScript = new Function(["response","event"], currentSettings.prep_script)
+                   	self.prepScript = new Function(["response"], currentSettings.prep_script)
                 } catch (g) {
                     var h = currentSettings.prep_script.replace(/"/g, '\\"').replace(/[\r\n]/g, " \\\n");
-                    self.prepScript = new Function(["response","event"], 'return "' + h + '";')
+                    self.prepScript = new Function(["response"], 'return "' + h + '";')
                 }
                 // console.log(">>>> return result : ", f(response));
             }
@@ -127,7 +125,7 @@
 					console.info("Subscribing to event: %s", event);
 					self.socket.on(event, function(message) {
 						// console.info("------message : ",message);
-						self.newMessageCallback(message,event);
+						self.newMessageCallback(message);
 					});
 				});
 			}
@@ -160,7 +158,6 @@
 				display_name : "Socket.IO",
 				description : "A real-time stream datasource from node.js servers using socket.io.",
 				// external_scripts : ["https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"], 
-				// external_scripts : [ "plugins/thirdparty/socket.io.min.v312.js" ],
 				external_scripts : [ "plugins/thirdparty/socket.io.v420.js" ],
 				// external_scripts : [ "plugins/thirdparty/socket.io-1.0.6.js" ],//[ "https://cdn.socket.io/socket.io-1.0.6.js" ],
 				settings : [
@@ -179,16 +176,9 @@
 			            },
 						{
 							name : "url",
-							display_name : "Socket Server",
+							display_name : "Server URL",
 							description : "(Optional) In case you are using custom namespaces, add the name of the namespace (e.g. chat) at the end of your URL.<br>For example: http://localhost/chat",
 							type : "text"
-						},
-						{
-							name: "header_object",
-							display_name: "Header",
-							type: "jsscript",
-							default_value: "{}",
-							description: "use \", not '. For example : { \"attr\" : value }"
 						},
 						{
 							name : "events",
@@ -220,7 +210,7 @@
 				            name: "prep_script",
 				            display_name: "(Optional) Prep Script",
 				            type: "jsscript",
-				            description: "prep script to execute after recieve data from socket. >>> function(response,event){...prep script...}",
+				            description: "prep script to execute after recieve data from socket.",
 				            default_value: null,
 			            }],
 				newInstance : function(settings, newInstanceCallback,updateCallback) {

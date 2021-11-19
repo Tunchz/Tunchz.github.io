@@ -1,0 +1,504 @@
+
+<!DOCTYPE HTML>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Place this data between the <head> tags of your website -->
+  <title>Mholan : the question isn't can you; it's WILL YOU. -FWTT-</title>
+  <meta name="description" content="the question isn't can you; it's WILL YOU. -FWTT-">
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+  <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+          // Connect to the Socket.IO server.
+          // The connection URL has the following format, relative to the current page:
+          //     http[s]://<domain>:<port>[/<namespace>]
+          var socket = io();
+
+          // Event handler for new connections.
+          // The callback function is invoked when a connection with the
+          // server is established.
+          socket.on('connect', function() {
+              socket.emit('my_event', {data: 'FWTT-Connecting'});
+          });
+
+          // Event handler for server sent data.
+          // The callback function is invoked whenever the server emits data
+          // to the client. The data is then displayed in the "Received"
+          // section of the page.
+          socket.on('my_response', function(msg, cb) {
+            // $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+            console.log('Received #' + msg.count + ': ' + msg.data);
+            console.log('date : ',msg.data.date);
+            console.log('flow : ',msg.data.flow);
+            console.log('pressure : ',msg.data.pressure);
+            console.log('label : ',msg.data.label);
+            console.log('anomaly : ',msg.data.anomaly);
+            console.log('score : ',msg.data.score);
+            if (cb)
+                cb();
+
+            if (msg.data == "FWTT-Connecting")
+                document.getElementById("status").innerHTML = `<span style="color:#0f0">◉ </span>connected`;
+            refresh(msg.data)
+          });
+
+          // // Interval function that tests message latency by sending a "ping"
+          // // message. The server then responds with a "pong" message and the
+          // // round trip time is measured.
+          // var ping_pong_times = [];
+          // var start_time;
+          // window.setInterval(function() {
+          //     start_time = (new Date).getTime();
+          //     socket.emit('my_ping');
+          // }, 1000);
+
+          // // Handler for the "pong" message. When the pong is received, the
+          // // time from the ping is stored, and the average of the last 30
+          // // samples is average and displayed.
+          // socket.on('my_pong', function() {
+          //     var latency = (new Date).getTime() - start_time;
+          //     ping_pong_times.push(latency);
+          //     ping_pong_times = ping_pong_times.slice(-30); // keep last 30 samples
+          //     var sum = 0;
+          //     for (var i = 0; i < ping_pong_times.length; i++)
+          //         sum += ping_pong_times[i];
+          //     $('#ping-pong').text(Math.round(10 * sum / ping_pong_times.length) / 10);
+          // });
+      });
+
+  </script>
+
+    
+  <link rel="stylesheet" href="../static/css/reset.css"> 
+  <link rel="stylesheet" href="../static/css/style.css"> 
+  <script src="../static/js/modernizr.js"></script>
+  <link rel="stylesheet" href="../static/css/mapbox-gl.css">
+  <link rel="stylesheet" href="../static/css/FWTT.css">
+  <link rel="stylesheet" href="../static/css/fonts.css">
+</head>
+<body onresize="buildChart(sensor);" style="background: url(https://tunchz.github.io/PoC/MWA/static/diagonal-noise.png);">
+   <nav id="cd-vertical-nav" style="font-family: Impact;">
+        <ul>
+<!--             <li>
+                <a href="#section1" data-number="1">
+                    <span class="cd-dot"></span>
+                    <span class="cd-label">Intro</span>
+                </a>
+            </li> -->
+            <li>
+                <a href="#section2" data-number="2">
+                    <span class="cd-dot"></span>
+                    <span class="cd-label">Page 1 ▸ Graph</span>
+                </a>
+            </li>
+            <li>
+                <a href="#section3" data-number="3">
+                    <span class="cd-dot"></span>
+                    <span class="cd-label">Page 2 ▸ Map</span>
+                </a>
+            </li>
+
+<!--             <li>
+                <a href="#section7" data-number="7">
+                    <span class="cd-dot"></span>
+                    <span class="cd-label">About</span>
+                </a>
+            </li> -->
+        </ul>
+    </nav>
+    <!-- <a class="cd-nav-trigger cd-img-replace">Open navigation<span></span></a> -->
+
+<!--    <section id="section1" class="cd-section">
+        <h1 style="font-family: Impact;">LEAP OR FALL ▸ Z∙E∙R∙O</h1>
+
+        
+
+        <a href="#section2" class="cd-scroll-down cd-img-replace">scroll down</a>
+    </section> -->
+
+    <section id="section2" class="cd-section" id="chart">
+          
+      <div id="s2left" style="background: url(https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png) #383838;"></div>
+      <div id="section2-title">
+        <h0> มิเตอร์ 102 : พื้นที่หนองแขม</h0>
+      <!/div>
+      <!div id="section2-subtitle">
+        <h00> แสดงข้อมูลเซนเซอร์ท่อน้ำ ▸ อัตราการไหล ความดัน และผลคาดการณ์ท่อรั่ว ย้อนหลัง 1 สัปดาห์</h00>
+      </div>
+      <!div id="divider"><!/div>
+          <!div id="chart"><!/div>
+      <!-- <div id="TimeDisplay"><span id="status"><span style="color:#f00">◉ </span>disconnected</span> : <span id="ping-pong">-</span> ms ║ <span id="datetime"></span></div> -->
+      <div id="TimeDisplay"><span id="status"><span style="color:#f00">◉ </span>disconnected</span> ║ <span id="datetime"></span></div>
+
+
+      <svg id="chart-container"></svg>
+
+      <div id="s21">
+        <h3><span id="s2-humd">Humd</span></h3>
+        <h4>Flow</h4>
+        <h7><span id="s2-humd-minmax">Humd-minmax</span></h7>
+       </div>
+       <div id="s22">
+        <h3><span id="s2-light">Light</span></h3>
+        <h4>Pressure</h4>
+        <h7><span id="s2-light-minmax">Humd-minmax</span></h7>
+       </div>
+       <div id="s23">
+        <h3><span id="s2-temp">Temp</span></h3>
+        <h4>Leak Detected</h4>
+        <h7><span id="s2-temp-minmax">Humd-minmax</span></h7>
+       </div>
+       <div id="s23_1">
+        <h3><span id="s2-tempper">%</span></h3>
+        <h4>% in 24H</h4>
+       </div>
+       <div id="s24">
+        <h3><span id="s2-pm25">PM25</span></h3>
+        <h3><span id="s2-pm10">PM10</span></h3>
+        <h4>Anomaly Detected</h4>
+        <h7><span id="s2-pm25-minmax">Humd-minmax</span></h7>
+       </div>
+       <div id="s24_1">
+        <h3><span id="s2-pm25per">&nbsp;</span></h3>
+        <h3><span id="s2-pm10per">%</span></h3>
+        <h4>% in 24H</h4>
+       </div>
+       <div id="s25">
+        <h7><span id="s2-time">Humd-minmax</span></h7>
+       </div>
+
+
+       <div id="top_center">
+        <h3>Leak Detected in 24H ▸ <span id="per_avg">%</span></h3>
+       </div>
+
+    
+    </section>
+
+   <section id="section3" class="cd-section" id="chart2" style="background: url(https://tunchz.github.io/PoC/MWA/static/diagonal-noise.png);">
+
+    <div id="s3left" style="background: url(https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png) #383838;"></div>
+    <div id="section2-title">
+      <h0> แผนที่สถานภาพภาพท่อน้ำ</h0>
+    <!/div>
+    <!div id="section3-subtitle">
+      <h00><br> แผนที่สถานภาพท่อน้ำ ▸ ละติจูด-ลองติจูด ของตำแหน่งมิเตอร์ท่อน้ำประปา <br><small>>> คลิ๊กซ้ายที่ไอคอนเพื่อ zoom-in และคลิ๊กขวาที่ไอคอนเพื่อ zoom-out </small></h00>
+    </div>
+
+    <div id="map-container">
+         <div id="map"></div>
+    </div>
+
+    </section>
+
+
+<!--    <section id="section7" class="cd-section">
+        <article>     โปรเจคนี้สร้างขึ้นเพื่อแสดงตัวอย่างการนำข้อมูลที่รวบรวมจากอุปกรณ์ iot ต่างๆ เช่น เซนเซอร์ แล้วนำมาแสดงข้อมูลแบบ Real-Time. <br><br> ชุดข้อมูลที่ใช้ในตัวอย่างนี้เป็นข้อมูลจากอุปกรณ์เซนเซอร์ตรวจวัดคุณภาพอากาศ และข้อมูลเซนเซอร์จากโทรศัพท์ </article>
+    
+
+    <footer>
+      A data visualization project by <a href="mailto:tunchz@gmail.com">-FWTT-</a>
+    </footer>
+    </section> -->
+
+
+</body>
+
+
+
+  <script src="../static/js/d3.v355.min.js"></script>
+  <script src="../static/js/chartsdisplay.js"></script>
+  <script src='../static/js/mapbox-gl.js'></script>
+
+
+<!-- <script src="../static/js/jquery.min.js"></script> -->
+<script src="../static/js/main.js"></script> 
+
+
+
+<script>
+
+
+
+    function project(m,d) {
+      return m.project(new mapboxgl.LngLat(+d.lon, +d.lat));
+    }
+
+    function markerupdate(m,d) {
+      d
+      .attr({
+        cx: function(d) { 
+          var x = project(m,d).x;
+          return x
+        },
+        cy: function(d) { 
+          var y = project(m,d).y;
+          return y
+        },
+      })
+    }
+
+    function zoom(d) {
+      if (d==1) {
+        return 16;
+      } else if (d==2) {
+        return 12;
+      } else if (d==3) {
+        return 9;
+      } else {
+        return 5;
+      }
+    }
+
+    function drawmap(data){
+
+
+      //remove all old markers and popups
+      markers = d3.select("#map").selectAll(".marker");
+      markers.remove();
+      markers = d3.select("#map").selectAll(".markertext");
+      markers.remove();
+      popups = d3.select("#map").selectAll(".mapboxgl-popup");
+      popups.remove();
+
+      var popups=[];
+
+      for (j = 0; j < data.length; j++) {
+
+        if (data[j].lat!=0 && data[j].lon!=0){
+
+          var el = document.createElement('div');
+          el.className = 'marker';
+          el.id = 'marker-'+j;
+
+          // make a marker for each feature and add to the map
+          new mapboxgl.Marker(el)
+          .setLngLat([data[j].lon,data[j].lat])
+          .addTo(map);
+
+          var tt = document.createElement('div');
+          tt.className = 'markertext';
+          tt.id = 'text-'+j;
+          tt.innerHTML = (data[j].per_avg == 0)? data[j].name : data[j].name+ " ▸ " + data[j].per_avg + "%";
+
+          // make a marker for each feature and add to the map
+          new mapboxgl.Marker(tt)
+          .setLngLat([data[j].lon,data[j].lat])
+          .addTo(map);
+
+          popups[j] = new mapboxgl.Popup({ offset: 20, closeButton: false, closeOnClick: false }).setHTML('<strong>┃ '+data[j].name+'</strong><br><small> ▸ Update: '+formatTime(data[j].date)+ '<br> ▸ Lat: '+ data[j].lat +'  Lat: '+ data[j].lon + '<br> ▸ Flow: '+ data[j].humd + '<br> ▸ Pressure: '+ data[j].light +'</small>');
+
+          d3.select("#map").selectAll("#marker-"+j)
+            .style("background-image",(data[j].per_avg == 0)?"url('../static/img/g.jpg')":"url('../static/img/r.jpg')")
+            .style("border",(data[j].per_avg == 0)?"4px solid #00ff00":"4px solid #ff0000");
+
+          d3.select("#map").selectAll("#text-"+j)
+            .style("color",(data[j].per_avg == 0)?"#00ff00":"#ff0000");
+
+          d3.select("#map").selectAll(".marker")
+            .on('mouseover', function(e) {k=d3.select(this).attr('id').split("-")[1]; popups[k].setLngLat([data[k].lon,data[k].lat]).addTo(map);})
+            .on('mouseout', function(e) {popup = popups[d3.select(this).attr('id').split("-")[1]]; popup.remove();})
+            .on('click', function(d) {z!=1 ? z = z - 1 : z = z; k=d3.select(this).attr('id').split("-")[1]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});})
+            .on('contextmenu', function(d) {z!=4 ? z = z + 1 : z = z; k=d3.select(this).attr('id').split("-")[1]; map.flyTo({ center: [data[k].lon,data[k].lat], zoom : zoom(z)});});
+
+        } //if
+      } //for
+    }
+
+
+
+    function refresh(data){
+
+        leak24h.unshift(parseFloat(data.label))
+        anomaly24h.unshift(parseFloat(data.anomaly))
+        while (leak24h.length>96) {
+          //sensor.shift();
+          leak24h.pop();
+          anomaly24h.pop();
+        }
+
+        sensor.unshift({ 
+            'pm25' : parseFloat(data.score),                         //pm2.5
+            'pm10' : parseFloat(data.anomaly),                         //pm2.5
+            'pm10per' : (anomaly24h.reduce((a, b) => a + b, 0)/0.96).toFixed(2),     //% in 24h
+            'humd' : parseFloat(data.flow),                          //hum
+            'light' : parseFloat(data.pressure),                          //light
+            'temp' : parseFloat(data.label),                         //temp    //lat
+            'tempper' : (leak24h.reduce((a, b) => a + b, 0)/0.96).toFixed(2),     //% in 24h
+            'per_avg' : ((anomaly24h.reduce((a, b) => a + b, 0)+leak24h.reduce((a, b) => a + b, 0))/1.92).toFixed(2),
+            'lat' : 13.70,     //lat
+            'lon' : 100.353,     //lon13.699889121955385, 100.35308892433287, 100.35308892433287
+            'name' : "102 หนองแขม",
+            'detected' : parseFloat(data.anomaly)+parseFloat(data.label), 
+            'date' : new Date()
+        });
+         
+
+        while (sensor.length>windowlength) {
+          //sensor.shift();
+          sensor.pop();
+        }
+
+        buildChart(sensor);
+
+        // draw the dot on map for last coordinate
+        drawmap([sensor[0],sensor2[0]]);
+
+    }
+
+
+
+    function tick() {
+      setTimeout(tick, 1000 - Date.now() % 1000);
+      var now = new Date;
+      document.getElementById("datetime").innerHTML = formatTime(now); //+" ▸ refresh in "+i+ " secs";
+      // if (i<=0) {
+      //   refresh({date:'', flow: 123, pressure: 10.324, label: 1, anomaly: 1, score: 175.26});
+      //     i = refresh_rate;
+      // } 
+
+      // i -= 1;
+    }
+
+
+
+
+    var formatTime = d3.time.format("%d %B %Y %H:%M:%S");
+    var chartData,
+        refresh_rate = 0.5,
+        i = 4,
+        windowlength = 672
+        z = 2;
+        //transitiontime = 100;
+    var sensor = [{
+                  'pm25' : 0,
+                  'pm10' : 0,
+                  'humd' : 0,                          
+                  'temp' : 0,                         
+                  'light' : 0,
+                  'lat' : 13.70, 
+                  'lon' : 100.353, 
+                  'name' : "102 หนองแขม",
+                  'detected' : 0,
+                  'per_avg' : 0,
+                  'date' : new Date()
+                  }],
+        sensor2 = [{ 
+                    'pm25' : 0,
+                    'pm10' : 0,
+                    'humd' : 0,                          
+                    'temp' : 0,                         
+                    'light' : 0,
+                    'lat' : 13.7253,     
+                    'lon' : 100.4063,   
+                    'name' : "101 ภาษีเจริญ",
+                    'detected' : 0,
+                    'per_avg' : 0,
+                    'date' : new Date()
+                  }],
+        leak24h = [],
+        anomaly24h = [];
+    var timenow = new Date;
+
+        timenow = new Date(timenow.getTime() - (refresh_rate*windowlength*1000));
+    var j;
+    for (j = 0; j < windowlength; j++) {
+        sensor.unshift({ 
+            'pm25' : 0,
+            'pm10' : 0,
+            'humd' : 0,                          
+            'temp' : 0,                         
+            'light' : 0,
+            'lat' : 13.70, 
+            'lon' : 100.353, 
+            'name' : "102 หนองแขม",
+            'detected' : 0, 
+            'per_avg' : 0,
+            'date' : new Date(timenow.getTime() + (refresh_rate*j*1000))
+        });
+    }
+
+//********** MAP ***********************************************************************
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoidHVuY2h6IiwiYSI6ImNqcnU5NTRmMzJ0NHAzeWw5MTc1YzN4cGQifQ.jSjhGqwnq-8XjfgRlf4JNg'
+    /*'pk.eyJ1IjoiZW5qYWxvdCIsImEiOiJjaWhtdmxhNTIwb25zdHBsejk0NGdhODJhIn0.2-F2hS_oTZenAWc0BMf_uw'*/
+    
+    //Setup mapbox-gl map
+    var map = new mapboxgl.Map({
+      //style: 'mapbox://styles/tunchz/ck9litjbw2soc1iqo4rysy4nt',
+      //style: 'mapbox://styles/mapbox/streets-v11',
+      //style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',  // the outdoors-v10 style but without Hillshade layers
+      //style: 'mapbox://styles/mapbox/outdoors-v10',
+      style: 'mapbox://styles/mapbox/dark-v10',
+      //style: 'mapbox://styles/mapbox/light-v10',
+      container: 'map', // container id
+      center: [100.375,13.711],
+      minZoom: 5,
+      maxZoom: 16,
+      zoom: 12,
+      pitch: 90,
+      //bearing: -17.6,
+      antialias: true
+
+    })
+
+/*
+    //use with : style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g' to add hillshading
+    map.on('load', function() {
+    map.addSource('dem', {
+    'type': 'raster-dem',
+    'url': 'mapbox://mapbox.terrain-rgb'
+    });
+    map.addLayer(
+    {
+    'id': 'hillshading',
+    'source': 'dem',
+    'type': 'hillshade'
+    // insert below waterway-river-canal-shadow;
+    // where hillshading sits in the Mapbox Outdoors style
+    },
+    'waterway-river-canal-shadow'
+    );
+    });
+*/
+
+
+
+    // map.flyTo({ center: [13.711,51.5119112] });
+
+
+    // disable map rotation using right click + drag
+    //map.dragRotate.disable();
+     
+    // disable map rotation using touch rotation gesture
+    //map.touchZoomRotate.disableRotation();
+
+    //map.scrollZoom.disable()
+    //map.addControl(new mapboxgl.Navigation());
+    map.addControl(new mapboxgl.FullscreenControl()/*, 'top-left'*/);
+    // Add geolocate control to the map.
+    map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true})/*, 'top-left'*/);
+    map.addControl(new mapboxgl.NavigationControl()/*, 'top-left'*/);
+
+
+    // Setup our svg layer that we can manipulate with d3
+//    var container = map.getCanvasContainer()
+//    var svg = d3.select(container).append("svg")
+
+
+
+    // refresh();
+    //drawmap(map,sensor);
+
+    tick();
+
+
+  </script>
+
+
+
+</html>

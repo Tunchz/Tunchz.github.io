@@ -76,8 +76,8 @@ function updateFullScreenStatus() {
                 topMargin = ($("body").height() - $("#board-content").height())/2,
                 (topMargin<=0)?(topMargin=0):$("body").css({height:"auto"}), topMargin -= 3
                 ):(topMargin = freeboard.getFullscreenTopMargin());
-            console.log("------> view height : ",$("body").height());
-            console.log("------> topMargin : ",topMargin);
+            // console.log("------> view height : ",$("body").height());
+            // console.log("------> topMargin : ",topMargin);
             $("#board-content-top").css({'height': topMargin+"px"});
         },500)
     } else {
@@ -92,12 +92,13 @@ function updateFullScreenStatus() {
 }
 
 function toggleFullScreen() {
-    // if (fullScreenApi.isFullScreen()) {
-    //     fullScreenApi.cancelFullScreen()
-    // } else {
-    //     fullScreenApi.requestFullScreen(document.documentElement)
-    // }
-    fullscreenById("board-content");
+
+    if (fullScreenApi.isFullScreen()) {
+        fullScreenApi.cancelFullScreen()
+    } else {
+        fullScreenApi.requestFullScreen(document.documentElement)
+    }
+    // fullscreenById("body");
 }
 
 function saveChanges() {
@@ -297,6 +298,10 @@ $(function() {
             //     $("#edit-dashboard").click(function() {
             //         location.href = "/board/edit/" + boardID
             //     })
+            } else {
+                // freeboard.setEditing(false, false);
+                // freeboard.setHeaderOpen(false);
+                $("#main-header").hide();
             }
     //     });
     //     if (boardData.allow_edit) {

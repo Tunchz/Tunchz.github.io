@@ -164,7 +164,7 @@
         freeboard.loadWidgetPlugin({
             type_name: "circular_progress",
             display_name: "Circle Progress Bar",
-            external_scripts:  ["plugins/thirdparty/progressbar.js"], //["plugins/thirdparty/jquery-asPieProgress.js"],
+            external_scripts:  ["https://tunchz.github.io/DB.Builder/plugins/thirdparty/progressbar.js"], //["plugins/thirdparty/progressbar.js"], //["plugins/thirdparty/jquery-asPieProgress.js"],
             settings: [
             {
                 name: "label_top",
@@ -373,7 +373,7 @@
         freeboard.loadWidgetPlugin({
             type_name: "semi_circular_progress",
             display_name: "Semi Circle Progress Bar",
-            external_scripts: ["plugins/thirdparty/progressbar.js"],
+            external_scripts: ["https://tunchz.github.io/DB.Builder/plugins/thirdparty/progressbar.js"], //["plugins/thirdparty/progressbar.js"],
             settings: [
             {
                 name: "label_top",

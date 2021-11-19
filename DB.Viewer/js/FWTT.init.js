@@ -165,7 +165,7 @@ function FreeboardModel(a, b, c) {
         }
     }, this.deserialize = function(e, f) {
         function g() {
-            c.setUserColumns(e.columns), _.isUndefined(e.allow_edit) ? d.allow_edit(_default.allow_edit) : d.allow_edit(e.allow_edit), d.version = e.version || 0, 
+            c.setUserColumns(e.columns), _.isUndefined(e.allow_edit) ? d.allow_edit(!0) : d.allow_edit(e.allow_edit), d.version = e.version || 0, 
             _.isUndefined(e.header_image) ? d.header_image(_default.header_image) : d.header_image(e.header_image),
             _.isUndefined(e.dashboard_title) ? d.dashboard_title(_default.dashboard_title) : d.dashboard_title(e.dashboard_title),
             _.isUndefined(e.avatar) ? d.avatar(_default.avatar) : d.avatar(e.avatar),
@@ -1678,6 +1678,7 @@ var freeboard = function() {
         initialize: function(b, c) {
             ko.applyBindings(e);
             // var f = a("localdashboard");
+            // // console.log("---> Local Dashboard Loading : ", f);
             // (f&&""!=f) ? $.ajax({
             //     url: f,
             //     success: function(a) {

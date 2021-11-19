@@ -12,7 +12,7 @@
 		<link href="css/netpie.plugins.css" rel="stylesheet" />
 		<link href="css/freeboard.css" rel="stylesheet" />
 		<link href="css/FWTT.css" rel="stylesheet" />
-		<script src="js/freeboard.thirdparty.js"></script>
+		<script src="js/FWTT.thirdparty.js"></script>
 		<script type="text/javascript">
 			function QueryStringToJSON(queryString) {            
 			    var pairs = queryString.slice(1).split('&');
@@ -41,6 +41,8 @@
 					"js/FWTT.custom.scrape.api.js",
 					"js/FWTT.custom.scrape.api.multiple.options.js",
 					"js/FWTT.socket.io.js",
+					"js/FWTT.MQTT.js",
+					"js/FWTT.MQTT.paho.js",
 					"js/FWTT.widget.html.js",
 			        "js/FWTT.widget.text.sparkline.js",
 					"js/FWTT.widget.circular.progress.js",
@@ -49,15 +51,16 @@
 			        "js/FWTT.widget.indicator.js",
 					"js/FWTT.widget.map.js",
 					"js/FWTT.widget.highcharts.js",
-					"js/FWTT.widget.button.js",
-					"js/FWTT.widget.feedview.js",
-					"js/FWTT.widget.toggle.js",
-					"js/FWTT.widget.rangeslider.js",
-					"js/FWTT.widget.actuator.js",
-					"js/FWTT.widget.horizontal.gauge.js",
-					"js/FWTT.widget.slider.js",
-					"js/FWTT.widget.switch.js",
-			        "js/FWTT.widget.altGuage.js",
+					
+					// "js/FWTT.widget.button.js",
+					// "js/FWTT.widget.feedview.js",
+					// "js/FWTT.widget.toggle.js",
+					// "js/FWTT.widget.rangeslider.js",
+					// "js/FWTT.widget.actuator.js",
+					// "js/FWTT.widget.horizontal.gauge.js",
+					// "js/FWTT.widget.slider.js",
+					// "js/FWTT.widget.switch.js",
+			  //       "js/FWTT.widget.altGuage.js",
 
 
 					// *** Load more plugins here ***
@@ -150,7 +153,7 @@
 					});
 		</script>
 	</head>
-	<body ng-app="starter">
+	<body id="body" ng-app="starter">
 		<div id="board-content">
 			<img id="dash-logo" data-bind="attr:{src: header_image}, visible:header_image()">
 			<div id="board-content-top"></div>
@@ -371,7 +374,7 @@
         </div>
     </script> -->
 
-	<script src="js/freeboard.footer.js"></script> <!-- for footer menu -->	
+	<script src="js/FWTT.footer.js"></script> <!-- for footer menu -->	
 
 	</body>
 </html>
