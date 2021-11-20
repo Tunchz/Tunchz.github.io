@@ -13,6 +13,7 @@
 		<link href="css/freeboard.css" rel="stylesheet" />
 		<link href="css/FWTT.css" rel="stylesheet" />
 		<script src="js/FWTT.thirdparty.js"></script>
+		<!-- <script src="js/freeboard.thirdparty.js"></script> -->
 		<script type="text/javascript">
 			function QueryStringToJSON(queryString) {            
 			    var pairs = queryString.slice(1).split('&');
@@ -93,14 +94,16 @@
 								if (dashboardPattern !== null) {
 									dashboardPattern=JSON.parse(dashboardPattern);
 									freeboard.loadDashboard(dashboardPattern, function() {
-										// freeboard.setHeaderOpen(false)
-										// freeboard.setEditing(false);
+										// setTimeout(()=>{
+										// 	freeboard.setHeaderOpen(false)
+										// 	// freeboard.setEditing(false);
+										// },500)
 									});
+								} else {
+									freeboard.setHeaderOpen(true);
+									freeboard.setEditing(true);
 								}
-
 						}
-
-
 						$(function()
 						{ //DOM Ready
 							freeboard.on("dashboard_loaded",()=>{
@@ -140,7 +143,7 @@
 								})
 							} else if (parameter.reset) {
 								json = {"version": "-Tunchz/FWTT-","header_image": "","dashboard_title": "untitled.dashboard","avatar": "https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png","min_cols": 4,"background_image": null,"background_color": "#212121","widget_background_color": "#383838","widget_border_color": "#FFFFFF","widget_border_width": 0,"widget_border_radius": "0","widget_background_image": null,"fullscreen_auto_topmargin": true,"fullscreen_topmargin": 0,"allow_edit": true,"plugins": [],"panes": [],"datasources": [],"columns": 12,"theme": "default"};
-								freeboard.initialize(false);
+								freeboard.initialize(true);
 								freeboard.loadDashboard(json, function() {
 									// freeboard.setHeaderOpen(false)
 									// freeboard.setEditing(false);
@@ -302,7 +305,8 @@
 				</header>
 				<section data-bind="foreach: widgets">
 					<div class="sub-section" data-bind="css: 'sub-section-height-' + height()">
-						<div class="widget" data-bind="widget: true, css:{fillsize:fillSize}"></div>
+						<div class="widget" data-bind="widget: true, css:{fillsize:fillSize}">
+						</div>
 						<div class="sub-section-tools">
 							<ul class="board-toolbar">
 								<!-- ko if:$parent.widgetCanMoveUp($data) -->

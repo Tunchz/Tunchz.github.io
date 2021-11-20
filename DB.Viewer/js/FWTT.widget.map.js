@@ -8,7 +8,10 @@
         var self = this
         self.widgetID = randomString(16);
         var title = $('<div></div>')
-        var mapElement = $('<div style="margin-top:0px" id="map_ld' + self.widgetID + '" ></div>');
+        var mapElement = $('<div style="margin-top:0px" id="map_ld' + self.widgetID + '" ></div>'),
+            fscreen = $('<ul class="widget-fullscreen"><li><div class="icon-widget-fullscreen icon-white" ></div></li></ul>'),
+            _container,
+            _id="fullscreen-"+Date.now();
         var currentSettings = settings
 
         // current Settings default
@@ -31,7 +34,8 @@
         }
 
         this.render = function (element) {
-            $(element).append(title).append(mapElement)
+            _container = element
+            $(_container).append(title).append(mapElement).attr("id",_id).append(fscreen.on("click",()=>{fullscreenById(_id)}));
             setTimeout(function() {
                 setHeight()
                 var maphtml = document.getElementById('map_ld' + self.widgetID)
@@ -79,6 +83,7 @@
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
             // Map & Marker
+            currentSettings.enabled_fullscreen?$(_container).addClass("fullscreenable"):$(_container).removeClass("fullscreenable")
             if (settingName == "lat") {
                 currentPosition.lat = newValue
             }
@@ -105,7 +110,7 @@
                 currentSettings.height_block = 2;
             }
             mapElement.css({
-                height: (currentSettings.height_block *_h-_r*2 - ((currentSettings.title)?20:0)) + "px",
+                height: '100%'/*(currentSettings.height_block *_h-_r*2 - ((currentSettings.title)?20:0)) + "px"*/,
             });
         }
 
@@ -317,6 +322,13 @@
                 "type": "text",
                 "default_value": "1",
                 "description": "put number between 0 and 1, when 0 is totally transparent and 1 is totally opaque."
+            },
+            {
+                name: "enabled_fullscreen",
+                display_name: "Fullscreenable",
+                type: "boolean",
+                default_value: !1,
+                description: "Enable widget fullscreen toggle"
             },
             {
                 "name": "height_block",

@@ -1,12 +1,18 @@
 (function(){
     freeboard.addStyle(".html-widget", "white-space:normal;width:100%;height:100%");
-    var o = function(a) {
+    var o1 = function(a) {
         var b = $('<div class="html-widget"></div>'),
-            c = a;
+            fscreen = $('<ul class="widget-fullscreen"><li><div class="icon-widget-fullscreen icon-white" ></div></li></ul>'),
+            c = a,
+            _container,
+            _id="fullscreen-"+Date.now();
         this.render = function(a) {
-            $(a).append(b)
+            _container=a;
+            $(_container).attr("id",_id).append(b).append(fscreen.on("click",()=>{fullscreenById(_id)}));
+            (c.enabled_fullscreen)&&($(_container).addClass("fullscreenable"))
         }, this.onSettingsChanged = function(a) {
             c = a
+            c.enabled_fullscreen?$(_container).addClass("fullscreenable"):$(_container).removeClass("fullscreenable")
         }, this.onCalculatedValueChanged = function(a, c) {
             "html" == a && b.html(c)
         }, this.onDispose = function() {}, this.getHeight = function() {
@@ -23,6 +29,12 @@
             type: "calculated",
             description: "Can be literal HTML, or javascript that outputs HTML."
         }, {
+            name: "enabled_fullscreen",
+            display_name: "Fullscreenable",
+            type: "boolean",
+            default_value: !1,
+            description: "Enable widget fullscreen toggle"
+        }, {
             name: "height",
             display_name: "Height Blocks",
             type: "number",
@@ -30,19 +42,25 @@
             description: "A height block is around 40 pixels"
         }],
         newInstance: function(a, b) {
-            b(new o(a))
+            b(new o1(a))
         }
     })
 
 
-    freeboard.addStyle(".html-widget", "white-space:normal;width:100%;height:100%");
-    var o = function(a) {
+    // freeboard.addStyle(".html-widget", "white-space:normal;width:100%;height:100%");
+    var o2 = function(a) {
         var b = $('<div class="html-widget"></div>'),
-            c = a;
+            fscreen = $('<ul class="widget-fullscreen"><li><div class="icon-widget-fullscreen icon-white" ></div></li></ul>'),
+            c = a,
+            _container,
+            _id="fullscreen-"+Date.now();
         this.render = function(a) {
-            $(a).append(b)
+            _container=a;
+            $(_container).attr("id",_id).append(b).append(fscreen.on("click",()=>{fullscreenById(_id)}));
+            (c.enabled_fullscreen)&&($(_container).addClass("fullscreenable"))
         }, this.onSettingsChanged = function(a) {
             c = a
+            c.enabled_fullscreen?$(_container).addClass("fullscreenable"):$(_container).removeClass("fullscreenable")
         }, this.onCalculatedValueChanged = function(a, c) {
             "html" == a && b.html(c)
         }, this.onDispose = function() {}, this.getHeight = function() {
@@ -62,6 +80,12 @@
             type: "calculated",
             description: "Can be literal HTML, or javascript that outputs HTML with D3 V3 support."
         }, {
+            name: "enabled_fullscreen",
+            display_name: "Fullscreenable",
+            type: "boolean",
+            default_value: !1,
+            description: "Enable widget fullscreen toggle"
+        }, {
             name: "height",
             display_name: "Height Blocks",
             type: "number",
@@ -69,12 +93,12 @@
             description: "A height block is around 40 pixels"
         }],
         newInstance: function(a, b) {
-            b(new o(a))
+            b(new o2(a))
         }
     })
 
-    freeboard.addStyle(".html-widget", "white-space:normal;width:100%;height:100%");
-    var o = function(a) {
+    // freeboard.addStyle(".html-widget", "white-space:normal;width:100%;height:100%");
+    var o3 = function(a) {
         function initTheme() {
             Highcharts.theme = {
                 global: {
@@ -303,22 +327,19 @@
             console.log("--- Highchart theme initialize")
         }
         var b = $('<div class="html-widget"></div>'),
+            fscreen = $('<ul class="widget-fullscreen"><li><div class="icon-widget-fullscreen icon-white" ></div></li></ul>'),
             c = a,
-            _self;
+            _container,
+            _id="fullscreen-"+Date.now();
+
         this.render = function(a) {
-            _self=a;
-            $(_self).append(b);
-            // initTheme();
-            // setTimeout(()=>{b.html(c.html)},100);
-            // b.html(c.html);
-            //setTimeout(()=>{b.empty(),b.html(c.html);},1000);
+            _container=a;
+            $(_container).attr("id",_id).append(b).append(fscreen.on("click",()=>{fullscreenById(_id)}));
+            (c.enabled_fullscreen)&&($(_container).addClass("fullscreenable"))
+            // c.enabled_fullscreen?$(_container).addClass("fullscreenable"):$(_container).removeClass("fullscreenable")
         }, this.onSettingsChanged = function(a) {
             c = a
-            // initTheme();
-            // setTimeout(()=>{
-            //     b.empty();
-            //     b.html(c.html);
-            // },1000);
+            c.enabled_fullscreen?$(_container).addClass("fullscreenable"):$(_container).removeClass("fullscreenable")
         }, this.onCalculatedValueChanged = function(a, c) {
             "html" == a && b.html(c)
         }, this.onDispose = function() {}, this.getHeight = function() {
@@ -347,6 +368,12 @@
             type: "calculated",
             description: "Can be literal HTML, or javascript that outputs HTML with highchart v.8 support."
         }, {
+            name: "enabled_fullscreen",
+            display_name: "Fullscreenable",
+            type: "boolean",
+            default_value: !1,
+            description: "Enable widget fullscreen toggle"
+        }, {
             name: "height",
             display_name: "Height Blocks",
             type: "number",
@@ -354,7 +381,7 @@
             description: "A height block is around 40 pixels"
         }],
         newInstance: function(a, b) {
-            b(new o(a))
+            b(new o3(a))
         }
     })
 

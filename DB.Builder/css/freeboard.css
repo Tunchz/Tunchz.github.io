@@ -1437,7 +1437,7 @@ ol {
     width: 14px;
     height: 14px;
     margin-top: 1px;
-    *margin-right: .3em;
+    margin-right: .3em;
     line-height: 14px;
     vertical-align: text-top;
     background-image: url(../img/glyphicons-halflings.png);
@@ -1783,6 +1783,11 @@ ol {
 
 .icon-chevron-right {
     background-position: -456px -72px
+}
+
+.icon-widget-fullscreen {
+/*    background-position: -456px -72px;
+    transform: translateX(-2px) translateY(-3px) rotate(-45deg);*/
 }
 
 .icon-plus-sign {

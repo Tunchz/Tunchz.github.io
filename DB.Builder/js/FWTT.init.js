@@ -2215,7 +2215,6 @@ function fullscreenById(id) {
       } else {
         //element = $('#container').get(0);
         element = document.getElementById(id);
-        console.log(element);
         if (element.requestFullscreen) {
           element.requestFullscreen();
         } else if (element.mozRequestFullScreen) {

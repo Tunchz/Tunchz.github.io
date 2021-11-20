@@ -101,6 +101,12 @@
         type: "boolean",
         default_value: 1,
 	}, {
+        name: "enabled_fullscreen",
+        display_name: "Fullscreenable",
+        type: "boolean",
+        default_value: !1,
+        description: "Enable widget fullscreen toggle"
+    }, {
         name: "blocks",
         display_name: "Height Blocks",
         type: "integer",
@@ -150,7 +156,10 @@
 	var highchartsTimeseriesWidgetPlugin = function(settings) {
 
 		var self = this;
-		var currentSettings = settings;
+		var currentSettings = settings,
+			fscreen = $('<ul class="widget-fullscreen"><li><div class="icon-widget-fullscreen icon-white" ></div></li></ul>'),
+            _container,
+            _id="fullscreen-"+Date.now();
 
 		var thisWidgetId = "highcharts-widget-timeseries-" + HIGHCHARTS_ID++;
 		var thisWidgetContainer = $('<div class="highcharts-widget" id="' + thisWidgetId + '"></div>');
@@ -425,7 +434,7 @@
 			}
 
 			// Create widget
-			thisWidgetContainer.css({'height': (self.getHeight()*_h-_r*2) + 'px','width': '100%'});
+			thisWidgetContainer.css({'height': '100%'/*(self.getHeight()*_h-_r*2) + 'px'*/,'width': '100%'});
 			// thisWidgetContainer.css('width', '100%');
 
 			thisWidgetContainer.highcharts({
@@ -493,7 +502,9 @@
 		}
 
 		self.render = function(containerElement) {
-			$(containerElement).append(thisWidgetContainer);
+            _container=containerElement;
+            $(_container).attr("id",_id).append(thisWidgetContainer).append(fscreen.on("click",()=>{fullscreenById(_id)}));
+            (currentSettings.enabled_fullscreen)&&($(_container).addClass("fullscreenable"))
 			setTimeout(function() {
 				createWidget();
 			}, 1000);
@@ -506,6 +517,7 @@
 		self.onSettingsChanged = function(newSettings) {
 			// setTimeout(function() {
 				currentSettings = newSettings;
+            	currentSettings.enabled_fullscreen?$(_container).addClass("fullscreenable"):$(_container).removeClass("fullscreenable")
 				createWidget();
 			// }, 1000);
 		}

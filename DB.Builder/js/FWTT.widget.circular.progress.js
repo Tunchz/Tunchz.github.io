@@ -136,9 +136,9 @@
 
                 },0)
 
-                label_top.css({"font-size":_settings.font_size_sublabel+'px', "color": _settings.color_sublabel}).html(_settings.label_top)
-                label.css({"font-size":_settings.font_size_label+'px', "color": _settings.color_label}).html(_settings.label)
-                label_bottom.css({"font-size":_settings.font_size_sublabel+'px', "color": _settings.color_sublabel}).html(_settings.label_bottom)
+                label_top.css({"font-size":_settings.font_size_sublabel+'px', "color": _settings.color_sublabel})//.html(_settings.label_top)
+                label.css({"font-size":_settings.font_size_label+'px', "color": _settings.color_label})//.html(_settings.label)
+                label_bottom.css({"font-size":_settings.font_size_sublabel+'px', "color": _settings.color_sublabel})//.html(_settings.label_bottom)
                 container.attr("data-barcolor", _settings.color_bar)
                 container.attr("data-barsize", _settings.bar_size)
                 _settings.round_bar?freeboard.addStyle("#"+_id+" svg", "stroke-linecap: round;"):freeboard.addStyle("#"+_id+" svg", "stroke-linecap: square;");
@@ -345,9 +345,9 @@
 
                 },100)
 
-                label_top.css({"font-size":_settings.font_size_sublabel+'px', "color": _settings.color_sublabel}).html(_settings.label_top)
-                label_bottom.css({"font-size":(_settings.font_size_sublabel-2)+'px', "color": _settings.color_sublabel,/* opacity:0.7*/}).html(_settings.label_bottom)
-                label.css({"font-size":_settings.font_size_label+'px', "color": _settings.color_label}).html(_settings.label)
+                label_top.css({"font-size":_settings.font_size_sublabel+'px', "color": _settings.color_sublabel})//.html(_settings.label_top)
+                label_bottom.css({"font-size":(_settings.font_size_sublabel-2)+'px', "color": _settings.color_sublabel,/* opacity:0.7*/})//.html(_settings.label_bottom)
+                label.css({"font-size":_settings.font_size_label+'px', "color": _settings.color_label})//.html(_settings.label)
                 // label_bottom.css({"font-size":_settings.font_size_sublabel+'px', "color": _settings.color_sublabel}).html(_settings.label_bottom)
                 // container.attr("data-barcolor", _settings.color_bar)
                 // container.attr("data-barsize", _settings.bar_size)
