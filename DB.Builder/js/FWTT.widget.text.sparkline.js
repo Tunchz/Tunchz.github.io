@@ -122,7 +122,7 @@
                 d()
             }, this.onCalculatedValueChanged = function(b, d) {
                 _data = d;
-                console.log("---> value : ", d)
+                // console.log("---> value : ", d)
                 "value" == b && (!d?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):(_settings.with_comma&&(d=numberWithCommas(d)),_settings.animate ? a(d, h, 500) : h.html(d)), _settings.sparkline && c(_settings, j, d))
             }, this.onDispose = function() {}, 
             this.getHeight = function() {
