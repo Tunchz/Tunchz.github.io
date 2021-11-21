@@ -22,6 +22,7 @@ var _default = {
     widget_border_width_reset: 0,
     widget_border_radius_reset: 0,
     widget_background_image_reset: null,
+    fullscreenable: !0,
     //fullscreen
     fullscreen_auto_topmargin:!0,
     fullscreen_topmargin:0,
@@ -1923,9 +1924,13 @@ $.extend(freeboard, jQuery.eventEmitter),
     function() {
         var a = function(a, b) {
             function c(a) {
-                e && clearInterval(e), e = setInterval(function() {
-                    d.updateNow()
-                }, a)
+                if (a && a > 0) {
+                    e && clearInterval(e), e = setInterval(function() {
+                        d.updateNow()
+                    }, a)
+                } else {
+                    e && clearInterval(e), e=null;
+                }
             }
             var d = this,
                 e = null,

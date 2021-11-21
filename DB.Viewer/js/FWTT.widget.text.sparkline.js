@@ -99,20 +99,22 @@
                 // },0);
                 
             }, 
-            this.onSettingsChanged = function(a) {
-                _settings = a;
+            this.onSettingsChanged = function(a_) {
+                _settings = a_;
                 if (!_.isUndefined(_settings?.mark_color) && _settings?.mark_color !== "") {_settings._color=[_settings.mark_color];} else {_settings._color=[_default.mark_color];}
-                var b = !_.isUndefined(a.title) && "" != a.title,
-                    cc = !_.isUndefined(a.units) && "" != a.units;
-                a.sparkline ? j.attr("style", null) : (delete j.data().values, j.empty(), j.hide()); 
-                b ? (g.html(_.isUndefined(a.title) ? "" : a.title), g.attr("style", null)) : (g.empty(), g.hide()), cc ? (i.html(_.isUndefined(a.units) ? "" : a.units), i.attr("style", null)) : (i.empty(), i.hide());
+                var b = !_.isUndefined(_settings.title) && "" != _settings.title,
+                    cc = !_.isUndefined(_settings.units) && "" != _settings.units;
+                _settings.sparkline ? j.attr("style", null) : (delete j.data().values, j.empty(), j.hide()); 
+                b ? (g.html(_.isUndefined(_settings.title) ? "" : _settings.title), g.attr("style", null)) : (g.empty(), g.hide()),
+                cc ? (i.html(_.isUndefined(_settings.units) ? "" : _settings.units), i.attr("style", null)) : (i.empty(), i.hide());
+                // !_settings.value?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):(_settings.with_comma&&(d=numberWithCommas(_settings.value)),_settings.animate ? a(_settings.value, h, 500) : h.html(_settings.value));
                 // var f = 15;//30;
                 // "big" == a.size && (f = 25/*75*/, a.sparkline && (f = 20/*60*/)), 
                 // h.css({
                 //     "font-size": f + "px"
                 // }), 
                 h_p.css({"text-align": (_settings.font_align)?_settings.font_align:"left"}), 
-                h.html("&nbsp;&nbsp;-&nbsp;&nbsp;").css({"font-size": a.font_size + "px", "color": _settings.font_color?_settings.font_color:_default.font_color}), 
+                h.html("&nbsp;&nbsp;-&nbsp;&nbsp;").css({"font-size": _settings.font_size + "px", "color": _settings.font_color?_settings.font_color:_default.font_color}), 
                 i.css({"color": _settings.font_color?_settings.font_color:_default.font_color, "opacity":_default.font_opacity}),
                 d()
                 // _settings.sparkline && c(_settings, j, _data)
@@ -120,6 +122,7 @@
                 d()
             }, this.onCalculatedValueChanged = function(b, d) {
                 _data = d;
+                console.log("---> value : ", d)
                 "value" == b && (!d?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):(_settings.with_comma&&(d=numberWithCommas(d)),_settings.animate ? a(d, h, 500) : h.html(d)), _settings.sparkline && c(_settings, j, d))
             }, this.onDispose = function() {}, 
             this.getHeight = function() {
@@ -136,12 +139,13 @@
             {
                 name: "title",
                 display_name: "Title",
-                type: "text"
+                type: "text",
             }, 
             {
                 name: "value",
                 display_name: "Value",
-                type: "calculated"
+                type: "calculated",
+                description: "Plain text must be place in double-qoute format >>> \"plain text\"."
             },
             {
                 name: "units",
@@ -234,7 +238,7 @@
         //------- Text Alternative ----------
         var g_ = function(b) {
             function d() {
-                _.isUndefined(_settings.units) || "" == _settings.units ? h.css("max-width", "100%") : h.css("max-width", f.innerWidth() - i.outerWidth(!0) + "px")
+                _.isUndefined(_settings.units) || "" == _settings.units ? h.css("max-width", "100%") : h.css("max-width", "100%") //h.css("max-width", f.innerWidth() - i.outerWidth(!0) + "px")
             }
             var _settings = b,
                 _data,
@@ -258,13 +262,9 @@
                 a.sparkline ? j.attr("style", null) : (delete j.data().values, j.empty(), j.hide());
                 var b = !_.isUndefined(a.title) && "" != a.title,
                     cc = !_.isUndefined(a.units) && "" != a.units;
-                a.title ? (g.html(_.isUndefined(a.title) ? "" : a.title), g.attr("style", null)) : (g.empty(), g.hide()), 
-                a.units ? (i.html(_.isUndefined(a.units) ? "" : a.units), i.attr("style", null)) : (i.empty(), i.hide());
-                // var f = 15;//30;
-                // "big" == a.size && (f = 25/*75*/, a.sparkline && (f = 20/*60*/)), 
-                // h.css({
-                //     "font-size": f + "px"
-                // }), 
+                a.title ? (/*g.html(_.isUndefined(a.title) ? "" : a.title*),*/ g.attr("style", null)) : (g.empty(), g.hide()), 
+                a.units ? (/*i.html(_.isUndefined(a.units) ? "" : a.units),*/ i.attr("style", null)) : (i.empty(), i.hide());
+
                 h_p.css({"text-align": (_settings.font_align)?_settings.font_align:"left"}), 
                 h.html("&nbsp;&nbsp;-&nbsp;&nbsp;").css({"font-size": a.font_size + "px",/* "color": _settings.font_color?_settings.font_color:_default.font_color*/}), 
                 //i.css({/*"color": _settings.font_color?_settings.font_color:_default.font_color, */"opacity":_default.font_opacity}),
@@ -275,9 +275,9 @@
             }, this.onCalculatedValueChanged = function(b, d) {
                 // _data = d;
                 "value" == b && (!d?h.html("&nbsp;&nbsp;-&nbsp;&nbsp;"):(_settings.with_comma&&(d=numberWithCommas(d)),_settings.animate ? a(d, h, 500) : h.html(d)), _settings.sparkline && c(_settings, j, d)),
-                "title" == b && g.html(d),
-                "units" == b && i.html(d),
-                "font_color" == b && (h.css({"color": (d?d:_default.font_color)}),i.css({"color": (d?d:_default.font_color)}),console.log("----- font_color : ",d))
+                "title" == b && g.html(!d?"&nbsp;&nbsp;-&nbsp;&nbsp;":d),
+                "units" == b && i.html(!d?"&nbsp;&nbsp;-&nbsp;&nbsp;":d),
+                "font_color" == b && (h.css({"color": (d?d:_default.font_color)}),i.css({"color": (d?d:_default.font_color)}))
             }, this.onDispose = function() {}, 
             this.getHeight = function() {
                 // return "big" == _settings.size || _settings.sparkline ? 2 : 1  //2 : 1

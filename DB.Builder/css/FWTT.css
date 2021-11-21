@@ -234,6 +234,8 @@ div#full-screen-action:hover,
     width: 14px;
     height: 14px;
     color: #fff;
+    margin: 3px;
+    margin-top:0;
 }
 
 #toggle-header li label {
@@ -329,10 +331,16 @@ header h1 {
 
 
 .board-toolbar li {
-	padding:2px 3px;
+    padding:2px 3px;
     margin: 1px 2px;
     /*background-color: #0003;*/
     border-radius: 2px;
+    display:block;
+    z-index: 1100 !important;
+}
+
+.board-toolbar li:hover {
+    background-color: #aaa8;
 }
 
 div.calculated-setting-row ul.board-toolbar li,
@@ -374,11 +382,12 @@ li.column-tool {
     z-index: 100 !important;
 }
 
-.pane-tools li,
+/*.pane-tools li,
 .pane-tools li i {
+    display: block;
 	z-index: 1100 !important;
 }
-
+*/
 #main-header {
 	z-index: 100;
 }
@@ -404,7 +413,7 @@ li.column-tool {
 
 .widget-fullscreen li {
     padding:0;
-    margin:-1px -1px 0 0;
+    margin:-1px 0px 0 0;
     border-radius: 1px;
     border-top: 2px solid #fff;
     border-right: 2px solid #fff;
