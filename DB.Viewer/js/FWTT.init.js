@@ -76,7 +76,7 @@ function FreeboardModel(a, b, c) {
     this.isHeaderOpen = ko.observable(!1),
     this.dashboard_title = ko.observable(_default.dashboard_title), this.dashboard_title.subscribe(function(a){$("#board-title").html(a?a:_default.dashboard_title)}),
     this.avatar = ko.observable(_default.avatar), this.avatar.subscribe(function(a){var s=a;(!a)&&(s=_default.avatar); $("#avatar-footer").css({content: "url('"+s+"')"})}),
-    this.min_cols = ko.observable(_default.minimum_columns), this.min_cols.subscribe(function(a){document.body.style.minWidth = !_.isUndefined(a)?(parseInt(a)*_w-_g*2+20+'px'):_default.min_width}),
+    this.min_cols = ko.observable(_default.minimum_columns), this.min_cols.subscribe(function(a){document.getElementById('board-content').style.minWidth = !_.isUndefined(a)?(parseInt(a)*_w-_g*2+20+'px'):_default.min_width}),
     this.background_image = ko.observable(_default.background_image), this.background_image.subscribe(function(a){document.body.style.backgroundImage = "url('"+(a?a:_default.background_image)+"')"}),
     this.background_color = ko.observable(_default.background_color), this.background_color.subscribe(function(a){document.body.style.backgroundColor = (a)?a:_default.background_color;}),
     this.widget_background_color = ko.observable(_default.widget_background_color), 

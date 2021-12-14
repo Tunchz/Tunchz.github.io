@@ -1,0 +1,136 @@
+<html>
+<head>
+  <title>test Ws mqtt.js</title>
+</head>
+<body>
+<!-- <script src="./browserMqtt.js"></script> -->
+<!-- <script src="./MQTTClient.js"></script> -->
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script> -->
+<script>
+
+
+  // var client = mqtt.connect("mqtt://mwa.maholan.app")
+  // client.subscribe("test")
+  // client.on("message", function (topic, payload) {
+  //   alert([topic, payload].join(": "))
+  //   client.end()
+  // })
+  // client.publish("test", "hello world!")
+
+
+
+
+// var port = 1883,
+// 	host = 'ws://mwa.maholan.app',
+// 	clientID = 'test123';
+// MQTTClient(port, host, clientID);
+
+// const mqtt = require('mqtt')
+console.log("mqtt : ",mqtt)
+const options = {
+  // Clean session
+  clean: true,
+  connectTimeout: 4000,
+  // Auth
+  clientId: 'emqx_test',
+  // username: 'emqx_test',
+  // password: 'emqx_test',
+}
+const client  = mqtt.connect('mqtt://broker.emqx.io:1883',options)
+client.on('connect', function () {
+  console.log('Connected')
+  client.subscribe('test', function (err) {
+    if (!err) {
+      client.publish('test', 'Hello mqtt')
+    }
+  })
+})
+
+client.on('message', function (topic, message) {
+  // message is Buffer
+  console.log(message.toString())
+  client.end()
+})
+
+
+// const options = {
+// 		clean: true, // retain session
+//   connectTimeout: 4000, // Timeout period
+//   // Authentication information
+//   clientId: 'emqx_test',
+//   // username: 'emqx_test',
+//   // password: 'emqx_test',
+// }
+
+// // Connect string, and specify the connection method by the protocol
+// // ws Unencrypted WebSocket connection
+// // wss Encrypted WebSocket connection
+// // mqtt Unencrypted TCP connection
+// // mqtts Encrypted TCP connection
+// // wxs WeChat applet connection
+// // alis Alipay applet connection
+// const connectUrl = 'ws://mwa.maholan.app'
+// const client = mqtt.connect(connectUrl, options)
+
+// client.on('reconnect', (error) => {
+//     console.log('reconnecting:', error)
+// })
+
+// client.on('error', (error) => {
+//     console.log('Connection failed:', error)
+// })
+
+// client.on('message', (topic, message) => {
+//   console.log('receive message：', topic, message.toString())
+// })
+
+
+
+
+// var location = {};
+// location.hostname = "https://mwa.maholan.app";
+// location.port = 1883;
+// // Create a client instance
+// client = new Paho.MQTT.Client(location.hostname, Number(location.port), "clientId");
+
+// // set callback handlers
+// client.onConnectionLost = onConnectionLost;
+// client.onMessageArrived = onMessageArrived;
+
+// // connect the client
+// client.connect({onSuccess:onConnect});
+
+
+// // called when the client connects
+// function onConnect() {
+//   // Once a connection has been made, make a subscription and send a message.
+//   console.log("onConnect");
+//   client.subscribe("test");
+//   message = new Paho.MQTT.Message("Hello");
+//   message.destinationName = "test";
+//   client.send(message);
+// }
+
+// // called when the client loses its connection
+// function onConnectionLost(responseObject) {
+//   if (responseObject.errorCode !== 0) {
+//     console.log("onConnectionLost:"+responseObject.errorMessage);
+//   }
+// }
+
+// // called when a message arrives
+// function onMessageArrived(message) {
+//   console.log("onMessageArrived:"+message.payloadString);
+// }
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

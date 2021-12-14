@@ -25,6 +25,7 @@
                 "display_name": "Port",
                 "type"        : "number",
                 "description" : "Websockets port on the broker",
+                "default_value": 1883,
                 "required"    : true
             },
             {

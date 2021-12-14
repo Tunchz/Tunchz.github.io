@@ -15,7 +15,13 @@ html *,
 }
 
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 5px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(200, 200, 200, .2);
+    -webkit-border-radius: 1ex;
 }
 
 #main-header {
@@ -40,17 +46,17 @@ html *,
 }
 
 
-.title.bordered {
-	line-height: 25px;
-	margin-bottom: 5px;
-}
-
 h2.title {
 	padding: 10px 0 5px 0;
 }
 
 #board-logo {
+    line-height: 25px;
     margin-bottom: 2px;
+}
+
+#board-actions {
+    margin-top: -5px;
 }
 
 /*#edit-toggle {
@@ -491,9 +497,6 @@ li:hover header ul.pane-tools {
     bottom:0 !important;
 	margin-top: 3px;
     top:0px;
-	/*margin-top: -20px;*/
-	/*margin-top: -10px;*/
-	/*margin-bottom: 50px;*/
 }
 
 #board-content-bottom {

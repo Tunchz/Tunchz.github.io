@@ -973,6 +973,7 @@ Paho.MQTT = (function (global) {
 		    wsurl = uriParts.join(":");
 		}
 		this.connected = false;
+		// wsurl = "ws://mwa.maholan.app:1883";
 		if (this.connectOptions.mqttVersion < 4) {
 			this.socket = new WebSocket(wsurl, ["mqttv3.1"]);
 		} else {

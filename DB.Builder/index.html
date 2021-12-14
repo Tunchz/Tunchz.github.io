@@ -39,6 +39,7 @@
 			head.js(
 					"js/FWTT.init.js",
 					"js/FWTT.global.js",
+					"js/FWTT.custom.json.js",
 					"js/FWTT.custom.scrape.api.js",
 					"js/FWTT.custom.scrape.api.multiple.options.js",
 					"js/FWTT.socket.io.js",
@@ -87,9 +88,25 @@
 
 
 					function(){
+						function setDatasourceDefaultOptions(){
+							// freeboard.on("dashboard_loaded",()=>{
+								if (parameter.defaultoption) {
+									// console.log("parameter.option : ",parameter.defaultoption)
+									var options = parameter.defaultoption.split("|"),
+										defaultOptions = [];
+									(options.length>0)&&options.map((item)=>{
+										var option = item.split('-')
+										// console.log("option : ",option[0]+" | "+option[1])
+										defaultOptions.push({datasourceName:option[0],selectedOption:option[1]})
+									})
+									freeboard.setDatasourceDefaultOptions(defaultOptions);
+								}
+							// })
+						}
 						function loadingDefalult(){
 
 								freeboard.initialize(false);
+								setDatasourceDefaultOptions()
 								var dashboardPattern = window.localStorage.getItem("maholan.db.builder");
 								// console.log("dashboardPattern : ",dashboardPattern)
 								if (dashboardPattern !== null) {
@@ -107,19 +124,19 @@
 						}
 						$(function()
 						{ //DOM Ready
-							freeboard.on("dashboard_loaded",()=>{
-								if (parameter.defaultoption) {
-									// console.log("parameter.option : ",parameter.defaultoption)
-									var options = parameter.defaultoption.split("|"),
-										defaultOptions = [];
-									(options.length>0)&&options.map((item)=>{
-										var option = item.split('-')
-										// console.log("option : ",option[0]+" | "+option[1])
-										defaultOptions.push({datasourceName:option[0],selectedOption:option[1]})
-									})
-									freeboard.setDatasourceDefaultOptions(defaultOptions);
-								}
-							})
+							// freeboard.on("dashboard_loaded",()=>{
+							// 	if (parameter.defaultoption) {
+							// 		// console.log("parameter.option : ",parameter.defaultoption)
+							// 		var options = parameter.defaultoption.split("|"),
+							// 			defaultOptions = [];
+							// 		(options.length>0)&&options.map((item)=>{
+							// 			var option = item.split('-')
+							// 			// console.log("option : ",option[0]+" | "+option[1])
+							// 			defaultOptions.push({datasourceName:option[0],selectedOption:option[1]})
+							// 		})
+							// 		freeboard.setDatasourceDefaultOptions(defaultOptions);
+							// 	}
+							// })
 							if (parameter.dashboard) {
 								$.get( parameter.dashboard, function( json ) {
 									json = JSON.parse(json)
@@ -127,6 +144,7 @@
 
 									if (json !== null) {
 										freeboard.initialize(false);
+										setDatasourceDefaultOptions()
 										// dashboardPattern=JSON.parse(json);
 										freeboard.loadDashboard(json, function() {
 											// freeboard.setHeaderOpen(false)

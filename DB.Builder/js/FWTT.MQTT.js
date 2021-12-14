@@ -147,7 +147,7 @@
         "type": "number",
         // "description": "Typically either 8883 or 443 for secure, or 1883 for insecure communication",
         "required": true,
-        "default_value": 8883
+        "default_value": 1883
       },
       {
         "name": "use_encryption",
