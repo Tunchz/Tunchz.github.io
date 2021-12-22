@@ -786,6 +786,7 @@ function WidgetModel(a, b) {
         !_.isUndefined(d.widgetInstance) && _.isFunction(d.widgetInstance.onSettingsChanged) && d.widgetInstance.onSettingsChanged(a), d.updateCalculatedSettings(), d._heightUpdate.valueHasMutated()
     }), this.processDatasourceUpdate = function(a) {
         var b = d.datasourceRefreshNotifications[a];
+        // console.log("------data refrest noti : ", b)
         _.isArray(b) && _.each(b, function(a) {
             d.processCalculatedSetting(a)
         })
@@ -795,6 +796,7 @@ function WidgetModel(a, b) {
         !_.isUndefined(d.widgetInstance) && _.isFunction(d.widgetInstance.onSizeChanged) && d.widgetInstance.onSizeChanged()
     }, this.processCalculatedSetting = function(a) {
         if (_.isFunction(d.calculatedSettingScripts[a])) {
+            // console.log("------calulated script : ", a)
             var b = void 0;
             try {
                 b = d.callValueFunction(d.calculatedSettingScripts[a])
@@ -804,9 +806,10 @@ function WidgetModel(a, b) {
             }
             if (!_.isUndefined(d.widgetInstance) && _.isFunction(d.widgetInstance.onCalculatedValueChanged) && !_.isUndefined(b))
                 try {
+                    // console.log("------::::: ", a,b)
                     d.widgetInstance.onCalculatedValueChanged(a, b)
                 } catch (c) {
-                    console.log(c.toString())
+                    // console.log(c.toString())
                 }
         }
     }, this.updateCalculatedSettings = function() {
@@ -817,6 +820,7 @@ function WidgetModel(a, b) {
             _.each(a, function(a) {
                 if ("calculated" == a.type) {
                     var b = e[a.name];
+                    // console.log("++++++ : ",b);
                     if (!_.isUndefined(b)) {
                         _.isArray(b) && (b = "[" + b.join(",") + "]"), (b.match(/;/g) || []).length <= 1 && -1 == b.indexOf("return") && (b = "return " + b);
                         var f;
@@ -827,12 +831,48 @@ function WidgetModel(a, b) {
                             f = new Function("datasources", 'return "' + h + '";')
                         }
                         d.calculatedSettingScripts[a.name] = f, d.processCalculatedSetting(a.name);
+                        // console.log("++++++ calculated : ",c.exec(b));
                         for (var i; i = c.exec(b);) {
                             var j = i[1] || i[2],
                                 k = d.datasourceRefreshNotifications[j];
-                            _.isUndefined(k) && (k = [], d.datasourceRefreshNotifications[j] = k), -1 == _.indexOf(k, a.name) && k.push(a.name)
+                            _.isUndefined(k) && (k = [], d.datasourceRefreshNotifications[j] = k), -1 == _.indexOf(k, a.name) && (k.push(a.name))
                         }
                     }
+                } else if ("array" == a.type) {
+                    _.each(a.settings, function(a_) {
+                        // console.log("----updateCalculatedSettings : ", a_)
+                        if ("calculated" == a_.type) {
+
+
+                            var b_ = e[a.name];
+                            // console.log("/////// : ",b_)
+                            b_?.map((item,index)=>{
+                                var b = item[a_.name];
+                                // console.log("++++++ : ",b,i);
+                                if (!_.isUndefined(b)) {
+                                    _.isArray(b) && (b = "[" + b.join(",") + "]"), (b.match(/;/g) || []).length <= 1 && -1 == b.indexOf("return") && (b = "return " + b);
+                                    var f;
+                                    try {
+                                        f = new Function("datasources", b)
+                                    } catch (g) {
+                                        var h = item[a_.name].replace(/"/g, '\\"').replace(/[\r\n]/g, " \\\n");
+                                        f = new Function("datasources", 'return "' + h + '";')
+                                    }
+                                    d.calculatedSettingScripts[a_.name+"."+index] = f, d.processCalculatedSetting(a_.name+"."+index);
+                                    // console.log("++++++ array : ",c.exec(b));
+                                    for (var i; i = c.exec(b);) {
+                                        var j = i[1] || i[2],
+                                            k = d.datasourceRefreshNotifications[j];
+                                        _.isUndefined(k) && (k = [], d.datasourceRefreshNotifications[j] = k), -1 == _.indexOf(k, (a_.name+"."+index)) && (k.push(a_.name+"."+index))
+                                    }
+                                }
+
+                            })
+                        }
+
+
+                    })
+
                 }
             })
         }
@@ -990,10 +1030,11 @@ PluginEditor = function(a, b, gg) {
         return !isNaN(parseFloat(a)) && isFinite(a)
     }
 
-    function f(c, d, e, f, g, type) {
+    function f(c, d, e, f, g, type, cb) {
         var h = $("<textarea></textarea>");
         h.change(function() {
-            d.settings[e.name] = $(this).val()
+            d.settings[e.name] = $(this).val();
+            _.isFunction(cb)&&cb($(this).val());
         }), 
         f && h.val(f), 
         (type==='urlOptionCalculated')?gg.createUrlOptionEditor(h,(a)=>{d.settings[e.name] = a}):b.createValueEditor(h);
@@ -1002,11 +1043,11 @@ PluginEditor = function(a, b, gg) {
         h.addClass(e.type);
         j.append(h).append(i);
         if (type==='calculated') {
-            var k = $('<li><i class="icon-plus icon-white"></i><label>DATASOURCE</label></li>').mousedown(function(a) {
+            var k = $('<li><i class="icon-plus icon-white"></i><label>'+(!_.isFunction(cb)?'DATASOURCE':'DtS')+'</label></li>').mousedown(function(a) {
                 a.preventDefault(), $(h).val("").focus().insertAtCaret('datasources["').trigger("freeboard-eval")
             });
             i.append(k);
-            var l = $('<li><i class="icon-fullscreen icon-white"></i><label>.JS EDITOR</label></li>').mousedown(function(b) {
+            var l = $('<li><i class="icon-fullscreen icon-white"></i><label>'+(!_.isFunction(cb)?'.JS EDITOR':'JsE')+'</label></li>').mousedown(function(b) {
                 b.preventDefault(), a.displayJSEditor(h.val(), function(a) {
                     h.val(a), h.change()
                 }, type)
@@ -1032,7 +1073,7 @@ PluginEditor = function(a, b, gg) {
         // if (i.append(l), g) {
         if (g) {
             h.addClass("removable");
-            var m = $('<li class="remove-setting-row"><i class="icon-minus icon-white"></i><label></label></li>').mousedown(function(a) {
+            var m = $('<li class="remove-setting-row"><i class="icon-trash icon-white"></i><label></label></li>').mousedown(function(a) {
                 a.preventDefault(), j.remove(), $(c).find("textarea:first").change()
             });
             i.prepend(m)
@@ -1052,15 +1093,56 @@ PluginEditor = function(a, b, gg) {
                     m.settings[a.name].length > 0 ? n.show() : n.hide()
                 }
 
-                function e(b) {
+                function e(b,index) {
+                    // console.log("index : ",index)
                     var c = $("<tr></tr>").appendTo(p),
+                        a_ = a,
                         e = {};
                     _.isArray(m.settings[a.name]) || (m.settings[a.name] = []), m.settings[a.name].push(e), _.each(a.settings, function(a) {
                         var d = $("<td></td>").appendTo(c),
-                            f = "";
-                        _.isUndefined(b[a.name]) || (f = b[a.name]), e[a.name] = f, $('<input class="table-row-value" type="text">').appendTo(d).val(f).change(function() {
-                            e[a.name] = $(this).val()
-                        })
+                            f_ = null;
+                        _.isUndefined(b[a.name]) || (f_ = b[a.name]), e[a.name] = f_;
+
+
+
+                        switch (a.type) {
+                            case "boolean":
+                                var r = $('<div class="onoffswitch table-row-value"><label class="onoffswitch-label" for="' + a.name + index + '-onoff"><div class="onoffswitch-inner"><span class="on">YES</span><span class="off">NO</span></div><div class="onoffswitch-switch"></div></label></div>').appendTo(d),
+                                    s = $('<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="' + a.name + index + '-onoff">').prependTo(r).change(function() {
+                                        e[a.name] = this.checked
+                                    });
+                                s.prop("checked", f_);
+                                break;
+                            case "option":
+                                var t = h[a.name],
+                                    s = $("<select></select>").appendTo($('<div class="styled-select table-row-value"></div>').appendTo(d)).val(f_).change(function() {
+                                        e[a.name] = $(this).val()
+                                    });
+                                _.each(a.options, function(a) {
+                                    var b, c;
+                                    _.isObject(a) ? (b = a.name, c = a.value) : b = a, _.isUndefined(c) && (c = b), _.isUndefined(t) && (t = c), $("<option></option>").text(b).attr("value", c).appendTo(s)
+                                }),s.val(f_);//, m.settings[a.name] = t, a.name in h && s.val(h[a.name]);
+                                break;
+                            case "calculated":
+                                var u = b[a.name];
+                                f(d, a_, a, u, !1, a.type, function(k) {e[a.name]=k})
+
+                                break;
+                            default:
+                                $('<input class="table-row-value" type="text">').appendTo(d).val(f_).change(function() {
+                                    "number" == a.type ? e[a.name] = Number($(this).val()) : e[a.name] = $(this).val()
+                                })
+                        }
+
+
+
+
+                        // $('<input class="table-row-value" type="text">').appendTo(d).val(f_).change(function() {
+                        //     e[a.name] = $(this).val()
+                        // })
+
+
+
                     }), c.append($('<td class="table-row-operation"></td>').append($('<ul class="board-toolbar"></ul>').append($("<li></li>").append($('<i class="icon-trash icon-white"></i>').click(function() {
                         var b = m.settings[a.name].indexOf(e); - 1 != b && (m.settings[a.name].splice(b, 1), c.remove(), d())
                     }))))), k.scrollTop(k[0].scrollHeight), d()
@@ -1075,17 +1157,20 @@ PluginEditor = function(a, b, gg) {
                             n = $("<thead></thead>").hide().appendTo(l),
                             o = $("<tr></tr>").appendTo(n),
                             p = $("<tbody></tbody>").appendTo(l),
-                            q = [];
+                            q = [],
+                            q_len;
                         _.each(a.settings, function(a) {
                             var b = a.name;
                             _.isUndefined(a.display_name) || (b = a.display_name), $("<th>" + b + "</th>").appendTo(o)
-                        }), a.name in h && (q = h[a.name]), $('<div class="table-operation text-button">+ ADD</div>').appendTo(i).click(function() {
+                        }), a.name in h && (q = h[a.name],q_len = q.length), $('<div class="table-operation text-button">+ ADD</div>').appendTo(i).click(function() {
+                            // adding item inputs for each setting in array record
                             var b = {};
                             _.each(a.settings, function(a) {
-                                b[a.name] = ""
-                            }), e(b)
+                                b[a.name] = !_.isUndefined(a.default_value)?a.default_value:null;
+                            }), e(b,q_len), q_len += 1;
                         }), _.each(q, function(a, b) {
-                            e(a)
+                            // console.log("----- : ",a,b)
+                            e(a,b)
                         });
                         break;
                     case "boolean":

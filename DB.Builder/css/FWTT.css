@@ -645,7 +645,7 @@ textarea.calculated {
 }
 
 textarea.calculated.removable {
-    width: calc(100% - 254px) !important;
+    width: calc(100% - 250px) !important;
 }
 
 /*#setting-value-container-datasource {
@@ -706,7 +706,17 @@ ul.datasource-input-suffix li {
   transform: rotate(180deg);
 }*/
 
-
+td.table-row-operation {
+    width: 0px;
+    padding: 2px 0px;
+}
+td.table-row-operation ul {
+    margin-left:-12px;
+    margin-right:0px;
+}
+li.remove-setting-row {
+    width: 14px;
+}
 
 
 
@@ -727,8 +737,8 @@ h2.section-title {
 /* Text Sparkline Widget */
 .tw-value-wrapper {
 	height:18px !important;
-	padding-left: 8px;
-	padding-right: 8px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 /*.tw-value-subwrapper {

@@ -358,7 +358,7 @@
             "plugins/thirdparty/highcharts/export-data.js",
             // "plugins/thirdparty/highcharts/accessibility.js",
             "plugins/thirdparty/highcharts/sonification.js",
-            // "plugins/thirdparty/highcharts/data.js",
+            "plugins/thirdparty/highcharts/data.js",
             "plugins/thirdparty/highcharts/solid-gauge.js",
         ],
         fill_size: !0,
