@@ -79,6 +79,7 @@ function updateFullScreenStatus() {
             // console.log("------> view height : ",$("body").height());
             // console.log("------> topMargin : ",topMargin);
             $("#board-content-top").css({'height': topMargin+"px"});
+            $("#board-content-bottom2").css({'height': topMargin+"px"});
         },500)
     } else {
         if (canEdit) $("#main-header").show()
@@ -88,6 +89,7 @@ function updateFullScreenStatus() {
         $("#board-content-bottom").removeClass("full-screen");
         $("body").css({height:"100%"})
         $("#board-content-top").css({'height': "0px"});
+        $("#board-content-bottom2").css({'height': "0px"});
     }
 }
 
