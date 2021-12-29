@@ -46,6 +46,59 @@
         }
     })
 
+    var o1_ = function(a) {
+        var b = $('<div class="html-widget"></div>'),
+            fscreen = $('<ul class="widget-fullscreen"><li><div class="icon-widget-fullscreen icon-white" ></div></li></ul>'),
+            c = a,
+            _container,
+            _id="fullscreen-"+Date.now();
+        this.render = function(a) {
+            _container=a;
+            $(_container).attr("id",_id).append(b).append(fscreen.on("click",()=>{fullscreenById(_id)}));
+            (c.enabled_fullscreen)&&($(_container).addClass("fullscreenable"))
+        }, this.onSettingsChanged = function(a) {
+            c = a
+            c.enabled_fullscreen?$(_container).addClass("fullscreenable"):$(_container).removeClass("fullscreenable")
+        }, this.onCalculatedValueChanged = function(a, c) {
+            "html" == a && b.html(c)
+        }, this.onDispose = function() {}, this.getHeight = function() {
+            return parseInt(c.height)
+        }, this.onSettingsChanged(a)
+    };
+    freeboard.loadWidgetPlugin({
+        type_name: "html_table",
+        display_name: "HTML Table",
+        "external_scripts": [
+            "plugins/thirdparty/jquery/jquery.dataTables.js",
+            "plugins/thirdparty/jquery/jquery.dataTables.css",
+            // "https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css",
+            // "https://cdn.datatables.net/1.11.3/js/dataTables.material.min.js",
+            // "https://cdnjs.cloudflare.com/ajax/libs/material-components-web/4.0.0/material-components-web.min.css",
+            // "https://cdn.datatables.net/1.11.3/css/dataTables.material.min.css"
+        ],
+        fill_size: !0,
+        settings: [{
+            name: "html",
+            display_name: "HTML",
+            type: "calculated",
+            description: "Can be literal HTML, or javascript that outputs HTML."
+        }, {
+            name: "enabled_fullscreen",
+            display_name: "Fullscreenable",
+            type: "boolean",
+            default_value: !1,
+            description: "Enable widget fullscreen toggle"
+        }, {
+            name: "height",
+            display_name: "Height Blocks",
+            type: "number",
+            default_value: 4,
+            description: "A height block is around 40 pixels"
+        }],
+        newInstance: function(a, b) {
+            b(new o1_(a))
+        }
+    })
 
     // freeboard.addStyle(".html-widget", "white-space:normal;width:100%;height:100%");
     var o2 = function(a) {

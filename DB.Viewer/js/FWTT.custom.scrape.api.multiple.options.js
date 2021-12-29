@@ -254,7 +254,7 @@
             name: "background_color",
             display_name: "background Color",
             type: "text",
-            default_value: _default.widget_background_color,
+            // default_value: _default.widget_background_color,
         },
         {
             name: "left_margin",
