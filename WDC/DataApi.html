@@ -1,0 +1,270 @@
+<html>
+<head>
+    <title>Maholan Data Api Feed</title>
+    <meta http-equiv="Cache-Control" content="no-store" />
+    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    
+    <script src="https://connectors.tableau.com/libs/tableauwdc-2.3.latest.js" type="text/javascript"></script>
+    <!-- <script src="../js/earthquakeUSGS.js" type="text/javascript"></script> -->
+</head>
+
+<body>
+    <div class="container container-table">
+        <div class="row vertical-center-row">
+            <div class="text-center col-md-8 col-md-offset-2">
+                <h2>Maholan WDC : Extract Data Table from API</h2>
+                <form id="form-etl">
+                    <!-- <div class="form-inline">
+                        <label for="start-date-one" class="text-center">Start Date</label>
+                        <span>&mdash;<span>
+                        <label for="end-date-one">End Date</label>
+                    </div>
+                    <div class="form-inline">
+                        <input type="text" class="form-control" id="start-date-one" value="2016-05-08">
+                        <input type="text" class="form-control" id="end-date-one" value="2016-05-15">
+                    </div> -->
+                    <div class="form-inline">
+                        <label for="apiurl" class="text-center">Url for Api Call</label>
+                    </div>
+                    <div class="form-inline">
+                        <input style="width:65%;" type="text" class="form-control"placeholder="enter URL for api call"  id="apiurl">
+                    </div>
+                    <div class="form-inline">
+                        <br/>
+                        <label for="table-path" class="text-center">Json response path for data table</label>
+                    </div>
+                    <div class="form-inline">
+                        <div class="path">
+                            <!-- <label for="data[path][0]">Path 1</label> -->
+                            <!-- <input type="text" class="form-control" name="data[path][0]" id="data[path][0]" /> -->
+                        </div>
+                        <button id="add-path"> + add path </button>
+                        <br/>
+                        <br/>
+                    </div>
+
+                    <div class="form-inline">
+                        <br/>
+                        <label for="table-cols" class="text-center">Mapping data columns</label>
+                    </div>
+                    <div class="form-inline">        
+                        <!-- <label>Name----Alias----DataType</label> -->
+                        <div class="tablecols">
+                            <div class="col">
+                                <label for="col">Column 1 : </label>
+                                <input type="text" class="form-control" placeholder="name" name="name[]"/>
+                                <input type="text" class="form-control" placeholder="alias" name="alias[]"/>
+                                <!-- <input type="text" class="form-control" placeholder="type" name="datatype[]"/> -->
+                                <select class="datatype form-control">
+                                    <option value="string">String</option>
+                                    <option value="int">Integer</option>
+                                    <option value="float">Float</option>
+                                    <option value="datetime">Datetime</option>
+                                    <option value="date">Date</option>
+                                    <option value="bool">Boolean</option>
+                                    <option value="geometry">Geometry</option>
+                                </select>
+                                <span style="width:20px;padding: 0 10px;"></span>
+                            </div>
+                            <button id="add-col"> + add column </button><br/>
+                        </div>
+                        <br/>
+                    </div>
+                    <!-- <div class="form-inline">
+                        <input type="text" class="form-control" id="table-array" placeholder="table etl path" name="levels[level][]">
+                        <input type="text" class="form-control" id="col-array" placeholder="column etl path" name="levels[build_time][]">
+                    </div> -->
+                </form>
+                <button type = "button" id = "submitButton" class = "btn btn-success" style = "margin: 10px;">Get Data!</button>
+                <div id="errorMsg"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        (function() {
+            // Create the connector object
+            var myConnector = tableau.makeConnector();
+
+            // Define the schema
+            myConnector.getSchema = function(schemaCallback) {
+                var settingsObj = JSON.parse(tableau.connectionData);
+                // console.log(">>>> getSchema : ", settingsObj)
+                // var cols = [{
+                //     id: "index",
+                //     alias: "index",
+                //     dataType: tableau.dataTypeEnum.string
+                // }, {
+                //     id: "datetime",
+                //     alias: "datetime",
+                //     dataType: tableau.dataTypeEnum.datetime //date
+                // }, {
+                //     id: "value",
+                //     alias: "value",
+                //     dataType: tableau.dataTypeEnum.float
+                // }, {
+                //     id: "last_update",
+                //     alias: "last update",
+                //     dataType: tableau.dataTypeEnum.datetime
+                // }]; 
+
+                var tableSchema = {
+                    id: "MaholanDataApiFeed",
+                    alias: "Maholan Web Data Connector for Api",
+                    columns: settingsObj["columns"]//cols
+                };
+
+                schemaCallback([tableSchema]);
+            };
+
+            // Download the data
+            myConnector.getData = function(table, doneCallback) {
+
+                var settingsObj = JSON.parse(tableau.connectionData)
+
+
+                $.getJSON(settingsObj.url, function(resp) {
+                    var feat = ((settingsObj.table_path.length>0)?resp[settingsObj.table_path]:resp),
+                        last_update = resp.last_update,
+                        tableData = [];
+
+                    // Iterate over the JSON object
+                    for (var i = 0, len = feat.length; i < len; i++) {
+                        // tableData.push({
+                        //     "index": feat[i].index,
+                        //     "datetime": feat[i].datetime,
+                        //     "value": feat[i].value,
+                        //     "last_update": last_update
+                        // });
+                        let rec={}
+                        for (var j = 0, cols_len = settingsObj['columns'].length; j < cols_len; j++) {
+                            // console.log("--- ", settingsObj['columns'][j]['id'])
+                            rec[settingsObj['columns'][j]['id']]=feat[i][settingsObj['columns'][j]['id']]
+                        }
+                        // console.log(">>>>> rec : ",rec)
+                        // tableData.push({
+                        //     "index": feat[i].index,
+                        //     "datetime": feat[i].datetime,
+                        //     "value": feat[i].value,
+                        //     "last_update": last_update
+                        // });
+                        tableData.push(rec);
+                    }
+
+                    table.appendRows(tableData);
+                    doneCallback();
+                });
+            };
+
+            tableau.registerConnector(myConnector);
+
+            // Create event listeners for when the user submits the form
+            $(document).ready(function() {
+                // $("#submitButton").click(function() {
+                //     tableau.connectionName = "Maholan Data Api Feed"; // This will be the data source name in Tableau
+                //     tableau.submit(); // This sends the connector object to Tableau
+                // });
+
+                //-----------------------------------------------------------------
+
+                $("#add-path").click(function(e){
+                    e.preventDefault();
+                    var numberOfAddresses = $("#form-etl").find("input[name^='data[path]']").length;
+                    var label = '';  //'<label for="data[path][' + numberOfAddresses + ']">Path ' + (numberOfAddresses + 1) + '</label> ';
+                    var input = '<input type="text" class="form-control" name="data[path][' + numberOfAddresses + ']" id="data[path][' + numberOfAddresses + ']" />';
+                    var removeButton = '<button class="remove-path"> - </button>';
+                    var html = "<div class='tablepath'>" + label + input + removeButton + "</div>";
+                    $("#form-etl").find("#add-path").before(html);
+                });
+                $("#add-col").click(function(e){
+                    e.preventDefault();
+                    var numberOfAddresses = $("#form-etl").find("input[name^='name[]']").length;
+                    var label = '<label for="col">Column ' + (numberOfAddresses + 1) + ' : </label> ';
+                    var input = '<input type="text" class="form-control" placeholder="name" name="name[]"/>&nbsp;<input type="text" class="form-control" placeholder="alias" name="alias[]"/>&nbsp;<select class="datatype form-control"><option value="string">String</option><option value="int">Integer</option><option value="float">Float</option><option value="datetime">Datetime</option><option value="date">Date</option><option value="bool">Boolean</option><option value="geometry">Geometry</option></select>'
+                    var removeButton = '<button class="remove-col"> - </button>';
+                    var html = "<div class='col'>" + label + input + removeButton + "</div>";
+                    $("#form-etl").find("#add-col").before(html);
+                });
+
+
+
+
+
+
+
+            });
+
+            $(document).on("click", ".remove-path",function(e){
+                e.preventDefault();
+                $(this).parents(".tablepath").remove();
+                //update labels
+                // $("#form-etl").find("label[for^='data[path]']").each(function(){
+                //     $(this).html("path " + ($(this).parents('.tablepath').index() + 1));
+                // });
+            });
+            $(document).on("click", ".remove-col",function(e){
+                e.preventDefault();
+                $(this).parents(".col").remove();
+                //update labels
+                $("#form-etl").find("label[for^='col']").each(function(){
+                    $(this).html("column " + ($(this).parents('.col').index() + 1) + " : ");
+                });
+            });
+            
+
+            $("#submitButton").click(function() {
+                let json_path = []
+                $('input[name^="data[path]"]').each(function() {
+                    // console.log(">>>>> path : ", $(this).val());
+                    json_path.push($(this).val());
+                });
+                
+                let cols = [],
+                    names = $('input[name^="name[]"]'),
+                    alias = $('input[name^="alias[]"]'),
+                    type = $('.datatype')
+                console.log(">>>>> type : ", type);
+                names?.map((index,item)=>{
+                    // console.log(">>>>> path : ", $(this).val());
+                    let col={}
+                    col['id']=$(item).val();
+                    col['alias']=$(alias[index]).val();
+                    col['dataType']=$(type[index]).val();
+                    cols.push(col);
+                });
+                // console.log(">>>>> type : ", tableau.dataTypeEnum);
+                var settingsObj = {
+                    // startDate: $('#start-date-one').val().trim(),
+                    // endDate: $('#end-date-one').val().trim(),
+                    // t_etl: $('#table-array').val(),
+                    // c_etl: $('#col-array').val(),
+                    url:$('#apiurl').val().trim(),
+                    table_path: json_path,
+                    columns: cols
+                };
+
+                // Simple date validation: Call the getDate function on the date object created
+                function isValidDate(dateStr) {
+                    var d = new Date(dateStr);
+                    return !isNaN(d.getDate());
+                }
+
+                if (settingsObj.url !== "" && settingsObj.columns.length > 0) {
+                    tableau.connectionData = JSON.stringify(settingsObj); // Use this variable to pass data to your getSchema and getData functions
+                    tableau.connectionName = "Maholan Data Api Feed"; // This will be the data source name in Tableau
+                    tableau.submit(); // This sends the connector object to Tableau
+                } else {
+                    $('#errorMsg').html("Please enter proper settings");
+                }
+            });
+
+
+        })();
+
+
+    </script>
+</body>
+</html>

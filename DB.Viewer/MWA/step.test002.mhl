@@ -1,0 +1,402 @@
+{
+ "version": "-Tunchz/FWTT-",
+ "header_image": "",
+ "dashboard_title": "step.test",
+ "avatar": "https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png",
+ "min_cols": 14,
+ "background_image": "https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png",
+ "background_color": "#212121",
+ "widget_background_color": "#383838aa",
+ "widget_border_color": "#FFFFFF",
+ "widget_border_width": 0,
+ "widget_border_radius": "0",
+ "widget_background_image": "",
+ "fullscreen_auto_topmargin": true,
+ "fullscreen_topmargin": 0,
+ "allow_edit": true,
+ "plugins": [],
+ "panes": [
+  {
+   "width": 1,
+   "row": {
+    "4": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 1,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "14": 1
+   },
+   "col": {
+    "4": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 1,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "14": 1
+   },
+   "col_width": 1,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "picture",
+     "settings": {
+      "src": "https://tunchz.github.io/CIA/MWALogo.png",
+      "margin": 0,
+      "refresh": 0,
+      "height_block": 2
+     }
+    }
+   ]
+  },
+  {
+   "width": 13,
+   "row": {
+    "4": 1,
+    "6": 1,
+    "7": 3,
+    "8": 1,
+    "9": 1,
+    "10": 1,
+    "11": 3,
+    "12": 1,
+    "13": 1,
+    "14": 1
+   },
+   "col": {
+    "4": 2,
+    "6": 2,
+    "7": 1,
+    "8": 2,
+    "9": 2,
+    "10": 2,
+    "11": 1,
+    "12": 2,
+    "13": 2,
+    "14": 2
+   },
+   "col_width": 13,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "",
+      "value": "return \"<div style='margin-top:5px;'>STEP TEST ▸ \"+ datasources[\"RTU_F&P\"][\"option name\"] +\"</div>\"",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "22",
+      "font_align": "center",
+      "font_color": "#FFFFFF",
+      "timeframe": 60,
+      "mark_color": "#FF9900",
+      "maxmin_color": "#00FF00",
+      "height_block": 1,
+      "_color": [
+       "#FF9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 10,
+   "row": {
+    "4": 2,
+    "6": 2,
+    "7": 2,
+    "8": 2,
+    "9": 2,
+    "10": 2,
+    "11": 2,
+    "12": 2,
+    "13": 2,
+    "14": 2
+   },
+   "col": {
+    "4": 2,
+    "6": 2,
+    "7": 2,
+    "8": 2,
+    "9": 2,
+    "10": 2,
+    "11": 2,
+    "12": 2,
+    "13": 2,
+    "14": 2
+   },
+   "col_width": 10,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "value": "//return toThaiDateString(datasources[\"RTU_F&P\"][\"result\"][\"pressure\"][\"log_dt\"],\"date\")+\" <span style='font-size:30px;'>\"+toThaiDateString(datasources[\"RTU_F&P\"][\"result\"][\"pressure\"][\"log_dt\"],\"time\")+\"</span>\";\n\n//return '<div><span style=\"font-size: 12px\"></span>'+datasources[\"RTU_F&P\"][\"result\"][\"pressure\"][\"log_dt\"]+'<div>'\n\nreturn toThaiDateString(datasources[\"นาฬิกา\"][\"date_object\"],\"date\")+\"&nbsp;&nbsp;&nbsp;&nbsp;\"",
+      "units": "var d = datasources[\"RTU_F&P\"][\"option name\"];\nvar n = new Date();\n\nreturn \"<div style='float:right;'>\"+\"อัปเดตล่าสุด@\"+toThaiDateString(null,\"time\")+\"</div>\"",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "18",
+      "font_align": "center",
+      "font_color": "#FFFFFF",
+      "timeframe": 60,
+      "mark_color": "#FF9900",
+      "maxmin_color": "#00FF00",
+      "height_block": 1,
+      "_color": [
+       "#FF9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 3,
+   "row": {
+    "4": 1,
+    "6": 2,
+    "7": 1,
+    "8": 2,
+    "9": 2,
+    "10": 2,
+    "11": 1,
+    "12": 2,
+    "13": 2,
+    "14": 2
+   },
+   "col": {
+    "4": 4,
+    "6": 5,
+    "7": 2,
+    "8": 6,
+    "9": 6,
+    "10": 6,
+    "11": 2,
+    "12": 10,
+    "13": 10,
+    "14": 12
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "url_option_selector_widget",
+     "settings": {
+      "title": "<div style=\"font-size:12px;padding-left:3px;padding-top:15px\">เลือก RTU<div>",
+      "datasource_name": "RTU_F&P",
+      "default_option": 1,
+      "font_size": "16",
+      "font_align": "left",
+      "font_color": "#FFFFFF",
+      "line_color": "#FFFFFF",
+      "line_thickness": 1,
+      "background_color": "",
+      "left_margin": "80",
+      "right_margin": "10",
+      "height_block": 1
+     }
+    }
+   ]
+  },
+  {
+   "width": 7,
+   "row": {
+    "4": 3,
+    "6": 3,
+    "7": 4,
+    "8": 3,
+    "9": 3,
+    "10": 3,
+    "11": 4,
+    "12": 3,
+    "13": 3,
+    "14": 3
+   },
+   "col": {
+    "4": 1,
+    "6": 4,
+    "7": 1,
+    "8": 5,
+    "9": 5,
+    "10": 5,
+    "11": 1,
+    "12": 7,
+    "13": 7,
+    "14": 8
+   },
+   "col_width": 7,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<span style='float:left;font-size:20px;margin-bottom:-20px;margin-left:10px;'>Pressure</span><span style='float:right;font-size:20px;margin-bottom:-20px;margin-right:10px;'>kg/cm2</span>",
+      "value": "return parseFloat(datasources[\"RTU_F&P\"][\"result\"][\"pressure\"][\"value\"]).toFixed(2)",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "60",
+      "font_align": "center",
+      "font_color": "#FFFFFF",
+      "timeframe": 60,
+      "mark_color": "#FF9900",
+      "maxmin_color": "#00FF00",
+      "height_block": "2",
+      "_color": [
+       "#FF9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 7,
+   "row": {
+    "4": 3,
+    "6": 3,
+    "7": 6,
+    "8": 3,
+    "9": 3,
+    "10": 3,
+    "11": 6,
+    "12": 3,
+    "13": 3,
+    "14": 3
+   },
+   "col": {
+    "4": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 1,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "14": 1
+   },
+   "col_width": 7,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<span style='float:left;font-size:20px;margin-bottom:-20px;margin-left:10px;'>Flow</span><span style='float:right;font-size:20px;margin-bottom:-20px;margin-right:10px;'>m3/s</span>",
+      "value": "return parseFloat(datasources[\"RTU_F&P\"][\"result\"][\"flow\"][\"value\"]).toFixed(2)",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "60",
+      "font_align": "center",
+      "font_color": "#FFFFFF",
+      "timeframe": 60,
+      "mark_color": "#FF9900",
+      "maxmin_color": "#00FF00",
+      "height_block": "2",
+      "_color": [
+       "#FF9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 14,
+   "row": {
+    "4": 5,
+    "6": 5,
+    "7": 8,
+    "8": 5,
+    "9": 5,
+    "10": 5,
+    "11": 8,
+    "12": 5,
+    "13": 5,
+    "14": 5
+   },
+   "col": {
+    "4": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 1,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "14": 1
+   },
+   "col_width": 14,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "html_table",
+     "settings": {
+      "html": "\nif (datasourceOptions[\"RTU_F&P\"][\"current\"] !== datasourceOptions[\"RTU_F&P\"].selectedOption) {\n    datasourceOptions[\"RTU_F&P\"][\"current\"] = datasourceOptions[\"RTU_F&P\"].selectedOption\n    var optionName = datasourceOptions[\"RTU_F&P\"][\"optionNameArray\"][option]\n    console.log(\">>>> Load data for : \",optionName)\n    const n = item => item!=''?item:'-';\n    const d = str => {\n        if (str) {\n            let date=str.split('-')\n            let time=date[3].split('.')\n            let date_str = date[0]+'-'+date[1]+'-'+date[2]+' '+time[0]+':'+time[1]+':'+time[2]\n            return date_str; //toThaiDateString(new Date(date_str),'datetime')\n        } else {\n            return \"-\"\n        }\n    }\n    //toThaiDateString(d,type)\n    var temp = datasources[\"RTU_F&P\"][\"result\"][\"flow\"][\"value\"]\n    var base_flow =datasources[\"RTU_F&P\"][\"result\"][\"base_flow\"]\n    \n    var st = datasources[\"RTU_F&P\"][\"result\"][\"st\"][optionName] ? datasources[\"RTU_F&P\"][\"result\"][\"st\"][optionName]:[];\n    //console.log('>>>>> st : ',st)\n\t//let st_prep = []\n    \n    let st_prep = st.map((rec)=>{\n        console.log(\"--- rec : \",rec);\n        \n        let job_code_prep = `<div style='width:100%; height:100%;padding:5px;'><div style='width:calc(100% - 10px); height:calc(100% - 25px);background-color:#ffffff0f;vertical-align:middle;text-align:center;padding-top:25px'>`+rec.job_code+`</div></div>`\n        let st_detail_prep = `\n<style>\n.st_title {\ncolor:#aaa;\nfont-size:10px;\n}\n.st_value {\ncolor:#fff;\nfloat:right;\n}\n.sec1,.sec2,.sec3,.sec4 {\nwidth:25%;\nfloat:left;\npadding: 5px 7px;\n}\n.sec2,.sec3,.sec4 {\nborder-left:1px solid #0003;\nmargin: 3px 0;\n}\n.sec4 {\nfloat:none;\nmargin-left:auto\n}\n.sec1 {\nwidth:12%;\n}\n.sec1>.st_value {\nfont-size:28px;\nfloat:none;\ntext-align:center;\n}\n</style>\n<div style='width:100%; height:100%; background-color:#ffffff0f;font-size:12px;text-align:left;'>\n<div style='width:100%;'>\n<div class='sec1'>\n<span class='st_title'>Step No </span><br><div class='st_value'>`+rec.st_detail.STEP_NO+`</div>\n</div>\n<div class='sec2'style='width:28%;'>\n<span class='st_title'>Total Meter </span><span class='st_value'>`+(rec.st_detail.TOTAL_METER).toFixed(3)+`</span><br>\n<span class='st_title'>Pipe Length </span><span class='st_value'>`+(rec.st_detail.PIPE_LENGTH).toFixed(3)+`</span><br>\n<span class='st_title'>Leak Rate </span><span class='st_value'>`+(rec.st_detail.LEAK_RATE).toFixed(3)+`</span>\n</div>\n<div class='sec3' style='width:17%;'>\n<span class='st_title'>M1 </span><span class='st_value'>`+(rec.st_detail.M1).toFixed(3)+`</span><br>\n<span class='st_title'>M2 </span><span class='st_value'>`+(rec.st_detail.M2).toFixed(3)+`</span><br>\n<span class='st_title'>M3 </span><span class='st_value'>`+(rec.st_detail.M3).toFixed(3)+`</span><br>\n<span class='st_title'>M4 </span><span class='st_value'>`+(rec.st_detail.M4).toFixed(3)+`</span><br>\n<span class='st_title'>M5 </span><span class='st_value'>`+(rec.st_detail.M5).toFixed(3)+`</span><br>\n<span class='st_title'>M6 </span><span class='st_value'>`+(rec.st_detail.M6).toFixed(3)+`</span><br>\n<span class='st_title'>M7 </span><span class='st_value'>`+(rec.st_detail.M7).toFixed(3)+`</span><br>\n<span class='st_title'>M8 </span><span class='st_value'>`+(rec.st_detail.M8).toFixed(3)+`</span>\n</div>\n<div class='sec4' style='width:27%;padding-top:8px;'>\n<span class='st_title'>M1 NNU </span><span class='st_value'>`+(rec.st_detail.M1_NNU).toFixed(3)+`</span><br>\n<span class='st_title'>M2 NNU </span><span class='st_value'>`+(rec.st_detail.M2_NNU).toFixed(3)+`</span><br>\n<span class='st_title'>M3 NNU </span><span class='st_value'>`+(rec.st_detail.M3_NNU).toFixed(3)+`</span><br>\n<span class='st_title'>M4 NNU </span><span class='st_value'>`+(rec.st_detail.M4_NNU).toFixed(3)+`</span><br>\n<span class='st_title'>M5 NNU </span><span class='st_value'>`+(rec.st_detail.M5_NNU).toFixed(3)+`</span><br>\n<span class='st_title'>M6 NNU </span><span class='st_value'>`+(rec.st_detail.M6_NNU).toFixed(3)+`</span><br>\n<span class='st_title'>M7 NNU </span><span class='st_value'>`+(rec.st_detail.M7_NNU).toFixed(3)+`</span><br>\n<span class='st_title'>M8 NNU </span><span class='st_value'>`+(rec.st_detail.M8_NNU).toFixed(3)+`</span>\n</div>\n</div>\n\t\t</div>`;\n\t\tlet st_valve_prep =  `\n<div style='width:100%; height:100%; background-color:#ffffff0f;font-size:12px;text-align:left;'>`\n        rec.st_valve = rec.st_valve.sort(function (a, b) {return a.STEP_NO - b.STEP_NO;});\n        rec.st_valve.map((item)=>{\n        st_valve_prep +=\n            `<div style='border-top:1px solid #aaa5; border-bottom:1px solid #aaa5; width:100%;display:block;'>\n<div class='sec1'>\n<span class='st_title'>Step No </span><br><div class='st_value'>`+item.STEP_NO+`</div>\n</div>\n<div class='sec2' style='width:20%;'>\n<span class='st_title'>Avg. Flow </span><span class='st_value'>`+(item.AVERAGE_FLOW).toFixed(3)+`</span><br>\n<span class='st_title'>Valve Type </span><span class='st_value'>`+(item.VALVE_TYPE)+`</span><br>\n<span class='st_title'>Equip Code </span><span class='st_value'>`+(item.EQUIP_NAME)+`</span><br>\n<span class='st_title'></span><span class='st_value'>`+(item.EQUIP_CODE)+`</span>\n</div>\n<div class='sec3' style='width:28%;'>\n<span class='st_title'>Open Cycle </span><span class='st_value'>`+(item.OPEN_CYCLE)+`</span><br>\n<span class='st_title'>Open Status </span><span class='st_value'>`+n(item.OPEN_STATUS)+`</span><br>\n<span class='st_title'>Open Date </span><span class='st_value' style='font-size:10px;'>`+d(item.OPEN_DT)+`</span><br>\n<span class='st_title'>Begin Cal </span><span class='st_value' style='font-size:10px;'>`+d(item.BEG_CALC_DT)+`</span>\n</div>\n<div class='sec4' style='width:28%;'>\n<span class='st_title'>Close Cycle </span><span class='st_value'>`+(item.CLOSE_CYCLE)+`</span><br>\n<span class='st_title'>Close Status </span><span class='st_value'>`+n(item.CLOSE_STATUS)+`</span><br>\n<span class='st_title'>Close Date </span><span class='st_value' style='font-size:10px;'>`+d(item.CLOSE_DT)+`</span><br>\n<span class='st_title'>End Cal </span><span class='st_value' style='font-size:10px;'>`+d(item.END_CALC_DT)+`</span>\n</div>\n</div>`\n        });\n\t\tst_valve_prep +=`</div>`;\n        \n        \n        return {\"job code\":job_code_prep,\"  step-test detail  \":st_detail_prep,\"     step-test valve     \":st_valve_prep};\n    })\n    \n    console.log('>>>>> st_prep : ',st_prep) \n   \n    \n    \n    \n    \n    \n    \n    \n    var tableContainer =$('<div id=\"table-container\" style=\"height:calc(100% - 40px); padding:20px;\"></div>')\n\n    //tableContainer.append($('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css\">'))\n    //tableContainer.append($('<script type=\"text/javascript\" charset=\"utf8\" src=\"https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js\"></script>'))\n\n    //var tableContainer = $(\"#table-container\")\n    //if (!tableContainer) {\n        // ------------ create chart\n    //tableContainer =$('<div id=\"table-container\" style=\"height:100%; padding:0px;\"></div>')\n    //} \n\n\n    function buildTable(labels, objects, container) {\n        var table = $('<table id=\"customizeTable\" class=\"display\" style=\"width:100%;height:100%\">')//document.createElement('table');\n       var thead = document.createElement('thead');\n       var tbody = document.createElement('tbody');\n       var theadTr = document.createElement('tr');\n       for (var i = 0; i < labels.length; i++) {\n          var theadTh = document.createElement('th');\n          theadTh.innerHTML = labels[i];\n          theadTr.appendChild(theadTh);\n       }\n       thead.appendChild(theadTr);\n       table.append(thead);\n       for (j = 0; j < objects.length; j++) {\n          var tbodyTr = document.createElement('tr');\n          for (k = 0; k < labels.length; k++) {\n             var tbodyTd = document.createElement('td');\n             tbodyTd.innerHTML = objects[j][labels[k].toLowerCase()];\n             tbodyTr.appendChild(tbodyTd);\n          }\n          tbody.appendChild(tbodyTr);\n       }\n       table.append(tbody);\n       container.append(table); \n    }\n\n    var labels1 = ['SECTION', 'BASE FLOW', 'BASE PRESSURE','NOTE'];\n    var objects1 = [{\n          \"section\": \"aa\",\n          'base flow': \"25.36\"\n       },\n       {\n          \"section\": \"bb\",\n          'base flow': \"12.45\"\n       }\n    ];\n\n    //buildTable(labels1, base_flow, tableContainer);\n\tbuildTable(['Job Code','  Step-Test Detail  ','     Step-Test Valve     '], st_prep, tableContainer);\n    \n    setTimeout(()=>{\n        $(document).ready(function() {\n            $('#customizeTable').DataTable({\n                //\"data\": objects1,\n                //\"columns\": labels1,\n                \"paging\":   false,\n                \"ordering\": true,\n                \"info\":     false,\n                \"searching\": false,\n                \"scrollY\" : true,\n                //Materail Design\n                //\"autoWidth\": true,\n                //\"columnDefs\": [\n                //    {\n                //        \"targets\": [\"_all\"],\n                //        \"className\": \"mdc-data-table__cell\"\n                //    }\n                //],\n\n            } );\n        });\n    },50);\n\n    return tableContainer;\n\n}",
+      "enabled_fullscreen": true,
+      "height": 12
+     }
+    }
+   ]
+  }
+ ],
+ "datasources": [
+  {
+   "name": "RTU_F&P",
+   "type": "custom_scrape_api_multiple_options",
+   "settings": {
+    "name": "RTU_F&P",
+    "url_array": [
+     {
+      "Option Name": "DM-03-01-01-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-01-01"
+     },
+     {
+      "Option Name": "DM-03-01-01-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-01-02"
+     },
+     {
+      "Option Name": "DM-03-01-02-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-02-01"
+     },
+     {
+      "Option Name": "DM-03-01-02-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-02-02"
+     }
+    ],
+    "script_text": "// Example: extractedResult = response.split(\",\"); // js script to extract the result in json from response\n// return extractedResult;\nvar optionName = datasourceOptions[\"RTU_F&P\"][\"optionNameArray\"][option]\n//console.log(\"optionName >> \",optionName);\n\n//var filterResults = response.results.filter(e => e.meter_code == optionName)\n//console.log(\"filterResults >> \",filterResults);\n\n\n//var mostRecentDate = Math.max.apply(null, filterResults.map( e => new Date(e.log_dt)));\n//console.log(\"mostRecentDate >> \",mostRecentDate);\n\n//var mostRecentObject = filterResults.filter( e => new Date(e.log_dt).getTime() == mostRecentDate);\n//console.log(\"mostRecentObject >> \",mostRecentObject);\n\nvar finalResult = {}\nfinalResult.flow = response.filter(e => e.log_type == 'F')[0]\n//finalResult.flow.value = (Math.random() * 200).toFixed(2)\nfinalResult.pressure = response.filter(e => e.log_type == 'P')[0]\n//finalResult.pressure.value = (Math.random() * 50).toFixed(2)\nvar section = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P']\n//console.log(\"********** \", datasourceOptions[\"RTU_F&P\"][\"_current\"])\n//if ((datasourceOptions[\"RTU_F&P\"][\"_current\"] !== option && !(datasourceOptions[\"RTU_F&P\"][\"_current\"] == 99 && option ==0)) || (datasourceOptions[\"RTU_F&P\"][\"_current\"] == 0 && option ==0)) {\n\tfinalResult.base_flow = section.map(item =>{return {\"section\":item,\"base flow\":(Math.random() * 200).toFixed(2),\"base pressure\":(Math.random() * 200).toFixed(2),\"note\":'<div style=\"font-size:10px\">row1<br>row2</div>'}})\n//    datasourceOptions[\"RTU_F&P\"][\"_current\"] = (option==0?99:option)\n//}\n\n//console.log(\"finalResult >> \",finalResult);\n    \n    \n\nst_detail = {\n        \"JOB_CODE\": \"J5303LS0314\",\n        \"STEP_NO\": 4,\n        \"PIPE_LENGTH\": 0.514316141605377,\n        \"TOTAL_METER\": 0,\n        \"M1\": 0,\n        \"M2\": 0,\n        \"M3\": 0,\n        \"M4\": 0,\n        \"M5\": 0,\n        \"M6\": 0,\n        \"M7\": 0,\n        \"M8\": 0,\n        \"M1_NNU\": 15.9548716,\n        \"M2_NNU\": 22.834059,\n        \"M3_NNU\": 49.7687612,\n        \"M4_NNU\": 68.8897438,\n        \"M5_NNU\": 60.3608608,\n        \"M6_NNU\": 41.9267328,\n        \"M7_NNU\": 122.4,\n        \"M8_NNU\": 0,\n        \"LEAK_RATE\": 0\n    };\n\nst_valve = [{\n        \"JOB_CODE\": \"J5006LS0107\",\n        \"EQUIP_CODE\": \"MWAII0000015679\",\n        \"EQUIP_NAME\": \"Sv6\",\n        \"VALVE_TYPE\": \"S\",\n        \"STEP_NO\": 6,\n        \"CLOSE_CYCLE\": 0,\n        \"CLOSE_DT\": '2009-07-21-01.28.00.000000',\n        \"OPEN_CYCLE\": 0,\n        \"OPEN_DT\": '2009-07-21-01.28.00.000000',\n        \"CLOSE_STATUS\": \"\",\n        \"OPEN_STATUS\": \"\",\n        \"BEG_CALC_DT\": '2009-07-21-01.28.00.000000',\n        \"END_CALC_DT\": '2009-07-21-01.28.00.000000',\n        \"AVERAGE_FLOW\": 0\n    },\n    {\n        \"JOB_CODE\": \"J5006LS0107\",\n        \"EQUIP_CODE\": \"h-23PP0001516\",\n        \"EQUIP_NAME\": \"Cv1(2)\",\n        \"VALVE_TYPE\": \"C\",\n        \"STEP_NO\": 0,\n        \"CLOSE_CYCLE\": 0,\n        \"CLOSE_DT\": '2009-07-21-01.28.00.000000',\n        \"OPEN_CYCLE\": 0,\n        \"OPEN_DT\": '2009-07-21-01.28.00.000000',\n        \"CLOSE_STATUS\": \"\",\n        \"OPEN_STATUS\": \"\",\n        \"BEG_CALC_DT\": '2009-07-21-01.28.00.000000',\n        \"END_CALC_DT\": '2009-07-21-01.28.00.000000',\n        \"AVERAGE_FLOW\": 0\n    },\n    {\n        \"JOB_CODE\": \"J5006LS0107\",\n        \"EQUIP_CODE\": \"h-23PP0000198\",\n        \"EQUIP_NAME\": \"Sv4\",\n        \"VALVE_TYPE\": \"S\",\n        \"STEP_NO\": 4,\n        \"CLOSE_CYCLE\": 0,\n        \"CLOSE_DT\": '2009-07-21-01.28.00.000000',\n        \"OPEN_CYCLE\": 0,\n        \"OPEN_DT\": '2009-07-21-01.28.00.000000',\n        \"CLOSE_STATUS\": \"\",\n        \"OPEN_STATUS\": \"\",\n        \"BEG_CALC_DT\": '2009-07-21-01.28.00.000000',\n        \"END_CALC_DT\": '2009-07-21-01.28.00.000000',\n        \"AVERAGE_FLOW\": 0\n    },\n    {\n        \"JOB_CODE\": \"J5006LS0107\",\n        \"EQUIP_CODE\": \"h-23PP0000137\",\n        \"EQUIP_NAME\": \"Cv6(1)\",\n        \"VALVE_TYPE\": \"C\",\n        \"STEP_NO\": 0,\n        \"CLOSE_CYCLE\": 0,\n        \"CLOSE_DT\": null,\n        \"OPEN_CYCLE\": 0,\n        \"OPEN_DT\": null,\n        \"CLOSE_STATUS\": \"\",\n        \"OPEN_STATUS\": \"\",\n        \"BEG_CALC_DT\": null,\n        \"END_CALC_DT\": null,\n        \"AVERAGE_FLOW\": 0\n    },\n    {\n        \"JOB_CODE\": \"J5006LS0107\",\n        \"EQUIP_CODE\": \"MWAII0000016182\",\n        \"EQUIP_NAME\": \"Cv3(3)\",\n        \"VALVE_TYPE\": \"C\",\n        \"STEP_NO\": 0,\n        \"CLOSE_CYCLE\": 0,\n        \"CLOSE_DT\": null,\n        \"OPEN_CYCLE\": 0,\n        \"OPEN_DT\": null,\n        \"CLOSE_STATUS\": \"\",\n        \"OPEN_STATUS\": \"\",\n        \"BEG_CALC_DT\": null,\n        \"END_CALC_DT\": null,\n        \"AVERAGE_FLOW\": 0\n    },\n    {\n        \"JOB_CODE\": \"J5006LS0107\",\n        \"EQUIP_CODE\": \"h-23PP0000135\",\n        \"EQUIP_NAME\": \"Cv4(1)\",\n        \"VALVE_TYPE\": \"C\",\n        \"STEP_NO\": 0,\n        \"CLOSE_CYCLE\": 0,\n        \"CLOSE_DT\": null,\n        \"OPEN_CYCLE\": 0,\n        \"OPEN_DT\": null,\n        \"CLOSE_STATUS\": \"\",\n        \"OPEN_STATUS\": \"\",\n        \"BEG_CALC_DT\": null,\n        \"END_CALC_DT\": null,\n        \"AVERAGE_FLOW\": 0\n    }];\n    \nfinalResult.st = {\n    'DM-03-01-01-01':[\n        {\n            'job_code':'test00000011',\n            'st_valve':st_valve,\n            'st_detail':st_detail\n        },\n        {\n            'job_code':'test00000012',\n            'st_valve':st_valve,\n            'st_detail':st_detail\n        },\n        {\n            'job_code':'test00000013',\n            'st_valve':st_valve,\n            'st_detail':st_detail\n        }\n    ],\n    'DM-03-01-02-01':[\n        {\n            'job_code':'test00000021',\n            'st_valve':st_valve,\n            'st_detail':st_detail\n        },\n        {\n            'job_code':'test00000022',\n            'st_valve':st_valve,\n            'st_detail':st_detail\n        },\n        {\n            'job_code':'test00000023',\n            'st_valve':st_valve,\n            'st_detail':st_detail\n        }\n    ],\n}   \n    \n    \n    \n    \n\nreturn finalResult;",
+    "refresh": 60
+   }
+  },
+  {
+   "name": "นาฬิกา",
+   "type": "clock",
+   "settings": {
+    "name": "นาฬิกา",
+    "refresh": 1
+   }
+  }
+ ],
+ "columns": 14,
+ "theme": "default"
+}

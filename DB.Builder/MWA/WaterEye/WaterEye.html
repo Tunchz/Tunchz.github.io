@@ -1,0 +1,685 @@
+
+          <!DOCTYPE html>
+          <html lang='th'>
+          <head>
+            <meta charset="utf-8" />
+            <title>Water Eye : Datanalytics by MWA</title>
+            <script type="text/javascript" src='./js/TunchzChartBuilder210x.js'></script>
+            <script type="text/javascript" src='./data.js'></script>
+            <script type="text/javascript" src='./template.js'></script>
+            <script type="text/javascript" src='./template_g1.js'></script>
+            <script type="text/javascript" src='./template_g2.js'></script>
+
+            <script src="./js/d3.min.js"></script>
+  			<script src="./js/jquery.min.js"></script>
+
+			 <style type="text/css">
+				@font-face {
+					font-family: Mitr;
+					src: url(./fonts/Mitr-Regular.woff) format('woff');
+					font-weight: 400;
+					font-style: normal;
+					font-display: swap
+				}
+				body,html {
+				background-color: #000;
+				height: 100%;
+				width: 100%;
+				position: relative;
+				margin: 0px;
+				}
+
+				.loader {
+				margin: 0 auto;
+				width: 60px;
+				height: 50px;
+				text-align: center;
+				font-size: 10px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				-webkit-transform: translateY(-50%) translateX(-50%);
+				}
+				.loader > div {
+				height: 100%;
+				width: 8px;
+				display: inline-block;
+				float: left;
+				margin-left: 2px;
+				-webkit-animation: delay 0.8s infinite ease-in-out;
+				animation: delay 0.8s infinite ease-in-out;
+				}
+				.loader .bar1 {
+				background-color: #754fa0;
+				}
+				.loader .bar2 {
+				background-color: #09b7bf;
+				-webkit-animation-delay: -0.7s;
+				animation-delay: -0.7s;
+				}
+				.loader .bar3 {
+				background-color: #90d36b;
+				-webkit-animation-delay: -0.6s;
+				animation-delay: -0.6s;
+				}
+				.loader .bar4 {
+				background-color: #f2d40d;
+				-webkit-animation-delay: -0.5s;
+				animation-delay: -0.5s;
+				}
+				.loader .bar5 {
+				background-color: #fcb12b;
+				-webkit-animation-delay: -0.4s;
+				animation-delay: -0.4s;
+				}
+				.loader .bar6 {
+				background-color: #ed1b72;
+				-webkit-animation-delay: -0.3s;
+				animation-delay: -0.3s;
+				}
+
+				@-webkit-keyframes delay {
+				0%, 40%, 100% { -webkit-transform: scaleY(0.05) }  
+				20% { -webkit-transform: scaleY(1.0) }
+				}
+
+				@keyframes delay {
+				0%, 40%, 100% { 
+					transform: scaleY(0.05);
+					-webkit-transform: scaleY(0.05);
+				}  20% { 
+					transform: scaleY(1.0);
+					-webkit-transform: scaleY(1.0);
+				}
+				}
+			 	html {
+					background-color: #222;
+					background: url("./diagonal-noise_dark.png");
+				}
+				* {
+					font-family: Mitr !important;
+				}
+            	.box {
+            		border-width: 0px;
+            		margin: 0px;/*
+					margin-right: -4px;
+					margin-top: -5px;*/
+					display: inline-block;
+					position: relative;
+					padding : 0px;
+  					font-size: 0;
+					/*background-color: #252525;*/
+            	}
+
+				body {
+					display: block;
+					position: relative;
+					width: calc(100% - 10px);
+					height: calc(100% - 10px);
+					margin: 5px;
+					background-color: #0000;
+  					font-size: 0;
+  					overflow: hidden;
+				}
+				#max_win {
+					display: block;
+					position: absolute;
+					left: 0;
+					top: 0;
+					width: 100%;
+					height: 100%;
+					z-index: 100;
+				}
+				#container, #container_g1, #container_g2 {
+					display: block;
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					/*background-color: #252525;*/
+				}
+				#left {
+					width: 55%;
+					height: 100%;
+					/*margin-bottom: -5px;*/
+					background-color: #222;
+					background: url("./diagonal-noise_dark.png");
+				}
+				#right {
+					width: calc(45% - 5px);
+					height: calc(100% - 5px);
+					margin-right: 5px;
+					margin-bottom: -5px;
+					/*margin-bottom: -4px;*/
+				}
+				#r1 {
+					width: 100%;
+					height: 50%;
+					background-color: #222;
+					background: url("./diagonal-noise_dark.png");
+				}
+				#r2 {
+					width: 100%;
+					height: 50%;
+					margin-top: 5px;
+					background-color: #222;
+					background: url("./diagonal-noise_dark.png");
+				}
+				#TimeDisplay {
+					position:absolute;
+					bottom: 1%;
+					left: 0%;
+					opacity: 1;
+					width: 98%;
+					text-align: right;
+					font-size: 12px;
+					z-index: 1000;
+					color: #fff;
+				}
+            </style>
+          </head>
+          <body oncontextmenu="return false;">
+          	<!-- <div id="max_win"></div> -->
+			  
+			  <div id="right" class="box">
+				<div id="r1" class="box">
+					<div class="loader">
+					  <div class="bar1"></div>
+					  <div class="bar2"></div>
+					  <div class="bar3"></div>
+					  <div class="bar4"></div>
+					  <div class="bar5"></div>
+					  <div class="bar6"></div>
+					</div>
+					<div id="container_g1"></div>
+				</div>
+				<div id="r2" class="box">
+					<div class="loader">
+					  <div class="bar1"></div>
+					  <div class="bar2"></div>
+					  <div class="bar3"></div>
+					  <div class="bar4"></div>
+					  <div class="bar5"></div>
+					  <div class="bar6"></div>
+					</div>
+					<div id="container_g2"></div>
+				</div>
+				
+			</div>
+			<div id="left" class="box">
+				<div class="loader">
+				  <div class="bar1"></div>
+				  <div class="bar2"></div>
+				  <div class="bar3"></div>
+				  <div class="bar4"></div>
+				  <div class="bar5"></div>
+				  <div class="bar6"></div>
+				</div>
+				<div id="container"></div>
+				<div id="TimeDisplay"><span id="status"><span style="color:#f00">◉ </span></span> <span id="datetime"></span></div>
+			</div>
+			<script type="text/javascript">
+
+            	let currentdayNumber;
+				// let dayNumber;
+
+            	function removeAllChildNodes(parent) {
+				    while (parent.firstChild) {
+				        parent.removeChild(parent.firstChild);
+				    }
+				}
+
+            	function draw(dataset, template, containerName) {
+
+					CharticulatorContainer.initialize().then(function() {
+
+		                const chartTemplate = new CharticulatorContainer.ChartTemplate(
+		                  template
+		                );
+	                	// chartTemplate.reset();
+
+		                const defaultTable = dataset.tables[0];
+		                const columns = defaultTable.columns;
+		                chartTemplate.assignTable(defaultTable.name, defaultTable.name);
+		                for (const column of columns) {
+		                  chartTemplate.assignColumn(
+		                    defaultTable.name,
+		                    column.name,
+		                    column.name
+		                  );
+		                }
+
+		                // links table
+		                const linksTable = dataset.tables[1];
+		                const links = linksTable && (linksTable.columns);
+		                if (links) {
+		                  chartTemplate.assignTable(linksTable.name, linksTable.name);
+		                  for (const column of links) {
+		                    chartTemplate.assignColumn(
+		                      linksTable.name,
+		                      column.name,
+		                      column.name
+		                    );
+		                  }
+		                }
+
+		                const instance = chartTemplate.instantiate(dataset);
+
+		                const { chart } = instance;
+
+		                const container = new CharticulatorContainer.ChartContainer({ chart: chart }, dataset);
+
+		                container.mount(containerName, document.getElementById(containerName).getBoundingClientRect().width, document.getElementById(containerName).getBoundingClientRect().height);
+		                window.addEventListener("resize", function() {
+		                  container.resize(
+		                    document.getElementById(containerName).getBoundingClientRect().width,
+		                    document.getElementById(containerName).getBoundingClientRect().height
+		                  );
+		                });
+		       		});
+				}
+
+				function filterChart(index) {
+
+					if (currentdayNumber !== index) {
+						dataset_filter.tables[0].rows = $.grep(dataset.tables[0].rows,function (n,i){ 
+							return (n["Day#"] > (index - 7) && (index + 8) >= n["Day#"] )
+						});
+						draw(dataset_filter, template_g1, "container_g1");
+						draw(dataset_filter, template_g2, "container_g2");
+						currentdayNumber = index;
+						console.log(">>> filter chart : date# ", currentdayNumber)
+
+					} else {
+						console.log(">>> : no need to filter")
+					}
+
+				}
+
+				function refresh() {
+
+					//filterChart(22);
+					filterChart(getdayofyear(new Date())-1)
+					filterChart(getdayofyear(new Date())-2)
+
+					CharticulatorContainer.initialize().then(function() {
+
+	                                             
+		                const chartTemplate = new CharticulatorContainer.ChartTemplate(
+		                  template
+		                );
+		                // chartTemplate.reset();
+
+		                const defaultTable = dataset.tables[0];
+		                const columns = defaultTable.columns;
+		                chartTemplate.assignTable(defaultTable.name, defaultTable.name);
+		                for (const column of columns) {
+		                  chartTemplate.assignColumn(
+		                    defaultTable.name,
+		                    column.name,
+		                    column.name
+		                  );
+		                }
+
+		                // links table
+		                const linksTable = dataset.tables[1];
+		                const links = linksTable && (linksTable.columns);
+		                if (links) {
+		                  chartTemplate.assignTable(linksTable.name, linksTable.name);
+		                  for (const column of links) {
+		                    chartTemplate.assignColumn(
+		                      linksTable.name,
+		                      column.name,
+		                      column.name
+		                    );
+		                  }
+		                }
+		                const instance = chartTemplate.instantiate(dataset);
+
+		                const { chart } = instance;
+
+		                const container = new CharticulatorContainer.ChartContainer({ chart: chart }, dataset);
+		                const width = document.getElementById("container").getBoundingClientRect().width;
+		                const height = document.getElementById("container").getBoundingClientRect().height;
+
+		                // console.log(">>> width : "+width+" | height : "+height)
+		                document.getElementById("container").style.visibility = "hidden";
+		                container.mount("container", width-1, height);
+		                window.addEventListener("resize", function() {
+		                  container.resize(
+		                    document.getElementById("container").getBoundingClientRect().width,
+		                    document.getElementById("container").getBoundingClientRect().height
+		                  );
+		                });
+
+		                setTimeout(function(){ 
+		                	// console.log(">>> container resize");
+			                container.resize(
+			                    document.getElementById("container").getBoundingClientRect().width,
+			                    document.getElementById("container").getBoundingClientRect().height
+			                );
+			                // document.getElementById("container").style.visibility = "visible";
+
+			                setTimeout(function(){
+								document.getElementById("container").style.visibility = "visible";
+								setLoader("hidden");
+			                },1000);
+		                }, 100);
+
+					    function clearSelection() {
+					        console.log('>>>> clear selection');
+							filterChart(getdayofyear(new Date())-2)
+							
+					    }
+
+						function selectionAction2(a,b,c) {
+
+				    		console.log('>>>> : select', c);
+				    		// console.log('>>>> : select', dayNumber);
+				    		filterChart(dataset.tables[0].rows[b[0]]["Day#"]);
+				    		// filterChart(dayNumber);
+
+						}
+
+					    function contextMenu(a,b,c) {
+
+					        console.log('>>>> context menu');
+					    }
+
+
+						d3.selectAll("#container").on("click", clearSelection);
+						d3.selectAll("#container").on("dblclick", ()=>{fullscreenById("left");console.log("getfullscreen")});
+						d3.selectAll("#container_g1").on("dblclick", ()=>{fullscreenById("r1");console.log("getfullscreen")});
+						d3.selectAll("#container_g2").on("dblclick", ()=>{fullscreenById("r2");console.log("getfullscreen")});
+
+		                container.addSelectionListener(selectionAction2);
+		                container.addMouseEnterListener(showTooltips);
+		                container.addMouseLeaveListener(hideTooltips);
+		            });
+
+				}
+
+
+	
+
+
+	            // tooltips
+		        var tooltip = d3.select("body")
+		            .append("div")
+		            .style({
+		            	"background-color": "#555555aa",
+		            	"color": "#ffffff",
+		            	"font-size": "10px",
+		                "position": "absolute",
+		                "z-index": "10",
+		                "visibility": "hidden",
+		                "padding": "10px",
+		                "border-radius": "3px"
+		            })
+		            .attr({
+		                "class": "tooltip"
+		            });
+
+	            const arrMin = arr => (Math.min(...arr)).toFixed(2)
+	            const arrMax = arr => (Math.max(...arr)).toFixed(2)
+		        const arrSum = arr => (arr.reduce((a,b) => a + b, 0) / 60).toFixed(2)
+				const arrAvg = arr => (arr.reduce((a,b) => a + b, 0) / arr.length).toFixed(2)
+
+				function selectionAction(a,b,c) {
+		    		var date = new Date(dataset.tables[0].rows[b[0]].Date)
+		    		// console.log('>>>> : ', date)
+		    		var day = date.getUTCDate();
+		    		var month = dataset.tables[0].rows[b[0]].Month_Th;
+		    		var year = date.getUTCFullYear() + 543;
+		    		console.log('>>>> : ', day+' '+month+' '+year);
+
+		    		filterChart(dataset.tables[0].rows[b[0]]["Day#"]);
+				}
+
+			    function showTooltips(a,b) {
+			    	// dayNumber = dataset.tables[0].rows[b[0]]["Day#"];
+		    		// console.log('>>>> : ', dayNumber);
+		    		var date = new Date(dataset.tables[0].rows[b[0]].Date)
+		    		// console.log('>>>> : ', date)
+		    		var day = date.getUTCDate();
+		    		var month = dataset.tables[0].rows[b[0]].Month_Th
+		    		var year = date.getUTCFullYear() + 543;
+		    		// console.log('>>>> : ', day+' '+month+' '+year)
+
+			    	if (b.length == 1) {
+			    		// console.log('>>>> : ', dataset.tables[0].rows[b[0]]["P2 "])
+				    	var content =  "<b>" + day+' '+month+' '+year +'  เวลา '+dataset.tables[0].rows[b[0]]["Hour  "]+ ":00 น.</b><br>" + 
+				    		"<b>-------------------------------------------------</b><br>" + 
+				            `<table>
+
+							    <tbody>
+							        <tr>
+							            <td>CD:ค่าความนำไฟฟ้า</td>
+							            <td>▸ `+ dataset.tables[0].rows[b[0]]["P2 "] +`</td>
+							        </tr>
+				                    <tr>
+				                        <td>SL:ค่าความเค็ม</td>
+				                        <td>▸ `+ dataset.tables[0].rows[b[0]]["P1"] +`</td>
+				                    </tr>
+							        <tr>
+							            <td>WQ:ระดับความเค็ม</td>
+							            <td>▸ `+ dataset.tables[0].rows[b[0]].P2LevelDesc +`</td>
+							        </tr>
+							    </tbody>
+							</table>`;
+			    	} else {
+			    		var CD=[],
+			    			SL=[],
+			    			FL=[],
+			    			DO=[],
+			    			TB=[];
+			    		var CD_warn = [], 
+			    			SL_warn = [], 
+			    			FL_warn = [], 
+			    			DO_warn = [], 
+			    			TB_warn = [];
+			    		for (i in b) {
+			    			SL.push(dataset.tables[0].rows[b[i]]["P1"]);
+			    			CD.push(dataset.tables[0].rows[b[i]]["P2 "]);
+			    			FL.push(dataset.tables[0].rows[b[i]]["P3 "]);
+			    			DO.push(dataset.tables[0].rows[b[i]]["P4 "]);
+			    			TB.push(dataset.tables[0].rows[b[i]]["P5 "]);
+			    			SL_warn.push(dataset.tables[0].rows[b[i]]["P1_warning"]);
+			    			CD_warn.push(dataset.tables[0].rows[b[i]]["P2_warning"]);
+			    			FL_warn.push(dataset.tables[0].rows[b[i]]["P3_warning"]);
+			    			DO_warn.push(dataset.tables[0].rows[b[i]]["P4_warning"]);
+			    			TB_warn.push(dataset.tables[0].rows[b[i]]["P5_warning"]);
+			    		}
+			    		// console.log('>>>> : ', (arrSum(CD_warn)>0)?arrSum(CD_warn):'-')
+			    		var content =  "<b>" + day+' '+month+' '+year + "</b><br>" + 
+				    		"<b>-------------------------------------------------------------------</b><br>" + 
+				            `<table>
+							    <thead>
+							        <tr>
+							            <th colspan="1">parameter       </th>
+							            <th colspan="1"></th>
+							            <th colspan="1">|  min   </th>
+							            <th colspan="1">|  avg   </th>
+							            <th colspan="1">|  max   </th>
+							            <th colspan="1">|  เกินเกณฑ์</th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							        <tr>
+							            <td>CD:ค่าความนำไฟฟ้า</td>
+							            <td>▸</td>
+							            <td>| `+ arrMin(CD) +`</td>
+							            <td>| `+ arrAvg(CD) +`</td>
+							            <td>| `+ arrMax(CD) +`</td>
+							            <td>| `+ ((arrSum(CD_warn)>0)?'<span style="color:#FF0000;">'+arrSum(CD_warn)+' ชม.</span>':'-') +`</td>
+							        </tr>
+							        <tr>
+							            <td>SL:ค่าความเค็ม</td>
+							            <td>▸</td>
+							            <td>| `+ arrMin(SL) +`</td>
+							            <td>| `+ arrAvg(SL) +`</td>
+							            <td>| `+ arrMax(SL) +`</td>
+							            <td>| `+ ((arrSum(SL_warn)>0)?'<span style="color:#FF0000;">'+arrSum(SL_warn)+' ชม.</span>':'-') +`</td>
+							        </tr>
+							        <tr>
+							            <td>FL:อัตราการไหล</td>
+							            <td>▸</td>
+							            <td>| `+ arrMin(FL) +`</td>
+							            <td>| `+ arrAvg(FL) +`</td>
+							            <td>| `+ arrMax(FL) +`</td>
+							            <td>| `+ ((arrSum(FL_warn)>0)?'<span style="color:#FF0000;">'+arrSum(FL_warn)+' ชม.</span>':'-') +`</td>
+							        </tr>
+							        <tr>
+							            <td>DO:ปริมาณออกซิเจน</td>
+							            <td>▸</td>
+							            <td>| `+ arrMin(DO) +`</td>
+							            <td>| `+ arrAvg(DO) +`</td>
+							            <td>| `+ arrMax(DO) +`</td>
+							            <td>| `+ ((arrSum(DO_warn)>0)?'<span style="color:#FF0000;">'+arrSum(DO_warn)+' ชม.</span>':'-') +`</td>
+							        </tr>
+							        <tr>
+							            <td>TB:ระดับความขุ่น</td>
+							            <td>▸</td>
+							            <td>| `+ arrMin(TB) +`</td>
+							            <td>| `+ arrAvg(TB) +`</td>
+							            <td>| `+ arrMax(TB) +`</td>
+							            <td>| `+ ((arrSum(TB_warn)>0)?'<span style="color:#FF0000;">'+arrSum(TB_warn)+' ชม.</span>':'-') +`</td>
+							        </tr>
+							    </tbody>
+							</table>`;
+			    	}
+
+			        return tooltip.style({
+			                "visibility": "visible",
+			                "text-align": "left",
+			                "top": (event.pageY - 10) + "px",
+			                "left": (event.pageX + 10) + "px"
+			            })
+			            .html(content);
+			    }
+
+			    function hideTooltips() {
+
+			        // hide tooltip
+			        return tooltip.style("visibility", "hidden");
+				}
+				
+				function fullscreenById(id) {
+					if (
+						document.fullscreenElement ||
+						document.webkitFullscreenElement ||
+						document.mozFullScreenElement ||
+						document.msFullscreenElement
+					) {
+						if (document.exitFullscreen) {
+						document.exitFullscreen();
+						} else if (document.mozCancelFullScreen) {
+						document.mozCancelFullScreen();
+						} else if (document.webkitExitFullscreen) {
+						document.webkitExitFullscreen();
+						} else if (document.msExitFullscreen) {
+						document.msExitFullscreen();
+						}
+					} else {
+						//element = $('#container').get(0);
+						element = document.getElementById(id);
+						if (element.requestFullscreen) {
+						element.requestFullscreen();
+						} else if (element.mozRequestFullScreen) {
+						element.mozRequestFullScreen();
+						} else if (element.webkitRequestFullscreen) {
+						element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+						} else if (element.msRequestFullscreen) {
+						element.msRequestFullscreen();
+						}
+					}
+				}
+
+				function getdayofyear(now) {
+					// var now = new Date();
+					var start = new Date(now.getFullYear(), 0, 0);
+					var diff = now - start;
+					var oneDay = 1000 * 60 * 60 * 24;
+					var day = Math.floor(diff / oneDay);
+					return day
+				}
+				
+				function setLoader(prop) {
+					let loaders = document.getElementsByClassName("loader")
+					for (let i = 0; i < loaders.length; i++) loaders[i].style.visibility = prop;
+				}
+
+				function toThaiDateString(d,type) {
+					let monthNames = [
+						"มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
+						"พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม.",
+						"กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+					];
+					var date;
+					(d)?date=d:date=new Date();
+					let year = date.getFullYear() + 543;
+					let month = monthNames[date.getMonth()];
+					let numOfDay = date.getDate();
+
+					let hour = date.getHours().toString().padStart(2, "0");
+					let minutes = date.getMinutes().toString().padStart(2, "0");
+					let second = date.getSeconds().toString().padStart(2, "0");
+					
+					return  type=="date"?`${numOfDay} ${month} ${year}`:
+							type=="time"?`${hour}:${minutes}:${second}`:
+							`${numOfDay} ${month} ${year} ${hour}:${minutes}:${second}`;
+
+				}
+
+				function update() {
+					console.log(">>>>> updating data...")
+					$.getJSON('https://bigdata.mwa.co.th/data-service/Water-Eye', {}, function(data, textStatus, jqXHR){
+						// console.log(">>>> data : ",data)
+						dataset = data.dataset
+						// console.log('----- old dataset : ', dataset)
+						console.log(">>>>> data updated")
+						console.log(">>>>> updating visualization")
+						refresh()
+					})
+					.done(function () {
+						document.getElementById("status").innerHTML = `<span style="color:#0f0">◉ </span>`;
+						console.log(">>>>> update done");
+						// setLoader("hidden");
+						is_updated = true;
+					})
+					.fail(function() { 
+						document.getElementById("status").innerHTML = `<span style="color:#f00">◉ </span>`; 
+						console.log(">>>>> update fail");
+						setLoader("hidden");
+					})
+					// .always(function() { alert("complete"); });
+				}
+
+				refresh_interval = 1800; 	// initial update interval 30 นาที
+				re_refresh_interval = 600;   // update interval in case of fail update 10 นาที
+				is_updated = false;
+				count = 1800
+				var formatTime = d3.time.format("%d %B %Y %H:%M:%S");
+				function tick() {
+					setTimeout(tick, 1000 - Date.now() % 1000);
+					var now = new Date;
+					document.getElementById("datetime").innerHTML = toThaiDateString(now,'date') + ' ' + toThaiDateString(now,'time')+" ▸ อัปเดต "+ Math.floor(count/60) + " นาทีที่ผ่านมา";
+					count+=1;
+					// update every 30 min and every 10 min if update fail
+					if ((count >= refresh_interval)&&(count%re_refresh_interval == 1)) {
+						setLoader("visible");
+						update()
+					}
+					if (is_updated) {
+						count = 0;
+						is_updated = false;
+					}
+				}
+
+				//filterChart(getdayofyear(new Date())-2);
+				refresh();  	// Load Default Data for 1st time
+				// update();
+				tick();		// Start update loop count
+            </script>
+          </body>
+          </html>
+        

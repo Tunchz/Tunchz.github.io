@@ -1,0 +1,302 @@
+{
+ "version": "-Tunchz/FWTT-",
+ "header_image": "",
+ "dashboard_title": "step.test",
+ "avatar": "https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png",
+ "min_cols": 6,
+ "background_image": "https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png",
+ "background_color": "#212121",
+ "widget_background_color": "#383838aa",
+ "widget_border_color": "#FFFFFF",
+ "widget_border_width": 0,
+ "widget_border_radius": "0",
+ "widget_background_image": "",
+ "fullscreen_auto_topmargin": true,
+ "fullscreen_topmargin": 0,
+ "allow_edit": true,
+ "plugins": [],
+ "panes": [
+  {
+   "width": 1,
+   "row": {
+    "4": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 1,
+    "11": 1,
+    "12": 1
+   },
+   "col": {
+    "4": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 1,
+    "11": 1,
+    "12": 1
+   },
+   "col_width": 1,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "picture",
+     "settings": {
+      "src": "https://tunchz.github.io/CIA/MWALogo.png",
+      "margin": 0,
+      "refresh": 0,
+      "height_block": 2
+     }
+    }
+   ]
+  },
+  {
+   "width": 5,
+   "row": {
+    "4": 1,
+    "6": 1
+   },
+   "col": {
+    "4": 2,
+    "6": 2
+   },
+   "col_width": 5,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "",
+      "value": "return \"<div style='margin-top:5px;'>STEP TEST ▸ \"+ datasources[\"RTU_F&P\"][\"option name\"] +\"</div>\"",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "22",
+      "font_align": "center",
+      "font_color": "#FFFFFF",
+      "timeframe": 60,
+      "mark_color": "#FF9900",
+      "maxmin_color": "#00FF00",
+      "height_block": 1,
+      "_color": [
+       "#FF9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 3,
+   "row": {
+    "4": 2,
+    "6": 2
+   },
+   "col": {
+    "4": 2,
+    "6": 2
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "value": "//return toThaiDateString(datasources[\"RTU_F&P\"][\"result\"][\"pressure\"][\"log_dt\"],\"date\")+\" <span style='font-size:30px;'>\"+toThaiDateString(datasources[\"RTU_F&P\"][\"result\"][\"pressure\"][\"log_dt\"],\"time\")+\"</span>\";\n\n//return '<div><span style=\"font-size: 12px\"></span>'+datasources[\"RTU_F&P\"][\"result\"][\"pressure\"][\"log_dt\"]+'<div>'\n\nreturn toThaiDateString(datasources[\"นาฬิกา\"][\"date_object\"],\"date\")+\"&nbsp;&nbsp;&nbsp;&nbsp;\"",
+      "units": "var d = datasources[\"RTU_F&P\"][\"option name\"];\nvar n = new Date();\n\nreturn \"<div style='float:right;'>\"+\"update@\"+toThaiDateString(null,\"time\")+\"</div>\"",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "18",
+      "font_align": "center",
+      "font_color": "#FFFFFF",
+      "timeframe": 60,
+      "mark_color": "#FF9900",
+      "maxmin_color": "#00FF00",
+      "height_block": 1,
+      "_color": [
+       "#FF9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 2,
+   "row": {
+    "4": 1,
+    "6": 2
+   },
+   "col": {
+    "4": 4,
+    "6": 5
+   },
+   "col_width": 2,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "url_option_selector_widget",
+     "settings": {
+      "title": "<div style=\"font-size:10px;\">เลือก RTU<div>",
+      "datasource_name": "RTU_F&P",
+      "default_option": 1,
+      "font_size": "12",
+      "font_align": "left",
+      "font_color": "#FFFFFF",
+      "line_color": "#FFFFFF",
+      "line_thickness": 1,
+      "background_color": "",
+      "left_margin": "40",
+      "right_margin": "10",
+      "height_block": 1
+     }
+    }
+   ]
+  },
+  {
+   "width": 3,
+   "row": {
+    "4": 3,
+    "6": 3
+   },
+   "col": {
+    "4": 1,
+    "6": 4
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<span style='float:left;font-size:12px;'>Pressure</span><span style='float:right;font-size:12px;'>m3/s</span>",
+      "value": "return parseFloat(datasources[\"RTU_F&P\"][\"result\"][\"pressure\"][\"value\"]).toFixed(2)",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "60",
+      "font_align": "center",
+      "font_color": "#FFFFFF",
+      "timeframe": 60,
+      "mark_color": "#FF9900",
+      "maxmin_color": "#00FF00",
+      "height_block": "2",
+      "_color": [
+       "#FF9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 3,
+   "row": {
+    "4": 3,
+    "6": 3
+   },
+   "col": {
+    "4": 1,
+    "6": 1
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<span style='float:left;font-size:12px;'>Flow</span><span style='float:right;font-size:12px;'>m3/s</span>",
+      "value": "return parseFloat(datasources[\"RTU_F&P\"][\"result\"][\"flow\"][\"value\"]).toFixed(2)",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "60",
+      "font_align": "center",
+      "font_color": "#FFFFFF",
+      "timeframe": 60,
+      "mark_color": "#FF9900",
+      "maxmin_color": "#00FF00",
+      "height_block": "2",
+      "_color": [
+       "#FF9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 6,
+   "row": {
+    "4": 5,
+    "6": 5
+   },
+   "col": {
+    "4": 1,
+    "6": 1
+   },
+   "col_width": 6,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "html_table",
+     "settings": {
+      "html": "// Example: Convert temp from C to F and truncate to 2 decimal places.\n// return (datasources[\"MyDatasource\"].sensor.tempInF * 1.8 + 32).toFixed(2);\nif (datasourceOptions[\"RTU_F&P\"][\"current\"] !== datasourceOptions[\"RTU_F&P\"].selectedOption) {\n    datasourceOptions[\"RTU_F&P\"][\"current\"] = datasourceOptions[\"RTU_F&P\"].selectedOption\n\nvar temp = datasources[\"RTU_F&P\"][\"result\"][\"flow\"][\"value\"]\nvar base_flow =datasources[\"RTU_F&P\"][\"result\"][\"base_flow\"]\nvar tableContainer =$('<div id=\"table-container\" style=\"height:calc(100% - 40px); padding:20px;\"></div>')\n\n//tableContainer.append($('<link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css\">'))\n//tableContainer.append($('<script type=\"text/javascript\" charset=\"utf8\" src=\"https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js\"></script>'))\n\n//var tableContainer = $(\"#table-container\")\n//if (!tableContainer) {\n    // ------------ create chart\n//tableContainer =$('<div id=\"table-container\" style=\"height:100%; padding:0px;\"></div>')\n//} \n\nfunction buildTable(labels, objects, container) {\n    var table = $('<table id=\"customizeTable\" class=\"display\" style=\"width:100%;\">')//document.createElement('table');\n   var thead = document.createElement('thead');\n   var tbody = document.createElement('tbody');\n   var theadTr = document.createElement('tr');\n   for (var i = 0; i < labels.length; i++) {\n      var theadTh = document.createElement('th');\n      theadTh.innerHTML = labels[i];\n      theadTr.appendChild(theadTh);\n   }\n   thead.appendChild(theadTr);\n   table.append(thead);\n   for (j = 0; j < objects.length; j++) {\n      var tbodyTr = document.createElement('tr');\n      for (k = 0; k < labels.length; k++) {\n         var tbodyTd = document.createElement('td');\n         tbodyTd.innerHTML = objects[j][labels[k].toLowerCase()];\n         tbodyTr.appendChild(tbodyTd);\n      }\n      tbody.appendChild(tbodyTr);\n   }\n   table.append(tbody);\n   container.append(table); \n}\n\nvar labels1 = ['SECTION', 'BASE FLOW'];\nvar objects1 = [{\n      \"section\": \"A\",\n      'base flow': \"25.36\"\n   },\n   {\n      \"section\": \"B\",\n      'base flow': \"12.45\"\n   }\n];\n\nbuildTable(labels1, base_flow, tableContainer);\n\nsetTimeout(()=>{\n    $(document).ready(function() {\n        $('#customizeTable').DataTable({\n            //\"data\": objects1,\n            //\"columns\": labels1,\n            \"paging\":   false,\n            \"ordering\": false,\n            \"info\":     false,\n            \"searching\": false,\n            \"scrollY\" : true,\n            //Materail Design\n            //\"autoWidth\": true,\n            //\"columnDefs\": [\n            //    {\n            //        \"targets\": [\"_all\"],\n            //        \"className\": \"mdc-data-table__cell\"\n            //    }\n            //],\n            \n        } );\n    });\n},0);\n\nreturn tableContainer;\n\n}",
+      "enabled_fullscreen": true,
+      "height": 9
+     }
+    }
+   ]
+  }
+ ],
+ "datasources": [
+  {
+   "name": "RTU_F&P",
+   "type": "custom_scrape_api_multiple_options",
+   "settings": {
+    "name": "RTU_F&P",
+    "url_array": [
+     {
+      "Option Name": "DM-03-01-01-01",
+      "Url": "https://tunchz.github.io/DB.Builder/MWA/rtu_03.json"
+     },
+     {
+      "Option Name": "DM-03-01-01-02",
+      "Url": "https://tunchz.github.io/DB.Builder/MWA/rtu_03.json"
+     },
+     {
+      "Option Name": "DM-03-01-02-01",
+      "Url": "https://tunchz.github.io/DB.Builder/MWA/rtu_03.json"
+     },
+     {
+      "Option Name": "DM-03-01-02-02",
+      "Url": "https://tunchz.github.io/DB.Builder/MWA/rtu_03.json"
+     }
+    ],
+    "script_text": "// Example: extractedResult = response.split(\",\"); // js script to extract the result in json from response\n// return extractedResult;\nvar optionName = datasourceOptions[\"RTU_F&P\"][\"optionNameArray\"][option]\nconsole.log(\"optionName >> \",optionName);\n\nvar filterResults = response.results.filter(e => e.meter_code == optionName)\nconsole.log(\"filterResults >> \",filterResults);\n\n\n//var mostRecentDate = new Date(Math.max.apply(null, filterResults.map( e => {\n//   return new Date(e.log_dt);\n//})));\n\n//var mostRecentObject = filterResults.filter( e => { \n//    var d = new Date( e.log_dt ); \n//    return d.getTime() == mostRecentDate.getTime();\n//})[0];\n\nvar mostRecentDate = Math.max.apply(null, filterResults.map( e => new Date(e.log_dt)));\nconsole.log(\"mostRecentDate >> \",mostRecentDate);\n\nvar mostRecentObject = filterResults.filter( e => new Date(e.log_dt).getTime() == mostRecentDate);\nconsole.log(\"mostRecentObject >> \",mostRecentObject);\n\nvar finalResult = {}\nfinalResult.flow = mostRecentObject.filter(e => e.log_type == 'F')[0]\nfinalResult.flow.value = (Math.random() * 200).toFixed(2)\nfinalResult.pressure = mostRecentObject.filter(e => e.log_type == 'P')[0]\nfinalResult.pressure.value = (Math.random() * 50).toFixed(2)\nvar section = ['A','B','C','D','E','F','G','H']\n//console.log(\"********** \", datasourceOptions[\"RTU_F&P\"][\"_current\"])\n//if ((datasourceOptions[\"RTU_F&P\"][\"_current\"] !== option && !(datasourceOptions[\"RTU_F&P\"][\"_current\"] == 99 && option ==0)) || (datasourceOptions[\"RTU_F&P\"][\"_current\"] == 0 && option ==0)) {\n\tfinalResult.base_flow = section.map(item =>{return {\"section\":item,\"base flow\":(Math.random() * 200).toFixed(2)}})\n//    datasourceOptions[\"RTU_F&P\"][\"_current\"] = (option==0?99:option)\n//}\n\nconsole.log(\"finalResult >> \",finalResult);\n\nreturn finalResult;",
+    "refresh": 5
+   }
+  },
+  {
+   "name": "นาฬิกา",
+   "type": "clock",
+   "settings": {
+    "name": "นาฬิกา",
+    "refresh": 1
+   }
+  }
+ ],
+ "columns": 6,
+ "theme": "default"
+}

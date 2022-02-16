@@ -1,9 +1,9 @@
 {
  "version": "-Tunchz/FWTT-",
  "header_image": "",
- "dashboard_title": "Pumping.dashboard.01_noEdited",
+ "dashboard_title": "Prototype.dashboard.02",
  "avatar": "https://tunchz.github.io/CIA/MWALogo.png",
- "min_cols": 13,
+ "min_cols": 14,
  "background_image": "https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png",
  "background_color": "#212121",
  "widget_background_color": "#383838cc",
@@ -11,13 +11,13 @@
  "widget_border_width": 0,
  "widget_border_radius": "0",
  "widget_background_image": "",
- "fullscreen_auto_topmargin": true,
+ "fullscreen_auto_topmargin": false,
  "fullscreen_topmargin": "0",
- "allow_edit": true,
+ "allow_edit": false,
  "plugins": [],
  "panes": [
   {
-   "width": 12,
+   "width": 13,
    "row": {
     "4": 1,
     "9": 1,
@@ -29,12 +29,12 @@
    "col": {
     "4": 2,
     "9": 1,
-    "12": 1,
-    "13": 2,
+    "12": 2,
+    "13": 3,
     "14": 2,
     "15": 3
    },
-   "col_width": 12,
+   "col_width": 13,
    "transparent_bg": false,
    "widget_background_color": "",
    "border_radius": null,
@@ -66,7 +66,7 @@
    "row": {
     "4": 1,
     "9": 2,
-    "12": 2,
+    "12": 1,
     "13": 1,
     "14": 1,
     "15": 1
@@ -75,15 +75,14 @@
     "4": 1,
     "9": 1,
     "12": 1,
-    "13": 1,
+    "13": 2,
     "14": 1,
     "15": 2
    },
    "col_width": 1,
-   "transparent_bg": false,
+   "transparent_bg": true,
    "widget_background_color": "",
-   "border_radius": "",
-   "border_width": "0",
+   "border_radius": null,
    "widgets": [
     {
      "type": "picture",
@@ -97,11 +96,11 @@
    ]
   },
   {
-   "width": 12,
+   "width": 13,
    "row": {
     "4": 2,
     "9": 4,
-    "12": 4,
+    "12": 2,
     "13": 2,
     "14": 2,
     "15": 2
@@ -109,12 +108,12 @@
    "col": {
     "4": 2,
     "9": 1,
-    "12": 1,
-    "13": 2,
+    "12": 2,
+    "13": 3,
     "14": 2,
     "15": 3
    },
-   "col_width": 12,
+   "col_width": 13,
    "transparent_bg": false,
    "widget_background_color": "",
    "border_radius": "",
@@ -125,7 +124,7 @@
      "settings": {
       "title": "",
       "value": "return toThaiDateString(datasources[\"นาฬิกา\"][\"date_object\"],\"date\")+\" <span style='font-size:30px;'>\"+toThaiDateString(datasources[\"นาฬิกา\"][\"date_object\"],\"time\")+\"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\";",
-      "units": "var d = datasources[\"นาฬิกา\"][\"date_object\"];\n//var d = new Date(datasources[\"MSSql\"][\"0\"][\"DateAndTime\"]) //datasources[\"MSSql\"][\"update_at\"];\nvar d2 = datasources[\"MSSql\"][\"0\"]?(datasources[\"MSSql\"][\"0\"][\"DateAndTime\"]).split(\"T\")[1].split(\".000Z\")[0]:\"-\";\n//var n = new Date();\n//console.log(datasources[\"นาฬิกา\"][\"date_object\"]);\n//return \"<div style='float:right;'>\"+\"อัปเดทข้อมูลล่าสุด \"+(d?toThaiDateString(d,\"date\") + \" \" + toThaiDateString(d,\"time\"):\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\"</div>\"\n//return \"<div style='float:right;'>\"+\"อัปเดทข้อมูลล่าสุด \"+(d?toThaiDateString(d,\"time\"):\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\"</div>\"\nreturn \"<div style='float:right;'>\"+\"อัปเดทข้อมูลล่าสุด \"+(d2?d2:\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\"</div>\"",
+      "units": "var d2 = datasources[\"นาฬิกา\"][\"date_object\"];\n//var d = datasources[\"MSSql\"][\"recordset\"];\nvar n = new Date();\nconsole.log(datasources[\"นาฬิกา\"][\"date_object\"]);\nreturn \"<div style='float:right;'>\"+\"อัปเดทข้อมูลล่าสุด \"+(false?toThaiDateString(n,\"time\"):\"&nbsp;&nbsp;-&nbsp;&nbsp;\")+\"</div>\"",
       "animate": true,
       "with_comma": false,
       "font_size": 20,
@@ -147,7 +146,7 @@
    "row": {
     "4": 5,
     "9": 5,
-    "12": 2,
+    "12": 4,
     "13": 4,
     "14": 4,
     "15": 5
@@ -155,7 +154,7 @@
    "col": {
     "4": 1,
     "9": 1,
-    "12": 2,
+    "12": 1,
     "13": 2,
     "14": 2,
     "15": 2
@@ -169,7 +168,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='color:#fff'>Phase 2  <span style='float:right;font-size:10px;'>\"+\"m3/h\"+\"</span></div>\"",
-      "value": "return \"<div style='margin-top:-5px;'>\"+((datasources[\"MSSql\"][\"13\"]?datasources[\"MSSql\"][\"13\"][\"Val\"]:0)/1000).toFixed(2)+\"</div>\"",
+      "value": "return \"<div style='margin-top:-5px;'>\"+datasources[\"MSSql\"][\"1\"][\"Val\"]+\"</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -213,8 +212,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<span style='color:#ffffff;'>A ▸ </span><span style='color:#00ff00;font-size:10px;'>\"+(datasources[\"MSSql\"][\"49\"]?datasources[\"MSSql\"][\"49\"][\"Val\"].toFixed(0):\"  -  \")+\" <span style='font-size:8px;'>m3</span></span>\"",
-      "value": "return \"<span style='color:#ffffff;'>B ▸ </span><span style='color:#00ff00;font-size:10px;'>\"+(datasources[\"MSSql\"][\"50\"]?datasources[\"MSSql\"][\"50\"][\"Val\"].toFixed(0):\"  -  \")+\" <span style='font-size:8px;'>m3</span></span>\"",
+      "title": "return \"<span style='color:#ffffff;'>C ▸ </span><span style='color:#00ff00;font-size:10px;'>\"+\"000000\"+\" <span style='font-size:8px;'>m3</span></span>\"",
+      "value": "return \"<span style='color:#ffffff;'>D ▸ </span><span style='color:#00ff00;font-size:10px;'>\"+\"000000\"+\" <span style='font-size:8px;'>m3</span></span>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -233,8 +232,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<div style='margin-top:-8px;'><div style='font-size:7px;color:#ffffff;'>CI2 Line A</div><span style='color:#00ff00;font-size:10px;'>\"+(datasources[\"MSSql\"][\"90\"]?datasources[\"MSSql\"][\"90\"][\"Val\"].toFixed(0):\"  -  \")+\" <span style='font-size:8px;'>kg</span></span></div>\"",
-      "value": "return \"<div style='font-size:7px;color:#ffffff;'>CI2 Line B</div><span style='color:#00ff00;font-size:10px;'>\"+(datasources[\"MSSql\"][\"91\"]?datasources[\"MSSql\"][\"91\"][\"Val\"].toFixed(0):\"  -  \")+\" <span style='font-size:8px;'>kg</span></span>\"",
+      "title": "return \"<div style='margin-top:-8px;'><div style='font-size:7px;color:#ffffff;'>CI2 Line A</div><span style='color:#00ff00;font-size:10px;'>\"+\"xxx\"+\" <span style='font-size:8px;'>kg</span></span></div>\"",
+      "value": "return \"<div style='font-size:7px;color:#ffffff;'>CI2 Line B</div><span style='color:#00ff00;font-size:10px;'>\"+\"xxx\"+\" <span style='font-size:8px;'>kg</span></span>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -331,14 +330,14 @@
       "displaytitle": true,
       "displaylabel": true,
       "label1": "",
-      "value1": "datasources[\"MSSql\"][\"128\"]&&datasources[\"MSSql\"][\"128\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv1\"]?1:0",
-      "color1": "(datasources[\"MSSql\"][\"128\"]&&datasources[\"MSSql\"][\"128\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"128\"]&&datasources[\"MSSql\"][\"128\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])",
+      "value1": "1",
+      "color1": "#FF0000",
       "label2": "",
-      "value2": "datasources[\"MSSql\"][\"129\"]&&datasources[\"MSSql\"][\"129\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv1\"]?1:0",
-      "color2": "(datasources[\"MSSql\"][\"129\"]&&datasources[\"MSSql\"][\"129\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"129\"]&&datasources[\"MSSql\"][\"129\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])",
+      "value2": "1",
+      "color2": "#FF0000",
       "label3": "",
-      "value3": "datasources[\"MSSql\"][\"130\"]&&datasources[\"MSSql\"][\"130\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv1\"]?1:0",
-      "color3": "(datasources[\"MSSql\"][\"130\"]&&datasources[\"MSSql\"][\"130\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"130\"]&&datasources[\"MSSql\"][\"130\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])",
+      "value3": "1",
+      "color3": "#FF0000",
       "size": "medium",
       "size_width": "10%",
       "font_align": "left",
@@ -354,7 +353,7 @@
    "row": {
     "4": 1,
     "9": 2,
-    "12": 2,
+    "12": 3,
     "13": 3,
     "14": 3,
     "15": 4
@@ -362,7 +361,7 @@
    "col": {
     "4": 4,
     "9": 8,
-    "12": 4,
+    "12": 1,
     "13": 2,
     "14": 2,
     "15": 2
@@ -376,7 +375,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='color:#fff'>Phase 1  <span style='float:right;font-size:10px;'>\"+\"m3/h\"+\"</span></div>\"",
-      "value": "return \"<div style='margin-top:-5px;'>\"+((datasources[\"MSSql\"][\"12\"]?datasources[\"MSSql\"][\"12\"][\"Val\"]:0)/1000).toFixed(2)+\"</div>\"",
+      "value": "return \"<div style='margin-top:-5px;'>\"+datasources[\"MSSql\"][\"0\"][\"Val\"]+\"</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -421,7 +420,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='color:#fff'>Phase 4  <span style='float:right;font-size:10px;'>\"+\"m3/h\"+\"</span></div>\"",
-      "value": "return \"<div style='margin-top:-5px;'>\"+((datasources[\"MSSql\"][\"4\"]?datasources[\"MSSql\"][\"4\"][\"Val\"]:0)).toFixed(0)+\"</div>\"",
+      "value": "return \"<div style='margin-top:-5px;'>\"+datasources[\"MSSql\"][\"127\"][\"Val\"]+\"</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -466,7 +465,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='color:#fff'>Phase 3  <span style='float:right;font-size:10px;'>\"+\"m3/h\"+\"</span></div>\"",
-      "value": "return \"<div style='margin-top:-5px;'>\"+((datasources[\"MSSql\"][\"20\"]?datasources[\"MSSql\"][\"20\"][\"Val\"]:0)).toFixed(0)+\"</div>\"",
+      "value": "return \"<div style='margin-top:-5px;'>\"+datasources[\"MSSql\"][\"72\"][\"Val\"]+\"</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -533,20 +532,20 @@
       "displaytitle": false,
       "displaylabel": false,
       "label1": "",
-      "value1": "datasources[\"MSSql\"][\"35\"]&&datasources[\"MSSql\"][\"35\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv1\"]?1:0",
-      "color1": "(datasources[\"MSSql\"][\"35\"]&&datasources[\"MSSql\"][\"35\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"35\"]&&datasources[\"MSSql\"][\"35\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])",
+      "value1": "1",
+      "color1": "#FF0000",
       "label2": "",
-      "value2": "datasources[\"MSSql\"][\"38\"]&&datasources[\"MSSql\"][\"38\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv1\"]?1:0",
-      "color2": "(datasources[\"MSSql\"][\"38\"]&&datasources[\"MSSql\"][\"38\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"38\"]&&datasources[\"MSSql\"][\"38\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])",
+      "value2": "1",
+      "color2": "#FF0000",
       "label3": "",
-      "value3": "datasources[\"MSSql\"][\"40\"]&&datasources[\"MSSql\"][\"40\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv1\"]?1:0",
-      "color3": "(datasources[\"MSSql\"][\"40\"]&&datasources[\"MSSql\"][\"40\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"40\"]&&datasources[\"MSSql\"][\"40\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])",
+      "value3": "1",
+      "color3": "#FF0000",
       "label4": "",
-      "value4": "datasources[\"MSSql\"][\"42\"]&&datasources[\"MSSql\"][\"42\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv1\"]?1:0",
-      "color4": "(datasources[\"MSSql\"][\"42\"]&&datasources[\"MSSql\"][\"42\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"42\"]&&datasources[\"MSSql\"][\"42\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])",
+      "value4": "1",
+      "color4": "#FF0000",
       "label5": "",
-      "value5": "datasources[\"MSSql\"][\"43\"]&&datasources[\"MSSql\"][\"43\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv1\"]?1:0",
-      "color5": "(datasources[\"MSSql\"][\"43\"]&&datasources[\"MSSql\"][\"43\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"43\"]&&datasources[\"MSSql\"][\"43\"][\"Val\"]>datasources[\"MSSql\"][\"rps_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])",
+      "value5": "1",
+      "color5": "#FF0000",
       "size": "medium",
       "size_width": "50%",
       "font_align": "left",
@@ -583,8 +582,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<span style='color:#ffffff;'>C ▸ </span><span style='color:#00ff00;font-size:10px;'>\"+(datasources[\"MSSql\"][\"27\"]?datasources[\"MSSql\"][\"27\"][\"Val\"].toFixed(0):\"  -  \")+\" <span style='font-size:8px;'>m3</span></span>\"",
-      "value": "return \"<span style='color:#ffffff;'>D ▸ </span><span style='color:#00ff00;font-size:10px;'>\"+(datasources[\"MSSql\"][\"28\"]?datasources[\"MSSql\"][\"28\"][\"Val\"].toFixed(0):\"  -  \")+\" <span style='font-size:8px;'>m3</span></span>\"",
+      "title": "return \"<span style='color:#ffffff;'>A ▸ </span><span style='color:#00ff00;font-size:10px;'>\"+\"000000\"+\" <span style='font-size:8px;'>m3</span></span>\"",
+      "value": "return \"<span style='color:#ffffff;'>B ▸ </span><span style='color:#00ff00;font-size:10px;'>\"+\"000000\"+\" <span style='font-size:8px;'>m3</span></span>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -603,8 +602,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<div style='margin-top:-8px;'><div style='font-size:7px;color:#ffffff;'>CI2 Line A</div><span style='color:#00ff00;font-size:10px;'>\"+(datasources[\"MSSql\"][\"29\"]?datasources[\"MSSql\"][\"29\"][\"Val\"].toFixed(0):\"  -  \")+\" <span style='font-size:8px;'>kg</span></span></div>\"",
-      "value": "return \"<div style='font-size:7px;color:#ffffff;'>CI2 Line B</div><span style='color:#00ff00;font-size:10px;'>\"+(datasources[\"MSSql\"][\"30\"]?datasources[\"MSSql\"][\"30\"][\"Val\"].toFixed(0):\"  -  \")+\" <span style='font-size:8px;'>kg</span></span>\"",
+      "title": "return \"<div style='margin-top:-8px;'><div style='font-size:7px;color:#ffffff;'>CI2 Line A</div><span style='color:#00ff00;font-size:10px;'>\"+\"xxx\"+\" <span style='font-size:8px;'>kg</span></span></div>\"",
+      "value": "return \"<div style='font-size:7px;color:#ffffff;'>CI2 Line B</div><span style='color:#00ff00;font-size:10px;'>\"+\"xxx\"+\" <span style='font-size:8px;'>kg</span></span>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -627,7 +626,7 @@
    "row": {
     "4": 4,
     "9": 5,
-    "12": 2,
+    "12": 3,
     "13": 3,
     "14": 3,
     "15": 4
@@ -635,7 +634,7 @@
    "col": {
     "4": 4,
     "9": 3,
-    "12": 6,
+    "12": 4,
     "13": 5,
     "14": 5,
     "15": 5
@@ -650,7 +649,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<span style='color:#ffffff;font-size:14px;'>CFS1A</span>\"",
-      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'>S: \"+\" - \"+\" sec</div><div style='color:#5DDCCF;font-size:10px;'>F: \"+\" - \"+\" sec</div>\"",
+      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'>S: \"+\"43\"+\" sec</div><div style='color:#5DDCCF;font-size:10px;'>F: \"+\"6\"+\" sec</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -716,7 +715,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='margin-top:0px;color:#ffffff;font-size:14px;'>CFS2A</div>\"",
-      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'>S: \"+\" - \"+\" sec</div><div style='color:#5DDCCF;font-size:10px;'>F: \"+\" - \"+\" sec</div>\"",
+      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'>S: \"+\"43\"+\" sec</div><div style='color:#5DDCCF;font-size:10px;'>F: \"+\"6\"+\" sec</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -782,7 +781,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='margin-top:0px;color:#ffffff;font-size:14px;'>CFS2B</div>\"",
-      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'>S: \"+\" - \"+\" sec</div><div style='color:#5DDCCF;font-size:10px;'>F: \"+\" - \"+\" sec</div>\"",
+      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'>S: \"+\"43\"+\" sec</div><div style='color:#5DDCCF;font-size:10px;'>F: \"+\"6\"+\" sec</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -801,8 +800,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<div style='margin-top:-5px;font-size:16px;color:#5DDCCF'><span style='color:#ffffff;font-size:10px;'>CW2B_TUR</span><br>\"+(datasources[\"MySql\"][\"QC_CW2B_TUR\"]?datasources[\"MySql\"][\"QC_CW2B_TUR\"][\"value\"]:(0).toFixed(2))+\"  <span style='font-size:10px;'>  ntu</span></div>\"",
-      "value": "return \"<div style='margin-left:50%;margin-top:-165%;font-size:7px;color:#ffffff;'>Alum P2 <span style='color:#00ff00;font-size:12px;'> \"+(datasources[\"MSSql\"][\"198\"]?datasources[\"MSSql\"][\"198\"][\"Val\"].toFixed(2):(0).toFixed(2))+\"  <span style='font-size:10px;'>  mg/L</span></span></div>\"",
+      "title": "return \"<div style='margin-top:10px;font-size:16px;color:#5DDCCF'>\"+\"3.18\"+\"  <span style='font-size:10px;'>  ntu</span></div>\"",
+      "value": "return \"<div style='margin-left:50%;margin-top:-160%;font-size:7px;color:#ffffff;'>Alum P2 <span style='color:#00ff00;font-size:12px;'> \"+\"30.89\"+\"  <span style='font-size:10px;'>  mg/L</span></span></div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -846,13 +845,13 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "<div style='padding-top:20px'> </div>",
-      "value": "return \"<div><span style='color:#ffffff;font-size:10px;'>CW2_TUR</span><br>\"+(datasources[\"MySql\"][\"QC_CW2_TUR\"]?datasources[\"MySql\"][\"QC_CW2_TUR\"][\"value\"]:(0).toFixed(2))+\" ntu<div>\"",
+      "title": "<div style='padding-top:40%'> </div>",
+      "value": "\"2.51\"+\" ntu\"",
       "units": "",
       "animate": true,
       "with_comma": false,
       "font_size": "18",
-      "font_align": "left",
+      "font_align": "center",
       "font_color": "#5DDCCF",
       "timeframe": 60,
       "mark_color": "#ff9900",
@@ -890,7 +889,7 @@
    "row": {
     "4": 9,
     "9": 9,
-    "12": 2,
+    "12": 3,
     "13": 3,
     "14": 3,
     "15": 9
@@ -898,7 +897,7 @@
    "col": {
     "4": 4,
     "9": 4,
-    "12": 7,
+    "12": 6,
     "13": 7,
     "14": 7,
     "15": 5
@@ -913,7 +912,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<span style='color:#ffffff;font-size:14px;'>FTS1</span>\"",
-      "value": "return \"<div style='color:#5DDCCF;font-size:16px;margin-top:-32px;'>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"74\"]&&datasources[\"MSSql\"][\"74\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"74\"]&&datasources[\"MSSql\"][\"74\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"75\"]&&datasources[\"MSSql\"][\"75\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"75\"]&&datasources[\"MSSql\"][\"75\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"76\"]&&datasources[\"MSSql\"][\"76\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"76\"]&&datasources[\"MSSql\"][\"76\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"77\"]&&datasources[\"MSSql\"][\"77\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"77\"]&&datasources[\"MSSql\"][\"77\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"78\"]&&datasources[\"MSSql\"][\"78\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"78\"]&&datasources[\"MSSql\"][\"78\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"79\"]&&datasources[\"MSSql\"][\"79\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"79\"]&&datasources[\"MSSql\"][\"79\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"80\"]&&datasources[\"MSSql\"][\"80\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"80\"]&&datasources[\"MSSql\"][\"80\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"81\"]&&datasources[\"MSSql\"][\"81\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"81\"]&&datasources[\"MSSql\"][\"81\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n</div>\"",
+      "value": "return \"<div style='color:#5DDCCF;font-size:10px;margin-top:-32px;'><span style='color:#ff0000;font-size:16px;'>■ ■ ■ ■ ■ ■ ■ ■ </span></div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -932,8 +931,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "<span style='float:right;color:#fff;font-size:10px;'>FW1_TUR</span>",
-      "value": "(datasources[\"MySql\"][\"QC_FW1_TUR\"]?datasources[\"MySql\"][\"QC_FW1_TUR\"][\"value\"]:(0).toFixed(2))+\" ntu\"",
+      "title": "",
+      "value": "\"5.59\"+\" ntu\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -978,8 +977,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<div style='margin-top:0px;color:#ffffff;font-size:14px;'>CFS3B</div>\"",
-      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'><span style='color:\"+(datasources[\"MSSql\"][\"109\"]&&datasources[\"MSSql\"][\"109\"][\"Val\"]>0?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";font-size:16px;'>■ </span>\"+(datasources[\"MSSql\"][\"109\"]?datasources[\"MSSql\"][\"109\"][\"Val\"].toFixed(0):0)+\" rpm</div><div style='color:#5DDCCF;font-size:10px;'> \"+\" \"+\" </div>\"",
+      "title": "return \"<div style='margin-top:0px;color:#ffffff;font-size:14px;'>CFS4B</div>\"",
+      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'><span style='color:#ff0000;font-size:16px;'>■ </span>\"+\"698\"+\" rpm</div><div style='color:#5DDCCF;font-size:10px;'> \"+\" \"+\" </div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -998,7 +997,7 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<div style='margin-top:-5px;font-size:16px;color:#5DDCCF'><span style='color:#ffffff;font-size:10px;'>CW3B_TUR</span><br>\"+(datasources[\"MySql\"][\"QC_CW3B_TUR\"]?datasources[\"MySql\"][\"QC_CW3B_TUR\"][\"value\"]:(0).toFixed(2))+\"  <span style='font-size:10px;'>  ntu</span></div>\"",
+      "title": "return \"<div style='margin-top:10px;font-size:16px;color:#5DDCCF'>\"+\"3.18\"+\"  <span style='font-size:10px;'>  ntu</span></div>\"",
       "value": "\" \"",
       "units": "",
       "animate": true,
@@ -1045,7 +1044,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<span style='color:#ffffff;font-size:14px;'>CFS3A</span>\"",
-      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'><span style='color:\"+(datasources[\"MSSql\"][\"108\"]&&datasources[\"MSSql\"][\"108\"][\"Val\"]>0?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";font-size:16px;'>■ </span>\"+(datasources[\"MSSql\"][\"108\"]?datasources[\"MSSql\"][\"108\"][\"Val\"].toFixed(0):0)+\" rpm</div><div style='color:#5DDCCF;font-size:10px;'> \"+\" \"+\" </div>\"",
+      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'><span style='color:#ff0000;font-size:16px;'>■ </span>\"+\"698\"+\" rpm</div><div style='color:#5DDCCF;font-size:10px;'> \"+\" \"+\" </div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1064,8 +1063,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<div style='margin-top:-5px;font-size:16px;color:#5DDCCF'><span style='color:#ffffff;font-size:10px;'>CW3A_TUR</span><br>\"+(datasources[\"MySql\"][\"QC_CW3A_TUR\"]?datasources[\"MySql\"][\"QC_CW3A_TUR\"][\"value\"]:(0).toFixed(2))+\"  <span style='font-size:10px;'>  ntu</span></div>\"",
-      "value": "return \"<div style='margin-left:50%;margin-top:10px;font-size:7px;color:#ffffff;z-index:350;'>Alum P3 <span style='color:#00ff00;font-size:12px;'> \"+(datasources[\"MSSql\"][\"71\"]?(datasources[\"MSSql\"][\"71\"][\"Val\"]/60).toFixed(2):(0).toFixed(2))+\"  <span style='font-size:10px;'>  mg/L</span></span></div>\"",
+      "title": "return \"<div style='margin-top:10px;font-size:16px;color:#5DDCCF'>\"+\"3.18\"+\"  <span style='font-size:10px;'>  ntu</span></div>\"",
+      "value": "return \"<div style='margin-left:50%;margin-top:12px;font-size:7px;color:#ffffff;z-index:350;'>Alum P3 <span style='color:#00ff00;font-size:12px;'> \"+\"33.20\"+\"  <span style='font-size:10px;'>  mg/L</span></span></div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1111,7 +1110,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='margin-top:0px;color:#ffffff;font-size:14px;'>CFS4A</div>\"",
-      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'><span style='color:\"+(datasources[\"MSSql\"][\"113\"]&&datasources[\"MSSql\"][\"113\"][\"Val\"]>0?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";font-size:16px;'>■ </span>\"+(datasources[\"MSSql\"][\"113\"]?datasources[\"MSSql\"][\"113\"][\"Val\"].toFixed(0):0)+\" rpm</div><div style='color:#5DDCCF;font-size:10px;'> \"+\" \"+\" </div>\"",
+      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'><span style='color:#ff0000;font-size:16px;'>■ </span>\"+\"698\"+\" rpm</div><div style='color:#5DDCCF;font-size:10px;'> \"+\" \"+\" </div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1130,8 +1129,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<div style='margin-top:-5px;font-size:16px;color:#5DDCCF'><span style='color:#ffffff;font-size:10px;'>CW4A_TUR</span><br>\"+(datasources[\"MySql\"][\"QC_CW4A_TUR\"]?datasources[\"MySql\"][\"QC_CW4A_TUR\"][\"value\"]:(0).toFixed(2))+\"  <span style='font-size:10px;'>  ntu</span></div>\"",
-      "value": "return \"<div style='margin-left:50%;margin-top:-165%;font-size:7px;color:#ffffff;'>Alum P4 <span style='color:#00ff00;font-size:12px;'> \"+(datasources[\"MSSql\"][\"25\"]?datasources[\"MSSql\"][\"25\"][\"Val\"].toFixed(2):(0).toFixed(2))+\"  <span style='font-size:10px;'>  mg/L</span></span></div>\"",
+      "title": "return \"<div style='margin-top:10px;font-size:16px;color:#5DDCCF'>\"+\"3.18\"+\"  <span style='font-size:10px;'>  ntu</span></div>\"",
+      "value": "return \"<div style='margin-left:50%;margin-top:-160%;font-size:7px;color:#ffffff;'>Alum P4 <span style='color:#00ff00;font-size:12px;'> \"+\"30.89\"+\"  <span style='font-size:10px;'>  mg/L</span></span></div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1154,7 +1153,7 @@
    "row": {
     "4": 4,
     "9": 5,
-    "12": 2,
+    "12": 3,
     "13": 3,
     "14": 3,
     "15": 4
@@ -1162,7 +1161,7 @@
    "col": {
     "4": 3,
     "9": 6,
-    "12": 9,
+    "12": 3,
     "13": 4,
     "14": 4,
     "15": 4
@@ -1177,7 +1176,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<span style='color:#ffffff;font-size:14px;'>CFS1B</span>\"",
-      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'>S: \"+\" - \"+\" sec</div><div style='color:#5DDCCF;font-size:10px;'>F: \"+\" - \"+\" sec</div>\"",
+      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'>S: \"+\"43\"+\" sec</div><div style='color:#5DDCCF;font-size:10px;'>F: \"+\"6\"+\" sec</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1196,8 +1195,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<div style='margin-top:-5px;font-size:16px;color:#5DDCCF'><span style='color:#ffffff;font-size:10px;'>CW1B_TUR</span><br>\"+(datasources[\"MySql\"][\"QC_CW1B_TUR\"]?datasources[\"MySql\"][\"QC_CW1B_TUR\"][\"value\"]:(0).toFixed(2))+\"  <span style='font-size:10px;'>  ntu</span></div>\"",
-      "value": "return \"<div style='margin-left:50%;margin-top:10px;font-size:7px;z-index:350; color:#fff;'>Alum P1 <span style='color:#00ff00;font-size:12px;'> \"+(datasources[\"MSSql\"][\"197\"]?datasources[\"MSSql\"][\"197\"][\"Val\"].toFixed(2):(0).toFixed(2))+\"  <span style='font-size:10px;'>  mg/L</span></span></div>\"",
+      "title": "return \"<div style='margin-top:10px;font-size:16px;color:#5DDCCF'>\"+\"3.18\"+\"  <span style='font-size:10px;'>  ntu</span></div>\"",
+      "value": "return \"<div style='margin-left:50%;margin-top:12px;font-size:7px;z-index:350; color:#fff;'>Alum P1 <span style='color:#00ff00;font-size:12px;'> \"+\"33.20\"+\"  <span style='font-size:10px;'>  mg/L</span></span></div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1220,7 +1219,7 @@
    "row": {
     "4": 1,
     "9": 5,
-    "12": 2,
+    "12": 3,
     "13": 3,
     "14": 3,
     "15": 4
@@ -1228,7 +1227,7 @@
    "col": {
     "4": 4,
     "9": 7,
-    "12": 10,
+    "12": 5,
     "13": 6,
     "14": 6,
     "15": 6
@@ -1241,13 +1240,13 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "<div style='padding-top:0px'></div>",
-      "value": "return \"<div><span style='color:#ffffff;font-size:10px;'>CW1_TUR</span><br>\"+(datasources[\"MySql\"][\"QC_CW1_TUR\"]?datasources[\"MySql\"][\"QC_CW1_TUR\"][\"value\"]:(0).toFixed(2))+\" ntu<div>\"",
+      "title": "<div style='padding-top:40%'></div>",
+      "value": "\"5.59\"+\" ntu\"",
       "units": "",
       "animate": true,
       "with_comma": false,
       "font_size": "18",
-      "font_align": "left",
+      "font_align": "center",
       "font_color": "#5DDCCF",
       "timeframe": 60,
       "mark_color": "#ff9900",
@@ -1306,13 +1305,13 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "<div style='padding-top:0px'> </div>",
-      "value": "return \"<div><span style='color:#ffffff;font-size:10px;'>CW3_TUR</span><br>\"+(datasources[\"MySql\"][\"QC_CW3_TUR\"]?datasources[\"MySql\"][\"QC_CW3_TUR\"][\"value\"]:(0).toFixed(2))+\" ntu<div>\"",
+      "title": "<div style='padding-top:40%'> </div>",
+      "value": "\"3.94\"+\" ntu\"",
       "units": "",
       "animate": true,
       "with_comma": false,
       "font_size": "18",
-      "font_align": "left",
+      "font_align": "center",
       "font_color": "#5DDCCF",
       "timeframe": 60,
       "mark_color": "#ff9900",
@@ -1371,13 +1370,13 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "<div style='padding-top:20px'> </div>",
-      "value": "return \"<div><span style='color:#ffffff;font-size:10px;'>CW4_TUR</span><br>\"+(datasources[\"MySql\"][\"QC_CW4_TUR\"]?datasources[\"MySql\"][\"QC_CW4_TUR\"][\"value\"]:(0).toFixed(2))+\" ntu<div>\"",
+      "title": "<div style='padding-top:40%'> </div>",
+      "value": "\"2.83\"+\" ntu\"",
       "units": "",
       "animate": true,
       "with_comma": false,
       "font_size": "18",
-      "font_align": "left",
+      "font_align": "center",
       "font_color": "#5DDCCF",
       "timeframe": 60,
       "mark_color": "#ff9900",
@@ -1437,8 +1436,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<span style='color:#ffffff;font-size:14px;'>CFS4B</span>\"",
-      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'><span style='color:\"+(datasources[\"MSSql\"][\"114\"]&&datasources[\"MSSql\"][\"114\"][\"Val\"]>0?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";font-size:16px;'>■ </span>\"+(datasources[\"MSSql\"][\"114\"]?datasources[\"MSSql\"][\"114\"][\"Val\"].toFixed(0):0)+\" rpm</div><div style='color:#5DDCCF;font-size:10px;'> \"+\" \"+\" </div>\"",
+      "title": "return \"<span style='color:#ffffff;font-size:14px;'>CFS3B</span>\"",
+      "value": "return \"<div style='color:#5DDCCF;font-size:10px;'><span style='color:#ff0000;font-size:16px;'>■ </span>\"+\"698\"+\" rpm</div><div style='color:#5DDCCF;font-size:10px;'> \"+\" \"+\" </div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1457,7 +1456,7 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<div style='margin-top:-5px;font-size:16px;color:#5DDCCF'><span style='color:#ffffff;font-size:10px;'>CW4B_TUR</span><br>\"+(datasources[\"MySql\"][\"QC_CW4B_TUR\"]?datasources[\"MySql\"][\"QC_CW4B_TUR\"][\"value\"]:(0).toFixed(2))+\"  <span style='font-size:10px;'>  ntu</span></div>\"",
+      "title": "return \"<div style='margin-top:10px;font-size:16px;color:#5DDCCF'>\"+\"3.18\"+\"  <span style='font-size:10px;'>  ntu</span></div>\"",
       "value": "\" \"",
       "units": "",
       "animate": true,
@@ -1504,7 +1503,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<span style='color:#ffffff;font-size:14px;'>FTS3</span>\"",
-      "value": "return \"<div style='margin-top:-25px;color:#5DDCCF;font-size:10px;'><div style='font-size:16px;'>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"169\"]&&datasources[\"MSSql\"][\"169\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"169\"]&&datasources[\"MSSql\"][\"169\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"170\"]&&datasources[\"MSSql\"][\"170\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"170\"]&&datasources[\"MSSql\"][\"170\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"171\"]&&datasources[\"MSSql\"][\"171\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"171\"]&&datasources[\"MSSql\"][\"171\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"172\"]&&datasources[\"MSSql\"][\"172\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"172\"]&&datasources[\"MSSql\"][\"172\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"173\"]&&datasources[\"MSSql\"][\"173\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"173\"]&&datasources[\"MSSql\"][\"173\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"174\"]&&datasources[\"MSSql\"][\"174\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"174\"]&&datasources[\"MSSql\"][\"174\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"175\"]&&datasources[\"MSSql\"][\"175\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"175\"]&&datasources[\"MSSql\"][\"175\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<div style='margin-top:-5px;font-size:16px;'>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"176\"]&&datasources[\"MSSql\"][\"176\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"176\"]&&datasources[\"MSSql\"][\"176\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"177\"]&&datasources[\"MSSql\"][\"177\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"177\"]&&datasources[\"MSSql\"][\"177\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"178\"]&&datasources[\"MSSql\"][\"178\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"178\"]&&datasources[\"MSSql\"][\"178\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"179\"]&&datasources[\"MSSql\"][\"179\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"179\"]&&datasources[\"MSSql\"][\"179\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"180\"]&&datasources[\"MSSql\"][\"180\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"180\"]&&datasources[\"MSSql\"][\"180\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"181\"]&&datasources[\"MSSql\"][\"181\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"181\"]&&datasources[\"MSSql\"][\"181\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"182\"]&&datasources[\"MSSql\"][\"182\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"182\"]&&datasources[\"MSSql\"][\"182\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n</div></div>\"",
+      "value": "return \"<div style='margin-top:-5px;color:#5DDCCF;font-size:10px;margin-top:-25px;'><div style='color:#ff0000;font-size:16px;'>■ ■ ■ ■ ■ ■ ■ </div><div style='margin-top:-5px;color:#ff0000;font-size:16px;'>■ ■ ■ ■ ■ ■ ■ </div></div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1523,8 +1522,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "<span style='float:right;color:#fff;font-size:10px;'>FW3_TUR</span>",
-      "value": "(datasources[\"MySql\"][\"QC_FW3_TUR\"]?datasources[\"MySql\"][\"QC_FW3_TUR\"][\"value\"]:(0).toFixed(2))+\" ntu\"",
+      "title": "",
+      "value": "\"5.59\"+\" ntu\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1570,7 +1569,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<span style='color:#ffffff;font-size:14px;'>FTS2</span>\"",
-      "value": "return \"<div style='color:#5DDCCF;font-size:16px;margin-top:-32px;'>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"82\"]&&datasources[\"MSSql\"][\"82\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"82\"]&&datasources[\"MSSql\"][\"82\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"83\"]&&datasources[\"MSSql\"][\"83\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"83\"]&&datasources[\"MSSql\"][\"83\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"84\"]&&datasources[\"MSSql\"][\"84\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"84\"]&&datasources[\"MSSql\"][\"84\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"85\"]&&datasources[\"MSSql\"][\"85\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"85\"]&&datasources[\"MSSql\"][\"85\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"86\"]&&datasources[\"MSSql\"][\"86\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"86\"]&&datasources[\"MSSql\"][\"86\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"87\"]&&datasources[\"MSSql\"][\"87\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"87\"]&&datasources[\"MSSql\"][\"87\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"88\"]&&datasources[\"MSSql\"][\"88\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"88\"]&&datasources[\"MSSql\"][\"88\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"89\"]&&datasources[\"MSSql\"][\"89\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"89\"]&&datasources[\"MSSql\"][\"89\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n</div>\"",
+      "value": "return \"<div style='color:#5DDCCF;font-size:10px;margin-top:-32px;'><span style='color:#ff0000;font-size:16px;'>■ ■ ■ ■ ■ ■ ■ ■ </span></div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1589,8 +1588,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "<span style='float:right;color:#fff;font-size:10px;'>FW2_TUR</span>",
-      "value": "(datasources[\"MySql\"][\"QC_FW2_TUR\"]?datasources[\"MySql\"][\"QC_FW2_TUR\"][\"value\"]:(0).toFixed(2))+\" ntu\"",
+      "title": "",
+      "value": "\"5.59\"+\" ntu\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1636,7 +1635,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<span style='color:#ffffff;font-size:14px;'>FTS4</span>\"",
-      "value": "return \"<div style='margin-top:-25px;color:#5DDCCF;font-size:10px;'><div style='font-size:16px;'>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"183\"]&&datasources[\"MSSql\"][\"183\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"183\"]&&datasources[\"MSSql\"][\"183\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"184\"]&&datasources[\"MSSql\"][\"184\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"184\"]&&datasources[\"MSSql\"][\"184\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"185\"]&&datasources[\"MSSql\"][\"185\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"185\"]&&datasources[\"MSSql\"][\"185\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"186\"]&&datasources[\"MSSql\"][\"186\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"186\"]&&datasources[\"MSSql\"][\"186\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"187\"]&&datasources[\"MSSql\"][\"187\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"187\"]&&datasources[\"MSSql\"][\"187\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"188\"]&&datasources[\"MSSql\"][\"188\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"188\"]&&datasources[\"MSSql\"][\"188\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"189\"]&&datasources[\"MSSql\"][\"189\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"189\"]&&datasources[\"MSSql\"][\"189\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<div style='margin-top:-5px;font-size:16px;'>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"190\"]&&datasources[\"MSSql\"][\"190\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"190\"]&&datasources[\"MSSql\"][\"190\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"191\"]&&datasources[\"MSSql\"][\"191\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"191\"]&&datasources[\"MSSql\"][\"191\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"192\"]&&datasources[\"MSSql\"][\"192\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"192\"]&&datasources[\"MSSql\"][\"192\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"193\"]&&datasources[\"MSSql\"][\"193\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"193\"]&&datasources[\"MSSql\"][\"193\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"194\"]&&datasources[\"MSSql\"][\"194\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"194\"]&&datasources[\"MSSql\"][\"194\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"195\"]&&datasources[\"MSSql\"][\"195\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"195\"]&&datasources[\"MSSql\"][\"195\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n<span style='color:\"+(datasources[\"MSSql\"][\"196\"]&&datasources[\"MSSql\"][\"196\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"196\"]&&datasources[\"MSSql\"][\"196\"][\"Val\"]>datasources[\"MSSql\"][\"fw_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])+\";'>■ </span>\\\n</div></div>\"",
+      "value": "return \"<div style='margin-top:-5px;color:#5DDCCF;font-size:10px;margin-top:-35px;'><div style='color:#ff0000;font-size:16px;'>■ ■ ■ ■ ■ ■ ■ </div><div style='margin-top:-5px;color:#ff0000;font-size:16px;'>■ ■ ■ ■ ■ ■ ■ </div></div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1655,8 +1654,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "<span style='float:right;color:#fff;font-size:10px;'>FW4_TUR</span>",
-      "value": "(datasources[\"MySql\"][\"QC_FW4_TUR\"]?datasources[\"MySql\"][\"QC_FW4_TUR\"][\"value\"]:(0).toFixed(2))+\" ntu\"",
+      "title": "",
+      "value": "\"5.59\"+\" ntu\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1679,7 +1678,7 @@
    "row": {
     "4": 9,
     "9": 9,
-    "12": 2,
+    "12": 3,
     "13": 3,
     "14": 3,
     "15": 9
@@ -1687,7 +1686,7 @@
    "col": {
     "4": 4,
     "9": 4,
-    "12": 11,
+    "12": 8,
     "13": 9,
     "14": 9,
     "15": 5
@@ -1702,13 +1701,13 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<span style='color:#ffffff;font-size:14px;'>CWT1</span>\"",
-      "value": "return \"<div style='margin-top:-20px;'><span style='color:#ffffff;font-size:10px;'>TW1_CL2</span><br>\"+(datasources[\"MySql\"][\"QC_TW1_CL2\"]?datasources[\"MySql\"][\"QC_TW1_CL2\"][\"value\"]:(0).toFixed(2))+\" mg/L<div>\"",
+      "value": "\"0.00\"+\" mg/L\"",
       "units": "",
       "animate": true,
       "with_comma": false,
       "font_size": "20",
       "font_align": "right",
-      "font_color": "#5DDCCF",
+      "font_color": "#ff0000",
       "timeframe": 60,
       "mark_color": "#ff9900",
       "maxmin_color": "#00ff00",
@@ -1721,8 +1720,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<div style='margin-top:0px;font-size:12px;color:#5DDCCF'><span style='color:#ffffff;font-size:10px;'>TW1_CL1</span><br>\"+(datasources[\"MySql\"][\"QC_TW1_CL2\"]?datasources[\"MySql\"][\"QC_TW1_CL1\"][\"value\"]:(0).toFixed(2))+\"  <span style='font-size:12px;'>  mg/L</span></div>\"",
-      "value": "return \"<div style='margin-top:-32px;'>\"+(datasources[\"MySql\"][\"QC_TW1_TUR\"]?datasources[\"MySql\"][\"QC_TW1_TUR\"][\"value\"]:(0).toFixed(2))+\" ntu</div>\"",
+      "title": "return \"<div style='margin-top:12px;font-size:12px;color:#5DDCCF'>\"+\"3.18\"+\"  <span style='font-size:12px;'>  mg/L</span></div>\"",
+      "value": "return \"<div style='margin-top:-32px;'>\"+\"5.59\"+\" ntu</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1765,7 +1764,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='margin-top:-5px;float:right;font-size:10px'>max 5.4 m</div>\"",
-      "value": "return \"<div style='float:right;margin-top:-5px;'>LEVEL = \"+(0.00).toFixed(2)+\" m</div>\"",
+      "value": "return \"<div style='float:right;margin-top:-5px;'>LEVEL = \"+\"3.20\"+\" m</div>\"",
       "animate": true,
       "with_comma": false,
       "font_size": "26",
@@ -1810,13 +1809,13 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<span style='color:#ffffff;font-size:14px;'>CWT2</span>\"",
-      "value": "return \"<div style='margin-top:-20px;'><span style='color:#ffffff;font-size:10px;'>TW2_CL2</span><br>\"+(datasources[\"MySql\"][\"QC_TW2_CL2\"]?datasources[\"MySql\"][\"QC_TW2_CL2\"][\"value\"]:(0).toFixed(2))+\" mg/L<div>\"",
+      "value": "\"0.00\"+\" mg/L\"",
       "units": "",
       "animate": true,
       "with_comma": false,
       "font_size": "20",
       "font_align": "right",
-      "font_color": "#5DDCCF",
+      "font_color": "#ff0000",
       "timeframe": 60,
       "mark_color": "#ff9900",
       "maxmin_color": "#00ff00",
@@ -1829,8 +1828,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<div style='margin-top:0px;font-size:12px;color:#5DDCCF'><span style='color:#ffffff;font-size:10px;'>TW2_CL1</span><br>\"+(datasources[\"MySql\"][\"QC_TW2_CL1\"]?datasources[\"MySql\"][\"QC_TW2_CL1\"][\"value\"]:(0).toFixed(2))+\"  <span style='font-size:12px;'>  mg/L</span></div>\"",
-      "value": "return \"<div style='margin-top:-32px;'>\"+(datasources[\"MySql\"][\"QC_TW2_TUR\"]?datasources[\"MySql\"][\"QC_TW2_TUR\"][\"value\"]:(0).toFixed(2))+\" ntu</div>\"",
+      "title": "return \"<div style='margin-top:12px;font-size:12px;color:#5DDCCF'>\"+\"3.18\"+\"  <span style='font-size:12px;'>  mg/L</span></div>\"",
+      "value": "return \"<div style='margin-top:-32px;'>\"+\"5.59\"+\" ntu</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1876,13 +1875,13 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<span style='color:#ffffff;font-size:14px;'>CWT3</span>\"",
-      "value": "return \"<div style='margin-top:-20px;'><span style='color:#ffffff;font-size:10px;'>TW3_CL2</span><br>\"+(datasources[\"MySql\"][\"QC_TW3_CL2\"]?datasources[\"MySql\"][\"QC_TW3_CL2\"][\"value\"]:(0).toFixed(2))+\" mg/L<div>\"",
+      "value": "\"0.00\"+\" mg/L\"",
       "units": "",
       "animate": true,
       "with_comma": false,
       "font_size": "20",
       "font_align": "right",
-      "font_color": "#5DDCCF",
+      "font_color": "#ff0000",
       "timeframe": 60,
       "mark_color": "#ff9900",
       "maxmin_color": "#00ff00",
@@ -1895,8 +1894,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<div style='margin-top:0px;font-size:12px;color:#5DDCCF'><span style='color:#ffffff;font-size:10px;'>TW3_CL1</span><br>\"+(datasources[\"MySql\"][\"QC_TW3_CL1\"]?datasources[\"MySql\"][\"QC_TW3_CL1\"][\"value\"]:(0).toFixed(2))+\"  <span style='font-size:12px;'>  mg/L</span></div>\"",
-      "value": "return \"<div style='margin-top:-32px;'>\"+(datasources[\"MySql\"][\"QC_TW3_TUR\"]?datasources[\"MySql\"][\"QC_TW3_TUR\"][\"value\"]:(0).toFixed(2))+\" ntu</div>\"",
+      "title": "return \"<div style='margin-top:12px;font-size:12px;color:#5DDCCF'>\"+\"3.18\"+\"  <span style='font-size:12px;'>  mg/L</span></div>\"",
+      "value": "return \"<div style='margin-top:-32px;'>\"+\"5.59\"+\" ntu</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -1964,13 +1963,13 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<span style='color:#ffffff;font-size:14px;'>CWT4</span>\"",
-      "value": "return \"<div style='margin-top:-20px;'><span style='color:#ffffff;font-size:10px;'>TW4_CL2</span><br>\"+(datasources[\"MySql\"][\"QC_TW4_CL2\"]?datasources[\"MySql\"][\"QC_TW4_CL2\"][\"value\"]:(0).toFixed(2))+\" mg/L<div>\"",
+      "value": "\"0.00\"+\" mg/L\"",
       "units": "",
       "animate": true,
       "with_comma": false,
       "font_size": "20",
       "font_align": "right",
-      "font_color": "#5DDCCF",
+      "font_color": "#ff0000",
       "timeframe": 60,
       "mark_color": "#ff9900",
       "maxmin_color": "#00ff00",
@@ -1983,8 +1982,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<div style='margin-top:0px;font-size:12px;color:#5DDCCF'><span style='color:#ffffff;font-size:10px;'>TW4_CL1</span><br>\"+(datasources[\"MySql\"][\"QC_TW4_CL1\"]?datasources[\"MySql\"][\"QC_TW4_CL1\"][\"value\"]:(0).toFixed(2))+\"  <span style='font-size:12px;'>  mg/L</span></div>\"",
-      "value": "return \"<div style='margin-top:-32px;'>\"+(datasources[\"MySql\"][\"QC_TW4_TUR\"]?datasources[\"MySql\"][\"QC_TW4_TUR\"][\"value\"]:(0).toFixed(2))+\" ntu</div>\"",
+      "title": "return \"<div style='margin-top:12px;font-size:12px;color:#5DDCCF'>\"+\"3.18\"+\"  <span style='font-size:12px;'>  mg/L</span></div>\"",
+      "value": "return \"<div style='margin-top:-32px;'>\"+\"5.59\"+\" ntu</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -2051,19 +2050,19 @@
       "displaytitle": false,
       "displaylabel": false,
       "label1": "",
-      "value1": "0",
+      "value1": "1",
       "color1": "#FF0000",
       "label2": "",
-      "value2": "0",
+      "value2": "1",
       "color2": "#FF0000",
       "label3": "",
-      "value3": "0",
+      "value3": "1",
       "color3": "#FF0000",
       "label4": "",
-      "value4": "0",
+      "value4": "1",
       "color4": "#FF0000",
       "label5": "",
-      "value5": "0",
+      "value5": "1",
       "color5": "#FF0000",
       "size": "medium",
       "size_width": "50%",
@@ -2076,7 +2075,7 @@
    ]
   },
   {
-   "width": 3,
+   "width": 2,
    "row": {
     "4": 1,
     "12": 5,
@@ -2091,7 +2090,7 @@
     "14": 11,
     "15": 10
    },
-   "col_width": 3,
+   "col_width": 2,
    "transparent_bg": true,
    "border_radius": null,
    "border_width": null,
@@ -2102,7 +2101,7 @@
    "row": {
     "4": 11,
     "9": 11,
-    "12": 6,
+    "12": 3,
     "13": 3,
     "14": 3,
     "15": 11
@@ -2110,7 +2109,7 @@
    "col": {
     "4": 1,
     "9": 1,
-    "12": 11,
+    "12": 10,
     "13": 11,
     "14": 11,
     "15": 2
@@ -2128,17 +2127,17 @@
       "displaytitle": true,
       "displaylabel": true,
       "label1": "",
-      "value1": "datasources[\"MSSql\"][\"117\"]&&datasources[\"MSSql\"][\"117\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv1\"]?1:0",
-      "color1": "(datasources[\"MSSql\"][\"117\"]&&datasources[\"MSSql\"][\"117\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"117\"]&&datasources[\"MSSql\"][\"117\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])",
+      "value1": "1",
+      "color1": "#FF0000",
       "label2": "",
-      "value2": "datasources[\"MSSql\"][\"118\"]&&datasources[\"MSSql\"][\"118\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv1\"]?1:0",
-      "color2": "(datasources[\"MSSql\"][\"118\"]&&datasources[\"MSSql\"][\"118\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"118\"]&&datasources[\"MSSql\"][\"118\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])",
+      "value2": "1",
+      "color2": "#FF0000",
       "label3": "",
-      "value3": "datasources[\"MSSql\"][\"119\"]&&datasources[\"MSSql\"][\"119\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv1\"]?1:0",
-      "color3": "(datasources[\"MSSql\"][\"119\"]&&datasources[\"MSSql\"][\"119\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"119\"]&&datasources[\"MSSql\"][\"119\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])",
+      "value3": "1",
+      "color3": "#FF0000",
       "label4": "",
-      "value4": "datasources[\"MSSql\"][\"120\"]&&datasources[\"MSSql\"][\"120\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv1\"]?1:0",
-      "color4": "(datasources[\"MSSql\"][\"120\"]&&datasources[\"MSSql\"][\"120\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv2\"]?datasources[\"MSSql\"][\"lv2_color\"]:datasources[\"MSSql\"][\"120\"]&&datasources[\"MSSql\"][\"120\"][\"Val\"]>datasources[\"MSSql\"][\"tps_lv1\"]?datasources[\"MSSql\"][\"lv1_color\"]:datasources[\"MSSql\"][\"lv0_color\"])",
+      "value4": "1",
+      "color4": "#FF0000",
       "size": "medium",
       "size_width": "10%",
       "font_align": "left",
@@ -2150,11 +2149,11 @@
    ]
   },
   {
-   "width": 2,
+   "width": 1,
    "row": {
     "4": 9,
     "9": 9,
-    "12": 8,
+    "12": 3,
     "13": 3,
     "14": 3,
     "15": 9
@@ -2162,12 +2161,12 @@
    "col": {
     "4": 1,
     "9": 1,
-    "12": 10,
+    "12": 11,
     "13": 12,
     "14": 12,
     "15": 2
    },
-   "col_width": 2,
+   "col_width": 1,
    "transparent_bg": true,
    "border_radius": null,
    "border_width": " ",
@@ -2176,7 +2175,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='color:#fff'>สูบจ่าย  <span style='padding-top:10;float:right;font-size:10px;'>\"+\"m3/h\"+\"</span></div>\"",
-      "value": "return \"<div style='margin-top:0px;'>\"+\n    ((datasources[\"MSSql\"][\"6\"]?datasources[\"MSSql\"][\"6\"][\"Val\"]:0)+\n     (datasources[\"MSSql\"][\"7\"]?datasources[\"MSSql\"][\"7\"][\"Val\"]:0)+\n     (datasources[\"MSSql\"][\"8\"]?datasources[\"MSSql\"][\"8\"][\"Val\"]:0)).toFixed(0)+\"</div>\"",
+      "value": "return \"<div style='margin-top:0px;'>\"+\"22750\"+\"</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -2195,7 +2194,7 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "value": "return \"<div style='margin-top:-5px;width:156px;'><span style='margin-top:-5px;width:100px;'>Line A : \"+\n    (datasources[\"MSSql\"][\"6\"]?datasources[\"MSSql\"][\"6\"][\"Val\"].toFixed(0):0)+\" </span><span style='color:#aaa;font-size:8px;left:70%'> \"+(datasources[\"MSSql\"][\"201\"]?datasources[\"MSSql\"][\"201\"][\"Val\"].toFixed(0):\"-\")+\"%</span></div>\"+\n\"<div><span>Line B : \"+(datasources[\"MSSql\"][\"7\"]?datasources[\"MSSql\"][\"7\"][\"Val\"].toFixed(0):0)+\" </span><span style='color:#aaa;font-size:8px;'> \"+(datasources[\"MSSql\"][\"202\"]?datasources[\"MSSql\"][\"202\"][\"Val\"].toFixed(0):\"-\")+\"%, \"+(datasources[\"MSSql\"][\"204\"]?datasources[\"MSSql\"][\"204\"][\"Val\"].toFixed(0):\"-\")+\"%</span></div>\"+\n\"<div><span>Line C : \"+(datasources[\"MSSql\"][\"8\"]?datasources[\"MSSql\"][\"8\"][\"Val\"].toFixed(0):0)+\" </span><span style='color:#aaa;font-size:8px;'> \"+(datasources[\"MSSql\"][\"206\"]?datasources[\"MSSql\"][\"206\"][\"Val\"].toFixed(0):\"-\")+\"%</span></div>\"",
+      "value": "return \"<div style='margin-top:-5px;width:156px;'><span style='margin-top:-5px;width:100px;'>Line A : \"+\"14797\"+\" </span><span style='color:#aaa;font-size:8px;left:70%'> \"+\"100\"+\"%</span></div>\"+\n\"<div><span>Line B : \"+\"5317\"+\" </span><span style='color:#aaa;font-size:8px;'> \"+\"9\"+\"%, \"+\"40\"+\"%</span></div>\"+\n\"<div><span>Line C : \"+\"7471\"+\" </span><span style='color:#aaa;font-size:8px;'> \"+\"100\"+\"%</span></div>\"",
       "animate": true,
       "with_comma": false,
       "font_size": "12",
@@ -2213,11 +2212,11 @@
    ]
   },
   {
-   "width": 2,
+   "width": 1,
    "row": {
     "4": 9,
     "9": 9,
-    "12": 10,
+    "12": 6,
     "13": 6,
     "14": 6,
     "15": 9
@@ -2225,12 +2224,12 @@
    "col": {
     "4": 1,
     "9": 1,
-    "12": 10,
+    "12": 11,
     "13": 12,
     "14": 12,
     "15": 2
    },
-   "col_width": 2,
+   "col_width": 1,
    "transparent_bg": true,
    "border_radius": null,
    "border_width": " ",
@@ -2239,7 +2238,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='color:#fff'>สูบส่ง  <span style='float:right;font-size:10px;'>\"+\"m3/h\"+\"</span></div>\"",
-      "value": "return \"<div style='margin-top:0px;'>\"+(datasources[\"MSSql\"][\"9\"]?datasources[\"MSSql\"][\"9\"][\"Val\"].toFixed(0):0)+\"</div>\"",
+      "value": "return \"<div style='margin-top:0px;'>\"+\"22750\"+\"</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -2258,7 +2257,7 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "value": "return (datasources[\"MSSql\"][\"10\"]?datasources[\"MSSql\"][\"10\"][\"Val\"].toFixed(2):(0).toFixed(2))+\" m\"",
+      "value": "\"23.00\"+\" m\"",
       "animate": true,
       "with_comma": false,
       "font_size": "20",
@@ -2276,33 +2275,33 @@
    ]
   },
   {
-   "width": 3,
+   "width": 2,
    "row": {
     "4": 1,
-    "12": 3,
+    "12": 8,
     "13": 8,
     "14": 8,
     "15": 8
    },
    "col": {
     "4": 4,
-    "12": 2,
+    "12": 10,
     "13": 11,
     "14": 11,
     "15": 11
    },
-   "col_width": 3,
+   "col_width": 2,
    "transparent_bg": true,
    "border_radius": null,
    "border_width": null,
    "widgets": []
   },
   {
-   "width": 3,
+   "width": 2,
    "row": {
     "4": 9,
     "9": 9,
-    "12": 15,
+    "12": 9,
     "13": 9,
     "14": 9,
     "15": 9
@@ -2315,7 +2314,7 @@
     "14": 11,
     "15": 2
    },
-   "col_width": 3,
+   "col_width": 2,
    "transparent_bg": true,
    "border_radius": null,
    "border_width": " ",
@@ -2324,7 +2323,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='color:#fff;font-size:16px;'>กำลังการผลิต<span style='float:right;font-size:16px;'>\"+\"CMD\"+\"</span></div>\"",
-      "value": "return \"<div style='margin-top:5px;'>\"+    \n    (((datasources[\"MSSql\"][\"12\"]?datasources[\"MSSql\"][\"12\"][\"Val\"]:0)*3.6+\n     (datasources[\"MSSql\"][\"13\"]?datasources[\"MSSql\"][\"13\"][\"Val\"]:0)*3.6+\n     (datasources[\"MSSql\"][\"20\"]?datasources[\"MSSql\"][\"20\"][\"Val\"]:0)+\n     (datasources[\"MSSql\"][\"4\"]?datasources[\"MSSql\"][\"4\"][\"Val\"]:0))*24).toFixed(0)\n    \"</div>\"",
+      "value": "return \"<div style='margin-top:5px;'>\"+\"1740384\"+\"</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -2344,7 +2343,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='color:#fff;font-size:16px;margin-top:-27px;'>น้ำผลิตจ่าย<span style='float:right;font-size:16px;'>\"+\"CMD\"+\"</span></div>\"",
-      "value": "return \"<div style='margin-top:-16px;'>\"+\n    (((datasources[\"MSSql\"][\"6\"]?datasources[\"MSSql\"][\"6\"][\"Val\"]:0)+\n     (datasources[\"MSSql\"][\"7\"]?datasources[\"MSSql\"][\"7\"][\"Val\"]:0)+\n     (datasources[\"MSSql\"][\"8\"]?datasources[\"MSSql\"][\"8\"][\"Val\"]:0)+\n     (datasources[\"MSSql\"][\"9\"]?datasources[\"MSSql\"][\"9\"][\"Val\"]:0))*24).toFixed(0)\n+\"</div>\"",
+      "value": "return \"<div style='margin-top:-16px;'>\"+\"175832\"+\"</div>\"",
       "animate": true,
       "with_comma": false,
       "font_size": "32",
@@ -2362,12 +2361,12 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "value": "\"Level = \"+\"-.--\"+\" m/h\"",
+      "value": "\"Level = \"+\"-0.01\"+\" m/h\"",
       "animate": true,
       "with_comma": false,
       "font_size": "16",
       "font_align": "center",
-      "font_color": "#5DDCCF",
+      "font_color": "#ff0000",
       "timeframe": 60,
       "mark_color": "#FF9900",
       "maxmin_color": "#00FF00",
@@ -2383,15 +2382,11 @@
    "width": 1,
    "row": {
     "4": 3,
-    "12": 3,
-    "13": 3,
     "14": 3,
     "15": 3
    },
    "col": {
     "4": 1,
-    "12": 5,
-    "13": 1,
     "14": 1,
     "15": 1
    },
@@ -2404,8 +2399,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='color:#fff'>ระดับน้ำ</div>\"",
-      "value": "datasources[\"MSSql\"][\"2\"][\"Val\"].toFixed(2)+\"m\"",
-      "units": "",
+      "value": "\"1.16\"+\"m\"",
       "animate": true,
       "with_comma": false,
       "font_size": "24",
@@ -2426,15 +2420,11 @@
    "width": 1,
    "row": {
     "4": 4,
-    "12": 6,
-    "13": 4,
     "14": 4,
     "15": 4
    },
    "col": {
     "4": 1,
-    "12": 12,
-    "13": 1,
     "14": 1,
     "15": 1
    },
@@ -2469,16 +2459,16 @@
    "row": {
     "4": 1,
     "9": 12,
-    "12": 12,
-    "13": 13,
+    "12": 11,
+    "13": 11,
     "14": 13,
     "15": 12
    },
    "col": {
     "4": 4,
     "9": 5,
-    "12": 10,
-    "13": 1,
+    "12": 5,
+    "13": 6,
     "14": 1,
     "15": 6
    },
@@ -2490,8 +2480,8 @@
     {
      "type": "text_alternative_widget",
      "settings": {
-      "title": "return \"<div style='color:#fff'>RW1_TUR</div>\"",
-      "value": "(datasources[\"MySql\"][\"QC_RW1_TUR\"]?datasources[\"MySql\"][\"QC_RW1_TUR\"][\"value\"]:(0).toFixed(2))+\" ntu\"",
+      "title": "return \"<div style='color:#fff'>ความขุ่นน้ำดิบ</div>\"",
+      "value": "\"45.9\"+\" ntu\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -2505,6 +2495,188 @@
       "_color": [
        "#ff9900"
       ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"<div style='color:#fff'>กรด-ด่าง</div>\"",
+      "value": "\"pH \"+\"8.01\"",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "18",
+      "font_align": "left",
+      "font_color": "#5DDCCF",
+      "timeframe": 60,
+      "mark_color": "#ff9900",
+      "maxmin_color": "#00ff00",
+      "height_block": 1,
+      "_color": [
+       "#ff9900"
+      ]
+     }
+    },
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "title": "return \"<div style='color:#fff'>ความนำไฟฟ้า</div>\"",
+      "value": "\"120\"+\" uS/m\"",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "16",
+      "font_align": "left",
+      "font_color": "#5DDCCF",
+      "timeframe": 60,
+      "mark_color": "#FF9900",
+      "maxmin_color": "#00FF00",
+      "height_block": 1,
+      "_color": [
+       "#FF9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 3,
+   "row": {
+    "4": 1,
+    "14": 13
+   },
+   "col": {
+    "4": 4,
+    "14": 8
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": "1",
+   "border_color": "#ffffff",
+   "widgets": [
+    {
+     "type": "highcharts_custom_timeseries",
+     "settings": {
+      "timeframe": 60,
+      "chart_style": "{\"marginTop\" : null,\"marginBottom\" : 40,\"marginLeft\" : null,\"marginRight\" : null}",
+      "xaxis": "{\"title\": {\"text\": \"time\", \"type\": \"datetime\", \"y\":-10,\"align\": \"middle\",\"enabled\": true,\"style\": {\"color\":\"#ffffff\"}},\"tickInterval\": 3600000,\"tickWidth\": 0,\"gridLineWidth\": 0,\"labels\": {\"align\": \"right\",\"x\": -2,\"y\": 10,\"style\": {\"color\":\"#ffffff\",\"fontSize\": \"8px\"}}}",
+      "yaxis": [
+       {
+        "style_object": "{\"linkedTo\":null,\"gridLineWidth\": 0,\"showFirstLabel\": false,\"opposite\": false, \"title\": {\"text\": \"yaxis_name\",\"x\":7,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"}},\"labels\": {\"align\": \"right\",\"x\": 3,\"y\": 16,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"},\"format\": \"{value:.,0f}\"}}"
+       }
+      ],
+      "include_legend": true,
+      "include_contextmenu": false,
+      "enabled_fullscreen": true,
+      "blocks": 4
+     }
+    }
+   ]
+  },
+  {
+   "width": 4,
+   "row": {
+    "4": 1,
+    "14": 13
+   },
+   "col": {
+    "4": 4,
+    "14": 11
+   },
+   "col_width": 4,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": "1",
+   "border_color": "#ffffff",
+   "widgets": [
+    {
+     "type": "highcharts_custom_timeseries",
+     "settings": {
+      "timeframe": 60,
+      "chart_style": "{\"marginTop\" : null,\"marginBottom\" : 40,\"marginLeft\" : null,\"marginRight\" : null}",
+      "xaxis": "{\"title\": {\"text\": \"time\", \"type\": \"datetime\", \"y\":-10,\"align\": \"middle\",\"enabled\": true,\"style\": {\"color\":\"#ffffff\"}},\"tickInterval\": 3600000,\"tickWidth\": 0,\"gridLineWidth\": 0,\"labels\": {\"align\": \"right\",\"x\": -2,\"y\": 10,\"style\": {\"color\":\"#ffffff\",\"fontSize\": \"8px\"}}}",
+      "yaxis": [
+       {
+        "style_object": "{\"linkedTo\":null,\"gridLineWidth\": 0,\"showFirstLabel\": false,\"opposite\": false, \"title\": {\"text\": \"yaxis_name\",\"x\":7,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"}},\"labels\": {\"align\": \"right\",\"x\": 3,\"y\": 16,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"},\"format\": \"{value:.,0f}\"}}"
+       }
+      ],
+      "include_legend": true,
+      "include_contextmenu": false,
+      "enabled_fullscreen": true,
+      "blocks": 4
+     }
+    }
+   ]
+  },
+  {
+   "width": 3,
+   "row": {
+    "4": 1,
+    "14": 13
+   },
+   "col": {
+    "4": 4,
+    "14": 2
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": "1",
+   "border_color": "#ffffff",
+   "widgets": [
+    {
+     "type": "highcharts_custom_timeseries",
+     "settings": {
+      "timeframe": 60,
+      "chart_style": "{\"marginTop\" : null,\"marginBottom\" : 40,\"marginLeft\" : null,\"marginRight\" : null}",
+      "xaxis": "{\"title\": {\"text\": \"time\", \"type\": \"datetime\", \"y\":-10,\"align\": \"middle\",\"enabled\": true,\"style\": {\"color\":\"#ffffff\"}},\"tickInterval\": 3600000,\"tickWidth\": 0,\"gridLineWidth\": 0,\"labels\": {\"align\": \"right\",\"x\": -2,\"y\": 10,\"style\": {\"color\":\"#ffffff\",\"fontSize\": \"8px\"}}}",
+      "yaxis": [
+       {
+        "style_object": "{\"linkedTo\":null,\"gridLineWidth\": 0,\"showFirstLabel\": false,\"opposite\": false, \"title\": {\"text\": \"yaxis_name\",\"x\":7,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"}},\"labels\": {\"align\": \"right\",\"x\": 3,\"y\": 16,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"},\"format\": \"{value:.,0f}\"}}"
+       },
+       {
+        "style_object": "{\"linkedTo\":null,\"gridLineWidth\": 0,\"showFirstLabel\": false,\"opposite\": true, \"title\": {\"text\": \"yaxis_name2\",\"x\":-7,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"}},\"labels\": {\"align\": \"left\",\"x\": -3,\"y\": 16,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"},\"format\": \"{value:.,0f}\"}}"
+       }
+      ],
+      "include_legend": true,
+      "include_contextmenu": false,
+      "enabled_fullscreen": true,
+      "blocks": 4
+     }
+    }
+   ]
+  },
+  {
+   "width": 3,
+   "row": {
+    "4": 1,
+    "14": 13
+   },
+   "col": {
+    "4": 4,
+    "14": 5
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": "1",
+   "border_color": "#ffffff",
+   "widgets": [
+    {
+     "type": "highcharts_custom_timeseries",
+     "settings": {
+      "timeframe": 60,
+      "chart_style": "{\"marginTop\" : null,\"marginBottom\" : 40,\"marginLeft\" : null,\"marginRight\" : null}",
+      "xaxis": "{\"title\": {\"text\": \"time\", \"type\": \"datetime\", \"y\":-10,\"align\": \"middle\",\"enabled\": true,\"style\": {\"color\":\"#ffffff\"}},\"tickInterval\": 3600000,\"tickWidth\": 0,\"gridLineWidth\": 0,\"labels\": {\"align\": \"right\",\"x\": -2,\"y\": 10,\"style\": {\"color\":\"#ffffff\",\"fontSize\": \"8px\"}}}",
+      "yaxis": [
+       {
+        "style_object": "{\"linkedTo\":null,\"gridLineWidth\": 0,\"showFirstLabel\": false,\"opposite\": false, \"title\": {\"text\": \"yaxis_name\",\"x\":7,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"}},\"labels\": {\"align\": \"right\",\"x\": 3,\"y\": 16,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"},\"format\": \"{value:.,0f}\"}}"
+       }
+      ],
+      "include_legend": true,
+      "include_contextmenu": false,
+      "enabled_fullscreen": true,
+      "blocks": 4
      }
     }
    ]
@@ -2524,26 +2696,14 @@
    "type": "Custom JSON",
    "settings": {
     "name": "MSSql",
-    "url": "https://bigdata.mwa.co.th/data-service/db-builder/mssql/?station=mahasawat",
+    "url": "http://127.0.0.1:1111/api/mssql/?host=127.0.0.1&user=test&password=1&database=SQL_Datalog&query=select%20DateAndTime,%20Millitm,%20Val,%20Status,%20Marker,%20TagName,%20TagType,%20TagDataType,%20F.TagIndex%20from%20SQL_Datalog.dbo.FloatTable%20as%20f%20left%20join%20SQL_Datalog.dbo.TagTable%20as%20t%20on%20f.TagIndex%20=%20t.TagIndex%20where%20DateAndTime%20=%20(select%20max(DateAndTime)%20from%20SQL_Datalog.dbo.FloatTable);",
     "use_thingproxy": false,
     "refresh": 60,
     "method": "GET",
-    "script_text": "//console.log(\"---- extract result : \", response.recordset)\nlet res={};\nresponse.recordset?.map((item,id)=>{\n    //console.log(\"--------- : \",id, item);\n\tlet tags = {}\n    item?.TagName.split(\"\\\\\")?.map((tag,i)=>{\n\t\t//console.log(\"--------- : \",i, tag);\n\t\ttags[\"tag\"+String(i+1)]=tag; \n    });\n\t//console.log(\"--------- : \", tags);\n\tres[item.TagIndex]={...response.recordset[id],\"tags\":tags};\n});\nres['update_at'] = new Date();\n\nres['lv0_color'] = \"#222\";\nres['lv1_color'] = \"#F00\"; //\"#FF0\";\nres['lv2_color'] = \"#F00\";\n// เกณฑ์สีสำหรับ  เทา เหลือง แดง\nres['rps_lv1'] = 0;\nres['rps_lv2'] = 1;\n// เกณฑ์สีสำหรับ  เทา เหลือง แดง\nres['fw_lv1'] = 0;\nres['fw_lv2'] = 1;\n\n// เกณฑ์สีสำหรับ TSP  เทา เหลือง แดง\nres['tps_lv1'] = 0;\nres['tps_lv2'] = 1;\n\nreturn res//response.recordset"
-   }
-  },
-  {
-   "name": "MySql",
-   "type": "Custom JSON",
-   "settings": {
-    "name": "MySql",
-    "url": "https://bigdata.mwa.co.th/data-service/db-builder/mysql/?station=mahasawat",
-    "use_thingproxy": false,
-    "refresh": 60,
-    "method": "GET",
-    "script_text": "//console.log(\"---- extract result : \", response.recordset)\nlet res={};\nresponse?.map((item,id)=>{\n    res[item.tag]=item\n    });\nres['update_at'] = new Date();\n\nreturn res;"
+    "script_text": "//console.log(\"---- extract result : \", response.recordset)\nlet res={};\nresponse.recordset?.map((item,id)=>{\n    //console.log(\"--------- : \",id, item);\n\tlet tags = {}\n    item?.TagName.split(\"\\\\\")?.map((tag,i)=>{\n\t\t//console.log(\"--------- : \",i, tag);\n\t\ttags[\"tag\"+String(i+1)]=tag; \n    });\n\t//console.log(\"--------- : \", tags);\n\tres[item.TagIndex]={...response.recordset[id],\"tags\":tags};\n});\nreturn res//response.recordset"
    }
   }
  ],
- "columns": 13,
+ "columns": 14,
  "theme": "default"
 }

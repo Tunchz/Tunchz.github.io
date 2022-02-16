@@ -2508,6 +2508,173 @@
      }
     }
    ]
+  },
+  {
+   "width": 3,
+   "row": {
+    "4": 1,
+    "12": 13,
+    "13": 13,
+    "14": 13,
+    "15": 13
+   },
+   "col": {
+    "4": 4,
+    "12": 1,
+    "13": 8,
+    "14": 8,
+    "15": 8
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": "1",
+   "border_color": "#ffffff",
+   "widgets": [
+    {
+     "type": "highcharts_custom_timeseries",
+     "settings": {
+      "timeframe": 60,
+      "chart_style": "{\"marginTop\" : null,\"marginBottom\" : 40,\"marginLeft\" : null,\"marginRight\" : null}",
+      "xaxis": "{\"title\": {\"text\": \"time\", \"type\": \"datetime\", \"y\":-10,\"align\": \"middle\",\"enabled\": true,\"style\": {\"color\":\"#ffffff\"}},\"tickInterval\": 3600000,\"tickWidth\": 0,\"gridLineWidth\": 0,\"labels\": {\"align\": \"right\",\"x\": -2,\"y\": 10,\"style\": {\"color\":\"#ffffff\",\"fontSize\": \"8px\"}}}",
+      "yaxis": [
+       {
+        "style_object": "{\"linkedTo\":null,\"gridLineWidth\": 0,\"showFirstLabel\": false,\"opposite\": false, \"title\": {\"text\": \"yaxis_name\",\"x\":7,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"}},\"labels\": {\"align\": \"right\",\"x\": 3,\"y\": 16,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"},\"format\": \"{value:.,0f}\"}}"
+       }
+      ],
+      "include_legend": true,
+      "include_contextmenu": false,
+      "enabled_fullscreen": true,
+      "blocks": 4
+     }
+    }
+   ]
+  },
+  {
+   "width": 3,
+   "row": {
+    "4": 1,
+    "12": 13,
+    "13": 13,
+    "14": 13,
+    "15": 13
+   },
+   "col": {
+    "4": 4,
+    "12": 4,
+    "13": 11,
+    "14": 11,
+    "15": 11
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": "1",
+   "border_color": "#ffffff",
+   "widgets": [
+    {
+     "type": "highcharts_custom_timeseries",
+     "settings": {
+      "timeframe": 60,
+      "chart_style": "{\"marginTop\" : null,\"marginBottom\" : 40,\"marginLeft\" : null,\"marginRight\" : null}",
+      "xaxis": "{\"title\": {\"text\": \"time\", \"type\": \"datetime\", \"y\":-10,\"align\": \"middle\",\"enabled\": true,\"style\": {\"color\":\"#ffffff\"}},\"tickInterval\": 3600000,\"tickWidth\": 0,\"gridLineWidth\": 0,\"labels\": {\"align\": \"right\",\"x\": -2,\"y\": 10,\"style\": {\"color\":\"#ffffff\",\"fontSize\": \"8px\"}}}",
+      "yaxis": [
+       {
+        "style_object": "{\"linkedTo\":null,\"gridLineWidth\": 0,\"showFirstLabel\": false,\"opposite\": false, \"title\": {\"text\": \"yaxis_name\",\"x\":7,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"}},\"labels\": {\"align\": \"right\",\"x\": 3,\"y\": 16,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"},\"format\": \"{value:.,0f}\"}}"
+       }
+      ],
+      "include_legend": true,
+      "include_contextmenu": false,
+      "enabled_fullscreen": true,
+      "blocks": 4
+     }
+    }
+   ]
+  },
+  {
+   "width": 3,
+   "row": {
+    "4": 1,
+    "12": 13,
+    "13": 13,
+    "14": 13,
+    "15": 13
+   },
+   "col": {
+    "4": 4,
+    "12": 7,
+    "13": 2,
+    "14": 2,
+    "15": 2
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": "1",
+   "border_color": "#ffffff",
+   "widgets": [
+    {
+     "type": "highcharts_custom_timeseries",
+     "settings": {
+      "timeframe": 60,
+      "chart_style": "{\"marginTop\" : null,\"marginBottom\" : 40,\"marginLeft\" : 20,\"marginRight\" :20}",
+      "xaxis": "{\"title\": {\"text\": \"time\", \"type\": \"datetime\", \"y\":-10,\"align\": \"middle\",\"enabled\": true,\"style\": {\"color\":\"#ffffff\"}},\"tickInterval\": 3600000,\"tickWidth\": 0,\"gridLineWidth\": 0,\"labels\": {\"align\": \"right\",\"x\": -2,\"y\": 10,\"style\": {\"color\":\"#ffffff\",\"fontSize\": \"8px\"}}}",
+      "yaxis": [
+       {
+        "style_object": "{\"linkedTo\":null,\"gridLineWidth\": 0,\"showFirstLabel\": false,\"opposite\": false, \"title\": {\"text\": \"yaxis_name\",\"x\":7,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"}},\"labels\": {\"align\": \"right\",\"x\": 3,\"y\": 16,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"},\"format\": \"{value:.,0f}\"}}"
+       },
+       {
+        "style_object": "{\"linkedTo\":null,\"gridLineWidth\": 0,\"showFirstLabel\": false,\"opposite\": true, \"title\": {\"text\": \"yaxis_name2\",\"x\":-7,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"}},\"labels\": {\"align\": \"left\",\"x\": -3,\"y\": 16,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"},\"format\": \"{value:.,0f}\"}}"
+       }
+      ],
+      "include_legend": true,
+      "include_contextmenu": false,
+      "enabled_fullscreen": true,
+      "blocks": 4
+     }
+    }
+   ]
+  },
+  {
+   "width": 3,
+   "row": {
+    "4": 1,
+    "12": 18,
+    "13": 13,
+    "14": 13,
+    "15": 13
+   },
+   "col": {
+    "4": 4,
+    "12": 1,
+    "13": 5,
+    "14": 5,
+    "15": 5
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": "1",
+   "border_color": "#ffffff",
+   "widgets": [
+    {
+     "type": "highcharts_custom_timeseries",
+     "settings": {
+      "timeframe": 60,
+      "chart_style": "{\"marginTop\" : null,\"marginBottom\" : 40,\"marginLeft\" : null,\"marginRight\" : null}",
+      "xaxis": "{\"title\": {\"text\": \"time\", \"type\": \"datetime\", \"y\":-10,\"align\": \"middle\",\"enabled\": true,\"style\": {\"color\":\"#ffffff\"}},\"tickInterval\": 3600000,\"tickWidth\": 0,\"gridLineWidth\": 0,\"labels\": {\"align\": \"right\",\"x\": -2,\"y\": 10,\"style\": {\"color\":\"#ffffff\",\"fontSize\": \"8px\"}}}",
+      "yaxis": [
+       {
+        "style_object": "{\"linkedTo\":null,\"gridLineWidth\": 0,\"showFirstLabel\": false,\"opposite\": false, \"title\": {\"text\": \"yaxis_name\",\"x\":7,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"}},\"labels\": {\"align\": \"right\",\"x\": 3,\"y\": 16,\"style\": {\"color\": \"#ffffff\",\"fontSize\": \"8px\"},\"format\": \"{value:.,0f}\"}}"
+       }
+      ],
+      "include_legend": true,
+      "include_contextmenu": false,
+      "enabled_fullscreen": true,
+      "blocks": 4
+     }
+    }
+   ]
   }
  ],
  "datasources": [
