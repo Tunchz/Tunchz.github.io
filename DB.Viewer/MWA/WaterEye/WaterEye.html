@@ -265,15 +265,39 @@
                         </div>
                         <div class="modal-body">
 							<p></p>
-                            <h3 style="margin-top:0">เกณฑ์คุณภาพน้ำ</h3>
-                            <p>เกณฑ์แบ่งตามช่วงของค่าความนำไฟฟ้า (หน่วย : uS/cm) ดังนี้</p>
-                            <!-- <ol>
-                                <li>ไม่กร่อย         น้อยกว่า 400</li>
-                                <li>เริ่มกร่อย         400-500</li>
-                                <li>กร่อยเล็กน้อย     500-700</li>
-                                <li>กร่อยปานกลาง    700-1200</li>
-                                <li>กร่อยมาก        มากกว่า 1200</li>
-							</ol> -->
+                            <h3 style="margin-top:0">เกณฑ์คุณภาพน้ำดิบ</h3>
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เกณฑ์แบ่งตามช่วงของค่าความเค็ม (หน่วย : g/l) ดังนี้</p>
+							<table class="table table-condensed" style="width: 80%; margin: 10px 10%">
+                                <thead style="text-align: left;">
+                                    <tr>
+                                        <th>ระดับ</th>
+                                        <th>สี</th>
+                                        <th>เกณฑ์</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>ปกติ</td>
+                                        <td><span style="color:#23b03f">■ เขียว</span></td>
+                                        <td>น้อยกว่า 400</td>
+                                    </tr>
+                                    <tr>
+                                        <td>เตือยภัย&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td><span style="color:#ebc51a">■ เหลือง</span></td>
+                                        <td>500-700</td>
+                                    </tr>
+                                    <tr>
+                                        <td>วิกฤต</td>
+                                        <td><span style="color:#ff0000">■ แดง</span></td>
+                                        <td>มากกว่า 1200</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+							<p></p>
+
+                            <h3 style="margin-top:0"><br>เกณฑ์คุณภาพน้ำประปา</h3>
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เกณฑ์แบ่งตามช่วงของค่าความนำไฟฟ้า (หน่วย : uS/cm) ดังนี้</p>
 							<table class="table table-condensed" style="width: 80%; margin: 10px 10%">
                                 <thead style="text-align: left;">
                                     <tr>
@@ -286,17 +310,17 @@
 
                                     <tr>
                                         <td>ไม่กร่อย</td>
-                                        <td><span style="color:#1565c0">■ น้ำเงิน</span></td>
+                                        <td><span style="color:#23b03f">■ เขียว</span></td>
                                         <td>น้อยกว่า 400</td>
                                     </tr>
                                     <tr>
                                         <td>เริ่มกร่อย</td>
-                                        <td><span style="color:#26c6da">■ ฟ้า</span></td>
+                                        <td><span style="color:#46b9eb">■ ฟ้า</span></td>
                                         <td>400-500</td>
                                     </tr>
                                     <tr>
                                         <td>กร่อยเล็กน้อย</td>
-                                        <td><span style="color:#ffeb3b">■ เหลือง</span></td>
+                                        <td><span style="color:#ebc51a">■ เหลือง</span></td>
                                         <td>500-700</td>
                                     </tr>
 
@@ -312,9 +336,8 @@
                                     </tr>
                                 </tbody>
                             </table>
-
                             <h3 class="">ข้อมูลคาดการณ์ความเค็ม</h3>
-                            <p>สามารถโหลด<a href="https://bigdata.mwa.co.th/data-service/water-salinity/predict30d?station=สถานีสำแล&export=csv">ชุดข้อมูล</a>ได้ที่นี่ </p>
+                            <p>สามารถโหลด<a href="https://bigdata.mwa.co.th/data-service/water-salinity/predict30d?station=สถานีสำแล&export=csv" download="export.csv">ชุดข้อมูล</a>ได้ที่นี่ </p>
                             
                         </div>
                         <div class="modal-footer" style="margin-top: 0px;padding: 5px 10px;"><span class="pull-left">MWA Big Data 64</span><span></span> <button type="button" class="btn btn-default btn-right" data-dismiss="modal" style="padding:0px 6px;margin-top:-2px;" onclick="togglemodal(false)">Close</button></div>
@@ -595,23 +618,23 @@
 			    	} else {
 			    		var CD=[],
 			    			SL=[],
-			    			FL=[],
+			    			PH=[],
 			    			DO=[],
 			    			TB=[];
 			    		var CD_warn = [], 
 			    			SL_warn = [], 
-			    			FL_warn = [], 
+			    			PH_warn = [], 
 			    			DO_warn = [], 
 			    			TB_warn = [];
 			    		for (i in b) {
 			    			SL.push(dataset.tables[0].rows[b[i]]["P1"]);
 			    			CD.push(dataset.tables[0].rows[b[i]]["P2 "]);
-			    			FL.push(dataset.tables[0].rows[b[i]]["P3 "]);
+			    			PH.push(dataset.tables[0].rows[b[i]]["P3 "]);
 			    			DO.push(dataset.tables[0].rows[b[i]]["P4 "]);
 			    			TB.push(dataset.tables[0].rows[b[i]]["P5 "]);
 			    			SL_warn.push(dataset.tables[0].rows[b[i]]["P1_warning"]);
 			    			CD_warn.push(dataset.tables[0].rows[b[i]]["P2_warning"]);
-			    			FL_warn.push(dataset.tables[0].rows[b[i]]["P3_warning"]);
+			    			PH_warn.push(dataset.tables[0].rows[b[i]]["P3_warning"]);
 			    			DO_warn.push(dataset.tables[0].rows[b[i]]["P4_warning"]);
 			    			TB_warn.push(dataset.tables[0].rows[b[i]]["P5_warning"]);
 			    		}
@@ -633,9 +656,9 @@
 							        <tr>
 							            <td>COND:ค่าความนำไฟฟ้า</td>
 							            <td>▸</td>
-							            <td>| `+ arrMin(CD) +`</td>
-							            <td>| `+ arrAvg(CD) +`</td>
-							            <td>| `+ arrMax(CD) +`</td>
+							            <td>| `+ parseInt(arrMin(CD)) +`</td>
+							            <td>| `+ parseInt(arrAvg(CD)) +`</td>
+							            <td>| `+ parseInt(arrMax(CD)) +`</td>
 							            <td>| `+ ((arrSum(CD_warn)>0)?'<span style="color:#FF0000;">'+arrSum(CD_warn)+' ชม.</span>':'-') +`</td>
 							        </tr>
 							        <tr>
@@ -657,10 +680,10 @@
 							        <tr>
 							            <td>DO:ปริมาณออกซิเจน</td>
 							            <td>▸</td>
-							            <td>| `+ arrMin(FL) +`</td>
-							            <td>| `+ arrAvg(FL) +`</td>
-							            <td>| `+ arrMax(FL) +`</td>
-							            <td>| `+ ((arrSum(FL_warn)>0)?'<span style="color:#FF0000;">'+arrSum(FL_warn)+' ชม.</span>':'-') +`</td>
+							            <td>| `+ arrMin(PH) +`</td>
+							            <td>| `+ arrAvg(PH) +`</td>
+							            <td>| `+ arrMax(PH) +`</td>
+							            <td>| `+ ((arrSum(PH_warn)>0)?'<span style="color:#FF0000;">'+arrSum(PH_warn)+' ชม.</span>':'-') +`</td>
 							        </tr>
 							        <tr>
 							            <td>TB:ระดับความขุ่น</td>
