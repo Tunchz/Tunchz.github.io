@@ -4,8 +4,8 @@
  "dashboard_title": "Pumping.dashboard.01_noEdited",
  "avatar": "https://tunchz.github.io/CIA/MWALogo.png",
  "min_cols": 13,
- "background_image": "",
- "background_color": "#252525",
+ "background_image": "https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png",
+ "background_color": "#212121",
  "widget_background_color": "#383838cc",
  "widget_border_color": "#FFFFFF",
  "widget_border_width": 0,
@@ -44,7 +44,7 @@
      "type": "text_widget",
      "settings": {
       "title": "",
-      "value": "var s = \"มหาสวัสดิ์\";\n//return 'สถานภาพสถานีสูบส่ง <span style=\"font-size:32px;\">'+s+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';\nreturn '<span style=\"font-size:32px;\">'+\"สถานะการผลิตโรงงานผลิตน้ำมหาสวัสดิ์\"+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';",
+      "value": "var s = \"มหาสวัสดิ์\";\nreturn 'สถานภาพสถานีสูบส่ง <span style=\"font-size:32px;\">'+s+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';",
       "animate": false,
       "with_comma": false,
       "font_size": "24",
@@ -169,7 +169,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='color:#fff'>Phase 2  <span style='float:right;font-size:10px;'>\"+\"m3/h\"+\"</span></div>\"",
-      "value": "return \"<div style='margin-top:-5px;'>\"+((datasources[\"MSSql\"][\"13\"]?datasources[\"MSSql\"][\"13\"][\"Val\"]:0)*3.6).toFixed(0)+\"</div>\"",
+      "value": "return \"<div style='margin-top:-5px;'>\"+((datasources[\"MSSql\"][\"13\"]?datasources[\"MSSql\"][\"13\"][\"Val\"]:0)/1000).toFixed(2)+\"</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,
@@ -376,7 +376,7 @@
      "type": "text_alternative_widget",
      "settings": {
       "title": "return \"<div style='color:#fff'>Phase 1  <span style='float:right;font-size:10px;'>\"+\"m3/h\"+\"</span></div>\"",
-      "value": "return \"<div style='margin-top:-5px;'>\"+((datasources[\"MSSql\"][\"12\"]?datasources[\"MSSql\"][\"12\"][\"Val\"]:0)*3.6).toFixed(0)+\"</div>\"",
+      "value": "return \"<div style='margin-top:-5px;'>\"+((datasources[\"MSSql\"][\"12\"]?datasources[\"MSSql\"][\"12\"][\"Val\"]:0)/1000).toFixed(2)+\"</div>\"",
       "units": "",
       "animate": true,
       "with_comma": false,

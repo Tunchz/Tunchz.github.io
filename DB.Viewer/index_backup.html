@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">	
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title>DB Builder</title>
+    		<meta name="description" content="the question isn't can you; it's WILL YOU. -FWTT-">
+    		<link rel="icon" type="image/x-icon" href="img/Mholan_Logo.png"/>
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<link href="./css/netpie.plugins.css" rel="stylesheet" />
+		<link href="./css/freeboard.css" rel="stylesheet" />
+		<link href="./css/FWTT.css" rel="stylesheet" />
+		<script src="./js/FWTT.thirdparty.js"></script>
+		<script type="text/javascript">
+			
+			function QueryStringToJSON(queryString) {            
+			    var pairs = queryString.slice(1).split('&');
+			    
+			    var result = {};
+			    pairs.forEach(function(pair) {
+			        pair = pair.split('=');
+			        result[pair[0]] = decodeURIComponent(pair[1] || '');
+			    });
+
+			    return JSON.parse(JSON.stringify(result));
+			}
+			const parameter = QueryStringToJSON(window.location.search);
+
+			head.js(
+					"js/FWTT.init.js",
+					"js/FWTT.global.js",
+					"js/FWTT.custom.json.js",
+					"js/FWTT.custom.scrape.api.js",
+					"js/FWTT.custom.scrape.api.multiple.options.js",
+					"js/FWTT.socket.io.js",
+					"js/FWTT.MQTT.js",
+					"js/FWTT.MQTT.paho.js",
+					"js/FWTT.widget.html.js",
+			        "js/FWTT.widget.text.sparkline.js",
+					"js/FWTT.widget.circular.progress.js",
+			        "js/FWTT.widget.pointer.js",
+			        "js/FWTT.widget.picture.js",
+			        "js/FWTT.widget.indicator.js",
+					"js/FWTT.widget.map.js",
+					"js/FWTT.widget.highcharts.js",
+					"js/FWTT.widget.charticulator.js",
+					"js/FWTT.widget.custom.highcharts.js",
+					
+					// "js/FWTT.widget.button.js",
+					// "js/FWTT.widget.feedview.js",
+					// "js/FWTT.widget.toggle.js",
+					// "js/FWTT.widget.rangeslider.js",
+					// "js/FWTT.widget.actuator.js",
+					// "js/FWTT.widget.horizontal.gauge.js",
+					// "js/FWTT.widget.slider.js",
+					// "js/FWTT.widget.switch.js",
+			  //       "js/FWTT.widget.altGuage.js",
+
+
+					// *** Load more plugins here ***
+
+					function(){
+						function setDatasourceDefaultOptions(){
+							// freeboard.on("dashboard_loaded",()=>{
+								if (parameter.defaultoption) {
+									// console.log("parameter.option : ",parameter.defaultoption)
+									var options = parameter.defaultoption.split("|"),
+										defaultOptions = [];
+									(options.length>0)&&options.map((item)=>{
+										var option = item.split('-')
+										// console.log("option : ",option[0]+" | "+option[1])
+										defaultOptions.push({datasourceName:option[0],selectedOption:option[1]})
+									})
+									freeboard.setDatasourceDefaultOptions(defaultOptions);
+								}
+							// })
+						}
+						function loadingDefalult(){
+								freeboard.initialize(false);
+								setDatasourceDefaultOptions()
+								var dashboardPattern = window.localStorage.getItem("maholan.db.builder");
+								if (dashboardPattern !== null) {
+									dashboardPattern=JSON.parse(dashboardPattern);
+									freeboard.loadDashboard(dashboardPattern, function() {
+									});
+								}
+						}
+						$(function()
+						{ //DOM Ready
+							// freeboard.on("dashboard_loaded",()=>{
+							// 	if (parameter.defaultoption) {
+							// 		var options = parameter.defaultoption.split("|"),
+							// 			defaultOptions = [];
+							// 		(options.length>0)&&options.map((item)=>{
+							// 			var option = item.split('-')
+							// 			defaultOptions.push({datasourceName:option[0],selectedOption:option[1]})
+							// 		})
+							// 		freeboard.setDatasourceDefaultOptions(defaultOptions);
+							// 	}
+							// })
+							if (parameter.dashboard) {
+								$.get( parameter.dashboard, function( json ) {
+									json = JSON.parse(json)
+									if (json !== null) {
+										freeboard.initialize(false);
+										setDatasourceDefaultOptions()
+										freeboard.loadDashboard(json, function() {
+										});
+									} else {
+										loadingDefalult();
+									}
+								}).fail(function() {
+									console.log( "Loading specified json error!!!" );
+									alert("Loading "+ parameter.dashboard+ " failed, load default!")
+									loadingDefalult();
+								})
+							} else if (parameter.reset) {
+								json = {"version": "-Tunchz/FWTT-","header_image": "","dashboard_title": "untitled.dashboard","avatar": "https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png","min_cols": 4,"background_image": null,"background_color": "#212121","widget_background_color": "#383838","widget_border_color": "#FFFFFF","widget_border_width": 0,"widget_border_radius": "0","widget_background_image": null,"fullscreen_auto_topmargin": true,"fullscreen_topmargin": 0,"allow_edit": true,"plugins": [],"panes": [],"datasources": [],"columns": 12,"theme": "default"};
+								freeboard.initialize(false);
+								freeboard.loadDashboard(json, function() {
+								});
+							} else {
+								loadingDefalult();
+							}
+						});
+					});
+		</script>
+	</head>
+	<body id="body" ng-app="starter">
+		<div id="board-content">
+			<img id="dash-logo" data-bind="attr:{src: header_image}, visible:header_image()">
+			<div id="board-content-top"></div>
+			<div class="gridster responsive-column-width">
+				<ul data-bind="grid: true">
+				</ul>
+			</div>
+			<div id="board-content-bottom"></div>
+			<div id="board-content-bottom2"></div>
+		</div>
+		<header id="main-header" data-bind="if:allow_edit">
+		</header>
+		<div style="display:hidden">
+			<ul data-bind="template: { name: 'pane-template', foreach: panes}">
+			</ul>
+		</div>
+
+		<script type="text/html" id="pane-template">
+			<li data-bind="pane: true">
+				<section data-bind="foreach: widgets">
+					<div class="sub-section" data-bind="css: 'sub-section-height-' + height()">
+						<div class="widget" data-bind="widget: true, css:{fillsize:fillSize}"></div>
+						<div class="sub-section-tools">
+							<ul class="board-toolbar">
+							</ul>
+						</div>
+					</div>
+				</section>
+			</li>
+		</script>
+    <div id="full-screen-action" onclick="toggleFullScreen()" style="position: absolute; right: 4px; bottom: 4px; padding:0px 3px 1px 4px; border-radius: 3px;">
+    	<i id="full-screen-icon" class="icon-resize-small icon-white"></i>
+    </div>
+
+    <script type="text/template" id="data-board">%7B%22allow_edit%22%3Afalse%2C%22canEdit%22%3Afalse%2C%22isPrivate%22%3Afalse%2C%22id%22%3A%22lWvIxK%22%2C%22name%22%3A%22FWTT-Test%22%7D</script>
+	<script src="js/FWTT.footer.js"></script>
+
+	</body>
+</html>

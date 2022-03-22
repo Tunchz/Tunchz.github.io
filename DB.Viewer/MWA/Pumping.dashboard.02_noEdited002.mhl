@@ -43,7 +43,7 @@
      "type": "text_widget",
      "settings": {
       "title": "",
-      "value": "var s = datasources[\"MWA Option Url\"][\"option name\"];\nreturn 'สถานภาพสถานีสูบจ่าย <span style=\"font-size:32px;\">'+s+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';",
+      "value": "var s = datasources[\"MWA Option Url\"][\"option name\"];\nreturn 'สถานภาพสถานีสูบส่ง <span style=\"font-size:32px;\">'+s+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';",
       "animate": false,
       "with_comma": false,
       "font_size": "24",
