@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mapbox Rain</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1" />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body style="margin: 0px; padding: 0px;">
+    <div
+      id="map"
+      style="position: absolute; top: 0px; bottom: 0px; width: 100%;"
+    ></div>
+    <div id="timestamp" style="text-align:center; justify-content:center; align-content: center ; position: absolute;bottom: 50px; left: 50%; transform: translateX(-50%); height: 20px; background-color:#fff; width:300px; border-radius:20px; padding: 5px; line-height: 150%;">FRAME TIME</div>
+    <script>
+      mapboxgl.accessToken = "pk.eyJ1Ijoic2lyaXRvZWkiLCJhIjoiY2wxNHN4YjJwMDl4bjNsbzdmdnZ4OGg5bCJ9.xS2LGqPIbk3pUibim5g1mA";
+      const map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/dark-v10",
+        zoom: 5,
+        center: [100.508, 13.725]
+      });
+
+      window.map = map;
+
+      map.on("load", () => {
+        fetch("https://api.rainviewer.com/public/weather-maps.json")
+          .then(res => res.json())
+          .then(apiData => {
+            dataFrame = [...apiData.radar.past.map((r)=>({...r, type:"ข้อมูลที่ผ่านมา"})), ...apiData.radar.nowcast.map((r)=>({...r, type:"ข้อมูลพยากรณ์"}))]
+            // let dataFrame = [...apiData.radar.past]
+            dataFrame.forEach(frame => {
+              map.addLayer({
+                id: `rainviewer_${frame.path}`,
+                type: "raster",
+                source: {
+                  type: "raster",
+                  tiles: [
+                    apiData.host + frame.path + '/256/{z}/{x}/{y}/2/1_1.png'
+                  ],
+                  tileSize: 256
+                },
+                layout: { visibility: "none" },
+                minzoom: 0,
+                maxzoom: 12
+              });
+            });
+
+
+            let i = 0;
+            // while (true) {
+                       
+            const interval = setInterval(() => {
+              if (i>=dataFrame.length) i=1;
+              if (i > dataFrame.length - 1) {
+                clearInterval(interval);
+                return;
+              } else {
+                // console.log("----- i : ", i)
+                dataFrame.forEach((frame, index) => {
+                  map.setLayoutProperty(
+                    `rainviewer_${frame.path}`,
+                    "visibility",
+                    index === i || index === i - 1 ? "visible" : "none"
+                  );
+                  
+                  map.setPaintProperty(
+                    `rainviewer_${frame.path}`,
+                    "raster-opacity",
+                    1
+                    );
+                });
+                if (i - 1 >= 0) {
+                  const frame = dataFrame[i - 1];
+                  document.getElementById("timestamp").innerHTML = frame.type + ': ' + (new Date(frame.time * 1000)).toString();
+                  let opacity = 1;
+                  setTimeout(() => {
+                    const i2 = setInterval(() => {
+                      if (opacity <= 0) {
+                        return clearInterval(i2);
+                      }
+                      map.setPaintProperty(
+                        `rainviewer_${frame.path}`,
+                        "raster-opacity",
+                        opacity
+                      );
+                      opacity -= 0.1;
+                    }, 20);
+                  }, 80);
+                }
+                i += 1;
+              }
+            }, 500);
+
+            // }
+          })
+          .catch(console.error);
+      });
+    </script>
+  </body>
+</html>
