@@ -124,7 +124,12 @@
 							})
 							if (parameter.dashboard) {
 								$.get( parameter.dashboard, function( json ) {
-									json = JSON.parse(json)
+
+									try {
+										json = JSON.parse(json)	
+									} catch (error) {
+									  	console.log(error);
+									}
 								  	// console.log("++++++++++++data : ",json)
 
 									if (json !== null) {

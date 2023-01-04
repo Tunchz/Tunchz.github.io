@@ -4854,8 +4854,12 @@ div.dataTables_scrollBody {
 							// })
 							if (parameter.dashboard) {
 								$.get( parameter.dashboard, function( json ) {
-									json = JSON.parse(json)
-									if (json !== null) {
+									try {
+                                        json = JSON.parse(json) 
+                                    } catch (error) {
+                                        console.log(error);
+                                    }
+                                    if (json !== null) {
 										freeboard.initialize(false);
 										setDatasourceDefaultOptions()
 										freeboard.loadDashboard(json, function() {

@@ -4,7 +4,7 @@
  "dashboard_title": "Pumping.dashboard.01_noEdited",
  "avatar": "https://tunchz.github.io/CIA/MWALogo.png",
  "min_cols": 13,
- "background_image": "https://bigdata.mwa.co.th/files/DB.Viewer/MWA/db_bg.jpg",
+ "background_image": "",
  "background_color": "#252525",
  "widget_background_color": "#383838cc",
  "widget_border_color": "#FFFFFF",

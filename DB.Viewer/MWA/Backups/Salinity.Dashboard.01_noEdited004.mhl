@@ -1,0 +1,136 @@
+{
+ "version": "-Tunchz/FWTT-",
+ "header_image": "",
+ "dashboard_title": "Salinity.Dashboard.01",
+ "avatar": "https://tunchz.github.io/CIA/MWALogo.png",
+ "min_cols": 16,
+ "background_image": "https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png",
+ "background_color": "#212121",
+ "widget_background_color": "#25252588",
+ "widget_border_color": "#383838",
+ "widget_border_width": 0,
+ "widget_border_radius": "0",
+ "widget_background_image": null,
+ "fullscreen_auto_topmargin": true,
+ "fullscreen_topmargin": 0,
+ "allow_edit": true,
+ "plugins": [],
+ "panes": [
+  {
+   "width": 1,
+   "row": {
+    "4": 1,
+    "11": 1,
+    "12": 1,
+    "15": 1,
+    "16": 1
+   },
+   "col": {
+    "4": 1,
+    "11": 8,
+    "12": 1,
+    "15": 1,
+    "16": 1
+   },
+   "col_width": 1,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "picture",
+     "settings": {
+      "src": "https://tunchz.github.io/CIA/MWALogo.png",
+      "margin": 0,
+      "refresh": 0,
+      "height_block": 2
+     }
+    }
+   ]
+  },
+  {
+   "width": 15,
+   "row": {
+    "4": 1,
+    "11": 29,
+    "12": 1,
+    "15": 3,
+    "16": 1
+   },
+   "col": {
+    "4": 2,
+    "11": 1,
+    "12": 2,
+    "15": 1,
+    "16": 2
+   },
+   "col_width": 15,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "",
+      "value": "return \"<div style='font-family:Mitr;font-weight:400;'>สถานการณ์คุณภาพน้ำ</div>\"",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "36",
+      "font_align": "center",
+      "font_color": "#FFFFFF",
+      "timeframe": 60,
+      "mark_color": "#FF9900",
+      "maxmin_color": "#00FF00",
+      "height_block": "2",
+      "_color": [
+       "#FF9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 16,
+   "row": {
+    "4": 3,
+    "15": 5,
+    "16": 3
+   },
+   "col": {
+    "4": 1,
+    "15": 1,
+    "16": 1
+   },
+   "col_width": 16,
+   "transparent_bg": true,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "html",
+     "settings": {
+      "html": "return     `<iframe \n                allowFullScreen \n                webkitallowfullscreen=\"true\"\n                mozallowfullscreen=\"true\"\n                id=\"WaterEye-dashboard\" \n                src='./MWA/WaterEye/WaterEye.html'\n                style='width:calc(100% + 10px);height:calc(100% + 10px);border:0px;padding:0px;margin: -5px 0 0 -5px;'\n            >\n            </iframe>`",
+      "enabled_fullscreen": true,
+      "height": 15
+     }
+    }
+   ]
+  }
+ ],
+ "datasources": [
+  {
+   "name": "data",
+   "type": "JSON",
+   "settings": {
+    "name": "data",
+    "url": "MWA/charticulator/data.json",
+    "use_thingproxy": false,
+    "refresh": 0,
+    "method": "GET"
+   }
+  }
+ ],
+ "columns": 16,
+ "theme": "default"
+}

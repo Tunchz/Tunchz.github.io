@@ -781,6 +781,7 @@
 
 				function update() {
 					console.log(">>>>> updating data...")
+					//$.getJSON('http://192.168.43.51:5555/watereye', {}, function(data, textStatus, jqXHR){
 					$.getJSON('https://bigdata.mwa.co.th/data-service/Water-Eye', {}, function(data, textStatus, jqXHR){
 						// console.log(">>>> data : ",data)
 						dataset = data.dataset

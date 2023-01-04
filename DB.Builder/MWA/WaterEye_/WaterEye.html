@@ -11,8 +11,7 @@
             <script type="text/javascript" src='./template_g2.js'></script>
 
             <script src="./js/d3.min.js"></script>
-			<script src="./js/jquery.min.js"></script>
-			<link rel="stylesheet" href="css/WaterEye.css">
+  			<script src="./js/jquery.min.js"></script>
 
 			 <style type="text/css">
 				@font-face {
@@ -28,7 +27,6 @@
 				width: 100%;
 				position: relative;
 				margin: 0px;
-				/* display: block; */
 				}
 
 				.loader {
@@ -149,7 +147,7 @@
 				#right {
 					width: calc(45% - 5px);
 					height: calc(100% - 5px);
-					margin-left: 5px;
+					margin-right: 5px;
 					margin-bottom: -5px;
 					/*margin-bottom: -4px;*/
 				}
@@ -166,38 +164,6 @@
 					background-color: #222;
 					background: url("./diagonal-noise_dark.png");
 				}
-				#InfoButton {
-					width: 20px;
-					height: 20px;
-				}
-				.btn-primary {
-					color: #fff;
-					background-color: #2a58c3;
-					background-image: linear-gradient(to bottom, #2a58c3 0, #2a58c3 100%);
-				}
-				.btn {
-					display: inline-block;
-					padding: 6px 12px;
-					margin-bottom: 0;
-					font-size: 13px;
-					line-height: 1.42857143;
-					text-align: center;
-					white-space: nowrap;
-					vertical-align: middle;
-					-ms-touch-action: manipulation;
-					touch-action: manipulation;
-					cursor: pointer;
-					-webkit-user-select: none;
-					-moz-user-select: none;
-					-ms-user-select: none;
-					user-select: none;
-					background-image: none;
-					border: 1px solid transparent;
-					border-radius: 4px
-				}
-
-
-
 				#TimeDisplay {
 					position:absolute;
 					bottom: 1%;
@@ -214,24 +180,7 @@
           <body oncontextmenu="return false;">
           	<!-- <div id="max_win"></div> -->
 			  
-			<div id="left" class="box">
-				<div class="loader">
-				  <div class="bar1"></div>
-				  <div class="bar2"></div>
-				  <div class="bar3"></div>
-				  <div class="bar4"></div>
-				  <div class="bar5"></div>
-				  <div class="bar6"></div>
-				</div>
-				<div id="container"></div>
-
-				<div id="TimeDisplay"><span id="status"><span style="color:#f00">◉ </span></span> <span id="datetime"></span><span>&nbsp;&nbsp;</span>
-					<div type="button" id="InfoButton" class="btn btn-primary" style="width:18px; height:18px; border-radius: 50%; padding: 0px; font-family: mitr;box-shadow: 0px 0px 3px #777;" data-toggle="modal" data-target="#info-modal" onclick="togglemodal(true)">
-						<div style="margin: -1px 0px 0px 0px;">?</div>
-					</div>
-				</div>
-			</div>
-			<div id="right" class="box">
+			  <div id="right" class="box">
 				<div id="r1" class="box">
 					<div class="loader">
 					  <div class="bar1"></div>
@@ -256,117 +205,19 @@
 				</div>
 				
 			</div>
-
-            <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="info-modalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="togglemodal(false)"><span aria-hidden="false">&times;</span></button>
-                            <h2 class="modal-title h3" id="myModalLabel"><a href="https://bigdata.mwa.co.th/">Datalytics by MWA</a> &gt; Water-Eye </h2>
-                        </div>
-                        <div class="modal-body">
-							<p></p>
-                            <h3 style="margin-top:0">เกณฑ์คุณภาพน้ำดิบ</h3>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เกณฑ์แบ่งตามช่วงของค่าความเค็ม (หน่วย : g/l) ดังนี้</p>
-							<table class="table table-condensed" style="width: 80%; margin: 10px 10%">
-                                <thead style="text-align: left;">
-                                    <tr>
-                                        <th>ระดับ</th>
-                                        <th>สี</th>
-                                        <th>เกณฑ์</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td>ปกติ</td>
-                                        <td><span style="color:#23b03f">■ เขียว</span></td>
-                                        <td>น้อยกว่า 400</td>
-                                    </tr>
-                                    <tr>
-                                        <td>เตือยภัย&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                        <td><span style="color:#ebc51a">■ เหลือง</span></td>
-                                        <td>500-700</td>
-                                    </tr>
-                                    <tr>
-                                        <td>วิกฤต</td>
-                                        <td><span style="color:#ff0000">■ แดง</span></td>
-                                        <td>มากกว่า 1200</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-							<p></p>
-
-                            <h3 style="margin-top:0"><br>เกณฑ์คุณภาพน้ำประปา</h3>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เกณฑ์แบ่งตามช่วงของค่าความนำไฟฟ้า (หน่วย : uS/cm) ดังนี้</p>
-							<table class="table table-condensed" style="width: 80%; margin: 10px 10%">
-                                <thead style="text-align: left;">
-                                    <tr>
-                                        <th>ระดับ</th>
-                                        <th>สี</th>
-                                        <th>เกณฑ์</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td>ไม่กร่อย</td>
-                                        <td><span style="color:#23b03f">■ เขียว</span></td>
-                                        <td>น้อยกว่า 400</td>
-                                    </tr>
-                                    <tr>
-                                        <td>เริ่มกร่อย</td>
-                                        <td><span style="color:#46b9eb">■ ฟ้า</span></td>
-                                        <td>400-500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>กร่อยเล็กน้อย</td>
-                                        <td><span style="color:#ebc51a">■ เหลือง</span></td>
-                                        <td>500-700</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>กร่อยปานกลาง</td>
-                                        <td><span style="color:#ff8f00">■ ส้ม</span></td>
-                                        <td>700-1200</td>
-                                    </tr>
-                                    <tr>
-                                        <td>กร่อยมาก</td>
-                                        <td><span style="color:#ff0000">■ แดง</span></td>
-                                        <td>มากกว่า 1200</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <h3 class="">ข้อมูลคาดการณ์ความเค็ม</h3>
-                            <p>สามารถโหลด<a href="https://bigdata.mwa.co.th/data-service/water-salinity/predict30d?station=สถานีสำแล&export=csv" download="export.csv">ชุดข้อมูล</a>ได้ที่นี่ </p>
-                            
-                        </div>
-                        <div class="modal-footer" style="margin-top: 0px;padding: 5px 10px;"><span class="pull-left">MWA Big Data 64</span><span></span> <button type="button" class="btn btn-default btn-right" data-dismiss="modal" style="padding:0px 6px;margin-top:-2px;" onclick="togglemodal(false)">Close</button></div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
+			<div id="left" class="box">
+				<div class="loader">
+				  <div class="bar1"></div>
+				  <div class="bar2"></div>
+				  <div class="bar3"></div>
+				  <div class="bar4"></div>
+				  <div class="bar5"></div>
+				  <div class="bar6"></div>
+				</div>
+				<div id="container"></div>
+				<div id="TimeDisplay"><span id="status"><span style="color:#f00">◉ </span></span> <span id="datetime"></span></div>
+			</div>
 			<script type="text/javascript">
-				let modalShown=false
-				function togglemodal(toggle) {
-					// if (toggle==true)	modalShown = !modalShown
-					// else madalShown = false
-					let infomodal = document.getElementById("info-modal")
-					if (toggle==true) {
-						// console.log(">>>> open modal : ", infomodal)
-						infomodal.style.display = "block";
-						infomodal.classList.add("in")
-						infomodal.setAttribute("aria-hidden", "false");
-
-					} else {
-						// console.log(">>>> close modal : ", infomodal)
-						infomodal.style.display = "none";
-						infomodal.classList.remove;("in")
-						infomodal.setAttribute("aria-hidden", "true");
-					}
-				}
 
             	let currentdayNumber;
 				// let dayNumber;
@@ -602,7 +453,7 @@
 
 							    <tbody>
 							        <tr>
-							            <td>COND:ค่าความนำไฟฟ้า</td>
+							            <td>CD:ค่าความนำไฟฟ้า</td>
 							            <td>▸ `+ dataset.tables[0].rows[b[0]]["P2 "] +`</td>
 							        </tr>
 				                    <tr>
@@ -618,23 +469,23 @@
 			    	} else {
 			    		var CD=[],
 			    			SL=[],
-			    			PH=[],
+			    			FL=[],
 			    			DO=[],
 			    			TB=[];
 			    		var CD_warn = [], 
 			    			SL_warn = [], 
-			    			PH_warn = [], 
+			    			FL_warn = [], 
 			    			DO_warn = [], 
 			    			TB_warn = [];
 			    		for (i in b) {
 			    			SL.push(dataset.tables[0].rows[b[i]]["P1"]);
 			    			CD.push(dataset.tables[0].rows[b[i]]["P2 "]);
-			    			PH.push(dataset.tables[0].rows[b[i]]["P3 "]);
+			    			FL.push(dataset.tables[0].rows[b[i]]["P3 "]);
 			    			DO.push(dataset.tables[0].rows[b[i]]["P4 "]);
 			    			TB.push(dataset.tables[0].rows[b[i]]["P5 "]);
 			    			SL_warn.push(dataset.tables[0].rows[b[i]]["P1_warning"]);
 			    			CD_warn.push(dataset.tables[0].rows[b[i]]["P2_warning"]);
-			    			PH_warn.push(dataset.tables[0].rows[b[i]]["P3_warning"]);
+			    			FL_warn.push(dataset.tables[0].rows[b[i]]["P3_warning"]);
 			    			DO_warn.push(dataset.tables[0].rows[b[i]]["P4_warning"]);
 			    			TB_warn.push(dataset.tables[0].rows[b[i]]["P5_warning"]);
 			    		}
@@ -654,11 +505,11 @@
 							    </thead>
 							    <tbody>
 							        <tr>
-							            <td>COND:ค่าความนำไฟฟ้า</td>
+							            <td>CD:ค่าความนำไฟฟ้า</td>
 							            <td>▸</td>
-							            <td>| `+ parseInt(arrMin(CD)) +`</td>
-							            <td>| `+ parseInt(arrAvg(CD)) +`</td>
-							            <td>| `+ parseInt(arrMax(CD)) +`</td>
+							            <td>| `+ arrMin(CD) +`</td>
+							            <td>| `+ arrAvg(CD) +`</td>
+							            <td>| `+ arrMax(CD) +`</td>
 							            <td>| `+ ((arrSum(CD_warn)>0)?'<span style="color:#FF0000;">'+arrSum(CD_warn)+' ชม.</span>':'-') +`</td>
 							        </tr>
 							        <tr>
@@ -670,20 +521,20 @@
 							            <td>| `+ ((arrSum(SL_warn)>0)?'<span style="color:#FF0000;">'+arrSum(SL_warn)+' ชม.</span>':'-') +`</td>
 							        </tr>
 							        <tr>
-							            <td>pH:ค่ากรด-ด่าง</td>
+							            <td>FL:อัตราการไหล</td>
+							            <td>▸</td>
+							            <td>| `+ arrMin(FL) +`</td>
+							            <td>| `+ arrAvg(FL) +`</td>
+							            <td>| `+ arrMax(FL) +`</td>
+							            <td>| `+ ((arrSum(FL_warn)>0)?'<span style="color:#FF0000;">'+arrSum(FL_warn)+' ชม.</span>':'-') +`</td>
+							        </tr>
+							        <tr>
+							            <td>DO:ปริมาณออกซิเจน</td>
 							            <td>▸</td>
 							            <td>| `+ arrMin(DO) +`</td>
 							            <td>| `+ arrAvg(DO) +`</td>
 							            <td>| `+ arrMax(DO) +`</td>
 							            <td>| `+ ((arrSum(DO_warn)>0)?'<span style="color:#FF0000;">'+arrSum(DO_warn)+' ชม.</span>':'-') +`</td>
-							        </tr>
-							        <tr>
-							            <td>DO:ปริมาณออกซิเจน</td>
-							            <td>▸</td>
-							            <td>| `+ arrMin(PH) +`</td>
-							            <td>| `+ arrAvg(PH) +`</td>
-							            <td>| `+ arrMax(PH) +`</td>
-							            <td>| `+ ((arrSum(PH_warn)>0)?'<span style="color:#FF0000;">'+arrSum(PH_warn)+' ชม.</span>':'-') +`</td>
 							        </tr>
 							        <tr>
 							            <td>TB:ระดับความขุ่น</td>
@@ -803,17 +654,17 @@
 					// .always(function() { alert("complete"); });
 				}
 
-				refresh_interval = 1200; 	// initial update interval 30 นาที
-				re_refresh_interval = 300;   // update interval in case of fail update 10 นาที
+				refresh_interval = 1800; 	// initial update interval 30 นาที
+				re_refresh_interval = 600;   // update interval in case of fail update 10 นาที
 				is_updated = false;
-				count = 1200
+				count = 1800
 				var formatTime = d3.time.format("%d %B %Y %H:%M:%S");
 				function tick() {
 					setTimeout(tick, 1000 - Date.now() % 1000);
 					var now = new Date;
 					document.getElementById("datetime").innerHTML = toThaiDateString(now,'date') + ' ' + toThaiDateString(now,'time')+" ▸ อัปเดต "+ Math.floor(count/60) + " นาทีที่ผ่านมา";
 					count+=1;
-					// update every 20 min and every 5 min if update fail
+					// update every 30 min and every 10 min if update fail
 					if ((count >= refresh_interval)&&(count%re_refresh_interval == 1)) {
 						setLoader("visible");
 						update()

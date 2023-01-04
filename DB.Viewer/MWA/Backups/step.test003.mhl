@@ -1,0 +1,747 @@
+{
+ "version": "-Tunchz/FWTT-",
+ "header_image": "",
+ "dashboard_title": "step.test",
+ "avatar": "https://tunchz.github.io/DB.Builder/img/Mholan_Logo.png",
+ "min_cols": 14,
+ "background_image": "https://tunchz.github.io/PoC/MWA/static/diagonal-noise_dark.png",
+ "background_color": "#212121",
+ "widget_background_color": "#383838aa",
+ "widget_border_color": "#FFFFFF",
+ "widget_border_width": 0,
+ "widget_border_radius": "0",
+ "widget_background_image": "",
+ "fullscreen_auto_topmargin": true,
+ "fullscreen_topmargin": 0,
+ "allow_edit": true,
+ "plugins": [],
+ "panes": [
+  {
+   "width": 1,
+   "row": {
+    "4": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 1,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "14": 1,
+    "16": 1
+   },
+   "col": {
+    "4": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 1,
+    "11": 1,
+    "12": 1,
+    "13": 2,
+    "14": 1,
+    "16": 1
+   },
+   "col_width": 1,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "picture",
+     "settings": {
+      "src": "https://tunchz.github.io/CIA/MWALogo.png",
+      "margin": 0,
+      "refresh": 0,
+      "height_block": 2
+     }
+    }
+   ]
+  },
+  {
+   "width": 13,
+   "row": {
+    "4": 1,
+    "6": 1,
+    "7": 3,
+    "8": 1,
+    "9": 1,
+    "10": 1,
+    "11": 3,
+    "12": 3,
+    "13": 3,
+    "14": 1,
+    "16": 1
+   },
+   "col": {
+    "4": 2,
+    "6": 2,
+    "7": 1,
+    "8": 2,
+    "9": 2,
+    "10": 2,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "14": 2,
+    "16": 2
+   },
+   "col_width": 13,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "",
+      "value": "return \"<div style='margin-top:5px;'>STEP TEST ▸ \"+ datasources[\"RTU_F&P\"][\"option name\"] +\"</div>\"",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "26",
+      "font_align": "center",
+      "font_color": "#FFFFFF",
+      "timeframe": 60,
+      "mark_color": "#FF9900",
+      "maxmin_color": "#00FF00",
+      "height_block": 1,
+      "_color": [
+       "#FF9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 10,
+   "row": {
+    "4": 2,
+    "6": 2,
+    "7": 2,
+    "8": 2,
+    "9": 2,
+    "10": 2,
+    "11": 2,
+    "12": 1,
+    "13": 1,
+    "14": 2,
+    "16": 2
+   },
+   "col": {
+    "4": 2,
+    "6": 2,
+    "7": 2,
+    "8": 2,
+    "9": 2,
+    "10": 2,
+    "11": 2,
+    "12": 2,
+    "13": 3,
+    "14": 2,
+    "16": 2
+   },
+   "col_width": 10,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "text_alternative_widget",
+     "settings": {
+      "value": "//return toThaiDateString(datasources[\"RTU_F&P\"][\"result\"][\"pressure\"][\"log_dt\"],\"date\")+\" <span style='font-size:30px;'>\"+toThaiDateString(datasources[\"RTU_F&P\"][\"result\"][\"pressure\"][\"log_dt\"],\"time\")+\"</span>\";\n\n//return '<div><span style=\"font-size: 12px\"></span>'+datasources[\"RTU_F&P\"][\"result\"][\"pressure\"][\"log_dt\"]+'<div>'\n\nreturn toThaiDateString(datasources[\"นาฬิกา\"][\"date_object\"],\"date\")+\"&nbsp;&nbsp;&nbsp;&nbsp;\"",
+      "units": "var d = datasources[\"RTU_F&P\"][\"option name\"];\nvar n = new Date();\n\nreturn \"<div style='float:right;'>\"+\"อัปเดตล่าสุด@\"+toThaiDateString(null,\"time\")+\"</div>\"",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "24",
+      "font_align": "center",
+      "font_color": "#FFFFFF",
+      "timeframe": 60,
+      "mark_color": "#FF9900",
+      "maxmin_color": "#00FF00",
+      "height_block": 1,
+      "_color": [
+       "#FF9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 3,
+   "row": {
+    "4": 1,
+    "6": 2,
+    "7": 1,
+    "8": 2,
+    "9": 2,
+    "10": 2,
+    "11": 1,
+    "12": 2,
+    "13": 2,
+    "14": 2,
+    "16": 2
+   },
+   "col": {
+    "4": 4,
+    "6": 5,
+    "7": 2,
+    "8": 6,
+    "9": 6,
+    "10": 6,
+    "11": 2,
+    "12": 10,
+    "13": 11,
+    "14": 12,
+    "16": 12
+   },
+   "col_width": 3,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": null,
+   "widgets": [
+    {
+     "type": "url_option_selector_widget",
+     "settings": {
+      "title": "<div style=\"font-size:12px;padding-left:3px;padding-top:15px\">เลือก RTU<div>",
+      "datasource_name": "RTU_F&P",
+      "default_option": "1",
+      "font_size": "16",
+      "font_align": "left",
+      "font_color": "#FFFFFF",
+      "line_color": "#FFFFFF",
+      "line_thickness": 1,
+      "background_color": "",
+      "left_margin": "80",
+      "right_margin": "10",
+      "height_block": 1
+     }
+    }
+   ]
+  },
+  {
+   "width": 7,
+   "row": {
+    "4": 3,
+    "6": 3,
+    "7": 4,
+    "8": 3,
+    "9": 3,
+    "10": 3,
+    "11": 4,
+    "12": 4,
+    "13": 4,
+    "14": 3,
+    "16": 3
+   },
+   "col": {
+    "4": 1,
+    "6": 4,
+    "7": 1,
+    "8": 5,
+    "9": 5,
+    "10": 5,
+    "11": 1,
+    "12": 1,
+    "13": 2,
+    "14": 8,
+    "16": 8
+   },
+   "col_width": 7,
+   "transparent_bg": true,
+   "border_radius": "5",
+   "border_width": "1",
+   "border_color": "#ffffff",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<span style='float:left;font-size:20px;margin-bottom:-20px;margin-left:10px;'>Pressure</span><span style='float:right;font-size:20px;margin-bottom:-20px;margin-right:10px;'>kg/cm2</span>",
+      "value": "return parseFloat(datasources[\"RTU_F&P\"][\"result\"][\"pressure\"][\"value\"]).toFixed(2)",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "60",
+      "font_align": "center",
+      "font_color": "#FFFFFF",
+      "timeframe": 60,
+      "mark_color": "#FF9900",
+      "maxmin_color": "#00FF00",
+      "height_block": "2",
+      "_color": [
+       "#FF9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 7,
+   "row": {
+    "4": 3,
+    "6": 3,
+    "7": 6,
+    "8": 3,
+    "9": 3,
+    "10": 3,
+    "11": 6,
+    "12": 6,
+    "13": 6,
+    "14": 3,
+    "16": 3
+   },
+   "col": {
+    "4": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 1,
+    "11": 1,
+    "12": 1,
+    "13": 2,
+    "14": 1,
+    "16": 1
+   },
+   "col_width": 7,
+   "transparent_bg": true,
+   "border_radius": "5",
+   "border_width": "1",
+   "border_color": "#ffffff",
+   "widgets": [
+    {
+     "type": "text_widget",
+     "settings": {
+      "title": "<span style='float:left;font-size:20px;margin-bottom:-20px;margin-left:10px;'>Flow</span><span style='float:right;font-size:20px;margin-bottom:-20px;margin-right:10px;'>m3/s</span>",
+      "value": "return parseFloat(datasources[\"RTU_F&P\"][\"result\"][\"flow\"][\"value\"]).toFixed(2)",
+      "units": "",
+      "animate": true,
+      "with_comma": false,
+      "font_size": "60",
+      "font_align": "center",
+      "font_color": "#FFFFFF",
+      "timeframe": 60,
+      "mark_color": "#FF9900",
+      "maxmin_color": "#00FF00",
+      "height_block": "2",
+      "_color": [
+       "#FF9900"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "width": 14,
+   "row": {
+    "4": 5,
+    "6": 5,
+    "7": 8,
+    "8": 5,
+    "9": 5,
+    "10": 5,
+    "11": 8,
+    "12": 8,
+    "13": 8,
+    "14": 5,
+    "16": 5
+   },
+   "col": {
+    "4": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 1,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "14": 1,
+    "16": 1
+   },
+   "col_width": 14,
+   "transparent_bg": false,
+   "border_radius": null,
+   "border_width": "",
+   "border_color": "",
+   "widgets": [
+    {
+     "type": "html_table",
+     "settings": {
+      "html": "var temp = datasources[\"RTU_F&P\"][\"result\"][\"flow\"][\"value\"]\nif (datasourceOptions[\"RTU_F&P\"][\"current\"] !== datasourceOptions[\"RTU_F&P\"].selectedOption) {\n    datasourceOptions[\"RTU_F&P\"][\"current\"] = datasourceOptions[\"RTU_F&P\"].selectedOption\n    var optionName = datasourceOptions[\"RTU_F&P\"][\"optionNameArray\"][option]\n    console.log(\">>>> Load data for : \",optionName)\n    var container = $('<div id=\"st-container\" style=\"height:100%;width:100%;\"></div>')\n    var tableContainer =$('<div id=\"table-container\"></div>')\n    container.append(tableContainer)\n    const n = item => item!=''?item:'-';\n    const r = item => item?(item).toFixed(2):'-';\n    const d = str => {\n        if (str) {\n            try {\n                let date=str.split('-')\n                let time=date[3].split('.')\n                let date_str = date[0]+'-'+date[1]+'-'+date[2]+' '+time[0]+':'+time[1]+':'+time[2]\n                return date_str; //toThaiDateString(new Date(date_str),'datetime')\n            } catch {\n                return str.substring(0,16);\n     \t\t}\n        } else {\n            return \"-\";\n        }\n    }\n    const buildTable = (labels, objects, container) => {\n       var table = $('<table id=\"customizeTable\" class=\"display\" style=\"width:100%;height:100%\">')//document.createElement('table');\n       var thead = document.createElement('thead');\n       var tbody = document.createElement('tbody');\n       var theadTr = document.createElement('tr');\n       for (var i = 0; i < labels.length; i++) {\n          var theadTh = document.createElement('th');\n          theadTh.innerHTML = labels[i];\n          theadTr.appendChild(theadTh);\n       }\n       thead.appendChild(theadTr);\n       table.append(thead);\n       for (j = 0; j < objects.length; j++) {\n          var tbodyTr = document.createElement('tr');\n          for (k = 0; k < labels.length; k++) {\n             var tbodyTd = document.createElement('td');\n             tbodyTd.innerHTML = objects[j][labels[k].toLowerCase()];\n             tbodyTr.appendChild(tbodyTd);\n          }\n          tbody.appendChild(tbodyTr);\n       }\n       table.append(tbody);\n       container.append(table); \n    }\n    \n\tconst prep_data = (st) => {\n    return st.map((rec)=>{\n        console.log(\"--- rec : \",rec);\n        \n        let job_code_prep = `<div style='width:100%; height:100%;padding:5px;'><div style='width:calc(100% - 10px); height:calc(100% - 25px);background-color:#ffffff05;vertical-align:middle;text-align:center;padding-top:25px'>`+rec.job_code+`</div></div>`\n        let st_detail_prep = `\n<style>\n.st_title {\ncolor:#aaa;\nfont-size:10px;\n}\n.st_value {\ncolor:#fff;\nfloat:right;\n}\n.sec1,.sec2,.sec3,.sec4 {\nwidth:25%;\nfloat:left;\npadding: 5px 7px;\n}\n.sec2,.sec3,.sec4 {\nborder-left:1px solid #0003;\nmargin: 3px 0;\n}\n.sec4 {\nfloat:none;\nmargin-left:auto\n}\n.sec1 {\nwidth:12%;\n}\n.sec1>.st_value {\nfont-size:28px;\nfloat:none;\ntext-align:center;\n}\n</style>\n<div style='width:100%; height:100%; background-color:#ffffff05;font-size:12px;text-align:left;'>`\n        rec.st_detail = rec.st_detail.sort(function (a, b) {return a.STEP_NO - b.STEP_NO;});\n        rec.st_detail.map((item)=>{\n        st_detail_prep += \n`<div style='border-top:1px solid #aaa5; border-bottom:1px solid #aaa5; width:100%;display:block;margin-bottom:-1px;'>\n<div class='sec2'style='width:35%;border-left:0px'>\n<div class='sec1' style='width:100%;padding:0 0 15% 0;'>\n<span class='st_title'>Step No </span><br><div class='st_value' style='padding-right:50%;'>`+item.STEP_NO+`</div>\n</div>\n<span class='st_title'>Total Meter </span><span class='st_value'>`+r(item.TOTAL_METER)+`</span><br>\n<span class='st_title'>Pipe Length </span><span class='st_value'>`+r(item.PIPE_LENGTH)+`</span><br>\n<span class='st_title'>Leak Rate </span><span class='st_value'>`+r(item.LEAK_RATE)+`</span>\n</div>\n<div class='sec3' style='width:25%;'>\n<span class='st_title'>M1 </span><span class='st_value'>`+r(item.M1)+`</span><br>\n<span class='st_title'>M2 </span><span class='st_value'>`+r(item.M2)+`</span><br>\n<span class='st_title'>M3 </span><span class='st_value'>`+r(item.M3)+`</span><br>\n<span class='st_title'>M4 </span><span class='st_value'>`+r(item.M4)+`</span><br>\n<span class='st_title'>M5 </span><span class='st_value'>`+r(item.M5)+`</span><br>\n<span class='st_title'>M6 </span><span class='st_value'>`+r(item.M6)+`</span><br>\n<span class='st_title'>M7 </span><span class='st_value'>`+r(item.M7)+`</span><br>\n<span class='st_title'>M8 </span><span class='st_value'>`+r(item.M8)+`</span>\n</div>\n<div class='sec4' style='width:27%;padding-top:4px;'>\n<span class='st_title'>M1 NNU </span><span class='st_value'>`+r(item.M1_NNU)+`</span><br>\n<span class='st_title'>M2 NNU </span><span class='st_value'>`+r(item.M2_NNU)+`</span><br>\n<span class='st_title'>M3 NNU </span><span class='st_value'>`+r(item.M3_NNU)+`</span><br>\n<span class='st_title'>M4 NNU </span><span class='st_value'>`+r(item.M4_NNU)+`</span><br>\n<span class='st_title'>M5 NNU </span><span class='st_value'>`+r(item.M5_NNU)+`</span><br>\n<span class='st_title'>M6 NNU </span><span class='st_value'>`+r(item.M6_NNU)+`</span><br>\n<span class='st_title'>M7 NNU </span><span class='st_value'>`+r(item.M7_NNU)+`</span><br>\n<span class='st_title'>M8 NNU </span><span class='st_value'>`+r(item.M8_NNU)+`</span>\n</div>\n</div>`\n        });\n\t\tst_detail_prep +=`</div>`;\n\n\t\tlet st_valve_prep =  `\n<div style='width:100%; height:100%; background-color:#ffffff05;font-size:12px;text-align:left;'>`\n        rec.st_valve = rec.st_valve.sort(function (a, b) {return a.STEP_NO - b.STEP_NO;});\n        rec.st_valve.map((item)=>{\n        st_valve_prep +=\n            `<div style='border-top:1px solid #aaa5; border-bottom:1px solid #aaa5; width:100%;display:block;margin-bottom:-1px;'>\n<div class='sec1'>\n<span class='st_title'>Step No </span><br><div class='st_value'>`+item.STEP_NO+`</div>\n</div>\n<div class='sec2' style='width:20%;'>\n<span class='st_title'>Avg. Flow </span><span class='st_value'>`+r(item.AVERAGE_FLOW)+`</span><br>\n<span class='st_title'>Valve Type </span><span class='st_value'>`+(item.VALVE_TYPE)+`</span><br>\n<span class='st_title'>Equip Code </span><span class='st_value'>`+(item.EQUIP_NAME)+`</span><br>\n<span class='st_title'></span><span class='st_value'>`+(item.EQUIP_CODE)+`</span>\n</div>\n<div class='sec3' style='width:28%;'>\n<span class='st_title'>Open Cycle </span><span class='st_value'>`+(item.OPEN_CYCLE)+`</span><br>\n<span class='st_title'>Open Status </span><span class='st_value'>`+n(item.OPEN_STATUS)+`</span><br>\n<span class='st_title'>Open Date </span><span class='st_value' style='font-size:10px;'>`+d(item.OPEN_DT)+`</span><br>\n<span class='st_title'>Begin Cal </span><span class='st_value' style='font-size:10px;'>`+d(item.BEG_CALC_DT)+`</span>\n</div>\n<div class='sec4' style='width:28%;'>\n<span class='st_title'>Close Cycle </span><span class='st_value'>`+(item.CLOSE_CYCLE)+`</span><br>\n<span class='st_title'>Close Status </span><span class='st_value'>`+n(item.CLOSE_STATUS)+`</span><br>\n<span class='st_title'>Close Date </span><span class='st_value' style='font-size:10px;'>`+d(item.CLOSE_DT)+`</span><br>\n<span class='st_title'>End Cal </span><span class='st_value' style='font-size:10px;'>`+d(item.END_CALC_DT)+`</span>\n</div>\n</div>`\n        });\n\t\tst_valve_prep +=`</div>`;\n        \n        \n        return {\"job code\":job_code_prep,\"  step-test detail  \":st_detail_prep,\"     step-test valve     \":st_valve_prep};\n    })\n    \n    //console.log('>>>>> st_prep : ',st_prep) \n     \n    }\n    \n    const st_jobs = () => {\n        return new Promise(function (resolve, reject) {\n\n            $.get( \"https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=steptest&DM=\"+optionName, (data)=>{\n                //console.log(\">>>>> data : \",data)\n                data.st_detail = data.st_detail.filter(item=>item.JOB_CODE)\n                job_array = data.st_detail?.map(item=>item.JOB_CODE)\n                job_array = job_array.filter((item, pos) => job_array.indexOf(item) == pos)\n                console.log(\">>> job_array : \",job_array)\n                let jobs = job_array?.map(item=>{\n                    //if (item) {\n                        return {\n                            'job_code':item,\n                            'st_detail':data.st_detail.filter(i=>(i.JOB_CODE==item)), //item,\n                            'st_valve':data.st_valve.filter(i=>(i.JOB_CODE==item))\n                        }\n                    //}\n                })\n                console.log(\">>> jobs : \",jobs)\n                resolve(jobs);\n            }).fail((err)=>{\n                reject(err);\n            })\n        });\n    }\n\n    const get_st = async () => {\n        const st = await st_jobs();\n        console.log(\">>> result : \",st)\n        st_prep = prep_data(st);\n\n        buildTable(['Job Code','  Step-Test Detail  ','     Step-Test Valve     '], st_prep, tableContainer);\n\n        setTimeout(()=>{\n            $(document).ready(function() {\n                $('#customizeTable').DataTable({\n                    //\"data\": objects1,\n                    //\"columns\": labels1,\n                    \"paging\":   true,\n                    \"ordering\": true,\n                    \"order\": [[ 0, \"desc\" ]],\n                    \"info\":     false,\n                    \"searching\": true,\n                    \"scrollY\" : true,\n                    \"responsive\": true,\n                    \"info\": true,\n                    //Materail Design\n                    //\"autoWidth\": true,\n                    //\"columnDefs\": [\n                    //    {\n                    //        \"targets\": [\"_all\"],\n                    //        \"className\": \"mdc-data-table__cell\"\n                    //    }\n                    //],\n\n                } );\n            });\n        },0);         \n    }\n\n    \n    get_st();\n\n    return container; //tableContainer;\n\n}",
+      "enabled_fullscreen": true,
+      "height": 12
+     }
+    }
+   ]
+  }
+ ],
+ "datasources": [
+  {
+   "name": "RTU_F&P",
+   "type": "custom_scrape_api_multiple_options",
+   "settings": {
+    "name": "RTU_F&P",
+    "url_array": [
+     {
+      "Option Name": "DM-03-01-01-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-01-01"
+     },
+     {
+      "Option Name": "DM-03-01-01-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-01-02"
+     },
+     {
+      "Option Name": "DM-03-01-02-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-02-01"
+     },
+     {
+      "Option Name": "DM-03-01-02-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-02-02"
+     },
+     {
+      "Option Name": "DM-03-01-02-03",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-02-03"
+     },
+     {
+      "Option Name": "DM-03-01-03-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-03-01"
+     },
+     {
+      "Option Name": "DM-03-01-04-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-04-01"
+     },
+     {
+      "Option Name": "DM-03-01-05-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-05-01"
+     },
+     {
+      "Option Name": "DM-03-01-05-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-05-02"
+     },
+     {
+      "Option Name": "DM-03-01-06-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-06-01"
+     },
+     {
+      "Option Name": "DM-03-01-06-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-06-02"
+     },
+     {
+      "Option Name": "DM-03-01-07-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-07-01"
+     },
+     {
+      "Option Name": "DM-03-01-08-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-08-01"
+     },
+     {
+      "Option Name": "DM-03-01-09-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-01-09-01"
+     },
+     {
+      "Option Name": "DM-03-02-01-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-02-01-01"
+     },
+     {
+      "Option Name": "DM-03-02-02-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-02-02-01"
+     },
+     {
+      "Option Name": "DM-03-02-03-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-02-03-01"
+     },
+     {
+      "Option Name": "DM-03-02-04-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-02-04-01"
+     },
+     {
+      "Option Name": "DM-03-02-05-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-02-05-01"
+     },
+     {
+      "Option Name": "DM-03-02-07-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-02-07-01"
+     },
+     {
+      "Option Name": "DM-03-02-08-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-02-08-01"
+     },
+     {
+      "Option Name": "DM-03-02-09-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-02-09-01"
+     },
+     {
+      "Option Name": "DM-03-03-01-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-01-01"
+     },
+     {
+      "Option Name": "DM-03-03-01-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-01-02"
+     },
+     {
+      "Option Name": "DM-03-03-02-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-02-01"
+     },
+     {
+      "Option Name": "DM-03-03-02-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-02-02"
+     },
+     {
+      "Option Name": "DM-03-03-03-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-03-01"
+     },
+     {
+      "Option Name": "DM-03-03-03-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-03-02"
+     },
+     {
+      "Option Name": "DM-03-03-05-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-05-01"
+     },
+     {
+      "Option Name": "DM-03-03-06-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-06-01"
+     },
+     {
+      "Option Name": "DM-03-03-06-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-06-02"
+     },
+     {
+      "Option Name": "DM-03-03-07-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-07-01"
+     },
+     {
+      "Option Name": "DM-03-03-07-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-07-02"
+     },
+     {
+      "Option Name": "DM-03-03-08-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-08-01"
+     },
+     {
+      "Option Name": "DM-03-03-09-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-09-01"
+     },
+     {
+      "Option Name": "DM-03-03-10-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-10-01"
+     },
+     {
+      "Option Name": "DM-03-03-10-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-10-02"
+     },
+     {
+      "Option Name": "DM-03-03-11-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-11-01"
+     },
+     {
+      "Option Name": "DM-03-03-11-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-11-02"
+     },
+     {
+      "Option Name": "DM-03-03-12-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-12-01"
+     },
+     {
+      "Option Name": "DM-03-03-13-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-03-13-01"
+     },
+     {
+      "Option Name": "DM-03-04-01-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-04-01-01"
+     },
+     {
+      "Option Name": "DM-03-04-02-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-04-02-01"
+     },
+     {
+      "Option Name": "DM-03-04-03-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-04-03-01"
+     },
+     {
+      "Option Name": "DM-03-04-04-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-04-04-01"
+     },
+     {
+      "Option Name": "DM-03-04-04-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-04-04-02"
+     },
+     {
+      "Option Name": "DM-03-04-05-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-04-05-01"
+     },
+     {
+      "Option Name": "DM-03-04-06-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-04-06-01"
+     },
+     {
+      "Option Name": "DM-03-04-07-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-04-07-01"
+     },
+     {
+      "Option Name": "DM-03-04-08-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-04-08-01"
+     },
+     {
+      "Option Name": "DM-03-05-01-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-05-01-01"
+     },
+     {
+      "Option Name": "DM-03-05-02-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-05-02-01"
+     },
+     {
+      "Option Name": "DM-03-05-03-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-05-03-01"
+     },
+     {
+      "Option Name": "DM-03-05-04-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-05-04-01"
+     },
+     {
+      "Option Name": "DM-03-05-05-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-05-05-01"
+     },
+     {
+      "Option Name": "DM-03-05-06-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-05-06-01"
+     },
+     {
+      "Option Name": "DM-03-05-07-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-05-07-01"
+     },
+     {
+      "Option Name": "DM-03-05-08-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-05-08-01"
+     },
+     {
+      "Option Name": "DM-03-05-09-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-05-09-01"
+     },
+     {
+      "Option Name": "DM-03-05-09-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-05-09-02"
+     },
+     {
+      "Option Name": "DM-03-05-10-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-05-10-01"
+     },
+     {
+      "Option Name": "DM-03-05-11-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-05-11-01"
+     },
+     {
+      "Option Name": "DM-03-05-12-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-05-12-01"
+     },
+     {
+      "Option Name": "DM-03-05-12-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-05-12-02"
+     },
+     {
+      "Option Name": "DM-03-06-01-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-01-01"
+     },
+     {
+      "Option Name": "DM-03-06-01-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-01-02"
+     },
+     {
+      "Option Name": "DM-03-06-02-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-02-01"
+     },
+     {
+      "Option Name": "DM-03-06-02-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-02-02"
+     },
+     {
+      "Option Name": "DM-03-06-03-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-03-01"
+     },
+     {
+      "Option Name": "DM-03-06-03-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-03-02"
+     },
+     {
+      "Option Name": "DM-03-06-03-03",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-03-03"
+     },
+     {
+      "Option Name": "DM-03-06-04-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-04-01"
+     },
+     {
+      "Option Name": "DM-03-06-04-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-04-02"
+     },
+     {
+      "Option Name": "DM-03-06-05-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-05-01"
+     },
+     {
+      "Option Name": "DM-03-06-05-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-05-02"
+     },
+     {
+      "Option Name": "DM-03-06-06-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-06-01"
+     },
+     {
+      "Option Name": "DM-03-06-06-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-06-02"
+     },
+     {
+      "Option Name": "DM-03-06-07-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-07-01"
+     },
+     {
+      "Option Name": "DM-03-06-08-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-08-01"
+     },
+     {
+      "Option Name": "DM-03-06-08-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-08-02"
+     },
+     {
+      "Option Name": "DM-03-06-09-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-09-01"
+     },
+     {
+      "Option Name": "DM-03-06-10-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-10-01"
+     },
+     {
+      "Option Name": "DM-03-06-11-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-11-01"
+     },
+     {
+      "Option Name": "DM-03-06-12-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-12-01"
+     },
+     {
+      "Option Name": "DM-03-06-13-01",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-13-01"
+     },
+     {
+      "Option Name": "DM-03-06-13-02",
+      "Url": "https://bigdata.mwa.co.th/data-service/db-builder/web2text?wlma=onlinedata&branch=all&dma=all&dm=DM-03-06-13-02"
+     }
+    ],
+    "script_text": "//var optionName = datasourceOptions[\"RTU_F&P\"][\"optionNameArray\"][option]\nvar finalResult = {}\nfinalResult.flow = response.filter(e => e.log_type == 'F')[0]\nfinalResult.pressure = response.filter(e => e.log_type == 'P')[0]\nreturn finalResult;",
+    "refresh": 60
+   }
+  },
+  {
+   "name": "นาฬิกา",
+   "type": "clock",
+   "settings": {
+    "name": "นาฬิกา",
+    "refresh": 1
+   }
+  }
+ ],
+ "columns": 14,
+ "theme": "default"
+}
