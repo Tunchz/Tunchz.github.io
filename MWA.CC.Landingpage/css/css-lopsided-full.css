@@ -1,0 +1,1332 @@
+@font-face {
+	font-family: 'Kanit'; /*a name to be used later*/
+	src: url('https://maholan.app/files/fonts/Kanit/Kanit-Regular.ttf'); /*URL to font*/
+  }
+/* 
+* {
+font-family: Kanit !important;
+} */
+
+#moneywinselections {
+	margin-left: 0 !important;
+	top:75px !important;
+	left:75px !important;
+}
+.sla1 {
+	color:#54D62C;
+}
+
+.sla2 {
+	color:#FFC107;
+}
+
+.sla3 {
+	color:#FF4842;
+}
+.sla4 {
+	color:#C81700;
+}
+
+html{
+    height: 100%;
+    overflow-x: hidden;
+    background: #ddd
+}
+
+.curtains{
+    width: 100%;
+    z-index:1;
+    position:relative;
+}
+#list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#list>li {
+	overflow: hidden;
+	position: relative;
+	z-index: 1000;
+}
+
+
+body {
+	background: #ddd;
+	margin: 0;
+	padding: 0;
+}
+
+#overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 2000;
+}
+#overlaySVG {
+	position: absolute;
+}
+#introSVG, #onepercentSVG {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+h1, h2, h3, h4, h5, h6, .sansserif, .moneyLabel {
+	font-family: Kanit !important;
+	/* font-family: "tablet-gothic-compressed",sans-serif; */
+	font-weight: 600;
+}
+
+.serif {
+	font-family: "abril-display",sans-serif;
+	font-weight: 600;
+}
+.geo {
+	font-family: Georgia, Times, "Times New Roman", serif;
+
+}
+.primaryColor {
+	color: #31A2E2;
+}
+
+.primaryColor.b1 {
+	font-size: 2.5em;
+}
+section {
+	padding: 0;
+	overflow: hidden;
+	background: #ffffff;
+	position: relative;
+}
+.pane, .intropane {
+	width: 18em;
+	margin: 0 auto;
+	padding: 3em 0;
+}
+
+img.respond {
+	width: 100%;
+	max-width: 18em;
+}
+
+/* Thank you */
+#thankyou {
+	width: 18em;
+	margin: 3em auto;
+	position: relative;
+	z-index: 600;
+}
+#thankyou h1 {
+	font-size: 1.8em;
+	line-height: 1.1em;
+	margin: 0;
+}
+#thankyou h1 span {
+	color: #C81700;
+}
+#thankyou p {
+	margin: 0.5em 0;
+	font-size: 1.1em;
+}
+
+/* Section: elections; */
+#elections {
+	background: #f1f1f1;
+	color: #110a09;
+}
+#electionsContainer {
+	display: none;
+}
+#moneywinselections {
+	position: relative;
+	z-index: 600;
+	padding-bottom: 0;
+}
+#moneywinselections p {
+	display: none;
+}
+#moneywinselections h1 {
+	margin-top: 0.5em;
+	font-size: 4.3em;
+	/* letter-spacing: -0.04em; */
+	line-height: 1em;
+	margin-bottom: 0.2em;
+}
+#moneywinselections span.a {
+	margin-top: 0.2em;
+	color: #31A2E2;
+	font-size: 1.4em;
+}
+#moneywinselections span.b {
+	font-size: 0.75em;
+	line-height: 0.8em;
+}
+#moneywinselections span.c {
+	font-size: 1.3em;
+	display: block;
+	margin-top: 0.3em;
+}
+#moneywinselections span.a,
+#moneywinselections span.c {
+	text-transform: uppercase;
+}
+#fourhundredthirtyfive p,
+#ninetyfivepercent p {
+	font-size: 2.2em;
+	line-height: 1.2em;
+}
+#fourhundredthirtyfive em,
+#ninetyfivepercent em {
+	font-style: normal;
+	font-size: 1.7em;
+}
+#ninetyfivepercent span.b {
+	text-transform: uppercase;
+	color: #31A2E2;
+	line-height: 1.5em;
+}
+#ninetyfivepercent span.b1 {
+	
+}
+#ninetyfivepercent em {
+	display: inline-block;
+	/* line-height: 0; */
+	margin-bottom: -0.05em;
+}
+
+
+/* Pop over */
+#electionOverlay {
+	position: absolute;
+	left: -800px;
+	background: #fff;
+	width: 350px;
+	border-radius: 2em;
+	z-index: 700;
+	
+}
+#electionOverlay p {
+	margin: 2em;
+}
+#electionOverlay span {
+	display: block;
+}
+#electionOverlay:after {
+	content: " ";
+	position:absolute;
+	bottom: -25px;
+	left: 165px;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 20px solid #fff;
+
+}
+.race, .moneyLabel {
+	cursor: pointer;
+}
+.moneyLabel {
+	letter-spacing: 0.08em;
+	color: #fff;
+}
+#electionSpender {
+	color: #31A2E2;
+}
+#electionUnderdog {
+	margin-top: 0.2em;
+}
+#electionSpender,
+#electionUnderdog {
+	font-size: 2.5em;
+	text-transform: uppercase;
+	line-height: 1.1em;
+}
+#electionOverlay .serif {
+	font-size: 1.4em;
+	line-height: 1;
+}
+#electionResult {
+	margin: 0.6em 0 -0.2em;
+	text-align: right;
+	font-style: italic;
+}
+#didMoneyWin {
+	text-transform: uppercase;
+	font-size: 3em;
+	font-style: normal;
+}
+
+.didWin #didMoneyWin {
+	color: #31A2E2;
+}
+.didWin {
+	border: 5px solid #b56122;
+}
+#electionOverlay.didWin:after {
+	border-top-color: #b56122;
+}
+
+.didnotWin #didMoneyWin {
+	color: rgb(172,172,172);
+}
+.didnotWin {
+	border: 5px solid #777;
+}
+#electionOverlay.didnotWin:after {
+	border-top-color: #777;
+}
+
+/* Section: onepercent */
+#onepercent {
+	background: #e1e1e1;
+}
+
+#lessthanone {
+	position: relative;
+}
+#lessthanone span {
+	display: inline-block;
+}
+#lessthanone span {
+	font-size: 1.8em;
+}
+#lessthanone span.a {
+	text-indent: 0.2em;
+	margin-bottom: 0.75em;
+	line-height: 1em;
+}
+#lessthanone span.b {
+	text-transform: uppercase;
+	font-size: 2.6em;
+	line-height: 0.7em;
+	letter-spacing: -0.05em;
+}
+#lessthanone span.b1 {
+	font-size: 2.5em;
+}
+#lessthanone span.b2 {
+	font-size: 1.5em;
+}
+#lessthanone span.d {
+	margin-top: 0.4em;
+	text-indent: 0.1em;
+}
+
+#contribute68percent {
+	width: 18em;
+}
+#contribute68percent span.a {
+	line-height: 1;
+	display: block;
+	font-size: 4.5em;
+	text-transform: uppercase;
+	margin-bottom: 0.9em;
+	text-align: center;
+}
+#contribute68percent span.b {
+	font-size: 16.8em;
+	display: block;
+	margin-top: 0.22em;
+	padding-top: 1px;
+	
+	text-indent: -0.03em;
+	line-height: 1;
+	line-height: 0.5em;
+}
+#contribute68percent span.b span {
+	font-size: 0.55em;
+	color: #000;
+}
+#contribute68percent span.c {
+	display: block;
+	text-align: center;
+	font-size: 1.6em;
+	font-style: italic;
+	margin-bottom: 1.4em;
+}
+#contribute68percent span.c span {
+	background: #e1e1e1;
+	padding: 0 0.2em;
+}
+#contribute68percent span.c:after {
+	content: " ";
+	display: block;
+	border-top: 3px solid #000;
+	width: 100%;
+	margin-top: -0.6em;
+}
+#contribute68percent span.d,
+#contribute68percent span.e {
+	text-transform: uppercase;
+	font-size: 3em;
+}
+#contribute68percent span.e {
+	float: right;
+}
+
+/* section: #policies */
+#policies {
+	background: #31A2E2;
+}
+
+#tinyGroup p {
+	font-size: 2.2em;
+	line-height: 1.1em;
+}
+#tinyGroup em {
+	margin-right: 0.1em;
+}
+#lopsidedpolicy {
+	float: none;
+	width: 18em;
+	margin: 4em auto;
+}
+#lopsidedpolicy h1 {
+	font-size: 2em;
+	line-height: 1.3em;
+	position: relative;
+	z-index: 400;
+}
+#lopsidedpolicy span.a {
+	line-height: 1.5em;
+	text-transform: uppercase;
+}
+#lopsidedpolicy span.a,
+#lopsidedpolicy span.c {
+	font-size: 1.1em;
+}
+#lopsidedpolicy span.b {
+	display: block;
+	text-transform: uppercase;
+	font-size: 2em;
+	color: #fff;
+	line-height: 1;
+}
+#washingtonInfluence {
+	display: none;
+}
+.vector_icon {
+	margin: 0 auto;
+	text-align: center;
+}
+
+#ChangeTheFunders p {
+	font-size: 1.8em;
+	line-height: 1.3em;
+}
+
+#ninetyfive {
+	width: 18em;
+}
+#ninetyfive p {
+	font-size: 2.4em;
+}
+#ninetyfive span.c {
+	font-size: 7.6em;
+	letter-spacing: -0.04em;
+	line-height: 1;
+}
+#ninetyfive span.c1 {
+	float: left;
+	position: relative;
+	margin: 0 0.05em 0 0;
+	line-height: 0.65em;
+	color: #31A2E2;
+}
+#ninetyfive span.c2 {
+	position: absolute;
+	top: 0;
+	right: -0.6em;
+	font-size: 0.3em;
+	display: block;
+	line-height: 0.1em;
+	color: #31A2E2;
+}
+#ninetyfive span.d {
+	padding-top: 1em;
+	line-height: 1.2em;
+	display: block;
+}
+#explodingDot {
+	display: none;
+}
+#top-section,
+#guns,
+#food,
+#keystone,
+#cispa,
+#guns .issue, 
+#food .issue, 
+#keystone .issue,
+#cispa .issue {
+	background: #555 url("../images/img-grey_wash_wall.png");
+}
+.issue h2 {
+	color: #000;
+	font-size: 1em;
+	text-align: center;
+}
+.issue span {
+	font-size: 2em;
+	line-height: 1.3em;
+}
+.lobbyingContext {
+	line-height: 2.2em; 
+	color: #000; 
+	margin-bottom: 0.1em; 
+	font-size: 1.62em;
+	display: block;
+}
+.lobbyingStance {
+	font-size: 1.6em;
+	line-height: 1.7em;
+	color: #000;
+	text-transform: uppercase;
+}
+.lobbyingStance span {
+	color: #fff;
+}
+.moneyFor .lobbyingStance {
+	word-spacing: -0.05em;
+}
+.moneyAgainst .lobbyingStance {
+	word-spacing: 0.1em;
+}
+.moneyFor {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.moneyAgainst {
+	padding-top: 0;	
+	padding-bottom: 0;
+}
+.moneyAgainst .lobbyingContext {
+	display: none;
+}
+.lobbyingSum {
+	color: #fff;
+	line-height: 0.9em;
+}
+span.lobbyingSum {
+	font-size: 2em;
+}
+.source {
+	width: 18em;
+	margin: 0 auto 8em;
+}
+.source p {
+	font-size: 0.7em;
+	margin: 0 auto;
+	color: #aaa;
+	line-height: 1.2em
+}
+.source a {
+	color: #ccc;
+}
+
+
+/* section: #rigged; */
+#rigged {
+	background: #31A2E2;
+	color: #fff;
+	letter-spacing: 0.05em;
+}
+#riggedGame {
+	text-align: center;
+}
+
+#riggedGame p {
+	font-size: 2.3em;
+}
+#butWeCanFixIt {
+	color: #C81700;
+}
+
+#InfluenceTheyDeserve {
+	color: #ffffff;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	font-size: 4em;
+	margin-bottom: 0.3em;
+}
+
+#OrdinaryCitizens strong {
+	text-transform: uppercase;
+	font-weight: normal;
+	font-size: 1.4em;
+}
+
+#theAct {
+	background: #999;
+	color: #444;
+}
+
+#theAACA {
+	width: 18em;
+}
+#theAACA h2 {
+	font-size: 2.7em;
+	line-height: 1.4em;
+	letter-spacing: -0.04em;
+	text-transform: uppercase;
+	margin-bottom: 0.1em;
+}
+#theAACA span.a1 {
+	font-size: 3.2em;
+	line-height: 0.7;
+	display: block;
+}
+#theAACA p {
+	margin: 0;
+	line-height: 1.2em;
+	font-size: 1.3em;
+	color: #555;
+}
+
+
+#OrdinaryCitizens strong,
+#OrdinaryCitizens span.a1,
+#theAACA span.a1a,
+#RestoreBalance span.a,
+#ChangeTheFunders strong {
+	color: #C81700;
+}
+#RestoreBalance span.b {
+	color: #101938;
+}
+#ChangeTheFunders strong {
+	font-weight: normal;
+	/*
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	*/
+}
+#ChangeTheFunders em {
+	font-style: normal;
+	color: #C81700;
+	line-height: 1;
+}
+#particles,
+#spreading {
+	display: none;
+}
+
+#ThirtyBillion {
+	max-width: 32.5em;
+}
+#ThirtyBillion p {
+	font-size: 2em;
+	line-height: 1.3em;
+}
+#ThirtyBillion strong {
+	color: #C81700;	
+}
+#ThirtyBillion .c1 {
+	color: #C81700;
+}
+#ThirtyBillion .b1 {
+	font-size: 1.6em;
+	line-height: 1.1em;
+}
+#ThirtyBillion .d {
+	font-size: 0.8em;
+}
+#ThirtyBillion .d a {
+	color: #555;
+}
+#OutMatch {
+	max-width: 25em;
+}
+#OutMatch p {
+	font-size: 2em;
+	line-height: 1;
+}
+#OutMatch strong.c1 {
+	text-transform: uppercase;
+	font-size: 1.98em;
+	line-height: 1;
+	margin-top: 0.2em;
+	display: block;
+	color: #31A2E2;
+}
+#particle {
+	float: right;
+	display: none;
+}
+
+#OneMillionCosponsors {
+	padding: 0.3em 0;
+	margin-top: 1.5em;
+}
+
+#OneMillionCosponsors span.a,
+#OneMillionCosponsors span.b {
+	display: block;
+	line-height: 1.4em;
+}
+#fixCongress,
+#OneMillionCosponsors span.a1,
+#OneMillionCosponsors span.b1 {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+#OneMillionCosponsors span.a2,
+#OneMillionCosponsors span.b2 a {
+	font-size: 1.3em;
+	display: block;
+	line-height: 1;
+	color: #C81700;
+	margin-top: 0.05em;
+}
+
+
+#Share {
+	background: #eaeaea;
+}
+#ShareTitle {
+	padding: 0;
+}
+#ShareTitle h2 {
+	color: #C81700;
+	text-transform: uppercase;
+	line-height: 1;
+}
+#ShareTitle span {
+	display: block;
+}
+#moredetail {
+	font-size: 0.8em;
+	color: #777;
+}
+#moredetail a:link,
+#moredetail a:visited {
+	color: #333;
+}
+#previewContainer {
+	background: #fff;
+	border-radius: 0.7em;
+}
+#shareContainer, #selectContainer {
+	padding: 0.4em 3em;
+}
+#selectContainer {
+	margin-top: 1em;
+	border-top: 1px solid #ccc;
+	padding-bottom: 1em;
+}
+#selectContainer p {
+	margin: 0;
+	font-size: 0.8em;
+	color: #777;
+}
+
+#unknown_user label {
+	display: block;
+	font-family: "tablet-gothic-compressed",sans-serif;
+	margin-top: 1em;
+	color: #C81700;
+}
+#unknown_user input {
+	background: transparent;
+	border: none;
+	border-bottom: 2px dotted #888;
+	width: 100%;
+	font-size: 2em;
+	outline: none;
+}
+#unknown_user input:focus {
+	background: rgba(255,255,255,0.7);
+}
+#unknown_user input:hover {
+	background: rgba(255,255,255,0.3);
+}
+.ak-err {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+button#id_aksubmit {
+	width: 101.5%;
+	border-radius: 0.4em;
+	margin: 1em auto 0;
+	font-size: 1.5em;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	padding: 0.5em 0 0.3em;
+	background: #C81700;
+	background-image:-moz-linear-gradient(top, #C81700, #a31708);
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#C81700), to(#a31708));
+	background-image:-webkit-linear-gradient(top, #C81700, #a31708);
+	background-image:-o-linear-gradient(top, #C81700, #a31708);
+	background-image:linear-gradient(to bottom, #C81700, #a31708);
+	background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffC81700', endColorstr='#ffa31708', GradientType=0);
+	color: #ffffff;
+	font-family: "tablet-gothic-compressed",sans-serif;
+	border: 2px solid #a31708;
+
+}
+
+#overlay {
+	display: none;
+}
+#socialTriggers {
+	font-size: 0.8em;
+}
+#socialTriggers a {
+	text-align: center;
+	display: block;
+	padding: 0.4em 0.7em;
+	margin-bottom: 0.2em;
+	border-radius: 0.2em;
+	text-decoration: none;
+	border: 1px solid #222;
+	box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px 0px inset, rgba(20, 10, 0, 0.0784314) 0px 1px 2px 0px;
+}
+a#FacebookShare {
+	color:#ffffff;
+	text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color:#3c5b9c;
+	background-image:-moz-linear-gradient(top, #4568b2, #30487b);
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#4568b2), to(#30487b));
+	background-image:-webkit-linear-gradient(top, #4568b2, #30487b);
+	background-image:-o-linear-gradient(top, #4568b2, #30487b);
+	background-image:linear-gradient(to bottom, #4568b2, #30487b);
+	background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4568b2', endColorstr='#ff30487b', GradientType=0);border-color:#30487b #30487b #1a2843;
+	border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color:#3c5b9c;
+	background-image:-moz-linear-gradient(top, #4568b2, #30487b);
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#4568b2), to(#30487b));
+	background-image:-webkit-linear-gradient(top, #4568b2, #30487b);
+	background-image:-o-linear-gradient(top, #4568b2, #30487b);
+	background-image:linear-gradient(to bottom, #4568b2, #30487b);
+	background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4568b2', endColorstr='#ff30487b', GradientType=0);
+	border-color:#213256;*background-color:#30487b;filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}
+	a.facebook_button:hover,a.facebook_button:focus,a.facebook_button:active,a.facebook_button.active,a.facebook_button.disabled,a.facebook_button[disabled]{color:#ffffff;background-color:#30487b;*background-color:#283d68;
+}
+a#twitterShare {color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background-color:#0bb8e7;background-image:-moz-linear-gradient(top, #12ccff, #009ac4);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#12ccff), to(#009ac4));background-image:-webkit-linear-gradient(top, #12ccff, #009ac4);background-image:-o-linear-gradient(top, #12ccff, #009ac4);background-image:linear-gradient(to bottom, #12ccff, #009ac4);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff12ccff', endColorstr='#ff009ac4', GradientType=0);border-color:#009ac4 #009ac4 #005e78;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background-color:#0bb8e7;background-image:-moz-linear-gradient(top, #12ccff, #009ac4);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#12ccff), to(#009ac4));background-image:-webkit-linear-gradient(top, #12ccff, #009ac4);background-image:-o-linear-gradient(top, #12ccff, #009ac4);background-image:linear-gradient(to bottom, #12ccff, #009ac4);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff12ccff', endColorstr='#ff009ac4', GradientType=0);border-color:#007291;*background-color:#009ac4;filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}a.twitter_button:hover,a.twitter_button:focus,a.twitter_button:active,a.twitter_button.active,a.twitter_button.disabled,a.twitter_button[disabled]{color:#ffffff;background-color:#009ac4;*background-color:#0086ab;}
+
+a#TumblrShare {color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background-color:#426a88;background-image:-moz-linear-gradient(top, #4c7a9d, #335269);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#4c7a9d), to(#335269));background-image:-webkit-linear-gradient(top, #4c7a9d, #335269);background-image:-o-linear-gradient(top, #4c7a9d, #335269);background-image:linear-gradient(to bottom, #4c7a9d, #335269);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4c7a9d', endColorstr='#ff335269', GradientType=0);border-color:#335269 #335269 #1a2a36;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background-color:#426a88;background-image:-moz-linear-gradient(top, #4c7a9d, #335269);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#4c7a9d), to(#335269));background-image:-webkit-linear-gradient(top, #4c7a9d, #335269);background-image:-o-linear-gradient(top, #4c7a9d, #335269);background-image:linear-gradient(to bottom, #4c7a9d, #335269);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4c7a9d', endColorstr='#ff335269', GradientType=0);border-color:#223747;*background-color:#335269;filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}a.tumblr_button:hover,a.tumblr_button:focus,a.tumblr_button:active,a.tumblr_button.active,a.tumblr_button.disabled,a.tumblr_button[disabled]{color:#ffffff;background-color:#335269;*background-color:#2a4458;}
+
+#credits {
+	background: #111;
+	color: #888;
+}
+#credits  .section {
+	width: 18em;
+	margin: 0 auto;
+	padding: 3em 0;
+}
+#credit_more, #credit_sources, #credit_icons {
+	display: none;
+}
+#credits a:link,
+#credits a:visited {
+	color: #a01000;
+}
+#sharePanel {
+	display: none;
+}
+
+@media only screen and (min-width: 960px) {
+	.section {
+		max-width: 75em;
+		margin: 0 auto;
+		position: relative;
+		overflow: hidden;
+	}
+	.fixed {
+		position: absolute;
+	}
+	.pane {
+		margin: 0 20px 40px 29em;
+		width: auto;
+	}
+	.intropane {
+		margin: 0 0 0 6em;
+		padding: 7em 0 0;
+		float: left;
+		width: 18em;
+	}
+	.singlepane {
+		text-align: center;
+		margin: 0 auto;
+		width: 18em;
+	}
+
+	/* Section:Intro */
+	#elections .pane {
+		margin: 0 0 0 4em;
+		padding: 0.6em 2.5em 0.3em 2.5em;
+		border-radius: 2em;
+		background: #fff;
+		width: 18em;
+		position: absolute;
+		z-index: 600;
+		box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
+	}
+	#elections .electionStats {
+		float: left;
+		clear: left;
+		position: absolute;
+		z-index: 550;
+		max-width: 18em;
+		margin: 0 0 0 6em;
+	}
+	#thankyou {
+		position: absolute;
+		padding-top: 1em;
+		max-width: 30em;
+		width: 60%;
+	}
+	#thankyou h1 {
+		font-size: 3em;
+	}
+	#moneywinselections {
+		position: relative;
+	}
+	#moneywinselections p {
+		display: block;
+		word-spacing: -0.02em;
+		padding-bottom: 0.2em;
+		color: #777;
+	}
+	#socialTriggers {
+		margin-top: 2em;
+	}
+	/*
+	#moneywinselections:after {
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: -7em;
+		display: block;
+		border-top: 5em solid #fff;
+		border-left: 10.75em solid transparent;
+		border-right: 10.75em solid transparent;
+	}
+	*/
+
+	#electionsContainer {
+		clear: both;
+		right: 0;
+		position: relative;
+		z-index: 500;
+		display: block;
+		width: 100%;
+		max-width: 1600px;
+		height: 1200px;
+	}
+	#electionsSVG {
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+
+	#PowerfulFew {
+		margin-top: 15.5em;
+		width: 24em;
+	}
+	#GetItBack {
+		margin-top: 18em;
+		padding-bottom: 24em;
+		width: 30em;
+	}
+
+	#ninetyfive {
+		width: auto;
+		max-width: 36em;
+	}
+
+	#explodingDot {
+		display: block;
+		z-index: 200;
+		float: left;
+		margin-bottom: -100%;
+	}
+
+	#onepercent .pane {
+		position: relative;
+		z-index: 500;
+	}
+
+	#lopsided {
+		background: none;
+	}
+
+	#tinyGroup {
+		width: auto;		
+	}
+	#tinyGroup p {
+		max-width: 23em;
+		margin-right: 6em;
+		line-height: 1.3em;
+	}
+	#washingtonInfluence {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 300;
+	}
+	#policies {
+		background: url("../fonts/bg.jpg") no-repeat center top;
+		background-size: cover;
+	}
+
+	#lessthanone span.a, 
+	#lessthanone span.d {
+		font-size: 2.6em;
+	}
+
+	#lopsidedpolicy {
+		float: none;
+		min-height: 30em;
+		padding-top: 6em;
+	}
+
+	#lopsidedfor,
+	#lopsidedagaint {
+		width: 18em;
+	}
+	#lopsidedfor {
+		float: left;
+		margin-left: 6em;
+	}
+	#lopsidedagaint {
+		float: right;
+		clear: left;
+		margin-right: 6em;
+	}
+	#AgainstPublicInterest {
+		clear: both;
+		width: 18em;
+		margin: 0 auto;
+		float: none;
+	}
+
+
+	/* Section: issues */
+	#lopsidedfor span.a,
+	#lopsidedagaint span.a {
+		display: block;
+		text-transform: uppercase;
+		font-size: 2.5em;
+	}
+	#lopsidedfor span.b,
+	#lopsidedagaint span.b {
+		font-size: 1.7em;
+		color: #888;
+		line-height: 1.3em;
+	}
+	#AgainstPublicInterest p {
+		font-size: 2em;
+		line-height: 1.3em;
+	}
+	.source {
+		font-size: 0.7em;
+		width: 100%;
+		margin: 0;
+	}
+	.source p {
+		width: 18em;
+		margin: 0 auto;
+		font-size: 1em;
+		text-align: center;
+	}
+
+	.issue span {
+		font-size: 3em;
+	}
+	.lobbyingContext {
+		display: inline-block; 
+		line-height: 2em; 
+		color: #000; 
+		margin-bottom: 0.1em; 
+		font-size: 1.62em;
+		border-top: 4px solid #000;
+	}
+	.lobbyingStance {
+		font-size: 1.8em;
+		line-height: 1.7em;
+		color: #000;
+		text-transform: uppercase;
+		display: inline-block;
+		border-bottom: 4px solid #000;
+	}
+	.lobbyingStance span {
+		color: #fff;
+	}
+	.moneyFor .lobbyingStance {
+		word-spacing: -0.05em;
+	}
+	.moneyAgainst .lobbyingStance {
+		word-spacing: 0.1em;
+	}
+	.moneyAgainst .lobbyingContext {
+		display: inline-block;
+	}
+	.lobbyingSum {
+		color: #fff;
+		line-height: 0.9em;
+		display: block;
+	}
+	span.lobbyingSum {
+		font-size: 3em;
+	}
+	.lobbyingSVG {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.issue {
+		padding: 0;
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+	}
+	.issue h2 {
+		width: 44%;
+		max-width: 32em;
+		margin: 0 auto 0;
+	}
+	.moneyFor,
+	.moneyAgainst {
+		width: 20%;
+		padding: 0;
+		text-align: center;
+	}
+	.moneyFor {
+		float: left;
+		margin: 0 0 0 4em;
+	}
+	.moneyAgainst {
+		float: right;
+		margin: 0 4em 0 0;
+	}
+	.lobbyingStats {
+		overflow: hidden;
+		padding: 1em 0;
+	}
+	#riggedGame .pane {
+		margin: 0;
+		width: 100%;
+		text-align: center;
+	}
+	.vector_icon {
+		padding: 6em 0 2em;
+	}
+	.source {
+		position: absolute;
+		bottom: 10em;
+	}
+
+	
+	#theAct .pane {
+		position: relative;
+		margin-left: 4em;
+		z-index: 700;
+		
+	}
+	#OrdinaryCitizens {
+		max-width: 30em;
+		padding: 0;
+	}
+
+	#ChangeTheFunders {
+		max-width: 25em;
+	}
+
+	#ThirtyBillion {
+		padding: 0;	
+	}
+	#ThirtyBillion p {
+		margin-bottom: 0;
+	}
+	#ThirtyBillion span.a,
+	#ThirtyBillion span.b,
+	#ThirtyBillion span.c {
+		display: block;
+	}
+	#ThirtyBillion strong {
+		color: #C81700;	
+	}
+	#ThirtyBillion .a1,
+	#ThirtyBillion .a2 {
+		font-size: 1.5em;
+	}
+	#ThirtyBillion .b {
+		margin-bottom: -0.4em;
+	}
+	#ThirtyBillion .b1 {
+		font-size: 3.33em;
+		line-height: 1.5em;
+	}
+	#ThirtyBillion .c {
+		text-align: right;
+	}
+	#ThirtyBillion .c1 {
+		color: #C81700;
+		font-size: 1.8em;
+	}
+	#ThirtyBillion .d {
+		text-align: right;
+		margin: 1em 0.5em 0 0;
+	}
+	#ThirtyBillion .d a {
+		color: #999;
+	}
+	#particles {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		z-index: 500;
+	}
+	#spreading {
+		display: block;
+	}
+	#particleAnimation {
+		padding: 0;
+	}
+	#InfluenceTheyDeserve {
+		font-size: 5em;
+	}
+
+	#fixCongress,
+	#OneMillionCosponsors span.a1,
+	#OneMillionCosponsors span.b1 {
+		font-size: 1.4em;
+	}
+	#OneMillionCosponsors span.a2,
+	#OneMillionCosponsors span.b2 {
+		font-size: 4.5em;
+		display: inline;
+	}
+	#OneMillionCosponsors span.a {
+		line-height: 1;
+		margin: 0.8em 0 0.4em;
+	}
+	#Appealing {
+		text-align: center;
+		margin: 0 auto;
+		max-width: 48em;
+	}
+	#unknown_user {
+		max-width: 39.5em;
+		margin: 0 auto;
+	}
+	#unknown_user input {
+		font-size: 2.5em;
+		padding: 0.2em 0.1em 0.05em 0.1em;
+	}
+
+	#Appealing label {
+		text-align: left;
+	}
+
+	#ShareTitle h2 {
+		color: #C81700;
+		font-size: 6em;
+		margin: 0.7em 0 0;
+	}
+	#ShareTitle p {
+
+	}
+	#previewContainer {
+		max-width: 42em;
+	}
+	#sharePreview {
+		font-size: 1.7em;
+		line-height: 1.3em;
+		min-height: 5.5em;
+	}
+
+	#socialTriggers {
+		font-size: 1em;
+	}
+	#socialTriggers a {
+		display: inline-block;
+	}
+
+	#overlay {
+		display: none;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		margin: 0 auto;
+		height: 100%;
+	}
+	#overlayFor {
+		position: absolute;
+		bottom: -10%;
+		left: 0;
+		width: 36em;
+		height: 36em;
+		
+	}
+	#overlayAgainst {
+		position: absolute;
+		bottom: -10%;
+		right: 0;
+		width: 36em;
+		height: 36em;
+		
+	}
+	#svgFor, #svgAgainst {
+		width: 100%;
+		height: 100%;
+	}
+
+	#sharePanel {
+		display: block;
+		position: fixed;
+		z-index: 2000;
+		top: 2em;
+		right: 2em;
+		padding: 1em 1em 0.8em;
+		border-radius: 0.7em;
+		background: rgba(0,0,0,0.12);
+	}
+	#sharePanel .smallButton {
+		max-width: 5em;
+	}
+
+	#credits {
+		padding: 6em 0;
+	}
+	#credits .section {
+		width: auto;
+		font-size: 0.8em;
+	}
+	#credit_more, #credit_sources, #credit_icons {
+		display: block;
+	}
+	#credits p {
+		max-width: 44em;
+		line-height: 1.6em;
+	}
+	.column {
+		float: left;
+		margin-right: 5em;
+	}
+	#credit_more {
+		min-width: 560px;
+		max-width: 60em;
+		width: 45%;
+	}
+
+	#credit_sources,
+	#credit_icons {
+		width: 25%;
+		max-width: 30em;
+	}
+
+}
+
+@media only screen and (min-width: 1500px) {
+	body {
+		font: 20px/30px Helvetica, Helvetica Neue, Arial;
+	}
+}
