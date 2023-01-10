@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    .link {
+        fill: none;
+        stroke: #555;
+        stroke-opacity: 0.4;
+        stroke-width: 1px;
+    }
+    text {
+        font-family: "Arial Black", Gadget, sans-serif;
+        fill: black;
+        font-weight: bold;
+        font-size: 14px
+    }
+
+    .xAxis .tick text{
+        fill: black;
+    }
+    .grid .tick line{
+        stroke: grey;
+        stroke-dasharray: 5, 10;
+        opacity: 0.7;
+    }
+    .grid path{
+        stroke-width: 0;
+    }
+
+    .node circle {
+        fill: #999;
+    }
+    .node--internal circle {
+        fill: #555;
+    }
+    .node--internal text {
+        font-size: 16px;
+        text-shadow: 0 2px 0 #fff, 0 -2px 0 #fff, 2px 0 0 #fff, -2px 0 0 #fff;
+    }
+    .node--leaf text {
+        fill: white;
+    }
+    .ballG text {
+        fill: white;
+	}
+	
+	svg {
+		position: absolute;
+	}
+
+    /* .shadow {
+        -webkit-filter: drop-shadow( -1.5px -1.5px 1.5px #000 );
+        filter: drop-shadow( -1.5px -1.5px 1.5px #000 );
+    } */
+</style>
+
+<body>
+    <svg width="1400" height="600"></svg>
+</body>
+
+<script src="./js/d3.v3.min.js"></script>
+<script>
+
+    // main svg
+    var svg = d3.select("svg"),
+            width = +svg.attr("width"),
+            height = +svg.attr("height"),
+            g = svg.append("g").attr("transform", "translate(20,0)");       // move right 20px.
+
+    // x-scale and x-axis
+    var experienceName = ["", "Basic 1.0","Alright 2.0","Handy 3.0","Expert 4.0","Guru 5.0"];
+    var formatSkillPoints = function (d) {
+        return experienceName[d % 6];
+    }
+    var xScale =  d3.scale.linear()
+            .domain([0,5])
+            .range([0, 400]);
+
+    // var xAxis = d3.svg.axis()
+    //         .scale(xScale)
+    //         .ticks(50)
+	// 		.tickFormat(formatSkillPoints)
+	// 		.orient("top");
+
+	// var x = d3.scaleTime().domain([minDt, maxDt]).range([groupWidth, width]);
+
+			
+    // Setting up a way to handle the data
+    var tree = d3.layout.cluster()                 // This D3 API method setup the Dendrogram datum position.
+            .size([height, width - 460])    // Total width - bar chart width = Dendrogram chart width
+            .separation(function separate(a, b) {
+                return a.parent == b.parent            // 2 levels tree grouping for category
+                || a.parent.parent == b.parent
+                || a.parent == b.parent.parent ? 0.4 : 0.8;
+            });
+
+    // var stratify = d3.stratify()            // This D3 API method gives cvs file flat data array dimensions.
+    //         .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
+
+    // d3.csv("https://gist.githubusercontent.com/bumbeishvili/ccaad3234864a1cc36b17c4538882b2c/raw/23ed2c89cb28160d16e8f638f83252ea02f2caff/skillsdata.csv", row, function(error, data) {
+    //     if (error) throw error;
+// id,value,color
+// Tom,
+// Tom.Front-End,
+// Tom.Front-End.Design,1,#808080
+// Tom.Front-End.Ps,0.5,#2E2575
+// Tom.Front-End.HTML & CSS,3,#E54F24
+// Tom.Front-End.SVG,1.5,#FF9900
+// Tom.Front-End.Bootstrap,3,#563B7E
+// Tom.Front-End.JavaScript World,
+// Tom.Front-End.JavaScript World.JavaScript,3,#D6BA33
+// Tom.Front-End.JavaScript World.JQuery,3,#1169AE
+// Tom.Front-End.JavaScript World.D3 js,2.5,#F6854D
+// Tom.Back-End,
+// Tom.Back-End.PHP,1.5,#617CBE
+// Tom.Back-End.C++,1,#0073AD
+// Tom.Back-End.SQL,1.5,#E58E00
+// Tom.Back-End.Java World,
+// Tom.Back-End.Java World.Java SE,3,#EB2C2F
+// Tom.Back-End.Java World.JSP,2,#EB2C2F
+// Tom.Back-End.Java World.Hibernate,2.5,#59666C
+// Tom.Back-End.Java World.Spring MVC / Boot,3,#6DB33F
+// Tom.Back-End.Java World.Spring Data,2.5,#6DB33F
+// Tom.Back-End.Java World.Spring Security,2.5,#5FA134
+// Tom.Back-End.Java World.Thymeleaf,3,#005F0F
+// Tom.Databases,
+// Tom.Databases.MySQL,2.5,#00618A
+// Tom.SysAdmin,
+// Tom.SysAdmin.VPS & SharedHost,2,#808080
+// Tom.SysAdmin.Linux,2.5,#040404
+// Tom.SysAdmin.Apache & Tomcat,2,#CA212F
+// Tom.CMS,
+// Tom.CMS.Wordpress,1.5,#00A0D2
+// Tom.CMS.Drupal,1.5,#0678BE
+		// var root = stratify(data);
+		// console.log("--- root : ", root)
+		var jsonData = {
+			id:"Tom",
+			children:[
+				{
+					id: "Tom.Front-End",
+					children:[
+						{
+							id: "Tom.Front-End.Design",
+							value: 1,
+							color: "#808080"
+						},
+						{
+							id: "Tom.Front-End.Ps",
+							value: 0.5,
+							color: "#2E2575"
+						},
+						{
+							id: "Tom.Front-End.HTML & CSS",
+							value: 3,
+							color: "#D6BA33"
+						},
+						{
+							id: "Tom.Front-End.SVG",
+							value: 1.5,
+							color: "#FF9900"
+						},
+					]
+				},
+				{
+					id: "Tom.Back-End",
+					children: [
+						{
+							id: "Tom.Back-End.PHP",
+							value: 1.5,
+							color: "#617CBE"
+						},
+						{
+							id: "Tom.Back-End.C++",
+							value: 2,
+							color: "#0073AD"
+						},
+						{
+							id: "Tom.Back-End.SQL",
+							value: 3,
+							color: "#E58E00"
+						},
+
+					]
+				},
+				{
+					id: "Tom.SysAdmin",
+					children:[
+						{
+							id: "Tom.SysAdmin.VPS & SharedHost",
+							value: 2,
+							color: "#808080"
+						},
+
+						{
+							id: "Tom.SysAdmin.Linux",
+							value: 2.5,
+							color: "#040404"
+						},
+					]
+				},
+			]
+
+		};
+		// var root = d3.hierarchy(jsonData);
+		// tree(root);
+		
+		var diagonal = d3.svg.diagonal()    
+		.projection (function(d) { return [d.y, d.x];}); 
+
+		var nodes = tree.nodes(jsonData);
+
+		// var link = svg.selectAll(".link")
+		// 	.data(cluster.links(nodes))
+		// .enter().append("path")
+		// 	.attr("class", "link")
+		// 	.attr("d", elbow);
+
+
+        // Draw every datum a line connecting to its parent.
+        var link = g.selectAll(".link")
+                .data(tree.links(nodes))
+                .enter().append("path")
+				.attr("class", "link")
+				.attr("d",diagonal);
+				// .attr("d", elbow);
+
+        // Setup position for every datum; Applying different css classes to parents and leafs.
+        var node = g.selectAll(".node")
+                .data(nodes)
+                .enter().append("g")
+                .attr("class", function(d) { return "node" + (d.children ? " node--internal" : " node--leaf"); })
+                .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+        // Draw every datum a small circle.
+        node.append("circle")
+                .attr("r", 4);
+
+        // Setup G for every leaf datum.
+        var leafNodeG = g.selectAll(".node--leaf")
+                .append("g")
+                .attr("class", "node--leaf-g")
+                .attr("transform", "translate(" + 8 + "," + -13 + ")");
+
+        leafNodeG.append("rect")
+                .attr("class","shadow")
+                .style("fill", function (d) {return d.color;})
+                .attr("width", 2)
+                .attr("height", 30)
+                .attr("rx", 2)
+                .attr("ry", 2)
+                .transition()
+                    .duration(800)
+                    .attr("width", function (d) {return xScale(d.value);});
+
+        leafNodeG.append("text")
+                .attr("dy", 19.5)
+                .attr("x", 8)
+                .style("text-anchor", "start")
+                .text(function (d) {
+                    return d.id.substring(d.id.lastIndexOf(".") + 1);
+                });
+
+        // Write down text for every parent datum
+        var internalNode = g.selectAll(".node--internal");
+        internalNode.append("text")
+                .attr("y", -10)
+                .style("text-anchor", "middle")
+                .text(function (d) {
+                    return d.id.substring(d.id.lastIndexOf(".") + 1);
+                });
+
+        // Attach axis on top of the first leaf datum.
+        var firstEndNode = g.select(".node--leaf");
+            firstEndNode.insert("g")
+                    .attr("class","xAxis")
+                    .attr("transform", "translate(" + 7 + "," + -14 + ")")
+                    .call(xAxis);
+
+            // tick mark for x-axis
+            firstEndNode.insert("g")
+                    .attr("class", "grid")
+                    .attr("transform", "translate(7," + (height - 15) + ")")
+                    .call(d3.axisBottom()
+                            .scale(xScale)
+                            .ticks(5)
+                            .tickSize(-height, 0, 0)
+                            .tickFormat("")
+                    );
+
+        // Emphasize the y-axis baseline.
+        svg.selectAll(".grid").select("line")
+                .style("stroke-dasharray","20,1")
+                .style("stroke","black");
+
+        // The moving ball
+        var ballG = svg.insert("g")
+                .attr("class","ballG")
+                .attr("transform", "translate(" + 1100 + "," + height/2 + ")");
+        ballG.insert("circle")
+                .attr("class","shadow")
+                .style("fill","steelblue")
+                .attr("r", 5);
+        ballG.insert("text")
+                .style("text-anchor", "middle")
+                .attr("dy",5)
+                .text("0.0");
+
+        // Animation functions for mouse on and off events.
+        d3.selectAll(".node--leaf-g")
+                .on("mouseover", handleMouseOver)
+                .on("mouseout", handleMouseOut);
+
+        function handleMouseOver(d) {
+            var leafG = d3.select(this);
+
+            leafG.select("rect")
+                    .attr("stroke","#4D4D4D")
+                    .attr("stroke-width","2");
+
+
+            var ballGMovement = ballG.transition()
+                    .duration(400)
+                    .attr("transform", "translate(" + (d.y
+                            + xScale(d.data.value) + 90) + ","
+                            + (d.x + 1.5) + ")");
+
+            ballGMovement.select("circle")
+                    .style("fill", d.data.color)
+                    .attr("r", 18);
+
+            ballGMovement.select("text")
+                    .delay(300)
+                    .text(Number(d.data.value).toFixed(1));
+        }
+        function handleMouseOut() {
+            var leafG = d3.select(this);
+
+            leafG.select("rect")
+                    .attr("stroke-width","0");
+        }
+
+	// });
+	function elbow(d, i) {
+		console.log("---d : ", d)
+		// return "M" + d.source.y + "," + d.source.x
+		// 	+ "V" + d.target.x + "H" + d.target.y;
+
+		return "M" + d.source.y + "," + d.source.x
+				+ "C" + (d.target.y + 100) + "," + d.source.x
+				+ " " + (d.target.y + 100) + "," + d.target.x
+				+ " " + d.target.y + "," + d.target.x;
+
+	}
+
+    function row(d) {
+        return {
+            id: d.id,
+            value: +d.value,
+            color: d.color
+        };
+    }
+</script>

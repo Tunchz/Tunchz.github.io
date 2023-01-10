@@ -8,21 +8,24 @@
 		<meta name="viewport" content="width=device-width">
 		
 
-		<link rel="stylesheet" href="./style.css">
+		<!-- <link rel="stylesheet" href="./style.css"> -->
 
-        <link rel="stylesheet" href="./css/css-normalize.min.css">
-        <link rel="stylesheet" href="./css/css-style.css">
+        <!-- <link rel="stylesheet" href="./css/css-normalize.min.css"> -->
+        <!-- <link rel="stylesheet" href="./css/css-style.css"> -->
 		<link rel="stylesheet" href="./css/css-lopsided-full.css">
+		<link rel="stylesheet" href="./css/dendrogram.css">
+		<link rel="stylesheet" href="./css/map.css">
+		<link rel="stylesheet" href="./css/sankey.css">
         <script src="./js/vendor-modernizr-2.6.2-respond-1.1.0.min.js"></script>
-		<script src="./js/use.typekit.net-zht1thr.js"></script>
-		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+		<!-- <script src="./js/use.typekit.net-zht1thr.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
 		<!-- Facebook Opengraph -->
-		<meta property="og:title" content="Water is a Heart of Our Job.">
+		<!-- <meta property="og:title" content="Water is a Heart of Our Job.">
 		<meta property="og:description" content="Frustrated with reforms failing in Congress? Real change can't happen when elections can be bought. Let's fix it.">
 		<meta property="og:url" content="https://www.mwa.co.th/">
 		<meta property="og:image" content="https://tunchz.github.io/CIA/MWALogo.png">
 		<meta property="og:site_name" content="Let's Serve Water">
-		<meta property="og:type" content="article">
+		<meta property="og:type" content="article"> -->
     </head>
     <body class="signup-page lang-en ak-no-js">
 
@@ -32,51 +35,60 @@
         <div id="container" class="main-container">
 
 <ol id="list">
-<li id="elections">
+<li id="situation-summary">
 		<div id="top-section">
 
-			</div>
-	<!-- <div class="pane step intro" id="moneywinselections">
+		</div>
+	<!-- <div class="pane step intro" id="request-summary">
 		<h1><span class="a"></span> <span class="b"></span><br><span class="b">สถานการณ์คำร้องปัจจุบัน</span><br><span class="c"></span></h1>
 		<p><strong></strong></p>
 	</div>	 -->
 
-	<div class="pane step intro" id="moneywinselections">
-		<h1><span class="a">38</span> <span class="b">คำร้อง</span><br><span class="b">ที่ถูกร้องขอ</span><br><span class="c">วันนี้</span></h1>
+	<div class="pane step intro" id="request-summary">
+		<h1><span class="a">49</span> <span class="b">รายการ</span><br><span class="b">ที่ถูกรับเรื่อง</span><br><span class="c">วันนี้</span></h1>
 		<p><strong>กรุณาเลื่อน</strong> เพื่อดูรายละเอียดเพิ่มเติม...</p>
 	</div>
 
-	<div class="pane step sansserif intro" id="fourhundredthirtyfive">
+	<div class="pane step kanit intro" id="request-sla">
 		<p>
-			<span><em class="sla1">31</em> อยู่ใน SLA</span><br>
-			<span><em class="sla2">6</em>  กำลังจะหลุด SLA</span><br>
-			<span><em class="sla3">1</em> งานที่เกิน SLA</span>
+			<span><em class="sla3">1</em> รายการเกิน SLA</span><br>
+			<span><em class="sla2">7</em>  กำลังจะเกิน SLA</span><br>
+			<span><em class="sla1">41</em> อยู่ใน SLA</span>
 		</p>
 	</div>
-	<div class="pane step sansserif intro" id="ninetyfivepercent">
-		<p>
-			<span>งานซ่อมท่อ คิดเป็น</span><br>
-			<span class="b"><span class="b1"><em>74</em>%<br>
-			</span></span>
-			<span> ของงานทั้งหมด</span>
-		</p>
+	
+	<div class="vizPane" id="sla-viz-container">
+		<!-- <svg id="lsa-svg" width="900" height="480"></svg> -->
 	</div>
 
-	<div id="electionsContainer">
-		<svg id="electionsSVG" width="1200" height="1200">
+	<div class="pane step kanit intro" id="job-summary">
+		<p>
+			<span>งานซ่อมท่อ <span class="b"><span class="b1"><em>36</em> รายการ<br>
+			</span></span> คิดเป็น</span><br>
+			<span class="b"><span class="b1"><em>74</em>%<br>
+			</span></span>
+			<span> ของรายการทั้งหมด</span>
+		</p>
+	</div>
+	
+	<div class="vizPane" id="job-viz-container">
+	</div>
+
+	<div id="requestMapContainer">
+		<svg id="requestMapSVG" width="1200" height="1200">
 		</svg>
-		<div id="electionOverlay">
+		<div id="requestMapOverlay">
 			<p>
-				<span class="sansserif" id="electionSpender">Michelle Bachmann</span> 
+				<span class="kanit" id="electionSpender">Michelle Bachmann</span> 
 				<span class="serif" id="electionMode">outspent</span> 
-				<span class="sansserif" id="electionUnderdog">Jim Graves</span> 
-				<span class="serif" id="electionResult">and <strong class="sansserif" id="didMoneyWin">won</strong></span>
+				<span class="kanit" id="electionUnderdog">Jim Graves</span> 
+				<span class="serif" id="electionResult">and <strong class="kanit" id="didMoneyWin">won</strong></span>
 			</p>
 		</div>
 	</div>
 </li>
 
-<li id="onepercent">
+<li id="complain">
 	<div class="fixed" id="explodingDot">
 		<svg id="expanding" width="900" height="700">
 		</svg>
@@ -84,28 +96,68 @@
 	<div class="section">
 		
 		<div class="pane step" id="tinyGroup">
-			<p class="sansserif">ข้อ<em> ร้องเรียน</em> คิด <span class="primaryColor">สะสมเดือนนี้</span> รวมเป็น <span class="primaryColor b1">23</span> คำร้องเรียน</p>
+			<p class="kanit">ข้อ<em> ร้องเรียน</em> จำนวน <span class="primaryColor">12 รายการ</span> คิดเป็น <span class="primaryColor b1">26</span><span class="primaryColor">%</span> ของรายการทั้งหมด</p>
+			<div class="vizPane2" id="complain-viz-container"></div>
 		</div>
+		
+
 		<div class="pane step" id="lessthanone">
 			<p>
-				<span class="a sansserif">คิดเป็น</span>
-				<span class="b sansserif primaryColor"><span class="b1">1</span><span class="b2">%</span></span>
-				<span class="d sansserif">ของคำร้องทั้งหมด</span>
+				
+				<span class="d kanit">แต่ละ<span class="primaryColor b2">หัวข้อร้องเรียน</span></span>
+				<span class="a kanit">แยกตาม</span>
+				<span class="b kanit primaryColor"><span class="b1">สาขา</span><span class="b2"></span></span>
 			</p>
+			<div class="vizPane2" id="complain2-viz-container"></div>
 		</div>
+		
 		<div class="pane step" id="contribute68percent">
 			<p>
-				<span class="a sansserif">ข้อร้องเรียนส่วนใหญ่</span>
-				<span class="b sansserif primaryColor">68<span>%</span></span>
-				<span class="c sansserif"><span>เกี่ยวกับ</span></span>
-				<span class="d sansserif"></span>
-				<span class="e sansserif primaryColor">น้ำขุ่น/มีกลิ่น</span>
+				<span class="a kanit">ข้อร้องเรียนส่วนใหญ่</span>
+				<span class="b kanit primaryColor">42<span></span>%</span>
+				<span class="c kanit"><span>เกี่ยวกับ</span></span>
+				<span class="d kanit"></span>
+				<span class="e kanit primaryColor">น้ำขุ่น/มีกลิ่น</span>
 			</p>
 		</div>
+		
+
 	</div>
 </li>
+<li id="mapexplore">
+	<!-- <div class="section"> -->
+	<div id="map-container"></div>
+		
+	<!-- <div id="sticky-map-label"></div> -->
 
-<li id="policies" class="clearfix">
+	<div class="pane step kanit intro" id="map-summary" style="left:14.5px;top:40px;">
+		<p>
+			<!-- <span></span><br> -->
+			<span class="b"><span class="b1"><em>แผนที่</em><br>
+			</span></span>
+			<span>แสดงการกระจาย เชิงพื้นที่</span>
+		</p>
+	</div>
+	<div class="pane step kanit intro" id="sticky-map-label" style="left:14.5px;top:400px;text-align: center;visibility:hidden;cursor: pointer;" onclick="reset()">
+			<p>
+				<span id="selected-label">กระจาย เชิงพื้นที่</span>
+			</p>
+	</div>
+		<!-- <div class="pane step" id="contribute68percent2">
+				<p>
+					<span class="a kanit">ข้อร้องเรียนส่วนใหญ่</span>
+					<span class="b kanit primaryColor">68<span>%</span></span>
+					<span class="c kanit"><span>เกี่ยวกับ</span></span>
+					<span class="d kanit"></span>
+					<span class="e kanit primaryColor">น้ำขุ่น/มีกลิ่น</span>
+				</p>
+		</div> -->
+
+	<!-- </div> -->
+
+</li>
+
+<li id="rawwater" class="clearfix">
 	<svg width="1200" height="800" id="washingtonInfluence">
 		<g id="washingtonLayer" transform="translate(320,320)">
 			<circle fill="#31A2E2" r="240" id="washingtonDot" opacity="0.9"></circle>
@@ -115,11 +167,13 @@
 		<div id="lopsidedpolicy">
 			
 			<h1>
-				<span class="a sansserif">คุณภาพน้ำดิบที่สถานี </span>
-				<span class="b sansserif">ท่าม่วง</span>
-				<span class="a sansserif">และ </span>
-				<span class="b sansserif">สำแล</span>
-				<span class="c sansserif">มีค่าอยู่ในเกณฑ์</span><span class="c sansserif sla1">ปรกติ</span>
+				<span class="a kanit">สถานการณ์น้ำใน </span>
+				<span class="b kanit">ระบบสูบน้ำดิบ</span>
+				<span class="b kanit">ระบบผลิตน้ำประปา</span>
+				<span class="b kanit">ระบบสูบส่ง</span>
+				<span class="a kanit">และ </span>
+				<span class="b kanit">ระบบสูบจ่าย</span>
+				<span class="c kanit">มีค่าอยู่ในเกณฑ์</span><br><span class="c kanit sla1">ปรกติ</span>
 			</h1>
 			
 
@@ -150,23 +204,41 @@
 			</g>
 			</svg> -->
 		</div>
-		<h2><span>ค่าคุณภาพน้ำสถานีสูบน้ำดิบ<br><span class="primaryColor">ท่าม่วง</span></span></h2>
+		<h2><span>คุณภาพน้ำดิบ<br>สถานีสูบน้ำดิบ<br><span class="primaryColor"></span></span></h2>
 	</div>
 	<div class="section lobbyingStats">
 		<div class="pane moneyFor step">
-			<span class="sansserif lobbyingContext">ค่าความขุ่น</span>
-			<span class="sansserif lobbyingSum">Turbidity<br><span></span>7 NTU</span></span>
-			<!-- <span class="sansserif lobbyingStance">to <span>support</span> this</span> -->
+			<span class="kanit lobbyingContext">สถานี</span>
+			<span class="kanit lobbyingSum">ท่าม่วง<br><span style="visibility:hidden;">5</span></span>
+			<!-- <span class="kanit lobbyingStance">to <span>support</span> this</span> -->
 		</div>
 		<div class="pane moneyAgainst">
-			<span class="sansserif lobbyingContext">ค้าออกซิเจนในน้ำ</span>
-			<span class="sansserif lobbyingSum">DO<br><span>6.68 mg/l</span></span>
-			<!-- <span class="sansserif lobbyingStance">to <span>oppose</span> this</span> -->
+			<span class="kanit lobbyingContext">สถานี</span>
+			<span class="kanit lobbyingSum">สำแล<br><span style="visibility:hidden;">15</span></span>
+			<!-- <span class="kanit lobbyingStance">to <span>oppose</span> this</span> -->
+		</div>
+		<div class="left side-pane step kanit intro">
+			<p>
+				<span>งานซ่อมท่อ <span class="b"><span class="b1"><em>36</em> รายการ<br>
+				</span></span> คิดเป็น</span><br>
+				<span class="b"><span class="b1"><em>74</em>%<br>
+				</span></span>
+				<span> ของรายการทั้งหมด</span>
+			</p>
+		</div>
+		<div class="right side-pane step kanit intro">
+			<p>
+				<span>งานซ่อมท่อ <span class="b"><span class="b1"><em>36</em> รายการ<br>
+				</span></span> คิดเป็น</span><br>
+				<span class="b"><span class="b1"><em>74</em>%<br>
+				</span></span>
+				<span> ของรายการทั้งหมด</span>
+			</p>
 		</div>
 		<span style="clear: both;">&nbsp;</span>
-		<div class="source">
+		<!-- <div class="source">
 			<p>แหล่งข้อมูล : <a target="_blank" href="http://www.opensecrets.org/news/issues/guns/index.php">ระบบ RWC</a></p>
-		</div>
+		</div> -->
 		
 	</div>
 </li>
@@ -183,23 +255,41 @@
 			</g>
 			</svg> -->
 		</div>
-		<h2><span>ค่าคุณภาพน้ำสถานีสูบน้ำดิบ<br><span class="primaryColor">ท่าม่วง</span></span></h2>
+		<h2><span>กำลังผลิตและคุณภาพน้ำ<br>โรงผลิตน้ำประปา<br><span class="primaryColor"></span></span></h2>
 	</div>
 	<div class="section lobbyingStats" id="moneyInFood">
 		<div class="pane moneyFor">
-				<span class="sansserif lobbyingContext">ความนำไฟฟ้า</span>
-				<span class="sansserif lobbyingSum">Conductivity<br><span></span>210 uS/cm</span></span>
-				<!-- <span class="sansserif lobbyingStance">to <span>support</span> this</span> -->
+				<span class="kanit lobbyingContext">ค่า</span>
+				<span class="kanit lobbyingSum">กำลังผลิต<br><span style="visibility:hidden;">15</span></span>
+				<!-- <span class="kanit lobbyingStance">to <span>support</span> this</span> -->
 		</div>
 		<div class="pane moneyAgainst step">
-				<!-- <span class="sansserif lobbyingContext">ค่าความขุ่น</span>
-				<span class="sansserif lobbyingSum">Turbidity<br><span></span>7 NTU</span></span> -->
-				<!-- <span class="sansserif lobbyingStance">to <span>support</span> this</span> -->
+				<span class="kanit lobbyingContext">ค่า</span>
+				<span class="kanit lobbyingSum">คุณภาพน้ำ<br><span style="visibility:hidden;">5</span></span>
+				<!-- <span class="kanit lobbyingStance">to <span>support</span> this</span> -->
+		</div>
+		<div class="left side-pane step kanit intro">
+			<p>
+				<span>งานซ่อมท่อ <span class="b"><span class="b1"><em>36</em> รายการ<br>
+				</span></span> คิดเป็น</span><br>
+				<span class="b"><span class="b1"><em>74</em>%<br>
+				</span></span>
+				<span> ของรายการทั้งหมด</span>
+			</p>
+		</div>
+		<div class="right side-pane step kanit intro">
+			<p>
+				<span>งานซ่อมท่อ <span class="b"><span class="b1"><em>36</em> รายการ<br>
+				</span></span> คิดเป็น</span><br>
+				<span class="b"><span class="b1"><em>74</em>%<br>
+				</span></span>
+				<span> ของรายการทั้งหมด</span>
+			</p>
 		</div>
 		<span style="clear: both;">&nbsp;</span>
-		<div class="source">
+		<!-- <div class="source">
 				<p>แหล่งข้อมูล : <a target="_blank" href="http://www.opensecrets.org/news/issues/guns/index.php">ระบบ RWC</a></p>
-		</div>
+		</div> -->
 	</div>
 </li>
 <li id="keystone" class="step">
@@ -213,23 +303,41 @@
 			</g>
 			</svg> -->
 		</div>
-		<h2><span>ค่าคุณภาพน้ำสถานีสูบน้ำดิบ<br><span class="primaryColor">สำแล</span></span></h2>
+		<h2><span>คุณภาพน้ำ<br>ในระบบสูบส่ง<br><span class="primaryColor"></span></span></h2>
 	</div>
 	<div class="section lobbyingStats" id="moneyInPipeline">
 			<div class="pane moneyFor step">
-				<span class="sansserif lobbyingContext">ค่าความขุ่น</span>
-				<span class="sansserif lobbyingSum">Turbidity<br><span></span>11 NTU</span></span>
-				<!-- <span class="sansserif lobbyingStance">to <span>support</span> this</span> -->
+				<span class="kanit lobbyingContext">ค่า</span>
+				<span class="kanit lobbyingSum">พารามิเตอร์<br><span style="visibility:hidden;">5</span></span>
+				<!-- <span class="kanit lobbyingStance">to <span>support</span> this</span> -->
 			</div>
 			<div class="pane moneyAgainst">
-				<span class="sansserif lobbyingContext">ค้าออกซิเจนในน้ำ</span>
-				<span class="sansserif lobbyingSum sla2">DO<br><span>1.65 mg/l</span></span>
-				<!-- <span class="sansserif lobbyingStance">to <span>oppose</span> this</span> -->
+				<span class="kanit lobbyingContext">ค่า</span>
+				<span class="kanit lobbyingSum sla2">พารามิเตอร์<br><span style="visibility:hidden;">15</span></span>
+				<!-- <span class="kanit lobbyingStance">to <span>oppose</span> this</span> -->
+			</div>
+			<div class="left side-pane step kanit intro">
+				<p>
+					<span>งานซ่อมท่อ <span class="b"><span class="b1"><em>36</em> รายการ<br>
+					</span></span> คิดเป็น</span><br>
+					<span class="b"><span class="b1"><em>74</em>%<br>
+					</span></span>
+					<span> ของรายการทั้งหมด</span>
+				</p>
+			</div>
+			<div class="right side-pane step kanit intro">
+				<p>
+					<span>งานซ่อมท่อ <span class="b"><span class="b1"><em>36</em> รายการ<br>
+					</span></span> คิดเป็น</span><br>
+					<span class="b"><span class="b1"><em>74</em>%<br>
+					</span></span>
+					<span> ของรายการทั้งหมด</span>
+				</p>
 			</div>
 		<span style="clear: both;">&nbsp;</span>
-		<div class="source">
+		<!-- <div class="source">
 				<p>แหล่งข้อมูล : <a target="_blank" href="http://www.opensecrets.org/news/issues/guns/index.php">ระบบ RWC</a></p>
-		</div>
+		</div> -->
 	</div>
 </li>
 <li id="cispa" class="step">
@@ -244,37 +352,55 @@
 			</g>
 			</svg> -->
 		</div>
-		<h2><span>ค่าคุณภาพน้ำสถานีสูบน้ำดิบ<br><span class="primaryColor">สำแล</span></span></h2>
+		<h2><span>ความดันและอัตราการไหล<br>ระบบสูบจ่าย<br><span class="primaryColor"></span></span></h2>
 	</div>
 	<div class="section lobbyingStats" id="moneyInPipeline">
 		<div class="pane moneyFor step">
-				<span class="sansserif lobbyingContext">ค่าความนำไฟฟ้า</span>
-				<span class="sansserif lobbyingSum">Conductivity<br><span></span>0.22 g/l</span></span>
-				<!-- <span class="sansserif lobbyingStance">to <span>support</span> this</span> -->
+				<span class="kanit lobbyingContext">สถานภาพ</span>
+				<span class="kanit lobbyingSum">ความดัน<br><span style="visibility:hidden;">15</span></span>
+				<!-- <span class="kanit lobbyingStance">to <span>support</span> this</span> -->
 		</div>
 		<div class="pane moneyAgainst">
-				<span class="sansserif lobbyingContext">ค่าความเค็ม</span>
-				<span class="sansserif lobbyingSum">Salinity<br><span></span>7 NTU</span></span>
-				<!-- <span class="sansserif lobbyingStance">to <span>support</span> this</span> -->
+				<span class="kanit lobbyingContext">สถานภาพ</span>
+				<span class="kanit lobbyingSum">อัตราการไหล<br><span style="visibility:hidden;">5</span></span>
+				<!-- <span class="kanit lobbyingStance">to <span>support</span> this</span> -->
+		</div>
+		<div class="left side-pane step kanit intro">
+			<p>
+				<span>งานซ่อมท่อ <span class="b"><span class="b1"><em>36</em> รายการ<br>
+				</span></span> คิดเป็น</span><br>
+				<span class="b"><span class="b1"><em>74</em>%<br>
+				</span></span>
+				<span> ของรายการทั้งหมด</span>
+			</p>
+		</div>
+		<div class="right side-pane step kanit intro">
+			<p>
+				<span>งานซ่อมท่อ <span class="b"><span class="b1"><em>36</em> รายการ<br>
+				</span></span> คิดเป็น</span><br>
+				<span class="b"><span class="b1"><em>74</em>%<br>
+				</span></span>
+				<span> ของรายการทั้งหมด</span>
+			</p>
 		</div>
 		<span style="clear: both;">&nbsp;</span>
-		<div class="source">
+		<!-- <div class="source">
 				<p>แหล่งข้อมูล : <a target="_blank" href="http://www.opensecrets.org/news/issues/guns/index.php">ระบบ RWC</a></p>
-		</div>
+		</div> -->
 	</div>
 </li>
 <li id="rigged">
 	<svg id="riggedSVG" class="fixed" style="position: absolute;">
 	</svg>
 	<div class="section" id="riggedGame">
-		<div class="pane step" id="noticeAPattern">
-			<p class="sansserif"><span>สถานการณ์คุณภาพน้ำในระบบสูบส่ง <span class="sla1">ปรกติ</span></span></p>
-		</div>
+		<!-- <div class="pane step" id="noticeAPattern">
+			<p class="kanit"><span>สถานภาพคุณภาพน้ำในระบบ <span class="sla1">ปรกติ</span></span></p>
+		</div> -->
 		<div class="pane step" id="thisIsRigged">
-			<p class="sansserif"><span>สถานการณ์น้าในภาพรวมอยู่ในสภาวะปรกติ</span></p>			
+			<p class="kanit"><span>สถานการณ์น้ำในภาพรวมอยู่ในสภาวะ<br><span class="sla1" style="font-size:66px;">ปรกติ</span></span></p>			
 		</div>
 		<div class="pane step" id="butWeCanFixIt">
-			<p class="sansserif"><span>ไม่มีการแจ้งเตือนล่วงหน้าในระบบ Early Warning</span></p>			
+			<p class="kanit"><span>ไม่พบการแจ้งเตือนล่วงหน้าในระบบ Early Warning</span></p>			
 		</div>
 
 	</div>
@@ -289,7 +415,7 @@
 			<h1 id="InfluenceTheyDeserve">
 				ประชาสัมพันธ์
 			</h1>
-			<p class="sansserif">
+			<p class="kanit">
 				การประปานครหลวงมีแผนกำหนดการในการดำเนินงาน<span class="sla4">ซ่อมท่อ</span>
 				ในห้วงวันที่ <span class="sla4">14-15 มี.ค.</span>
 				บริเวณ <span class="sla4">ถนนสาย 234</span>
@@ -301,7 +427,7 @@
 			<h1 id="InfluenceTheyDeserve">
 					ประชาสัมพันธ์
 				</h1>
-				<p class="sansserif">
+				<p class="kanit">
 					การประปานครหลวงมีแผนกำหนดการในการดำเนินงาน<span class="sla4">ซ่อมท่อ</span>
 					ในห้วงวันที่ <span class="sla4">14-15 มี.ค.</span>
 					บริเวณ <span class="sla4">ถนนสาย 234</span>
@@ -310,7 +436,7 @@
 				</p>
 		</div>
 		<div class="pane step" id="OutMatch">
-			<p><span class="c sansserif">น้ำสะอาด สดใส บริการด้วยใจ <strong class="c1">การประปานครหลวง</strong> น้ำคุณภาพ สำหรับทุกคน</span></p>
+			<p><span class="c kanit">น้ำสะอาด สดใส บริการด้วยใจ <strong class="c1">การประปานครหลวง</strong> น้ำคุณภาพ สำหรับทุกคน</span></p>
 		</div>
 	</div>
 </li>
@@ -324,7 +450,7 @@
 		<div class="pane step" id="Appealing">
 			<p id="OneMillionCosponsors">
 				<span id="fixCongress">You can fix Congress. Tell Congress to pass the</span>
-        <span class="b"><span class="b2 sansserif">
+        <span class="b"><span class="b2 kanit">
           <a href="https://represent.us/our-policy-platform/">American Anti-Corruption Act</a>
         </span></span>
         <br>
@@ -349,10 +475,17 @@
         <script src="./js/1.8.2-jquery.min.js"></script>
         
 		<script type="text/javascript" src="./js/resources-actionkit.js"></script>
-		
-		<script src="./js/js-lopsided.js"></script>
 
-		<script src="./js/d3.v3.min.js"></script>
-		<script src="./script.en.js"></script>
+		
+		<script src="./js/d3.v3.min.js"></script>	
+		<script src="js/queue.v1.min.js"></script>
+		<script src="js/topojson.js"></script>
+		<script src="./js/sankey.js"></script>
+		<script src="./js/situation_summary.js"></script>
+		<script src="./js/Packed_Bubbles.js"></script>
+		<script src="./js/Dendrogram.js"></script>
+		<script src="./js/Map.js"></script>
+		<script src="./js/Sankey_graph.js"></script>
+		<script src="./request_eye.js"></script>
     </body>
 </html>

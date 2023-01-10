@@ -1,16 +1,56 @@
 @font-face {
-	font-family: 'Kanit'; /*a name to be used later*/
+	font-family: "Kanit"; /*a name to be used later*/
 	src: url('https://maholan.app/files/fonts/Kanit/Kanit-Regular.ttf'); /*URL to font*/
   }
-/* 
-* {
-font-family: Kanit !important;
-} */
 
-#moneywinselections {
+* {
+	font-family: Kanit !important;
+}
+
+.left {
+	left: 0;
+	/* margin-left: -10px !important; */
+}
+.right {
+	right: 0;
+	/* margin-right: -10px !important; */
+}
+.side-pane {
+	margin:0 !important;
+	width: 18em !important;
+	height: 20em !important;
+	/* border-radius: 50%; */
+	top: 1165px;
+}
+.side-pane * {
+	visibility: hidden;
+}
+#map-container {
+	width: 100%;
+	height: 750px;
+	margin: 0 0;
+}
+
+#request-summary {
 	margin-left: 0 !important;
 	top:75px !important;
 	left:75px !important;
+}
+#top-section {
+    width:100%;
+    height: 1000px;
+    min-height: 500px;
+  }
+
+#top-section>svg {
+	position: absolute;
+	right: 20px;
+	/* left: 50%;
+	transform: translateX(-50%); */
+	/* margin: 5rem auto 12rem !important; */
+	/* border-radius: 30px; */
+	margin-top: 3rem;
+	z-index: 501;
 }
 .sla1 {
 	color:#54D62C;
@@ -25,6 +65,12 @@ font-family: Kanit !important;
 }
 .sla4 {
 	color:#C81700;
+}
+
+.packed-bubble:hover{
+	stroke: #ddd !important;
+	stroke-width: 5px !important;
+	/* opacity: 1 !important; */
 }
 
 html{
@@ -66,24 +112,24 @@ body {
 #overlaySVG {
 	position: absolute;
 }
-#introSVG, #onepercentSVG {
+#introSVG, #complainSVG {
 	position: absolute;
 	top: 0;
 	left: 0;
 }
 
-h1, h2, h3, h4, h5, h6, .sansserif, .moneyLabel {
-	font-family: Kanit !important;
+h1, h2, h3, h4, h5, h6, .kanit, .moneyLabel {
+	font-family: "Kanit" !important;
 	/* font-family: "tablet-gothic-compressed",sans-serif; */
 	font-weight: 600;
 }
 
 .serif {
-	font-family: "abril-display",sans-serif;
+	font-family: "Kanit", "abril-display",sans-serif;
 	font-weight: 600;
 }
 .geo {
-	font-family: Georgia, Times, "Times New Roman", serif;
+	font-family: "Kanit", Georgia, Times, "Times New Roman", serif;
 
 }
 .primaryColor {
@@ -103,6 +149,43 @@ section {
 	width: 18em;
 	margin: 0 auto;
 	padding: 3em 0;
+}
+
+.vizPane {
+	width: 30em;
+	height: 30em;
+    border-radius: 2em;
+    background: #fffc;
+    position: absolute;
+    z-index: 600;
+    box-shadow: 0px 3px 5px rgb(0 0 0 / 10%);
+}
+
+.vizPane2 {
+	width: 100%;
+	height: 30em;
+    border-radius: 2em;
+    background: #fff0;
+    /* position: absolute; */
+    z-index: 600;
+    /* box-shadow: 0px 3px 5px rgb(0 0 0 / 10%); */
+}
+
+.tooltip {
+	font-family: "Kanit";
+	color: #31A2E2;
+	border: 5px solid #b56122;
+	background-color: #fff;
+	border-radius: 20px;
+	padding: 20px;
+	position: absolute;
+    z-index: 601;
+	box-shadow: 0px 3px 5px rgb(0 0 0 / 10%);
+}
+
+.packed-bubble-title {
+	font-family: "Kanit";
+	pointer-events: none;
 }
 
 img.respond {
@@ -131,65 +214,74 @@ img.respond {
 }
 
 /* Section: elections; */
-#elections {
+#situation-summary {
 	background: #f1f1f1;
 	color: #110a09;
 }
-#electionsContainer {
+#requestMapContainer {
 	display: none;
 }
-#moneywinselections {
+#request-summary {
 	position: relative;
 	z-index: 600;
 	padding-bottom: 0;
 }
-#moneywinselections p {
+#request-summary p {
 	display: none;
 }
-#moneywinselections h1 {
+#request-summary h1 {
 	margin-top: 0.5em;
 	font-size: 4.3em;
 	/* letter-spacing: -0.04em; */
 	line-height: 1em;
 	margin-bottom: 0.2em;
 }
-#moneywinselections span.a {
+#request-summary span.a {
 	margin-top: 0.2em;
 	color: #31A2E2;
 	font-size: 1.4em;
 }
-#moneywinselections span.b {
+#request-summary span.b {
 	font-size: 0.75em;
 	line-height: 0.8em;
 }
-#moneywinselections span.c {
+#request-summary span.c {
 	font-size: 1.3em;
 	display: block;
 	margin-top: 0.3em;
 }
-#moneywinselections span.a,
-#moneywinselections span.c {
+#request-summary span.a,
+#request-summary span.c {
 	text-transform: uppercase;
 }
-#fourhundredthirtyfive p,
-#ninetyfivepercent p {
+.side-pane p,
+#sticky-map-label p,
+#map-summary p,
+#request-sla p,
+#job-summary p {
 	font-size: 2.2em;
 	line-height: 1.2em;
 }
-#fourhundredthirtyfive em,
-#ninetyfivepercent em {
+.side-pane em,
+#map-summary em,
+#request-sla em,
+#job-summary em {
 	font-style: normal;
 	font-size: 1.7em;
 }
-#ninetyfivepercent span.b {
+.side-pane span.b,
+#map-summary span.b,
+#job-summary span.b {
 	text-transform: uppercase;
 	color: #31A2E2;
 	line-height: 1.5em;
 }
-#ninetyfivepercent span.b1 {
+/* #job-summary span.b1 {
 	
-}
-#ninetyfivepercent em {
+} */
+.side-pane em,
+#map-summary em,
+#job-summary em {
 	display: inline-block;
 	/* line-height: 0; */
 	margin-bottom: -0.05em;
@@ -197,7 +289,7 @@ img.respond {
 
 
 /* Pop over */
-#electionOverlay {
+#requestMapOverlay {
 	position: absolute;
 	left: -800px;
 	background: #fff;
@@ -206,13 +298,13 @@ img.respond {
 	z-index: 700;
 	
 }
-#electionOverlay p {
+#requestMapOverlay p {
 	margin: 2em;
 }
-#electionOverlay span {
+#requestMapOverlay span {
 	display: block;
 }
-#electionOverlay:after {
+#requestMapOverlay:after {
 	content: " ";
 	position:absolute;
 	bottom: -25px;
@@ -241,7 +333,7 @@ img.respond {
 	text-transform: uppercase;
 	line-height: 1.1em;
 }
-#electionOverlay .serif {
+#requestMapOverlay .serif {
 	font-size: 1.4em;
 	line-height: 1;
 }
@@ -262,7 +354,7 @@ img.respond {
 .didWin {
 	border: 5px solid #b56122;
 }
-#electionOverlay.didWin:after {
+#requestMapOverlay.didWin:after {
 	border-top-color: #b56122;
 }
 
@@ -272,12 +364,12 @@ img.respond {
 .didnotWin {
 	border: 5px solid #777;
 }
-#electionOverlay.didnotWin:after {
+#requestMapOverlay.didnotWin:after {
 	border-top-color: #777;
 }
 
-/* Section: onepercent */
-#onepercent {
+/* Section: complain */
+#complain {
 	background: #e1e1e1;
 }
 
@@ -364,8 +456,8 @@ img.respond {
 	float: right;
 }
 
-/* section: #policies */
-#policies {
+/* section: #rawwater */
+#rawwater {
 	background: #31A2E2;
 }
 
@@ -378,8 +470,9 @@ img.respond {
 }
 #lopsidedpolicy {
 	float: none;
-	width: 18em;
+	width: 24em;
 	margin: 4em auto;
+	text-align: center;
 }
 #lopsidedpolicy h1 {
 	font-size: 2em;
@@ -722,7 +815,7 @@ span.lobbyingSum {
 
 #unknown_user label {
 	display: block;
-	font-family: "tablet-gothic-compressed",sans-serif;
+	font-family: "Kanit","tablet-gothic-compressed",sans-serif;
 	margin-top: 1em;
 	color: #C81700;
 }
@@ -760,7 +853,7 @@ button#id_aksubmit {
 	background-image:linear-gradient(to bottom, #C81700, #a31708);
 	background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffC81700', endColorstr='#ffa31708', GradientType=0);
 	color: #ffffff;
-	font-family: "tablet-gothic-compressed",sans-serif;
+	font-family: "Kanit","tablet-gothic-compressed",sans-serif;
 	border: 2px solid #a31708;
 
 }
@@ -854,7 +947,9 @@ a#TumblrShare {color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background
 	}
 
 	/* Section:Intro */
-	#elections .pane {
+	.side-pane,
+	#mapexplore .pane,
+	#situation-summary .pane {
 		margin: 0 0 0 4em;
 		padding: 0.6em 2.5em 0.3em 2.5em;
 		border-radius: 2em;
@@ -864,7 +959,7 @@ a#TumblrShare {color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background
 		z-index: 600;
 		box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
 	}
-	#elections .electionStats {
+	#situation-summary .electionStats {
 		float: left;
 		clear: left;
 		position: absolute;
@@ -881,10 +976,10 @@ a#TumblrShare {color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background
 	#thankyou h1 {
 		font-size: 3em;
 	}
-	#moneywinselections {
+	#request-summary {
 		position: relative;
 	}
-	#moneywinselections p {
+	#request-summary p {
 		display: block;
 		word-spacing: -0.02em;
 		padding-bottom: 0.2em;
@@ -906,7 +1001,7 @@ a#TumblrShare {color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background
 	}
 	*/
 
-	#electionsContainer {
+	#requestMapContainer {
 		clear: both;
 		right: 0;
 		position: relative;
@@ -916,7 +1011,7 @@ a#TumblrShare {color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background
 		max-width: 1600px;
 		height: 1200px;
 	}
-	#electionsSVG {
+	#requestMapSVG {
 		position: absolute;
 		left: 0;
 		top: 0;
@@ -944,7 +1039,7 @@ a#TumblrShare {color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background
 		margin-bottom: -100%;
 	}
 
-	#onepercent .pane {
+	#complain .pane {
 		position: relative;
 		z-index: 500;
 	}
@@ -968,7 +1063,7 @@ a#TumblrShare {color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background
 		left: 0;
 		z-index: 300;
 	}
-	#policies {
+	#rawwater {
 		background: url("../fonts/bg.jpg") no-repeat center top;
 		background-size: cover;
 	}

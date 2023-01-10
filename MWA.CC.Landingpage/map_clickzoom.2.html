@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>D3 World Map Demo with Zoom into Country | TechSlides</title>
+<style>
+body { 
+  color: #666; 
+  background: #f3f3f3; 
+  font: normal 10px "Helvetica Neue", Helvetica, sans-serif; 
+  margin: 2em; 
+}
+#map {
+  border:2px solid #000;
+  width:960px;
+  height:550px;
+}
+.branch {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: .1px;
+  stroke-linejoin: round;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.hidden { 
+  display: none; 
+}
+div.tooltip {
+  color: #222; 
+  background: #fff; 
+  padding: .5em; 
+  text-shadow: #f5f5f5 0 1px 0;
+  border-radius: 2px; 
+  box-shadow: 0px 0px 2px 0px #a6a6a6; 
+  opacity: 0.9; 
+  position: absolute;
+}
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+.inactive {
+  fill: #eee !important;
+}
+
+.branch-label {
+  pointer-events: none !important;
+  z-index:900;
+}
+
+#sticky-map-label {
+  position: relative;
+  top: 10px;
+  right: 10px;
+  color: #31A2E2;
+  font-size: 24px;
+}
+
+#map-svg.zoom #branch-label {
+  opacity: 0.3 !important;
+}
+
+
+.dma {
+  fill: #31A2E2;
+  stroke: #fff;
+  stroke-width: .05px;
+  stroke-linejoin: round;
+  cursor: pointer;
+  visibility:hidden;
+  z-index: 102;
+}
+
+#map-svg.zoom .dma {
+  visibility: visible;
+}
+
+#dma-label {
+  visibility: hidden;
+}
+
+.dma-label {
+  font-size: xx-small !important;
+  visibility: hidden;
+  pointer-events: none !important;
+}
+
+
+/* .dma-label.active {
+  visibility: visible;
+  z-index: 104;
+} */
+
+#map-svg.zoom #dma-label {
+  visibility: visible;
+}
+
+</style>
+<body>
+<h1>D3 World Map Demo with Zooming into geoJSON area on Mouse Click.</h1>
+<a href="http://techslides.com/d3-world-maps-tooltips-zooming-and-queue/">Back to Article</a>
+<br><br>
+<div id="map">
+</div>
+
+<div id="sticky-map-label"></div>
+
+<script src="js/d3.v3.min.js"></script>
+<script src="js/queue.v1.min.js"></script>
+<script src="js/topojson.js"></script>
+<script>
+// The SVG container
+var width  = 960,
+    height = 550,
+    active;
+
+var offsetTop = document.getElementById("map").offsetTop,
+  offsetLeft = document.getElementById("map").offsetLeft;
+var color = d3.scale.category10();
+
+var projection = d3.geo.mercator()
+                .translate([width/2, height/2])
+                .rotate([0, 0])
+                .center([100.6, 13.8])
+                .scale(43500);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var svg = d3.select("#map").append("svg")
+    .attr("id", "map-svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+    .attr("id", "map-bg")
+    .attr("width", width)
+    .attr("height", height)
+    .on("click", reset);
+
+var g = svg.append("g");
+
+
+
+function click(d) {
+  if (active === d) return reset();
+  active = d;
+
+  var b = path.bounds(d);
+  g.transition().duration(750).attr("transform",
+      "translate(" + projection.translate() + ")"
+      + "scale(" + .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height) + ")"
+      + "translate(" + -(b[1][0] + b[0][0]) / 2 + "," + -(b[1][1] + b[0][1]) / 2 + ")");
+
+  if (d.layer != 'dma') {
+    g.selectAll(".active").classed("active", false);
+    g.selectAll(".inactive").classed("inactive", false);
+    d3.selectAll(".branch").classed("inactive", true);
+    d3.select(this).classed("inactive", false).classed("active", true);
+    document.getElementById("sticky-map-label").innerHTML = d.name
+    document.getElementById("map-svg").classList.add("zoom")
+
+    d3.selectAll(".dma").classed("inactive", true);
+    d3.selectAll(".dma-"+d.branch).classed("inactive", false).classed("active", true);
+  }
+}
+
+function reset() {
+  g.selectAll(".active").classed("active", active = false);
+  g.selectAll(".inactive").classed("inactive", active = false);
+  g.transition().duration(750).attr("transform", "");
+  document.getElementById("sticky-map-label").innerHTML = ""
+  document.getElementById("map-svg").classList.remove("zoom")
+
+  d3.selectAll(".dma").classed("inactive", false).classed("active", false);
+}
+
+function onover(d,i) {
+    d3.select(this).style("fill", "#5522aa")
+  }
+
+function onmove(d,i) {
+  // console.log("----d : ", d)
+  var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
+
+  tooltip
+    .classed("hidden", false)
+    .attr("style", "left:"+(mouse[0]+25+offsetLeft)+"px;top:"+(mouse[1]+offsetTop)+"px")
+    .html(d.name)
+
+}
+
+function onout(d,i) {
+  d3.select(this).style("fill", "#31A2E2")
+  tooltip.classed("hidden", true)
+}
+
+var tooltip = d3.select("#map").append("div")
+    .attr("class", "tooltip");
+
+queue()
+    .defer(d3.json, "https://tunchz.github.io/CIA/geoJson/WMA_Admin_Level1_2.topojson")
+    .defer(d3.json, "https://tunchz.github.io/CIA/geoJson/WMA_DMA2.topojson")
+    .await(ready);
+
+    
+function ready(error, Admin, DMA) {
+  console.log("--- Admin : ", Admin, DMA)
+  var branchs = topojson.object(Admin, Admin.objects.WMA_Admin_Level1).geometries;
+      // neighbors = topojson.neighbors(world, branchs),
+      // i = -1,
+      // n = branchs.length;
+      
+
+  // var temp = Admin.objects.WMA_DMA.geometries.map(r,i=>!r.type&&console.log(i))
+  branchs.map(function(d,i) { 
+    // console.log("--- d : ", d)
+    // var tryit = names.filter(function(n) { return d.id == n.id; })[0];
+    var tryit = Admin.objects.WMA_Admin_Level1.geometries[i].properties
+    if (typeof tryit === "undefined"){
+      d.name = "Undefined";
+    } else {
+      d.name = tryit.NAME; 
+      d.branch = tryit.DISTRICT_I;
+      d.layer = "branch";
+    }
+  });
+  
+  var dmas = topojson.object(DMA, DMA.objects.WMA_DMA).geometries;
+  dmas.map(function(d,i) { 
+    // console.log("--- d : ", d)
+    // var tryit = names.filter(function(n) { return d.id == n.id; })[0];
+    var tryit = DMA.objects.WMA_DMA.geometries[i].properties
+    // console.log("--- tryit: ", tryit)
+    if (typeof tryit === "undefined"){
+      d.name = "Undefined";
+    } else {
+      d.name = tryit.BLOCKNAME || 'unknown'
+      d.branch = tryit.BLOCKNAME?tryit.BLOCKNAME.substring(0,2):'unknown'
+      d.layer = "dma";
+      // !tryit.BLOCKNAME&&(console.log("--- i : ", i))
+    }
+  });
+  dmas = dmas.filter(r=>r.name!='unknown')
+
+
+  console.log("--- branchs : ", branchs)
+  console.log("--- dmas : ", dmas)
+
+var branch = g.selectAll(".branch")
+      .data(branchs)
+      .enter()
+      .append("path")
+      .attr("class", "branch")    
+      .attr("title", function(d,i) { return d.name; })
+      .attr("d", path)
+      .on("click", click)
+      // .style("fill", function(d, i) { return color(d.color = d3.max(neighbors[i], function(n) { return branchs[n].color; }) + 1 | 0); });
+      .style("fill", "#31A2E2")
+      .on("mouseover", onover)
+      .on("mousemove", onmove)
+      .on("mouseout",  onout);
+
+  
+  var labels = g.append("g")
+      .attr("id", "branch-label")
+        .selectAll("text")
+        .data(branchs)
+        .enter()
+        .append("svg:text")
+        .attr("class", "branch-label")
+        .text(function(d){
+          return d.name;
+        })
+        .attr("x", function(d){
+            return path.centroid(d)[0];
+        })
+        .attr("y", function(d){
+            return  path.centroid(d)[1];
+        })
+        .attr("text-anchor","middle")
+        .attr('fill', 'white');
+
+  var dma = g.selectAll(".dma")
+      .data(dmas)
+      .enter()
+      .append("path")
+      .attr("class", r=>"dma dma-"+r.branch)    
+      .attr("title", function(d,i) { return d.name; })
+      .attr("d", path)
+      .on("click", click)
+      .style("stroke", "#FFF")
+      .style("fill", "#31A2E200")
+      .on("mouseover", onover)
+      .on("mousemove", onmove)
+      .on("mouseout",  onout);
+  
+  var dmaLabels = g.append("g")
+      .attr("id", "dma-label")
+      .selectAll("text")
+      .data(dmas)
+      .enter()
+      .append("svg:text")
+      .attr("class", r=>"dma-label dma-"+r.branch) 
+      .text(function(d){
+        return d.name;
+      })
+      .attr("x", function(d){
+          return path.centroid(d)[0];
+      })
+      .attr("y", function(d){
+          return  path.centroid(d)[1];
+      })
+      .attr("text-anchor","middle")
+      .attr('fill', 'white');
+
+}
+</script>

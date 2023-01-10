@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+  <style>
+    body { 
+      color: #666; 
+      background: #f3f3f3; 
+      font: normal 10px "Helvetica Neue", Helvetica, sans-serif; 
+      margin: 2em; 
+    }
+    #map {
+      border:2px solid #000;
+      width:960px;
+      height:550px;
+    }
+    .country {
+      fill: #ccc;
+      stroke: #fff;
+      stroke-width: .1px;
+      stroke-linejoin: round;
+      cursor: pointer;
+    }
+    
+    .hidden { 
+      display: none; 
+    }
+    div.tooltip {
+      color: #222; 
+      background: #fff; 
+      padding: .5em; 
+      text-shadow: #f5f5f5 0 1px 0;
+      border-radius: 2px; 
+      box-shadow: 0px 0px 2px 0px #a6a6a6; 
+      opacity: 0.9; 
+      position: absolute;
+    }
+    
+    rect {
+      fill: none;
+      pointer-events: all;
+    }
+    
+    
+  </style>
+<body>
+  <div id="map" style="width:960px;height:700px;"></div>
+  <script src="http://d3js.org/d3.v2.min.js?2.10.0"></script>
+  <script>
+
+    var width = 960,
+      height = 700,
+      active;
+
+    var svg = d3.select("#map").append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+    svg.append("rect")
+      .attr("width", width)
+      .attr("height", height)
+      .on("click", reset);
+
+    var g = svg.append("g");
+
+    var tooltip = d3.select("#map").append("div")
+      .attr("class", "tooltip");
+
+    var xym = d3.geo.albers();
+    var path = d3.geo.path()
+                .projection(xym);
+
+    xym.origin([100.6, 13.8])
+    xym.translate([width/2, height/2])
+    // xym.parallels([24.6, 43.6])
+    xym.scale(59500)
+
+    
+  function click(d) {
+    if (active === d) return reset();
+    g.selectAll(".active").classed("active", false);
+    d3.select(this).classed("active", active = d);
+
+    var b = path.bounds(d);
+    g.transition().duration(750).attr("transform",
+        "translate(" + projection.translate() + ")"
+        + "scale(" + .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height) + ")"
+        + "translate(" + -(b[1][0] + b[0][0]) / 2 + "," + -(b[1][1] + b[0][1]) / 2 + ")");
+  }
+
+  function reset() {
+    g.selectAll(".active").classed("active", active = false);
+    g.transition().duration(750).attr("transform", "");
+  }
+
+  function onover(d,i) {
+    d3.select(this).style("fill", "#5522aa")
+  }
+
+  function onmove(d,i) {
+    // console.log("----d : ", d)
+    var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
+    tooltip
+      .classed("hidden", false)
+      .attr("style", "left:"+(mouse[0]+25)+"px;top:"+mouse[1]+"px")
+      .html(d.properties.NAME)
+  }
+
+  function onout(d,i) {
+    d3.select(this).style("fill", "#44aaee")
+    tooltip.classed("hidden", true)
+  }
+
+    d3.json("https://tunchz.github.io/CIA/geoJson/WMA_Admin_Level1.json", function(data) {
+        svg.selectAll("path").data(data.features)
+        .enter().append("path")
+        .attr("d", path)
+        .style("fill", function() { return "#44aaee" })
+        .on("mouseover", onover)
+        .on("mousemove", onmove)
+        .on("mouseout", onout)
+        .on("click", click)
+        
+      });
+  </script>
+
+<!-- mapChart = dc.geoChoroplethChart("#map-chart"), -->
+<!-- mapChart.width(v).height(C).dimension(u).group(b).transitionDuration(200)
+.projection(d3.geo.mercator().rotate([-100.6331, -13.2]).translate([v / 2, C / 2]).center([1.5, -1.1]).scale(2.478*Math.min(v*1.872, C-69)+541))
+.overlayGeoJson(mapjson.features, "PROVINCE_N", function(e) {e.properties.value = e.value; return e.properties.PROVINCE_N})
+.colors(d3.scale.threshold().range(Theme_Color_Range))
+.colorDomain([1,6,11,51,101,501])
+//.colorDomain([-8, 100/*b.top(2)[0].key === "ไม่พบข้อมูล" ? b.top(2)[1].value : b.top(2)[0].value*/])
+.label(function(e) {return 15/*e.value*/})
+//.title(function(e) {return e.value/*"จังหวัด : " + e.key + "\nจำนวนผู้ติดเชื้อ : " + e.value + " คน"*/})
+.title(function(e) {return ""})
+.legend(dc.legend().x(0).y(0).horizontal(false).itemHeight(10).gap(5))
+; -->
+<!-- mapChart
+  .width(v)
+  .height(C)
+  .projection(d3.geo.mercator()
+  .rotate([-100.6331, -13.2])
+  .translate([v / 2, C / 2])
+  .center([1.5, (extend ? -2.1 : -1.1)])
+  .scale(2.478*Math.min(v*1.872, C-69)+541))
+  .transitionDuration(0);
+mapChart.render(); -->

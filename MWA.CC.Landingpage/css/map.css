@@ -1,0 +1,121 @@
+
+  .branch {
+    fill: #ccc;
+    stroke: #ddd;
+    stroke-width: 1px;
+    stroke-linejoin: round;
+    cursor: pointer;
+    z-index: 101;
+  }
+  
+  .hidden { 
+    display: none; 
+  }
+  div.map-tooltip {
+    color: #222; 
+    background: #fff; 
+    padding: .5em; 
+    text-shadow: #f5f5f5 0 1px 0;
+    border-radius: 2px; 
+    box-shadow: 0px 0px 2px 0px #a6a6a6; 
+    opacity: 0.9; 
+    position: absolute;
+  }
+  
+  #map-bg {
+    fill: none;
+    pointer-events: all;
+  }
+
+  #map-bg * {
+      font-family: "Kanit" !important;
+  }
+
+  .inactive {
+    fill: #eee !important;
+  }
+  
+  .branch-label {
+    pointer-events: none !important;
+    visibility: hidden;
+    z-index:900;
+  }
+  
+  /* #sticky-map-label {
+    position: relative;
+    top: 10px;
+    right: 10px;
+    color: #31A2E2;
+    font-size: 24px;
+  } */
+  
+  #map-svg.zoom #branch-label {
+    opacity: 0.5 !important;
+  }
+  
+  
+  .dma {
+    fill: #31A2E2;
+    stroke: #fff;
+    stroke-width: .05px;
+    stroke-linejoin: round;
+    cursor: pointer;
+    visibility:hidden;
+    z-index: 102;
+  }
+  
+  #map-svg.zoom .dma {
+    visibility: visible;
+  }
+  
+  #dma-label {
+    visibility: hidden;
+  }
+  
+  .dma-label {
+    font-size: 3px;
+    visibility: hidden;
+    pointer-events: none !important;
+  }
+  
+    #map-svg.zoom-dma .dma-label {
+        font-size: 1px !important;
+    }
+
+  .branch-label.active,
+  .dma-label.active {
+    color: #FFFFFF;
+    visibility: visible !important;
+  }
+  
+  #map-svg.zoom #dma-label {
+    visibility: visible;
+  }
+
+  .job-loc {
+        visibility: hidden;
+  }
+  .job-loc.active {
+      visibility: visible;
+  }
+
+  .branch-stats {
+      pointer-events: none;
+      font-size: 16px;
+  }
+  #map-svg.zoom .branch-stats {
+    visibility: hidden;
+  }
+
+.dma-stats {
+    pointer-events: none;
+    font-size: 3px;
+}
+
+#map-svg.zoom .dma-stats {
+    visibility: visible;
+}
+
+#map-svg.zoom-dma .dma-stats {
+    visibility: hidden;
+}
