@@ -30,7 +30,8 @@ const facedescriptorUrl = "https://tunchz.github.io/Face.Rex/descriptors/descrip
 // Load face labels list & profile image
 let facestoverifyList = [];
 const facelabels = loadcsvtoarray('https://tunchz.github.io/Face.Rex/descriptors/LabeledFaceImageProfiles3.csv');
-//console.log(facelabels);
+
+// console.log(facelabels);
 
 //var camIP = "10.90.0.98:8080";// "192.168.1.11:8080";
 var image_src;
@@ -106,7 +107,7 @@ var formatDayDisplay = d3.time.format("%d");
 var formatMonthDisplay = d3.time.format("%B");
 var filterDate = formatDate(new Date());
 var filterVerification = "verified";
-var filterDept = "All";
+var filterDept = "MACS";
 
 // Load face log to create detectedfacesList
 summarysheetLoad(facelogsheetUrl);
@@ -705,7 +706,7 @@ function doData(data) {
   //         latestRow.push(text);
   //     }
   // }
-  summarysheetResults = data.values;
+  summarysheetResults = data.values?.filter((r=>r[1]));
   handleResults(summarysheetResults);
   console.log("update summary sheet finished at "+ formatTime(new Date()));
 }
@@ -727,7 +728,7 @@ function handleResults(spreadsheetArray) {
     }
     //console.log(r,inlist);
     if (!inlist) {
-      var d = spreadsheetArray[r][2].split('/'); //split date to reconstruct timestamp later on
+      var d = spreadsheetArray[r][2]?.split('/'); //split date to reconstruct timestamp later on
       facesList./*push*/unshift({  
                       'id'        : spreadsheetArray[r][1],
                       'date'      : spreadsheetArray[r][2],
@@ -737,7 +738,7 @@ function handleResults(spreadsheetArray) {
                       'location'  : spreadsheetArray[r][5],
                       'lat'       : spreadsheetArray[r][6],
                       'lon'       : spreadsheetArray[r][7],
-                      'img'       : typeof spreadsheetArray[r][8]!='undefined'? spreadsheetArray[r][8].replace(/\s/g, "+"):spreadsheetArray[r][1]=="unknown"?"https://tunchz.github.io/Face.Rex.MACS/img/unknown_small.jpg":facelabels[parseInt(spreadsheetArray[r][1])].img.src, //if no image, use profile image
+                      'img'       : typeof spreadsheetArray[r][8]!='undefined'? spreadsheetArray[r][8]?.replace(/\s/g, "+"):spreadsheetArray[r][1]=="unknown"?"https://tunchz.github.io/Face.Rex.MACS/img/unknown_small.jpg":facelabels[parseInt(spreadsheetArray[r][1])]?.img?.src, //if no image, use profile image
                       'status'    : spreadsheetArray[r][1]=="unknown"?"unknown":"succeeded",
                       'dept'      : spreadsheetArray[r][1]=="unknown"?"":facestoverifyList[parseInt(spreadsheetArray[r][1])]?.last,
                       'verified'  : spreadsheetArray[r][1]=="unknown"?"unknown":"verified",
@@ -772,6 +773,7 @@ function updateTable() {
 
 function displayTable() {
   // Initialize crossfilter variable for detectedfacesList
+
   dl = crossfilter(detectedfacesList);
   dl.date = dl.dimension(function(d) { return d.date; });
   dl.timestamp = dl.dimension(function(d) { return d.timestamp; });
@@ -917,10 +919,10 @@ function loadcsvtoarray(filename) {
     url: filename,
     dataType: "text",
     success: function (data) {
-      arr = csv2array(data); //console.log(arr);
+      arr = (csv2array(data))//?.filter(r=>["MACS","Tunchz Family"].includes(r[3])); console.log(arr);
     }
   });
-  for (i = 1; i < 50/*arr.length*/; i++) {
+  for (i = 1; i < 50 /*arr.length*/; i++) {
     var mini_img = new Image(); 
     mini_img.src = 'data:image/jpeg;base64,'+arr[i][2];//.replace(/\s/g, "+");
     mini_img.id = 'thumbnail';
@@ -1003,7 +1005,6 @@ function updateMenu(menuNum) {
 }
 
 function Initialize() {
-
   const ONE_HOUR = 60 * 60 * 1000,
         ONE_DAY = 24 * ONE_HOUR;
   var today = new Date();//Date('2020-05-18T17:59:06.134Z');
@@ -1033,12 +1034,13 @@ function Initialize() {
     .text(function (d) { return d.dept+"   ("+d.num+")"; }) // text showed in the menu
     .attr("value", function (d) { return d.dept; }) // corresponding value returned by the button
 
+  d3.select('#dept-selector').property('value', 'MACS');
+
   d3.select("#dept-selector").on("change", function(d) {
       filterDept = d3.select(this).property("value");
       updateTable();
   })
-
-
+  
   $('#datepicker').datepicker({
     format: 'dd/mm/yy',
     autoclose: true,
