@@ -11,7 +11,7 @@ var num_keep = Math.ceil(verifyingPeriod/detectionloopDelay);
 var loop_i = 0;
 var looptoUpdate = Math.ceil(timetoupdateResults/detectionloopDelay);
 var videoStart = true;
-var frontCam = false; // default for mobile rear camera
+var frontCam = true; // default mobile cam >>>  true : front camera, false : rear camera
 var displaySize, canvas_ctx;
 
 // Url for target google sheet script of insert the face record
