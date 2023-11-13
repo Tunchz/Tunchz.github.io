@@ -15,11 +15,14 @@ var frontCam = false; // default for mobile rear camera
 var displaySize, canvas_ctx;
 
 // Url for target google sheet script of insert the face record
-//const sheetUrl = "https://script.google.com/macros/s/AKfycbxxYJAPo5auDaZiy66RizPTMGE9QxLeIbUDRw_shEDpEbQoZCg/exec";
-const sheetUrl = "https://script.google.com/macros/s/AKfycbw6y-uoU3UA2-E9tLc6x0TcdQ64E19cny4bkocY/exec";
+const sheetUrl = "https://script.google.com/macros/s/AKfycbxxYJAPo5auDaZiy66RizPTMGE9QxLeIbUDRw_shEDpEbQoZCg/exec";
+// const sheetUrl = "https://script.google.com/macros/s/AKfycbw6y-uoU3UA2-E9tLc6x0TcdQ64E19cny4bkocY/exec";
 // Url for face log google sheet
-//const facelogsheetUrl = "https://spreadsheets.google.com/feeds/cells/1f2zLWOWivY_L72VW0odfmGGeF4wxve1D6o4VvQm2Spg/1/public/values?alt=json-in-script&callback=doData";
-const facelogsheetUrl = "https://spreadsheets.google.com/feeds/cells/1BkNHlFBWNXDSDD-jMM_BWSYjLNenLVKGW9cY7Mtnkzg/1/public/values?alt=json-in-script&callback=doData";
+const facelogsheetUrl = "https://sheets.googleapis.com/v4/spreadsheets/1f2zLWOWivY_L72VW0odfmGGeF4wxve1D6o4VvQm2Spg/values/sheet1?key=AIzaSyCaGhi6LMhZ5yjYt3nEBwamE45iHqfrxEs"
+// const facelogsheetUrl = "https://spreadsheets.google.com/feeds/cells/1f2zLWOWivY_L72VW0odfmGGeF4wxve1D6o4VvQm2Spg/1/public/values?alt=json-in-script&callback=doData";
+// const facelogsheetUrl = "https://opensheet.elk.sh/1BkNHlFBWNXDSDD-jMM_BWSYjLNenLVKGW9cY7Mtnkzg/1"
+// const facelogsheetUrl = "https://sheets.googleapis.com/v4/spreadsheets/1BkNHlFBWNXDSDD-jMM_BWSYjLNenLVKGW9cY7Mtnkzg/values/sheet1?key=AIzaSyCaGhi6LMhZ5yjYt3nEBwamE45iHqfrxEs"
+// const facelogsheetUrl = "https://spreadsheets.google.com/feeds/cells/1BkNHlFBWNXDSDD-jMM_BWSYjLNenLVKGW9cY7Mtnkzg/1/public/values?alt=json-in-script&callback=doData";
 // Url for face models
 const modelsUrl = "https://tunchz.github.io/Face.Rex/models";
 // Url for trained face descriptor used to label known faces
@@ -666,38 +669,43 @@ function uploadsendingfailList() {
   //updateTable();
 }
 
-function summarysheetLoad(url) {
+async function summarysheetLoad(url) {
 
   console.log("update summary sheet start at "+formatTime(new Date()));
   // Create JSONP Request to Google Docs API, then execute the callback function doData
-  $.ajax({
-      url: url,
-      jsonp: 'doData',
-      dataType: 'jsonp'
-  });
+  // $.ajax({
+  //     url: url,
+  //     jsonp: 'doData',
+  //     dataType: 'jsonp'
+  // });
+
+  const result = await (await fetch(url)).json();
+
+  doData(result)
 
 }
 
 
 // The callback function the JSONP request will execute to load data from API
 function doData(data) {
-  var entries = data.feed.entry;
-  var previousRow = 0;
-  summarysheetResults = [];
-  for (var i = 0; i < entries.length; i++) {
-      var latestRow = summarysheetResults[summarysheetResults.length - 1];
-      var cell = entries[i];
-      var text = cell.content.$t;
-      var row = cell.gs$cell.row;
-      if (row > previousRow) {
-          var newRow = [];
-          newRow.push(text);
-          summarysheetResults.push(newRow);
-          previousRow++;
-      } else {
-          latestRow.push(text);
-      }
-  }
+  // var entries = data.feed.entry;
+  // var previousRow = 0;
+  // summarysheetResults = [];
+  // for (var i = 0; i < entries.length; i++) {
+  //     var latestRow = summarysheetResults[summarysheetResults.length - 1];
+  //     var cell = entries[i];
+  //     var text = cell.content.$t;
+  //     var row = cell.gs$cell.row;
+  //     if (row > previousRow) {
+  //         var newRow = [];
+  //         newRow.push(text);
+  //         summarysheetResults.push(newRow);
+  //         previousRow++;
+  //     } else {
+  //         latestRow.push(text);
+  //     }
+  // }
+  summarysheetResults = data.values;
   handleResults(summarysheetResults);
   console.log("update summary sheet finished at "+ formatTime(new Date()));
 }
@@ -706,7 +714,7 @@ function doData(data) {
 function handleResults(spreadsheetArray) {
   var facesList = [], inlist = false;
 
-  //console.log(spreadsheetArray);
+  console.log(spreadsheetArray);
   //for (r=1; r<spreadsheetArray.length; r++) {
   for (r=spreadsheetArray.length-1; r>0; r--) {
     inlist = false;
@@ -731,7 +739,7 @@ function handleResults(spreadsheetArray) {
                       'lon'       : spreadsheetArray[r][7],
                       'img'       : typeof spreadsheetArray[r][8]!='undefined'? spreadsheetArray[r][8].replace(/\s/g, "+"):spreadsheetArray[r][1]=="unknown"?"https://tunchz.github.io/Face.Rex.MACS/img/unknown_small.jpg":facelabels[parseInt(spreadsheetArray[r][1])].img.src, //if no image, use profile image
                       'status'    : spreadsheetArray[r][1]=="unknown"?"unknown":"succeeded",
-                      'dept'      : spreadsheetArray[r][1]=="unknown"?"":facestoverifyList[parseInt(spreadsheetArray[r][1])].last,
+                      'dept'      : spreadsheetArray[r][1]=="unknown"?"":facestoverifyList[parseInt(spreadsheetArray[r][1])]?.last,
                       'verified'  : spreadsheetArray[r][1]=="unknown"?"unknown":"verified",
                       'timestamp' : new Date(d[2]+'-'+d[1]+'-'+d[0]+' '+spreadsheetArray[r][3]+':00'),
                       'detection' : 1
