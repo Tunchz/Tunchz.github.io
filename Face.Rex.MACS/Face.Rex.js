@@ -156,7 +156,12 @@ function startVideo(webcam) {
     video = document.createElement("video");
     video.id = "video";
     video.style.backgroundColor = "#000";
-    video.autoplay = true;
+    // video.autoplay = true;
+
+    video.setAttribute('autoplay', '');
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '')
+
     videocontainer.append(video);
     resizeAdjust();
     ipcamUse = false;
@@ -1428,23 +1433,42 @@ function switchCam(sw) {
 
   } else {
     // not on mobile
-    navigator.getUserMedia(
-      { video: {}, audio: false },  //{ video: {width:640, height:480} },
-      stream => {
-        video.srcObject = stream;
+    navigator.mediaDevices.getUserMedia({ video: {}, audio: false })
+      // { video: {}, audio: false },  //{ video: {width:640, height:480} },
+      // stream => {
+      //   video.srcObject = stream;
+      //   videoStart = true;
+      //   controlButton();
+      //   resizeAdjust();
+      //   video.muted = true;
+      //   displaynoti("");
+      //   console.log("video started...")
+      // },
+      // err => {
+      //   //alert("error loading video >> please allow access to the video source...")
+      //   displaynoti("Can't access video source!<br><red><small>click to return</small></red>");
+      //   //inputMenu();
+      // } //console.error(err)
+      .then(stream => {
+        // console.log(stream);
+        // console.dir(video);
+        if ('srcObject' in video) {
+          video.srcObject = stream;
+        } else {
+          video.src = URL.createObjectURL(stream);
+        }
         videoStart = true;
         controlButton();
         resizeAdjust();
         video.muted = true;
         displaynoti("");
         console.log("video started...")
-      },
-      err => {
-        //alert("error loading video >> please allow access to the video source...")
+        video.play();
+      })
+      .catch(err => {
         displaynoti("Can't access video source!<br><red><small>click to return</small></red>");
-        //inputMenu();
-      } //console.error(err)
-    )    
+      });
+    // )    
   }
 }
 
