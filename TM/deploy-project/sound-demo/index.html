@@ -13,8 +13,8 @@
         <link rel="stylesheet" href="./css/style.css" />
         <!-- these load the tensorflow and audio libraries: -->
         <!-- more documentation at https://github.com/tensorflow/tfjs-models/tree/master/speech-commands -->
-        <script src="/dist/tf.min.js"></script>
-        <script src="/dist/speech-commands.min.js"></script>
+        <script src="../../dist/tf.min.js"></script>
+        <script src="../../dist/speech-commands.min.js"></script>
         <!-- these load our code: -->
         <script type="module" src="./js/model-runner.js"></script>
         <script type="module" src="./js/bar-graph.js"></script>
@@ -29,7 +29,7 @@
                 <div class="mic-icon-wrapper">
                     <img
                         class="mic-icon"
-                        src="/assets/img/mic_white_48dp.png"
+                        src="../../assets/img/mic_white_48dp.png"
                     />
                 </div>
             </div>
@@ -57,7 +57,7 @@
 
             
             // let URL = 'https://teachablemachine.withgoogle.com/models/WSP4ifnt/';
-            let URL = 'http://localhost:3000/models/WSP4ifnt/';
+            let URL = 'https://tunchz.github.io/TM/models/WSP4ifnt/';
 
             // setupBarGraph is defined in the js/bar-graph.js file
             setupBarGraph(URL);
