@@ -7527,9 +7527,9 @@
                         primaryProjectRoute="/train/image"
                         modalTitle=${Object(x.b)("embedded-subproject-modal-title")}
                         >
-                        <img slot="images" alt="${Object(x.b)("new-project_card_image_image-alt")}" src="../assets/img/project-samples/image/sample1.jpg"/>
-                        <img slot="images" alt="${Object(x.b)("new-project_card_image_image-alt")}" src="../assets/img/project-samples/image/sample2.jpg"/>
-                        <img slot="images" alt="${Object(x.b)("new-project_card_image_image-alt")}" src="../assets/img/project-samples/image/sample3.jpg"/>
+                        <img slot="images" alt="${Object(x.b)("new-project_card_image_image-alt")}" src="./assets/img/project-samples/image/sample1.jpg"/>
+                        <img slot="images" alt="${Object(x.b)("new-project_card_image_image-alt")}" src="./assets/img/project-samples/image/sample2.jpg"/>
+                        <img slot="images" alt="${Object(x.b)("new-project_card_image_image-alt")}" src="./assets/img/project-samples/image/sample3.jpg"/>
                         <p slot="description" class="project-desc">${Object(x.b)("new-project_card_image_description")}</p>
                     </tm-new-model-card>
                     <tm-new-model-card
@@ -7538,9 +7538,9 @@
                         label="${Object(x.b)("new-project_card_audio_label")}"
                         tooltip=""
                         @click=${()=>o()("/train/audio")}>
-                        <img slot="images" alt="${Object(x.b)("new-project_card_audio_image-alt")}" src="../assets/img/project-samples/sound/sample1.jpg"/>
-                        <img slot="images" alt="${Object(x.b)("new-project_card_audio_image-alt")}" src="../assets/img/project-samples/sound/sample2.jpg"/>
-                        <img slot="images" alt="${Object(x.b)("new-project_card_audio_image-alt")}" src="../assets/img/project-samples/sound/sample3.jpg"/>
+                        <img slot="images" alt="${Object(x.b)("new-project_card_audio_image-alt")}" src="./assets/img/project-samples/sound/sample1.jpg"/>
+                        <img slot="images" alt="${Object(x.b)("new-project_card_audio_image-alt")}" src="./assets/img/project-samples/sound/sample2.jpg"/>
+                        <img slot="images" alt="${Object(x.b)("new-project_card_audio_image-alt")}" src="./assets/img/project-samples/sound/sample3.jpg"/>
                         <p slot="description" class="project-desc">${Object(x.b)("new-project_card_audio_description")}</p>
                     </tm-new-model-card>
                     <tm-new-model-card
@@ -7549,9 +7549,9 @@
                         label="${Object(x.b)("new-project_card_pose_label")}"
                         tooltip=""
                         @click=${()=>{o()("/train/pose")}}>
-                        <img slot="images" alt="${Object(x.b)("new-project_card_pose_image-alt")}" src="../assets/img/project-samples/pose/sample1.jpg"/>
-                        <img slot="images" alt="${Object(x.b)("new-project_card_pose_image-alt")}" src="../assets/img/project-samples/pose/sample2.jpg"/>
-                        <img slot="images" alt="${Object(x.b)("new-project_card_pose_image-alt")}" src="../assets/img/project-samples/pose/sample3.jpg"/>
+                        <img slot="images" alt="${Object(x.b)("new-project_card_pose_image-alt")}" src="./assets/img/project-samples/pose/sample1.jpg"/>
+                        <img slot="images" alt="${Object(x.b)("new-project_card_pose_image-alt")}" src="./assets/img/project-samples/pose/sample2.jpg"/>
+                        <img slot="images" alt="${Object(x.b)("new-project_card_pose_image-alt")}" src="./assets/img/project-samples/pose/sample3.jpg"/>
                         <p slot="description" class="project-desc">${Object(x.b)("new-project_card_image_description")}</p>
                     </tm-new-model-card>
                     <div class="project coming-soon">
