@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Audio Model Demo - Teachable Machine</title>
+        <!-- don't mind these: -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- these load the stylesheets: -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow:500" />
+        <link rel="stylesheet" href="./css/reset.css" />
+        <link rel="stylesheet" href="./css/style.css" />
+        <!-- these load the tensorflow and audio libraries: -->
+        <!-- more documentation at https://github.com/tensorflow/tfjs-models/tree/master/speech-commands -->
+        <script src="/dist/tf.min.js"></script>
+        <script src="/dist/speech-commands.min.js"></script>
+        <!-- these load our code: -->
+        <script type="module" src="./js/model-runner.js"></script>
+        <script type="module" src="./js/bar-graph.js"></script>
+        <!-- <script type="module" src="./js/audio-visualizer.js"></script> -->
+    </head>
+    <body>
+        <section id="model">
+            <h1>I taught a machine learning model to recognize noises.</h1>
+            <h2>Try whistling or snapping to get started.</h2>
+            <div id="mic-wrapper">
+                <div><div id="mic-loading"></div></div>
+                <div class="mic-icon-wrapper">
+                    <img
+                        class="mic-icon"
+                        src="/assets/img/mic_white_48dp.png"
+                    />
+                </div>
+            </div>
+            <div id="predicted-result">predicted result</div>
+            <div id="graph-wrapper"></div>
+        </section>
+        <section id="info">
+            <h2>
+                This machine learning model was made using 
+                <a href="https://teachablemachine.withgoogle.com/">Teachable Machine.</a>
+            </h2>
+            <!-- <h2><a href="https://medium.com/p/4212fd7f3555">Learn how we made it without coding.</a></h2> -->
+        </section>
+        <footer>
+            <!-- <h2>
+                <a href="https://glitch.com/edit/#!/remix/tm-audio-demo">
+                    Remix this site on Glitch
+                </a>
+            </h2> -->
+        </footer>
+
+        <script type="module">
+            import { setupModel } from './js/model-runner.js';
+            import { setupBarGraph, updateBarGraph } from './js/bar-graph.js';
+
+            
+            // let URL = 'https://teachablemachine.withgoogle.com/models/WSP4ifnt/';
+            let URL = 'http://localhost:3000/models/WSP4ifnt/';
+
+            // setupBarGraph is defined in the js/bar-graph.js file
+            setupBarGraph(URL);
+
+            // setupModel is defined in the js/model-runner.js file
+            // we pass in two functions:
+            // updateBarGraph (defined in the js/bar-graph.js file)
+            // and updateAudioVisualizer (defined in the js/audio-visualizer.js file)
+            // setupModel will store these functions,
+            // and call them every time it has new data from the model
+            setupModel(URL, data => {
+                updateBarGraph(data);
+            });
+        </script>
+    </body>
+</html>
