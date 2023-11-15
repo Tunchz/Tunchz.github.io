@@ -10,20 +10,20 @@
 }
 @font-face {
     font-family: 'BoingRegular';
-    src: url('./assets/fonts/boing/Boing_RegularWEB.eot');
-    src: url('./assets/fonts/boing/Boing_RegularWEB.eot?#iefix') format('embedded-opentype'),
-            url('./assets/fonts/boing/Boing_RegularWEB.woff2') format('woff2'),
-            url('./assets/fonts/boing/Boing_RegularWEB.woff') format('woff'),
-            url('./assets/fonts/boing/Boing_RegularWEB.svg') format('svg');
+    src: url('./fonts/boing/Boing_RegularWEB.eot');
+    src: url('./fonts/boing/Boing_RegularWEB.eot?#iefix') format('embedded-opentype'),
+            url('./fonts/boing/Boing_RegularWEB.woff2') format('woff2'),
+            url('./fonts/boing/Boing_RegularWEB.woff') format('woff'),
+            url('./fonts/boing/Boing_RegularWEB.svg') format('svg');
 }
 
 @font-face {
     font-family: 'BoingSemiBold';
-    src: url('./assets/fonts/boing/Boing_SemiboldWEB.eot');
-    src: url('./assets/fonts/boing/Boing_SemiboldWEB.eot?#iefix') format('embedded-opentype'),
-            url('./assets/fonts/boing/Boing_SemiboldWEB.woff2') format('woff2'),
-            url('./assets/fonts/boing/Boing_SemiboldWEB.woff') format('woff'),
-            url('./assets/fonts/boing/Boing_SemiboldWEB.svg') format('svg');
+    src: url('./fonts/boing/Boing_SemiboldWEB.eot');
+    src: url('./fonts/boing/Boing_SemiboldWEB.eot?#iefix') format('embedded-opentype'),
+            url('./fonts/boing/Boing_SemiboldWEB.woff2') format('woff2'),
+            url('./fonts/boing/Boing_SemiboldWEB.woff') format('woff'),
+            url('./fonts/boing/Boing_SemiboldWEB.svg') format('svg');
 }
 
 body {
