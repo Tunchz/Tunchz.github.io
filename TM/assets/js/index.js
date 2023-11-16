@@ -5498,7 +5498,7 @@
                     <div title="${Object(c.b)("menu_edit-project-title")}" role="button" tabindex="0" @click=${e("editModelName")}> ${i} </div>
                     <div title="${Object(c.b)("menu_show-project-drive")}" role="button" tabindex="0" @click=${e("openInDrive")}> ${o} </div>
                 </div>
-                <ul>
+                <!-- <ul>
                     <li role="button" tabindex="0" id="drive-open" @click=${e("driveOpen")}>
                             ${o}
                             ${Object(c.b)("menu_open-project-drive")}
@@ -5519,7 +5519,7 @@
                             ${g}
                             ${Object(c.b)("menu_sign-out-drive")}
                     </li>
-                </ul>
+                </ul> -->
                 <ul>
                     <li role="button" tabindex="0" id='drive-open' @click=${e("fileOpen")}>
                             ${s}
