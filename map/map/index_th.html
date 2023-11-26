@@ -8,9 +8,9 @@
 
 <script src="http://d3js.org/d3.v3.js"></script>
 <script src="//d3js.org/topojson.v1.min.js"></script>
-<script src="//d3js.org/d3-color.v1.min.js"></script>  
+<!-- <script src="//d3js.org/d3-color.v1.min.js"></script>  
 <script src="//d3js.org/d3-interpolate.v1.min.js"></script> 
-<script src="//d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="//d3js.org/d3-scale-chromatic.v1.min.js"></script> -->
 <script src="//d3js.org/d3-hexbin.v0.2.min.js"></script>
 
 <style type="text/css">
@@ -129,7 +129,7 @@ a:hover {
 
 <body>
 
-<h1>Thailand Customed Map <span id="header-dataset">Hex/Circle</span></h1>
+<h1>Thailand Customed Map : <span id="header-dataset">Hex</span></h1>
 <h4>Hover to highlight province.</h4>
 
 <div id="container">
@@ -208,19 +208,11 @@ var svg = d3.select('#vis')
 /* Functions */
 /* ========= */
 
-// function onover(d) {
-// 	console.log("== onover : ", d)
-// }
-
-// function onout(d) {
-// 	console.log("== onout : ", d)
-	
-// }
 
 function drawHexmap(points) {
 	console.log("== type : ", type)
 	// console.log("== points : ", points)
-	if (type=='hex') {
+	if (type=='Hex') {
 		var hexes = svg.append('g').attr('id', 'hexes')
 				.selectAll('.hex')
 				.data(points)
@@ -298,21 +290,6 @@ function rollupHexPoints(data) {
 
 	});
 
-	// Determine exponent for the colorScale interpolator
-	var exponent = 10;
-
-	// // Create colorScale as soon as maximum number of datapoints is determined
-	// colorScale = d3.scaleSequential(function(t) {
-
-	// 	var tNew = Math.pow(t, exponent);
-	// 	return d3.interpolateViridis(tNew);
-
-	// }).domain([maxCount, 1]);	
-
-	// // Update slider
-	// d3.select('#change-scale-input').property("max", 100);
-	// d3.select('#change-scale-input').property("value", perR*100);
-	// d3.select('#change-scale-value').html(perR*100);
 
 	return data;
 
@@ -365,26 +342,6 @@ function polygonContains(polygon, point) {
 
   return inside;
 }
-
-// function polygonContains(polygon, point) {
-// 	let i, 
-// 		j=polygon.length-1,
-// 		inside = false,
-// 		x=point[0],
-// 		y=point[1];
-
-// 	for (i=0; i<polygon.length; i++) {
-// 		let x0=polygon[j][0],y0=polygon[j][1],
-// 			x1=polygon[i][0],y1=polygon[i][1];
-
-// 		if ((y1< y && y0>=y ||  y0< y && y1>=y)
-// 			&& (x1<=x || x0<=x)) {
-// 			inside ^= (x1 + (y-y1)*(x0-x1)/(y0-y1)) < x; 
-// 		}
-// 		j=i; 
-// 	}
-// 	return inside;
-// }
 
 
 function keepPointsInPolygon(points, polygon, properties) {
@@ -488,9 +445,7 @@ function drawPolygon(geoData) {
     // .style("fill", function(d, i) { return color(d.color = d3.max(neighbors[i], function(n) { return branchs[n].color; }) + 1 | 0); });
     .style("fill", d=>{ return "#EEEEEE"})
 	.style("stroke", "#777777")
-    // .on("mouseover", onover)
-    // .on("mousemove", onmove)
-    // .on("mouseout",  onout);
+
 } // drawPolygon()
 
 function prepData(topo) {
@@ -513,29 +468,13 @@ function getPointsInPolygons(points, geoData) {
 			let polygonPoints = [];
 			if (features.length == 1) {
 				features=features[0]
-				// console.log("++ item.geometry.coordinates : ", item.geometry.coordinates)
-				// console.log("++ features : ", features)
 			}
 			features.map(function(el) {
 				polygonPoints.push(projection(el));
 			});
-			// if (polygonPoints.length<3) {
-			// 	console.log("-- polygonPoints : ", polygonPoints)
-			// 	console.log("-- features : ", features)
-			// 	features.map(function(el) {
-			// 		console.log("-- projection : ", el, projection(el));
-			// 	});
-			// }
-			// console.log('== item : ', item.properties.ID_1, item.properties.NAME_1, )
+			
 			let eachPolygonPoints = keepPointsInPolygon(points, polygonPoints, item.properties );
 
-			// console.log("-- features : ", features)
-			// console.log("-- polygonPoints : ", polygonPoints)
-			// console.log('== item : ', item.properties.ID_1, item.properties.NAME_1, eachPolygonPoints.length)
-			// if (eachPolygonPoints.length == 0) {
-			// 	console.log("++ item.geometry.coordinates : ", item.geometry.coordinates)
-			// 	console.log("++ features : ", features)
-			// }
 			allPoints = allPoints.concat(eachPolygonPoints);
 		})
 		
@@ -589,21 +528,6 @@ function ready(us, markets) {
 	mouseInteractivity();
 
 } // ready()
-
-
-// // Load data sources
-// var usData = d3.json('../data/us.json').then(function(us) { return us; });
-// // var usData = d3.json('./thprov.topojson').then(function(us) { return us; });
-// var marketData = d3.json('../data/markets_overall.json').then(function(markets) { return markets; });
-
-// Promise.all([usData, marketData]).then(function(response) {
-
-// 	var usResolved = response[0];
-// 	var marketsResolved = response[1];
-
-// 	ready(usResolved, marketsResolved);
-
-// });
 
 
 // d3.json(`../data/us.json`, function (us) {
@@ -679,41 +603,14 @@ function changeSelectedScale() {
 
 } // changeSelectedSize()
 
-// // Add a slider to change the color scales maximum value
-// d3.select('input#change-scale-input').on('input', function() {
-
-// 	var perR = this.value / 100;
-// 	console.log("-- perR : ", perR)
-
-// 	// // Create new colorScale with user picked exponent
-// 	// colorScale = d3.scaleSequential(function(t) {
-
-// 	// 	var tUpdated = Math.pow(t, newExponent);
-// 	// 	return d3.interpolateViridis(tUpdated);
-
-// 	// }).domain([maxCount, 1]);	
-
-// 	// d3.selectAll('.hex').style('fill', function(d) { 
-// 	// 	return d.datapoints === 0 ? 'none' : colorScale(d.datapoints); 
-// 	// });
-
-// 	d3.select('#change-scale-value').html(perR*100);
-
-// 	ready(usResolved, marketsResolved);
-
-// });
-
 
 /* Add dropdown for dataset choice */
 /* ------------------------------- */
 
-// All datasets available
-var datasets = ['markets_overall.json', 'markets_bakedgoods.json','markets_cheese.json','markets_coffee.json','markets_crafts.json','markets_flowers.json','markets_fruits.json','markets_herbs.json','markets_honey.json','markets_jams.json','markets_meat.json','markets_nursery.json','markets_nuts.json','markets_organic.json','markets_petfood.json','markets_plants.json','markets_poultry.json','markets_seafood.json','markets_tofu.json','markets_trees.json','markets_vegetables.json','markets_wine.json'];
-
 // Build a drop-down
 d3.select('#select-data select')
 		.selectAll('.select-option-data')
-		.data(['hex', 'circle'])
+		.data(['Hex', 'Circle'])
 		.enter().append('option')
 		.attr('value', function(d) { return d; })
 		.html(function(d) { return d; });
