@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<title>Self Organizing Maps</title>
+		
+		<script type="text/javascript" src="http://d3js.org/d3.v3.js"></script>
+		<script type="text/javascript" src="./topojson.js"></script>	
+		<script type="text/javascript" src="./map.js"></script>	
+        <link rel="stylesheet" href="./map.css">
+
+		<style type="text/css">
+		
+		</style>
+	</head>
+	<body>
+	    <div class="header">
+			D3 Maps
+			<div class="hint">Heatmaps showing distributions per variable</div>
+		</div>
+        <div class="pane step kanit intro" id="map-container-sticky-map-label" style="top:400px;text-align: center;visibility:hidden; height: 70px;">
+                <div class="icon-db" onclick='handleclick("map")' style="float:right; visibility: inherit; margin: 10px -20px;">
+                    <div id="map-filter" style="float:left; width:300px; margin:0px 0px 0px -305px; position:absolute; bottom: -25px; right:0; font-size: 12px; text-align: right;"></div>
+                </div>
+                <p style="margin:0;">
+                    <span id="map-back" class="icon-back" style="visibility: inherit" onclick='reset()'></span>
+                    <span id="map-container-sticky-map-label-selected-label" onclick='reset()' style="cursor: pointer;"></span>
+                </p>
+        </div>
+        <div id="d3-map">
+            <!-- <div class="icon-db" onclick='handleclick("map")' style="float:right;"></div> -->
+            <div id="map-container" style="width:100%; height:1000px;" ></div>
+        </div>
+		
+
+	</body>
+</html>

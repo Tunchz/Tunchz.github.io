@@ -1,0 +1,877 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>11 Hexbin maps - example 8</title>
+<meta charset="utf-8">
+
+<script src="http://d3js.org/d3.v3.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script src="//d3js.org/d3-color.v1.min.js"></script>  
+<script src="//d3js.org/d3-interpolate.v1.min.js"></script> 
+<script src="//d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="//d3js.org/d3-hexbin.v0.2.min.js"></script>
+
+<style type="text/css">
+
+body {
+	font-family: Avenir, sans-serif;
+}
+
+h1 {
+	color: #777;
+	padding: 0 5rem;
+	margin: 2rem 0 0 0;
+}
+
+h4 {
+	color: #aaa;
+	padding: 0 5rem;
+	margin: 0;
+}
+
+#container{
+	display: flex;
+	/* justify-content: ; */
+}
+
+#vis svg {
+	/* border: 1px solid #ccc; */
+}
+
+#market-list {
+	position: relative;
+	max-height: 80vh;
+	overflow-y: scroll;
+}
+
+#change-scale, #select-data, #select-size {
+	display: flex;
+	justify-content: flex-start;
+	margin: 1rem 0;
+}
+
+#change-scale-intro, #select-data-intro, #select-size-intro, #attribution {
+	font-size: 0.8rem;
+	padding: 0 1rem 0 5rem;
+}
+
+#attribution {
+	font-size: 0.6rem;
+}
+
+#change-scale-value {
+	font-size: 0.8rem;
+	padding-left: 1rem;
+}
+
+#tooltip {
+    position: absolute;
+    display: inline-block;
+    color: #555;
+    font-size: 11px;
+    text-align: left;
+    background: #fafafa;
+    box-shadow: 2px 2px 5px rgba(0, 0, 20, 0.25);
+    pointer-events: none;
+    line-height: 200%;
+    max-width: 250px;
+
+    opacity: 0;
+  }
+
+#tip-header {
+  padding: 5px 10px;
+  border-bottom: 1px solid #ccc;
+  color: #666;
+  font-weight: bold;
+  margin: 0;
+}
+#tip-header h1 {
+	font-size: 1rem;
+  padding: 0;
+  margin: 0;
+
+}
+#tip-header p {
+  margin: 0;
+  color: #ccc;
+	text-align: right;
+}
+
+.market-card {
+	border-bottom: 1px dotted #ccc;
+	padding: 10px 10px;
+	line-height: 130%;
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+}
+
+a:link {
+	background-color: aliceblue;
+}
+
+a:visited {
+	background-color: #f7f7f7;
+}
+
+a:hover {
+	background-color: #FDF4DF;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Thailand Customed Map <span id="header-dataset">Hex/Circle</span></h1>
+<h4>Hover to highlight province.</h4>
+
+<div id="container">
+
+	<div id="vis-container">
+		<div id="vis"></div>
+
+		<div id="select-data">
+			<div id="select-data-intro">Map marker : </div>
+			<select></select>
+		</div>
+
+		<div id="select-size">
+			<div id="select-size-intro">Map marker's size : </div>
+			<select></select>
+		</div>
+
+		<div id="change-scale">
+			<div id="change-scale-intro">Display maker's size : </div>
+			<select></select>
+			<!-- <input type="range" id="change-scale-input" min="10">
+			<div id="change-scale-value"></div> -->
+		</div>
+
+	<div id="attribution"><a href="https://github.com/cvibhagool/thailand-map/blob/master/thailand-provinces.topojson">Data source: topojson map</a></div>
+
+	</div>
+
+	<!-- <div id="market-list"></div> -->
+
+</div>
+
+
+<div id="tooltip">
+	<div id="tip-header">
+		<h1></h1>
+		<p></p>
+	</div>
+</div>
+
+<script>
+
+
+/* Globals and SVG */
+/* =============== */
+
+var projection,
+	geoPath,
+	hexRadius = 5,
+	perR = 0.8,
+	type = 'hex',
+	hexbin,
+	maxCount,
+	colorScale,
+	mouseInteractivity,
+	listChange = 1,
+	usResolved,
+	marketsResolved,
+	dataset = 'markets_overall.json',
+	selectedProv=null;
+
+
+var margin = { top: 30, right: 30, bottom: 30, left: 30 },
+		width = 400 - margin.left - margin.right,
+		height = 500 - margin.top - margin.bottom;
+
+var svg = d3.select('#vis')
+	.append('svg')
+		.attr('width', width + margin.left + margin.top)
+		.attr('height', height + margin.top + margin.bottom)
+	.append('g')
+		.attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+
+
+
+/* Functions */
+/* ========= */
+
+// function onover(d) {
+// 	console.log("== onover : ", d)
+// }
+
+// function onout(d) {
+// 	console.log("== onout : ", d)
+	
+// }
+
+function drawHexmap(points) {
+	console.log("== type : ", type)
+	// console.log("== points : ", points)
+	if (type=='hex') {
+		var hexes = svg.append('g').attr('id', 'hexes')
+				.selectAll('.hex')
+				.data(points)
+				.enter()
+				.append('path')
+				.attr('class', d=>'hex hex-'+(d.properties?.ID_1||"unknown"))
+				.attr('transform', function(d) { return 'translate(' + d.x + ', ' + d.y + ')'; })
+				.attr('d', hexbin.hexagon(hexRadius*perR))
+				.style('fill', function(d) { return d.datapoints === 0 ? '#FAFAFA' : colorScale(d.datapoints); })
+				.style('stroke', '#ccc')
+				.style('stroke-width', 1)
+	} else {
+		var hexes = svg.append('g').attr('id', 'hexes')
+				.selectAll('.hex')
+				.data(points)
+				.enter()
+				.append('circle')
+				.attr('class', d=>'hex hex-'+(d.properties?.ID_1||"unknown"))
+				.attr('transform', function(d) { return 'translate(' + d.x + ', ' + d.y + ')'; })
+				.attr('r', hexRadius*Math.sqrt(3)/2 * perR)
+				.style('fill', function(d) { return d.datapoints === 0 ? '#FAFAFA' : colorScale(d.datapoints); })
+				.style('stroke', '#ccc')
+				.style('stroke-width', 1)
+	}
+		
+
+} // drawHexmap()
+
+function rollupHexPoints(data) {
+	// console.log("== data : ", data)
+	maxCount = 0; // for colorScale
+
+	// Loop through all hexagons
+	data.forEach(function(el) {
+
+		// Remove grid-points
+		for (var i = el.length - 1; i >= 0; --i) {
+			if (el[i].datapoint === 0) {
+				el.splice(i, 1);
+			}
+		}
+
+		// Set up variables 
+		var count = 0,
+			markets = [],
+			properties;
+
+		// Loop through all markets in the hexagon
+		el.forEach(function(elt, i) {
+			// if (elt.datapoint === 1) {
+				
+				// Count the number of markets in hexagon
+				count++;
+
+				// Collect the data from each market in the hexagon for the tooltip
+				var obj = {};
+				obj.name = elt.name;
+				obj.state = elt.state;
+				obj.city = elt.city;
+				obj.url = elt.url;
+				markets.push(obj);
+				properties = elt.properties
+			// } else {
+				
+			// }
+		});
+
+		// Add summarised data to hexagon array
+		el.datapoints = count;
+		el.markets = markets;
+		el.properties = properties;
+
+		// Set the maximum number of markets of all hexagons
+		maxCount = Math.max(maxCount, count); // for colorScale
+
+	});
+
+	// Determine exponent for the colorScale interpolator
+	var exponent = 10;
+
+	// // Create colorScale as soon as maximum number of datapoints is determined
+	// colorScale = d3.scaleSequential(function(t) {
+
+	// 	var tNew = Math.pow(t, exponent);
+	// 	return d3.interpolateViridis(tNew);
+
+	// }).domain([maxCount, 1]);	
+
+	// // Update slider
+	// d3.select('#change-scale-input').property("max", 100);
+	// d3.select('#change-scale-input').property("value", perR*100);
+	// d3.select('#change-scale-value').html(perR*100);
+
+	return data;
+
+} // rollupHexPoints()
+
+function getHexPoints(points) {
+	// console.log("+++ points : ", points)
+	hexbin = d3.hexbin() // note: global
+		.radius(hexRadius)
+		.x(function(d) { return d.x; })
+		.y(function(d) { return d.y; });
+
+	var hexPoints = hexbin(points);
+
+	// console.log("+++hexPoints : ",hexPoints)
+	return hexPoints;
+
+} // getHexPoints()
+
+function getDatapoints(data) {
+	
+	return data.map(function(el) {
+		var coords = projection([+el.lng, +el.lat]);
+		return {			
+			x: coords[0],
+			y: coords[1],
+			datapoint: 1,
+			name: el.MarketName,
+			state: el.State,
+			city: el.city,
+			url: el.Website
+		};
+	});
+
+} // getDatapoints()
+
+function polygonContains(polygon, point) {
+  var n = polygon.length,
+      p = polygon[n - 1],
+      x = point[0], y = point[1],
+      x0 = p[0], y0 = p[1],
+      x1, y1,
+      inside = false;
+
+  for (var i = 0; i < n; ++i) {
+    p = polygon[i], x1 = p[0], y1 = p[1];
+    if (((y1 > y) !== (y0 > y)) && (x < (x0 - x1) * (y - y1) / (y0 - y1) + x1)) inside = !inside;
+    x0 = x1, y0 = y1;
+  }
+
+  return inside;
+}
+
+// function polygonContains(polygon, point) {
+// 	let i, 
+// 		j=polygon.length-1,
+// 		inside = false,
+// 		x=point[0],
+// 		y=point[1];
+
+// 	for (i=0; i<polygon.length; i++) {
+// 		let x0=polygon[j][0],y0=polygon[j][1],
+// 			x1=polygon[i][0],y1=polygon[i][1];
+
+// 		if ((y1< y && y0>=y ||  y0< y && y1>=y)
+// 			&& (x1<=x || x0<=x)) {
+// 			inside ^= (x1 + (y-y1)*(x0-x1)/(y0-y1)) < x; 
+// 		}
+// 		j=i; 
+// 	}
+// 	return inside;
+// }
+
+
+function keepPointsInPolygon(points, polygon, properties) {
+
+	var pointsInPolygon = [];
+	points.forEach(function(el) {
+
+		var inPolygon = polygonContains(polygon, [el.x, el.y]);
+		if (inPolygon) pointsInPolygon.push({...el,properties: properties});
+
+	});
+
+	return pointsInPolygon;
+
+} // keepPointsInPolygon()
+
+function drawPointGrid(data) {
+
+	svg.append('g').attr('id', 'circles')
+			.selectAll('.dot')
+		.data(data)
+		.enter().append('circle')
+			.attr('cx', function(d) { return d.x; })
+			.attr('cy', function(d) { return d.y; })
+			.attr('r', 1)
+			.attr('fill', 'tomato');
+
+} // drawPointGrid()
+
+function getPolygonPoints(data) {
+	console.log("=== data : ", data)
+	// var features = data.features[0].geometry.coordinates[7][0];
+	var features = data.features[0].geometry.coordinates[0];
+
+	console.log("=== features : ", features)
+
+	var polygonPoints = [];
+	features.forEach(function(el) {
+		polygonPoints.push(projection(el));
+	});
+
+	return polygonPoints;
+
+} // getPolygonPoints()
+
+function getPointGrid(radius) {
+
+	var hexDistanceX = radius * Math.sqrt(3);
+	var cols = Math.floor(width / hexDistanceX);
+
+	var hexDistanceY = radius * 1.5;
+	var rows = Math.floor(height / hexDistanceY);
+	
+  return d3.range(rows * cols).map(function(el, i) {
+	let row = Math.floor(i / cols)
+  	return {
+  		x: i % cols * hexDistanceX + (row % 2 * hexDistanceX/2),
+  		y: row * hexDistanceY,
+  		datapoint: 0
+  	};
+
+  });
+
+} // getPointGrid()
+
+function drawGeo(data) {
+
+	projection = d3.geo.mercator() //.albers() //d3.geoAlbers() // note: global
+	  .scale(1500)
+	  .translate([width/2, height/2])
+	  .center([100.6, 13.8]);
+
+	geoPath = d3.geo.path() //d3.geoPath()
+		.projection(projection);
+
+	svg
+		.append('path')
+		.datum(data)
+		.attr('d', geoPath)
+		.attr('fill', 'none');
+
+} // drawGeo()
+
+function drawPolygon(geoData) {
+	console.log("=== drawPolygon data : ", geoData)
+	polygonData = geoData.features?.map(item=>{
+		return {
+			...item.geometry,
+			...item.properties
+		}
+	})
+	var g = svg.append("g");
+	var prov = g.selectAll(".province")
+    .data(polygonData)
+    .enter()
+    .append("path")
+    .attr("class", "province")    
+    .attr("title", d => d.NAME_1)
+    .attr("d", geoPath)
+    // .on("click", click)
+    // .style("fill", function(d, i) { return color(d.color = d3.max(neighbors[i], function(n) { return branchs[n].color; }) + 1 | 0); });
+    .style("fill", d=>{ return "#EEEEEE"})
+	.style("stroke", "#777777")
+    // .on("mouseover", onover)
+    // .on("mousemove", onmove)
+    // .on("mouseout",  onout);
+} // drawPolygon()
+
+function prepData(topo) {
+	console.log("=== topo : ", topo)
+	// var geo = topojson.feature(topo, topo.objects.us);
+	var geo = topojson.feature(topo, topo.objects.province);
+	// var geo = topojson.feature(topo, topo.objects.province);
+
+	return geo;
+
+} // prepData()
+
+function getPointsInPolygons(points, geoData) {
+	var allPoints = [];
+	// var points2assigned = points, unassignedPoints = []
+	geoData.features?.map(item=>{
+		// let len = item.geometry.coordinates.length
+		item.geometry.coordinates.map(features=>{
+			// let features = item.geometry.coordinates[len-1];
+			let polygonPoints = [];
+			if (features.length == 1) {
+				features=features[0]
+				// console.log("++ item.geometry.coordinates : ", item.geometry.coordinates)
+				// console.log("++ features : ", features)
+			}
+			features.map(function(el) {
+				polygonPoints.push(projection(el));
+			});
+			// if (polygonPoints.length<3) {
+			// 	console.log("-- polygonPoints : ", polygonPoints)
+			// 	console.log("-- features : ", features)
+			// 	features.map(function(el) {
+			// 		console.log("-- projection : ", el, projection(el));
+			// 	});
+			// }
+			// console.log('== item : ', item.properties.ID_1, item.properties.NAME_1, )
+			let eachPolygonPoints = keepPointsInPolygon(points, polygonPoints, item.properties );
+
+			// console.log("-- features : ", features)
+			// console.log("-- polygonPoints : ", polygonPoints)
+			// console.log('== item : ', item.properties.ID_1, item.properties.NAME_1, eachPolygonPoints.length)
+			// if (eachPolygonPoints.length == 0) {
+			// 	console.log("++ item.geometry.coordinates : ", item.geometry.coordinates)
+			// 	console.log("++ features : ", features)
+			// }
+			allPoints = allPoints.concat(eachPolygonPoints);
+		})
+		
+	})
+
+	return allPoints;
+}
+
+/* Load and build steps */
+/* ==================== */
+
+function ready(us, markets) {
+
+	// Reset the visual
+	d3.selectAll('.hex').remove();
+	d3.selectAll('#market-list *').remove();
+	listChange = 1;
+
+
+	var us = prepData(us);
+
+	drawGeo(us);
+	// drawPolygon(us);
+
+	var points = getPointGrid(hexRadius);									// all point in bbox
+	console.log("=== points : ", points)
+	// var polygonPoints = getPolygonPoints(us);								// polygon boundary points
+	// console.log("=== polygonPoints : ", polygonPoints)
+
+	// var usPoints = keepPointsInPolygon(points, polygonPoints);				// all point inside polygon
+	// console.log("=== usPoints : ", usPoints)
+
+
+	var provPoints = getPointsInPolygons(points, us)
+	console.log("=== provPoints : ", provPoints)
+
+	var dataPoints = []//getDatapoints(markets);
+
+	var mergedPoints = provPoints.concat(dataPoints);
+	// var mergedPoints = points
+
+	var hexPoints = getHexPoints(mergedPoints);
+
+	var hexPointsRolledup = rollupHexPoints(hexPoints);
+	console.log("-- hexPointsRolledup : ",hexPointsRolledup )
+	// drawHexmap(hexPointsRolledup);
+	let mergedPoints_ = mergedPoints?.map(r=>({...r, datapoints:0, markets:[]}))
+	console.log("-- mergedPoints_ : ",mergedPoints_ )
+	drawHexmap(mergedPoints_);
+	
+	mouseInteractivity();
+
+} // ready()
+
+
+// // Load data sources
+// var usData = d3.json('../data/us.json').then(function(us) { return us; });
+// // var usData = d3.json('./thprov.topojson').then(function(us) { return us; });
+// var marketData = d3.json('../data/markets_overall.json').then(function(markets) { return markets; });
+
+// Promise.all([usData, marketData]).then(function(response) {
+
+// 	var usResolved = response[0];
+// 	var marketsResolved = response[1];
+
+// 	ready(usResolved, marketsResolved);
+
+// });
+
+
+// d3.json(`../data/us.json`, function (us) {
+d3.json(`./thprov.topojson`, function (us) {
+    d3.json(`../data/markets_overall.json`, function (markets) {
+		usResolved = us;
+		marketsResolved = markets;
+
+		ready(usResolved, marketsResolved);
+    });  
+});
+
+
+/* Interactivity */
+/* ============= */
+
+/* Add dropdown for hex-radius choice */
+/* ---------------------------------- */
+
+// All sizes available
+var sizes = [2, 3.5, 5, 7.5, 9, 10.5, 12, 14.5];
+
+// Build a drop-down
+d3.select('#select-size select')
+		.selectAll('.select-option-size')
+	.data(sizes)
+	.enter().append('option')
+		.attr('value', function(d) { return d; })
+		.html(function(d) { return d; });
+
+// Set default value
+d3.selectAll('#select-size option')
+	.filter(function(d) { return d === hexRadius; })
+	.property('selected', 'selected');
+
+// Handle the change
+d3.select('#select-size select').on('change', changeSelectedSize);
+
+function changeSelectedSize() {
+
+	hexRadius = this.value;
+	ready(usResolved, marketsResolved);
+
+} // changeSelectedSize()
+
+
+/* Add slider for max value */
+/* ------------------------ */
+
+// All sizes available
+var scales = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0];
+
+// Build a drop-down
+d3.select('#change-scale select')
+		.selectAll('.select-option-scale')
+	.data(scales)
+	.enter().append('option')
+		.attr('value', function(d) { return d; })
+		.html(function(d) { return d; });
+
+// Set default value
+d3.selectAll('#change-scale option')
+	.filter(function(d) { return d === perR; })
+	.property('selected', 'selected');
+
+// Handle the change
+d3.select('#change-scale select').on('change', changeSelectedScale);
+
+function changeSelectedScale() {
+
+	perR = this.value;
+	ready(usResolved, marketsResolved);
+
+} // changeSelectedSize()
+
+// // Add a slider to change the color scales maximum value
+// d3.select('input#change-scale-input').on('input', function() {
+
+// 	var perR = this.value / 100;
+// 	console.log("-- perR : ", perR)
+
+// 	// // Create new colorScale with user picked exponent
+// 	// colorScale = d3.scaleSequential(function(t) {
+
+// 	// 	var tUpdated = Math.pow(t, newExponent);
+// 	// 	return d3.interpolateViridis(tUpdated);
+
+// 	// }).domain([maxCount, 1]);	
+
+// 	// d3.selectAll('.hex').style('fill', function(d) { 
+// 	// 	return d.datapoints === 0 ? 'none' : colorScale(d.datapoints); 
+// 	// });
+
+// 	d3.select('#change-scale-value').html(perR*100);
+
+// 	ready(usResolved, marketsResolved);
+
+// });
+
+
+/* Add dropdown for dataset choice */
+/* ------------------------------- */
+
+// All datasets available
+var datasets = ['markets_overall.json', 'markets_bakedgoods.json','markets_cheese.json','markets_coffee.json','markets_crafts.json','markets_flowers.json','markets_fruits.json','markets_herbs.json','markets_honey.json','markets_jams.json','markets_meat.json','markets_nursery.json','markets_nuts.json','markets_organic.json','markets_petfood.json','markets_plants.json','markets_poultry.json','markets_seafood.json','markets_tofu.json','markets_trees.json','markets_vegetables.json','markets_wine.json'];
+
+// Build a drop-down
+d3.select('#select-data select')
+		.selectAll('.select-option-data')
+		.data(['hex', 'circle'])
+		.enter().append('option')
+		.attr('value', function(d) { return d; })
+		.html(function(d) { return d; });
+
+// Set default value
+d3.selectAll('#select-size option')
+	.filter(function(d) { return d === type; })
+	.property('selected', 'selected');
+
+// Handle the change
+d3.select('#select-data select').on('change', changeSelectedData);
+
+function changeSelectedData() {
+	type = this.value;
+	console.log("-- type : ", type)
+
+
+	// Updatde header
+	// var headerDataset = dataset;
+	// if (headerDataset === 'overall') headerDataset = 'all markets';
+	// if (headerDataset === 'bakedgoods') headerDataset = 'baked goods';
+
+	d3.select('#header-dataset').html(type);
+
+	// // // Rebuild visual
+	// // var usData = d3.json('data/us.json').then(function(us) { return us; });
+	// // var marketData = d3.json('data/' + dataset).then(function(markets) { return markets; });
+
+	// // Promise.all([usData, marketData]).then(function(response) {
+
+	// // 	var usResolved = response[0];
+	// // 	var marketsResolved = response[1];
+
+	// // 	ready(usResolved, marketsResolved);
+
+	// // });
+	// d3.json(`../data/us.json`, function (us) {
+	// 	d3.json(`../data/${dataset}`, function (markets) {
+	// 		var usResolved = us;
+	// 		var marketsResolved = markets;
+
+	// 		ready(usResolved, marketsResolved);
+	// 	});  
+	// });
+	ready(usResolved, marketsResolved);
+
+} // changeSelectedData()
+
+
+/* Add tooltip */
+/* ----------- */
+
+mouseInteractivity = function() {
+
+	d3.selectAll('.hex').on('mouseover', mouseover);
+	d3.selectAll('.hex').on('mousemove', mousemove);
+	d3.selectAll('.hex').on('mouseout', mouseout);
+	d3.selectAll('.hex').on('mousedown', mousedown);
+
+	function mouseover(d) {
+		// console.log("-- mouseover : ", d.properties?.ID_1)
+
+		// d3.select('#tip-header h1').html(`Province : ${d.properties?.NAME_1 || '-'}`);
+		// d3.select('#tip-header p').html('click to action');
+
+		// var marketData = d3.select(this).data()[0].markets;
+
+		// if (marketData.length) { // if this hexagon has markets to show
+
+		// 	// build the tooltip
+		// 	d3.select('#tooltip')
+		// 		.style('top', d3.event.y + 'px')
+		// 		.style('left', (d3.event.x + 10) + 'px')
+		// 		.style('opacity', 0.9);
+
+		// 	d3.select('#tip-header h1').html(function() {
+		// 		return marketData.length > 1 
+		// 			? marketData.length + ' markets in this area'
+		// 			: marketData.length + ' market in this area';
+		// 	});
+		// 	d3.select('#tip-header p').html('click to examine list');
+
+		// 	if (listChange) { // if the list is allowed to change
+
+		// 		d3.selectAll('#market-list *').remove();
+
+		// 		d3.select('#market-list').selectAll('.market-card')
+		// 			.data(marketData)
+		// 			.enter().append('div')
+		// 				.attr('class', 'market-card')
+		// 				.html(function(d) { 
+
+		// 					// Build list HTML (with URL only if URL available)
+		// 					var listData = d.url 
+		// 							? '<a href="' + d.url + '" target="_blank">' + d.name + '</a>, ' + d.city + ', ' + d.state
+		// 							: d.name + ', ' + d.city + ', ' + d.state;
+
+		// 					return listData;
+		// 				});
+
+		// 	} // only build list if the user hasn't locked it with a click
+
+		// } // only show if there's data in the hexagon
+
+	} // mouseover()
+
+
+	function mousemove(d) {
+		console.log("-- mouseover : ", d.properties?.ID_1)
+
+		d3.select('#tip-header h1').html(`Province : ${d.properties?.NAME_1 || '-'}`);
+		d3.select('#tip-header p').html('click to action');
+		
+		d3.select('#tooltip')
+			.style('top', d3.event.y + 'px')
+			.style('left', (d3.event.x + 10) + 'px')
+			.style('opacity', 0.9);
+
+		d3.selectAll('.hex-'+(d.properties?.ID_1||"unknown"))
+			.style('fill','#0000FF')
+
+	} // mousemove()
+
+
+	function mouseout(d) {
+
+		console.log("-- mouseout : ", d.properties?.ID_1)
+
+		// Hide the tooltip
+		d3.select('#tooltip')
+			.style('opacity', 0);
+		
+		d3.selectAll('.hex-'+(d.properties?.ID_1||"unknown"))
+			.style('fill','#FAFAFA')
+
+		// Remove the market list if the user doesn't want to examine it
+		if (listChange) d3.selectAll('#market-list *').remove();
+
+	} // mouseout()
+
+
+	function mousedown(d) {
+		
+		selectedProv = (selectedProv == d.properties.ID_1)? null: d.properties.ID_1;
+		// Highlight the clicked hexagon (only when the user wants to examine the list)
+		d3.selectAll('.hex')
+			.style('stroke', '#ccc');
+		d3.selectAll('.hex-'+(d.properties?.ID_1||"unknown"))
+			.style('stroke', selectedProv?'#FF0000':'#ccc');
+		
+		// Negate the current list examination desire
+		listChange = 1 - listChange;
+	
+	}
+
+}; // mouseInteractivity()
+
+
+</script>
+
+</html>
